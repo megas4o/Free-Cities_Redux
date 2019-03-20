@@ -1,0 +1,20 @@
+:: Generate New Slave [nobr]
+
+<<if (random(0,99) < $seeDicks)>>
+	<<include "Generate XY Slave">>
+<<elseif ($seeDicks > 0)>>
+	<<if ($arcologies[0].FSGenderFundamentalistSMR == 1)>>
+	<<set $seed = 90>>
+	<<elseif ($arcologies[0].FSGenderRadicalistLaw == 1)>>
+	<<set $seed = 50>>
+	<<else>>
+	<<set $seed = 80>>
+	<</if>>
+	<<if (random(1,100) > $seed) && (random(0,99) < $seeDicks)>>
+	<<include "Generate XY Slave">>
+	<<else>>
+	<<include "Generate XX Slave">>
+	<</if>>
+<<else>>
+	<<include "Generate XX Slave">>
+<</if>>

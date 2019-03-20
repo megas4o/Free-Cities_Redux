@@ -1,0 +1,198 @@
+:: Main [nobr]
+
+<<if $releaseID >= 1000 || $ver.includes("0.9") || $ver.includes("0.8") || $ver.includes("0.7") || $ver.includes("0.6")>>
+	<<if $releaseID >= 1019>>
+	<<else>>
+		''@@.red;INCOMPATIBLE SAVE WARNING:@@'' your saved game was created using version $ver build $releaseID. Please select New Game Plus from the Options menu or start a new game.
+		<br>
+	<</if>>
+<<else>>
+	''@@.red;INCOMPATIBLE SAVE WARNING:@@'' your saved game was created using version $ver and you are using later version which New Game Plus cannot reconcile. Please start a new game.
+	<br>
+<</if>>
+
+<<if ndef $defaultRules>>
+	<<include "Init Rules">>
+<</if>>
+<<set $currentRule = $defaultRules[0]>>
+
+<<SlaveSort $slaves>>
+
+<<set $dormitoryPopulation = 0, $roomsPopulation = 0, $slavesVisible = 0, _PA = -1, _HG = -1, _RC = -1, _BG = -1, _SL = $slaves.length>>
+
+<<for $i = 0; $i < _SL; $i++>>
+	<<for _i = $i + 1; _i < _SL; _i++>>
+		<<if $slaves[$i].ID == $slaves[_i].ID>>
+			<br><br>@@.red;Duplicate slave ID $slaves[$i].ID at index $i - $slaves[$i].slaveName ($slaves[$i].assignment) and index _i - $slaves[_i].slaveName ($slaves[_i].assignment)@@<br><br>
+		<</if>>
+	<</for>>
+	<<if $slaves[$i].assignmentVisible == 1>>
+		<<set $slavesVisible++>>
+		<<if $slaves[$i].livingRules == "luxurious">>
+			<<if $slaves[$i].relationship >= 4>>
+			  <<set $roomsPopulation += 0.5>>
+			<<else>>
+			  <<set $roomsPopulation++>>
+			<</if>>
+		<<else>>
+			<<set $dormitoryPopulation++>>
+		<</if>>
+	<</if>>
+	<<set _ID = $slaves[$i].ID>>
+	<<if $personalAttention == _ID>>
+		<<set _PA = $i>>
+	<</if>>
+	<<if $HeadGirl.ID == _ID>>
+		<<set _HG = $i>>
+	<<elseif $Recruiter.ID == _ID>>
+		<<set _RC = $i>>
+	<<elseif $Bodyguard.ID == _ID>>
+		<<set _BG = $i>>
+	<</if>>
+<</for>>
+
+<<set $nextButton = "END WEEK", $nextLink = "End Week", $showEncyclopedia = 1, $encyclopedia = "How to Play">>
+<<if ndef $costs>>
+  <<include "Costs">>
+<</if>>
+
+<<if ($arcologies[0].name == "")>>
+	<<set $arcologies[0].name = "Arcology X-4">>
+<</if>>
+<<if ($PC.customTitle == "")>>
+	<<set $PC.customTitle = undefined, $PC.customTitleLisp = undefined>>
+<</if>>
+<<if ($brothelName == "")>>
+	<<set $brothelName = "the Brothel">>
+<</if>>
+<<if ($brothelNameCaps == "")>>
+	<<set $brothelNameCaps = "The Brothel">>
+<</if>>
+<<if ($dairyName == "")>>
+	<<set $dairyName = "the Dairy">>
+<</if>>
+<<if ($dairyNameCaps == "")>>
+	<<set $dairyNameCaps = "The Dairy">>
+<</if>>
+<<if ($clubName == "")>>
+	<<set $clubName = "the Club">>
+<</if>>
+<<if ($clubNameCaps == "")>>
+	<<set $clubNameCaps = "The Club">>
+<</if>>
+<<if ($servantsQuartersName == "")>>
+	<<set $servantsQuartersName = "the Servants' Quarters">>
+<</if>>
+<<if ($servantsQuartersNameCaps == "")>>
+	<<set $servantsQuartersNameCaps = "The Servants' Quarters">>
+<</if>>
+<<if ($schoolroomName == "")>>
+	<<set $schoolroomName = "the Schoolroom">>
+<</if>>
+<<if ($schoolroomNameCaps == "")>>
+	<<set $schoolroomNameCaps = "The Schoolroom">>
+<</if>>
+<<if ($spaName == "")>>
+	<<set $spaName = "the Spa">>
+<</if>>
+<<if ($spaNameCaps == "")>>
+	<<set $spaNameCaps = "The Spa">>
+<</if>>
+<<if ($clinicName == "")>>
+	<<set $clinicName = "the Clinic">>
+<</if>>
+<<if ($clinicNameCaps == "")>>
+	<<set $clinicNameCaps = "The Clinic">>
+<</if>>
+<<if ($arcadeName == "")>>
+	<<set $arcadeName = "the Arcade">>
+<</if>>
+<<if ($arcadeNameCaps == "")>>
+	<<set $arcadeNameCaps = "The Arcade">>
+<</if>>
+<<if ($cellblockName == "")>>
+	<<set $cellblockName = "the Cellblock">>
+<</if>>
+<<if ($cellblockNameCaps == "")>>
+	<<set $cellblockNameCaps = "The Cellblock">>
+<</if>>
+<<if ($masterSuiteName == "")>>
+	<<set $masterSuiteName = "the Master Suite">>
+<</if>>
+<<if ($masterSuiteNameCaps == "")>>
+	<<set $masterSuiteNameCaps = "The Master Suite">>
+<</if>>
+<<if ($HGSuiteName == "")>>
+	<<set $HGSuiteName = "the Head Girl Suite">>
+<</if>>
+<<if ($HGSuiteNameCaps == "")>>
+	<<set $HGSuiteNameCaps = "The Head Girl Suite">>
+<</if>>
+<<if ($pitName == "")>>
+	<<set $pitName = "the Pit">>
+<</if>>
+<<if ($pitNameCaps == "")>>
+	<<set $pitNameCaps = "The Pit">>
+<</if>>
+
+/* Saves use the first eight printed words to make the "file name", the below line cheats and makes saves here nicer named. */
+@@font-size: 0; $arcologies[0].name, Week $week, $slaves.length Slaves, ¤$cash … … …  @@
+
+<<if $newModelUI == 1>><<DisplayBuilding>><</if>>
+<<if $seeArcology == 1>>&nbsp;&nbsp;&nbsp;&nbsp;<<include "Arcology Description">> | [[Hide|Main][$seeArcology = 0]]<br><</if>>
+
+<<if $seeDesk == 1>>
+<<include "Office Description">>
+[[Hide|Main][$seeDesk = 0]]
+<</if>>
+<<if $seeFCNN == 1>><center>FCNN: <<print $fcnn.random()>> [[Hide|Main][$seeFCNN = 0]]</center><</if>>
+<<if ($seeDesk == 1) && ($seeFCNN == 0)>><br><</if>>
+
+<br>
+
+<<if $positionMainLinks >= 0>>
+	<<MainLinks>>
+<</if>>
+<br>
+<<if $rulesAssistantMain != 0>>
+	//<span id="RAButton"><<link "Rules Assistant Options">><<goto "Rules Assistant">><</link>></span>// @@.cyan;[R]@@
+	<<if $rulesAssistantAuto != 1>>
+		| //<<link "Apply Rules Assistant at week end">><<set $rulesAssistantAuto = 1>><<goto "Main">><</link>>//
+	<<else>>
+		| //<<link "Stop applying Rules Assistant at week end">><<set $rulesAssistantAuto = 0>><<goto "Main">><</link>>//
+	<</if>>
+	| //<<link "Re-apply Rules Assistant now (this will only check slaves in the Penthouse)">><<for _i = 0;_i < _SL;_i++>><<if $slaves[_i].assignmentVisible == 1 && $slaves[_i].useRulesAssistant == 1>><<set $slaves[_i].currentSummary = 0>><<CheckAutoRulesActivate $slaves[_i]>><<DefaultRules $slaves[_i]>><</if>><</for>><<goto "Main">><</link>>//
+<</if>>
+
+/* variables used in "use $someone" links*/
+<<set _j = "Back", _k = "AS Dump", _l = "Main">>
+
+//<<OptionsSortAsAppearsOnMain>>//
+	<<include "Slave Summary">>
+
+	<<if $lineSeparations == 0>><br><<else>><hr style="margin:0"><</if>>
+	<<if $positionMainLinks <= 0>>
+		<br><<MainLinks>>
+	<</if>>
+
+	<<if (_BG > -1) && ($slaves[_BG].assignment == "guard you")>>
+		<<set $i = _BG>>
+		<<include "Use Guard">>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;<<print "[[Use her mouth|FLips][$activeSlave = $slaves["+_BG+"], $nextButton = _j, $nextLink = _k, $returnTo = _l]]">>
+		| <<print "[[Play with her tits|FBoobs][$activeSlave = $slaves["+_BG+"], $nextButton = _j, $nextLink = _k, $returnTo = _l]]">>
+		<<if canDoVaginal($slaves[_BG])>>
+			| <<print "[[Fuck her|FVagina][$activeSlave = $slaves["+_BG+"], $nextButton = _j, $nextLink = _k, $returnTo = _l]]">>
+			<<if canDoAnal($slaves[_BG])>>
+			| <<print "[[Use her holes|FButt][$activeSlave = $slaves["+_BG+"],$nextButton = _j, $nextLink = _k, $returnTo = _l]]">>
+			<</if>>
+		<</if>>
+		<<if canDoAnal($slaves[_BG])>>
+		| <<print "[[Fuck her ass|FAnus][$activeSlave = $slaves["+_BG+"], $nextButton = _j, $nextLink = _k, $returnTo = _l]]">>
+		<</if>>
+		| <<print "[[Abuse her|FAbuse][$activeSlave = $slaves["+_BG+"], $nextButton = _j, $nextLink = _k, $returnTo = _l]]">>
+	<</if>>
+
+	<<set $activeSlave = $slaves.random()>>
+	<<if $activeSlave &&  ($activeSlave.assignment != "please you") && ($activeSlave.assignment != "guard you")>>
+		<br><<include "Walk Past">>
+	<</if>>

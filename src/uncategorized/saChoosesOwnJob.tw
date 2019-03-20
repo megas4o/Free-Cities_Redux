@@ -1,0 +1,405 @@
+:: SA chooses own job [nobr]
+
+<<if ($slaves[$i].choosesOwnAssignment == 0) || ($slaves[$i].fuckdoll > 0) || ($slaves[$i].fetish == "mindbroken")>>
+	/* nothing to do */
+
+<<elseif ($slaves[$i].choosesOwnAssignment == 2)>> /* second pass happens visibly during weekly report for the location where this slave decided to go (or stay) */
+	/* display text but don't change assignment (already done) */
+
+	<<SlavePronouns $slaves[$i]>>
+	<<SlaveTitle $slaves[$i]>>
+	<<set _oself = $object + "self">>
+	<<print $slaves[$i].choosesOwnAssignmentText>>
+	<<set $slaves[$i].choosesOwnAssignmentText = "", $slaves[$i].choosesOwnAssignment = 1>> /* continue cycle for next week */
+
+<<else>> /* first pass happens silently before all reports: give stats bonus, construct decision string for display during second pass, actually change assignment */
+
+	<<set $slaves[$i].devotion++, $slaves[$i].trust++, $slaves[$i].choosesOwnAssignmentText = "was assigned to " + $slaves[$i].assignment + ". $pronounCap watches your other slaves to decide what to do, @@.hotpink;happy@@ to be permitted a choice and a little more @@.mediumaquamarine;confident@@ than if you had just given $object orders. The $desc">>
+
+	<<if ($slaves[$i].devotion <= 20) && ($slaves[$i].trust >= -20)>>
+		<<set $slaves[$i].choosesOwnAssignmentText += " decides to rest, taking advantage of your permission to @@.mediumorchid;remain indolent@@.">>
+		<<removeJob $slaves[$i] $slaves[$i].assignment>>
+		<<set $slaves[$i].devotion -= 5>>
+
+	<<elseif ($slaves[$i].health < 20)>>
+		<<if ($universalRulesAssignsSelfFacility == 1) && ($clinic > $clinicSlaves)>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " is unhealthy, so $pronoun decides to get treatment at $clinicName.">>
+			<<assignJob $slaves[$i] "get treatment in the clinic">>
+		<<else>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " is unhealthy, so $pronoun decides to rest.">>
+			<<removeJob $slaves[$i] $slaves[$i].assignment>>
+		<</if>>
+
+	<<elseif ($slaves[$i].intelligenceImplant != 1)>>
+		<<if ($universalRulesAssignsSelfFacility == 1) && ($schoolroom > $schoolroomSlaves)>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " is uneducated, so $pronoun sits _oself down in $schoolroomName.">>
+			<<assignJob $slaves[$i] "learn in the schoolroom">>
+		<<else>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " is uneducated, so $pronoun sits _oself down to learn.">>
+			<<assignJob $slaves[$i] "take classes">>
+		<</if>>
+
+	<<elseif ($Attendant != 0) && ($universalRulesAssignsSelfFacility == 1) && (($slaves[$i].devotion < 45) || ($slaves[$i].trust < 45) || ($slaves[$i].sexualFlaw != "none") || ($slaves[$i].behavioralFlaw != "none"))>>
+		<<set $slaves[$i].choosesOwnAssignmentText += " could use some counseling, so $pronoun decides to visit $spaName.">>
+		<<assignJob $slaves[$i] "rest in the spa">>
+
+	<<elseif ($slaves[$i].devotion <= 50) && canWalk($slaves[$i]) && canSee($slaves[$i])>>
+		<<if ($universalRulesAssignsSelfFacility == 1) && ($servantsQuarters > $servantsQuartersSlaves)>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " is obedient but not devoted, so $pronoun decides to work from $servantsQuartersName since it's the least sexually demanding job available.">>
+			<<assignJob $slaves[$i] "work as a servant">>
+		<<else>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " is obedient but not devoted, so $pronoun decides to work as a servant since it's the least sexually demanding job available.">>
+			<<assignJob $slaves[$i] "be a servant">>
+		<</if>>
+
+	<<elseif ($slaves[$i].relationship == -1)>>
+		<<set $slaves[$i].choosesOwnAssignmentText += " relies on promiscuity to fulfill $possessive emotional needs,">>
+		<<if ($cash > 10000)>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " and doesn't mind being a whore, so $pronoun prostitutes _oself">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " in $brothelName.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " on the streets.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<else>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun eagerly decides to slut around">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " in $clubName.">>
+				<<assignJob $slaves[$i] "serve in the club">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " on the streets.">>
+				<<assignJob $slaves[$i] "serve the public">>
+			<</if>>
+		<</if>>
+
+	<<elseif ($slaves[$i].relationship == -2)>>
+		<<set $slaves[$i].choosesOwnAssignmentText += " is emotionally bonded to you,">>
+		<<if ($slaves[$i].behavioralQuirk == "insecure")>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " but insecure, so $pronoun decides to make you money by prostituting _oself">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " in $brothelName.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " on the streets.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<elseif ($slaves[$i].behavioralQuirk == "advocate")>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " and an advocate for slavery, so $pronoun decides to burnish your reputation by slutting it up">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " in $clubName.">>
+				<<assignJob $slaves[$i] "serve in the club">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " on the streets.">>
+				<<assignJob $slaves[$i] "serve the public">>
+			<</if>>
+		<<elseif ($slaves[$i].energy > 60)>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " and $pronoun thinks of little but sex with you,">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($masterSuite > $masterSuiteSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun heads straight to $masterSuiteName.">>
+				<<assignJob $slaves[$i] "serve in the master suite">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun cheerfully designates _oself one of your fucktoys.">>
+				<<assignJob $slaves[$i] "please you">>
+			<</if>>
+		<<elseif canSee($slaves[$i]) && canWalk($slaves[$i])>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun decides to work">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($servantsQuarters > $servantsQuartersSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " from $servantsQuartersName">>
+				<<assignJob $slaves[$i] "work as a servant">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " as a servant">>
+				<<assignJob $slaves[$i] "be a servant">>
+			<</if>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " to make your penthouse as clean and homelike as possible.">>
+		<<else>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " but unable to do much on $possessive own,">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($masterSuite > $masterSuiteSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun heads straight to $masterSuiteName to await your caress.">>
+				<<assignJob $slaves[$i] "serve in the master suite">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun cheerfully designates _oself one of your fucktoys to be close to you.">>
+				<<assignJob $slaves[$i] "please you">>
+			<</if>>
+		<</if>>
+
+	<<elseif ($slaves[$i].relationship == -3)>>
+		<<set $slaves[$i].choosesOwnAssignmentText += " is married to you,">>
+		<<if ($slaves[$i].energy > 60)>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " and $pronoun thinks of little but sex with you,">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($masterSuite > $masterSuiteSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun heads straight to $masterSuiteName.">>
+				<<assignJob $slaves[$i] "serve in the master suite">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun cheerfully designates _oself one of your fucktoys.">>
+				<<assignJob $slaves[$i] "please you">>
+			<</if>>
+		<<elseif canSee($slaves[$i]) && canWalk($slaves[$i])>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun decides to work">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($servantsQuarters > $servantsQuartersSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " from $servantsQuartersName">>
+				<<assignJob $slaves[$i] "work as a servant">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " as a servant">>
+				<<assignJob $slaves[$i] "be a servant">>
+			<</if>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " to make your penthouse as clean and homelike as possible.">>
+		<<else>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " but unable to do much on $possessive own">>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($masterSuite > $masterSuiteSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun heads straight to $masterSuiteName to await your caress.">>
+				<<assignJob $slaves[$i] "serve in the master suite">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " so $pronoun cheerfully designates _oself one of your fucktoys to be close to you.">>
+				<<assignJob $slaves[$i] "please you">>
+			<</if>>
+		<</if>>
+
+	<<elseif ($slaves[$i].fetishKnown == 1)>>
+		<<if ($slaves[$i].fetish == "submissive") && canWalk($slaves[$i]) && canSee($slaves[$i])>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($servantsQuarters > $servantsQuartersSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " thinks $pronoun belongs at the bottom of the penthouse hierarchy, so $pronoun goes to live in $servantsQuartersName.">>
+				<<assignJob $slaves[$i] "work as a servant">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " thinks $pronoun belongs at the bottom of the penthouse hierarchy, so $pronoun decides $pronoun should be a servant.">>
+				<<assignJob $slaves[$i] "be a servant">>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "dom") || ($slaves[$i].fetish == "sadist")>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is self-confident, so $pronoun decides to work in $clubName.">>
+				<<assignJob $slaves[$i] "serve in the club">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is self-confident, so $pronoun decides to work as a public servant.">>
+				<<assignJob $slaves[$i] "serve the public">>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "masochist")>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " enjoys abuse, so $pronoun hurries down to $brothelName.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " enjoys abuse, so $pronoun decides to become a whore.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "cumslut")>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " hurries down to $brothelName to suck cocks.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to become a whore, mostly to suck cock.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "humiliation")>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $brothelName, since it's even more embarrassing to be a whore than a club slut.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to whore, since it's even more embarrassing to be a whore than to be a public servant.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "buttslut")>>
+			<<if ($slaves[$i].balls > 0)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($dairyRestraintsSetting < 2) && ($dairy > $dairySlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " chooses confinement in $dairyName, since all $pronoun will be expected to do is produce cum by orgasming to buttsex.">>
+					<<assignJob $slaves[$i] "work in the dairy">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to get milked, since all $pronoun will be expected to do is produce cum by orgasming to buttsex.">>
+					<<assignJob $slaves[$i] "get milked">>
+				<</if>>
+			<<else>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $brothelName, since whores get buttfucked more than anyone else.">>
+					<<assignJob $slaves[$i] "work in the brothel">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to whore, since whores get buttfucked more than anyone else.">>
+					<<assignJob $slaves[$i] "whore">>
+				<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "pregnancy")>>
+			<<if ($slaves[$i].lactation > 0)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($dairyRestraintsSetting < 2) && ($dairy > $dairySlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " heads down to $dairyName to be around other lactating girls.">>
+					<<assignJob $slaves[$i] "work in the dairy">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to get milked, since $pronoun is already lactating.">>
+					<<assignJob $slaves[$i] "get milked" >>
+				<</if>>
+			<<elseif ($PC.dick == 1) && isFertile($slaves[$i])>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($masterSuite > $masterSuiteSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to serve you in $masterSuiteName, hoping that you'll get $possessive pregnant.">>
+					<<assignJob $slaves[$i] "serve in the master suite">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to be your fucktoy, hoping that you'll get $possessive pregnant.">>
+					<<assignJob $slaves[$i] "please you">>
+				<</if>>
+			<<elseif ($universalRulesAssignsSelfFacility == 1) && ($dairyPregSetting > 0) && ($dairy > $dairySlaves) && isFertile($slaves[$i])>>
+				<<if $dairyPregSetting > 1>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " eagerly rushes to $dairyName in the hopes that $possessive fertile womb will be packed full of children.">>
+					<<assignJob $slaves[$i] "work in the dairy">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " rushes to $dairyName in the hopes that $possessive fertile womb will be rented out.">>
+					<<assignJob $slaves[$i] "work in the dairy">>
+				<</if>>
+			<<elseif ($slaves[$i].preg > 0)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($masterSuite > $masterSuiteSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " heads straight to $masterSuiteName to share the intimacy of $possessive pregnant body with you.">>
+					<<assignJob $slaves[$i] "serve in the master suite">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to be your fucktoy to share the intimacy of $possessive pregnant body with you.">>
+					<<assignJob $slaves[$i] "please you">>
+				<</if>>
+			<<else>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " can't indulge $possessive fetish by getting pregnant _oself, so $pronoun just heads down to $brothelName.">>
+					<<assignJob $slaves[$i] "work in the brothel">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " can't indulge $possessive fetish by getting pregnant _oself, so $pronoun glumly decides to be a whore.">>
+					<<assignJob $slaves[$i] "whore">>
+				<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "boobs")>>
+			<<if ($slaves[$i].lactation > 0)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($dairyRestraintsSetting < 2) && ($dairy > $dairySlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " heads down to $dairyName for all the attention that'll be lavished on $possessive nipples.">>
+					<<assignJob $slaves[$i] "work in the dairy">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to get milked, since $pronoun loves getting off to it.">>
+					<<assignJob $slaves[$i] "get milked">>
+				<</if>>
+			<<else>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $clubName so $pronoun can show off $possessive bare breasts.">>
+					<<assignJob $slaves[$i] "serve in the club">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to work as a public servant so $pronoun can show off $possessive bare breasts.">>
+					<<assignJob $slaves[$i] "serve the public">>
+				<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].attrXX > 85)>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $clubName so $pronoun can hit on hot girls.">>
+				<<assignJob $slaves[$i] "serve in the club">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to work as a public servant so $pronoun can hit on hot girls.">>
+				<<assignJob $slaves[$i] "serve the public">>
+			<</if>>
+		<<elseif ($slaves[$i].attrXY > 85)>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $clubName so $pronoun can hit on cute boys.">>
+				<<assignJob $slaves[$i] "serve in the club">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to work as a public servant so $pronoun can hit on cute boys.">>
+				<<assignJob $slaves[$i] "serve the public">>
+			<</if>>
+		<<elseif ($slaves[$i].energy > 95)>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to help those of your girls who mind taking dick all day by working in $brothelName.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to help those of your girls who mind taking dick all day by working as a whore.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+
+		<<elseif ($arcologies[0].FSChattelReligionist > 0)>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a pure and faithful slave, so $pronoun sells $possessive body in the holy brothel.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a pure and faithful slave, so $pronoun sells $possessive body as a holy prostitute.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<elseif ($arcologies[0].FSEgyptianRevivalist > 0)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($masterSuite > $masterSuiteSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a devoted slave, so $pronoun immediately joins your harem.">>
+				<<assignJob $slaves[$i] "serve in the master suite">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a devoted slave, so $pronoun immediately joins your harem.">>
+				<<assignJob $slaves[$i] "please you">>
+			<</if>>
+		<<elseif ($arcologies[0].FSRomanRevivalist > 0)>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a devoted slave, so $pronoun decides $pronoun can best serve the state by raising money for the treasury, by selling $possessive body in $brothelName.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a devoted slave, so $pronoun decides $pronoun can best serve the state by raising money for the treasury, by selling $possessive body as a prostitute.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<elseif ($arcologies[0].FSAztecRevivalist > 0)>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a devoted slave, so $pronoun decides $pronoun can best serve the empire by serving at the fertility temple.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " is a devoted slave, so $pronoun decides $pronoun can best serve the empire by offering herself to the public.">>
+				<<assignJob $slaves[$i] "serve the public">>
+			<</if>>
+		<<elseif ($arcologies[0].FSPaternalist > 0)>>
+			<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $brothelName, a respectable position for a slave in this enlightened arcology.">>
+				<<assignJob $slaves[$i] "work in the brothel">>
+			<<else>>
+				<<set $slaves[$i].choosesOwnAssignmentText += " decides to be a whore, a respectable position for a slave in this enlightened arcology.">>
+				<<assignJob $slaves[$i] "whore">>
+			<</if>>
+		<<elseif ($arcologies[0].FSPastoralist > 0)>>
+			<<if ($slaves[$i].lactation > 0)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($dairyRestraintsSetting < 2) && ($dairy > $dairySlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " hurries to join your herd of dairy cows.">>
+					<<assignJob $slaves[$i] "work in the dairy">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " hurries to join your herd of cows.">>
+					<<assignJob $slaves[$i] "get milked">>
+				<</if>>
+			<<else>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $brothelName to help raise money to get more girls lactating properly.">>
+					<<assignJob $slaves[$i] "work in the brothel">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to prostitute _oself to help raise money to get more girls lactating properly.">>
+					<<assignJob $slaves[$i] "whore">>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if ($slaves[$i].whoreSkill > $slaves[$i].entertainSkill)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to work in $brothelName, since $pronoun thinks _oself a better whore than a public slut.">>
+					<<assignJob $slaves[$i] "work in the brothel">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to whore, since $pronoun thinks _oself a better whore than a public slut.">>
+					<<assignJob $slaves[$i] "whore">>
+				<</if>>
+			<<elseif ($slaves[$i].entertainSkill >= $slaves[$i].whoreSkill)>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to be a club girl, since $pronoun thinks _oself a better public slut than a whore.">>
+					<<assignJob $slaves[$i] "serve in the club">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to serve the public, since $pronoun thinks _oself a better public slut than a whore.">>
+					<<assignJob $slaves[$i] "serve the public">>
+				<</if>>
+			<<else>>
+				<<if ($universalRulesAssignsSelfFacility == 1) && ($brothel > $brothelSlaves)>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to join $possessive sisters and work in $brothelName.">>
+					<<assignJob $slaves[$i] "work in the brothel">>
+				<<else>>
+					<<set $slaves[$i].choosesOwnAssignmentText += " decides to prostitute _oself to help you upgrade $arcologies[0].name and improve everyone's life.">>
+					<<assignJob $slaves[$i] "whore">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if ($universalRulesAssignsSelfFacility == 1) && ($club > $clubSlaves)>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " decides to be a club girl, since partying is better than sitting around and failing to think of a job to do.">>
+			<<assignJob $slaves[$i] "serve in the club">>
+		<<elseif canWalk($slaves[$i]) && canSee($slaves[$i])>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " decides to tidy up the penthouse a little while $pronoun thinks.">>
+			<<assignJob $slaves[$i] "be a servant">>
+		<<else>>
+			<<set $slaves[$i].choosesOwnAssignmentText += " stays in bed, unable to come up with anything.">>
+			<<removeJob $slaves[$i] $slaves[$i].assignment>>
+		<</if>>
+	<</if>>
+
+	<<set $slaves[$i].choosesOwnAssignment = 2>> /* ready for second pass */
+
+<</if>> /* closes choosesOwnAssignment */
+
+

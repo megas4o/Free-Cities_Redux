@@ -1,0 +1,156 @@
+:: P coup attempt [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event", $daughtersVictory = 1>>
+
+You are awakened in the middle of the night by a jolt that shakes the entire arcology, accompanied by a distant boom. It is followed by the wail of the arcology's alarm systems, and then finally by a faint crackle that grows to a constant chatter of gunfire. Main power goes out, and you claw your way in the darkness to the video feeds, running on emergency backup. The Daughters of Liberty have more sympathizers in the arcology than even you suspected, and they're well armed and have the element of surprise. <<if $arcologies[0].FSRomanRevivalistLaw == 1>>$arcologies[0].name, however, is home to a society that cannot be surprised, for each and every one of its citizens is armed and trained for instant contribution to the defense of Rome. Even as you do your best to reestablish control, you hear a thunderous, ubiquitous roar from all around you. Your citizens are already getting into the fight.<</if>>
+
+<br><br>
+
+<<if $hackerSupport == 0>>Many of the arcology systems are not responding properly. It seems the Daughters' penetration of your systems is thorough. Your security systems are still reasonably functional, but the rebels are aided by partial control of things like lights and door locks.<<else>>It seems your cyberwarfare ally of convenience is having an effect. Arcology systems are working perfectly unless the rebels disable them physically. Their fighters are impeded by uncooperative lights, resistant locking systems, and even $assistantName's selective deployment of firefighting systems to obscure visibility.<</if>>
+
+<br><br>
+
+<<if $personalArms == 0>>Since you are not well armed or armored, you stay in your penthouse and do what you can to coordinate the defense.<<elseif $personalArms == 1>>The Daughters are appalled to encounter you striding thunderously out of your penthouse, fully armored. Your exoskeleton mounts an acoustic riot control system that even allows you to take prisoners.<<else>>The Daughters are appalled to encounter you striding thunderously out of your penthouse, fully armored. Your exoskeleton mounts an acoustic riot control system that even allows you to take prisoners. Meanwhile, your security drones are busily rearming themselves, and soon the dominant sound in the arcology is the ripping noise made by their small-caliber guns. A few of them retain their nonlethal weapons and swoop in to subdue when possible.<</if>>
+
+<br><br>
+
+<<if ($mercenaries == 0) && ($arcologies[0].FSRomanRevivalistLaw == 0)>>You are alone in contributing to the defense of your home.<<elseif $mercenaries == 1>>Your mercenaries desperately defend their barracks but manage little else.<<elseif $mercenaries == 3>>Your mercenaries manage to get into action quickly enough, but are bogged down in the streets. They are obliged to fight a confused battle to establish a perimeter. Only once it's stable are they able to push out.<<else>>Your $mercenariesTitle spread out into the arcology, as invincible as Medieval men-at-arms matched against peasants. They are so dominant over the Daughters that they are able to take many prisoners. Their armor often permits them to approach armed, resisting rebels and disarm them manually.<</if>> <<if $arcologies[0].FSRomanRevivalistLaw == 1>>As the crisis is reached and passed, lower-class citizens armed as Hastati, with lighter weapons and personal armor, begin to sweep the arcology to ensure no one escapes. Middle-class citizens, meanwhile, heavily armored as Principes, methodically grind out pockets of armed resistance. The toughest rebel groups are left to the exoskeleton-armored Triarii.<</if>>
+
+<br><br>
+
+<<set _newSlaves = []>>
+<<if $arcologies[0].FSRomanRevivalistLaw + $mercenaries + $personalArms + $hackerSupport > 8>>
+	@@.yellow;The Daughters of Liberty are utterly crushed.@@ $arcologies[0].name has been slightly damaged, but even as the last pockets of resistance are crushed, your citizens begin repairs themselves. The effect on your reputation is @@.green;immensely positive,@@ since your victory was insultingly easy and barely set the arcology's prosperity back at all. You also took a truly impressive bag of prisoners.
+	<<set $daughtersVictory = 3>>
+	<<set $cash -= 2000>>
+	<<set $cash -= Math.trunc($cash*0.2)>>
+	<<set $arcologies[0].prosperity = Math.trunc($arcologies[0].prosperity*0.7)>>
+	<<set $rep += 2000>>
+	<<for $i = 0; $i < 8; $i++>>
+		<<if random(0,99) < $seeDicks>>
+			<<include "Generate XY Slave">>
+		<<else>>
+			<<include "Generate XX Slave">>
+		<</if>>
+		<<set $activeSlave.origin = "She is an enslaved Daughter of Liberty.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+	<<set $desc = "a damaged plate carrier bearing Daughters of Liberty insignia">>
+	<<set $trinkets.push($desc)>>
+<<elseif $arcologies[0].FSRomanRevivalistLaw == 1>>
+	@@.yellow;The Daughters of Liberty are annihilated.@@ @@.red;$arcologies[0].name has been damaged,@@ and the repairs will be quite costly. However, the effect on your reputation is @@.green;very positive,@@ since though your victory was hard-fought and set the arcology's prosperity back @@.red;considerably,@@ you did better than other arcology owners have done when faced with similar well-armed unrest. You also took a truly impressive bag of prisoners.
+	<<set $daughtersVictory = 3>>
+	<<set $cash -= 5000>>
+	<<set $cash -= Math.trunc($cash*0.2)>>
+	<<set $arcologies[0].prosperity = Math.trunc($arcologies[0].prosperity*0.7)>>
+	<<set $rep += 1000>>
+	<<if $seeDicks > 50>>
+		<<set $j = 5>>
+	<<elseif $seeDicks > 0>>
+		<<set $j = 2>>
+	<<else>>
+		<<set $j = 0>>
+	<</if>>
+	<<for $i = 0; $i < $j; $i++>>
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.origin = "She is an enslaved Daughter of Liberty.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+	<<if $seeDicks > 50>>
+		<<set $j = 0>>
+	<<elseif $seeDicks > 0>>
+		<<set $j = 3>>
+	<<else>>
+		<<set $j = 5>>
+	<</if>>
+	<<for $i = 0; $i < $j; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She is an enslaved Daughter of Liberty.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+	<<set $desc = "a Daughters of Liberty flag that once hung in their forward command post within your arcology">>
+	<<set $trinkets.push($desc)>>
+<<else>>
+	@@.yellow;The Daughters of Liberty are defeated.@@ @@.red;$arcologies[0].name is heavily damaged,@@ and the repairs will be very costly. The effect on your reputation is @@.green;muted, but positive,@@ since though you won, your victory was hard-fought and set the arcology's prosperity back @@.red;a long way.@@
+	<<if $traitor != 0>>
+		$traitor.slaveName was killed in the fighting.
+		<<set $traitor = 0>>
+	<</if>>
+	<<set $daughtersVictory = 2>>
+	<<set $cash -= 10000>>
+	<<set $cash -= Math.trunc($cash*0.3)>>
+	<<set $arcologies[0].prosperity = Math.trunc($arcologies[0].prosperity*0.5)>>
+	<<set $rep += 500>>
+	<<if $seeDicks > 50>>
+		<<set $j = 3>>
+	<<elseif $seeDicks > 0>>
+		<<set $j = 1>>
+	<<else>>
+		<<set $j = 0>>
+	<</if>>
+	<<for $i = 0; $i < $j; $i++>>
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.origin = "She is an enslaved Daughter of Liberty.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+	<<if $seeDicks > 50>>
+		<<set $j = 0>>
+	<<elseif $seeDicks > 0>>
+		<<set $j = 2>>
+	<<else>>
+		<<set $j = 3>>
+	<</if>>
+	<<for $i = 0; $i < $j; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She is an enslaved Daughter of Liberty.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+	<<set $desc = "a Daughters of Liberty brassard">>
+	<<set $trinkets.push($desc)>>
+<</if>>
+
+<<if $traitor != 0>>
+	$traitor.slaveName was captured and has been returned to you.
+	<<set $traitor.assignmentVisible = 1>>
+	<<set $traitor.assignment = "stay confined">>
+	<<set $traitor.health = random(-80,-60)>>
+	<<set $traitor.origin = "She was your slave, but you freed her, which she repaid by participating in a coup attempt against you. It failed, and she is again your chattel.">>
+	<<set $traitor.recruiter = 0, $traitor.canRecruit = 0>> /* disable relative recruitment event for traitor since we don't have the traitor's original stats */
+	<<AddSlave $traitor>> /* skip New Slave Intro */
+<</if>>
+
+<br><br>
+
+<span id="result">
+<<link "Sell your prisoners immediately">>
+	<<replace "#result">>
+	<<for $i = 0; $i < _newSlaves.length; $i++>>
+		<<slaveCost _newSlaves[$i]>>
+		<<set $cash += $slaveCost>>
+	<</for>>
+	Prisoners sold.
+	<</replace>>
+<</link>> <<if $traitor != 0>>//$traitor.slaveName will not be sold.//<</if>>
+<br><<link "Give your prisoners to those who suffered property damage">>
+	<<replace "#result">>
+	<<for $i = 0; $i < _newSlaves.length; $i++>>
+		<<slaveCost _newSlaves[$i]>>
+		<<set $rep += Math.trunc($slaveCost/10)>>
+	<</for>>
+	Prisoners @@.green;given away.@@
+	<</replace>>
+<</link>> <<if $traitor != 0>>//$traitor.slaveName will not be given away.//<</if>>
+<br><<link "Enslave all of your prisoners">>
+	<<replace "#result">>
+	<<for $i = 0; $i < _newSlaves.length; $i++>>
+		<<AddSlave _newSlaves[$i]>> /* skip New Slave Intro */
+	<</for>>
+	You simply enslave all of the prisoners yourself. You will make them pay for attacking your arcology.
+	<</replace>>
+<</link>>
+</span>

@@ -1,0 +1,187 @@
+:: End Week [nobr]
+
+<<set $gingering = 0>>
+
+<<set $oralUseWeight = 5>>
+<<set $vaginalUseWeight = 5>>
+<<set $analUseWeight = 5>>
+<<set $mammaryUseWeight = 1>>
+<<set $penetrativeUseWeight = 1>>
+
+<<if $OralEncouragement == 1>>
+	<<set $oralUseWeight += 2>>
+	<<set $vaginalUseWeight -= 1>>
+	<<set $analUseWeight -= 1>>
+<<elseif $VaginalEncouragement == 1>>
+	<<set $oralUseWeight -= 1>>
+	<<set $vaginalUseWeight += 2>>
+	<<set $analUseWeight -= 1>>
+<<elseif $AnalEncouragement == 1>>
+	<<set $oralUseWeight -= 1>>
+	<<set $vaginalUseWeight -= 1>>
+	<<set $analUseWeight += 2>>
+<</if>>
+<<if $OralDiscouragement == 1>>
+	<<set $oralUseWeight -= 2>>
+	<<set $vaginalUseWeight += 1>>
+	<<set $analUseWeight += 1>>
+<</if>>
+<<if $VaginalDiscouragement == 1>>
+	<<set $oralUseWeight += 1>>
+	<<set $vaginalUseWeight -= 2>>
+	<<set $analUseWeight += 1>>
+<</if>>
+<<if $AnalDiscouragement == 1>>
+	<<set $oralUseWeight += 1>>
+	<<set $vaginalUseWeight += 1>>
+	<<set $analUseWeight -= 2>>
+<</if>>
+
+<<set $organsCompleted = 0>>
+<<if $organs.length > 0>>
+<<for _i = 0; _i < $organs.length; _i++>>
+	<<if $organs[_i].weeksToCompletion > 0>>
+		<<set $organs[_i].weeksToCompletion-->>
+	<</if>>
+	<<if $organs[_i].weeksToCompletion == 0>>
+		<<set $organsCompleted++>>
+	<</if>>
+<</for>>
+<</if>>
+
+<<if $limbs.length > 0>>
+<<for _i = 0; _i < $limbs.length; _i++>>
+	<<if $limbs[_i].weeksToCompletion > 0>>
+		<<set $limbs[_i].weeksToCompletion-->>
+	<</if>>
+	<<if $limbs[_i].weeksToCompletion == 0>>
+		<<set $limbsCompleted++>>
+	<</if>>
+<</for>>
+<</if>>
+
+<<set $TSS.schoolSale = 0, $GRI.schoolSale = 0, $SCP.schoolSale = 0, $LDE.schoolSale = 0, $TGA.schoolSale = 0, $TFS.schoolSale = 0, $independenceDay = 0, $showEncyclopedia = 0, $racialVarieties = [], $shelterGirlsIDs = [], $oldWeek = $week, $cashLastWeek = $cash>>
+
+<<set $lastWeeksFinances = {
+incomeArcologyImprovement:0,
+incomeMercenaries:0,
+incomeStocksBought:0,
+incomeStocks:0,
+incomeMenialTrades:0,
+incomePersonalBusiness:0,
+incomeFuckDollBioFactory: 0,
+incomeWhore: 0,
+incomeRest: 0,
+incomeFucktoy: 0,
+incomeSubordinateSlave: 0,
+incomeHouseServant: 0,
+incomeConfined: 0,
+incomePublicServant: 0,
+incomeClasses: 0,
+incomeMilked: 0,
+incomeExtraMilk: 0,
+incomeGloryhole: 0,
+incomeSlaves: 0,
+incomeLab: 0,
+incomeBrothel: 0,
+incomeClub: 0,
+incomeArcade: 0,
+incomeDairy: 0,
+incomeServantsQuarters: 0,
+incomeMasterSuite: 0,
+incomeSchool: 0,
+incomeSpa: 0,
+incomeClinic: 0,
+incomeCellblock: 0,
+incomeRents: 0,
+incomeTotal: 0,
+expensesMercenaries:0,
+expensesArcologyImprovement:0,
+expensesStocksBought:0,
+expensesStocks:0,
+expensesMenialTrades:0,
+expensesFuckDollBioFactory:0,
+expensesWhore: 0,
+expensesRest: 0,
+expensesFucktoy: 0,
+expensesSubordinateSlave: 0,
+expensesHouseServant: 0,
+expensesConfined: 0,
+expensesPublicServant: 0,
+expensesClasses: 0,
+expensesMilked: 0,
+expensesGloryhole: 0,
+expensesSlaves: 0,
+expensesLab: 0,
+expensesBrothel: 0,
+expensesClub: 0,
+expensesArcade: 0,
+expensesDairy: 0,
+expensesServantsQuarters: 0,
+expensesMasterSuite: 0,
+expensesSchool: 0,
+expensesSpa: 0,
+expensesClinic: 0,
+expensesCellblock: 0,
+expensesCitizenOrphanage: 0,
+expensesPrivateOrphanage: 0,
+expensesTotal: 0,
+profitsMercenaries:0,
+profitsArcologyImprovement:0,
+profitsStocksBought:0,
+profitsStocks:0,
+profitsMenialTrades:0,
+profitsFuckDollBioFactory:0,
+profitsWhore: 0,
+profitsRest: 0,
+profitsFucktoy: 0,
+profitsSubordinateSlave: 0,
+profitsHouseServant: 0,
+profitsConfined: 0,
+profitsPublicServant: 0,
+profitsClasses: 0,
+profitsMilked: 0,
+profitsGloryhole: 0,
+profitsSlaves: 0,
+profitsLab: 0,
+profitsBrothel: 0,
+profitsClub: 0,
+profitsArcade: 0,
+profitsDairy: 0,
+profitsServantsQuarters: 0,
+profitsMasterSuite: 0,
+profitsSchool: 0,
+profitsSpa: 0,
+profitsClinic: 0,
+profitsCellblock: 0,
+profitsTotal: 0
+}>>
+
+
+
+
+
+
+<<if $manuallyRetired == 0>><<set $retiree = 0>><</if>>
+<<set $expiree = 0>>
+
+<<set $PC.sexualEnergy = 4>>
+<<if $personalAttention == "sex">>
+	<<set $PC.sexualEnergy += 2>>
+<</if>>
+<<if $PC.age == 3>>
+	<<set $PC.sexualEnergy -= 2>>
+<<elseif $PC.age == 1>>
+	<<set $PC.sexualEnergy += 2>>
+<</if>>
+
+<<set $HGEnergy = 0, $HGCum = 0, $HGSlaveSuccess = 0, $HeadGirl = 0, $Recruiter = 0, $Madam = 0, $madamCashBonus = 0, $DJ = 0, $DJRepBonus = 0, $Milkmaid = 0, $Collectrix = 0, $Stewardess = 0, $Schoolteacher = 0, $Wardeness = 0, $Concubine = 0, $Attendant = 0, $Nurse = 0, $Bodyguard = 0, $fuckSlaves = 0, $freeSexualEnergy = 0, $publicServants = 0, $cumSlaves = 0, $averageDick = 0, $slavesWithWorkingDicks = 0>>
+
+/* GAMEOVERS */
+<<if $slaves.length < 1>>
+	<<set $gameover = "no slaves">><<goto "Gameover">>
+<<elseif $arcologies[0].ownership < $arcologies[0].minority>>
+	<<set $gameover = "ownership">><<goto "Gameover">>
+<<else>>
+	<<goto "Slave Assignments Report">>
+<</if>>

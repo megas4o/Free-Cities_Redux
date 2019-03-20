@@ -1,0 +1,105 @@
+:: Arcade [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Arcade", $showEncyclopedia = 1, $encyclopedia = "Arcade", $arcadeSlaves = $ArcadeiIDs.length>>
+
+<<if $arcadeName != "the Arcade">>
+	<<set $arcadeNameCaps = $arcadeName.replace("the ", "The ")>>
+<</if>>
+
+<<arcadeDescriptionFS>>
+
+<<if $arcadeSlaves > 2>>
+	It's busy. Customers are entering and exiting, leaving a few ¤ behind in the charge machines and loads of semen behind in the holes.
+<<elseif $arcadeSlaves > 0>>
+	It's understaffed; there are lines here and there for the few holes available.
+<<else>>
+	It's empty and quiet.
+	<<link "Decommission the arcade">>
+		<<set $arcade = 0, $arcadeUpgradeInjectors = 0, $arcadeUpgradeFuckdolls = 0, $arcadeUpgradeCollectors = 0>>
+		<<for _i = 0; _i < $sectors.length; _i++>>
+		<<if $sectors[_i].type == "Arcade">>
+			<<set $sectors[_i].type = "Markets">><<break>>
+		<</if>>
+		<</for>>
+		<<goto "Main">>
+	<</link>>
+<</if>>
+
+<br>It can support $arcade inmates.
+<<if ($arcade < $arcadeSlaves) && ($arcadeUpgradeFuckdolls == 1)>>
+	@@.yellow;$arcadeNameCaps is overcrowded;@@ the least popular inmate will be converted to a standard Fuckdoll this week.
+<</if>>
+<<set _Tmult0 = Math.trunc($arcade*1000*$upgradeMultiplierArcology)>>
+[[Expand the arcade|Arcade][$cash -= _Tmult0, $arcade += 5]] //Costs ¤_Tmult0 and will increase upkeep costs//
+
+<br>
+<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+<<if $arcadeUpgradeInjectors == 1>>
+	It has been upgraded with aphrodisiac injection systems and electroshock applicators. If the aphrodisiacs fail to force an orgasm from an inmate, she is shocked to tighten her holes regardless.
+<<elseif $arcadeUpgradeCollectors == 1>>
+	It has been retrofitted to milk lactating slaves<<if $seeDicks != 0>> and cockmilk slaves capable of ejaculating<</if>>, though less efficiently than a dedicated facility.
+<<else>>
+	<br>It is a standard arcade. It can be upgraded to either maximize the pleasure of those that visit it at the expense of the health or the inmates, or to keep them healthy (if not happy) and milk them of useful fluids.<br>
+	[[Upgrade the arcade with invasive performance-enhancing systems|Arcade][$cash -= _Tmult1, $arcadeUpgradeInjectors = 1]] | [[Retrofit the arcade to collect useful fluids|Arcade][$cash -= _Tmult1, $arcadeUpgradeCollectors = 1]]<br>
+	//Choosing either upgrade will cost ¤_Tmult1 and will increase upkeep costs. They are mutually exclusive; only one can be chosen.// <br>
+<</if>>
+
+<<if $arcologies[0].FSPaternalist == "unset">>
+	<br>
+	<<if $arcadeUpgradeMenials == 1>>
+		<<if $fuckdolls > 0>>
+			Rows of menial Fuckdolls are shackled to the floor in positions that force them to present all their holes. Their latex-clad bodies struggle in their restraints when fucked, offering a different $arcadeName experience.
+		<<else>>
+			In addition to the low walls that house inmates, there are also rows of simple shackles that allow menial Fuckdolls to be restrained here to add still more rapeable holes to $arcadeName's capacity. They're empty at present.
+		<</if>>
+	<<else>>
+		There is no provision for menial Fuckdolls. [[Add shackles to restrain more holes|Arcade][$cash -= _Tmult1, $arcadeUpgradeMenials = 1]] //Costs ¤_Tmult1//
+	<</if>>
+<</if>>
+
+<br>$arcadeNameCaps is
+<<if $arcadeUpgradeFuckdolls == 1>>
+	equipped to convert surplus inmates into standard Fuckdolls.
+<<else>>
+	<<set _Tmult2 = Math.trunc(5000*$upgradeMultiplierArcology)>>
+	not equipped to convert surplus inmates into standard Fuckdolls. [[Upgrade the arcade to create Fuckdolls|Arcade][$cash -= _Tmult2, $arcadeUpgradeFuckdolls = 1]] //Costs ¤_Tmult2//
+<</if>>
+
+<br><br>
+<<if ($arcade <= $arcadeSlaves)>>
+	''$arcadeNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $arcadeSlaves)>>
+	<<link "''Confine a slave in $arcadeName''">>
+		<<set $leaveArcade = 0>>
+		<<replace #arcadeComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $arcadeSlaves > 0>>
+	| <<link "''Bring a slave out of $arcadeName''">>
+		<<set $leaveArcade = 1>>
+		<<replace #arcadeComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//$arcadeNameCaps is empty for the moment.<br> //
+<</if>>
+
+<span id="arcadeComingGoing">
+<<if $leaveArcade == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<<unset $Flag>>
+
+<br><br>Rename $arcadeName: <<textbox "$arcadeName" $arcadeName "Arcade">> //Use a noun or similar short phrase//

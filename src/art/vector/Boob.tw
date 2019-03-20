@@ -1,0 +1,49 @@
+:: Art_Vector_Boob_ [nobr]
+
+/* BEWARE: _art_have_boobs and _art_scale_factor interfere with Art_Vector_Penis_ */
+<<set _art_have_boobs to true>>
+
+/* BEWARE: _art_boob_transform is also read by Art_Vector_Boob_Addons_ */
+
+/* 
+Prepare SVG transform matrix for continuous boob scaling.
+This transform affects boobs, areolae and piercings.
+The parameters were fit by points (300,1.0) and (15000,2.5).
+See https://www.wolframalpha.com/input/?i=log+fit+%7B%7B300,1%7D,%7B15000,2.5%7D%7D .
+Boobs start at 300cc as of "flesh description widgets".
+Upper value was discussed at https://github.com/Free-Cities/Free-Cities/issues/950#issuecomment-321359466 .
+*/
+<<set _art_scale_factor = 0.383433*Math.log(0.0452403*_artSlave.boobs) >>
+<<set _art_translation_x = -292.841*_art_scale_factor+292.349 >>
+<<set _art_translation_y = -216.438*_art_scale_factor+216.274 >>
+<<set _art_boob_transform = "matrix(" + _art_scale_factor +",0,0," + _art_scale_factor + "," + _art_translation_x + "," + _art_translation_y + ")">>
+/*
+_art_boob_transform is for internal program usage.
+_art_transform will affect the display.
+*/
+<<set _art_transform = _art_boob_transform>>
+
+<<if _artSlave.boobs < 300 >> 
+  /* BEWARE: this threshold may be used in other art-related code, too */
+  /* boobs too small - draw areolae directly onto torso */
+  <<set _art_scale_factor = 1 >>
+  <<set _art_translation_x = 16 >> /* a little shift to the right is needed due to perspective */
+  <<set _art_translation_y = 0 >>
+  <<set _art_boob_transform = "matrix(" + _art_scale_factor +",0,0," + _art_scale_factor + "," + _art_translation_x + "," + _art_translation_y + ")">>
+  <<set _art_transform = _art_boob_transform>>
+<<else>>
+  <<include Art_Vector_Boob>>
+  /* shiny clothings */
+  <<if $seeVectorArtHighlights == 1>>
+    <<if _artSlave.fuckdoll != 0 || _artSlave.clothes == "a latex catsuit" || _artSlave.clothes == "body oil">>
+      <<include Art_Vector_Boob_Outfit_Shine>>
+    <</if>>
+  <</if>>
+<</if>>
+<<if _artSlave.clothes != "a cheerleader outfit" && _artSlave.clothes != "a hijab and abaya" && _artSlave.clothes != "cutoffs and a t-shirt" && _artSlave.clothes != "a halter top dress" && _artSlave.clothes != "a mini dress" && _artSlave.clothes != "a leotard" && _artSlave.clothes != "a nice maid outfit" && _artSlave.clothes != "a slutty maid outfit" && _artSlave.clothes != "a military uniform" && _artSlave.clothes != "a nice nurse outfit" && _artSlave.clothes != "a schoolgirl outfit" && _artSlave.clothes != "a scalemail bikini" && _artSlave.clothes != "a slutty nurse outfit" && _artSlave.clothes != "a ball gown" && _artSlave.clothes != "battledress" && _artSlave.clothes != "spats and a tank top" && _artSlave.clothes != "nice business attire" && _artSlave.clothes != "slutty business attire" && _artSlave.clothes != "a bunny outfit" && _artSlave.clothes != "conservative clothing" && _artSlave.clothes != "a huipil" && _artSlave.clothes != "a kimono" && _artSlave.clothes != "a slave gown" && _artSlave.clothes != "stretch pants and a crop-top" && _artSlave.clothes != "a maternity dress" && _artSlave.clothes != "a slutty qipao" && _artSlave.clothes != "faceless cybersuit" && _artSlave.clothes != "half-face cybersuit">>
+<<include Art_Vector_Boob_Areola>>
+<</if>>
+
+/* set _art_transform to empty string so stray SVG groups in other passages are not affected */
+<<set _art_transform = "">>
+

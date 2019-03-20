@@ -1,0 +1,818 @@
+:: SA recruit girls [nobr]
+
+<<set $bellyAccessory = $slaves[$i].bellyAccessory>>
+
+/* Note on target sum: HG and Recruiter are the initial 2 counted (no facility req'd), while HGSuite counts the HG's girl, other facilities count associated leader */
+<<if $recruiterIdleRule == "number">>
+	<<set _idleTarget = $recruiterIdleNumber>>
+<<elseif $recruiterIdleRule == "facility">>
+	<<set _idleTarget = (2 + $brothel + $club + $arcade + $dairy + $servantsQuarters + $masterSuite)>>
+	<<if $HGSuite>><<set _idleTarget++>><</if>>
+	<<if $dojo>><<set _idleTarget++>><</if>>
+	<<if $brothel>><<set _idleTarget++>><</if>>
+	<<if $club>><<set _idleTarget++>><</if>>
+	<<if $dairy && $dairyRestraintsSetting < 2>><<set _idleTarget++>><</if>>
+	<<if $servantsQuarters>><<set _idleTarget++>><</if>>
+	<<if $masterSuite>><<set _idleTarget++>><</if>>
+	<<if $schoolroom>><<set _idleTarget++>><</if>>
+	<<if $spa>><<set _idleTarget++>><</if>>
+	<<if $clinic>><<set _idleTarget++>><</if>>
+	<<if $cellblock>><<set _idleTarget++>><</if>>
+	<<set _idleTarget = Math.max(_idleTarget, 20)>>
+<<else>>
+	<<set _idleTarget = Infinity>>
+<</if>>
+
+<<if $recruiterTarget == "other arcologies">>
+
+<<set _influenced = 0>>
+<<for _j = 0; _j < $arcologies.length; _j++>>
+<<if $arcologies[_j].direction == $arcologies[0].influenceTarget>>
+
+acting as a sexual Ambassador to $arcologies[_j].name, which mostly means that she travels there in her offical capacity and has culturally influential sex with its leading citizens.
+
+<<set _oldRepGain = clone($repGain)>>
+<<set $pure = 0>>
+<<silently>><<include "SA serve the public">><</silently>>
+<<set _influence = Math.clamp(($repGain-_oldRepGain)*0.01,1,3)>>
+<<set $repGain = _oldRepGain>>
+
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<if ($arcologies[_j].FSSubjugationist != "unset")>>
+		<<if ($arcologies[0].FSSubjugationistRace == $arcologies[_j].FSSubjugationistRace)>>
+			She advances its racially aligned Subjugationism<<if $slaves[$i].race == $arcologies[_j].FSSubjugationistRace>>, which she's very appropriate for, since she's a $slaves[$i].race slave herself<<set $arcologies[_j].FSSubjugationist++>><</if>>.
+			<<set $arcologies[_j].FSSubjugationist += _influence>>
+		<<else>>
+			She challenges its racially mismatched Subjugationism<<if $slaves[$i].race != $arcologies[_j].FSSubjugationistRace>>, which she's very appropriate for, since she's a $slaves[$i].race slave<<set $arcologies[_j].FSSubjugationist-->><</if>>.
+			<<set $arcologies[_j].FSSubjugationist -= _influence>>
+		<</if>>
+	<<elseif ($arcologies[_j].FSSupremacist != "unset") && ($arcologies[0].FSSubjugationistRace == $arcologies[_j].FSSupremacistRace)>>
+		She challenges its opposing Supremacism<<if $slaves[$i].race == $arcologies[_j].FSSubjugationistRace>>, which she's very appropriate for, since she's a $slaves[$i].race slave herself<<set $arcologies[_j].FSSupremacist-->><</if>>.
+		<<set $arcologies[_j].FSSupremacist -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<if ($arcologies[_j].FSSupremacist != "unset")>>
+		<<if ($arcologies[0].FSSupremacistRace == $arcologies[_j].FSSupremacistRace)>>
+			She advances its racially aligned Supremacism<<if $slaves[$i].race != $arcologies[_j].FSSupremacistRace>>, which she's very appropriate for, since she's a $slaves[$i].race slave herself<<set $arcologies[_j].FSSupremacist++>><</if>>.
+			<<set $arcologies[_j].FSSupremacist += _influence>>
+		<<else>>
+			She challenges its racially mismatched Supremacism<<if $slaves[$i].race == $arcologies[_j].FSSupremacistRace>>, which she's very appropriate for, since she's a $slaves[$i].race slave<<set $arcologies[_j].FSSupremacist-->><</if>>.
+			<<set $arcologies[_j].FSSupremacist -= _influence>>
+		<</if>>
+	<<elseif ($arcologies[_j].FSSubjugationist != "unset") && ($arcologies[0].FSSupremacistRace == $arcologies[_j].FSSubjugationistRace)>>
+		She challenges its opposing Subjugationism<<if $slaves[$i].race != $arcologies[_j].FSSupremacistRace>>, which she's very appropriate for, since she's a $slaves[$i].race slave herself<<set $arcologies[_j].FSSubjugationist-->><</if>>.
+		<<set $arcologies[_j].FSSubjugationist -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<if $arcologies[_j].FSGenderRadicalist != "unset">>
+		She advances Gender Radicalism there by fucking and getting fucked by anyone who's willing<<if canDoAnal($slaves[$i]) && canAcheiveErection($slaves[$i])>>, which she's perfect for, since she's quite capable of cumming from prostate stimulation while fucking someone in the ass<<set $arcologies[_j].FSGenderRadicalist++>><</if>>.
+		<<set $arcologies[_j].FSGenderRadicalist += _influence>>
+	<<elseif $arcologies[_j].FSGenderFundamentalist != "unset">>
+		She challeges Gender Fundamentalism there by fucking and getting fucked by anyone who's willing<<if canDoAnal($slaves[$i]) && canAcheiveErection($slaves[$i])>>, which she's perfect for, since she's quite capable of cumming from prostate stimulation while fucking someone in the ass<<set $arcologies[_j].FSGenderFundamentalist-->><</if>>.
+		<<set $arcologies[_j].FSGenderFundamentalist -= _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<if $arcologies[_j].FSGenderFundamentalist != "unset">>
+		She advances Gender Fundamentalism there by being a wholesome, romantic girl<<if $slaves[$i].genes == "XX" && $slaves[$i].vagina > -1 && !$slaves[$i].dick>>, which she's perfect for, since she's a proper woman with a body meant for missionary<<set $arcologies[_j].FSGenderFundamentalist++>><</if>>.
+		<<set $arcologies[_j].FSGenderFundamentalist += _influence>>
+	<<elseif $arcologies[_j].FSGenderRadicalist != "unset">>
+		She challeges Gender Radicalism there by being a wholesome, romantic girl<<if $slaves[$i].genes == "XX" && $slaves[$i].vagina > -1 && !$slaves[$i].dick>>, which she's perfect for, since she's a proper woman with a body meant for missionary<<set $arcologies[_j].FSGenderRadicalist-->><</if>>.
+		<<set $arcologies[_j].FSGenderRadicalist -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<if $arcologies[_j].FSPaternalist != "unset">>
+		She advances Paternalism there by her enthusiasm for sexual slavery<<if $slaves[$i].energy > 95 && $slaves[$i].trust > 50>>, which she's perfect for, since she's a trusting nymphomaniac who couldn't possibly find happiness as anything other than a sex slave<<set $arcologies[_j].FSPaternalist++>><</if>>.
+		<<set $arcologies[_j].FSPaternalist += _influence>>
+	<<elseif $arcologies[_j].FSDegradationist != "unset">>
+		She challeges Degradationism there by her enthusiasm for sexual slavery<<if $slaves[$i].energy > 95 && $slaves[$i].trust > 50>>, which she's perfect for, since she's a trusting nymphomaniac who couldn't possibly find happiness as anything other than a sex slave<<set $arcologies[_j].FSDegradationist-->><</if>>.
+		<<set $arcologies[_j].FSDegradationist -= _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	<<if $arcologies[_j].FSDegradationist != "unset">>
+		She advances Degradationism there by submitting to public use in the most degrading ways<<if $slaves[$i].energy > 95 && $slaves[$i].trust < -50>>, which she's perfect for, since she's a frightened nymphomaniac for whom fear is an essential ingredient in the sexual release she craves<<set $arcologies[_j].FSDegradationist++>><</if>>.
+		<<set $arcologies[_j].FSDegradationist += _influence>>
+	<<elseif $arcologies[_j].FSPaternalist != "unset">>
+		She challeges Paternalism there by submitting to public use in the most degrading ways<<if $slaves[$i].energy > 95 && $slaves[$i].trust < -50>>, which she's perfect for, since she's a frightened nymphomaniac for whom fear is an essential ingredient in the sexual release she craves<<set $arcologies[_j].FSPaternalist-->><</if>>.
+		<<set $arcologies[_j].FSPaternalist -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<if $arcologies[_j].FSBodyPurist != "unset">>
+		She advances Body Purism there with a lot of unadorned public nudity<<if $pure>>, which she's perfect for, since she's an all-natural beauty<<set $arcologies[_j].FSBodyPurist++>><</if>>.
+		<<set $arcologies[_j].FSBodyPurist += _influence>>
+	<<elseif $arcologies[_j].FSTransformationFetishist != "unset">>
+		She challeges Transformation Fetishism there with a lot of unadorned public nudity<<if $pure>>, which she's perfect for, since she's an all-natural beauty<<set $arcologies[_j].FSTransformationFetishist-->><</if>>.
+		<<set $arcologies[_j].FSTransformationFetishist -= _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	<<if $arcologies[_j].FSBodyPurist != "unset">>
+		She advances Transformation Fetishism there with a lot of slutty public nudity<<if !$pure>>, which she's perfect for, since she's a whorish sex doll full of plastic<<set $arcologies[_j].FSBodyPurist++>><</if>>.
+		<<set $arcologies[_j].FSBodyPurist += _influence>>
+	<<elseif $arcologies[_j].FSTransformationFetishist != "unset">>
+		She challeges Body Purism there with a lot of slutty public nudity<<if !$pure>>, which she's perfect for, since she's a whorish sex doll full of plastic<<set $arcologies[_j].FSTransformationFetishist-->><</if>>.
+		<<set $arcologies[_j].FSTransformationFetishist -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<if $arcologies[_j].FSYouthPreferentialist != "unset">>
+		She advances Youth Preferentialism there by showing favoritism to younger suitors<<if $slaves[$i].age < 25>>, and by being nice and young herself, appropriately enough<<set $arcologies[_j].FSYouthPreferentialist++>><</if>>.
+		<<set $arcologies[_j].FSYouthPreferentialist += _influence>>
+	<<elseif $arcologies[_j].FSMaturityPreferentialist != "unset">>
+		She challeges Maturity Preferentialism there by showing favoritism to younger suitors<<if $slaves[$i].age < 25>>, and by being nice and young herself, appropriately enough<<set $arcologies[_j].FSMaturityPreferentialist-->><</if>>.
+		<<set $arcologies[_j].FSMaturityPreferentialist -= _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<if $arcologies[_j].FSMaturityPreferentialist != "unset">>
+		She advances Maturity Preferentialism there by showing favoritism to more mature suitors<<if $slaves[$i].age > 35>>, and by being a MILF herself, appropriately enough<<set $arcologies[_j].FSMaturityPreferentialist++>><</if>>.
+		<<set $arcologies[_j].FSMaturityPreferentialist += _influence>>
+	<<elseif $arcologies[_j].FSYouthPreferentialist != "unset">>
+		She challeges Youth Preferentialism there by showing favoritism to more mature suitors<<if $slaves[$i].age > 35>>, and by being a MILF herself, appropriately enough<<set $arcologies[_j].FSYouthPreferentialist-->><</if>>.
+		<<set $arcologies[_j].FSYouthPreferentialist -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<if $arcologies[_j].FSSlimnessEnthusiast != "unset">>
+		She advances Slimness Enthusiasm there by showing her appreciation for lithe, graceful partners<<if $slaves[$i].boobs < 500 && $slaves[$i].butt < 3>>, and by being a lissome waif herself<<set $arcologies[_j].FSSlimnessEnthusiast++>><</if>>.
+		<<set $arcologies[_j].FSSlimnessEnthusiast += _influence>>
+	<<elseif $arcologies[_j].FSAssetExpansionist != "unset">>
+		She challeges Asset Expansionism there by showing her appreciation for lithe, graceful partners<<if $slaves[$i].boobs < 500 && $slaves[$i].butt < 3>>, and by being a lissome waif herself<<set $arcologies[_j].FSAssetExpansionist-->><</if>>.
+		<<set $arcologies[_j].FSAssetExpansionist -= _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	<<if $arcologies[_j].FSAssetExpansionist != "unset">>
+		She advances Asset Expansionism there by showing her appreciation for partners with healthy helpings of tits and ass<<if $slaves[$i].butt > 4 && $slaves[$i].boobs > 800>>, and by being deliciously stacked herself<<set $arcologies[_j].FSAssetExpansionist++>><</if>>.
+		<<set $arcologies[_j].FSAssetExpansionist += _influence>>
+	<<elseif $arcologies[_j].FSSlimnessEnthusiast != "unset">>
+		She challeges Slimness Enthusiasm there by showing her appreciation for partners with healthy helpings of tits and ass<<if $slaves[$i].butt > 4 && $slaves[$i].boobs > 800>>, and by being deliciously stacked herself<<set $arcologies[_j].FSSlimnessEnthusiast-->><</if>>.
+		<<set $arcologies[_j].FSSlimnessEnthusiast -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<if $arcologies[_j].FSPastoralist != "unset">>
+		She advances Pastoralism there by drinking a lot of milk, as lavisciously as possible<<if $slaves[$i].lactation>>, and by not milking herself at all, thereby causing her tits to jet cream during intercourse, while she moves, or for no reason at all<<set $arcologies[_j].FSPastoralist++>><</if>>.
+		<<set $arcologies[_j].FSPastoralist += _influence>>
+	<<elseif $arcologies[_j].FSPhysicalIdealist != "unset">>
+		She challeges Physical Idealism there by drinking a lot of milk, as lavisciously as possible<<if $slaves[$i].lactation>>, and by not milking herself at all, thereby causing her tits to jet cream during intercourse, while she moves, or for no reason at all<<set $arcologies[_j].FSPhysicalIdealist-->><</if>>.
+		<<set $arcologies[_j].FSPhysicalIdealist -= _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<if $arcologies[_j].FSPhysicalIdealist != "unset">>
+		She advances Physical Idealism there by working out in public, having physically challenging sex in public<<if $slaves[$i].muscles > 30>>, and improving her already impressive musculature in a publicly documented journey of self-improvement<<set $arcologies[_j].FSPhysicalIdealist++>><</if>>.
+		<<set $arcologies[_j].FSPhysicalIdealist += _influence>>
+	<<elseif $arcologies[_j].FSPastoralist != "unset">>
+		She challeges Pastoralism there by working out in public, having physically challenging sex in public<<if $slaves[$i].muscles > 30>>, and improving her already impressive musculature in a publicly documented journey of self-improvement<<set $arcologies[_j].FSPastoralist-->><</if>>.
+		<<set $arcologies[_j].FSPastoralist -= _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<if $arcologies[_j].FSChattelReligionist != "unset">>
+		She advances Chattel Religionism there by constant public worship, both sexual and traditional<<if $slaves[$i].devotion > 95 && $slaves[$i].intelligence >= 3>>, and by composing her own series of devotionals to your sexual prowess and attractiveness<<set $arcologies[_j].FSChattelReligionist++>><</if>>.
+		<<set $arcologies[_j].FSChattelReligionist += _influence>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<if $arcologies[_j].FSRomanRevivalist != "unset">>
+		She advances Roman Revivalism there by taking an active part in the daily round of public Roman life<<if canTalk($slaves[$i]) && $slaves[$i].intelligence >= 3>>, which she's perfect for, since she has the intelligence to hold her own in discourse with citizens<<set $arcologies[_j].FSRomanRevivalist++>><</if>>.
+		<<set $arcologies[_j].FSRomanRevivalist += _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	<<if $arcologies[_j].FSAztecRevivalist != "unset">>
+		She advances Aztec Revivalism there by taking an active part in the bloodier spectacles<<if $slaves[$i].combatSkill >= 1>>, which she's perfect for, since she has enough experience with blood to make it look good<<set $arcologies[_j].FSAztecRevivalist++>><</if>>.
+		<<set $arcologies[_j].FSAztecRevivalist += _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<if $arcologies[_j].FSEgyptianRevivalist != "unset">>
+		She advances Egyptian Revivalism there by playing her part in the endless round of voluptous entertainments<<if $slaves[$i].relationship && $slaves[$i].relation && $slaves[$i].relationshipTarget == $slaves[$i].relationTarget>>, which she's perfect for, since everyone knows that at the end of the day she'll go home and make love to a blood relative<<set $arcologies[_j].FSEgyptianRevivalist++>><</if>>.
+		<<set $arcologies[_j].FSEgyptianRevivalist += _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<<if $arcologies[_j].FSEdoRevivalist != "unset">>
+		She advances Edo Revivalism there by artfully mixing sexual allure and elegant propriety<<if $slaves[$i].entertainSkill > 95>>, which she's perfect for, since no slave can claim to better entertain a gentleman caller than her<<set $arcologies[_j].FSEdoRevivalist++>><</if>>.
+		<<set $arcologies[_j].FSEdoRevivalist += _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	<<if $arcologies[_j].FSArabianRevivalist != "unset">>
+		She advances Arabian Revivalism there by helping citizens improve their slaves' sex skills<<if $slaves[$i].fetishKnown && ($slaves[$i].fetish == "sadist" || $slaves[$i].fetish == "dom")>>, which she's perfect for, since she's naturally dominant and likes nothing better than fucking her inferiors<<set $arcologies[_j].FSArabianRevivalist++>><</if>>.
+		<<set $arcologies[_j].FSArabianRevivalist += _influence>>
+	<</if>>
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<<if $arcologies[_j].FSChineseRevivalist != "unset">>
+		She advances Chinese Revivalism there by helping citizens improve the feng shui of their slave arrangments<<if $slaves[$i].intelligenceImplant >= 1 && $slaves[$i].intelligence >= 3>>, which she's perfect for, since she has the intelligence and education to make real contributions<<set $arcologies[_j].FSChineseRevivalist++>><</if>>.
+		<<set $arcologies[_j].FSChineseRevivalist += _influence>>
+	<</if>>
+<</if>>
+
+<<set _influenced = 1>>
+<<break>>
+<</if>>
+<</for>>
+<<if !_influenced>>
+	assigned to be a sexual Ambassador to other arcologies, but you have not targeted a neighboring arcology for cultural influence, making the assignment pointless.
+	<<if $oldRecruiterTarget>>
+		<<set $recruiterTarget = clone($oldRecruiterTarget)>>
+		@@.yellow;She goes back to recruiting $recruiterTarget.@@
+		<<unset $oldRecruiterTarget>>
+	<</if>>
+<</if>>
+
+<<elseif $slaves.length < _idleTarget>> /* begin recruiting */
+
+<<set $recruiterProgress += random(0,1)>>
+
+uses your online resources and some @@.yellowgreen;modest funds@@ to convince $recruiterTarget from the old world to immigrate for voluntary enslavement.
+
+<<if $slaves[$i].devotion > 95>>
+	Her extreme devotion to you lends her total cogency.
+	<<set $recruiterProgress += 2>>
+<<elseif $slaves[$i].devotion > 50>>
+	Her devotion to you lends her conviction.
+	<<set $recruiterProgress += 1>>
+<<else>>
+	Her imperfect feelings toward you give her little conviction.
+<</if>>
+
+<<if $slaves[$i].intelligence >= 2>>
+	Her intelligence enables her to cleverly entrap potential slaves.
+	<<set $recruiterProgress += 1>>
+<</if>>
+
+<<if $slaves[$i].entertainSkill >= 100>>
+	She has the entertainment skills necessary to convince any target.
+	<<set $recruiterProgress += 2>>
+<<elseif $slaves[$i].entertainSkill > 60>>
+	She has the entertainment expertise to lure in most targets.
+	<<set $recruiterProgress += 1.5>>
+<<elseif $slaves[$i].entertainSkill > 30>>
+	She has the necessary entertainment skills to banter successfully with her targets.
+	<<set $recruiterProgress += 1>>
+<<elseif $slaves[$i].entertainSkill > 10>>
+	Her mediocre entertainment skills do nothing to convince her targets.
+<<else>>
+	Her total lack of entertainment skills seriously hinders her efforts.
+	<<set $recruiterProgress -= 1>>
+<</if>>
+
+<<if $clubUpgradePDAs == 1>>
+	The slaves in $clubName help her by passing her tips they pick up while working the crowds.
+	<<for $j = 0; $j < $slaves.length; $j++>>
+	<<if $slaves[$j].assignment == "serve in the club">>
+		<<set $recruiterProgress += 0.5>>
+	<</if>>
+	<</for>>
+<</if>>
+
+<<if $recruiterTarget == "desperate whores">>
+	<<if ($Recruiter.analCount + $Recruiter.oralCount) > 200>>
+	As a veteran slut, she speaks from experience when she says that being your slave whore will be safer and healthier than streetwalking.
+	<<set $recruiterProgress += 1>>
+	<<else>>
+	She does her best to convince them that being your slave whore will be safer and healthier than streetwalking.
+	<</if>>
+<<elseif $recruiterTarget is "expectant mothers">> /* now you can ginger too */
+  <<if $Recruiter.preg > 5 || setup.fakeBellies.includes($bellyAccessory)>>
+	Since she's visibly pregnant herself, she speaks with authority when she says that Free Cities medicine can keep them and their pregnancies safe and healthy.
+	<<set $recruiterProgress += 1>>
+  <<else>>
+	She does her best to convince them that Free Cities medicine can keep them and their pregnancies safe and healthy.
+  <</if>>
+<<elseif $recruiterTarget is "young migrants">>
+	<<if ($Recruiter.health >= 80) && ($Recruiter.face > 10)>>
+	Her lovely face and shining health go a long way to convince them that being your slave promises a better life.
+	<<set $recruiterProgress += 1>>
+	<<else>>
+	She does her best to convince them that being your slave promises a better life.
+	<</if>>
+<<elseif $recruiterTarget == "dissolute sissies">>
+	<<if ($Recruiter.dick > 1) && canAchieveErection($Recruiter) && ($Recruiter.dickAccessory != ("chastity"))>>
+	She giggles and shows off her erection, making it easy to convince them that your slaves with dicks enjoy a sexually satisfying life.
+	<<set $recruiterProgress += 1>>
+	<<else>>
+	She does her best to convince them that your slaves with dicks enjoy a sexually satisfying life.
+	<</if>>
+<<elseif $recruiterTarget is "reassignment candidates">>
+	<<if ($Recruiter.ovaries == 0) && ($Recruiter.face > 10)>>
+	She shows off her lovely face and describes her unusual biological situation under your care, convincing them that you'll turn them into happy little slave girls.
+	<<set $recruiterProgress += 1>>
+	<<else>>
+	She does her best to convince them that you'll turn them into happy little slave girls.
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].livingRules != "luxurious")>>
+	She would be more effective if she could show off a luxurious standard of living.
+	<<set $recruiterProgress -= 1>>
+<</if>>
+
+<<if $recruiterProgress > 7>>
+	She has several excellent prospects and will probably get one of them to agree to enslavement soon.
+<<elseif $recruiterProgress > 3>>
+	She has some prospects to work with but needs more time to get them agree to enslavement.
+<<else>>
+	She has no real prospects yet and has more work to do before anyone agrees to enslavement.
+<</if>>
+
+<<if ($slaves[$i].livingRules == "luxurious")>>
+	Being continually trusted with this position @@.hotpink;increases her devotion to you@@ and encourages her to @@.mediumaquamarine;trust you in turn.@@
+	<<set $slaves[$i].devotion += 4>>
+	<<set $slaves[$i].trust += 4>>
+<<else>>
+	Being continually trusted with this position @@.hotpink;slightly increases her devotion to you,@@ though she harbors some doubts because she isn't allowed a room of her own to set her apart from the other slaves.
+	<<set $slaves[$i].devotion += 1>>
+<</if>>
+
+<<else>> /* idle publicity (submitted by FireDrops) */
+
+tries to maintain her network of prospects without promising anyone a space in $arcologies[0].name, since you already control <<if $slaves.length > _idleTarget>>more sex slaves than<<else>>as many sex slaves as<</if>> her assigned goal.
+
+<<set _seed = 0>>
+<<set _seed -= (6 - (6*$slaves[$i].entertainSkill/100))>>
+<<set _seed -= (3 - $slaves[$i].face)>>
+<<if $slaves[$i].intelligence < 0>>
+	<<set _seed = Math.min(_seed, 4*$slaves[$i].intelligence)>>
+<</if>>
+<<if _seed < 0>> /*catches overload from very high entertainment*/
+	<<set $recruiterProgress += _seed/10>>
+<</if>>
+<<if $recruiterProgress < 0>>
+	<<set $recruiterProgress = 0>>
+<</if>>
+
+<<if $slaves[$i].intelligence >= 0>>
+	<<if $slaves[$i].entertainSkill >= 100>>
+	Her mastery of flirting and conversation continues to seduce them,
+		<<if $slaves[$i].face > 95>> and with her nearly perfect face they instinctively trust her.
+		<<else>> although she might have done better still if she were prettier.
+		<</if>>
+	<<else>>
+	She uses what conversation skill she has to keep them interested in enslavement,
+		<<if $slaves[$i].face > 40>> and the reminder that they could share a home with such a beauty doesn't hurt.
+		<<else>> but her face isn't attractive enough to hold their attention.
+		<</if>>
+	<</if>>
+<<else>>
+Unfortunately she's just not smart enough to manage such a delicate balance and some potential slaves inevitably drift away.
+<</if>>
+
+She uses her extra time and @@.yellowgreen;recruitment allowance@@ this week to tour the arcology and post to your household's social media accounts more actively than usual, @@.green;building up your reputation.@@
+
+<<set _seed = 10>>
+<<set _FSmatch = 0>> /* _FSmatch means recruiter's appearance displays FS ideas */
+<<set _FSdefend = 0>> /* _FSdefend is intelligence-based advocation for your FS */
+
+<<if $slaves[$i].face > 40>>
+	<<set _seed += $slaves[$i].face*$slaves[$i].entertainSkill/30>>
+	<<else>>
+	<<set _seed += $slaves[$i].entertainSkill/30>>
+<</if>>
+<<if $slaves[$i].intelligence > 0>>
+	<<set _seed += $slaves[$i].intelligence+$slaves[$i].intelligenceImplant>>
+<</if>>
+<<if $studio && $slaves[$i].pornFame >= 10>>
+	<<set _seed += $slaves[$i].prestige*3>>
+<</if>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<if $slaves[$i].intelligence > 1>>
+	<<set _seed += 2, _FSdefend++, $arcologies[0].FSSupremacist += 0.01*$FSSingleSlaveRep*($slaves[$i].intelligence-1)>>
+		<<if $slaves[$i].race != $arcologies[0].FSSupremacistRace>>
+		<<set $arcologies[0].FSSupremacist += 0.01*$FSSingleSlaveRep>>
+		<</if>>
+<</if>> <</if>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<if $slaves[$i].intelligence > 1>>
+	<<set _seed += 2, _FSdefend++, $arcologies[0].FSSubjugationist += 0.01*$FSSingleSlaveRep*($slaves[$i].intelligence-1)>>
+		<<if $slaves[$i].race == $arcologies[0].FSSubjugationistRace>>
+		<<set $arcologies[0].FSSubjugationist += 0.01*$FSSingleSlaveRep>>
+		<</if>>
+<</if>> <</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<if $slaves[$i].dick > 0 && ($slaves[$i].balls < 1 || $slaves[$i].boobs > 400)>>
+		<<if $slaves[$i].anus > 0>> <<set _seed += 4>>
+		<<else>> <<set _seed += 1>>
+		<</if>>
+	<<set _FSmatch++, $arcologies[0].FSGenderRadicalist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<if $slaves[$i].balls < 1 && ($slaves[$i].preg > 5 || setup.fakeBellies.includes($bellyAccessory))>>
+		<<if $slaves[$i].preg > 5>> <<set _seed += 4>>
+		<<else>> <<set _seed += 1>>
+		<</if>>
+	<<set _FSmatch++, $arcologies[0].FSGenderFundamentalist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<if ($slaves[$i].devotion + $slaves[$i].trust) > 150 || $slaves[$i].relationship == -3>>
+	<<set _seed += 1, _FSdefend++>>
+		<<if $slaves[$i].intelligenceImplant == 1>>
+		<<set _seed += 1, $arcologies[0].FSPaternalist += 0.02*$FSSingleSlaveRep>>
+		<<else>>
+		<<set $arcologies[0].FSPaternalist += 0.01*$FSSingleSlaveRep>>
+		<</if>>
+	<</if>>
+	<<if $slaves[$i].health > 40>>
+		<<set _seed += 1>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSDegradationist != "unset" || $arcologies[0].FSBodyPurist != "unset">>
+	<<modScore $slaves[$i]>>
+<</if>>
+<<if $arcologies[0].FSDegradationist != "unset">>
+	<<if $slaves[$i].intelligence > 1>>
+	<<set _seed += 1, _FSdefend++, $arcologies[0].FSDegradationist += 0.01*$FSSingleSlaveRep*($slaves[$i].intelligence-1)>>
+	<</if>>
+	<<if $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+	<<set _seed += 1, _FSmatch++, $arcologies[0].FSDegradationist += 0.01*$FSSingleSlaveRep>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<if $slaves[$i].corsetPiercing == 0 && $piercingScore < 3 && $tatScore < 2>>
+		<<if $slaves[$i].boobsImplant == 0>>
+			<<set _seed += 1>>
+		<</if>>
+		<<if $slaves[$i].buttImplant == 0>>
+			<<set _seed += 1>>
+		<</if>>
+		<<if $slaves[$i].waist >= -95>>
+			<<set _seed += 1>>
+		<</if>>
+	<<set _seed += 1, _FSmatch++, $arcologies[0].FSBodyPurist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSTransformationFetishist != "unset">>
+	<<if $slaves[$i].boobsImplant > 0 && $slaves[$i].buttImplant > 0 && $slaves[$i].lipsImplant > 0>>
+		<<if $slaves[$i].waist < -95 || $slaves[$i].teeth == "pointy" || $slaves[$i].amp != 0 || ($slaves[$i].vagina > -1 && $slaves[$i].dick > 6)>> <<set _seed += 4>>
+		<<else>> <<set _seed += 2>>
+		<</if>>
+	<<set _FSmatch++, $arcologies[0].FSTransformationFetishist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<if $slaves[$i].age < 30>>
+	<<set _seed += 4, _FSmatch++, $arcologies[0].FSYouthPreferentialist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<if $slaves[$i].age >= 30>>
+	<<set _seed += 4, _FSmatch++, $arcologies[0].FSMaturityPreferentialist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<if $slaves[$i].boobs < 500 && $slaves[$i].butt < 3 && $slaves[$i].weight <= 10 && $slaves[$i].muscles <= 30>>
+	<<set _seed += 4, _FSmatch++, $arcologies[0].FSSlimnessEnthusiast += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSAssetExpansionist != "unset">>
+	<<if ($slaves[$i].boobs > 2000 || $slaves[$i].butt > 7 || $slaves[$i].balls > 4 || $slaves[$i].dick > 8)>>
+	<<set _seed += 4, _FSmatch++, $arcologies[0].FSAssetExpansionist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<if $dairy > 0 && ($slaves[$i].lactation > 0 || ($dairySlaves > 0 && $slaves[$i].intelligence > ($dairyRestraintsSetting+1)))>>
+		<<if $dairySlaves > 0 && $slaves[$i].intelligence > ($dairyRestraintsSetting+1)>>
+		<<set _seed += 3, _FSdefend++>>
+		<</if>>
+		<<if $slaves[$i].lactation > 0>>
+		<<set _seed += 1, _FSmatch++>>
+		<</if>>
+	<<set $arcologies[0].FSPastoralist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<if $slaves[$i].muscles > 95 || ($slaves[$i].muscles > 45 && $slaves[$i].health > 80)>>
+	<<set _seed += 4, _FSmatch++, $arcologies[0].FSPhysicalIdealist += 0.01*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<if $slaves[$i].intelligence > 0 && ($slaves[$i].devotion > 95 || $slaves[$i].trust > 95)>>
+	<<set _seed += 1, _FSdefend++, $arcologies[0].FSChattelReligionist += 0.01*$FSSingleSlaveRep*$slaves[$i].intelligence>>
+	<</if>>
+	<<if $slaves[$i].clothes == "a chattel habit" || $slaves[$i].clothes == "a fallen nuns habit" || $slaves[$i].clothes == "a penitent nuns habit" || $slaves[$i].clothes == "a hijab and abaya" || ($arcologies[0].FSRomanRevivalist != "unset" && $slaves[$i].clothes == "a toga")>>
+	<<set _seed += 1>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<if $slaves[$i].clothes == "a toga">>
+	<<set _seed += 1>>
+		<<if $slaves[$i].face > 10 && $slaves[$i].pitKills > 0>> /* protip: it doesn't have to be YOUR pit */
+		<<set _seed += 5, _FSmatch++, $arcologies[0].FSRomanRevivalist += 0.02*$FSSingleSlaveRep>>
+		<</if>>
+<</if>> <</if>>
+<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<if $slaves[$i].relation != 0>>
+	<<for _j = 0; _j < $slaves.length; _j++>>
+		<<if $slaves[$i].relationTarget == $slaves[_j].ID>>
+		<<set _recruiterRelation = $slaves[_j]>>
+		<<break>> <</if>>
+	<</for>>
+	/* availability */
+	<<if !((_recruiterRelation.assignment == "work in the dairy" && $dairyRestraintsSetting > 1) || _recruiterRelation.assignment == "stay confined" || _recruiterRelation.assignment == "be confined in the cellblock" || _recruiterRelation.assignment == "be your agent" || _recruiterRelation.assignment == "live with your agent")>>
+		/* willingness; protip: relationSHIP optional */
+		<<if ($slaves[$i].energy > 60 || $slaves[$i].sexualQuirk == "tease" || $slaves[$i].sexualQuirk == "perverted") && (_recruiterRelation.energy > 60 || _recruiterRelation.sexualQuirk == "tease" || _recruiterRelation.sexualQuirk == "perverted")>>
+		<<set _seed += 6, _FSmatch++, $arcologies[0].FSEgyptianRevivalist += 0.02*$FSSingleSlaveRep>>
+		<</if>>
+<</if>> <</if>> <</if>>
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+	<<if $clubDecoration != "standard" && $clubSlaves > 1>>
+		<<if $clubAdsSpending > 0>>
+		<<set _clubSeed = ($clubBonuses+Math.abs($clubAdsOld)+Math.abs($clubAdsStacked)+Math.abs($clubAdsImplanted)+Math.abs($clubAdsModded)+Math.abs($clubAdsXX))>>
+		<<else>>
+		<<set _clubSeed = $clubBonuses>> /* protip: some FS reduce bonuses available, use ad spending to get counted in that category */
+		<</if>>
+		<<if _clubSeed >= 3>>
+		<<set _seed += 6, _FSmatch++, $arcologies[0].FSEdoRevivalist += 0.02*$FSSingleSlaveRep>>
+		<</if>>
+<</if>> <</if>>
+<<if $arcologies[0].FSArabianRevivalist != "unset">>
+	<<if $masterSuiteDecoration == "Arabian Revivalist" && $masterSuiteUpgradeLuxury > 0 && $masterSuiteAverageEnergy > 60 && $masterSuiteSlaves >= 3>>
+	<<set _seed += 6, _FSmatch++, $arcologies[0].FSArabianRevivalist += 0.02*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSChineseRevivalist != "unset">>
+	<<if $slaves[$i].intelligence > 0 && $HeadGirl != 0 && $Bodyguard != 0 && $HGSuite > 0>>
+	<<set _seed += (Math.min((($HeadGirl.entertainSkill/30)+$HeadGirl.intelligenceImplant+$HeadGirl.prestige), 4)+Math.min($Bodyguard.prestige, 1)), _FSdefend++, $arcologies[0].FSChineseRevivalist += 0.03*$FSSingleSlaveRep>>
+<</if>> <</if>>
+<<if $arcologies[0].FSNull != "unset">>
+	<<set _seed += (($slaves[$i].entertainSkill/30)*$arcologies[0].FSNull/10)>>
+<</if>>
+
+<<set $repGain += Math.trunc(_seed)>>
+
+<<if $showEWM == 1>>
+<<if $slaves[$i].entertainSkill > 10>>
+		<<if $slaves[$i].face > 40>>
+		<<if $slaves[$i].entertainSkill >= 100>>Her good looks and innate artistry awe the arcology and leave many starstruck.
+		<<elseif $slaves[$i].entertainSkill > 60>>Her good looks draw quite an audience; she entertains them reasonably well.
+		<<elseif $slaves[$i].entertainSkill > 30>>Her face appeals to a certain crowd, mostly looking for sex tapes rather than quality entertainment.
+		<</if>>
+		<<else>>
+		<<if $slaves[$i].entertainSkill >= 100>>All
+		<<elseif $slaves[$i].entertainSkill > 60>>Many
+		<<elseif $slaves[$i].entertainSkill > 30>>Some
+		<<else>>A few
+		<</if>> of her wittier lines are liked and re-shared, but her face just doesn't catch many eyes.
+		<</if>>
+	<<else>>
+	More than a few sign up to watch her feeds, but unsubscribe due to her amateur presentation.
+<</if>>
+<<if $slaves[$i].intelligence > 0>>
+	She offers thoughtful commentaries on trending topics.
+	<<else>>
+	She lacks the intelligence to compose thoughtful remarks; a lot the time she merely +1s what others have said.
+<</if>>
+<<if $studio && $slaves[$i].pornFame >= 10>>
+	Her fan base from arcology porn significantly drives up her followers count.
+<</if>>
+<</if>> /*temp close EWM so next two lines always show */
+<<if _FSmatch > 0>>
+Her personal appearance fits with your social philosophies, making the future you're building @@.green;more popular.@@
+<</if>>
+<<if _FSdefend > 0>>
+She is able to smartly <<if $arcologies[0].FSPaternalist != "unset">>answer<<else>>deflect<</if>> abolitionist trolls about your arcology's treatment of <<if $arcologies[0].FSPaternalist != "unset">>contracted sex workers<<else>>chattel<</if>>, @@.green;confirming your ideals@@ in the minds of some wavering individuals.
+<</if>>
+<<if $showEWM == 1>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<if $slaves[$i].intelligence >= 2>>
+		<<if $slaves[$i].race != $arcologies[0].FSSupremacistRace>>
+		She patiently explains how $slaves[$i].race girls like herself benefit from the firm guidance of their proper $arcologies[0].FSSupremacistRace masters.
+		<<else>>
+		She makes the clear case for $arcologies[0].FSSupremacistRace superiority, although as an enslaved $slaves[$i].race woman her words are a bit hollow.
+		<</if>>
+	<<elseif $slaves[$i].race != $arcologies[0].FSSupremacistRace>>
+	The dumb $slaves[$i].race bitch can't even repeat her Supremacist indoctrination properly.
+	<<else>>
+	She flubs her lines so badly that no one would ever believe $arcologies[0].FSSupremacistRace people make better leaders.
+<</if>> <</if>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<if $slaves[$i].intelligence >= 2>>
+		<<if $slaves[$i].race == $arcologies[0].FSSubjugationistRace>>
+		It's always a pleasure to hear a $slaves[$i].race slave admit to all the failings for which her kind need to be taken in hand.
+		<<else>>
+		She argues intelligently in favor of $arcologies[0].FSSubjugationistRace subjugation, a performance undermined only slightly by miscegenationist scum releasing a competing clip of her open-mic comment that she's glad not to be one of //them//.
+		<</if>>
+	<<elseif $slaves[$i].race == $arcologies[0].FSSubjugationistRace>>
+	The subhuman idiot's floundering on the race question rather proves your point about $arcologies[0].FSSubjugationistRace inferiority, but not in a way that gains any converts.
+	<<else>>
+	Her uninspired presentation on $arcologies[0].FSSubjugationistRace failings only links to the educational materials already published in your arcology.
+<</if>> <</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<if $slaves[$i].dick > 0 && ($slaves[$i].balls < 1 || $slaves[$i].boobs > 400)>>
+		<<if $slaves[$i].anus > 0>>
+		Her public demonstrations of just how hard feminized sissies can orgasm with buttsex – at a different interior balcony each day – draw plenty of attention.
+		<<else>>
+		She attracts a little attention by gaily showing off her <<if $slaves[$i].balls < 1>>soft bitch-clit<<else>>intersex anatomy<</if>> on the public thoroughfares of your arcology, being careful not to risk her virgin backdoor.
+		<</if>>
+	<<else>>
+	She just doesn't have the right combination of body parts to personally demonstrate your utopia of eager, girly-dicked buttsluts.
+<</if>> <</if>>
+<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<if $slaves[$i].balls < 1>>
+		<<if $slaves[$i].preg > 5>>
+		She unashamedly live streams an obstetric health check in the nude, promising to broadcast similar footage right up until, and during, the birth.
+		<<elseif setup.fakeBellies.includes($bellyAccessory)>>
+		With some discreet editing, she uploads fake ultrasounds to match her plastic pregnancy, bringing a little more attention to your fertility campaigns.
+		<<else>>
+		She posts plenty of snapshots of gravid mothers-to-be. But with no belly bump of her own to feature, the impact is no different from any preggo porn already floating around the net.
+		<</if>>
+	<<else>>
+	On the topic of natural female deference to their owners around the house, your recruiter would be more convincing if she didn't keep readjusting her junk.
+<</if>> <</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<if ($slaves[$i].devotion + $slaves[$i].trust) > 150 || $slaves[$i].relationship == -3>>
+		<<if $slaves[$i].intelligenceImplant == 1>>
+		All week she shares original poetry in which her love for you shines through<<if $slaves[$i].health > 40>>, and her healthy body shines in every live appearance<</if>>.
+		<<else>>
+		Even though she clearly adores her <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>master<<else>>mistress<</if>>, at times the uneducated slave struggles to fully and cogently express her affection.
+		<</if>>
+	<<else>>
+	Her praise of your good works lacks the special touch of personal affection, so it doesn't impress much.
+<</if>> <</if>>
+<<if $arcologies[0].FSDegradationist != "unset">>
+	<<if $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+		<<if $slaves[$i].intelligence > 1>>
+		Ordinarily you would punish a slave who displays independent thinking, but when $slaves[$i].slaveName goes public in all her garish, modded glory to defend the legal right of slaveowners to use their property however they please, she's earned a brief reprieve.
+		<<else>>
+		Just the sight of $slaves[$i].slaveName's provocatively decorated body entices her online "friends" to share multiple scenarios for raping her, although the honor is wasted on the dumb fucktoy.
+		<</if>>
+	<<elseif $slaves[$i].intelligence > 1>>
+	Ordinarily you would punish a slave who displays independent thinking, but when $slaves[$i].slaveName defends the right of owners to use their property however they please, she's earned some consideration: perhaps you could "reward" her with an extra piercing or a slutty new tat.
+	<<else>>
+	She isn't smart enough to understand the primal attraction of an arcology where slave holes exist only to be raped, nor is her body sufficiently degraded to advertise it.
+<</if>> <</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<if $slaves[$i].corsetPiercing == 0 && $piercingScore < 3 && $tatScore < 2>>
+		<<if $slaves[$i].boobsImplant == 0 && $slaves[$i].buttImplant == 0 && $slaves[$i].waist >= -95>>
+		She exhibits pure sexuality in a lovely, artistic gallery of erotic photos posted this week that displays every natural centimeter of her body.
+		<<elseif $slaves[$i].boobsImplant == 0 && $slaves[$i].buttImplant == 0>>
+		This week's softcore photoshoot delights the eye: only her unnatural waistline mars her beauty, and that can hardly be blamed on the model.
+		<<else>>
+		Her unblemished skin shines artistically in this week's erotic studio gallery, but the shape of her curves is too obviously artificial.
+		<</if>>
+	<<elseif $slaves[$i].boobsImplant == 0 && $slaves[$i].buttImplant == 0 && $slaves[$i].waist >= -95>>
+	Her most recent photo galleries are barely passable: you can hardly see the woman beneath her blatant body art.
+	<<else>>
+	She is burdened by the knowledge that her heavy alterations don't fit your ideal of purity, and fails to show at a scheduled photoshoot.
+<</if>> <</if>>
+<<if $arcologies[0].FSTransformationFetishist != "unset">>
+	<<if $slaves[$i].boobsImplant > 0 && $slaves[$i].buttImplant > 0 && $slaves[$i].lipsImplant > 0>>
+		<<if $slaves[$i].waist < -95 || $slaves[$i].teeth == "pointy" || $slaves[$i].amp != 0 || ($slaves[$i].vagina > -1 && $slaves[$i].dick > 6)>>
+		A series of cleverly staged publicity events at various businesses in the arcology subtly focuses on her better-than-natural physiology in each one.
+		<<elseif $seeExtreme == 1>>
+		Her augmented body certainly has its appeals, yet as you look over this week's publicity recap you begin to wonder if she could be still more extremely //transformed//.
+		<<elseif $slaves[$i].vagina > -1 && $slaves[$i].dick > 0>>
+		Her special body stands out during this week's publicity tour; and if her futa cock were grown beyond a natural size, now that would really advertise her improved state.
+		<<elseif $seeDicks > 0>>
+		She looks great in this week's publicity events at arcology businesses, always posing to show off her enhancements. Now if only there were something to graft on that would take her beyond implants to genuine //transformation//.
+		<<else>> /* game settings prohibit greater transformations */
+		A series of cleverly staged publicity events at various businesses in the arcology subtly focuses on the beauty of her implants.
+		<</if>>
+	<<else>>
+	"Boobs, butts, and blowjobs": it's the plastic surgeon's mantra, and viewing this week's publicity footage reminds you that you've neglected your recruiter's augmentations.
+<</if>> <</if>>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<if $slaves[$i].age < 30>>
+	Her nightly cam chats sparkle with the energy of youth.
+	<<else>>
+	As an older slave, she doesn't have enough energy to cam chat late into the night.
+<</if>> <</if>>
+<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<if $slaves[$i].age >= 30>>
+	She video blogs regularly about the financial, medical, and even emotional security of slave life for older women.
+	<<else>>
+	She uses too much youthful slang and jumps from topic to topic in her video blogs, making them difficult for her audience to follow.
+<</if>> <</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<if $slaves[$i].boobs < 500 && $slaves[$i].butt < 3 && $slaves[$i].weight <= 10 && $slaves[$i].muscles <= 30>>
+	Her trim body gives her a cute, girl-next-door sex appeal in every selfie, even the ones taken in your penthouse far above everyone else's doors.
+	<<else>>
+	She shares a lot of selfies of her activities in your penthouse, but her bulging figure tends to hide what's going on.
+<</if>> <</if>>
+<<if $arcologies[0].FSAssetExpansionist != "unset">>
+	<<if $slaves[$i].boobs > 2000 || $slaves[$i].butt > 7 || $slaves[$i].balls > 4 || $slaves[$i].dick > 8>>
+	As the saying goes, "shake it if you got it," and no one can doubt $slaves[$i].slaveName has it after a "citizen" posts an "unauthorized" wristcam video of her humongous anatomy swinging around a stripper pole.
+	<<else>>
+	Although she tries hard, none of her assets interest the true size fetishist.
+<</if>> <</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<if $dairy>>
+		<<if $dairySlaves && $slaves[$i].intelligence > ($dairyRestraintsSetting+1)>>
+			<<if $slaves[$i].lactation > 0>>
+			She schedules VR tours of $dairyName in order to popularize your free-range practices and quality products: the highlight each time is when she hooks her own teats into a milker and brings herself to orgasm.
+			<<else>>
+			She narrates a virtual reality tour of $dairyName, explaining how your humane, free-range practices result in a high quality product.
+			<</if>>
+		<<elseif $slaves[$i].lactation > 0>>
+		Her VR uploads include a short clip of her milking herself in $dairyName; she squirts directly into an old-fashioned bucket while ignoring the complicated, industrial machines behind her.
+		<<elseif $dairyRestraintsSetting >= 2>>
+		Your dairy is too heavily industrialized to promote socially.
+		<<else>>
+		She ignores $dairyName, since she can't think of any ideas to promote it.
+		<</if>>
+	<<else>>
+	She can't really promote Pastoralist ideals when her owner hasn't even committed to building a Dairy.
+<</if>> <</if>>
+<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<if $slaves[$i].muscles > 95 || ($slaves[$i].muscles > 45 && $slaves[$i].health > 80)>>
+	She asks another slave to photo-document her time in the gym this week: naked, of course, to show off her impressive muscle definition, and in certain poses she nearly seems to be making love to the equipment.
+	<<else>>
+	She tries documenting her exercise routine, but it's a snooze fest because she doesn't have the guns to show for it.
+<</if>> <</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<if $slaves[$i].intelligence > 0 && ($slaves[$i].devotion > 95 || $slaves[$i].trust > 95)>>
+		<<if $slaves[$i].clothes == "a chattel habit" || $slaves[$i].clothes == "a fallen nuns habit" || $slaves[$i].clothes == "a penitent nuns habit" || $slaves[$i].clothes == "a hijab and abaya">>
+		Clad in her holy garb, $slaves[$i].slaveName preaches to the atrium with a powerful appeal to the new morality, in which her absolute faith in your revelations is unmistakable.
+		<<elseif $arcologies[0].FSRomanRevivalist != "unset" && $slaves[$i].clothes == "a toga">>
+		She preaches in the atrium, delivering a powerful and faith-filled appeal in support of the new state religion and its Prophet-Emperor, descendant of the gods.
+		<<else>>
+		She heads to the atrium to deliver a powerful, faith-based appeal for everyone to join the new moral order, though one cynical onlooker heckles her about her style of dress.
+		<</if>>
+	<<elseif $slaves[$i].intelligence > 0>>
+	Her lecture on the new religious morality is thorough, and also devastatingly boring: all bullet point scriptures and little emotion that would sway unenlightened hearts.
+	<<elseif $slaves[$i].devotion > 95 || $slaves[$i].trust > 95>>
+	Although she wears her faith in you on her metaphorical sleeve, she can't muster the intellectual arguments to counter the shrill voices of backward old world religions.
+	<<else>>
+	She is hapless as a proselytizer for the new religious order because her personal understanding and adherence remains inadequate.
+<</if>> <</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<if $slaves[$i].clothes == "a toga">>
+		<<if $slaves[$i].face > 10 && $slaves[$i].pitKills > 0>>
+		She thrills audiences by recounting tales of her exploits as a beautiful and deadly gladiatrix-//slash//-love-slave for the First Citizen of the Eternal City reborn.
+		<<elseif $slaves[$i].face > 10>>
+		Her statuesque beauty is a fitting tribute to the glory of the Eternal City reborn, but she still lacks the edge of //bloodthirstiness// that makes life here so exciting.
+		<<elseif $slaves[$i].pitKills > 0>>
+		Even though her history of gladiatorial combat is noble, when mixed with her homeliness it tends to frighten the squeamish as much as it attracts the sanguinary.
+		<<else>>
+		She comes across like a historical tour guide; more worthy citizens would flock to the New Rome if your recruiter appeared as a statuesque, and possibly deadly, inamorata of its ruler.
+		<</if>>
+	<<else>>
+	Dressed as she is in the garments of a barbarian, the citizens of the New Rome ignore her.
+<</if>> <</if>>
+<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<if $slaves[$i].relation != 0 && (!(_recruiterRelation.assignment == "be your agent" || _recruiterRelation.assignment == "live with your agent"))>>
+		<<if (_recruiterRelation.assignment == "work in the dairy" && $dairyRestraintsSetting > 1) || _recruiterRelation.assignment == "stay confined" || _recruiterRelation.assignment == "be confined in the cellblock">>
+		One idea that comes up while brainstorming is to act out Ancient Egyptian incest with her _recruiterRelation.relation, but _recruiterRelation.slaveName is confined and unavailable.
+		<<else>>
+			<<if $slaves[$i].energy > 60 || $slaves[$i].sexualQuirk == "tease" || $slaves[$i].sexualQuirk == "perverted">>
+				<<if _recruiterRelation.energy > 60 || _recruiterRelation.sexualQuirk == "tease" || _recruiterRelation.sexualQuirk == "perverted">>
+				$slaves[$i].slaveName and her _recruiterRelation.relation _recruiterRelation.slaveName collaborate on a series of short commercials walking and playing in your arcology's public spaces. A little hand on the ass here, a little lips almost touching there, and it's enough to tease your Ancient Egyptian sensibility about incest without running afoul of too many Old World censors.
+				<<elseif $slaves[$i].relationshipTarget == _recruiterRelation.ID>>
+				Even though their incestuous relationship is not condemned here, her _recruiterRelation.relation _recruiterRelation.slaveName is too shy to act it out in front of the world.
+				<<else>>
+				The Ancient Egyptian sensibility of your arcology features slave incest, but your recruiter can't convince her shy _recruiterRelation.relation to play along for publicity.
+				<</if>>
+			<<elseif $slaves[$i].relationshipTarget == _recruiterRelation.ID>>
+			Even though she shares a properly incestuous relationship with her _recruiterRelation.relation, she is too shy to bring it on camera for the whole world.
+			<<else>>
+			The Ancient Egyptian sensibility of your arcology features slave incest, but she's too shy even to playact with her _recruiterRelation.relation for publicity.
+			<</if>>
+		<</if>>
+	<<else>>
+	One of the most prominent features of your Egyptian Revival is an open, even expectant, attitude toward slave incest, but she doesn't have any close family living in your household.
+<</if>> <</if>>
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+	<<if $clubDecoration != "standard" && $clubSlaves > 1>>
+		<<if _clubSeed >= 3>>
+		The candid, POV-style videos of $slaves[$i].slaveName dancing, making out, and giving blowjobs alongside your regular sluts in $clubName's $clubDecoration atmosphere earn a lot of thumbs up.
+		<<else>>
+		She enjoys herself when she films in $clubName, but the sluts there just don't earn enough attention for the visit to raise your public profile; the club may need broader marketing appeal.
+		<</if>>
+	<<elseif $club == 0>>
+	She'd like to integrate her personal profile with your cultural Revival, but there's no clear place in your arcology to focus her attention.
+	<<elseif $clubSlaves <= 1>>
+	She travels down to $clubName for some POV video footage, but she can't get enough reliable dance partners.
+	<<else>>
+	She gets some hot POV-style footage when she films in your nightclub, but there's nothing special about its atmosphere to distinguish it from any other bar in any other arcology.
+<</if>> <</if>>
+<<if $arcologies[0].FSArabianRevivalist != "unset">>
+	<<if $masterSuiteDecoration == "Arabian Revivalist" && $masterSuiteUpgradeLuxury > 0 && $masterSuiteAverageEnergy > 60>>
+		<<if $masterSuiteSlaves >= 3>>
+		An exposé that "pulls back the curtain" on your elaborate master bedroom goes viral after several harem slaves drag her into <<if $masterSuiteUpgradeLuxury == 1>>four-way action with their <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>master<<else>>mistress<</if>><<else>>a fuck pit daisy chain<</if>> and another takes over the filming.
+		<<else>>
+		She makes a short video essay about your elaborate master suite, but the empty space unfilled by luscious slave bodies fails to impress.
+		<</if>>
+	<<elseif $masterSuiteUpgradeLuxury == 0>> /* covers if suite is unbuilt as well */
+	She wants to profile the decadence of your grand bedroom, but the reality is shabby compared to the Revivalist dreams of luxurious harems in the old days.
+	<<elseif $masterSuiteDecoration != "Arabian Revivalist">>
+	She thinks that "Pulling Back the Curtain" would make a good title for an exposé of your sumptuous bedroom, but it turns out that the space isn't decorated with Arabian-style curtains.
+	<<else>>
+	She makes a short video essay about your elaborate master suite, but there's no sex going on while she films.
+<</if>> <</if>>
+<<if $arcologies[0].FSChineseRevivalist != "unset">>
+	<<if $slaves[$i].intelligence >= 1 && $HeadGirl != 0 && $Bodyguard != 0 && $HGSuite > 0>>
+		<<if (($HeadGirl.entertainSkill/30)+$HeadGirl.intelligenceImplant+$HeadGirl.prestige) >= 4>>
+			<<if $Bodyguard.prestige >= 1>>
+			She deferentially chronicles the administration of your Imperial household by Head Girl $HeadGirl.slaveName and Bodyguard $Bodyguard.slaveName. The piece explains points of Chinese Revivalist protocol where new slaves or visitors to the Forbidden Penthouse might inadvertently stumble.
+			<<else>>
+			She interviews your Head Girl about points of protocol and household administration for broadcast to the arcology. Your Bodyguard, $Bodyguard.slaveName, is not accustomed to fame and prefers to remain off-screen.
+			<</if>>
+		<<elseif $HeadGirl.intelligenceImplant < 1>>
+		She edits a documentary broadcast about the Revivalist protocols that drive your household, and in the process uncovers small but annoying lapses due to the Head Girl's lack of formal education.
+		<<else>>
+		She broadcasts a documentary about life inside your Imperial Chinese household, but the Head Girl's segment comes out flat: $HeadGirl.slaveName needs more experience working in front of a camera.
+		<</if>>
+	<<elseif $HeadGirl == 0 || $Bodyguard == 0>>
+	She can't document the benefits of your Imperial Chinese administration because of unfilled posts in its leadership.
+	<<elseif $slaves[$i].intelligence < 1>>
+	Your household is a well-run model for the arcology at large, but your recruiter doesn't completely understand its intricate Revivalist protocols and can't explain it for the masses.
+	<<else>>
+	She never considers promoting your household's Revivalist protocols, since you don't value your Head Girl enough to accord her a separate apartment inside your walls.
+<</if>> <</if>>
+<<if $arcologies[0].FSNull != "unset">>
+	Her contribution is one voice among many in the open freedom of $arcologies[0].name's media,
+	<<if $slaves[$i].entertainSkill > 10>> but everything that relates to its leadership is usually well-received.
+	<<else>> so her unskilled performances this week hardly cause a ripple.
+<</if>> <</if>>
+<</if>> /* closes EWM */
+
+<</if>> /* closes _idleTarget check */

@@ -1,0 +1,773 @@
+:: Option Widgets [widget nobr]
+
+/%
+  Call as <<OptionLineSeparations>>
+    Should be placed in a <span> with id = "OptionLineSeparations"
+%/
+<<widget "OptionLineSeparations">>
+Line separations are 
+<<if $lineSeparations == 0>>
+	@@.red;HIDDEN.@@
+	//<<link 'Show'>>
+		<<set $lineSeparations = 1>>
+		<<replace '#OptionLineSeparations'>>
+			<<OptionLineSeparations>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	@@.cyan;SHOWN.@@
+	//<<link 'Hide'>>
+		<<set $lineSeparations = 0>>
+		<<replace '#OptionLineSeparations'>>
+			<<OptionLineSeparations>>
+		<</replace>>
+	<</link>>//
+<</if>>
+
+<</widget>>
+
+/%
+  Call as <<OptionSortBy>>
+    Should be placed in a <span> with id = "OptionSortBy"
+%/
+<<widget "OptionSortBy">>
+<<if $sortSlavesBy is "name">>
+	Slaves are sorted on the main menu by @@.yellow;NAME.@@
+<<elseif $sortSlavesBy == "seniority">>
+	Slaves are sorted on the main menu by @@.yellow;SENIORITY.@@
+<<elseif $sortSlavesBy == "age">>
+	Slaves are sorted on the main menu by @@.yellow;AGE.@@
+<<elseif $sortSlavesBy == "assignment">>
+	Slaves are sorted on the main menu by @@.yellow;ASSIGNMENT.@@
+<<else>>
+	Slaves are sorted on the main menu by @@.yellow;DEVOTION.@@
+<</if>>
+//
+<<link 'Devotion'>>
+	<<set $sortSlavesBy = "devotion">>
+	<<replace '#OptionSortBy'>>
+		<<OptionSortBy>>
+	<</replace>>
+<</link>>
+|
+<<link 'Name'>>
+	<<set $sortSlavesBy = "name">>
+	<<replace '#OptionSortBy'>>
+		<<OptionSortBy>>
+	<</replace>>
+<</link>>
+|
+<<link 'Assignment'>>
+	<<set $sortSlavesBy = "assignment">>
+	<<replace '#OptionSortBy'>>
+		<<OptionSortBy>>
+	<</replace>>
+<</link>>
+|
+<<link 'Date purchased'>>
+	<<set $sortSlavesBy = "seniority">>
+	<<replace '#OptionSortBy'>>
+		<<OptionSortBy>>
+	<</replace>>
+<</link>>
+| 
+<<link 'Age'>>
+	<<set $sortSlavesBy = "age">>
+	<<replace '#OptionSortBy'>>
+		<<OptionSortBy>>
+	<</replace>>
+<</link>>
+//
+<</widget>>
+
+/%
+  Call as <<OptionSortOrder>>
+    Should be placed in a <span> with id = "OptionSortOrder"
+%/
+<<widget "OptionSortOrder">>
+<<if $sortSlavesOrder == "ascending">>
+	Slaves are sorted in @@.cyan;ASCENDING@@ order.
+	//<<link 'Sort descending'>>
+		<<set $sortSlavesOrder = "descending">>
+		<<replace '#OptionSortOrder'>>
+			<<OptionSortOrder>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	Slaves are sorted in @@.red;DESCENDING@@ order.
+	//<<link 'Sort ascending'>>
+		<<set $sortSlavesOrder = "ascending">>
+		<<replace '#OptionSortOrder'>>
+			<<OptionSortOrder>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionSortMain>>
+    Should be placed in a <span> with id = "OptionSortMain"
+%/
+<<widget "OptionSortMain">>
+<<if $sortSlavesMain == 0>>
+	Sort options are @@.red;HIDDEN@@ on the main menu.
+	//<<link 'Show'>>
+		<<set $sortSlavesMain = 1>>
+		<<replace '#OptionSortMain'>>
+			<<OptionSortMain>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	Sort options are @@.cyan;SHOWN@@ on the main menu.
+	//<<link 'Hide'>>
+		<<set $sortSlavesMain = 0>>
+		<<replace '#OptionSortMain'>>
+			<<OptionSortMain>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+<<widget "OptionsSortAsAppearsOnMain">>
+<<if $sortSlavesMain != 0>>
+	<br>
+	Sort by:
+	<<if $sortSlavesBy != "devotion">>[[Devotion|Main][$sortSlavesBy = "devotion"]]<<else>>Devotion<</if>> |
+	<<if $sortSlavesBy != "name">>[[Name|Main][$sortSlavesBy = "name"]]<<else>>Name<</if>> |
+	<<if $sortSlavesBy != "assignment">>[[Assignment|Main][$sortSlavesBy = "assignment"]]<<else>>Assignment<</if>> |
+	<<if $sortSlavesBy != "seniority">>[[Seniority purchased|Main][$sortSlavesBy = "seniority"]]<<else>>Seniority<</if>> |
+	<<if $sortSlavesBy != "age">>[[Age|Main][$sortSlavesBy = "age"]]<<else>>Age<</if>>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	Sort: <<if $sortSlavesOrder != "descending">>[[Descending|Main][$sortSlavesOrder = "descending"]]<<else>>Descending<</if>> |
+	<<if $sortSlavesOrder != "ascending">>[[Ascending|Main][$sortSlavesOrder = "ascending"]]<<else>>Ascending<</if>>
+<</if>>
+<</widget>>
+
+
+/%
+  Call as <<OptionRulesAssistantMain>>
+    Should be placed in a <span> with id = "OptionRulesAssistantMain"
+%/
+<<widget "OptionRulesAssistantMain">>
+<<if $rulesAssistantMain == 0>>
+	The rules assistant is @@.red;HIDDEN.@@
+	//<<link 'Show'>>
+		<<set $rulesAssistantMain = 1>>
+		<<replace '#OptionRulesAssistantMain'>>
+			<<OptionRulesAssistantMain>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	The rules assistant is @@.cyan;SHOWN.@@
+	//<<link 'Hide'>>
+		<<set $rulesAssistantMain = 0>>
+		<<replace '#OptionRulesAssistantMain'>>
+			<<OptionRulesAssistantMain>>
+		<</replace>>
+	<</link>>//
+<</if>>
+
+<</widget>>
+
+/%
+  Call as <<OptionDisplayAssignments>>
+    Should be placed in a <span> with id = "OptionDisplayAssignments"
+%/
+<<widget "OptionDisplayAssignments">>
+Main menu assignment shortcuts are
+<<if $displayAssignments == 1>>
+	@@.cyan;SHOWN.@@
+	//<<link 'Hide'>>
+		<<set $displayAssignments = 0>>
+		<<replace '#OptionDisplayAssignments'>>
+			<<OptionDisplayAssignments>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	@@.red;HIDDEN.@@ 
+	//<<link 'Show'>>
+		<<set $displayAssignments = 1>>
+		<<replace '#OptionDisplayAssignments'>>
+			<<OptionDisplayAssignments>>
+		<</replace>>
+	<</link>>//
+<</if>>
+
+<</widget>>
+
+/%
+  Call as <<OptionSummaryStats>>
+    Should be placed in a <span> with id = "OptionSummaryStats"
+%/
+<<widget "OptionSummaryStats">>
+Granular slave stat numbers are
+<<if $summaryStats == 1>>
+	@@.cyan;DISPLAYED.@@ 
+	//<<link 'Hide'>>
+		<<set $summaryStats = 0>>
+		<<replace '#OptionSummaryStats'>>
+			<<OptionSummaryStats>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	@@.red;HIDDEN.@@ 
+	//<<link 'Display'>>
+		<<set $summaryStats = 1>>
+		<<replace '#OptionSummaryStats'>>
+			<<OptionSummaryStats>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateDevotion>>
+    Should be placed in a <span> with id = "OptionAbbreviateDevotion"
+%/
+<<widget "OptionAbbreviateDevotion">>
+Mental stats are
+<<if $abbreviateDevotion == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateDevotion == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateDevotion != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateDevotion = 0>>
+		<<replace '#OptionAbbreviateDevotion'>>
+			<<OptionAbbreviateDevotion>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateDevotion != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateDevotion = 1>>
+		<<replace '#OptionAbbreviateDevotion'>>
+			<<OptionAbbreviateDevotion>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateDevotion != 2>>|<</if>>
+<</if>>
+<<if $abbreviateDevotion != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateDevotion = 2>>
+		<<replace '#OptionAbbreviateDevotion'>>
+			<<OptionAbbreviateDevotion>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateRules>>
+    Should be placed in a <span> with id = "OptionAbbreviateRules"
+%/
+<<widget "OptionAbbreviateRules">>
+Rules are
+<<if $abbreviateRules == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateRules == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateRules != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateRules = 0>>
+		<<replace '#OptionAbbreviateRules'>>
+			<<OptionAbbreviateRules>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateRules != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateRules = 1>>
+		<<replace '#OptionAbbreviateRules'>>
+			<<OptionAbbreviateRules>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateRules != 2>>|<</if>>
+<</if>>
+<<if $abbreviateRules != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateRules = 2>>
+		<<replace '#OptionAbbreviateRules'>>
+			<<OptionAbbreviateRules>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateHealth>>
+    Should be placed in a <span> with id = "OptionAbbreviateHealth"
+%/
+<<widget "OptionAbbreviateHealth">>
+Health is
+<<if $abbreviateHealth == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateHealth == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateHealth != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateHealth = 0>>
+		<<replace '#OptionAbbreviateHealth'>>
+			<<OptionAbbreviateHealth>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateHealth != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateHealth = 1>>
+		<<replace '#OptionAbbreviateHealth'>>
+			<<OptionAbbreviateHealth>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateHealth != 2>>|<</if>>
+<</if>>
+<<if $abbreviateHealth != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateHealth = 2>>
+		<<replace '#OptionAbbreviateHealth'>>
+			<<OptionAbbreviateHealth>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateDiet>>
+    Should be placed in a <span> with id = "OptionAbbreviateDiet"
+%/
+<<widget "OptionAbbreviateDiet">>
+Diet and weight are
+<<if $abbreviateDiet == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateDiet == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateDiet != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateDiet = 0>>
+		<<replace '#OptionAbbreviateDiet'>>
+			<<OptionAbbreviateDiet>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateDiet != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateDiet = 1>>
+		<<replace '#OptionAbbreviateDiet'>>
+			<<OptionAbbreviateDiet>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateDiet != 2>>|<</if>>
+<</if>>
+<<if $abbreviateDiet != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateDiet = 2>>
+		<<replace '#OptionAbbreviateDiet'>>
+			<<OptionAbbreviateDiet>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateDrugs>>
+    Should be placed in a <span> with id = "OptionAbbreviateDrugs"
+%/
+<<widget "OptionAbbreviateDrugs">>
+Drugs and addiction are
+<<if $abbreviateDrugs == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateDrugs == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateDrugs != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateDrugs = 0>>
+		<<replace '#OptionAbbreviateDrugs'>>
+			<<OptionAbbreviateDrugs>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateDrugs != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateDrugs = 1>>
+		<<replace '#OptionAbbreviateDrugs'>>
+			<<OptionAbbreviateDrugs>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateDrugs != 2>>|<</if>>
+<</if>>
+<<if $abbreviateDrugs != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateDrugs = 2>>
+		<<replace '#OptionAbbreviateDrugs'>>
+			<<OptionAbbreviateDrugs>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateGenitalia>>
+    Should be placed in a <span> with id = "OptionAbbreviateGenitalia"
+%/
+<<widget "OptionAbbreviateGenitalia">>
+Genitalia are
+<<if $abbreviateGenitalia == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateGenitalia == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateGenitalia != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateGenitalia = 0>>
+		<<replace '#OptionAbbreviateGenitalia'>>
+			<<OptionAbbreviateGenitalia>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateGenitalia != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateGenitalia = 1>>
+		<<replace '#OptionAbbreviateGenitalia'>>
+			<<OptionAbbreviateGenitalia>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateGenitalia != 2>>|<</if>>
+<</if>>
+<<if $abbreviateGenitalia != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateGenitalia = 2>>
+		<<replace '#OptionAbbreviateGenitalia'>>
+			<<OptionAbbreviateGenitalia>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviatePhysicals>>
+    Should be placed in a <span> with id = "OptionAbbreviatePhysicals"
+%/
+<<widget "OptionAbbreviatePhysicals">>
+Physical traits are
+<<if $abbreviatePhysicals == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviatePhysicals == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviatePhysicals != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviatePhysicals = 0>>
+		<<replace '#OptionAbbreviatePhysicals'>>
+			<<OptionAbbreviatePhysicals>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviatePhysicals != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviatePhysicals = 1>>
+		<<replace '#OptionAbbreviatePhysicals'>>
+			<<OptionAbbreviatePhysicals>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviatePhysicals != 2>>|<</if>>
+<</if>>
+<<if $abbreviatePhysicals != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviatePhysicals = 2>>
+		<<replace '#OptionAbbreviatePhysicals'>>
+			<<OptionAbbreviatePhysicals>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateSkills>>
+    Should be placed in a <span> with id = "OptionAbbreviateSkills"
+%/
+<<widget "OptionAbbreviateSkills">>
+Skills are
+<<if $abbreviateSkills == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateSkills == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateSkills != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateSkills = 0>>
+		<<replace '#OptionAbbreviateSkills'>>
+			<<OptionAbbreviateSkills>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateSkills != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateSkills = 1>>
+		<<replace '#OptionAbbreviateSkills'>>
+			<<OptionAbbreviateSkills>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateSkills != 2>>|<</if>>
+<</if>>
+<<if $abbreviateSkills != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateSkills = 2>>
+		<<replace '#OptionAbbreviateSkills'>>
+			<<OptionAbbreviateSkills>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateMental>>
+    Should be placed in a <span> with id = "OptionAbbreviateMental"
+%/
+<<widget "OptionAbbreviateMental">>
+Mental attributes are
+<<if $abbreviateMental == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateMental == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateMental != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateMental = 0>>
+		<<replace '#OptionAbbreviateMental'>>
+			<<OptionAbbreviateMental>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateMental != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateMental = 1>>
+		<<replace '#OptionAbbreviateMental'>>
+			<<OptionAbbreviateMental>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateMental != 2>>|<</if>>
+<</if>>
+<<if $abbreviateMental != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateMental = 2>>
+		<<replace '#OptionAbbreviateMental'>>
+			<<OptionAbbreviateMental>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateNationality>>
+    Should be placed in a <span> with id = "OptionAbbreviateNationality"
+%/
+<<widget "OptionAbbreviateNationality">>
+Nationality is
+<<if $abbreviateNationality == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateNationality == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateNationality != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateNationality = 0>>
+		<<replace '#OptionAbbreviateNationality'>>
+			<<OptionAbbreviateNationality>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateNationality != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateNationality = 1>>
+		<<replace '#OptionAbbreviateNationality'>>
+			<<OptionAbbreviateNationality>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateNationality != 2>>|<</if>>
+<</if>>
+<<if $abbreviateNationality != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateNationality = 2>>
+		<<replace '#OptionAbbreviateNationality'>>
+			<<OptionAbbreviateNationality>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateRace>>
+    Should be placed in a <span> with id = "OptionAbbreviateRace"
+%/
+<<widget "OptionAbbreviateRace">>
+Race is
+<<if $abbreviateRace == 2>>
+	@@.cyan;SUMMARIZED.@@
+<<elseif $abbreviateRace == 1>>
+	@@.yellow;ABBREVIATED.@@
+<<else>>
+	@@.red;HIDDEN.@@
+<</if>>
+
+<<if $abbreviateRace != 0>>
+	//<<link 'Hide'>>
+		<<set $abbreviateRace = 0>>
+		<<replace '#OptionAbbreviateRace'>>
+			<<OptionAbbreviateRace>>
+		<</replace>>
+	<</link>>// |
+<</if>>
+<<if $abbreviateRace != 1>>
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateRace = 1>>
+		<<replace '#OptionAbbreviateRace'>>
+			<<OptionAbbreviateRace>>
+		<</replace>>
+	<</link>>//
+	<<if $abbreviateRace != 2>>|<</if>>
+<</if>>
+<<if $abbreviateRace != 2>>
+	//<<link 'Summarize'>>
+		<<set $abbreviateRace = 2>>
+		<<replace '#OptionAbbreviateRace'>>
+			<<OptionAbbreviateRace>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateClothes>>
+    Should be placed in a <span> with id = "OptionAbbreviateClothes"
+%/
+<<widget "OptionAbbreviateClothes">>
+Clothes are
+<<if $abbreviateClothes == 2>>
+	@@.cyan;SUMMARIZED.@@ 
+	//<<link 'Hide'>>
+		<<set $abbreviateClothes = 0>>
+		<<replace '#OptionAbbreviateClothes'>>
+			<<OptionAbbreviateClothes>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	@@.red;HIDDEN.@@ 
+	//<<link 'Summarize'>>
+		<<set $abbreviateClothes = 2>>
+		<<replace '#OptionAbbreviateClothes'>>
+			<<OptionAbbreviateClothes>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateOrigins>>
+    Should be placed in a <span> with id = "OptionAbbreviateOrigins"
+%/
+<<widget "OptionAbbreviateOrigins">>
+Origins are
+<<if $abbreviateOrigins == 2>>
+	@@.cyan;SUMMARIZED.@@ 
+	//<<link 'Hide'>>
+		<<set $abbreviateOrigins = 0>>
+		<<replace '#OptionAbbreviateOrigins'>>
+			<<OptionAbbreviateOrigins>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	@@.red;HIDDEN.@@ 
+	//<<link 'Summarize'>>
+		<<set $abbreviateOrigins = 2>>
+		<<replace '#OptionAbbreviateOrigins'>>
+			<<OptionAbbreviateOrigins>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateRulesets>>
+    Should be placed in a <span> with id = "OptionAbbreviateRulesets"
+%/
+<<widget "OptionAbbreviateRulesets">>
+Rules Assistant rulesets are
+<<if $abbreviateRulesets == 2>>
+	@@.cyan;SUMMARIZED.@@ 
+	//<<link 'Hide'>>
+		<<set $abbreviateRulesets = 0>>
+		<<replace '#OptionAbbreviateRulesets'>>
+			<<OptionAbbreviateRulesets>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	@@.red;HIDDEN.@@ 
+	//<<link 'Summarize'>>
+		<<set $abbreviateRulesets = 2>>
+		<<replace '#OptionAbbreviateRulesets'>>
+			<<OptionAbbreviateRulesets>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+
+/%
+  Call as <<OptionAbbreviateSidebar>>
+    Should be placed in a <span> with id = "OptionAbbreviateSidebar"
+%/
+<<widget "OptionAbbreviateSidebar">>
+Facilities in the sidebar are
+<<if $abbreviateSidebar == 2>>
+	@@.cyan;SUMMARIZED.@@ 
+	//<<link 'Abbreviate'>>
+		<<set $abbreviateSidebar = 1>>
+		<<replace '#OptionAbbreviateSidebar'>>
+			<<OptionAbbreviateSidebar>>
+		<</replace>>
+	<</link>>//
+<<else>>
+	@@.yellow;ABBREVIATED.@@ 
+	//<<link 'Summarize'>>
+		<<set $abbreviateSidebar = 2>>
+		<<replace '#OptionAbbreviateSidebar'>>
+			<<OptionAbbreviateSidebar>>
+		<</replace>>
+	<</link>>//
+<</if>>
+<</widget>>
+

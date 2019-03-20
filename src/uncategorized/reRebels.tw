@@ -1,0 +1,47 @@
+:: RE rebels
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+<<set _i = $slaves.findIndex(function(s) { return s.ID == $rebelSlaves[0].ID; })>>
+<<set _j = $slaves.findIndex(function(s) { return s.ID == $rebelSlaves[1].ID; })>>
+
+<</nobr>>\
+\
+You have a rebel problem. $slaves[_i].slaveName and $slaves[_j].slaveName are both unbroken, and they seem to draw strength from each other. They're discreet about it, but the arcology's always-vigilant systems occasionally catch them nodding to one another after one of them is punished, or giving each other quiet words of encouragement when they think no one is listening. This is extremely dangerous and should be addressed promptly.
+\
+<span id="result">
+<<link "Set them against each other, in public">>
+	<<replace "#result">>
+	You haul your little rebel bitches out in public, one by one, bound, with bags over their heads. They find themselves chained in a low position so their mouths are publicly available. Then, you whisper to each of them that whichever slut sucks off the most passersby gets to rest tomorrow - and whichever sucks least gets a beating. It doesn't take long before @@.hotpink;they forget their friendship@@ and try to outdo each other, and their desperate efforts @@.green; are certainly appreciated by the citizens getting free blowjobs.@@ It's childishly easy to declare the contest over when they happen to be tied, and announce that no one will be punished or rewarded. They hate you less and each other more.
+	<<set $slaves[_i].devotion += 4>>
+	<<set $slaves[_j].devotion += 4>>
+	<<set $slaves[_j].oralCount += 6>>
+	<<set $slaves[_i].oralCount += 6>>
+	<<set $oralTotal += 12>>
+	<<set $rep += 100>>
+	<</replace>>
+<</link>>
+<<link "Set them against each other, in private">>
+	<<replace "#result">>
+	Back in the old world, the saying went that turnabout was fair play. In the Free Cities, turnabout is often a cast-iron bitch. Whenever you have an idle moment, all week, you set them against one another in some degrading or painful contest. They are made to spank each other, with the slave who hits lightest getting a spanking from you. They are made to compete to see who can suck other slaves off quickest, with the loser forced to orally service the winner. So on, and so on; by the end of the week @@.gold;they forget their friendship@@ and try to outdo each other to avoid punishment.
+	<<set $slaves[_i].trust -= 5>>
+	<<set $slaves[_j].trust -= 5>>
+	<<set $slaves[_j].oralCount += 6>>
+	<<set $slaves[_i].oralCount += 6>>
+	<<set $oralTotal += 12>>
+	<</replace>>
+<</link>>
+<<if $arcade > 0>>\
+<<link "Sentence them to a month in the arcade">>
+	<<replace "#result">>
+	They scream and beg when they realize what their punishment is to be, but you are obdurate. Each tries to inform on the other to avoid such a fate, but to no avail. After they're properly confined, the only sign of their discomfiture is a slight movement of their butts as they wriggle desperately against their restraints.
+	<<assignJob $slaves[_j] "be confined in the arcade">>
+	<<set $slaves[_j].sentence = 4>>
+	<<assignJob $slaves[_i] "be confined in the arcade">>
+	<<set $slaves[_i].sentence = 4>>
+	<</replace>>
+<</link>>
+<</if>>\
+</span>

@@ -1,0 +1,13 @@
+:: Concubine Workaround [silently]
+
+<<if $Concubine != 0>>
+	<<removeJob $Concubine "be your Concubine">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be your Concubine">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Concubine = $slaves[$i]>>
+<</if>>
+
+<<goto "Master Suite">>
+

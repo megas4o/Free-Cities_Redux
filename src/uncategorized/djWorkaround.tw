@@ -1,0 +1,13 @@
+:: DJ Workaround [silently]
+
+<<if $DJ != 0>>
+	<<removeJob $DJ "be the DJ">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the DJ">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $DJ = $slaves[$i]>>
+<</if>>
+
+<<goto "Club">>
+

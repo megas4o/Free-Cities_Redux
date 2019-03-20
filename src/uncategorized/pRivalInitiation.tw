@@ -1,0 +1,59 @@
+:: P rival initiation [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Scheduled Event", $rivalOwner = 0, $rivalOwnerEnslaved = 1>>
+
+<<set $activeSlave = $slaves.find(function(s) { return s.prestigeDesc == "You bankrupted and enslaved her in revenge for her part in the attack on your arcology by the Daughters of Liberty."; })>>
+
+<<if ndef $activeSlave>> /* rival slave is gone */
+
+	<<goto $returnTo>>
+
+<<else>>
+
+This is a special week, the week of your victory. <<EventNameLink $activeSlave>> awaits your pleasure. You could certainly do to her anything and everything you usually do to your chattel. You could also do something special to mark the occasion.
+
+<br><br>
+
+<span id="result">
+<<link "Force her to do a public relations tour with you">>
+	<<replace "#result">>
+	Though she hates you with all her heart, she knows better than most what happens to slaves who disobey. So, when you describe your public relations plans to her, she promises to obey before you even get to the threats. She finds herself accompanying you to the arcology's finest establishment in a lovely evening dress. The two of you share an understandably quiet meal, with a growing crowd coming to leer at the defeated slaveowner-cum-slave. At a prearranged signal from you, she stands, quickly strips naked, gets down on her knees, and <<if $PC.dick == 1>>sucks you off<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>eats you out<</if>>. Such public humiliation starts her down the path of @@.hotpink;obedience,@@ and is the @@.green;talk of the Free Cities.@@
+	<<set $rep += 500, $activeSlave.devotion += 4, $activeSlave.oralCount += 1, $oralTotal += 1>>
+	<</replace>>
+<</link>>
+<br><<link "Make her orally service your other slaves in public">>
+	<<replace "#result">>
+	$slaves[0].slaveName leads her out into the arcology's largest atrium, forces her to her knees, and in full view of the whole arcology, orally rapes someone who was until this week a slaveowner herself. Behind her, $slaves[1].slaveName is standing ready for her turn, and all your other slaves are behind. Public opinion is divided; the precedent is universally agreed to be bad, but the punishment is generally thought to be terrible and deserved. Your slaves, however, are almost insufferably @@.hotpink;pleased with you@@ for forcing $activeSlave.slaveName, whom they still view as a slaveowner, to pleasure them.
+	<<set $activeSlave.oralCount += $slaves.length*2, $oralTotal += $slaves.length*2>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<set $slaves[$i].devotion += 10>>
+	<</for>>
+	<</replace>>
+<</link>>
+<<if $activeSlave.anus == 0>>
+	<br><<link "Break her ass and then let the public use it">>
+		<<replace "#result">>
+		$activeSlave.slaveName, who has been fairly dignified up to this point, breaks down when she's placed in stocks with her ass in the air. Her sobs become screams when, for the first time in her life, she feels the burning sensation of a well-lubricated <<if $PC.dick == 1>>cockhead<<else>>strap-on<</if>> forcing its way past her virgin sphincter. Raping a virgin anus is not a new pleasure for you, but the usual shrieking, struggling and spasming is all the sweeter this time. @@.green;Half the arcology@@ has used her @@.red;poor injured butthole@@ by the end of the day, she @@.gold;is learning to fear you,@@ and hates you @@.mediumorchid;even more@@ if possible.
+		<<set $rep += 500, $activeSlave.devotion -= 4, $activeSlave.trust -= 5, $activeSlave.health -= 10, $activeSlave.anus = 3, $activeSlave.analCount += 47, $analTotal += 47>>
+		<</replace>>
+	<</link>>
+<<elseif ($activeSlave.balls > 0) && ($seeExtreme == 1)>>
+	<br><<link "Publicly geld her">>
+		<<replace "#result">>
+		You announce that since $activeSlave.slaveName has spent so much money and effort turning herself into a girl with expensive hormones, you'll take a lower-tech step to bring her further in that regard. An auto surgery is set up in public and the populace is treated to the edifying spectacle of a very large pair of testicles being efficiently removed by the modern surgical art. Unusually, she was not given general anaesthesia, but instead given local painkillers and made to watch on a monitor, to her @@.gold;rage@@ and @@.mediumorchid;horror.@@ There is @@.green;applause@@ as the cauterizer seals the surgical site where her massive scrotum used to hang. Her cock looks softer already.
+		<<set $rep += 500, $activeSlave.devotion -= 50, $activeSlave.trust -= 50, $activeSlave.health -= 10, $activeSlave.balls = 0>>
+		<</replace>>
+	<</link>>
+<<elseif isFertile($activeSlave)>>
+	<br><<link "Let the public impregnate her">>
+		<<replace "#result">>
+		You announce that since $activeSlave.slaveName damaged the arcology, she will be taking a leading role in the reconstruction. She will be doing this by replacing one of the residents killed in the violence - by bearing a new slave, to be conceived collectively. The shame and @@.mediumorchid;horror@@ of her future as breeding stock comes home to her as she's restrained in a chair with her legs spread. Soon, the stream of fluids is running down her thoroughly-fucked pussy and over her virgin anus to pool on the floor beneath her. Modern medical imaging reveals her fertile ovum's last, losing battle against a legion of sperm in real time, and the images are projected on large screens.
+		<<set $rep += 500, $activeSlave.preg = 1, $activeSlave.pregSource = -2, $activeSlave.devotion -= 15>>
+		<<SetPregType $activeSlave>>
+		<</replace>>
+	<</link>>
+<</if>>
+</span>
+
+<</if>> /* def $activeSlave */
+

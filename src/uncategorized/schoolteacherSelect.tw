@@ -1,0 +1,14 @@
+:: Schoolteacher Select [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Schoolroom", $showEncyclopedia = 1, $encyclopedia = "Schoolteacher">>
+
+<<if ($Schoolteacher != 0)>>
+	''__@@.pink;$Schoolteacher.slaveName@@__'' is serving as your Schoolteacher.<br><br>She will help teach your slaves.
+<<else>>
+	You have not selected a Schoolteacher.
+<</if>>
+
+<br><br>''Appoint a Schoolteacher from your devoted slaves:''
+<<include "Slave Summary">>
+
+<br><br>[[None|Schoolteacher Workaround][$i = -1]]

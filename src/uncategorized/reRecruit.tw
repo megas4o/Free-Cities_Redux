@@ -1,0 +1,1619 @@
+:: RE recruit [nobr]
+
+<<if Array.isArray($recruit)>>
+  <<if $cheatMode == 1>>
+	<<set $nextButton = "Back", $nextLink = "Nonrandom Event", $returnTo = "Nonrandom Event">> /* if user just clicks spacebar */
+	''A random recruit event would have been selected from the following:''
+	<br>
+	<<for _i = 0; _i < $recruit.length; _i++>>
+		<<print "[[$recruit[_i]|RE recruit][$recruit = $recruit[" + _i + "]]]">>
+		<br>
+	<</for>>
+	<br><br>[[Go Back to Random Nonindividual Event|Random Nonindividual Event][$eventSlave = 0]]
+  <<else>>
+	<<set $recruit = $recruit.random()>>
+	<<goto "RE recruit">>
+  <</if>>
+<<else>>
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check", $returnTo = "RIE Eligibility Check", $showEncyclopedia = 1, $encyclopedia = "Enslaving People">>
+
+<<switch $recruit>>
+<<case "female recruit">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She offered herself to you as a slave to escape a life of boredom.">>
+<<set $activeSlave.career = "a party girl">>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 1>>
+<<set $activeSlave.eyebrowPiercing = 1>>
+<<set $activeSlave.navelPiercing = 1>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.hStyle = "fashionable for a Free Cities girl, long, with the left half shaved">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+
+Your head girl sends you a discreet message that she may have found a slave for you. $HeadGirl.slaveName duly ushers a girl into your office. She looks very young, like a dissolute party girl. She bites her lip nervously when she sees you, and looks to $HeadGirl.slaveName for guidance. $HeadGirl.slaveName nods at her reassuringly, so she explains herself.
+<br><br>
+"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, my name is $activeSlave.slaveName. I'm, um, bored, I guess. I go to clubs and get drunk and fuck guys and it's just kinda boring. I thought it would be different when I turned 18, but that was a couple months ago and, well, nothing's different. I saw $HeadGirl.slaveName and she was just so graceful and beautiful and she seemed so confident in what she was doing and who she was and I talked to her and she said she was your head girl and... I want to be like her. Can I be your slave? I'd be good, I'm good at sucking dicks and stuff." She seems to be a little naive about sexual slavery, but there's no need to tell her that.
+
+<<case "male recruit">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She offered herself to you as a slave to escape a life of boredom.">>
+<<set $activeSlave.career = "a party girl">>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 1>>
+<<set $activeSlave.eyebrowPiercing = 1>>
+<<set $activeSlave.navelPiercing = 1>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.hStyle = "fashionable for a Free Cities trap, long, with the right half shaved">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+
+Your head girl sends you a discreet message that she may have found a slave for you. $HeadGirl.slaveName duly ushers an androgynous young person into your office. She's dressed as a girl and acts like one. She looks very young, like a dissolute party girl. She bites her lip nervously when she sees you, and looks to $HeadGirl.slaveName for guidance. $HeadGirl.slaveName nods at her reassuringly, so she explains herself.
+<br><br>
+"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, my name is $activeSlave.slaveName. I'm, um, bored, I guess. I go to clubs and get drunk and fuck guys and it's just kinda boring. I thought it would be different when I turned 18, but that was a couple months ago and, well, nothing's different. I saw $HeadGirl.slaveName and she was just so beautiful and has a dick like me and she seemed so confident in what she was doing and who she was and I talked to her and she said she was your head girl and... I want to be like her. Can I be your slave? I'd be good, I'm good at sucking dicks." She seems to be a little naive about sexual slavery, but there's no need to tell her that.
+
+<<case "whore recruit">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She offered herself to you as a slave to escape the hard life of a free whore.">>
+<<set $activeSlave.career = "a prostitute">>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.health = random(-40,-20)>>
+<<set $activeSlave.anus = 2>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.vaginalSkill = 35>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.analSkill = 35>>
+<<set $activeSlave.whoreSkill = 35>>
+<<set $activeSlave.boobs += 600>>
+<<set $activeSlave.boobsImplant = 600>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.buttImplant = 1>>
+<<set $activeSlave.lips += 10>>
+<<set $activeSlave.lipsImplant = 10>>
+<<set $activeSlave.lipsPiercing = 1>>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 1>>
+<<set $activeSlave.eyebrowPiercing = 1>>
+<<set $activeSlave.navelPiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 1>>
+<<set $activeSlave.clitPiercing = 1>>
+<<set $activeSlave.hStyle = "strip">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.customTat = "She has a tear tattooed under each eye.">>
+
+Your head girl sends you a discreet message that she may have found a slave for you. $HeadGirl.slaveName duly ushers a working girl into your office. She looks like a classic street hooker, and she's clearly had a rough time recently. She needs no prompting to explain herself, and she does so without embarrassment.
+<br><br>
+"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, my name is $activeSlave.slaveName. I'm a street whore. Working girls get to know each other, so I know $HeadGirl.slaveName pretty well. I've been having a bad time on the streets, and last night a john beat on me pretty good. I'm broke and I'm sick of this. Being free isn't worth shit. $HeadGirl.slaveName likes you and she seems to do OK. So, can I be your slave? I'm a good bet, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I'd be happy enough working for you as a slave whore if you keep me healthy and safe, and I'm a good fuck."
+
+<<case "female debtor">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was enslaved after she fell into debt to you.">>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-15,0)>>
+
+One of the tenants in your arcology has not paid rent in some time. In the Free Cities, debtors may be enslaved once their debt reaches a fair price for their enslavement. Your tenant has reached this point. She comes to see you, sobbing in terror; you are pleased to see that she is female and of appropriate age.
+
+<<case "male debtor">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "You turned her into a slave girl after she fell into debt to you.">>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-15,0)>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,30)>>
+<<set $activeSlave.hStyle = either("very short", "short")>>
+
+One of the tenants in your arcology has not paid rent in some time. In the Free Cities, debtors may be enslaved once their debt reaches a fair price for their enslavement. Your tenant has reached this point. He comes to see you, despondent. He is male for the moment, but enslavement will change that status, if only by a technicality. More concrete feminization will be up to you.
+
+<<case "desperate preg">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She sold herself into slavery out of fear that life on the streets was endangering her pregnancy.">>
+<<set $activeSlave.devotion = random(0,15)>>
+<<set $activeSlave.trust = random(0,15)>>
+<<set $activeSlave.boobs += 100>>
+<<set $activeSlave.lactation = 1>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.preg = 25>>
+<<set $activeSlave.fetish = "none">>
+<<set $activeSlave.fetishKnown = 0>>
+<<set $activeSlave.age = random(25,30)>>
+<<set $activeSlave.health = random(-40,-20)>>
+
+A young woman comes to your penthouse for an interview. You accepted her request to see you because she took the unusual step of promising to sell herself to you if you would admit her. The reason for this odd behavior becomes clear when she enters. She's dressed in torn old clothes, is obviously unhealthy, and is massively pregnant. Instead of standing in front of your desk, she kneels and looks at the floor as she speaks. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I'm desperate. I understand slaves' babies must be sent to orphanages at birth. But I'm on the streets and I'm so sick and hungry I'm afraid I'll miscarry. Could you enslave me, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>? I'm still pretty enough, and... I know some men like pregnant women. My ass is - well, I hear slaves are more valuable if they're tight back there and I've never done it there. I'm also starting to give a little milk. I know I'll have to give up the baby. I guess that's all." She weeps quietly as she talks, but she's brave enough to get through her little speech.
+
+<<case "desperate milf">>
+
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She sold herself into slavery to escape life on the streets.">>
+<<set $activeSlave.devotion = random(0,15)>>
+<<set $activeSlave.trust = random(0,15)>>
+<<set $activeSlave.boobs += 650>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.anus += 1>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.fetish = "none">>
+<<set $activeSlave.fetishKnown = 0>>
+<<set $activeSlave.age = random(30,$retirementAge-2)>>
+<<set $activeSlave.health = random(-80,-60)>>
+
+A middle-aged woman comes to your penthouse for an interview. She's clearly unwell. Instead of standing in front of your desk, she kneels and looks at the floor as she speaks. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I'm desperate. I came to the Free Cities to build a better life, but... it hasn't worked out for me. I can't afford medical care, and I guess I'm too scared to try street-walking yet, though I'll have to soon. I hear you're a known slave owner, and that you give your slaves good medical care... could you enslave me, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>? I know I'm still pretty enough, so I'd be used as a sex slave." She weeps quietly as she talks, but she's brave enough to get through her little speech.
+
+<<case "tg addict">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "You tricked her into enslavement, manipulating her based on her surgical addiction.">>
+<<set $activeSlave.devotion = random(-75,-60)>>
+<<set $activeSlave.trust = random(-15,0)>>
+<<set $activeSlave.age = random(18,25)>>
+<<set $activeSlave.hStyle = either("very short", "short")>>
+<<set $activeSlave.weight = random(-40,5)>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.dick = 0>>
+<<set $activeSlave.foreskin = 0>>
+<<set $activeSlave.balls = 0>>
+<<set $activeSlave.face = 0>>
+<<set $activeSlave.preg = -2>>
+<<set $activeSlave.vaginalSkill = 0>>
+
+One of your tenants asks for an interview. He's an effeminate young man; it seems he's a surgical addict. He has heard that you have a remote surgical unit, and offers to pay well over a fair price to rent its use. Intrigued, you investigate, and find that he has been banned from the regular hospitals for unpaid bills. You could easily reprogram the surgery to ignore his input and instead gender reassign him into a saleable young woman, driving him into enslaveable debt at the same time. 'She'll' be slim, inexperienced, and very unhappy.
+<br><br>
+//You could agree and then reprogram the remote surgery for transformation into a female once he's unconscious. Alternatively, you could transform him and then sell her.//
+
+<<case "school sale">>
+
+<<set $encyclopedia = "Slave Schools">>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was raised in a radical slave school that treated her with drugs and surgery from a very young age.">>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.health = random(50,60)>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.lips = 35>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.butt = random(4,5)>>
+<<set $activeSlave.buttImplant = 1>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.boobs = random(8,10)*100>>
+<<set $activeSlave.lipsImplant = 10>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.hStyle = "long and in twin schoolgirl tails">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+
+A young slave is going door to door offering herself for sale on behalf of her owner. It's rare to see a slave obedient enough to be entrusted with her own sale, and she's interesting, so you let her up. She stands in front of your desk and waits for instructions. She's wearing a very skimpy schoolgirl skirt and a white blouse so tight and brief that the tops of her areolae are visible. The badge on her blouse identifies her as a product of one of the Free Cities' legal slave orphanages. You instruct her to tell you about herself.
+<br><br>
+"I was raised and trained by a slave orphanage, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>. It is not legal to own children, but it is legal to charge an orphan for the costs of raising her when she reaches 18, and those debts are always high enough to enslave her. My 18th birthday was yesterday, so I am a slave and for sale now."
+<br><br>
+"I have been trained for obedience since I came to the orphanage. At 14 they put me on drugs to make sure I'd grow nice T&A. On my 16th birthday I got my first set of implants. Every time my boobs got used to the implants, I got sent in for a bigger set. I'm on my second set." She unbuttons her blouse and displays a pair of big fake tits. "I've also had my lips done." She blows you a wet kiss.
+<br><br>
+She hikes up her skirt and spins around slowly. "The drugs also made my butt bigger, and I've had my butt done too. Since it wasn't okay to fuck me before I had turned 18 and been made a slave, I'm a virgin and my anus has never had anything up it, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>." She pulls her buttocks apart to prove it.
+<br><br>
+"I cost ¤$slaveCost, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>."
+
+<<case "school trap">>
+
+<<set $encyclopedia = "Slave Schools">>
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was raised in a radical slave school that treated her from a very young age, up to the point that she never experienced male puberty.">>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.health = random(50,60)>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.boobs = random(5,6)*100>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.butt = random(2,3)>>
+<<set $activeSlave.buttImplant = 1>>
+<<set $activeSlave.dick = 1>>
+<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum = $activeSlave.balls>><</if>>
+<<set $activeSlave.balls = 1>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.clit = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.hStyle = "long and in twin schoolgirl tails">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+
+A young slave is going door to door offering herself for sale on behalf of her owner. It's rare to see a slave obedient enough to be entrusted with her own sale, and she's interesting, so you let her up. She stands in front of your desk and waits for instructions. She's wearing a very skimpy schoolgirl skirt and a white blouse so tight and brief that the tops of her areolae are visible. Something is tenting the front of her skirt slightly. The badge on her blouse identifies her as a product of one of the Free Cities' legal slave orphanages. You instruct her to tell you about herself.
+<br><br>
+"I was raised and trained by a slave orphanage, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>. It is not legal to own children, but it is legal to charge an orphan for the costs of raising her when she reaches 18, and those debts are always high enough to enslave her. My 18th birthday was yesterday, so I am a slave and for sale now."
+<br><br>
+"I have been trained for obedience since I came to the orphanage. I came as a male, but they reassigned me to female right away. At 14 they put me on drugs to make sure I'd grow nice T&A and look more feminine. Those drugs also stopped my penis from growing much, so it's small, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. On my 16th birthday I got my first set of implants. Every time my chest got used to the implants, I got sent in for a bigger set. I'm on my third set." She unbuttons her blouse and displays a pair of fake tits.
+<br><br>
+She hikes up her skirt and spins around slowly, displaying a petite, half-hard cock. "The drugs also made my butt bigger and my hips wider. Since it wasn't okay to fuck me before I had turned 18 and been made a slave, my anus has never had anything up it, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>." She pulls her buttocks apart to prove it. "I... I would be happy to serve you like I am now <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>, or you could send me for surgery to give me a pussy instead, I would like that too, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>."
+<br><br>
+"I cost ¤$slaveCost, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>."
+
+<<case "handsome PC">>
+
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She asked to be enslaved out of naive infatuation with you.">>
+<<set $activeSlave.devotion = random(25,30)>>
+<<set $activeSlave.trust = random(-15,-10)>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<if $activeSlave.vagina > 0>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.vaginalSkill = 15>>
+<</if>>
+<<set $activeSlave.earPiercing = random(0,1)>>
+<<set $activeSlave.age = 18>>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a supplicant has arrived at the door to the penthouse. A constant stream of hopefuls appear at your door, and $assistantName makes herself invaluable by filtering them. One of the few categories of applicant that is always admitted is people willing to be enslaved for some reason; this is just such a girl.
+<br><br>
+The young girl who is admitted to your office quails a bit at the sight of you, and you believe you can detect a bit of infatuation there, too. You wordlessly query $assistantName, and she turns to the massive task of sorting through arcology records to come up with a possible explanation. Meanwhile, you start interviewing the potential slave. It appears that she left home, in a settlement near the arcology, right after her 18th birthday and came straight here. She's no innocent, and not destitute, and you're surprised she's done something this foolish.
+<br><br>
+After a short while, your assistant whispers in your earpiece, <<if $assistant == 0>><<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>"Sir<<else>>"Ma'am<</if>>,<<else>>"Sweetheart,<</if>> she doesn't live here. Look at this." She pulls up footage of a public event several weeks ago, and the girl is in the crowd, staring at you with limpid eyes. Rather than confronting her directly, you probe the subject, and after some evasion she admits that yes, she did come here out of infatuation with you. "Pretty fuckin' stupid," she admits. "But I've come too far now. I just really want to live here. With you, I guess. If that means being your slave, that's okay. Can I be your house servant, maybe?"
+
+<<case "womanly PC">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She asked to be enslaved in the hope you'd treat a fellow woman well.">>
+<<set $activeSlave.devotion = random(10,15)>>
+<<set $activeSlave.trust = random(-15,-10)>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.face = random(0,20)>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.earPiercing = random(0,1)>>
+<<set $activeSlave.navelPiercing = random(0,1)>>
+<<set $activeSlave.nosePiercing = random(0,1)>>
+<<set $activeSlave.clitPiercing = random(0,1)>>
+<<set $activeSlave.nipplesPiercing = random(0,1)>>
+<<set $activeSlave.age = random(28,32)>>
+<<set $activeSlave.shouldersTat = either(0, 0, "tribal patterns", "flowers")>>
+<<set $activeSlave.stampTat = either(0, 0, "tribal patterns", "flowers")>>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a supplicant has arrived at the door to the penthouse. A constant stream of hopefuls appear at your door, and $assistantName makes herself invaluable by filtering them. One of the few categories of applicant that is always admitted is people willing to be enslaved for some reason; this is just such a woman.
+<br><br>
+"It's my husband," she says forthrightly. "I'm pretty sure the bastard is going to enslave me." She pours out the trite story; it's terrifically boring, but it pays to hear people who want to be enslaved out. It's the only forbearance you'll need to show her, ever, if you manage things correctly.
+<br><br>
+"So," she sums up, sighing and dabbing at tears, "I know you're a slave-owner. I don't really have anywhere else to go, so I'll be your slave. I'm not stupid, and I'm not ugly, so I know that means I'd be a sex slave. But it's better than the open market." Left unsaid is her obvious expectation that you'll be sympathetic to her plight.
+
+<<case "shemale PC">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She asked to be enslaved since she felt you were her only hope of becoming a prettier woman.">>
+<<set $activeSlave.devotion = random(10,15)>>
+<<set $activeSlave.trust = random(-15,-10)>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.voice = 1>>
+<<set $activeSlave.dick = random(1,2)>>
+<<set $activeSlave.balls = random(1,2)>>
+<<set $activeSlave.scrotum = $activeSlave.balls>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.boobs += 400>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.buttImplant = 1>>
+<<set $activeSlave.lips += 10>>
+<<set $activeSlave.lipsImplant = 10>>
+<<set $activeSlave.face = Math.clamp($activeSlave.face+20,-100,100)>>
+<<set $activeSlave.faceImplant = 15>>
+<<set $activeSlave.earPiercing = random(0,1)>>
+<<set $activeSlave.navelPiercing = random(0,1)>>
+<<set $activeSlave.nosePiercing = random(0,1)>>
+<<set $activeSlave.eyebrowPiercing = random(0,1)>>
+<<set $activeSlave.lipsPiercing = random(0,1)>>
+<<set $activeSlave.clitPiercing = random(0,1)>>
+<<set $activeSlave.nipplesPiercing = random(0,1)>>
+<<set $activeSlave.age = random(18,20)>>
+<<set $activeSlave.stampTat = either(0, 0, "tribal patterns", "flowers", "advertisements", "degradation", "rude words")>>
+<<set $activeSlave.anusTat = either("bleached")>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a supplicant has arrived at the door to the penthouse. A constant stream of hopefuls appear at your door, and $assistantName makes herself invaluable by filtering them. One of the few categories of applicant that is always admitted is people willing to be enslaved for some reason; this is just such a girl.
+<br><br>
+"Hi," she says hesitantly. She's a pretty convincing girl; her voice is the only giveaway. You tell her that if she wishes to be considered for enslavement, you need to inspect her naked. To her credit, she obeys, undressing quickly to reveal a body that's clearly seen a good deal of hormone therapy. She's not unhealthy and isn't too shabby, so you ask her why she's here.
+<br><br>
+"I don't make very much money," she says, and you manage not to laugh at the absurdity. "I really want to be a prettier girl. I'm - I'm not really comfortable yet. But all the modern surgeries and drugs are so expensive. And I can't afford it, and I won't be able to before I'm old unless I decide to be a whore. So I decided if I was going to do that I might as well do it here, for you. You're," she blushes, "you're very pretty. I would love to look like you."
+
+<<case "female SD">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She got into debt for damaging someone's property during a student protest and you bought out her debt.">>
+<<set $activeSlave.devotion = random(-25,0)>>
+<<set $activeSlave.trust = random(-20,-5)>>
+<<set $activeSlave.health = random(20,40)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.vaginalSkill = random(0,15)>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = random(0,15)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,21)>>
+<<set $activeSlave.boobs = random(2,6)*100>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.labia = 0>>
+<<set $activeSlave.clit = 0>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 20>>
+<<set $activeSlave.intelligence = random(1,2)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.behavioralFlaw = "liberated">>
+
+Your desk flags a report of the arcology security service for your immediate attention. As it turns out, a number of pretty liberal students from the college in your arcology led a protest earlier today in the financial district several levels up from their institution. Seems to have been against slavery, for environmentalism, or some other nonsense that you skip over reading. The really interesting thing is what happened during the protest anyways. Things became a bit unruly between protesters and some counter-protesters - and at some point rocks started to fly... all of which would barely be worth a mention, if the vintage sports car of a prominent resident hadn't been parked on the same street.
+<br><br>
+One dented hood and smashed windshield later, someone was in big trouble. The ever-present camera surveillance in your arcology made it easy to track the rock to the hand of the person who threw it - a quite pretty young woman, who immediately got arrested and is awaiting sentencing in the lock-up right now. The video of her getting booked - complete with a thorough strip-search (since all the officers agreed she 'had to be hiding something') is definitively worth saving to a private folder.
+<br><br>
+Given the damage to an expensive classic car and the meager balance of her bank accounts, this student is definitively up for enslavement. There's no way she or even anyone related to her could come up with the cash. All of which leaves you with an opportunity... the car's owner hasn't seen her yet, so you could conceivably approach him and buy the debt for this beauty off him. Better be quick, if he realizes what is waiting in a cell for him, you doubt he'd sell her at all.
+<br><br>
+//Her debt will cost ¤5000 to pay off, with the usual ¤1000 in registration fees afterward. Alternatively, you could buy her and sell her.//
+
+<<case "male SD">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She got into debt for damaging someone's property during a student protest and you bought out her debt.">>
+<<set $activeSlave.devotion = random(-30,-5)>>
+<<set $activeSlave.trust = random(-25,-5)>>
+<<set $activeSlave.health = random(20,40)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.faceImplant = 15>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = random(0,40)>>
+<<set $activeSlave.oralSkill = random(0,40)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,21)>>
+<<set $activeSlave.boobs = 150>>
+<<set $activeSlave.vagina = -1>>
+<<set $activeSlave.labia = 0>>
+<<set $activeSlave.ovaries = 0>>
+<<set $activeSlave.preg = 0>>
+<<set $activeSlave.anus = random(0,1)>>
+<<set $activeSlave.dick = random(3,5)>>
+<<set $activeSlave.balls = random(2,4)>>
+<<set $activeSlave.scrotum = $activeSlave.balls>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 50>>
+<<set $activeSlave.intelligence = random(1,2)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.behavioralFlaw = "liberated">>
+
+Your desk flags a report of the arcology security service for your immediate attention. As it turns out, a number of pretty liberal students from the college in your arcology led a protest earlier today in the financial district several levels up from their institution. Seems to have been against slavery, for environmentalism, or some other nonsense that you skip over reading. The really interesting thing is what happened during the protest anyways. Things became a bit unruly between protesters and some counter-protesters - and at some point rocks started to fly... all of which would barely be worth a mention, if the vintage sports car of a prominent resident hadn't been parked on the same street.
+<br><br>
+One dented hood and smashed windshield later, someone was in big trouble. The ever-present camera surveillance in your arcology made it easy to track the rock to the hand of the person who threw it - a good-looking young man, well-muscled too, who immediately got arrested and is awaiting sentencing in the lock-up right now. The video of him getting booked - complete with a thorough strip-search (since all the officers agreed he 'had to be hiding something') does make you think about the potential this guy would have as a dickgirl slave with a little work done on him.
+<br><br>
+Given the damage to an expensive classic car and the meager balance of his bank accounts, this student is definitively up for enslavement. There's no way he or even anyone related to him could come up with the cash. All of which leaves you with an opportunity... the car's owner hasn't seen the arrested student yet, so you could conceivably approach him and buy the debt for this young buck off him. Better be quick, or the owner might just choose to keep such a promising slave himself.
+<br><br>
+//His debt will cost ¤5000 to pay off, with the usual ¤1000 in registration fees and a little work to make a satisfactory dickgirl out of him afterward. Alternatively, you could buy him and after just a little work with the remote surgery sell a newly made dickgirl.//
+
+<<case "female SE">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She enslaved herself to be with a man she loved, only to be sold to you afterward.">>
+<<set $activeSlave.devotion = random(-30,-5)>>
+<<set $activeSlave.trust = random(-25,-5)>>
+<<set $activeSlave.health = random(10,30)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.faceImplant = 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = random(15,40)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,21)>>
+<<set $activeSlave.boobs = random(2,6)*100>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.labia = random(0,1)>>
+<<set $activeSlave.clit = 0>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 20>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.behavioralFlaw = "devout">>
+<<set $activeSlave.sexualFlaw = "idealistic">>
+
+A (quite unrealistic) blockbuster movie took your arcology by storm recently, causing some curious side effects among the more idealistic type of young people here. The movie plot is about a young woman who sells herself into slavery to be close to a love interest... then wins his adoration and her freedom in the process. Of course, just because it works like that in a movie doesn't mean real life will be the same - which didn't seem to occur to several young women who actually try to put such a plan in action. Mostly, the sudden spike of self-enslavement does lead to a number of handsome college students getting their dicks wet as they enjoy their new status as slave owners - and not a one freed his love-sick slave-girl either.
+<br><br>
+The situation does yield a few business opportunities too, as not all of the guys think just with their dicks. One of them is currently offering his free girl for sale, which your assistant instantly flags for your attention. A video attached to the offer does look quite nice, as the slave-girl happily poses in the nude for her 'beloved', not knowing that he's planning to sell her.
+<br><br>
+//The young woman will be auctioned off, but you think you should be able to get her for about ¤4000 or so... she's pretty and a virgin, but the nonexistent sex skills will keep the price relatively low in the end.//
+
+<<case "MTF SE">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She (formerly he) enslaved herself to be with a man she loved, only to be sold to you afterward.">>
+<<set $activeSlave.devotion = random(-30,-5)>>
+<<set $activeSlave.trust = random(-25,-5)>>
+<<set $activeSlave.health = random(10,30)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.faceImplant = 15>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = random(15,40)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,21)>>
+<<set $activeSlave.boobsImplant = random(3,6)*100>>
+<<set $activeSlave.boobs = $activeSlave.boobsImplant+150>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.ovaries = 0>>
+<<set $activeSlave.preg = 0>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.dick = 0>>
+<<set $activeSlave.balls = 0>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 20>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.behavioralFlaw = "devout">>
+<<set $activeSlave.sexualFlaw = "idealistic">>
+
+A (quite unrealistic) blockbuster movie took your arcology by storm recently, causing some curious side effects among the more idealistic type of young people here. The movie plot is about a young woman who sells herself into slavery to be close to a love interest... then wins his adoration and her freedom in the process. Of course, just because it works like that in a movie doesn't mean real life will be the same - which didn't seem to occur to several young women who actually try to put such a plan in action. Mostly, the sudden spike of self-enslavement does lead to a number of handsome college students getting their dicks wet as they enjoy their new status as slave owners - and not a one freed his love-sick slave-girl either.
+<br><br>
+It isn't just all natural females either, as a few men also jumped on the bandwagon, throwing in a little bit of transformative surgery in the mix. Either going all the way to making themselves into female slaves or hoping to be accepted as dick-girls after making the target of their affection fall for a pretty face and breasts. One of former cases gets flagged by your assistant as a business opportunity, as the new slave-owner wasn't impressed by a former male - despite her good looks and virgin pussy, he can't forget she originally was a man. A video attached to the 'sale offer' online post does show a relatively pretty young woman, sniffling quietly as she gets ordered to show off her body to prospective buyers.
+<br><br>
+//The girl should go pretty cheap, just ¤2000. Sounds like the owner mostly wants to not be bothered by her anymore.//
+
+<<case "DG SE">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She (formerly he) enslaved herself to be with a man she loved, only to be sold to you afterward.">>
+<<set $activeSlave.devotion = random(-30,-5)>>
+<<set $activeSlave.trust = random(-25,-5)>>
+<<set $activeSlave.health = random(10,30)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.faceImplant = 15>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,21)>>
+<<set $activeSlave.boobs = 150>>
+<<set $activeSlave.boobsImplant = random(2,6)*100>>
+<<set $activeSlave.vagina = -1>>
+<<set $activeSlave.ovaries = 0>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.dick = random(1,4)>>
+<<set $activeSlave.balls = random(1,4)>>
+<<set $activeSlave.scrotum = $activeSlave.balls>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 20>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.behavioralFlaw = "devout">>
+<<set $activeSlave.sexualFlaw = "idealistic">>
+
+A (quite unrealistic) blockbuster movie took your arcology by storm recently, causing some curious side effects among the more idealistic type of young people here. The movie plot is about a young woman who sells herself into slavery to be close to a love interest... then wins his adoration and her freedom in the process. Of course, just because it works like that in a movie doesn't mean real life will be the same - which didn't seem to occur to several young women who actually try to put such a plan in action. Mostly, the sudden spike of self-enslavement does lead to a number of handsome college students getting their dicks wet as they enjoy their new status as slave owners - and not a one freed his love-sick slave-girl either.
+<br><br>
+It isn't just all natural females either, as a few men also jumped on the bandwagon, throwing in a little bit of transformative surgery in the mix. Either going all the way to making themselves into female slaves or hoping to be accepted as dick-girls after making the target of their affection fall for a pretty face and breasts. One of latter cases gets flagged by your assistant as a business opportunity, as the new slave-owner wasn't impressed by a former male and wants to get rid of the dickgirl as quickly as possible. A video attached to the 'sale offer' online post does show a relatively pretty young dickgirl, sniffling quietly as she gets ordered to show off her body to prospective buyers.
+<br><br>
+//The dickgirl should go pretty cheap, just ¤1500. Sounds like the owner mostly wants to not be bothered by her anymore.//
+
+<<case "gang leader">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was given to you by criminals as 'tribute', after which you transformed the overthrown (male) leader of their rival gang.">>
+<<set $activeSlave.devotion = random(-70,-40)>>
+<<set $activeSlave.trust = random(-20,-5)>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.face = Math.clamp($activeSlave.face+20,-100,100)>>
+<<set $activeSlave.faceImplant = 15>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.combatSkill = 1>>
+<<set $activeSlave.age = random(18,25)>>
+<<set $activeSlave.hStyle = either("very short", "short")>>
+<<set $activeSlave.boobs = 150>>
+<<set $activeSlave.vagina = -1>>
+<<set $activeSlave.clit = 0>>
+<<set $activeSlave.ovaries = 0>>
+<<set $activeSlave.preg = 0>>
+<<set $activeSlave.dick = random(3,5)>>
+<<set $activeSlave.balls = random(2,4)>>
+<<set $activeSlave.scrotum = $activeSlave.balls>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 50>>
+<<set $activeSlave.career = "a criminal">>
+<<set $activeSlave.sexualFlaw = "hates oral">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.eyebrowPiercing = 1>>
+<<set $activeSlave.customTat = "She has a tear tattooed under her left eye.">>
+
+Your desk flags a video message as coming from an... interesting source. It is from one of the minor gangs on the lower levels of your arcology - or not so minor anymore, as a pop-up tells you of the power-grab they made barely an hour ago. Curious what they might want, you take the call.
+<br><br>
+A tough-looking man with multiple tattoos and a wife-beater shirt on appears on the screen, nodding in recognition. "Hey there, boss-<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>man<<else>>woman<</if>>. Just calling to pay my respects. Those weak-ass punks that were squatting in this section won't bother you anymore... we took care of em. Now it's just all law-abiding citizens and shit down here - so you don't have to send your security goons to check us out, you know." Your assistant throws up a list of the gang's numerous criminal activities, as well as the estimates what other enterprises they've just taken over. Nothing much out of the ordinary and with the shape the world is in, you got bigger problems. The recommendation is to observe but mostly ignore them, which you casually confirm with a flick of your finger.
+<br><br>
+Clearing his throat, the new gang-leader on level twenty-five continues, "But that's not all, we got a bit of tribute for ya." Waving his hand, he makes room for two muscular bruisers carrying the unconscious form of another man - easily recognizable from his muscled build and numerous tattoos as a hardened criminal. The face-recognition software tells you he is the now overthrown gangster boss in that area of the arcology. "Everyone knows what fun things you do with your slaves, so we thought it'd fit for this guy. Gonna throw him in an elevator in a minute and send it up, kay? If you make him into a proper brainless slut, you'll have quite a few guys standing in line to have a go. And well, he'd make a capable gladiator in a pit fight too. Have fun with the bastard."
+<br><br>
+The signal is cut suddenly, and just a few moments later, your assistant flags an elevator going up containing a person needing medical attention. Anticipating your wishes, the planning interface of the remote surgery opens up right away, indicating available options for the criminal's feminized face.
+
+<<case "DG runaway">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was a runaway slave captured by a gang outside your arcology. You bought her cheap after she was harshly used by them.">>
+<<set $activeSlave.devotion = random(0,25)>>
+<<set $activeSlave.trust = -20>>
+<<set $activeSlave.health = random(-50,-30)>>
+<<set $activeSlave.face = random(0,20)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,24)>>
+<<set $activeSlave.boobs = random(2,6)*100>>
+<<set $activeSlave.vagina = -1>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 0>>
+<<set $activeSlave.preg = 0>>
+<<set $activeSlave.dick = random(1,3)>>
+<<set $activeSlave.balls = 0>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.anus = 3>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralFlaw = "hates men">>
+<<set $activeSlave.behavioralQuirk = "insecure">>
+<<set $activeSlave.sexualFlaw = "apathetic">>
+<<set $activeSlave.lipsPiercing = 1>>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 2>>
+<<set $activeSlave.navelPiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 2>>
+<<set $activeSlave.clitPiercing = 2>>
+<<set $activeSlave.customTat = "She has a barcode tattooed on her neck.">>
+<<set $activeSlave.attrXY = 20>>
+
+A report about a successful operation by your mercenaries waits at your desk when you come in the office this morning. Turns out they tracked a brutal gang that was waylaying travellers near the Free City and stormed their hideout last night. All of the criminals were killed in the process, preventing proper punishments or more... creative uses for them. From the videos of the raid and the fanatic way the men fought to the last man, it seems that this was unavoidable, so you send a quick note of approval to their commander.
+<br><br>
+After the fighting died down, they found a dickgirl inside the compound, harshly used and seemingly the center of many gang-bangs there. A scan of her biometric data revealed that she is in fact a slave that ran away about two months ago - into a much worse situation after being caught by the gang, as it turns out. Countless dicks have stretched her ass wide, she has been crudely gelded, and they've decorated her with numerous piercings. As you notify the owner that her property has been retrieved, the woman is distraught at the state of her merchandise, grumbling that a once quite valuable girl is now worth almost nothing. Seems she's unwilling to invest her time and money in caring for the slave. With a sigh, the slave-mistress whips out her smart-phone and starts to set up a selling offer in one of the popular slave trading apps.
+<br><br>
+//The young dickgirl has been used and abused quite a bit, making her deathly terrified about what might happen to her next. She has partially resigned to be nothing but a fuckhole. You can get her cheap from the owner, it'll be just ¤1000.//
+
+<<case "herm runaway">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was a runaway slave captured by a gang outside your arcology. You bought her cheap after she was harshly used by them.">>
+<<set $activeSlave.devotion = random(0,25)>>
+<<set $activeSlave.trust = -20>>
+<<set $activeSlave.health = random(-50,-30)>>
+<<set $activeSlave.face = random(0,20)>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,24)>>
+<<set $activeSlave.boobs = random(3,7)*100>>
+<<set $activeSlave.vagina = 3>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = 7>>
+<<set $activeSlave.dick = random(1,3)>>
+<<set $activeSlave.balls = 0>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.anus = 3>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralFlaw = "hates men">>
+<<set $activeSlave.behavioralQuirk = "insecure">>
+<<set $activeSlave.sexualFlaw = "apathetic">>
+<<set $activeSlave.lipsPiercing = 1>>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 2>>
+<<set $activeSlave.navelPiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 2>>
+<<set $activeSlave.clitPiercing = 2>>
+<<set $activeSlave.customTat = "She has a barcode tattooed on her neck.">>
+<<set $activeSlave.attrXY = 20>>
+
+A report about a successful operation by your mercenaries waits at your desk when you come in the office this morning. Turns out they tracked a brutal gang that was waylaying travellers near the Free City and stormed their hideout last night. All of the criminals were killed in the process, preventing proper punishments or more... creative uses for them. From the videos of the raid and the fanatic way the men fought to the last man, it seems that this was unavoidable, so you send a quick note of approval to their commander.
+<br><br>
+After the fighting died down, they found a woman inside the compound, harshly used and seemingly the center of many gang-bangs there. A scan of her biometric data revealed that she is in fact a slave that ran away about two months ago - into a much worse situation after being caught by the gang, as it turns out. Countless dicks have stretched her pussy and ass wide, she is pregnant with some dead criminal's offspring, has been crudely gelded and they've decorated her with numerous piercings. As you notify the owner that her property has been retrieved, the woman is distraught at the state of her merchandise, grumbling that a once quite valuable girl is now worth almost nothing. Seems she's unwilling to invest her time and money in caring for the slave. With a sigh, the slave-mistress whips out her smart-phone and starts to set up a selling offer in one of the popular slave trading apps.
+<br><br>
+//The young dickgirl has been used and abused quite a bit, making her deathly terrified about what might happen to her next. She has partially resigned to be nothing but a fuckhole. You can get her cheap from the owner, it'll be just ¤1000.//
+
+<<case "female runaway">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was a runaway slave captured by a gang outside your arcology. You bought her cheap after she was harshly used by them.">>
+<<set $activeSlave.devotion = random(0,25)>>
+<<set $activeSlave.trust = -20>>
+<<set $activeSlave.health = random(-50,-30)>>
+<<set $activeSlave.face = random(0,20)>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,24)>>
+<<set $activeSlave.boobs = random(3,7)*100>>
+<<set $activeSlave.vagina = 3>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = 7>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.anus = 3>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralFlaw = "hates men">>
+<<set $activeSlave.behavioralQuirk = "insecure">>
+<<set $activeSlave.sexualFlaw = "apathetic">>
+<<set $activeSlave.lipsPiercing = 1>>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 2>>
+<<set $activeSlave.navelPiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 2>>
+<<set $activeSlave.clitPiercing = 2>>
+<<set $activeSlave.customTat = "She has a barcode tattooed on her neck.">>
+<<set $activeSlave.attrXY = 20>>
+
+A report about a successful operation by your mercenaries waits at your desk when you come in the office this morning. Turns out they tracked a brutal gang that was waylaying travellers near the Free City and stormed their hideout last night. All of the criminals were killed in the process, preventing proper punishments or more... creative uses for them. From the videos of the raid and the fanatic way the men fought to the last man, it seems that this was unavoidable, so you send a quick note of approval to their commander.
+<br><br>
+After the fighting died down, your men found a woman inside the compound, harshly used and seemingly the center of many gang-bangs there. A scan of her biometric data revealed that she is in fact a slave that ran away about two months ago - into a much worse situation after being caught by the gang, as it turns out. Countless dicks have stretched her pussy and ass wide, she is pregnant with some dead criminal bastard's offspring and they've decorated her with numerous piercings. As you notify the owner that her property has been retrieved, the woman is distraught at the state of her merchandise, grumbling that a once quite valuable girl is now worth almost nothing. Seems she's unwilling to invest her time and money in caring for the slave. With a sigh, the slave-mistress whips out her smart-phone and starts to set up a selling offer in one of the popular slave trading apps.
+<br><br>
+//The young woman has been used and abused quite a bit, making her deathly terrified about what might happen to her next. She has partially resigned to be nothing but a fuckhole. You can get her cheap from the owner, it'll be just ¤1000.//
+
+<<case "CCS angel">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was the private slave of a con artist cult leader before he had to abandon her and flee.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(25,100)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.entertainSkill = 35>>
+<<set $activeSlave.age = random(18,24)>>
+<<set $activeSlave.boobs = random(2,7)*100>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.height = random(160,200)>>
+<<set $activeSlave.shoulders = random(-1,1)>>
+<<set $activeSlave.hips = -1>>
+<<set $activeSlave.butt = 0>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = random(10,50)>>
+<<set $activeSlave.intelligence = random(0,1)>>
+<<set $activeSlave.career = "a dancer">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralFlaw = "devout">>
+<<set $activeSlave.sexualFlaw = "idealistic">>
+<<set $activeSlave.customTat = "She has beautifully detailed set of angel wings tattooed on her back.">>
+<<set $activeSlave.voice = 3>>
+<<set $activeSlave.eyeColor = "blue">>
+<<set $activeSlave.hColor = "blonde">>
+<<set $activeSlave.pubicHColor = "blonde">>
+<<set $activeSlave.skin = "pale">>
+<<set $activeSlave.race = "white">>
+<<set $activeSlave.hLength = 40>>
+<<set $activeSlave.hStyle = "halfway down her back">>
+<<set $activeSlave.slaveName = either("Angel", "Angelica", "Gabriela", "Layla", "Seraph", "Liel")>>
+
+As a minor point of information on your daily news download, you see that yet another of the new religions (cults really) that tend to spring up like weeds in the Free Cities has met its almost inevitable fate. Even with the most charismatic leader, starry-eyed idealism or boundless greed in milking the followers usually put a sudden end to the various self-declared churches, temples and holy places. In this case, the cult leader successfully made a hasty getaway, leaving his creditors and conned believers behind. Repo men are sent out in force, carting off the contents of the 'house of worship' and the luxurious apartment the man kept.
+<br><br>
+Wondering what sorts of strange paraphernalia or weird sex toys the grifter might have kept himself amused with, you casually select the feed of one of the surveillance cameras that overlooks the area. And indeed, the contents of many boxes being carried out of there do have a certain perverted look to them, prompting you to zoom in - which is when a pretty, young and almost naked woman walks through the image, escorted by two repo men. Immediately directing the camera to follow her, you see that they scan and log her like any of the other items in the household liquidation - she must have been the cult leader's personal slave. She certainly has a unique look, waking your interest enough to check the slave markets for her - and indeed, half an hour later she's being listed as for sale.
+<br><br>
+The young woman is best described as being 'angelic', in a stereotypical Western view of the mythical divine messengers. Blond-haired, blue eyed and with milky-white skin, she has had a pair of beautifully detailed wings tattooed on her back. The small icon of two cherries next to one another also designates her to be a complete virgin.
+<br><br>
+// Someone already started bidding for her and more bids are coming in fast. As such things usually go, you guess that the price will come out to about ¤5000 in the end.//
+
+<<case "CCS DA">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was the private slave of a con artist cult leader before he had to abandon her and flee.">>
+<<set $activeSlave.devotion = random(-45,15)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.vaginalSkill = random(50,100)>>
+<<set $activeSlave.analSkill = random(50,100)>>
+<<set $activeSlave.oralSkill = random(50,100)>>
+<<set $activeSlave.whoreSkill = random(50,100)>>
+<<set $activeSlave.entertainSkill = 35>>
+<<set $activeSlave.age = random(18,22)>>
+<<set $activeSlave.boobs = random(2,7)*100>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.vaginaLube = 2>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.height = random(160,200)>>
+<<set $activeSlave.shoulders = random(-1,1)>>
+<<set $activeSlave.hips = -1>>
+<<set $activeSlave.butt = 0>>
+<<set $activeSlave.anus = 2>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = random(10,50)>>
+<<set $activeSlave.intelligence = random(0,1)>>
+<<set $activeSlave.career = "a dancer">>
+<<set $activeSlave.fetish = "dom">>
+<<set $activeSlave.behavioralQuirk = "sinful">>
+<<set $activeSlave.sexualFlaw = "judgemental">>
+<<set $activeSlave.customTat = "She has beautifully detailed set of angel wings tattooed on her back.">>
+<<set $activeSlave.voice = random(2,3)>>
+<<set $activeSlave.eyeColor = "amber">>
+<<set $activeSlave.hColor = "black">>
+<<set $activeSlave.pubicHColor = "black">>
+<<set $activeSlave.skin = "pale">>
+<<set $activeSlave.race = "white">>
+<<set $activeSlave.hLength = 40>>
+<<set $activeSlave.hStyle = "halfway down her back">>
+<<set $activeSlave.slaveName = either("Lilith", "Eve", "Lucy", "Malicia", "Lileli", "Jezebel")>>
+
+As a minor point of information on your daily news download, you see that yet another of the new religions (cults really) that tend to spring up like weeds in the Free Cities has met its almost inevitable fate. Even with the most charismatic leader, starry-eyed idealism or boundless greed in milking the followers usually put a sudden end to the various self-declared churches, temples and holy places. In this case, the cult leader successfully made a hasty getaway, leaving his creditors and conned believers behind. Repo men are sent out in force, carting off the contents of the 'house of worship' and the luxurious apartment the man kept.
+<br><br>
+Wondering what sorts of strange paraphernalia or weird sex toys the grifter might have kept himself amused with, you casually select the feed of one of the surveillance cameras that overlooks the area. And indeed, the contents of many boxes being carried out of there do have a certain perverted look to them, prompting you to zoom in - which is when a pretty, young and almost naked woman walks through the image, escorted by two repo men. Immediately directing the camera to follow her, you see that they scan and log her like any of the other items in the household liquidation - she must have been the cult leader's personal slave. She certainly has a unique look, waking your interest enough to check the slave markets for her - and indeed, half an hour later she's being listed as for sale.
+<br><br>
+The young woman is best described as being 'angelic', in a stereotypical Western view of the mythical divine messengers. Having jet-black hair and amber eyes, coupled with milky-white skin, there is a pair of beautifully detailed wings tattooed on her back. A whole row of icons depicting stylized sex acts mark her as being well versed in sexual matters.
+<br><br>
+// Someone already started bidding for her and more bids are coming in fast. As such things usually go, you guess that the price will come out to about ¤7500 in the end.//
+
+<<case "racer DG chaser">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was a dickgirl chaser in the slave races before being sold to you.">>
+<<set $activeSlave.prestige = 1>>
+<<set $activeSlave.prestigeDesc = "Many people remember her from the slave-girl races where she slammed her cock into countless runners' pussies after catching them.">>
+<<set $activeSlave.devotion = random(-15,10)>>
+<<set $activeSlave.trust = random(-20,10)>>
+<<set $activeSlave.health = random(30,50)>>
+<<set $activeSlave.shoulders = random(1,2)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = random(0,15)>>
+<<set $activeSlave.oralSkill = random(0,15)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(19,22)>>
+<<set $activeSlave.boobs = random(1,4)*100>>
+<<set $activeSlave.vagina = -1>>
+<<set $activeSlave.ovaries = 0>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.dick = random(4,5)>>
+<<set $activeSlave.balls = random(3,4)>>
+<<set $activeSlave.scrotum = $activeSlave.balls>>
+<<set $activeSlave.height = random(180,200)>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 50>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "an athlete">>
+<<set $activeSlave.fetish = "dom">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.behavioralQuirk = "fitness">>
+<<set $activeSlave.sexualQuirk = "perverted">>
+<<set $activeSlave.sexualFlaw = "judgemental">>
+
+Coming to your desk in the morning, you see that your assistant has flagged an interesting news item for you to check out. Looks like the monthly final in the slave racing league was yesterday. With the push of a button on the keyboard, you check out the rankings and then choose to display a video of the race's end - with a very pretty young woman crossing the finish line, immediately followed by half a dozen further slaves. It is quite a show since of course, all of them are naked - or almost so, as anything but smallish breasts make sports bras a necessity.
+<br><br>
+Whatever your predecessor's faults, he surely did something very right in endorsing the slave racing league when it started to establish itself way back when. These days, many of your residents regularly watch the races going on - and that number rises to include a clear majority in the arcology for the special events that are also in the organizer's program. An absolute favorite of the population is the 'vestalian hunt', in which a dozen virgins are chased along the track by very well-hung dick-girls. Anyone falling behind soon has their cherry taken in the most public way possible, right on the track. Only the quickest manage to make it to the finish line at all without being wrestled down and pounded hard. Quite a risk, with the slaves precious virginity being sacrificed this way, but of course those who make it win their owners large sums of prize money. You've just switched over to see a re-play of the action, seeing the camera move past the very attractive lineup of the race, when your communicator rings with an incoming call.
+<br><br>
+As fate has it, the person calling is the owner of the local race-track, wanting to offer you a deal. It turns out that he wants to sell one of his dick-girls to you at a fairly reasonable price. When you ask for a reason, the man replies, "Well, she's a crowd-pleaser alright with that big dick of hers, but... a bit headstrong. You see, she punched one of the other girls when they grabbed a virgin at the same time. She's been a distraction for the rest of the team, so I think it's best to remove her and bring in new talent." He then sends you her file to review, including more than a few videos of her 'in action' on the racetrack - both running as well as fucking.
+<br><br>
+//The dickgirl does have an impressive physique and is tall, fast on the track and has a whopping big dick. She has some prestige from appearing in the races, but with the control issues, you could likely negotiate a bit and get her for ¤5000.//
+
+<<case "racer loser">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was a virgin runner in the slave races before being sold to you.">>
+<<set $activeSlave.prestige = 1>>
+<<set $activeSlave.prestigeDesc = "After her short but very promising slave racing career, during which she made it through several competitions as a virgin, many people fondly remember fantasizing about taking her.">>
+<<set $activeSlave.devotion = random(15,25)>>
+<<set $activeSlave.trust = random(15,25)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = random(0,15)>>
+<<set $activeSlave.oralSkill = random(0,15)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,21)>>
+<<set $activeSlave.boobs = random(1,4)*100>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = 1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.height = random(180,200)>>
+<<set $activeSlave.hips = -1>>
+<<set $activeSlave.butt = 0>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 20>>
+<<set $activeSlave.shoulders = 0>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.entertainSkill = 15>>
+<<set $activeSlave.career = "an athlete">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralFlaw = "anorexic">>
+<<set $activeSlave.behavioralQuirk = "fitness">>
+<<set $activeSlave.sexualQuirk = "tease">>
+<<set $activeSlave.sexualFlaw = "none">>
+
+Coming to your desk in the morning, you see that your assistant has flagged an interesting news item for you to check out. Looks like the monthly final in the slave racing league was yesterday. With the push of a button on the keyboard, you check out the rankings and then choose to display a video of the race's end - with a very pretty young woman crossing the finish line, immediately followed by half a dozen further slaves. It is quite a show since of course, all of them are naked - or almost so, as anything but smallish breasts make sports bras a necessity.
+<br><br>
+Whatever your predecessor's faults, he surely did something very right in endorsing the slave racing league when it started to establish itself way back when. These days, many of your residents regularly watch the races going on - and that number rises to include a clear majority in the arcology for the special events that are also in the organizer's program. An absolute favorite of the population is the 'vestalian hunt', in which a dozen virgins are chased along the track by very well-hung dick-girls. Anyone falling behind soon has their cherry taken in the most public way possible, right on the track. Only the quickest manage to make it to the finish line at all without being wrestled down and pounded hard. Quite a risk, with the slaves precious virginity being sacrificed this way, but of course those who make it win their owners large sums of prize money. You've just switched over to see a re-play of the action, seeing the camera move past the very attractive lineup of the race, when your communicator rings with an incoming call.
+<br><br>
+As fate has it, the person calling is the owner of the local race-track, wanting to offer you a deal. It turns out that he wants to sell one of his well-known virgin runners to you. When you ask him why, he is slightly surprised that you don't know already - turns out, the young woman got caught by an especially motivated chaser during the race yesterday, wrestling her to the ground and taking her virginity with a thick shaft. While a great athlete like her usually still would have a place in his stable, the race track's resident doctor just confirmed that she's pregnant. With abortion being out of the question - as the fans would see that as scandalous cheating defeating the purpose of the virgin race - the owner now wants to sell her before her fame fades.
+<br><br>
+//The young woman is really pretty and tall, if a bit plain in the breast department. With the moderate fame she has earned during her racing career and its spectacular end, she'd draw raised interest if used as a whore. Due to the fact that she's no longer a virgin, pregnant and not really trained in sex acts, you could likely negotiate a bit and get her for ¤5000.//
+
+<<case "racer winner">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was a famous virgin runner in the slave races before being sold to you.">>
+<<set $activeSlave.prestige = 2>>
+<<set $activeSlave.prestigeDesc = "For years, she delighted the watchers of slave girl racing with winning competition after competition with her virginity intact.">>
+<<set $activeSlave.devotion = random(15,25)>>
+<<set $activeSlave.trust = random(10,20)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = random(0,15)>>
+<<set $activeSlave.oralSkill = random(0,15)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(21,24)>>
+<<set $activeSlave.boobs = either(100, 200, 300)>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.height = random(180,200)>>
+<<set $activeSlave.shoulders = random(-1,1)>>
+<<set $activeSlave.hips = -1>>
+<<set $activeSlave.butt = 0>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 50>>
+<<set $activeSlave.intelligence = random(0,1)>>
+<<set $activeSlave.entertainSkill = 35>>
+<<set $activeSlave.career = "an athlete">>
+<<set $activeSlave.fetish = "pregnancy">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.behavioralQuirk = "fitness">>
+<<set $activeSlave.sexualQuirk = "tease">>
+<<set $activeSlave.sexualFlaw = "none">>
+
+Coming to your desk in the morning, you see that your assistant has flagged an interesting news item for you to check out. Looks like the monthly final in the slave racing league was yesterday. With the push of a button on the keyboard, you check out the rankings and then choose to display a video of the race's end - with a very pretty young woman crossing the finish line, immediately followed by half a dozen further slaves. It is quite a show since of course, all of them are naked - or almost so, as anything but smallish breasts make sports bras a necessity.
+<br><br>
+Whatever your predecessor's faults, he surely did something very right in endorsing the slave racing league when it started to establish itself way back when. These days, many of your residents regularly watch the races going on - and that number rises to include a clear majority in the arcology for the special events that are also in the organizer's program. An absolute favorite of the population is the 'vestalian hunt', in which a dozen virgins are chased along the track by very well-hung dickgirls. Anyone falling behind soon has their cherry taken in the most public way possible, right on the track. Only the quickest manage to make it to the finish line at all without being wrestled down and pounded hard. Quite a risk, with the slaves precious virginity being sacrificed this way, but of course those who make it win their owners large sums of prize money. You've just switched over to see a re-play of the action, seeing the camera move past the very attractive lineup of the race, when your communicator rings with an incoming call.
+<br><br>
+As fate has it, the person calling is the owner of the local race-track, wanting to offer you a deal. It turns out that he wants to sell one of his very prestigious virgin runners to you. She's been the champion of the race track for three years in a row now, the virgin queen of the slave-girl sprinters... so the man decided he'd maximize his profit by selling her at the height of her popularity instead of chancing a loss in the next big race. It's a young woman's sport, and with new talent being trained, he feels its time to give the early twenties slave-girl a new purpose. There are numerous interested parties in buying her of course, but out of respect he is coming to you first.
+<br><br>
+//The young woman is really pretty and tall, if a bit plain in the breast department. With the fame she has earned during her racing career, she'd draw quite a bit of interest if used as a whore. The price for her reflects that of course - you doubt you can get a price under ¤10000.//
+
+<<case "repo housekeeper">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was the housekeeper and fucktoy of a frat house before being collected by repo-men and sold to you.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(0,60)>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.entertainSkill = 15>>
+<<set $activeSlave.whoreSkill = 15>>
+<<set $activeSlave.age = random(18,23)>>
+<<set $activeSlave.boobs = random(3,8)*100>>
+<<set $activeSlave.vagina = random(1,2)>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(-1,0)>>
+<<set $activeSlave.butt = 0>>
+<<set $activeSlave.anus = random(1,2)>>
+<<set $activeSlave.weight = random(-50,0)>>
+<<set $activeSlave.muscles = random(0,15)>>
+<<set $activeSlave.shoulders = random(-1,1)>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralQuirk = "insecure">>
+<<set $activeSlave.sexualQuirk = "caring">>
+
+Coming to your desk in the morning, you see that your assistant has flagged an interesting offer for you to check out in the newsletter of a professional repossession company. Life in the Free Cities being what it is, there are winners and losers of the ever-changing local and global realities... and when someone falls upon hard times, the repo-men and repo-women start their work. Grim-faced and unmoved by sympathy, they go in to seize the debtor's assets to pay off their debts - which does at times include some quite interesting pieces of merchandise, like a nice slave or two.
+<br><br>
+The current sale offer by the company was taken from a college frat-house - apparently being enrolled at the small university in your arcology doesn't mean that the guys know their asses from their elbows in money-management. A few too many parties and frivolous purchases sent an asset reclamation officer to their door, soon leaving with one of those recent purchases - a pretty female slave who doubled as both a housekeeper and fuckhole for the whole bunch of horny students. She's cute and apparently well-trained, if a bit exhausted right now after numerous gang-bangs her former owners put her through.
+<br><br>
+//The repo-company doesn't hold on to assets long, they just want to get new cash pretty quickly - which makes this a nice opportunity, as the price for the young woman is set pretty low. It'll just take  ¤2500 to buy her off their hands.//
+
+<<case "repo nanny">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was a nanny before being sold to you.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(-50,-25)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(0,60)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.entertainSkill = random(15,40)>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(20,25)>>
+<<set $activeSlave.boobs = random(3,8)*100>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(-1,0)>>
+<<set $activeSlave.butt = 0>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.muscles = random(0,15)>>
+<<set $activeSlave.shoulders = random(-1,1)>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralQuirk = "adores women">>
+<<set $activeSlave.sexualQuirk = "caring">>
+
+Coming to your desk in the morning, you see that your assistant has flagged an interesting offer for you to check out in the newsletter of a professional repossession company. Life in the Free Cities being what it is, there are winners and losers of the ever-changing local and global realities... and when someone falls upon hard times, the repo-men and repo-women start their work. Grim-faced and unmoved by sympathy, they go in to seize the debtor's assets to pay off their debts - which does at times include some quite interesting pieces of merchandise, like a nice slave or two.
+<br><br>
+The current sale offer by the company was taken from a businesswoman's apartment - one of the higher income strata of the arcology, she's recently had fortune turn from her due to some unfortunate occurrences outside your demesne of the free cities. The file doesn't say exactly which - some natural catastrophe, raiders, competing business or whatnot - one thing is for sure though, she's in a financial pinch right now. All of which meant that her slave nanny was fair game to be taken and is now awaiting re-sale. As her mistress never had any sexual interest in the slave, the young woman is actually a virgin and used to the relatively cushy life of just watching children. The fact that all of that ended from one day to the next has made her quite afraid for her future...
+<br><br>
+//The repo-company doesn't hold on to assets long, they just want to get new cash pretty quickly - which makes this a nice opportunity, as the price for the young woman is set pretty low. It'll just take ¤2500 to buy her off their hands.//
+
+<<case "farm cow">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was a milk cow in the stable of a slave-holding farmer before being sold to you.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(-30,30)>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(24,30)>>
+<<set $activeSlave.boobs = random(8,20)*100>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 2>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = 15>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(0,2)>>
+<<set $activeSlave.butt = random(2,5)>>
+<<set $activeSlave.anus = 2>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.muscles = random(0,15)>>
+<<set $activeSlave.shoulders = random(0,2)>>
+<<set $activeSlave.intelligence = random(-2,1)>>
+<<set $activeSlave.nosePiercing = 2>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "pregnancy">>
+<<set $activeSlave.behavioralQuirk = "advocate">>
+<<set $activeSlave.sexualQuirk = "caring">>
+
+As you're working on some boring administrative matters, a courier comes to your office, delivering a satchel of documents. Opening it up to check who would go through the trouble of having something hand-delivered, you find out that the Free Cities Farmers Association (FCFA) has chosen your arcology to hold the next of their semi-regular conventions, in which prominent members of the industry will gather and new developments be presented. Sounds like a mixture of a conference and a trade show, and the association has rented out the convention center in the mid-levels of your demesne for more than a week. That'll certainly boost the local economy a bit.
+<br><br>
+From the looks of all the brochures and extra information included, the association's president is well-versed in how the Free Cities are run... leading him to promote his group directly to you. And not only that - in an effort to curry favor, he included a slave's records, including an offer to buy the obedient milking cow from his own stable for an almost ridiculously low price.
+<br><br>
+//Checking her stats and the videos included, you see the woman is healthy and well cared for, fitting for a prized milk-producer. She's a mother of three already and has got another baby on the way, making her lactation an all natural one. With the registration and all, it'll still just take ¤2500 to buy her and add her to your own slave lineup.//
+
+<<case "farm bull">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was a breeding bull in the stable of a slave-holding farmer before being sold to you.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(-30,30)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 35>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(21,25)>>
+<<set $activeSlave.boobs = 0>>
+<<set $activeSlave.vagina = -1>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = -1>>
+<<set $activeSlave.dick = random(4,5)>>
+<<set $activeSlave.balls = random(3,4)>>
+<<set $activeSlave.scrotum = $activeSlave.balls>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(1,2)>>
+<<set $activeSlave.butt = random(2,5)>>
+<<set $activeSlave.anus = 2>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.muscles = random(10,50)>>
+<<set $activeSlave.shoulders = random(1,2)>>
+<<set $activeSlave.intelligence = random(-2,1)>>
+<<set $activeSlave.nosePiercing = 2>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "pregnancy">>
+<<set $activeSlave.behavioralQuirk = "adores women">>
+<<set $activeSlave.sexualQuirk = "size queen">>
+
+As you're working on some boring administrative matters, a courier comes to your office, delivering a satchel of documents. Opening it up to check who would go through the trouble of having something hand-delivered, you find out that the Free Cities Farmers Association (FCFA) has chosen your arcology to hold the next of their semi-regular conventions, in which prominent members of the industry will gather and new developments be presented. Sounds like a mixture of a conference and a trade show, and the association has rented out the convention center in the mid-levels of your demesne for more than a week. That'll certainly boost the local economy a bit.
+<br><br>
+From the looks of all the brochures and extra information included, the association's president is well-versed in how the Free Cities are run... leading him to promote his group directly to you. And not only that - in an effort to curry favor, he included a slave's records, including an offer to buy the obedient breeding bull (a dickgirl) from his own stable for an almost ridiculously low price.
+<br><br>
+//Checking her stats and the videos included, you see the dickgirl is healthy and well cared for, fitting for a prized breeder of countless milk cows. She's sired countless offspring already and will yield quite a bit of cum if her cock is milked. With the registration and all, it'll still just take ¤2500 to buy her and add her to your own slave lineup.//
+
+<<case "farm virgin cow">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was a virgin cow in the stable of a slave-holding farmer before being sold to you.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(-30,30)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = random(18,19)>>
+<<set $activeSlave.boobs = random(6,12)*100>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 2>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(0,2)>>
+<<set $activeSlave.butt = random(1,4)>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.muscles = random(0,40)>>
+<<set $activeSlave.shoulders = random(-1,2)>>
+<<set $activeSlave.intelligence = random(-2,1)>>
+<<set $activeSlave.nosePiercing = 2>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "pregnancy">>
+<<set $activeSlave.behavioralQuirk = "insecure">>
+<<set $activeSlave.sexualQuirk = "tease">>
+
+As you're working on some boring administrative matters, a courier comes to your office, delivering a satchel of documents. Opening it up to check who would go through the trouble of having something hand-delivered, you find out that the Free Cities Farmers Association (FCFA) has chosen your arcology to hold the next of their semi-regular conventions, in which prominent members of the industry will gather and new developments be presented. Sounds like a mixture of a conference and a trade show, and the association has rented out the convention center in the mid-levels of your demesne for more than a week. That'll certainly boost the local economy a bit.
+<br><br>
+From the looks of all the brochures and extra information included, the association's president is well-versed in how the Free Cities are run... leading him to promote his group directly to you. And not only that - in an effort to curry favor, he included a slave's records, including an offer to buy the fresh and yet unused virgin cow from his own stable for an almost ridiculously low price.
+<br><br>
+//Checking her stats and the videos included, you see the young woman is healthy and well cared for, with a nice pair of tits. Her records indicate that she is very fertile and has excellent genes, promising a nice line of slaves to be bred in her womb. With the registration and all, it'll still just take ¤1500 to buy her and add her to your own slave lineup.//
+
+<<case "orphan rebellious female">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was in an orphanage until reaching maturity, at which point she was sold to you.">>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-25,0)>>
+<<set $activeSlave.health = random(10,40)>>
+<<set $activeSlave.face = random(-30,30)>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.whoreSkill = 15>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.boobs = random(4,8)*100>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 2>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(-1,2)>>
+<<set $activeSlave.butt = random(1,3)>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.weight = random(-80,20)>>
+<<set $activeSlave.muscles = random(0,40)>>
+<<set $activeSlave.shoulders = random(-1,2)>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "an orphan">>
+<<set $activeSlave.fetish = "pregnancy">>
+<<set $activeSlave.behavioralFlaw = either("bitchy", "hates men", "hates women")>>
+<<set $activeSlave.sexualFlaw = either("crude", "judgemental", "apathetic", "hates oral", "hates anal")>>
+
+An invitation to a 'visitation day' at an orphanage in the arcology pops up in your in-box, prompting you to make some room in your schedule to go have a look. Run by a well-meaning non-profit organization active in numerous of the Free Cities, the facility does house quite a few orphans (both local and saved from the chaos of the old world), doing excellent work in teaching them and finding new homes. Still, with times being what they are, the people running things do have a... realistic outlook, in the end. And so, in order to keep the orphanage going, those living there who aren't adopted till they reach maturity are sold as slaves. Legally this practice is easily arranged, as the life-debt for any of the orphans builds up over the years, pretty much automatically putting them over the limit for enslavement.
+<br><br>
+Knowing what's coming, the teachers in the facility do train their pupils accordingly and try to instill obedience and acceptance into those soon reaching eighteen years of age, but there are always those with whom the lessons don't quite take hold. The young woman that catches your eye from among the newly of age orphans is such a case... from all accounts, she's rather headstrong and doesn't bend her will to anyone really - for example having long lost her virginities one way or another. Still, a young slave at a fairly low price could be worth the investment for anyone who likes breaking them in...
+<br><br>
+//A short discussion with an administrator establishes the young woman's asking price at ¤1500.//
+
+<<case "orphan femboy">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was in an orphanage until reaching maturity, at which point she was sold to you.">>
+<<set $activeSlave.devotion = random(10,40)>>
+<<set $activeSlave.trust = random(-25,0)>>
+<<set $activeSlave.health = random(10,40)>>
+<<set $activeSlave.face = random(20,60)>>
+<<if $activeSlave.faceShape == "masculine">>
+	<<set $activeSlave.faceShape = "cute">>
+<</if>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.whoreSkill = 15>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.boobs = 0>>
+<<set $activeSlave.vagina = -1>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 2>>
+<<set $activeSlave.ovaries = -1>>
+<<set $activeSlave.dick = random(3,4)>>
+<<set $activeSlave.balls = random(2,3)>>
+<<set $activeSlave.scrotum = $activeSlave.balls>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.height = random(140,170)>>
+<<set $activeSlave.hips = random(-1,0)>>
+<<set $activeSlave.butt = 1>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.weight = random(-80,-20)>>
+<<set $activeSlave.muscles = 0>>
+<<set $activeSlave.shoulders = random(-1,0)>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "an orphan">>
+<<set $activeSlave.fetish = "humiliation">>
+<<set $activeSlave.behavioralQuirk = either("funny", "adores women", "adores men", "insecure")>>
+<<set $activeSlave.sexualQuirk = either("gagfuck queen", "strugglefuck queen", "tease", "caring", "unflinching")>>
+
+An invitation to a 'visitation day' at an orphanage in the arcology pops up in your in-box, prompting you to make some room in your schedule to go have a look. Run by a well-meaning non-profit organization active in numerous of the Free Cities, the facility does house quite a few orphans (both local and saved from the chaos of the old world), doing excellent work in teaching them and finding new homes. Still, with times being what they are, the people running things do have a... realistic outlook, in the end. And so, in order to keep the orphanage going, those living there who aren't adopted till they reach maturity are sold as slaves. Legally this practice is easily arranged, as the life-debt for any of the orphans builds up over the years, pretty much automatically putting them over the limit for enslavement.
+<br><br>
+Knowing what's coming, the teachers in the facility do train their pupils accordingly and try to instill obedience and acceptance into those soon reaching eighteen years of age, and the young man you're shown in short notice is said to be a good student and receptive for his lessons. It is quite obvious why he hasn't been adopted so far - the eighteen year old is relatively small in stature and his face was too pretty and feminine to appeal to anyone wanting to add a male child to their family. For your uses on the other hand, he's perfect. With a little bit of training, this teen will make an excellent dickgirl. Approaching him, you question the soon-to-be slave a little, finding him nervous but fairly obedient to commands. Testing out his limits, you have him pull down his pants right then and there, revealing that there's one part of his body that's not at all small - his dick. When you pose the question what he'd think about becoming a dickgirl, he is speechless at first, then after a pointed stare stammers out, "I - um, I'd do my best, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>!"
+
+//Satisfied, you leave him be and have a short discussion with an administrator, who establishes the young man's - or rather dickgirl's - asking price at ¤1500.//
+
+<<case "captured teen">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was the spoiled daughter of a wealthy old world businessman, who was captured and sold to you.">>
+<<set $activeSlave.devotion = -20>>
+<<set $activeSlave.trust = 0>>
+<<set $activeSlave.health = 20>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.boobs = random(3,10)*100>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.vaginaLube = random(1,2)>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(0,2)>>
+<<set $activeSlave.butt = random(1,4)>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.weight = random(-20,0)>>
+<<set $activeSlave.muscles = 0>>
+<<set $activeSlave.shoulders = random(-2,0)>>
+<<set $activeSlave.intelligence = -1>>
+<<set $activeSlave.career = "the spoiled daughter of a wealthy old world businessman">>
+<<set $activeSlave.fetish = "humiliation">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.nationality = "American">>
+<<set $activeSlave.race = "white">>
+<<NationalityToName $activeSlave>>
+<<NationalityToAccent $activeSlave>>
+<<set $activeSlave.skin = "tanned">>
+<<set $activeSlave.voice = 3>>
+<<set $activeSlave.boobShape = "perky">>
+<<set $activeSlave.eyeColor = "blue">>
+<<set $activeSlave.hColor = "blonde">>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.prestige = 1>>
+<<set $activeSlave.prestigeDesc = "She is the notoriously spoiled daughter of a wealthy old world businessman.">>
+
+You've been kept busy until late at night. The warm blue glow of your desk screen illuminates your work. Suddenly, your assistant flags an incoming vidcall as urgent. The call had decent encryption, but could be traced to a rural location several miles away from your arcology. The callers only specified that they had a good deal to offer.
+<br><br>
+With apprehension, you decide to let the call through. The screen switches from your work to the vidcall. Several armed men, cloaked in black, are standing around a pretty young girl. She's gagged and bound to a chair.
+<br><br>
+The men explain that they've captured the young daughter of a wealthy old-world businessman, by abducting her straight from a gated community. It's far from uncommon for girls to be captured and sold as slaves, but that these men had the balls to raid a gated community is something else. There are still some places in the world that are considered safe, where the world's deterioration isn't readily apparent. Showing that these places aren't safe from the predations of slavers upsets what little balance that the old world still has left, and that isn't always a good thing for the Free Cities.<br><br>
+At any rate, she's a fine capture. And unsurprisingly, they want to get rid of her. Fast. They're willing to offer a below-market price for her enslavement.
+<br><br>
+//You can buy out her auction for ¤10000.//
+
+<<case "desperate university milf">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She sold herself into slavery to pay for her children's education.">>
+<<set $activeSlave.devotion = random(0,15)>>
+<<set $activeSlave.trust = random(0,15)>>
+<<set $activeSlave.boobs += 650>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.anus += 1>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.fetish = "none">>
+<<set $activeSlave.fetishKnown = 0>>
+<<set $activeSlave.age = random(30,$retirementAge-2)>>
+<<set $activeSlave.health = random(-80,-60)>>
+<<set $activeSlave.intelligence = -1>>
+<<set $activeSlave.intelligenceImplant = 0>>
+<<set $activeSlave.career = setup.uneducatedCareers.random()>>
+
+A call comes in from an old world household. The caller appears on your screen, a worn down matronly woman flanked by her two daughters. The middle-aged mother addresses you in a formal yet halting manner, as if rehearsing an unfamiliar speech. "I don't know how closely you watch the old world from where you are, but finding steady work without an education is becoming increasingly difficult".
+<br><br>
+The mother pauses to glance at her daughters before continuing. "I want my daughters to have a chance to make a life for themselves. I know that if I can pay their way towards attending University, then I will have succeeded as a parent."
+<br><br>
+She begins to weep quietly, but continues after her daughters lay their hands supportively on her shoulder. "Could you enslave me, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>? It's the only way I have to pay for their tuition."
+
+<<case "spoiled daughter">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was the spoiled daughter of a wealthy old world businessman, who sold herself into slavery to spite her father.">>
+<<set $activeSlave.devotion = 20>>
+<<set $activeSlave.trust = 0>>
+<<set $activeSlave.health = 80>>
+<<set $activeSlave.face = random(20,60)>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.boobs = random(3,10)*100>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.vaginaLube = random(1,2)>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.hips = random(0,2)>>
+<<set $activeSlave.butt = random(1,4)>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.weight = random(-20,0)>>
+<<set $activeSlave.muscles = 0>>
+<<set $activeSlave.shoulders = random(-2,0)>>
+<<set $activeSlave.intelligence = -1>>
+<<set $activeSlave.career = "the spoiled daughter of a wealthy old world businessman">>
+<<set $activeSlave.prestigeDesc = "She is the notoriously spoiled daughter of a wealthy old world businessman.">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.voice = 3>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.prestige = 1>>
+
+Your desk flags a video message as coming from an influential old world businessman. To your surprise, rather than the portly visage you were expecting, a pretty young face appears on your screen. "Oh. My. God. How long does it take to answer a call?"
+<br><br>
+The girl speaks in a ridiculously high, bubblegum voice and bounces indignantly around her father's luxurious office as she rants, barely acknowledging your presence on the other end of the call. "Daddy says that I'm spending too much of his money but what the hell is all of his money for if he's not spending it on his little girl?"
+<br><br>
+She pauses, looking directly at you for the first time, though you get the sense that she seems more interested in your own luxurious surroundings. "Daddy told me all about you arcology types, so I know what you're all about. Anyways, I don't care about freedom and stuff if you treat me like the perfect princess I am."
+<br><br>
+"So, could you enslave me or whatever?"
+
+<<case "starving artist">>
+
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement out of devotion to her artistic 'craft'.">>
+<<set $activeSlave.boobs = random(4,6)*50>>
+<<set $activeSlave.weight = -20>>
+<<set $activeSlave.height = random(160,200)>>
+<<set $activeSlave.face = random(25,100)>>
+<<set $activeSlave.butt = random(1,2)>>
+<<set $activeSlave.lips = 0>>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.age = random(25,$retirementAge)>>
+<<set $activeSlave.career = "an artist">>
+<<set $activeSlave.health = random(-60,-50)>>
+<<set $activeSlave.intelligence = 1>>
+<<set $activeSlave.entertainSkill = 40>>
+<<set $activeSlave.intelligenceImplant = 0>>
+<<set $activeSlave.behavioralFlaw = "odd">>
+<<set $activeSlave.fetish = "humiliation">>
+
+<<if $assistantName is "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a supplicant has arrived at the door to the penthouse. A constant stream of hopefuls appear at your door, and $assistantName makes herself invaluable by filtering them. One of the few categories of applicant that is always admitted is people willing to be enslaved for some reason; the odd individual standing before you is just such a woman.
+<br><br>
+"What we're going to do together will be recorded in the annals of history" she says expansively, sweeping about your office in a series of twirls and pirouettes. Though when you enquire as to what exactly you'll be doing together, all she can give you is a torrent of vague artistic prattle. In the end, all you can get out of her is an understanding that she sees enslavement as the ultimate form of creative self-expression.
+<br><br>
+She seems more than a little odd, but not unattractive. At the very least, she's not likely to be a boring slave to have around the penthouse.
+
+<<case "repo milf housekeeper">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was the housekeeper and fucktoy of a frat house before being replaced in favor of fresher slaves and sold to you.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.health = random(30,60)>>
+<<set $activeSlave.face = random(0,60)>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.analSkill = 25>>
+<<set $activeSlave.oralSkill = 25>>
+<<set $activeSlave.entertainSkill = 25>>
+<<set $activeSlave.whoreSkill = 25>>
+<<set $activeSlave.age = random(35,$retirementAge-2)>>
+<<set $activeSlave.boobs = random(3,8)*100>>
+<<set $activeSlave.vagina = random(1,2)>>
+<<set $activeSlave.vaginaLube = 1>>
+<<set $activeSlave.labia = 1>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.hips = random(-1,0)>>
+<<set $activeSlave.butt = 0>>
+<<set $activeSlave.anus = random(1,2)>>
+<<set $activeSlave.weight = random(-50,0)>>
+<<set $activeSlave.muscles = random(0,15)>>
+<<set $activeSlave.shoulders = random(-1,1)>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.fetish = "submissive">>
+<<set $activeSlave.behavioralQuirk = "insecure">>
+<<set $activeSlave.sexualQuirk = "caring">>
+
+Coming to your desk in the morning, you see that your assistant has flagged an interesting offer for you to check out in the newsletter of a local University. Life in the Free Cities being what it is, there are winners and losers of the ever-changing local and global realities. In a novel change of pace, it seems this offer comes from one of the Free Cities' rare winners.
+<br><br>
+The current sale offer comes from one of the arcology's oldest college frat-houses - apparently a wealthy alumnus of the fraternity has bestowed a significant donation on the current brothers of the frat house. A few visits to the slave market later, the frat house is practically flush with fresh, nubile, slavegirls. Yet, all these new slaves have left little room for one of the frat house's oldest fixtures - an older female slave who doubled as both a housekeeper and fuckhole for a few generations of horny students. She's pretty and has been well-trained over the years, if a bit exhausted from her decades of serving as a sexual outlet to a house of frat brothers.
+<br><br>
+//The brothers don't want to hold onto her for long, having already been entranced by their multitude of new purchases - which makes this a nice opportunity, as the price for the middle-aged woman is set pretty low. It'll just take  ¤2500 to buy her off their hands.//
+
+<<case "immigrant">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She sold herself into slavery to pay her immigration costs.">>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-15,0)>>
+<<set $activeSlave.health -= 50>>
+
+Your desk flags a video message as having potential. It's a desperate refugee from outside the Free Cities, begging you to pay her steep immigration fees. She promises to pay you back with interest. She clearly isn't too well informed; the fees are so high that if you lend her the money so she can immigrate, you'll be able to call her debt in and enslave her immediately.
+
+<</switch>> /* END SLAVE GENERATION AND INTRODUCTION */
+
+<<switch $recruit>>
+<<case "female SD" "male SD">>
+	<<set $contractCost = 6000>>
+<<case "female SE">>
+	<<set $contractCost = 4000>>
+<<case "MTF SE">>
+	<<set $contractCost = 2000>>
+<<case "DG SE" "farm virgin cow" "orphan rebellious female" "orphan femboy">>
+	<<set $contractCost = 1500>>
+<<case "CCS angel" "racer DG chaser" "racer loser">>
+	<<set $contractCost = 5000>>
+<<case "CCS angel">>
+	<<set $contractCost = 7500>>
+<<case "racer winner" "captured teen">>
+	<<set $contractCost = 10000>>
+<<case "repo housekeeper" "repo nanny" "farm cow" "farm bull">>
+	<<set $contractCost = 2500>>
+<<default>>
+	<<set $contractCost = 1000>>
+<</switch>>
+<<set $activeSlave.slaveCost = $contractCost>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= $contractCost>>
+
+<br><br>
+
+<<set $saleDescription = 1, $applyLaw = 0>><<include "Long Slave Description">>
+
+<br><br>
+
+<span id="result">
+<<if $cash >= $contractCost>>
+<<link "Enslave her">>
+	<<set $cash -= $contractCost>>
+	<<replace "#result">>
+	<<switch $recruit>>
+	<<case "female recruit">>
+		You complete the legalities and biometric scanning quickly and without fuss. $activeSlave.slaveName bounces nervously on her heels. Finally she works up her courage and asks, <<if $HeadGirl.clothes != "no clothing">>"Can I have <<if $HeadGirl.clothes == "choosing her own clothes">>a cute outfit<<else>>$HeadGirl.clothes<</if>> like $HeadGirl.slaveName?"<<else>>"Can I work with $HeadGirl.slaveName?"<</if>> Your sternly tell her to call you <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>, to ask questions only with permission, and to strip. She looks at $HeadGirl.slaveName, but $HeadGirl.slaveName returns her look with no compassion at all and tells her to do what you say. Looking suddenly fearful, $activeSlave.slaveName strips. Once your inspection of her body reaches her anus, she becomes suddenly nervous. "A-am I going to have t-to do butt stuff, <<Master>>?"
+	<<case "male recruit">>
+		You complete the legalities and biometric scanning quickly and without fuss. $activeSlave.slaveName bounces nervously on her heels. Finally she works up her courage and asks, <<if $HeadGirl.clothes != "no clothing">>"Can I have <<if $HeadGirl.clothes == "choosing her own clothes">>a cute outfit<<else>>$HeadGirl.clothes<</if>> like $HeadGirl.slaveName?"<<else>>"Can I work with $HeadGirl.slaveName?"<</if>> Your sternly tell her to call you <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>, to ask questions only with permission, and to strip. She looks at $HeadGirl.slaveName, but $HeadGirl.slaveName returns her look with no compassion at all and tells her to do what you say. Looking suddenly fearful, $activeSlave.slaveName strips. Her cock is totally flaccid as she looks at the floor, shivering. Once your inspection of her body reaches her anus, she becomes suddenly nervous. "A-am I going to have t-to do butt stuff, <<Master>>?"
+	<<case "whore recruit">>
+		You complete the legalities and biometric scanning quickly and without fuss. $activeSlave.slaveName participates matter-of-factly, and there's a certain sense of relief about her. Her fate is out of her hands now, and you get the impression she isn't sorry about that at all.
+	<<case "female debtor">>
+		She sobs as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She tries to resist placing her biometric signature in testament to the truth of her debt, but when you observe that the alternative is death, she complies. The process is completed with a distinct anticlimax: she is one of your slaves now.
+	<<case "male debtor">>
+		Once you begin the enslavement process, you, your personal assistant, and the forms you're filling out all begin to refer to the slave using female pronouns. She is clearly tormented, and only barely manages to hold herself together for the moment, but is on the verge of breaking down.
+	<<case "desperate preg">>
+		She cooperates as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She willingly places her biometric signature in testament to the truth of her voluntary enslavement. The process is completed with a distinct anticlimax: she is one of your slaves now. She looks almost relaxed, as though she's at peace, now.
+	<<case "desperate milf">>
+		She cooperates as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She willingly places her biometric signature in testament to the truth of her voluntary enslavement. The process is completed with a distinct anticlimax: she is one of your slaves now. She looks almost relaxed, as though she's at peace, now.
+	<<case "tg addict">>
+		When she awakes from surgery, she slowly realizes that whatever she programmed the remote surgery to do wasn't done; instead, she's a young woman with a flat chest and a new virgin pussy. It takes a while for you to get her to understand, through her tears, that she is now obliged to accept enslavement due to her extreme debts. Eventually she figures it out and glares daggers at you as she signs her life away.
+	<<case "school sale">>
+		She thanks you profusely for purchasing her, and she means it. She's happy to have been bought by a real master, and to go by the hardness of her nipples, looking forward to finally losing her virginity.
+	<<case "school trap">>
+		She thanks you profusely for purchasing her, and she means it. She's happy to have been bought by a real master, and to go by the stiffness of her little dick, looking forward to finally taking it up the ass.
+	<<case "handsome PC">>
+		You put her through the enslavement procedures. She looks  doubtful, obviously wondering whether she's made a huge mistake. She's legally your property, now; you can fulfill her wishes for a gentler assignment near you, or not. Her suspicion that she's blundered into something terrible no longer matters.
+	<<case "womanly PC">>
+		You put her through the enslavement procedures. She looks relieved, as though she thinks she no longer has anything to worry about. She's certainly more complacent than the average inductee.
+	<<case "shemale PC">>
+		You put her through the enslavement procedures. She's almost excited. Though she knows she's signed herself over to a life of sexual slavery, the anticipation of becoming more feminine is clearly more important to her than any kind of fear.
+	<<case "female SD">>
+		Contacting the wealthy resident, you apologize for his inconvenience and offer to 'deal with ' the matter personally. He is content with not having the hassle and agrees with little thought, leaving you owning the debt of the unfortunate student. Making your way to the guard station where she is being kept, you tell the young woman she's getting out of jail right away. She cooperates to having her biometric readings taken and logged, only later realizing this isn't for her release but to register her as a slave. In shock and with tears in her eyes, she dejectedly follows the guard you summon to have her brought to the slave quarters.
+	<<case "male SD">>
+		Contacting the wealthy resident, you apologize for his inconvenience and offer to 'deal with' the matter personally. He is content with not having the hassle and agrees with little thought, leaving you owning the debt of the unfortunate student. Making your way to the guard station where he is being kept, you tell the young man he's getting out of jail right away. He cooperates to having his biometric readings taken and logged, only later realizing this isn't for a release but to register him as a slave. In shock and with tears in his eyes, he gets angry and tries to fight, only to be overwhelmed by your guards and be dragged off to the remote surgery. It doesn't take long at all to add a pretty dickgirl to your slave quarters after that.
+	<<case "female SE">>
+		Bidding for the girl and winning her in the auction, you await her and the student selling her in your penthouse. As the young man guides her in, she gives you a properly deferential greeting, then looks wide-eyed at the decor and wealth presented all around. Yet as her 'lover' informs the woman that she'll belong to you now, tears start flowing down her cheeks as her heart almost audibly breaks. Smiling at the man over the sobbing shape of your newly acquired virgin slave-girl, you casually push a button to approve the money transfer and he strides out of the room after checking his smart-phone for the transfer. On your orders, she strips and submits to biometric scanning, registering her as your property.
+	<<case "MTF SE">>
+		Sending an offer to buy the slave girl, you get a confirmation from the student very shortly afterward. It doesn't take much longer before he appears at the security office leading into your penthouse to drop off his slave, leaving her behind without even saying goodbye. The sniffling and dejected girl is brought into your office so you can check her out in person afterward. On your orders, she strips and submits to biometric scanning, registering her as your property.
+	<<case "DG SE">>
+		Sending an offer to buy the dickgirl, you get a confirmation from the student very shortly afterward. It doesn't take much longer before he appears at the security office leading into your penthouse to drop off his slave, leaving her behind without even saying goodbye. The sniffling and dejected girl is brought into your office so you can check her out in person afterward. On your orders, she strips and submits to biometric scanning, registering her as your property.
+	<<case "gang leader">>
+		Opening a voice-link, you call in two security guards to await the elevator and have your new property brought to the remote surgery. After some fun playing with various sliders and buttons in its settings, you have the machine start on modding the man into a new dickgirl with a pleasing set of features. By the time she comes to after the operation and quick-heal treatment, the legalities of enslavement are completed too, leaving you with another slave registered as your property. Of course, she is naturally horrified and furious with you; where there was once a tough young man's square jaw, there is now a definitively feminine face which looks rather cute when angry. The rest of her is still broad-shouldered and muscular, with all the tattoos and a well-sized dick - but you can always mod that later if you want to.
+	<<case "DG runaway" "herm runaway" "female runaway">>
+		With a few keystrokes, you wire the payment to the slave-girl's owner, then have your guardsmen bring her from the station infirmary to your penthouse. She is led to stand before you, shivering in terror and looking at her feet. Only after an insistent command does she look up long enough to be biometrically scanned and registered as your property.
+	<<case "CCS angel" "CCS angel">>
+		Winning out in the auction, you have the young woman brought to you straight away. She is led into your penthouse in semitransparent shimmering gown - some sort of cult garb that was thrown into the sale as a bonus. It certainly looks amazing on her, but you want to see all of your new acquisition so you order her to strip. Obediently, she slides the fabric off and lets it fall to the floor, then submits to biometric scanning, registering her as your property.
+	<<case "racer DG chaser">>
+		After some negotiations with the race track owner, you finally agree on a good price. After he tells his subordinates to bring the girl to you, the two of you chat a bit about business matters and you're invited to the owner's booth for the next big race. A short while later, guards bring in the dickgirl athlete, dressed in nothing but a long bathrobe and with a slightly sullen look on her face. Seems like she was brought here from her former owner's premises without so much as a warning or chance to put on any clothes. He really must have wanted her out of his racing stable quickly. On your orders, she pushes the robe over her shoulders and lets it fall to the floor, then submits to biometric scanning, registering her as your property.
+	<<case "racer loser">>
+		After some negotiations with the race track owner, you finally agree on a good price. After he tells his subordinates to bring the girl to you, the two of you chat a bit about business matters and you're invited to the owner's booth for the next big race. A short while later, guards bring in the young athlete, dressed in a cute yet revealing white dress, the 'showing off' outfit used for virgin runners - or ex-virgins, in her case. On your orders, she obediently takes it off, letting the thin fabric fall to the floor, then submits to biometric scanning, registering her as your property.
+	<<case "racer winner">>
+		After some negotiations with the race track owner, you finally agree on a good price. After he tells his subordinates to bring the girl to you, the two of you chat a bit about business matters and you're invited to the owner's booth for the next big race. A short while later, guards bring in the virgin athlete, dressed in a cute yet revealing white dress, highlighting her pureness and virginity. On your orders, she readily takes it off, letting the thin fabric fall to the floor, then submits to biometric scanning, registering her as your property.
+	<<case "repo housekeeper">>
+		With a few keystrokes, you wire the payment to the repo company, then wait for her delivery. After being brought into your penthouse by security, the legalities and biometric scanning with her are taken care off fairly quickly and without fuss. Stepping towards you after the chime announcing a successful registration as your property, $activeSlave.slaveName lowers her head obediently and asks, "<<Master>>, what will my new tasks in your household be? Shall I just clean or will there be... other things for me to do?" The eager tremble in her voice tells you that she's more than a little aroused by the thought of being used, so you tell her it'll all depend on if she's a good girl...
+	<<case "repo nanny">>
+		With a few keystrokes, you wire the payment to the repo company, then wait for her delivery. After being brought into your penthouse by security, the legalities and biometric scanning with her are taken care off fairly quickly and without fuss. Stepping towards you after the chime announcing a successful registration as your property, $activeSlave.slaveName lowers her head obediently and asks, "<<Master>>, I - umm... what will be required of me? I'm really good with children and... and I can sing. Also, I've -" The fearful tremble in her voice tells you that she's more than a little afraid of what you might have planned for her. Waving off the slave's frightened babbling, you tell her that you'll decide what to do with her when you feel like it.
+	<<case "farm cow">>
+		Making a video call to tell the association president you accept the asking price for $activeSlave.slaveName, you're drawn into a conversation with the skillful speaker, at the end of which you agree to be the honored guest for their convention. Who knows, new developments in the slave farming industry might actually prove interesting to learn about, and the pleasure of acquiring a new slave will make it worth your while even if it turns out to be boring. In short notice, the woman you just bought is brought to your penthouse where she obediently strips and stands ready for your inspection.
+	<<case "farm bull">>
+		Making a video call to tell the association president you accept the asking price for $activeSlave.slaveName, you're drawn into a conversation with the skillful speaker, at the end of which you agree to be the honored guest for their convention. Who knows, new developments in the slave farming industry might actually prove interesting to learn about, and the pleasure of acquiring a new slave will make it worth your while even if it turns out to be boring. In short notice, the dickgirl you just bought is brought to your penthouse where she obediently strips and stands ready for your inspection, a sizeable cock swinging between her legs.
+	<<case "farm virgin cow">>
+		Making a video call to tell the association president you accept the asking price for $activeSlave.slaveName, you're drawn into a conversation with the skillful speaker, at the end of which you agree to be the honored guest for their convention. Who knows, new developments in the slave farming industry might actually prove interesting to learn about, and the pleasure of acquiring a new slave will make it worth your while even if it turns out to be boring. In short notice, the young woman you just bought is brought to your penthouse where she obediently strips and stands ready for your inspection.
+	<<case "orphan rebellious female">>
+		Transferring the money with a few clicks on your smart-phone, you have your new acquisition brought to your penthouse. $activeSlave.slaveName reacts sullenly to an order to strip, so the guardmen's assistance is required to peel her clothes off her, followed by the young woman sticking out her tongue as she is scanned and registered as your property.
+	<<case "orphan femboy">>
+		Transferring the money with a few clicks on your smart-phone, you have your new acquisition brought to your penthouse. $activeSlave.slaveName does look rather afraid at the whole business of actually being sold, but she follows your instruction obediently to get naked and let herself be biometrically scanned and registered as your property.
+	<<case "captured teen">>
+		You agree to the purchase. The men give a hushed thank you, and the call ends, cutting you off from the light. They arrive outside the city just a few hours later, and you send your VTOL to pick up the girl. When she arrives, you see that she was kept in the same bindings. She's awake, and her eyes make her hatred of you unmistakable.
+	<<case "starving artist">>
+		She twirls and poses artistically as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She seems a little disappointed that she won't have the opportunity to practice her penmanship but nonetheless places her biometric signature in testament to the truth of her voluntary enslavement.
+	<<case "repo milf housekeeper">>
+		With a few keystrokes, you wire the payment to the frat house, then wait for her delivery. After being brought into your penthouse by security, the legalities and biometric scanning with her are taken care off fairly quickly and without fuss. Stepping towards you after the chime announcing a successful registration as your property, $activeSlave.slaveName lowers her head obediently and asks, "<<Master>>, what will my new tasks in your household be? Shall I just clean or will there be... other things for me to do?" The eager tremble in her voice tells you that she's more than a little aroused by the thought of being used, so you tell her it'll all depend on if she's a good MILF.
+	<<case "spoiled daughter">>
+		A few days after granting your assent to the girl's offer, she appears at your penthouse laden with luggage and handbags. Much to your relief, she gets through the legalities and biometric scanning with little more than a pout.
+	<<case "desperate university milf">>
+		She cooperates as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She willingly places her biometric signature in testament to the truth of her voluntary enslavement. The process is completed with a distinct anticlimax: she is one of your slaves now. She looks almost relaxed, content in the knowledge that her daughters education has been paid in full.
+	<<case "immigrant">>
+		She comes immediately from the immigration center to your arcology. You patiently explain the realities of the situation to her. She isn't too bright and it takes a while for things to sink in. The scanners finally do it, though. She sobs as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She tries to resist placing her biometric signature in testament to the truth of her debt, but when you observe that the alternative is death, she complies. The process is completed with a distinct anticlimax: she is one of your slaves now.
+	<</switch>>
+	<<include "New Slave Intro">>
+	<</replace>>
+<</link>> //for ¤$contractCost//
+<<switch $recruit>>
+<<case "school sale">>
+<<case "school trap">>
+<<case "female SE">>
+<<case "MTF SE">>
+<<case "DG SE">>
+<<case "racer DG chaser">>
+<<case "racer loser">>
+<<case "racer winner">>
+<<case "repo housekeeper">>
+<<case "repo nanny">>
+<<case "farm cow">>
+<<case "farm bull">>
+<<case "farm virgin cow">>
+<<case "orphan rebellious female">>
+<<case "orphan femboy">>
+<<case "starving artist">>
+<<case "repo milf housekeeper">>
+<<default>>
+<br><<link "Sell her immediately">>
+	<<set $cash += $slaveCost>>
+	<<replace "#result">>
+	<<switch $recruit>>
+	<<case "female recruit">>
+		You complete the legalities and biometric scanning quickly and without fuss. $activeSlave.slaveName bounces nervously on her heels. Finally she works up her courage and asks, <<if $HeadGirl.clothes != "no clothing">>"Can I have <<if $HeadGirl.clothes == "choosing her own clothes">>a cute outfit<<else>>$HeadGirl.clothes<</if>> like $HeadGirl.slaveName?"<<else>>"Can I work with $HeadGirl.slaveName?"<</if>> Your answer appears in the form of a purchasing agent, here to take her away. As he restrains the disbelieving girl, you tell her she's been purchased by a brothel, so she's going to be fucked about 70,000 times before she gets to be too old and is retired, so she can be sure she won't be bored. She releases a wail of utter despair, quickly cut off by a sturdy bag being fastened over her head.
+	<<case "male recruit">>
+		You complete the legalities and biometric scanning quickly and without fuss. $activeSlave.slaveName bounces nervously on her heels. Finally she works up her courage and asks, <<if $HeadGirl.clothes != "no clothing">>"Can I have <<if $HeadGirl.clothes == "choosing her own clothes">>a cute outfit<<else>>$HeadGirl.clothes<</if>> like $HeadGirl.slaveName?"<<else>>"Can I work with $HeadGirl.slaveName?"<</if>> Your answer appears in the form of a purchasing agent, here to take her away. As he restrains the disbelieving bitch, you tell her she's been purchased by a brothel, so she's going to be fucked about 70,000 times before she gets to be too old and is retired, so she can be sure she won't be bored. She releases a wail of utter despair, quickly cut off by a sturdy bag being fastened over her head.
+	<<case "whore recruit">>
+		When the purchasing agent appears to take her away, she looks rueful. "God fucking damn it," she says, less angrily than you expected. "I should have known. $HeadGirl.slaveName played me good. Treat her right, she's got skills."
+	<<case "female debtor">>
+		She sobs as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She tries to resist placing her biometric signature in testament to the truth of her debt, but when you observe that the alternative is death, she complies. A purchasing agent appears to take her away.
+	<<case "male debtor">>
+		Once you begin the enslavement process, you, your personal assistant, and the forms you're filling out all begin to refer to the slave using female pronouns. She is clearly tormented, and only barely manages to hold herself together for the moment, but is on the verge of breaking down. When a purchasing agent appears, she loses it entirely, and the agent is obliged to drag her away.
+	<<case "desperate preg">>
+		She cooperates as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She willingly places her biometric signature in testament to the truth of her voluntary enslavement. When a purchaser's agent arrives to take her away, though, she becomes afraid. "W-will they h-hurt my baby?" she asks plaintively. You tell her no, she's been bought by a slave dairy. She'll be permitted to carry her pregnancy to term, since it'll enhance her milk production; and within a few weeks after that, she'll be impregnated again. And again.
+	<<case "desperate milf">>
+		She cooperates as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She willingly places her biometric signature in testament to the truth of her voluntary enslavement. A purchasing agent appears to take her away, which she accepts resignedly, though she does ask you who purchased her. You tell her that her ample breasts have gotten her bought by a slave dairy; she looks thoughtful. "I'm going to be a cow?" She turns her torso a little, sloshing her breasts from side to side. "Well, that doesn't sound //too// bad. Thank you."
+	<<case "tg addict">>
+		When she awakes from surgery, she slowly realizes that whatever she programmed the remote surgery to do wasn't done; instead, she's a young woman with a flat chest and a new virgin pussy. It takes a while for you to get her to understand, through her tears, that she is now obliged to accept enslavement due to her extreme debts. Eventually she figures it out, assisted by a purchasing agent, who restrains her for transportation despite her grief.
+	<<case "handsome PC">>
+		You put her through the enslavement procedures. She only realizes her mistake when her purchaser's agent appears to take her away. She looks at you in total unwillingness to believe you'd do such a thing; you observe politely that she's likely to receive an easy assignment like being a house servant in about twenty years. In the meantime, you continue, she's been purchased by a brothel, so she's going to be fucked about 70,000 times before then. She releases a wail of utter despair, quickly cut off by a sturdy bag being fastened over her head.
+	<<case "womanly PC">>
+		You put her through the enslavement procedures. She only realizes the true situation when her purchaser's agent appears to take her away. She looks at you in total unwillingness to believe you'd do such a thing; you observe politely that she's been purchased by a brothel, but is old enough she'll probably only work there for ten years or so. During that time she'll only be fucked 30,000 times, give or take. She releases a wail of utter despair, quickly cut off by a sturdy bag being fastened over her head.
+	<<case "shemale PC">>
+		You put her through the enslavement procedures. She only realizes the true situation when her purchaser's agent appears to take her away. She looks at you with a faint hopefulness. "Do you think they'll pay for surgery and drugs for me?" she asks plaintively. You observe that they probably will; she's been sold to a boutique trainer that produces high-class gelded escorts. She quails a little at hearing about the castration, but squares her shoulders and accompanies the agent willingly.
+	<<case "female SD">>
+		Contacting the wealthy resident, you apologize for his inconvenience and offer to 'deal with' the matter personally. He is content with not having the hassle and agrees with little thought, leaving you owning the debt of the unfortunate student. Making your way to the guard station where she is being kept, you tell the young woman she's getting out of jail right away. She cooperates to having her biometric readings taken and logged, only later realizing this isn't for her release but to register her as a slave. In shock and with tears in her eyes, she dejectedly follows the guard you summon to have her brought to the slave broker you sold her to.
+	<<case "male SD">>
+		Contacting the wealthy resident, you apologize for his inconvenience and offer to 'deal with' the matter personally. He is content with not having the hassle and agrees with little thought, leaving you owning the debt of the unfortunate student. Making your way to the guard station where he is being kept, you tell the young man he's getting out of jail right away. He cooperates to having his biometric readings taken and logged, only later realizing this isn't for a release but to register him as a slave. In shock and with tears in his eyes, he gets angry and tries to fight, only to be overwhelmed by your guards and be dragged off to the remote surgery. It doesn't take long at all before the student is transported to the office of the slave broker you sold her to.
+	<<case "gang leader">>
+		Opening a voice-link, you call in two security guards to await the elevator and have your new property brought to the remote surgery. After some fun playing with various sliders and buttons in its settings, you have the machine start on modding the man into a new dickgirl with a pleasing set of features. By the time she comes to after the operation and quick-heal treatment, the legalities of enslavement are completed too, leaving you with another slave registered as your property. Of course, she is naturally horrified and furious with you, but this is nothing to the terror that dawns when a purchasing agent appears to take her away.
+	<<case "DG runaway" "herm runaway" "female runaway">>
+		With a few keystrokes, you wire the payment to the slave-girl's owner, then have your guardsmen bring her from the station infirmary to your penthouse. She is led to stand before you, shivering in terror and looking at her feet. Only after an insistent command does she look up long enough to be biometrically scanned and registered as your property. Frowning at the emotional state the gang left her in, you're relieved when your guards take her away a moment later, to be transported to the office of a slave broker you know well. Oh well, now she'll be someone else's problem to fix up.
+	<<case "CCS angel">>
+		Winning out in the auction, you have the young woman brought to you straight away. She is led into your penthouse in semitransparent shimmering gown - some sort of cult garb that was thrown into the sale as a bonus. It certainly looks amazing on her, but you want to see all of your new acquisition so you order her to strip. Obediently, she slides the fabric off and lets it fall to the floor, then submits to biometric scanning, registering her as your property. When she's taken away to the office of the slave broker you sold her on to, the young woman sighs, sad that she's not staying as yours in the luxurious penthouse you call your own.
+	<<case "CCS DA">>
+		Winning out in the auction, you have the young woman brought to you straight away. She is led into your penthouse in semitransparent shimmering gown - some sort of cult garb that was thrown into the sale as a bonus. It certainly looks amazing on her, but you want to see all of your new acquisition so you order her to strip. Obediently, she slides the fabric off and lets it fall to the floor, then submits to biometric scanning, registering her as your property. When she's taken away to the office of the slave broker you sold her on to, the young woman lets out a little huff, as if telling herself that your luxurious penthouse can't be that good if you're not keeping her for it.
+	<<case "spoiled daughter">>
+		A few days after granting your assent to the girl's offer, she appears at your penthouse laden with luggage and handbags. $activeSlave.slaveName bounces happily in her heels and eagerly explains her expectations regarding her new life with you. Your response appears in the form of a purchasing agent, here to take her away. As he restrains the disbelieving girl, you tell her she's been purchased by a brothel, so she's soon going to have more sugar daddies than her holes can take. She releases a wail of utter despair, quickly cut off by a sturdy bag being fastened over her head.
+	<<case "desperate university milf">>
+		She cooperates as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She willingly places her biometric signature in testament to the truth of her voluntary enslavement. A purchasing agent appears to take her away, which she accepts resignedly, though she does ask you who purchased her. Amused, you tell her that her reverence of education convinced you to sell her to a brothel catering to inexperienced men. "I'm going to be a little bit like a teacher?" She contemplates this unexpected turn of events. "Well, that's very thoughtful of you. Thank you."
+	<<case "immigrant">>
+		She comes immediately from the immigration center to your arcology. You patiently explain the realities of the situation to her. She isn't too bright and it takes a while for things to sink in. The scanners finally do it, though. She sobs as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She tries to resist placing her biometric signature in testament to the truth of her debt, but when you observe that the alternative is death, she complies. You add that she's already been purchased by a brothel, and would be well advised to keep obeying. She breaks down entirely at this.
+	<</switch>>
+	<</replace>>
+<</link>> //This will bring in ¤$slaveCost.//
+<</switch>>
+<<else>>
+	//You lack the necessary funds to enslave her.//
+<</if>>
+
+<<if $cheatMode == 1>>
+	<br><br>DEBUG: &nbsp;&nbsp;&nbsp;&nbsp;[[Go back to Nonrandom Event|Nonrandom Event][$activeSlave = 0, $eventSlave = 0]]
+<</if>>
+
+</span>
+
+<</if>>

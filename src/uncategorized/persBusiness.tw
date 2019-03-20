@@ -1,0 +1,301 @@
+:: Personal Business [nobr]
+
+__Personal Business__
+<br>
+
+<<if $cash < 0>>
+	@@.red;You are in debt.@@ This week, interest came to ¤<<print (1+Math.trunc(Math.abs($cash)/100))>>.
+	<<set $cash -= (1+Math.trunc(Math.abs($cash)/100))>>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		Society @@.red;very strongly disapproves@@ of your being in debt; this damages the idea that you model yourself on what a Roman leader should be.
+		<<FSChange "RomanRevivalist" -10>>
+	<</if>>
+	<<if $cash < -9000>>
+		@@.red;WARNING: you are dangerously indebted.@@ Immediately acquire more liquid assets or you will be in danger of being enslaved yourself.
+		<<set $debtWarned += 1>>
+		<<if $debtWarned > 1>>
+		<<set $ui = "start">>
+		<<set $gameover = "debt">><<goto "Gameover">>
+		<</if>>
+	<</if>>
+<<elseif ($cash > 1000) && ($personalAttention == "business")>>
+	<<set $seed = random(1000,1500)>>
+	<<if $PC.trading >= 100>>
+		You focus on business and leverage your @@.springgreen;venture capital experience@@ to make good money:
+		<<set $seed += random(500,1000)>>
+	<<elseif $PC.career == "arcology owner">>
+		You focus on business and leverage your @@.springgreen;Free Cities experience@@ to make good money:
+		<<set $seed += random(500,1000)>>
+	<<else>>
+		You focus on business this week and make money:
+	<</if>>
+	<<set _incomePersonalBusiness = ($seed+Math.trunc(Math.abs($cash)/40))>>
+	@@.yellowgreen;¤<<print (_incomePersonalBusiness)>>.@@
+	<<set $cash += _incomePersonalBusiness>>
+	<<set $lastWeeksFinances.incomePersonalBusiness += _incomePersonalBusiness>>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		Society @@.green;approves@@ of your close attention to your own affairs; this advances your image as a <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title == 1>>well-rounded Roman man<<else>>responsible Roman lady<</if>>.
+		<<FSChange "RomanRevivalist" 2>>
+	<</if>>
+<<elseif ($cash > 1000)>>
+	<<set _incomePersonalBusiness = (1+Math.trunc(Math.abs($cash)/50))>>
+	You have significant assets. This week, your business endeavors made you @@.yellowgreen;¤<<print _incomePersonalBusiness>>.@@
+	<<set $cash += _incomePersonalBusiness>>
+	<<set $lastWeeksFinances.incomePersonalBusiness += _incomePersonalBusiness>>
+<<else>>
+	You have enough cash to manage your affairs, but not enough to do much business.
+<</if>>
+
+<<if ($personalAttention == "trading")>>
+	<<set _oldSkill = $PC.trading>>
+	<<set $PC.trading += random(5,10)>>
+	<<if _oldSkill <= 10>>
+		<<if $PC.trading > 10>>
+			You now have @@.green;basic knowledge@@ about how to be a venture capitalist.
+		<<else>>
+			You have made progress towards a basic knowledge of venture capitalism.
+		<</if>>
+	<<elseif _oldSkill <= 30>>
+		<<if $PC.trading > 30>>
+			You now have @@.green;some skill@@ as a venture capitalist.
+		<<else>>
+			You have made progress towards being skilled in venture capitalism.
+		<</if>>
+	<<else>>
+		<<if $PC.trading >= 60>>
+			<<set $personalAttention = "business">>
+			You are now an @@.green;expert venture capitalist.@@
+		<<else>>
+			You have made progress towards being an expert in venture capitalism.
+		<</if>>
+	<</if>>
+
+<<elseif ($personalAttention == "warfare")>>
+	<<set _oldSkill = $PC.warfare>>
+	<<set $PC.warfare += random(5,10)>>
+	<<if _oldSkill <= 10>>
+		<<if $PC.warfare > 10>>
+			You now have @@.green;basic knowledge@@ about how to be a mercenary.
+		<<else>>
+			You have made progress towards a basic knowledge of mercenary work.
+		<</if>>
+	<<elseif _oldSkill <= 30>>
+		<<if $PC.warfare > 30>>
+			You now have @@.green;some skill@@ as a mercenary.
+		<<else>>
+			You have made progress towards being skilled in mercenary work.
+		<</if>>
+	<<else>>
+		<<if $PC.warfare >= 60>>
+			<<set $personalAttention = "business">>
+			You are now an @@.green;expert mercenary.@@
+		<<else>>
+			You have made progress towards being an expert in mercenary work.
+		<</if>>
+	<</if>>
+
+<<elseif ($personalAttention == "slaving")>>
+	<<set _oldSkill = $PC.slaving>>
+	<<set $PC.slaving += random(5,10)>>
+	<<if _oldSkill <= 10>>
+		<<if $PC.slaving > 10>>
+			You now have @@.green;basic knowledge@@ about how to be a slaver.
+		<<else>>
+			You have made progress towards a basic knowledge of slaving.
+		<</if>>
+	<<elseif _oldSkill <= 30>>
+		<<if $PC.slaving > 30>>
+			You now have @@.green;some skill@@ as a slaver.
+		<<else>>
+			You have made progress towards being skilled in slaving.
+		<</if>>
+	<<else>>
+		<<if $PC.slaving >= 60>>
+			<<set $personalAttention = "business">>
+			You are now an @@.green;expert slaver.@@
+		<<else>>
+			You have made progress towards being an expert in slaving.
+		<</if>>
+	<</if>>
+
+<<elseif ($personalAttention == "engineering")>>
+	<<set _oldSkill = $PC.engineering>>
+	<<set $PC.engineering += random(5,10)>>
+	<<if _oldSkill <= 10>>
+		<<if $PC.engineering > 10>>
+			You now have @@.green;basic knowledge@@ about how to be an arcology engineer.
+		<<else>>
+			You have made progress towards a basic knowledge of arcology engineering.
+		<</if>>
+	<<elseif _oldSkill <= 30>>
+		<<if $PC.engineering > 30>>
+			You now have @@.green;some skill@@ as an arcology engineer.
+		<<else>>
+			You have made progress towards being skilled in arcology engineering.
+		<</if>>
+	<<else>>
+		<<if $PC.engineering >= 60>>
+			<<set $personalAttention = "business">>
+			You are now an @@.green;expert arcology engineer.@@
+		<<else>>
+			You have made progress towards being an expert in arcology engineering.
+		<</if>>
+	<</if>>
+
+<<elseif ($personalAttention == "medicine")>>
+	<<set _oldSkill = $PC.medicine>>
+	<<set $PC.medicine += random(5,10)>>
+	<<if _oldSkill <= 10>>
+		<<if $PC.medicine > 10>>
+			You now have @@.green;basic knowledge@@ about how to be a slave surgeon.
+		<<else>>
+			You have made progress towards a basic knowledge of slave surgery.
+		<</if>>
+	<<elseif _oldSkill <= 30>>
+		<<if $PC.medicine > 30>>
+			You now have @@.green;some skill@@ as a slave surgeon.
+		<<else>>
+			You have made progress towards being skilled in slave surgery.
+		<</if>>
+	<<else>>
+		<<if $PC.medicine >= 60>>
+			<<set $personalAttention = "business">>
+			You are now an @@.green;expert slave surgeon.@@
+		<<else>>
+			You have made progress towards being an expert in slave surgery.
+		<</if>>
+	<</if>>
+
+<</if>>
+
+<<if $cash > 1000>>
+<<if $CashForRep == 1>>
+	This week you gave up business opportunities worth ¤$policyCost to help deserving citizens, @@.green;burnishing your reputation.@@
+	<<set $rep += 100, $cash -= $policyCost, $lastWeeksFinances.expensesPersonalBusiness += $policyCost>>
+<</if>>
+<</if>>
+<<if $rep > 100>>
+<<if $RepForCash == 1>>
+	This week you used your position to secure business opportunities worth ¤$policyCost at the expense of citizens, @@.red;damaging your reputation.@@
+	<<set $rep -= 100, $cash += $policyCost, $lastWeeksFinances.incomePersonalBusiness += $policyCost>>
+<</if>>
+<</if>>
+<<if $rep <= 18000>>
+<<if $RegularParties != 1>>
+<<if $rep > 1500>>
+	Your @@.red;reputation is damaged@@ by your not hosting regular social events for your leading citizens.
+	<<set $rep -= 100>>
+	<<else>>
+	Though you are not hosting regular social events for your leading citizens, your lack of renown prevents this from damaging your reputation; they don't expect someone so relatively unknown to be throwing parties.
+<</if>>
+<</if>>
+<</if>>
+
+<<include "Costs">>
+<<set $cash -= $costs>>
+Routine upkeep of your demesne costs @@.yellow;¤$costs.@@
+
+<<if $plot == 1>>
+<<if $week > 10>>
+<<if $weatherToday.severity-$weatherCladding > 2>>
+	<<set $weatherAwareness = 1>>
+	<<if $weatherCladding == 1>>
+	<<set $seed = Math.trunc((($weatherToday.severity-3)*($arcologies[0].prosperity*random(50,100)))+random(1,100))>>
+	$arcologies[0].name's hardened exterior only partially resisted the extreme weather this week, and it requires repairs costing @@.yellow;¤$seed.@@ Your citizens are @@.green;grateful@@ to you for upgrading $arcologies[0].name to provide a safe haven from the terrible climate.
+	<<set $rep += 100>>
+	<<else>>
+	<<set $seed = Math.trunc((($weatherToday.severity-2)*($arcologies[0].prosperity*random(50,100)))+random(1,100))>>
+	Severe weather damaged the arcology this week, requiring repairs costing @@.yellow;¤$seed.@@ Your citizens are @@.red;unhappy@@ that the arcology has proven vulnerable to the terrible climate.
+	<<set $rep -= 100>>
+	<</if>>
+	<<if $cash > 0>>
+	<<set $cash -= $seed>>
+	<<set $lastWeeksFinances.expensesArcologyImprovement += $seed>>
+	<<else>>
+	Since you lack the resources to effect prompt repairs yourself, prominent citizens step in to repair their own parts of the arcology. This is @@.red;terrible for your reputation,@@ and it also @@.red;severely reduces the arcology's prosperity.@@
+	<<if $arcologies[0].prosperity > 50>>
+		<<set $arcologies[0].prosperity -= random(5,10)>>
+	<</if>>
+	<<set $rep = Math.trunc($rep*0.8)>>
+	<<set $cash -= Math.trunc($seed/4)>>
+	<<set $lastWeeksFinances.expensesArcologyImprovement += Math.trunc($seed/4)>>
+	<</if>>
+<<elseif $weatherToday.severity-$weatherCladding == 2>>
+	<<if $weatherCladding == 1>>
+	<<set $weatherAwareness = 1>>
+	The arcology's hardened exterior resisted severe weather this week. Your citizens are @@.green;grateful@@ to you for maintaining the arcology as a safe haven from the terrible climate.
+	<<set $rep += 100>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<br>
+
+<<set $seed = random(1,100)>>
+<<if $arcologies[0].FSRomanRevivalist > random(1,150)>>
+	<<if $slaveCostFactor > 0.8>>
+	@@.yellow;Your Roman Revivalism is having an effect on the slave market and has driven local prices down@@ by convincing slave traders that this is a staunchly pro-slavery area.<br>
+	<<set $slaveCostFactor -= 0.05>>
+	<<else>>
+	@@.yellow;Your Roman Revivalism is having an effect on the slave market and is holding local prices down@@ by convincing slave traders that this is a staunchly pro-slavery area.<br>
+	<</if>>
+<<elseif ($slaveCostFactor > 1.15)>>
+	@@.yellow;Natural market forces drive the very high price of slaves down.@@<br>
+	<<set $slaveCostFactor -= 0.1>>
+<<elseif ($slaveCostFactor < 0.85)>>
+	@@.yellow;Natural market forces drive the very low price of slaves up.@@<br>
+	<<set $slaveCostFactor += 0.1>>
+<<elseif ($seed > 30)>>
+	<<if ($slaveCostFactor > 1)>>
+		@@.yellow;Natural market forces drive the high price of slaves slowly down.@@<br>
+		<<set $slaveCostFactor -= 0.05>>
+	<<elseif ($slaveCostFactor < 1)>>
+		@@.yellow;Natural market forces drive the low price of slaves slowly up.@@<br>
+		<<set $slaveCostFactor += 0.05>>
+	<<else>>
+		<<if $seed > 80>>
+		@@.yellow;The price of slaves has naturally risen slightly.@@<br>
+		<<set $slaveCostFactor += 0.05>>
+	<<elseif $seed > 60>>
+		@@.yellow;The price of slaves has naturally fallen slightly.@@<br>
+		<<set $slaveCostFactor -= 0.05>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $menialDemandFactor != 0>>
+<<if Math.abs($menialDemandFactor) > 100>>
+<<if ($menialDemandFactor > 1000) && ($slaveCostFactor <= 1.1)>>
+	Your dealings in menial slaves have had a major impact on the slave market, @@.yellow;greatly increasing slave prices.@@
+	<<set $menialDemandFactor = 0>>
+	<<set $slaveCostFactor += 0.15>>
+	<br><br>
+<<elseif ($menialDemandFactor > 500) && ($slaveCostFactor <= 1.15)>>
+	Your dealings in menial slaves have had a noticeable impact on the slave market, @@.yellow;significantly increasing slave prices.@@
+	<<set $menialDemandFactor = 0>>
+	<<set $slaveCostFactor += 0.1>>
+	<br><br>
+<<elseif ($menialDemandFactor > 250) && ($slaveCostFactor <= 1.2)>>
+	Your dealings in menial slaves have had a minor impact on the slave market, @@.yellow;slightly increasing slave prices.@@
+	<<set $menialDemandFactor = 0>>
+	<<set $slaveCostFactor += 0.05>>
+	<br><br>
+<<elseif ($menialDemandFactor < -1000) && ($slaveCostFactor >= 0.9)>>
+	Your dealings in menial slaves have had a major impact on the slave market, @@.yellow;greatly reducing slave prices.@@
+	<<set $menialDemandFactor = 0>>
+	<<set $slaveCostFactor -= 0.15>>
+	<br><br>
+<<elseif ($menialDemandFactor < -500) && ($slaveCostFactor >= 0.85)>>
+	Your dealings in menial slaves have had a noticeable impact on the slave market, @@.yellow;significantly reducing slave prices.@@
+	<<set $menialDemandFactor = 0>>
+	<<set $slaveCostFactor -= 0.1>>
+	<br><br>
+<<elseif ($menialDemandFactor < -250) && ($slaveCostFactor >= 0.8)>>
+	Your dealings in menial slaves have had a minor impact on the slave market, @@.yellow;slightly reducing slave prices.@@
+	<<set $menialDemandFactor = 0>>
+	<<set $slaveCostFactor -= 0.05>>
+	<br><br>
+<</if>>
+<</if>>
+<</if>>

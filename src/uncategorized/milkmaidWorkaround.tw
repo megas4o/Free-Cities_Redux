@@ -1,0 +1,13 @@
+:: Milkmaid Workaround [silently]
+
+<<if $Milkmaid != 0>>
+	<<removeJob $Milkmaid "be the Milkmaid">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the Milkmaid">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Milkmaid = $slaves[$i]>>
+<</if>>
+
+<<goto "Dairy">>
+

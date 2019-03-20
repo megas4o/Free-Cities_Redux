@@ -1,0 +1,40 @@
+:: P defense fears [nobr]
+
+<<set $nextButton = " ", $nextLink = "Random Nonindividual Event">> /* hide button until user makes a selection */
+
+A deputation of slaveowning citizens comes to see you. Though they haven't experienced anything so disturbing as your dealings with the Daughters of Liberty, rumors of unrest and revolution are running through the Free Cities. They are upset with the lack of troops to protect the arcology. This is quite a development in the young history of Free Cities society; only a few months ago, the idea of collective defense would have been a bitterly controversial one. It's still an employer's market for mercenaries; you could easily hire some. Alternatively, your citizens would probably agree to fund them by subscription - the word "taxes" would be impolitic.
+
+<br><br>
+
+''This is a unique and very important opportunity'' and must not be taken lightly.
+
+<br><br>
+
+<span id="result">
+<<link "Install a full platoon by subscription">>
+	<<set $nextButton = "Continue">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	You hire a full platoon of reputable mercenaries and a veteran officer to command them, kit them in excellent gear, and quarter them in the arcology. Their pay is on an escrow basis; the huge lump sum you paid will serve to secure them, and its interest will constitute their pay. The sight of many armed men on patrol has reassured the worried slaveowners, but they are @@.red;resentful@@ of having to take this step themselves.
+	<<set $rep -= 500>>
+	<<set $mercenaries = 3>>
+	<</replace>>
+<</link>>
+<br><<link "Install a full platoon at your expense">>
+	<<set $nextButton = "Continue">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	You hire a full platoon of reputable mercenaries and a veteran officer to command them, kit them in excellent gear, and quarter them in the arcology. Their pay is on an escrow basis; the huge lump sum you paid will serve to secure them, and its interest will constitute their pay. The sight of many armed men on patrol has reassured the worried slaveowners, and they are @@.green;grateful@@ to you for seeing to their defense.
+	<<set $rep += 500>>
+	<<set $cash -= 10000>>
+	<<set $mercenaries = 3>>
+	<</replace>>
+<</link>> <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤10000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤10000 and incur significant upkeep costs//<</if>>
+<br><<link "Refuse to quarter so many troops in your arcology">>
+	<<set $nextButton = "Continue">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	The consensus that the arcology is vulnerable triggers an @@.red;exodus@@ of your most wealthy and valuable citizens, and your reputation @@.red;suffers@@ grievously.
+	<<set $arcologies[0].prosperity = Math.trunc($arcologies[0].prosperity*0.8)>>
+	<<set $rep -= 1000>>
+	<</replace>>
+<</link>>
+</span>
+

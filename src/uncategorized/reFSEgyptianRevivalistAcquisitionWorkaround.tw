@@ -1,0 +1,98 @@
+:: RE FSEgyptianRevivalist acquisition workaround
+
+/* Written and coded by Boney M */
+They arrive hand-in-hand and don't let go of each other until the end of the enslavement process, and even after they break their grip and undress at your instruction, their eyes never stray far from each other. With a closer look at them, their blood relation is as obvious as their infatuation with one another. No wonder they couldn't keep it a secret.
+
+<<AddSlave $sibling>>
+
+<<set _secondSlave = clone($activeSlave)>>
+
+<<NationalityToName _secondSlave>>
+<<if $activeSlave.slaveSurname>><<set _secondSlave.slaveSurname = $activeSlave.slaveSurname>><</if>>
+<<set _secondSlave.birthSurname = $activeSlave.birthSurname>>
+
+<<set _secondSlave.ID = $activeSlave.ID + 1000>>
+<<set _secondSlave.devotion += random (-1, 1)>>
+<<set _secondSlave.trust += random (-1, 1)>>
+<<set _secondSlave.oldDevotion = $activeSlave.devotion>>
+<<set _secondSlave.age -= random (1, 3)>>
+
+<<set _secondSlave.relation = "sister">>
+<<set _secondSlave.relationTarget = $activeSlave.ID>>
+<<set _secondSlave.relationship = 4>>
+<<set _secondSlave.relationshipTarget = $activeSlave.ID>>
+
+<<if _secondSlave.age < 18>>
+	<<set _secondSlave.age = 18>>
+<</if>>
+
+<<set _secondSlave.hStyle = either("ass-length", "long", "shoulder-length", "short", "very short", "shaved bald")>>
+<<if (_secondSlave.age <= 22)>>
+	<<set _secondSlave.career = setup.youngCareers.random()>>
+<<elseif (_secondSlave.intelligenceImplant == 1)>>
+	<<set _secondSlave.career = setup.educatedCareers.random()>>
+<<else>>
+	<<set _secondSlave.career = setup.uneducatedCareers.random()>>
+<</if>>
+
+<<if (random(1,4) > 1) && (random(1,99) < $seeDicks)>>
+
+<<if ($activeSlave.dick > 0) && ($activeSlave.vagina < 0)>>
+	<<set _secondSlave.dick to 0>>
+	<<set _secondSlave.foreskin to 0>>
+	<<set _secondSlave.scrotum to 0>>
+	<<set _secondSlave.balls to 0>>
+	<<set _secondSlave.vagina to 1>>
+	<<set _secondSlave.clit to either(0, 0, 0, 0, 0, 0, 1, 1, 2)>>
+	<<set _secondSlave.labia to either(0, 0, 0, 1, 1, 1, 1, 2, 2, 3)>>
+	<<set _secondSlave.preg to -1>>
+	<<set _secondSlave.ovaries to 1>>
+	<<set _secondSlave.face = Math.trunc(_secondSlave.face+20,-100,100)>>
+	<<set _secondSlave.boobs += either(0, 100, 200, 300, 400)>>
+	<<set _secondSlave.butt += either(0, 1, 1, 2)>>
+	<<set _secondSlave.earPiercing = either(0,1)>>
+	<<set _secondSlave.nosePiercing = either(0,0,0,1)>>
+	<<set _secondSlave.eyebrowPiercing = either(0,0,0,0,0,1)>>
+	<<set _secondSlave.clitPiercing = either(0,0,0,0,0,1)>>
+	<<set _secondSlave.lipsPiercing = either(0,0,0,0,0,1)>>
+	<<set _secondSlave.navelPiercing = either(0,0,0,1)>>
+	<<set _secondSlave.nipplesPiercing = either(0,0,0,1)>>
+<<elseif ($activeSlave.dick == 0) && ($activeSlave.vagina >= 0)>>
+	<<set _secondSlave.dick = either(1, 2, 2, 2, 3, 3, 3, 4, 4, 5)>>
+	<<set _secondSlave.balls = either(1, 2, 2, 2, 3, 3, 3, 4, 4, 5)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set _secondSlave.vagina = -1>>
+	<<set _secondSlave.clit = 0>>
+	<<set _secondSlave.labia = 0>>
+	<<set _secondSlave.preg = -2>>
+	<<set _secondSlave.ovaries = 0>>
+
+	<<set _secondSlave.face = Math.trunc(_secondSlave.face-20,-100,100)>>
+	<<set _secondSlave.boobs -= either(0, 100, 200, 300, 400)>>
+	<<set _secondSlave.butt -= either(0, 1, 1, 2)>>
+
+	<<set _secondSlave.earPiercing = either(0,0,0,1)>>
+	<<set _secondSlave.nosePiercing = either(0,0,0,0,1)>>
+	<<set _secondSlave.eyebrowPiercing = either(0,0,0,0,0,1)>>
+	<<set _secondSlave.dickPiercing = either(0,0,0,0,0,1)>>
+	<<set _secondSlave.lipsPiercing = either(0,0,0,0,0,1)>>
+	<<set _secondSlave.navelPiercing = either(0,0,0,0,1)>>
+	<<set _secondSlave.nipplesPiercing = either(0,0,0,0,1)>>
+<<elseif $activeSlave.dick > 0>>
+	<<if random(1, 3) == 1>>
+		<<set _secondSlave.anus = 1>>
+	<<else>>
+		<<set $activeSlave.anus = 1>>
+	<</if>>
+<</if>>
+
+<<if _secondSlave.vagina == 0>>
+	<<set _secondSlave.vagina = 1>>
+<</if>>
+<<if (_secondSlave.dick > 0) && (_secondSlave.balls == 0)>>
+	<<set _secondSlave.balls = random(1,5)>>
+<</if>>
+
+<</if>>
+
+<<AddSlave _secondSlave>>

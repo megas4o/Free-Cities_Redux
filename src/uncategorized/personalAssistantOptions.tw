@@ -1,0 +1,429 @@
+:: Personal assistant options [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+<<if $marketAssistantLimit>><<set $marketAssistantLimit to Math.clamp($marketAssistantLimit, 10000, 10000000)>><</if>>
+
+<<if $seeImages == 1>><<AssistantArt 3>><</if>>
+
+Seated at your desk, you glance at the visual representation of $assistantName, down in one corner of your desk's glass top.
+
+<<set $masturbationAllowed = 0>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $activeSlave.releaseRules == "permissive">>
+	<<set $masturbationAllowed = 1>>
+	<<break>>
+	<</if>>
+<</for>>
+
+<<include "Personal Assistant Appearance">>
+
+<<if $assistantPower > 0>>
+	<br><br>
+	Though <<if $assistant == 0>>it<<else>>she<</if>> remains short of a true AI, the arcology's upgraded computer core allows <<if $assistant == 0>>it<<else>>her<</if>> to use brute force to simulate sentient behavior quite well. <<if $assistant == 0>>It<<else>>She<</if>> is not truly self aware, but <<if $assistant == 0>>it<<else>>she<</if>> is able to predict what a sentient being with a certain character might say or do in common situations. The increased power has other applications; for example, it has improved the accuracy of your estimates of economic activity in the Free City.
+<<else>>
+	<<if $assistant == 0>>It<<else>>She<</if>> is well short of a true AI, but with extensive access to information on past human behavior and the processing power to query that information quickly, <<if $assistant == 0>>it<<else>>she<</if>> can often seem self aware by modeling herself after others' past behavior.
+<</if>>
+<br><br>
+
+__Computer Core Upgrades__
+<br>
+
+<<if $assistantPower == 0>>
+	//The first upgrade needed is a switch to a holographic memory core to store the immense quantity of data $assistantName gathers. This upgrade will cost ¤<<print Math.trunc(20000*$upgradeMultiplierArcology)>>.// [[Install holographic memory core|Personal assistant options][$cash -= Math.trunc(20000*$upgradeMultiplierArcology), $assistantPower += 1]]
+<<elseif $assistantPower == 1>>
+	//The final upgrade needed is a transition to optical RAM. This huge project will cost ¤<<print Math.trunc(50000*$upgradeMultiplierArcology)>>.// [[Install optical RAM|Personal assistant options][$cash -= Math.trunc(50000*$upgradeMultiplierArcology), $assistantPower += 1]]
+<<else>>
+	//The arcology's computer core is fully upgraded.//
+<</if>>
+<br>
+
+<<if $assistantOptions>>
+<br>
+__Behavior settings:__
+<br>
+
+<<if $assistant == 0>>
+	Your assistant is using its default settings, and is not behaving as though it has a libido. [[Instruct it to simulate a sex drive|Personal assistant options][$assistant = 1]]
+<<else>>
+	Your assistant is simulating preferences and a sex drive. [[Revert her to normal settings|Personal assistant options][$assistant = 0, $assistantAppearance = "normal"]]
+<</if>>
+<br>
+
+<<if $assistant != 0>>
+
+<br>
+__Appearance settings:__
+<br>
+She is currently using the ''$assistantAppearance'' avatar.
+<<if $PAPublic == 1>>
+<<set _seed = []>>
+<<switch $assistantAppearance>>
+	<<case "businesswoman">>
+		<<if $arcologies[0].FSSubjugationist != "unset">> <<set _seed.push($arcologies[0].FSSubjugationistRace + " subjugation")>> <</if>>
+		<<if $arcologies[0].FSDegradationist != "unset">> <<set _seed.push("degradationism")>> <</if>>
+		<<if $arcologies[0].FSTransformationFetishist != "unset">> <<set _seed.push("transformation fetishism")>> <</if>>
+		<<if $arcologies[0].FSMaturityPreferentialist != "unset">> <<set _seed.push("maturity preferentialism")>> <</if>>
+		<<if $arcologies[0].FSAssetExpansionist != "unset">> <<set _seed.push("asset expansionism")>> <</if>>
+		<<if $arcologies[0].FSRomanRevivalist != "unset">> <<set _seed.push("Roman revivalism")>> <</if>>
+		<<if $arcologies[0].FSArabianRevivalist != "unset">> <<set _seed.push("Arabian revivalism")>> <</if>>
+	<<case "goddess">>
+		<<if $arcologies[0].FSGenderFundamentalist != "unset">> <<set _seed.push("gender fundamentalism")>> <</if>>
+		<<if $arcologies[0].FSPaternalist != "unset">> <<set _seed.push("paternalism")>> <</if>>
+		<<if $arcologies[0].FSBodyPurist != "unset">> <<set _seed.push("body purism")>> <</if>>
+		<<if $arcologies[0].FSMaturityPreferentialist != "unset">> <<set _seed.push("maturity preferentialism")>> <</if>>
+		<<if $arcologies[0].FSPastoralist != "unset">> <<set _seed.push("pastoralism")>> <</if>>
+		<<if $arcologies[0].FSChattelReligionist != "unset">> <<set _seed.push("chattel religionism")>> <</if>>
+		<<if $arcologies[0].FSAztecRevivalist != "unset">> <<set _seed.push("Aztec revivalism")>> <</if>>
+		<<if $arcologies[0].FSEgyptianRevivalist != "unset">> <<set _seed.push("Egyptian revivalism")>> <</if>>
+	<<case "amazon">>
+		<<if $arcologies[0].FSSupremacist != "unset">> <<set _seed.push($arcologies[0].FSSupremacistRace + " supremacy")>> <</if>>
+		<<if $arcologies[0].FSSubjugationist != "unset">> <<set _seed.push($arcologies[0].FSSubjugationistRace + " subjugation")>> <</if>>
+		<<if $arcologies[0].FSBodyPurist != "unset">> <<set _seed.push("body purism")>> <</if>>
+		<<if $arcologies[0].FSPhysicalIdealist != "unset">> <<set _seed.push("physical idealism")>> <</if>>
+		<<if $arcologies[0].FSRomanRevivalist != "unset">> <<set _seed.push("Roman revivalism")>> <</if>>
+		<<if $arcologies[0].FSAztecRevivalist != "unset">> <<set _seed.push("Aztec revivalism")>> <</if>>
+		<<if $arcologies[0].FSEdoRevivalist != "unset">> <<set _seed.push("Edo revivalism")>> <</if>>
+	<<case "schoolgirl">>
+		<<if $arcologies[0].FSGenderFundamentalist != "unset">> <<set _seed.push("gender fundamentalism")>> <</if>>
+		<<if $arcologies[0].FSPaternalist != "unset">> <<set _seed.push("paternalism")>> <</if>>
+		<<if $arcologies[0].FSYouthPreferentialist != "unset">> <<set _seed.push("youth preferentialism")>> <</if>>
+		<<if $arcologies[0].FSSlimnessEnthusiast != "unset">> <<set _seed.push("slimness enthusiasm")>> <</if>>
+		<<if $arcologies[0].FSArabianRevivalist != "unset">> <<set _seed.push("Arabian revivalism")>> <</if>>
+		<<if $arcologies[0].FSChineseRevivalist != "unset">> <<set _seed.push("Chinese revivalism")>> <</if>>
+	<<case "monstergirl">>
+		<<if $arcologies[0].FSSupremacist != "unset">> <<set _seed.push($arcologies[0].FSSupremacistRace + " supremacy")>> <</if>>
+		<<if $arcologies[0].FSGenderRadicalist != "unset">> <<set _seed.push("gender radicalism")>> <</if>>
+		<<if $arcologies[0].FSDegradationist != "unset">> <<set _seed.push("degradationism")>> <</if>>
+		<<if $arcologies[0].FSChattelReligionist != "unset">> <<set _seed.push("chattel religionism")>> <</if>>
+		<<if $arcologies[0].FSEgyptianRevivalist != "unset">> <<set _seed.push("Egyptian revivalism")>> <</if>>
+		<<if $arcologies[0].FSEdoRevivalist != "unset">> <<set _seed.push("Edo revivalism")>> <</if>>
+		<<if $arcologies[0].FSChineseRevivalist != "unset">> <<set _seed.push("Chinese revivalism")>> <</if>>
+	<<case "shemale">>
+		<<if $arcologies[0].FSGenderRadicalist != "unset">> <<set _seed.push("gender radicalism")>> <</if>>
+		<<if $arcologies[0].FSTransformationFetishist != "unset">> <<set _seed.push("transformation fetishism")>> <</if>>
+		<<if $arcologies[0].FSYouthPreferentialist != "unset">> <<set _seed.push("youth preferentialism")>> <</if>>
+		<<if $arcologies[0].FSSlimnessEnthusiast != "unset">> <<set _seed.push("slimness enthusiasm")>> <</if>>
+		<<if $arcologies[0].FSAssetExpansionist != "unset">> <<set _seed.push("asset expansionism")>> <</if>>
+		<<if $arcologies[0].FSPastoralist != "unset">> <<set _seed.push("pastoralism")>> <</if>>
+		<<if $arcologies[0].FSPhysicalIdealist != "unset">> <<set _seed.push("physical idealism")>> <</if>>
+<</switch>>
+<<if _seed.length > 0>>
+	<<set _desc = "">>
+	<<for _i = 0; _i < _seed.length; _i++>>
+		<<set _desc = (_desc + _seed[_i])>>
+		<<if (_i < _seed.length-2)>>
+			<<set _desc = (_desc + ", ")>>
+		<<elseif (_seed.length > 2) && (_i == _seed.length-2)>>
+			<<set _desc = (_desc + ", and ")>>
+		<<elseif (_seed.length == 2) && (_i == 0)>>
+			<<set _desc = (_desc + " and ")>>
+		<</if>>
+	<</for>>
+This appearance bolsters _desc.
+<<else>>
+It has no impact on public opinion.
+<</if>>
+<</if>>
+<br>
+
+<<if $assistantAppearance != "normal">> [[Normal|Personal assistant options][$assistantAppearance = "normal"]]
+	<br>
+<</if>>
+<<if $assistantAppearance != "businesswoman">> [[Businesswoman|Personal assistant options][$assistantAppearance = "businesswoman"]]
+	<<if $PAPublic == 1>>
+	<<set _seed = []>>
+	<<if $arcologies[0].FSSubjugationist != "unset">> <<set _seed.push($arcologies[0].FSSubjugationistRace + " subjugation")>> <</if>>
+	<<if $arcologies[0].FSDegradationist != "unset">> <<set _seed.push("degradationism")>> <</if>>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">> <<set _seed.push("transformation fetishism")>> <</if>>
+	<<if $arcologies[0].FSMaturityPreferentialist != "unset">> <<set _seed.push("maturity preferentialism")>> <</if>>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">> <<set _seed.push("asset expansionism")>> <</if>>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">> <<set _seed.push("Roman revivalism")>> <</if>>
+	<<if $arcologies[0].FSArabianRevivalist != "unset">> <<set _seed.push("Arabian revivalism")>> <</if>>
+	<<if _seed.length > 0>>
+		<<set _desc = "">>
+		<<for _i = 0; _i < _seed.length; _i++>>
+			<<set _desc = (_desc + _seed[_i])>>
+			<<if (_i < _seed.length-2)>> <<set _desc = (_desc + ", ")>>
+			<<elseif (_seed.length > 2) && (_i == _seed.length-2)>> <<set _desc = (_desc + ", and ")>>
+			<<elseif (_seed.length == 2) && (_i == 0)>> <<set _desc = (_desc + " and ")>>
+			<</if>>
+		<</for>>
+		A good emblem for _desc
+	<</if>>
+	<</if>>
+	<br>
+<</if>>
+<<if $assistantAppearance != "goddess">> [[Goddess|Personal assistant options][$assistantAppearance = "goddess"]]
+	<<if $PAPublic == 1>>
+	<<set _seed = []>>
+	<<if $arcologies[0].FSGenderFundamentalist != "unset">> <<set _seed.push("gender fundamentalism")>> <</if>>
+	<<if $arcologies[0].FSPaternalist != "unset">> <<set _seed.push("paternalism")>> <</if>>
+	<<if $arcologies[0].FSBodyPurist != "unset">> <<set _seed.push("body purism")>> <</if>>
+	<<if $arcologies[0].FSMaturityPreferentialist != "unset">> <<set _seed.push("maturity preferentialism")>> <</if>>
+	<<if $arcologies[0].FSPastoralist != "unset">> <<set _seed.push("pastoralism")>> <</if>>
+	<<if $arcologies[0].FSChattelReligionist != "unset">> <<set _seed.push("chattel religionism")>> <</if>>
+	<<if $arcologies[0].FSAztecRevivalist != "unset">> <<set _seed.push("Aztec revivalism")>> <</if>>
+	<<if $arcologies[0].FSEgyptianRevivalist != "unset">> <<set _seed.push("Egyptian revivalism")>> <</if>>
+	<<if _seed.length > 0>>
+		<<set _desc = "">>
+		<<for _i = 0; _i < _seed.length; _i++>>
+			<<set _desc = (_desc + _seed[_i])>>
+			<<if (_i < _seed.length-2)>> <<set _desc = (_desc + ", ")>>
+			<<elseif (_seed.length > 2) && (_i == _seed.length-2)>> <<set _desc = (_desc + ", and ")>>
+			<<elseif (_seed.length == 2) && (_i == 0)>> <<set _desc = (_desc + " and ")>>
+			<</if>>
+		<</for>>
+		A good emblem for _desc
+	<</if>>
+	<</if>>
+	<br>
+<</if>>
+<<if $assistantAppearance != "amazon">> [[Amazon|Personal assistant options][$assistantAppearance = "amazon"]]
+	<<if $PAPublic == 1>>
+	<<set _seed = []>>
+	<<if $arcologies[0].FSSupremacist != "unset">> <<set _seed.push($arcologies[0].FSSupremacistRace + " supremacy")>> <</if>>
+	<<if $arcologies[0].FSSubjugationist != "unset">> <<set _seed.push($arcologies[0].FSSubjugationistRace + " subjugation")>> <</if>>
+	<<if $arcologies[0].FSBodyPurist != "unset">> <<set _seed.push("body purism")>> <</if>>
+	<<if $arcologies[0].FSPhysicalIdealist != "unset">> <<set _seed.push("physical idealism")>> <</if>>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">> <<set _seed.push("Roman revivalism")>> <</if>>
+	<<if $arcologies[0].FSAztecRevivalist != "unset">> <<set _seed.push("Aztec revivalism")>> <</if>>
+	<<if $arcologies[0].FSEdoRevivalist != "unset">> <<set _seed.push("Edo revivalism")>> <</if>>
+	<<if _seed.length > 0>>
+		<<set _desc = "">>
+		<<for _i = 0; _i < _seed.length; _i++>>
+			<<set _desc = (_desc + _seed[_i])>>
+			<<if (_i < _seed.length-2)>> <<set _desc = (_desc + ", ")>>
+			<<elseif (_seed.length > 2) && (_i == _seed.length-2)>> <<set _desc = (_desc + ", and ")>>
+			<<elseif (_seed.length == 2) && (_i == 0)>> <<set _desc = (_desc + " and ")>>
+			<</if>>
+		<</for>>
+		A good emblem for _desc
+	<</if>>
+	<</if>>
+	<br>
+<</if>>
+<<if $assistantAppearance != "schoolgirl">> [[Schoolgirl|Personal assistant options][$assistantAppearance = "schoolgirl"]]
+	<<if $PAPublic == 1>>
+	<<set _seed = []>>
+	<<if $arcologies[0].FSGenderFundamentalist != "unset">> <<set _seed.push("gender fundamentalism")>> <</if>>
+	<<if $arcologies[0].FSPaternalist != "unset">> <<set _seed.push("paternalism")>> <</if>>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">> <<set _seed.push("youth preferentialism")>> <</if>>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">> <<set _seed.push("slimness enthusiasm")>> <</if>>
+	<<if $arcologies[0].FSArabianRevivalist != "unset">> <<set _seed.push("Arabian revivalism")>> <</if>>
+	<<if $arcologies[0].FSChineseRevivalist != "unset">> <<set _seed.push("Chinese revivalism")>> <</if>>
+	<<if _seed.length > 0>>
+		<<set _desc = "">>
+		<<for _i = 0; _i < _seed.length; _i++>>
+			<<set _desc = (_desc + _seed[_i])>>
+			<<if (_i < _seed.length-2)>> <<set _desc = (_desc + ", ")>>
+			<<elseif (_seed.length > 2) && (_i == _seed.length-2)>> <<set _desc = (_desc + ", and ")>>
+			<<elseif (_seed.length == 2) && (_i == 0)>> <<set _desc = (_desc + " and ")>>
+			<</if>>
+		<</for>>
+		A good emblem for _desc
+	<</if>>
+	<</if>>
+	<br>
+<</if>>
+<<if $seeDicks != 0>>
+<<if $assistantAppearance != "monstergirl">> [[Monstergirl|Personal assistant options][$assistantAppearance = "monstergirl"]]
+	<<if $PAPublic == 1>>
+	<<set _seed = []>>
+	<<if $arcologies[0].FSSupremacist != "unset">> <<set _seed.push($arcologies[0].FSSupremacistRace + " supremacy")>> <</if>>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">> <<set _seed.push("gender radicalism")>> <</if>>
+	<<if $arcologies[0].FSDegradationist != "unset">> <<set _seed.push("degradationism")>> <</if>>
+	<<if $arcologies[0].FSChattelReligionist != "unset">> <<set _seed.push("chattel religionism")>> <</if>>
+	<<if $arcologies[0].FSEgyptianRevivalist != "unset">> <<set _seed.push("Egyptian revivalism")>> <</if>>
+	<<if $arcologies[0].FSEdoRevivalist != "unset">> <<set _seed.push("Edo revivalism")>> <</if>>
+	<<if $arcologies[0].FSChineseRevivalist != "unset">> <<set _seed.push("Chinese revivalism")>> <</if>>
+	<<if _seed.length > 0>>
+		<<set _desc = "">>
+		<<for _i = 0; _i < _seed.length; _i++>>
+			<<set _desc = (_desc + _seed[_i])>>
+			<<if (_i < _seed.length-2)>> <<set _desc = (_desc + ", ")>>
+			<<elseif (_seed.length > 2) && (_i == _seed.length-2)>> <<set _desc = (_desc + ", and ")>>
+			<<elseif (_seed.length == 2) && (_i == 0)>> <<set _desc = (_desc + " and ")>>
+			<</if>>
+		<</for>>
+		A good emblem for _desc
+	<</if>>
+	<</if>>
+	<br>
+<</if>>
+<<if $assistantAppearance != "shemale">> [[Shemale|Personal assistant options][$assistantAppearance = "shemale"]]
+	<<if $PAPublic == 1>>
+	<<set _seed = []>>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">> <<set _seed.push("gender radicalism")>> <</if>>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">> <<set _seed.push("transformation fetishism")>> <</if>>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">> <<set _seed.push("youth preferentialism")>> <</if>>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">> <<set _seed.push("slimness enthusiasm")>> <</if>>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">> <<set _seed.push("asset expansionism")>> <</if>>
+	<<if $arcologies[0].FSPastoralist != "unset">> <<set _seed.push("pastoralism")>> <</if>>
+	<<if $arcologies[0].FSPhysicalIdealist != "unset">> <<set _seed.push("physical idealism")>> <</if>>
+	<<if _seed.length > 0>>
+		<<set _desc = "">>
+		<<for _i = 0; _i < _seed.length; _i++>>
+			<<set _desc = (_desc + _seed[_i])>>
+			<<if (_i < _seed.length-2)>> <<set _desc = (_desc + ", ")>>
+			<<elseif (_seed.length > 2) && (_i == _seed.length-2)>> <<set _desc = (_desc + ", and ")>>
+			<<elseif (_seed.length == 2) && (_i == 0)>> <<set _desc = (_desc + " and ")>>
+			<</if>>
+		<</for>>
+		A good emblem for _desc
+	<</if>>
+	<</if>>
+	<br>
+<</if>>
+<</if>>
+
+/* Choose her FS appearance */
+<<if $assistantFSOptions != 0 && $assistantAppearance != "normal">>
+<br>
+__Society-specific appearance settings:__
+<br>
+She can further refine her avatar to match the arcology's social profile<<if $assistantFSAppearance != "default">>; her current variation shows ''$assistantFSAppearance'' touches.<<else>>, though no details stand out right now.<</if>>
+<br>
+<<if $assistantFSAppearance != "default">>
+	[[Default|Personal assistant options][$assistantFSAppearance = "default"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "gender radicalist" && $arcologies[0].FSGenderRadicalistDecoration > 20>>
+	[[Gender Radicalist|Personal assistant options][$assistantFSAppearance = "gender radicalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "gender fundamentalist" && $arcologies[0].FSGenderFundamentalistDecoration > 20>>
+	[[Gender Fundamentalist|Personal assistant options][$assistantFSAppearance = "gender fundamentalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "paternalist" && $arcologies[0].FSPaternalistDecoration > 20>>
+	[[Paternalist|Personal assistant options][$assistantFSAppearance = "paternalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "degradationist" && $arcologies[0].FSDegradationistDecoration > 20>>
+	[[Degradationist|Personal assistant options][$assistantFSAppearance = "degradationist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "body purist" && $arcologies[0].FSBodyPuristDecoration > 20>>
+	[[Body Purist|Personal assistant options][$assistantFSAppearance = "body purist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "transformation fetishist" && $arcologies[0].FSTransformationFetishistDecoration > 20>>
+	[[Transformation Fetishist|Personal assistant options][$assistantFSAppearance = "transformation fetishist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "youth preferentialist" && $arcologies[0].FSYouthPreferentialistDecoration > 20>>
+	[[Youth Preferentialist|Personal assistant options][$assistantFSAppearance = "youth preferentialist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "maturity preferentialist" && $arcologies[0].FSMaturityPreferentialistDecoration > 20>>
+	[[Maturity Preferentialist|Personal assistant options][$assistantFSAppearance = "maturity preferentialist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "slimness enthusiast" && $arcologies[0].FSSlimnessEnthusiastDecoration > 20>>
+	[[Slimness Enthusiast|Personal assistant options][$assistantFSAppearance = "slimness enthusiast"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "asset expansionist" && $arcologies[0].FSAssetExpansionistDecoration > 20>>
+	[[Asset Expansionist|Personal assistant options][$assistantFSAppearance = "asset expansionist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "pastoralist" && $arcologies[0].FSPastoralistDecoration > 20>>
+	[[Pastoralist|Personal assistant options][$assistantFSAppearance = "pastoralist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "physical idealist" && $arcologies[0].FSPhysicalIdealistDecoration > 20>>
+	[[Physical Idealist|Personal assistant options][$assistantFSAppearance = "physical idealist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "chattel religionist" && $arcologies[0].FSChattelReligionistDecoration > 20>>
+	[[Chattel Religionist|Personal assistant options][$assistantFSAppearance = "chattel religionist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "roman revivalist" && $arcologies[0].FSRomanRevivalistDecoration > 20>>
+	[[Roman Revivalist|Personal assistant options][$assistantFSAppearance = "roman revivalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "aztec revivalist" && $arcologies[0].FSAztecRevivalistDecoration > 20>>
+	[[Aztec Revivalist|Personal assistant options][$assistantFSAppearance = "aztec revivalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "egyptian revivalist" && $arcologies[0].FSEgyptianRevivalistDecoration > 20>>
+	[[Egyptian Revivalist|Personal assistant options][$assistantFSAppearance = "egyptian revivalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "edo revivalist" && $arcologies[0].FSEdoRevivalistDecoration > 20>>
+	[[Edo Revivalist|Personal assistant options][$assistantFSAppearance = "edo revivalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "arabian revivalist" && $arcologies[0].FSArabianRevivalistDecoration > 20>>
+	[[Arabian Revivalist|Personal assistant options][$assistantFSAppearance = "arabian revivalist"]]
+	<br>
+<</if>>
+<<if $assistantFSAppearance != "chinese revivalist" && $arcologies[0].FSChineseRevivalistDecoration > 20>>
+	[[Chinese Revivalist|Personal assistant options][$assistantFSAppearance = "chinese revivalist"]]
+	<br>
+<</if>>
+<</if>>
+
+<</if>> /* CLOSES PERSONALITY ACTIVE REQUIREMENT */
+
+<<if ($assistantNameAnnounced != 0)>>
+<br>
+	__Name:__
+	<<textbox "$assistantName" $assistantName "Personal assistant options">>
+	<<if $assistantName != "your personal assistant">>
+		<br>
+		[[Stop using a custom name|Personal assistant options][$assistantName = "your personal assistant"]]
+	<</if>>
+<</if>>
+
+<</if>>/* CLOSES ASSISTANT OPTIONS AVAILABILITY */
+
+<<if $marketAssistantAnnounced>>
+
+<br><br>
+__Business Assistant settings:__
+<br>
+The arcology's upgraded computers support advanced business analysis.
+<<if $assistantAppearance != "normal">>
+	These capabilities are represented by an avatar styled after $assistantName's, with which she simulates a ''$marketAssistantRelationship'' relationship.
+	<br>
+	<<if $marketAssistantRelationship != "cute">>
+		[[Cute|Personal assistant options][$marketAssistantRelationship = "cute"]]
+		<br>
+	<</if>>
+	<<if $marketAssistantRelationship != "romantic">>
+		[[Romantic|Personal assistant options][$marketAssistantRelationship = "romantic"]]
+		<br>
+	<</if>>
+	<<if $marketAssistantRelationship != "nonconsensual">>
+		[[Nonconsensual|Personal assistant options][$marketAssistantRelationship = "nonconsensual"]]
+		<br>
+	<</if>>
+	<<if $marketAssistantRelationship != "incestuous">>
+		[[Incestuous|Personal assistant options][$marketAssistantRelationship = "incestuous"]]
+		<br>
+	<</if>>
+<<else>>
+	Although technically an expanded subroutine within the same app, $assistantName uses a distinct icon to identify these alerts and improve your workflow.
+	<br>
+<</if>>
+<br>
+<<if $assistant>>She<<else>>It<</if>> is
+<<if $marketAssistantLimit>>
+	''allowed'' to use excess liquid assets over ¤$marketAssistantLimit to play the menial slave market. [[Disallow|Personal assistant options][$marketAssistantLimit = 0]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	//Define custom cash limit://<<textbox "$marketAssistantLimit" $marketAssistantLimit "Personal assistant options">>
+	<br>
+	<<if $assistant>>She<<else>>It<</if>> will be
+	<<if $marketAssistantAggressiveness>>
+		''aggressive'' about buying and selling. [[Be conservative|Personal assistant options][$marketAssistantAggressiveness = 0]]
+	<<else>>
+		''conservative'' about buying and selling. [[Be aggressive|Personal assistant options][$marketAssistantAggressiveness = 100]]
+	<</if>>
+<<else>>
+	''not allowed'' to use excess liquid assets to play the menial slave market. [[Allow|Personal assistant options][$marketAssistantLimit = 10000]]
+<</if>>
+
+<</if>>

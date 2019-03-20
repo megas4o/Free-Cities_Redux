@@ -1,0 +1,61 @@
+:: Agent Workaround [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Neighbor Interact", _SL = $slaves.length, _ID = $slaves[$i].ID>>
+
+<<assignJob $slaves[$i] "be your agent">>
+
+<<if $slaves[$i].rivalry > 0>>
+	<<for _i = 0; _i < _SL; _i++>>
+		<<if _ID == $slaves[_i].rivalryTarget>>
+			<<set $slaves[_i].rivalry = 0, $slaves[_i].rivalryTarget = 0>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<set $slaves[$i].rivalry = 0, $slaves[$i].rivalryTarget = 0>>
+<</if>>
+
+<<if $slaves[$i].relationship > 0 && $slaves[$i].relationship < 4>>
+	<<for _i = 0;_i < _SL;_i++>>
+		<<if _ID == $slaves[_i].relationshipTarget>>
+			<<set $slaves[_i].relationship = 0, $slaves[_i].relationshipTarget = 0>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<set $slaves[$i].relationship = 0, $slaves[$i].relationshipTarget = 0>>
+<</if>>
+
+<<set $leaders.push($slaves[$i]), $activeArcology.leaderID = _ID, $activeArcology.government = "your agent">>
+
+<<SlaveTitle $slaves[$i]>>
+
+You order $slaves[$i].slaveName to come into your office for orders. The devoted $desc has no prior warning that this is anything unusual, and from the <<if $slaves[$i].energy > 95>>horny glint<<else>>glow of sexual availability<</if>> in her $slaves[$i].eyeColor eyes as she <<if canWalk($slaves[$i])>>enters<<else>>is helped in<</if>>, she <<if $slaves[$i].energy > 95>>seems to be hoping<<else>>wouldn't mind hearing<</if>> that you've called her in for a quick fuck. In fact, the matter at hand is about as far as it could possibly be from that, on the spectrum of interactions between <<if $PC.title != 0>>master<<else>>mistress<</if>> and slave.
+
+<br><br>You offer her, without preamble, agency on your behalf in $activeArcology.name. As a woman of intelligence, she knows the basics of such an arrangement, but she's stunned into silence by the offer, so you outline it briefly. Having a slave lead an arcology would be too much, even for the most open minded of Free Cities societies. So, she would be freed, albeit subject to a set of private, restrictive contracts that would allow you to recall her if you wish, and require her to follow your directions, if you give her any. But other than that, she would be the effective leader of an entire arcology. It's an unusual arrangement, but one that's becoming more common as multiple arcologies come under united control.
+
+<br><br>She's intelligent and confident of her place within society as a valued slave, and knows that with your resources behind her, this is likely something she's capable of succeeding at. Nevertheless, her feelings are obviously mixed. It will be a challenge,
+<<switch $slaves[$i].fetish>>
+<<case "submissive">>
+	especially for a sexual submissive like her.
+<<case "cumslut">>
+	and she'll have to find dominant ways to sate her oral appetites.
+<<case "humiliation">>
+	especially for a humiliation addict like her.
+<<case "buttslut">>
+	though she'll probably be able to live her anal life vicariously by buttfucking others.
+<<case "boobs">>
+	but she'll have a practically infinite procession of breasts to judge and fondle.
+<<case "pregnancy">>
+	but the potential for impregnation of hundreds of slaves excites her.
+<<case "dom">>
+	but the prospect of having more slaves at her whim than even she could possibly use is incredibly exciting to her.
+<<case "sadist">>
+	but the prospect of having more slaves at her whim than even she could possibly break is incredibly exciting to her.
+<<case "masochist">>
+	especially for a masochist like her.
+<<default>>
+	though one she's willing to take on.
+<</switch>>
+It will mean that she'll see much less of you, something such a devoted slave may struggle with. Oppressed by the confusion and strength of her feelings, she begins to cry.
+
+<br><br>"Thank you, <<Master $slaves[i]>>," she gasps out. "I'll do my be<<s>>t."
+

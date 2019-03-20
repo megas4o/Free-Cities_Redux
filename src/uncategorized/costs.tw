@@ -1,0 +1,171 @@
+:: Costs [nobr]
+
+<<set $costs = 0>>
+
+<<if $arcade > 0>>
+	<<set _costs = 0>>
+	<<set _costs += ($arcade*$facilityCost*0.5)>>
+	<<set _costs +=(0.2*$arcadeUpgradeInjectors*$arcade*$facilityCost)>>
+	<<set _costs +=(0.2*$arcadeUpgradeCollectors*$arcade*$facilityCost)>>
+	<<set $costs += _costs>>
+	<<set $lastWeeksFinances.expensesArcade += _costs>>
+<</if>>
+
+<<if $servantsQuarters > 0>>
+	<<set _costs = 0>>
+	<<set _costs += (0.2*$servantsQuartersUpgradeMonitoring*$servantsQuarters*$facilityCost)>>
+	<<set $costs += _costs>>
+	<<set $lastWeeksFinances.expensesArcade += _costs>>
+<</if>>
+
+<<if $dairy > 0>>
+	<<set _costs = 0>>
+	<<set _costs += ($dairy*$facilityCost)>>
+	<<set _costs += (0.2*$dairyFeedersUpgrade*$dairy*$facilityCost)>>
+	<<set _costs += (0.1*$dairyPregUpgrade*$dairy*$facilityCost)>>
+	<<set _costs += (0.2*$dairyStimulatorsUpgrade*$facilityCost)>>
+	<<set _costs += ($bioreactorsXY+$bioreactorsXX+$bioreactorsHerm+$bioreactorsBarren)*100>>
+	<<set $costs += _costs>>
+	<<set $lastWeeksFinances.expensesDairy += _costs>>
+<</if>>
+
+<<if $brothel > 0>>
+	<<set _costs = 0>>
+	<<set _costs += ($brothel*$facilityCost)>>
+	<<set _costs += (0.2*$brothelUpgradeDrugs*$brothel*$facilityCost)>>
+	<<set _costs += $brothelAdsSpending>>
+	<<set $costs += _costs>>
+	<<set $lastWeeksFinances.expensesBrothel += _costs>>
+<</if>>
+
+<<if $club > 0>>
+	<<set _costs = 0>>
+	<<set _costs += ($club*$facilityCost)>>
+	<<set _costs += (0.2*$clubUpgradePDAs*$club*$facilityCost)>>
+	<<set _costs += $clubAdsSpending>>
+	<<set $costs += _costs>>
+	<<set $lastWeeksFinances.expensesClub += _costs>>
+<</if>>
+
+<<if ($masterSuitePregnancySlaveLuxuries == 1)>>
+	<<set $costs += 500>>
+	<<set $lastWeeksFinances.expensesMasterSuite += 500>>
+<</if>>
+<<if ($masterSuitePregnancyFertilitySupplements == 1)>>
+	<<set $costs += 1000>>
+	<<set $lastWeeksFinances.expensesMasterSuite += 1000>>
+<</if>>
+
+<<set $costs += ($girls*(250+($economy*500)))>>
+
+<<if def $citizenOrphanageTotal>>
+	<<set $costs += $citizenOrphanageTotal*100>>
+	<<set $lastWeeksFinances.expensesCitizenOrphanage = ($citizenOrphanageTotal*100)>>
+<</if>>
+<<if def $privateOrphanageTotal>>
+	<<set $costs += $privateOrphanageTotal*500>>
+	<<set $lastWeeksFinances.expensesPrivateOrphanage = ($privateOrphanageTotal*500)>>
+<</if>>
+
+<<if (def $peacekeepers) and ($peacekeepers != 0) >>
+	<<if $peacekeepers.undermining != 0>>
+		<<set $costs += $peacekeepers.undermining>>
+	<</if>>
+<</if>>
+
+<<if $mercenaries > 0>>
+	<<set _mercCosts = $mercenaries*2000>>
+	<<if $barracks>><<set _mercCosts *= 0.5>><</if>>
+	<<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>><<set _mercCosts *= 0.5>><</if>>
+	<<set $costs += _mercCosts>>
+<</if>>
+
+<<set $costs += $FSSpending>>
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+<<silently>>
+<<SlaveExpenses>>
+<</silently>>
+<<set $costs -= $individualCosts>>
+<<set $slaves[$i].lifetimeCost += $individualCosts>>
+<<set $lastWeeksFinances.expensesSlaves += $individualCosts>>
+<</for>>
+
+<<if $Recruiter != 0>>
+	<<set $costs += 250>>
+<</if>>
+<<if $TSS.schoolPresent == 1>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $GRI.schoolPresent == 1>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $SCP.schoolPresent == 1>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $LDE.schoolPresent == 1>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $TGA.schoolPresent == 1>>
+	<<set $costs += 1000>>
+<</if>>
+<<if ($TFS.schoolPresent == 1) && (($PC.dick == 0) || ($PC.vagina == 0) || ($PC.boobs == 0))>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $TSS.subsidize != 0>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $GRI.subsidize != 0>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $SCP.subsidize != 0>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $LDE.subsidize != 0>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $TGA.subsidize != 0>>
+	<<set $costs += 1000>>
+<</if>>
+<<if $TFS.subsidize != 0>>
+	<<set $costs += 1000>>
+<</if>>
+
+<<if $alwaysSubsidizeGrowth == 1>>
+	<<set $costs += $policyCost>>
+<</if>>
+<<if $alwaysSubsidizeRep == 1>>
+	<<set $costs += $policyCost>>
+<</if>>
+<<if $RegularParties == 1>>
+	<<set $costs += $policyCost>>
+<</if>>
+
+<<if $ProImmigrationCash == 1>>
+	<<set $costs += $policyCost>>
+<</if>>
+<<if $AntiEnslavementCash == 1>>
+	<<set $costs += $policyCost>>
+<</if>>
+
+<<if $CoursingAssociation == 1>>
+	<<set $costs += 1000>>
+<</if>>
+
+<<if ($personalAttention == "trading")>>
+	<<set $costs += 10000>>
+<<elseif ($personalAttention == "warfare")>>
+	<<set $costs += 10000>>
+<<elseif ($personalAttention == "slaving")>>
+	<<set $costs += 10000>>
+<<elseif ($personalAttention == "engineering")>>
+	<<set $costs += 10000>>
+<<elseif ($personalAttention == "medicine")>>
+	<<set $costs += 10000>>
+<</if>>
+
+<<if $costs < 0>>
+	<<set $costs = 0>>
+<<else>>
+	<<set $costs = Math.trunc($costs)>>
+<</if>>

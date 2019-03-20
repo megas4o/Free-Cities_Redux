@@ -1,0 +1,24 @@
+:: RIE Eligibility Check
+
+<<silently>>
+
+<<set $eventSlave = 0, $eligibleSlaves = []>>
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].assignmentVisible == 1>>
+	<<if $slaves[$i].fuckdoll == 0>>
+		<<set $eligibleSlaves.push($slaves[$i])>>
+	<</if>>
+	<</if>>
+<</for>>
+
+<<if $eligibleSlaves.length == 0>>
+	<<goto "Next Week">>
+<<elseif $hostageRescued == 1>>
+	<<goto "P hostage acquisition">>
+<<else>>
+	<<goto "Random Individual Event">>
+<</if>>
+
+<</silently>>
+

@@ -1,0 +1,93 @@
+:: Schoolroom [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Schoolroom", $showEncyclopedia = 1, $encyclopedia = "Schoolroom", $schoolroomSlaves = $SchlRiIDs.length>>
+
+<<if $schoolroomName != "the Schoolroom">>
+	<<set $schoolroomNameCaps = $schoolroomName.replace("the ", "The ")>>
+<</if>>
+
+<<schoolroomDescriptionFS>>
+
+<<if $schoolroomSlaves > 2>>
+	$schoolroomNameCaps is busy with slaves, repeating their lessons out loud to drill the instruction home. A few girls are maintaining uncomfortable positions in the corner as punishment for poor work.
+<<elseif $schoolroomSlaves > 0>>
+	$schoolroomNameCaps sparsely populated, the few students repeating their lessons out loud to drill the instruction home. One girl is maintaining an uncomfortable position in the corner as punishment for poor work.
+<<elseif $Schoolteacher != 0>>
+	$Schoolteacher.slaveName is alone in $schoolroomName, and has nothing to do but work on her lesson plans.
+<<else>>
+	None of your slaves are learning in $schoolroomName.
+	[[Decommission the schoolroom|Main][$schoolroom = 0, $schoolroomUpgradeSkills = 0, $schoolroomUpgradeLanguage = 0, $schoolroomUpgradeRemedial = 0, $schoolroomDecoration = "standard"]]
+<</if>>
+
+<<set _Tmult0 = Math.trunc($schoolroom*1000*$upgradeMultiplierArcology)>>
+<br>$schoolroomNameCaps has room to house $schoolroom slaves while they learn.
+[[Expand the schoolroom|Schoolroom][$cash -= _Tmult0, $schoolroom += 5]] //Costs ¤_Tmult0//
+
+<br>
+<<if $schoolroomUpgradeSkills == 1>>
+	$schoolroomNameCaps provides slaves with some intermediate skills, including a solid foundation in sexual techniques, efficient and safe prostitution, and the rudiments of courtesanship.
+<<else>>
+	<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+	$schoolroomNameCaps inculcates the basic skills necessary to a sex slave. [[Upgrade the curriculum to cover some intermediate skills|Schoolroom][$cash -= _Tmult1, $schoolroomUpgradeSkills = 1]] //Costs ¤_Tmult1//
+<</if>>
+
+<br>
+<<set _Tmult2 = Math.trunc(5000*$upgradeMultiplierArcology)>>
+<<if $schoolroomUpgradeLanguage == 1>>
+	$schoolroomNameCaps boasts state of the art linguistic interfaces that allow it to teach the basics of the arcology's lingua franca with increased success.
+<<else>>
+	$schoolroomNameCaps includes only basic language classes in its curriculum. [[Install advanced linguistic interfaces to efficiently teach the arcology's lingua franca|Schoolroom][$cash -= _Tmult2, $schoolroomUpgradeLanguage = 1]] //Costs ¤_Tmult2//
+<</if>>
+
+<br>
+<<if $schoolroomUpgradeRemedial == 1>>
+	$schoolroomNameCaps has been upgraded with advanced teaching tools to help even the stupidest slave learn at an acceptable pace. Intelligent slaves won't learn much faster as a result, but idiots will benefit a great deal.
+<<else>>
+	$schoolroomNameCaps teaches idiots using standard methods. [[Purchase specialized materials to help stupid slaves learn good|Schoolroom][$cash -= _Tmult2, $schoolroomUpgradeRemedial = 1]] //Costs ¤_Tmult2//
+<</if>>
+
+<br><br>
+<<if $Schoolteacher != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<<else>>
+	You do not have a slave serving as a Schoolteacher. [[Appoint one|Schoolteacher Select]]
+<</if>>
+<br><br>
+<<if ($schoolroom <= $schoolroomSlaves)>>
+	''$schoolroomNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $schoolroomSlaves)>>
+	<<link "''Send a slave to study in $schoolroomName''">>
+		<<set $leaveSchoolroom = 0>>
+		<<replace #schoolroomComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $schoolroomSlaves > 0>>
+	| <<link "''Bring a slave out of $schoolroomName''">>
+		<<set $leaveSchoolroom = 1>>
+		<<replace #schoolroomComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//The classroom is empty for the moment.<br>//
+<</if>>
+
+<span id="schoolroomComingGoing">
+<<if $leaveSchoolroom == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<<unset $Flag>>
+
+<br><br>Rename $schoolroomName: <<textbox "$schoolroomName" $schoolroomName "Schoolroom">> //Use a noun or similar short phrase//

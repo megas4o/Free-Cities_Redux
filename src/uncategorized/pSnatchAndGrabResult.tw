@@ -1,0 +1,70 @@
+:: P snatch and grab result [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event", $returnTo = "Random Nonindividual Event", $PSnatch = 0>>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She is your share of a raid on an illegal laboratory by your mercenaries.">>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.devotion = 100>>
+<<set $activeSlave.trust = 100>>
+<<set $activeSlave.health = 205>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.faceShape = "androgynous">>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.vagina = 0>>
+<<set $activeSlave.ovaries = 1>>
+<<if $seeDicks == 0>>
+	<<set $activeSlave.dick = 0>>
+	<<set $activeSlave.balls = 0>>
+<<elseif (random(0,99) < $seeDicks)>>
+	<<set $activeSlave.dick = 6>>
+	<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum = $activeSlave.balls>><</if>>
+	<<set $activeSlave.balls = 1>>
+<<else>>
+	<<set $activeSlave.dick = 1>>
+	<<set $activeSlave.foreskin = 1>>
+	<<set $activeSlave.balls = 1>>
+	<<set $activeSlave.scrotum = $activeSlave.balls>>
+<</if>>
+<<set $activeSlave.boobs += 200>>
+<<set $activeSlave.butt += 1>>
+<<if $activeSlave.lips < 10>>
+	<<set $activeSlave.lips += 5>>
+<</if>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.birthWeek = 0>>
+<<set $activeSlave.height = random(165,175)>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.muscles = 20>>
+<<set $activeSlave.waist = -75>>
+<<set $activeSlave.hStyle = "shaved bald, with a barcode tattooed on the top of her head">>
+<<set $activeSlave.hLength = 0>>
+<<set $activeSlave.customDesc = "Her skin is unnaturally perfect, totally without blemishes. She radiates unnatural health and resilience.">>
+<<set $activeSlave.behavioralFlaw = "odd">>
+<<set $activeSlave.fetish = "none">>
+<<set $activeSlave.energy = 100>>
+<<set $activeSlave.fetishKnown = 1>>
+<<set $activeSlave.attrKnown = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.slaveCost = 10000>>
+
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+In the middle of the night, there is a polite knock on your penthouse door. You are alerted by $assistantName, who observes with some irritation that the mercenary who knocked has gone, has left a large case outside the door, and has satisfied the security systems that the case contains nothing hazardous.
+
+The case prompts you for a handprint code; your hand works just fine. It contains a naked, hairless, perfectly healthy young body in the fetal position. This person awakes as the case opens, looks you confidently in the eye, and says "Are you my <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>?"
+
+When you state that, apparently, you are, she climbs out of the case, prostrates herself in the hall before you, and says reverentially into the floor, "I love you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>."
+
+<br><br>
+
+<<set $saleDescription = 0, $applyLaw = 0>><<include "Long Slave Description">>
+
+<br><<include "New Slave Intro">>

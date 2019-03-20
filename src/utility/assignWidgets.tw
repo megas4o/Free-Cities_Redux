@@ -1,0 +1,147 @@
+:: Assign Widgets [widget nobr]
+
+/%
+	Call as <<assignJob slaveObject $returnTo | _currentRule.facilityRemove | "serve in the master suite"
+	$args[0] slave object. *MUST be present*
+	$args[1] Job to assign slave to. Will accept the $returnTo vars and the _currentRule.assignFacility vars and the actual job assignments "serve in the master suite" etc.
+
+	This is basically a Widget version of assign but will work anywhere, and saves to the slaves[..] array, and changes your $args[0] var sent.
+%/
+<<widget assignJob>>
+<<if ($args[1] != "Pit") && ($args[1] != "Coursing Association")>>
+
+	<<removeJob $args[0] $args[0].assignment>> /* sets _wID and _wi */
+
+	/% use .toLowerCase() to get rid of a few dupe conditions. %/
+	<<switch $args[1].toLowerCase()>>
+		<<case "be confined in the arcade" "arcade">>
+			<<set $args[0].assignment = "be confined in the arcade",    $args[0].assignmentVisible = 0, $arcadeSlaves++, $ArcadeiIDs.push(_wID)>>
+		<<case "work in the brothel" "brothel">>
+			<<set $args[0].assignment = "work in the brothel",          $args[0].assignmentVisible = 0, $brothelSlaves++, $BrothiIDs.push(_wID)>>
+		<<case "be confined in the cellblock" "cellblock">>
+			<<set $args[0].assignment = "be confined in the cellblock", $args[0].assignmentVisible = 0, $cellblockSlaves++, $CellBiIDs.push(_wID)>>
+		<<case "get treatment in the clinic" "clinic">>
+			<<set $args[0].assignment = "get treatment in the clinic",  $args[0].assignmentVisible = 0, $clinicSlaves++, $CliniciIDs.push(_wID)>>
+		<<case "serve in the club" "club">>
+			<<set $args[0].assignment = "serve in the club",            $args[0].assignmentVisible = 0, $clubSlaves++, $ClubiIDs.push(_wID)>>
+		<<case "work in the dairy" "dairy">>
+			<<set $args[0].assignment = "work in the dairy",            $args[0].assignmentVisible = 0, $dairySlaves++, $DairyiIDs.push(_wID)>>
+		<<case "live with your head girl" "head girl suite" "hgsuite">>
+			<<set $args[0].assignment = "live with your Head Girl",     $args[0].assignmentVisible = 0, $HGSuiteSlaves++, $HGSuiteiIDs.push(_wID)>>
+		<<case "serve in the master suite" "master suite" "mastersuite">>
+			<<set $args[0].assignment = "serve in the master suite",    $args[0].assignmentVisible = 0, $masterSuiteSlaves++, $MastSiIDs.push(_wID)>>
+		<<case "learn in the schoolroom" "schoolroom">>
+			<<set $args[0].assignment = "learn in the schoolroom",      $args[0].assignmentVisible = 0, $schoolroomSlaves++, $SchlRiIDs.push(_wID)>>
+		<<case "work as a servant" "servants' quarters" "servantsquarters">>
+			<<set $args[0].assignment = "work as a servant",            $args[0].assignmentVisible = 0, $servantsQuartersSlaves++, $ServQiIDs.push(_wID)>>
+		<<case "rest in the spa" "spa">>
+			<<set $args[0].assignment = "rest in the spa",              $args[0].assignmentVisible = 0, $spaSlaves++, $SpaiIDs.push(_wID)>>
+		<<case "be the attendant" "be your concubine" "be the dj" "be the madam" "be the milkmaid" "be the nurse" "be the schoolteacher" "be the stewardess" "be the wardeness">>
+			<<set $args[0].assignment = $args[1],                       $args[0].assignmentVisible = 0>>     /* non-visible leadership roles */
+		<<case "be your agent" "live with your agent">>
+			<<set $args[0].assignment = $args[1],                       $args[0].assignmentVisible = 0,      $args[0].useRulesAssistant = 0>> /* non-visible roles exempt from Rules Assistant */
+		<<case "choose her own job">>
+			<<set $args[0].assignment = $args[1],                       $args[0].choosesOwnAssignment = 1>>  /* removeJob already set assignmentVisible = 1 */
+		<<default>>
+			<<set $args[0].assignment = $args[1]>>                      /* removeJob already set assignmentVisible = 1 and choosesOwnAssignment = 0 */
+	<</switch>>
+
+	<<if _wID == $personalAttention && $args[0].assignmentVisible == 0>>
+		<<set $personalAttention = "business">>
+		$args[0].slaveName no longer has your personal attention; you plan to focus on $personalAttention.
+	<</if>>
+
+	<<if _wi >= 0>>
+		<<set $slaves[_wi] = $args[0]>> /* save changes to slave array */
+	<</if>>
+
+<</if>> /* not Pit or Coursing Association */
+<</widget>>
+
+/%
+	Call as <<removeJob slaveObject $returnTo | _currentRule.facilityRemove | "serve in the master suite">>
+	$args[0] slave object. *MUST be present*
+	$args[1] Job to remove slave from. Will accept the $returnTo vars and the _currentRule.assignFacility vars and the actual job assignments "serve in the master suite" etc.
+
+	This is basically a Widget version of Retrieve but will work anywhere. It changes the assignment and saves to the slaves[..] array, and changes your $args[0] var sent.
+	Retrieve overrides the 'rest' in most cases.
+%/
+<<widget removeJob>>
+<<set _wID = $args[0].ID>>
+<<set _wi = $slaves.findIndex(function(s) { return s.ID === _wID; })>>
+
+<<if ($args[1] == "Pit")>>
+	<<set $fighterIDs.delete(_wID)>>
+
+<<elseif ($args[1] == "Coursing Association")>>
+	<<set $Lurcher = 0>>
+
+<<else>>
+
+	<<if $HeadGirl != 0      && _wID == $HeadGirl.ID>><<set $HeadGirl = 0>><</if>>
+	<<if $Recruiter != 0     && _wID == $Recruiter.ID>><<set $Recruiter = 0>><</if>>
+	<<if $Bodyguard != 0     && _wID == $Bodyguard.ID>><<set $Bodyguard = 0>><</if>>
+	<<if $Madam != 0         && _wID == $Madam.ID>><<set $Madam = 0>><</if>>
+	<<if $DJ != 0            && _wID == $DJ.ID>><<set $DJ = 0>><</if>>
+	<<if $Milkmaid != 0      && _wID == $Milkmaid.ID>><<set $Milkmaid = 0>><</if>>
+	<<if $Schoolteacher != 0 && _wID == $Schoolteacher.ID>><<set $Schoolteacher = 0>><</if>>
+	<<if $Attendant != 0     && _wID == $Attendant.ID>><<set $Attendant = 0>><</if>>
+	<<if $Nurse != 0         && _wID == $Nurse.ID>><<set $Nurse = 0>><</if>>
+	<<if $Stewardess != 0    && _wID == $Stewardess.ID>><<set $Stewardess = 0>><</if>>
+	<<if $Wardeness != 0     && _wID == $Wardeness.ID>><<set $Wardeness = 0>><</if>>
+	<<if $Concubine != 0     && _wID == $Concubine.ID>><<set $Concubine = 0>><</if>>
+	<<if $Collectrix != 0    && _wID == $Collectrix.ID>><<set $Collectrix = 0>><</if>>
+
+	/% use .toLowerCase() to get rid of a few dupe conditions. %/
+	<<switch $args[1].toLowerCase()>>
+		<<case "be confined in the arcade" "arcade">>
+			<<set $args[0].assignment = "work a glory hole">>
+			<<set $ArcadeiIDs.delete(_wID), $arcadeSlaves-->>
+		<<case "work in the brothel" "brothel">>
+			<<set $args[0].assignment = "whore">>
+			<<set $BrothiIDs.delete(_wID), $brothelSlaves-->>
+		<<case "be confined in the cellblock" "cellblock">>
+			<<set $args[0].assignment = "rest">>
+			<<set $CellBiIDs.delete(_wID), $cellblockSlaves-->>
+		<<case "get treatment in the clinic" "clinic">>
+			<<set $args[0].assignment = "rest">>
+			<<set $CliniciIDs.delete(_wID), $clinicSlaves-->>
+		<<case "serve in the club" "club">>
+			<<set $args[0].assignment = "serve the public">>
+			<<set $ClubiIDs.delete(_wID), $clubSlaves-->>
+		<<case "work in the dairy" "dairy">>
+			<<set $args[0].assignment = "get milked">>
+			<<set $DairyiIDs.delete(_wID), $dairySlaves-->>
+		<<case "learn in the schoolroom" "schoolroom">>
+			<<set $args[0].assignment = "rest">>
+			<<set $SchlRiIDs.delete(_wID), $schoolroomSlaves-->>
+		<<case "rest in the spa" "spa">>
+			<<set $args[0].assignment = "rest">>
+			<<set $SpaiIDs.delete(_wID), $spaSlaves-->>
+		<<case "work as a servant" "servants' quarters" "servantsquarters">>
+			<<set $args[0].assignment = "be a servant">>
+			<<set $ServQiIDs.delete(_wID), $servantsQuartersSlaves-->>
+		<<case "serve in the master suite" "master suite" "mastersuite">>
+			<<set $args[0].assignment = "please you">>
+			<<set $MastSiIDs.delete(_wID), $masterSuiteSlaves-->>
+		<<case "live with your head girl" "head girl suite" "hgsuite">>
+			<<set $args[0].assignment = "rest">>
+			<<set $HGSuiteiIDs.delete(_wID), $HGSuiteSlaves-->>
+		<<case "be your head girl">>
+			<<set $args[0].assignment = "rest">>
+			<<if $HGSuiteEquality == 0 && $personalAttention == "HG">>
+				<<set $personalAttention = "business">>
+				You no longer have a slave assigned to be your Head Girl, so you turn your personal attention to focus on $personalAttention.
+			<</if>>
+		<<default>>
+			<<set $args[0].assignment = "rest">>
+	<</switch>>
+
+	<<set $args[0].assignmentVisible = 1, $args[0].choosesOwnAssignment = 0, $args[0].sentence = 0>>
+
+	<<if _wi >= 0>>
+		<<set $slaves[_wi] = $args[0]>> /* save changes to slave array */
+	<</if>>
+
+<</if>> /* not Pit or Coursing Association */
+<</widget>>

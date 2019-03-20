@@ -1,0 +1,269 @@
+:: FAbuse [nobr]
+
+<<if ($activeSlave.ID == $Bodyguard.ID)>>
+	<<set $gameover = "idiot ball">><<goto "Gameover">>
+<</if>>
+
+<<set $activeSlave.currentSummary = 0>>
+<<set _asspain = 0>>
+
+<<if ($activeSlave.amp == 1)>>
+	You set her helpless form down for abuse. Brutalizing her is almost childishly easy; her limbless torso leaves her at your mercy.
+<<else>>
+	You call her over so you can abuse the <<if $seeRace == 1>>$activeSlave.race <</if>>bitch. You get things started with an open-handed slap across the face<<if !canSee($activeSlave)>>; she never saw it coming<</if>>. As she reels in shock and pain, you follow up with
+	<<if ($activeSlave.dick > 0)>>
+		a vicious slap to her cock,
+	<<elseif ($activeSlave.clit > 0)>>
+		a vicious slap to her exposed clit,
+	<<elseif ($activeSlave.nipples == "huge")>>
+		a vicious jerk on her big nipples,
+	<<elseif ($activeSlave.nipples == "inverted")>>
+		a vicious pinch to each side of her sensitive, fully inverted nipples,
+	<<elseif ($activeSlave.preg > 10)>>
+		a vicious slap across her pregnant belly,
+	<<elseif ($activeSlave.heels > 0)>>
+		a vicious thrust to her altered tendons,
+	<<elseif ($activeSlave.boobs >= 800)>>
+		a vicious slap across her massive breasts,
+	<<elseif ($activeSlave.vaginalAccessory !== "chastity belt")>>
+		a vicious slap on the mons,
+	<<else>>
+		a vicious jerk on her nipples,
+	<</if>>
+
+	which causes her to collapse to the floor in agony.
+	<<if ($activeSlave.clothes !== "no clothing")>>
+		You tell her she has ten seconds to get naked.
+	<</if>>
+	<<if ($activeSlave.clothes == "uncomfortable straps")>>
+		In her haste to get out of her straps she trips and falls flat.
+	<<elseif ($activeSlave.clothes == "clubslut netting")>>
+		In her haste to get out of her slutty netting she trips and falls flat.
+	<<elseif ($activeSlave.clothes == "shibari ropes")>>
+		In her haste to get out of her shibari ropes she only manages to get tangled and fall over.
+	<<elseif ($activeSlave.clothes == "restrictive latex") || ($activeSlave.clothes == "a latex catsuit")>>
+		In her haste to get out of her clinging latex she trips and falls flat in a tangle of latex and trembling flesh.
+	<<elseif ($activeSlave.clothes == "a military uniform")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll damage her shirt.
+	<<elseif ($activeSlave.clothes == "a nice nurse outfit")>>
+		She quickly tears off her loose scrubs.
+	<<elseif ($activeSlave.clothes == "a mini dress")>>
+		She struggles to take off her tight mini dress.
+	<<elseif ($activeSlave.clothes == "attractive lingerie")>>
+		She almost tears her delicate lingerie in her haste to avoid punishment.
+	<<elseif ($activeSlave.clothes == "a succubus outfit")>>
+		She struggles with her leather corset.
+	<<elseif ($activeSlave.clothes == "a cheerleader outfit")>>
+		She yanks her cheerleader skirt down and pulls her slutty top off.
+	<<elseif ($activeSlave.clothes == "a string bikini")>>
+		She gives herself a nasty pinch between the legs in her haste to get out of her string bottom.
+	<<elseif ($activeSlave.clothes == "a fallen nuns habit")>>
+		She tugs desperately at the laces of her tight latex nun getup.
+	<<elseif ($activeSlave.clothes == "a chattel habit")>>
+		She shucks her habit off easily, since it was designed to be removed quickly.
+	<<elseif ($activeSlave.clothes == "a penitent nuns habit")>>
+		She pulls her coarse habit over her head, revealing her chafed flesh.
+	<<elseif ($activeSlave.clothes == "cutoffs and a t-shirt")>>
+		She shimmies out of her cutoffs and whips her t-shirt over her head.
+	<<elseif ($activeSlave.clothes == "a slutty nurse outfit")>>
+		Getting out of her tight nurse getup in that amount of time is impossible, but she tries anyway.
+	<<elseif ($activeSlave.clothes == "a schoolgirl outfit")>>
+		Her schoolgirl outfit is easily stripped off: she pulls down her skimpy skirt and tears off her little blouse, and she's nude.
+	<<elseif ($activeSlave.clothes == "a kimono")>>
+		Getting out of her kimono in that amount of time is flagrantly impossible, but she tries anyway.
+	<<elseif ($activeSlave.clothes == "a hijab and abaya")>>
+		Because she's nude under her hijab and abaya, she simply lifts it over her head.
+	<<elseif ($activeSlave.clothes == "battledress")>>
+		She strips her tank top off in one motion, unfastens her belt, and pulls down her pants, though her boots defeat her and stay on.
+	<<elseif ($activeSlave.clothes == "a slutty outfit")>>
+		She hurriedly strips herself out of her carefully chosen outfit.
+	<<elseif ($activeSlave.clothes == "a slave gown")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll rip her delicate gown.
+	<<elseif ($activeSlave.clothes == "a halter top dress")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll rip her delicate dress.
+	<<elseif ($activeSlave.clothes == "a ball gown")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll rip her delicate silken ball gown.
+	<<elseif ($activeSlave.clothes == "nice business attire")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll damage her blouse.
+	<<elseif ($activeSlave.clothes == "slutty business attire")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll tear her suit in her haste.
+	<<elseif ($activeSlave.clothes == "a nice maid outfit")>>
+		She pulls her dress over her head and quickly undoes the buttons of her blouse, one after the other.
+	<<elseif ($activeSlave.clothes == "a slutty maid outfit")>>
+		Her short dress comes off easily, but she fumbles with the buttons on her tight blouse.
+	<<elseif ($activeSlave.clothes == "a comfortable bodysuit")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll stretch out her bodysuit.
+	<<elseif ($activeSlave.clothes == "a leotard")>>
+		Her leotard is tight enough that she has to struggle mightily to get it off that quickly.
+	<<elseif ($activeSlave.clothes == "a bunny outfit")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll put runs in her hose.
+	<<elseif ($activeSlave.clothes == "harem gauze")>>
+		She's desperately torn between hurry to avoid punishment and fear she'll tear her flimsy gauze.
+	<<elseif ($activeSlave.clothes == "slutty jewelry")>>
+		She hurriedly strips fine jewelry from her neck, wrists, and ankles.
+	<<elseif ($activeSlave.bellyAccessory == "a corset")>>
+		Her fingers fumble desperately with the straps of her corset.
+	<<elseif ($activeSlave.bellyAccessory == "an extreme corset")>>
+		Her fingers fumble desperately with the bindings of her corset, and she hyperventilates within its embrace as she works.
+	<</if>>
+<</if>>
+
+<<if ($PC.dick == 0)>>
+	<<if ($activeSlave.amp !== 1) && ($activeSlave.clothes !== "no clothing")>>While she strips, you<<else>>You<</if>> don a cruelly large strap-on, earning a frightened glance from your victim.
+<<elseif $PC.vagina == 1>>
+	While she strips, your stiffening cock rises, revealing your pussy and earning a frightened stare from your victim.
+<</if>>
+
+<<if ($activeSlave.amp == 1)>>
+	<<if ($activeSlave.clothes !== "no clothing")>>You rip the clothes off her limbless torso<<else>>You walk up to her<</if>>, and spank her brutally causing her to be spun around to present
+<<else>>
+	You order her to present
+<</if>>
+<<if ($activeSlave.vagina > -1)>>her holes<<else>>her hole<</if>>, to you
+
+<<if ($activeSlave.amp !== 1)>>
+and spank her brutally
+<<if $activeSlave.devotion < -50>>
+	until she complies.
+<<elseif $activeSlave.devotion < -20>>
+	as she slowly complies.
+<<elseif $activeSlave.devotion <= 20>>
+	as she fearfully complies.
+<<elseif $activeSlave.devotion <= 50>>
+	as she rushes to comply.
+<<else>>
+	as she complies.
+<</if>>
+<</if>>
+
+<<if $seeRace == 1>>
+<<if $activeSlave.race == "white">>
+	Her white, $activeSlave.skin ass shows the spanking well.
+<<elseif $activeSlave.race == "asian">>
+	Her asian, $activeSlave.skin ass shows the spanking well.
+<<elseif $activeSlave.race == "middle eastern">>
+	Her arab, $activeSlave.skin ass barely shows the spanking.
+<<elseif $activeSlave.race == "latina">>
+	Her latina, $activeSlave.skin ass barely shows the spanking.
+<<elseif $activeSlave.race == "black">>
+	Her black, $activeSlave.skin ass barely shows any marks from the spanking.
+<</if>>
+<</if>>
+
+<<if ($activeSlave.dickAccessory == "chastity")>>
+	You rip her dick chastity off her, though she knows not to be relieved. Her cock is now vulnerable, not free.
+<</if>>
+
+<<if ($activeSlave.anus == 0)>>
+	The bitch's still a butthole virgin and you don't mean to take that now, but you torture her with the threat of raping her virgin ass for a while before settling for her gagging throat
+	<<set $activeSlave.oralCount++, $oralTotal++>>
+<<elseif ($activeSlave.vaginalAccessory == "chastity belt")>>
+	The bitch's wearing a chastity belt, so she isn't surprised when you shove <<if ($PC.dick == 0)>>the strap-on<<else>>your dick<</if>> up her butt. What surprises her is when you slide a finger or two in alongside your dick to stretch her to the point of pain
+	<<AnalVCheck>>
+	<<set _asspain = 1>>
+<<elseif ($activeSlave.vagina == 0)>>
+	The bitch's still a virgin and you don't mean to take that now, but you torture her with the threat of raping her virgin pussy for a while before settling for her gagging throat
+	<<set $activeSlave.oralCount++, $oralTotal++>>
+<<elseif ($activeSlave.preg > 10)>>
+	The bitch is pregnant, so hard intercourse will be uncomfortable and even worrying for her. You have hard intercourse. She sobs as you saw the huge weight of her belly back and forth without mercy, and whines as she feels your cockhead batter her womb.<<if ($PC.vagina == 1) && ($PC.dick == 1)>> Fortunately for her, this gets you so wet that some of your pussyjuice makes it down onto your shaft and serves as improvised lube.<</if>> More cum won't make the bitch more pregnant, but you cum inside her anyway
+	<<VaginalVCheck>>
+<<elseif ($activeSlave.vagina == 1)>>
+	The bitch's pussy is tight, so you ram <<if ($PC.dick == 0)>>the strap-on<<else>>your dick<</if>> into her without preamble and fuck her hard and fast.<<if ($PC.vagina == 1) && ($PC.dick == 1)>> Fortunately for her, this gets you so wet that some of your pussyjuice makes it down onto your shaft and serves as improvised lube.<</if>> Her cunt spasms with the pain of the rape. You cum in no time
+	<<VaginalVCheck>>
+<<elseif ($activeSlave.anus == 1)>>
+	The bitch's butt is tight, so you ram <<if ($PC.dick == 0)>>the strap-on<<else>>your dick<</if>> into her without lubricant and sodomize her as hard as you can without damaging your property.<<if ($PC.vagina == 1) && ($PC.dick == 1)>> Fortunately for her, this gets you so wet that some of your pussyjuice makes it down onto your shaft and serves as improvised lube.<</if>> Her asshole spasms with the pain of the rape. You cum explosively
+	<<AnalVCheck>>
+	<<set _asspain = 1>>
+<<elseif ($activeSlave.dick > 0) && ($activeSlave.balls > 0)>>
+	You ram <<if ($PC.dick == 0)>>the strap-on<<else>>your dick<</if>> into her sissy butt without lubricant. As she flinches you announce that she'll be taking part in giving herself anal pain. She humps into you lamely, so you administer a truly agonizing slap to her balls<<if ($PC.dick == 0)>><<else>> that makes her anal ring stiffen deliciously around your dick<</if>>. To avoid further punishment she fucks herself against you almost hard enough to hurt herself.<<if ($PC.vagina == 1) && ($PC.dick == 1)>> Fortunately for her, this gets you so wet that some of your pussyjuice makes it down onto your shaft and serves as improvised lube.<</if>> You orgasm explosively
+	<<AnalVCheck>>
+	<<set _asspain = 1>>
+<<elseif ($activeSlave.dick > 0)>>
+	You ram <<if ($PC.dick == 0)>>the strap-on<<else>>your dick<</if>> into her gelded butt without lubricant and sodomize her as hard as you can without damaging your property.<<if $PC.vagina == 1>> Fortunately for her, this gets you so wet that some of your pussyjuice makes it down onto your shaft and serves as improvised lube.<</if>> She's such a slut that she shows signs of enjoyment, but you put a stop to that whenever it happens by slapping and flicking her cock. You cum explosively
+	<<AnalVCheck>>
+	<<set _asspain = 1>>
+<<else>>
+	She's got no special physical targets for abuse, so you just rape her hard and fast, raining stinging slaps down on her as you do. She cries and whimpers; you finish
+	<<BothVCheck>>
+<</if>>
+and leave her sobbing on the floor <<if ($PC.dick == 0)>>as you shuck off the strap-on and drop it on her face<<else>>with cum dripping out of her<</if>>.
+
+<<if $activeSlave.minorInjury == 0>>
+<<if _asspain == 1>>
+	The anal rape leaves her with a sore butthole.
+<<elseif random(1,100) > 50>>
+	<<set $activeSlave.minorInjury = either("black eye", "split lip", "bruise")>>
+	Your abuse gave her a $activeSlave.minorInjury.
+<</if>>
+<</if>>
+
+<<if ($activeSlave.fetish == "masochist") && ($activeSlave.fetishStrength > 60) && ($activeSlave.fetishKnown == 1)>>
+	She secretly got off on the pain and humiliation.
+<<elseif $activeSlave.devotion < -50>>
+	Her @@.mediumorchid;hatred@@ and @@.gold;fear@@ of you have increased.
+	<<set $activeSlave.devotion-=4, $activeSlave.trust-=4>>
+<<elseif $activeSlave.devotion < -20>>
+	Her @@.mediumorchid;resistance@@ to and @@.gold;fear@@ of you have increased.
+	<<set $activeSlave.devotion-=4, $activeSlave.trust-=4>>
+<<elseif $activeSlave.devotion <= 20>>
+	Her @@.gold;fear@@ of you is tinged with @@.mediumorchid;hatred.@@
+	<<set $activeSlave.devotion-=4, $activeSlave.trust-=4>>
+<<elseif $activeSlave.devotion <= 50>>
+	Her @@.mediumorchid;obedience to you is reduced,@@ and she @@.gold;fears@@ further abuse.
+	<<set $activeSlave.devotion-=4, $activeSlave.trust-=4>>
+<<else>>
+	She is so devoted to you that she accepts your abuse as her just due, but she now @@.gold;fears@@ you more and trusts you less.
+	<<set $activeSlave.trust-=4>>
+<</if>>
+
+<<if (random(1,100) > (20+$activeSlave.devotion+$activeSlave.trust))>>
+	<<if ($activeSlave.fetish !== "submissive") && ($activeSlave.fetish !== "masochist")>>
+	<<set _seed = random(1,8)>>
+	Brutal abuse has left her
+	<<if (_seed == 1) && ($activeSlave.behavioralFlaw !== "odd")>>
+		@@.red;acting strangely.@@
+		<<set $activeSlave.behavioralFlaw = "odd">>
+	<<elseif (_seed == 2) && ($activeSlave.behavioralFlaw !== "anorexic")>>
+		@@.red;starving herself@@ in a crippling attempt to be pretty.
+		<<set $activeSlave.behavioralFlaw = "anorexic">>
+	<<elseif (_seed == 3) && ($activeSlave.behavioralFlaw !== "gluttonous")>>
+		@@.red;stress eating@@ whenever she can.
+		<<set $activeSlave.behavioralFlaw = "gluttonous">>
+	<<elseif (_seed == 4) && ($activeSlave.behavioralFlaw !== "devout")>>
+		@@.red;praying in private@@ whenever she can.
+		<<set $activeSlave.behavioralFlaw = "devout">>
+	<<elseif (_seed == 5) && ($activeSlave.sexualFlaw !== "apathetic")>>
+		@@.red;sexually apathetic,@@ since she feels it cannot go well for her.
+		<<set $activeSlave.sexualFlaw = "apathetic">>
+	<<elseif (_seed == 6) && ($activeSlave.sexualFlaw !== "crude")>>
+		@@.red;sexually crude,@@ out of an unconscious belief that sex is ugly and unworthy of effort.
+		<<set $activeSlave.sexualFlaw = "crude">>
+	<<elseif (_seed == 7) && ($activeSlave.sexualFlaw !== "judgemental")>>
+		@@.red;sexually judgemental,@@ out of an unconscious desire to disqualify people from being good enough to have sex with her.
+		<<set $activeSlave.sexualFlaw = "judgemental">>
+	<<elseif ($PC.dick == 1)>>
+		@@.red;hating men,@@ since you forced your cock on her.
+		<<set $activeSlave.behavioralFlaw = "hates men">>
+	<<else>>
+		@@.red;hating women,@@ since you forced your cunt on her.
+		<<set $activeSlave.behavioralFlaw = "hates women">>
+	<</if>>
+	<</if>>
+<</if>>
+<<if (random(1,100) > (50+$activeSlave.devotion+$activeSlave.trust))>>
+	<<if ($activeSlave.fetish !== "mindbroken") && ($activeSlave.fetishKnown == 0) && ($activeSlave.clitSetting !== $activeSlave.fetish)>>
+	Her acceptance of your abuse has twisted her
+	<<if (random(1,2) == 1) && ($activeSlave.fetish !== "submissive")>>
+		@@.lightcoral;sexuality towards submissiveness.@@
+		<<set $activeSlave.fetish = "submissive", $activeSlave.fetishKnown = 1>>
+	<<elseif ($activeSlave.fetish !== "masochism")>>
+		@@.lightcoral;sexuality towards masochism.@@
+		<<set $activeSlave.fetish = "masochism", $activeSlave.fetishKnown = 1>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if passage() !== "Slave Interact">>
+	<<set $nextLink = "AS Dump">>
+<</if>>
+

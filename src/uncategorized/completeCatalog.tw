@@ -1,0 +1,24 @@
+:: Complete Catalog [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Main">>
+
+//This is the complete catalog of slaves that you can acquire from other slaveowners. Most of these slaves are not for sale, so persuading their owners to part with them will be extremely expensive.//
+
+<br><br>
+
+<<for $i = 0; $i < $heroSlaves.length; $i++>>
+	<<if $i > 0>> | <</if>>
+	<<print "[[$heroSlaves[$i].slaveName|Complete Catalog][$activeSlave = getHeroSlave($heroSlaves[" + $i + "], $baseHeroSlave)]]">>
+<</for>>
+
+<br><br>
+
+<<include "Long Slave Description">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost = (10*Math.trunc(($slaveCost/10)*2))>>
+
+<br><br>
+
+The offered price is ¤<<print $slaveCost>>.
+<<set >>
+[[Buy her slave contract|New Slave Intro][$cash -= $slaveCost, $activeSlave.weekAcquired = $week, $activeSlave.slaveCost = $slaveCost, $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Main", $specialSlave = 1]]

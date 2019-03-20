@@ -1,0 +1,39 @@
+:: minor injury response [nobr]
+
+<<if $arcologies[0].FSDegradationist > 20>>
+
+She carries on, knowing that in your degradationist arcology, this is accepted behavior.
+
+<<elseif $arcologies[0].FSPaternalist > 20>>
+
+<<if ($arcologyUpgrade.drones == 1) && (random(1,100) > 50)>>
+	The security drones successfully detain him and oblige him to pay significant @@.yellowgreen;compensation,@@ since abusing slaves is discouraged here.
+	<<slavePaid $slaves[$i] 50>>
+<<elseif ($arcologyUpgrade.grid == 1) && (random(1,100) > 50)>>
+	The computer systems successfully detain him and require him to pay significant @@.yellowgreen;compensation,@@ since abusing slaves is discouraged here.
+	<<slavePaid $slaves[$i] 50>>
+<<elseif ($slaves[$i].whoreSkill > random(1,100))>>
+	$slaves[$i].slaveName is used to this sort of thing, and convinces him to pay significant @@.yellowgreen;compensation,@@ since abusing slaves is discouraged here.
+	<<slavePaid $slaves[$i] 50>>
+<<elseif ($slaves[$i].combatSkill > 0)>>
+	$slaves[$i].slaveName can take care of herself, and she successfully forces him to pay significant @@.yellowgreen;compensation,@@ since abusing slaves is discouraged here.
+	<<slavePaid $slaves[$i] 50>>
+<</if>>
+
+<<else>>
+
+<<if ($arcologyUpgrade.drones == 1) && (random(1,100) > 50)>>
+	The security drones successfully detain him and oblige him to pay minor @@.yellowgreen;compensation.@@
+	<<slavePaid $slaves[$i] 10>>
+<<elseif ($arcologyUpgrade.grid == 1) && (random(1,100) > 50)>>
+	The computer systems successfully detain him and require him to pay minor @@.yellowgreen;compensation.@@
+	<<slavePaid $slaves[$i] 10>>
+<<elseif ($slaves[$i].whoreSkill > random(1,100))>>
+	$slaves[$i].slaveName is used to this sort of thing, and convinces him to pay minor @@.yellowgreen;compensation.@@
+	<<slavePaid $slaves[$i] 10>>
+<<elseif ($slaves[$i].combatSkill > 0)>>
+	$slaves[$i].slaveName can take care of herself, and she successfully forces him to pay minor @@.yellowgreen;compensation.@@
+	<<slavePaid $slaves[$i] 10>>
+<</if>>
+
+<</if>>

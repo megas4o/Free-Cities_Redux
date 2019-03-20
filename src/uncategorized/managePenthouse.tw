@@ -1,0 +1,227 @@
+:: Manage Penthouse [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main", $showEncyclopedia = 1, $encyclopedia = "What the Upgrades Do">>
+
+<<if $cheatMode == 1>>
+<center>
+//[[Cheat Edit Arcology|MOD_Edit Arcology Cheat][$cheater = 1]]//
+</center>
+<</if>>
+
+<<include "Office Description">>
+<<if $PC.career == "mercenary">>
+	You look back at the rifle. It could never hold a zero, and would fail to feed if it wasn't given just the right amount of lubricant. But sometimes, you'd give anything for one more mission with that shitty old rifle.
+<</if>>
+
+<br><br>
+
+__Penthouse Capacity__
+<br>
+
+The main penthouse dormitory, which houses slaves who aren't living in a facility and aren't granted a luxurious standard of living, has a capacity of ''$dormitory'' slaves.
+[[Expand the dormitory|Manage Penthouse][$cash -= Math.trunc($dormitory*1000*$upgradeMultiplierArcology), $dormitory += 10]]
+//Costs ¤<<print Math.trunc($dormitory*1000*$upgradeMultiplierArcology)>>//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Exceeding this limit is bad for slaves' health, devotion and trust//
+
+<br>
+
+The penthouse also features little individual rooms, which house slaves who do enjoy a luxurious standard of living. They have a capacity of ''$rooms'' slaves.
+[[Expand the rooms|Manage Penthouse][$cash -= Math.trunc($rooms*1000*$upgradeMultiplierArcology), $rooms += 5]]
+//Costs ¤<<print Math.trunc($rooms*1000*$upgradeMultiplierArcology)>>//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//The number of rooms determines the number of slaves that can be granted luxury//
+
+<br><br>
+
+__Penthouse Facilities__
+
+<br>
+
+<<if $masterSuite == 0>>
+	[[Improve your master bedroom to house a harem of personal toys|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $masterSuite = 1]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	Your penthouse is capped by a master suite with room for an entire harem of personal toys.
+<</if>>
+
+<br>
+
+<<if $servantsQuarters == 0>>
+	[[Build a dormitory to house large numbers of house servants|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $servantsQuarters = 5]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	Your penthouse includes a dormitory to house large numbers of house servants.
+<</if>>
+
+<br>
+
+<<if $schoolroom == 0>>
+	[[Build a schoolroom where slaves can be educated|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $schoolroom = 5]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	Your penthouse includes a schoolroom where slaves can be educated.
+<</if>>
+
+<br>
+
+<<if $spa == 0>>
+	[[Install open baths to provide relaxation space for resting slaves|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $spa = 5]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The penthouse includes a fully appointed spa where slaves can rest and recuperate.
+<</if>>
+
+<br>
+
+<<if $clinic == 0>>
+	[[Expand the surgical recovery area to accommodate patients and a nurse|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $clinic = 5]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The surgical recovery area has been expanded to take in more unhealthy slaves and be staffed by a nurse.
+<</if>>
+
+<br>
+
+<<if $cellblock == 0>>
+	[[Construct cells to properly confine disobedient slaves|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $cellblock = 5]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The lower level of the penthouse includes a hallway of cells to confine slaves in.
+<</if>>
+
+<br>
+
+<<if $HGSuite != 1>>
+	[[Build a small suite for a Head Girl to live in|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $HGSuite = 1]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	There is a small but handsome suite next to yours reserved for the Head Girl.
+<</if>>
+
+
+<br><br>
+
+__Penthouse Upgrades__
+
+<br>
+
+<<if $servantMilkers != 1>>
+	Your penthouse is equipped with basic milkers for lactating slaves. [[Install more and tie them into the liquid systems|Manage Penthouse][$cash -= Math.trunc(25000*$upgradeMultiplierArcology), $servantMilkers = 1]]
+	//Costs ¤<<print Math.trunc(25000*$upgradeMultiplierArcology)>>//
+<<else>>
+	Every room in the penthouse is equipped with milkers tied into the liquid systems, letting slaves with full udders drain them anywhere.
+<</if>>
+
+<br>
+
+<<if $boobAccessibility != 1>>
+	There are no special accessibility provisions for slaves with enormous breasts. [[Remodel for accessibility|Manage Penthouse][$cash -= Math.trunc(50000*$upgradeMultiplierArcology), $boobAccessibility = 1]]
+	//Costs ¤<<print Math.trunc(50000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The entire penthouse has been remodeled to make life with enormous breasts easier. The doorways have been widened, and tables, sinks and other items now have two levels: one at shoulder height for slaves to use, and another at waist height for them to rest their tits on while they do.
+<</if>>
+
+<br>
+
+<<if $feeder == 0>>
+	[[Upgrade the kitchen's nutritional sensing systems|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $feeder = 1]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The kitchen mounts sensors to refine diets in real time.
+<</if>>
+
+<br>
+
+<<if $cockFeeder == 0>>
+	[[Enhance the feeding system with faux phalli|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $cockFeeder = 1]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The kitchen dispenses food from phalli slaves must suck off in order to eat. //[[Remove them|Manage Penthouse][$cockFeeder = 0]]//
+<</if>>
+
+<br>
+
+<<if $suppository == 0>>
+	[[Replace the drug dispensers with reciprocating dildo suppositories|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $suppository = 1]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The kitchen applies drugs that can be absorbed rectally by assfucking slaves with dildos that cum the pharmaceuticals.  //[[Remove them|Manage Penthouse][$suppository = 0]]//
+<</if>>
+
+<br>
+
+<<if $studio == 0>>
+	[[Install a media hub to convert slave video feeds into pornography|Manage Penthouse][$cash -= Math.trunc(10000*$upgradeMultiplierArcology), $studio = 1]]
+	//Costs ¤<<print Math.trunc(10000*$upgradeMultiplierArcology)>>//
+<<else>>
+	The arcology's video systems are connected to a media hub that can convert slave video feeds into pornography.
+<</if>>
+
+<br>
+
+<<if $dojo == 0>>
+	[[Set up a personal armory to support a bodyguard|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $dojo = 1]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<elseif $dojo == 1>>
+	There is a small armory next to your office that can support a bodyguard. [[Upgrade the armory with a private room for the bodyguard|Manage Penthouse][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $dojo = 2]]
+	//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+<<else>>
+	There is a small armory next to your office that can support a bodyguard, with a little room for her to rest in when off duty.
+<</if>>
+
+<br>
+
+<<if $surgeryUpgrade == 0>>
+<<if $rep > 10000>>
+	[[Upgrade the remote surgery|Manage Penthouse][$cash -= Math.trunc(50000*$upgradeMultiplierArcology), $surgeryUpgrade = 1]]
+	//Costs ¤<<print Math.trunc(50000*$upgradeMultiplierArcology)>>//
+<<else>>
+	//You lack the reputation to secure rare surgery upgrades//
+<</if>>
+<<else>>
+	Your remote surgery has been heavily upgraded and customized.
+<</if>>
+
+<br>
+
+<<if $dispensary == 0>>
+<<if $rep > 5000>>
+	[[Install a cutting-edge pharmaceutical fabricator|Manage Penthouse][$cash -= Math.trunc(50000*$upgradeMultiplierArcology), $dispensary = 1, $drugsCost = $drugsCost/2]]
+	//Costs ¤<<print Math.trunc(50000*$upgradeMultiplierArcology)>>//
+<<else>>
+	//You lack the reputation to obtain cutting-edge pharmaceutical technology//
+<</if>>
+<<else>>
+	There is a cutting-edge [[pharmaceutical fabricator|Dispensary]] attached to the surgery.
+<</if>>
+
+<br>
+
+<<switch $prostheticsUpgrade>>
+<<case 1>>
+There is a facility to construct mechanical prosthetic limbs for amputated slaves.
+<<if ($rep > 14000)>>
+	[[Research advanced prototype prosthetics|Manage Penthouse][$cash -= Math.trunc(100000*$upgradeMultiplierArcology), $prostheticsUpgrade = 2]]
+	//Costs ¤<<print Math.trunc(100000*$upgradeMultiplierArcology)>>//
+<<else>>
+	//You lack the reputation to research and produce prototype prosthetics.//
+<</if>>
+<<case 2>>
+There is a prosthetics facility upgraded to use advanced materials and designs.
+<<if ($rep > 16000)>>
+	[[Research high-tech cybernetic limbs|Manage Penthouse][$cash -= Math.trunc(100000*$upgradeMultiplierArcology), $prostheticsUpgrade = 3]]
+	//Costs ¤<<print Math.trunc(100000*$upgradeMultiplierArcology)>>//
+<<else>>
+	//You lack the reputation to research and produce prototype cybernetic limbs.//
+<</if>>
+<<case 3>>
+There is a high-tech facility to build prosthetics and state-of-the-art cybernetic replacement limbs.
+<<default>>
+<<if ($rep > 12000)>>
+	[[Construct a mechanical prosthetics facility|Manage Penthouse][$cash -= Math.trunc(100000*$upgradeMultiplierArcology), $prostheticsUpgrade = 1]]
+	//Costs ¤<<print Math.trunc(100000*$upgradeMultiplierArcology)>>//
+<<else>>
+	//You lack the reputation to construct a prosthetics facility.//
+<</if>>
+<</switch>>

@@ -1,0 +1,162 @@
+:: Dispensary [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Manage Penthouse", $showEncyclopedia = 1, $encyclopedia = "The Pharmaceutical Fab.">>
+
+//The pharmaceutical fabricator is running smoothly. It can quickly and cheaply replicate complex medications, and has already cut the cost of drugs for your slaves in half. It can easily produce advanced drugs should you obtain the data necessary to create them.//
+
+<br><br>
+
+<<if ($organFarmUpgrade == 0) && ($rep <= 10000*$upgradeMultiplierMedicine)>>
+	//You lack the reputation to access experimental organ farm parts//
+<</if>>
+
+<<if ($organFarmUpgrade == 0) && ($rep > 10000*$upgradeMultiplierMedicine)>>
+	[[Upgrade the fabricator with an experimental organ farm|Dispensary][$cash -= 50000*$upgradeMultiplierMedicine, $organFarmUpgrade = 1]]
+	//Costs ¤<<print 50000*$upgradeMultiplierMedicine>>//
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will allow the fabrication of tailored organs using the autosurgery.//
+<<elseif ($organFarmUpgrade > 0)>>
+	The fabricator is capable of growing organs.
+<</if>>
+
+<<if $organs.length > 0>>
+It is currently working on the following organs:
+	<<for $i = 0; $i < $organs.length; $i++>>
+	<<for $j = 0; $j < $slaves.length; $j++>>
+		<<if $slaves[$j].ID == $organs[$i].ID>>
+		<br>
+		$slaves[$j].slaveName's $organs[$i].type,
+		<<if $organs[$i].weeksToCompletion <= 0>>
+			ready for implantation.
+		<<else>>
+			$organs[$i].weeksToCompletion weeks from completion.
+		<</if>>
+		<<break>>
+		<</if>>
+	<</for>>
+	<</for>>
+<</if>>
+
+<br><br>
+
+The fabricator is producing
+<<if $injectionUpgrade == 0>>
+	standard growth hormones.
+	<<if $rep > 6000>>
+		[[Purchase data on prototype growth hormone tests|Dispensary][$cash -= 25000*$upgradeMultiplierMedicine, $injectionUpgrade = 1]]
+		//Costs ¤<<print 25000*$upgradeMultiplierMedicine>>//
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should improve the reliability of growth injections of all kinds.//
+	<<else>>
+		//You lack the reputation to obtain prototype medicines//
+	<</if>>
+<<elseif $injectionUpgrade == 1>>
+	prototype growth hormones.
+	<<if $rep > 10000>>
+		[[Upgrade the fabricator to customize each slave's growth hormones|Dispensary][$cash -= 50000*$upgradeMultiplierMedicine, $injectionUpgrade = 2]]
+		//Costs ¤<<print 50000*$upgradeMultiplierMedicine>>//
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should improve the reliability of growth injections of all kinds.//
+	<<else>>
+		//You lack the reputation to obtain prototype fabricator upgrades//
+	<</if>>
+<<elseif $injectionUpgrade == 2>>
+	prototype growth hormones.
+	<<if $rep > 14000>>
+		[[Upgrade the fabricator with prototype biomechanical microfactories|Dispensary][$cash -= 100000*$upgradeMultiplierMedicine, $injectionUpgrade = 3]]
+		//Costs ¤<<print 100000*$upgradeMultiplierMedicine>>//
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should improve the reliability of growth injections of all kinds.//
+	<<else>>
+		//You lack the reputation to obtain prototype biomechanical microfactories//
+	<</if>>
+<<else>>
+	the world's most effective growth hormones.
+<</if>>
+
+<br><br>
+
+The fabricator is producing
+<<if $hormoneUpgradeMood == 0>>
+	standardized hormone replacement therapies.
+	<<if $rep > 2000>>
+		[[Upgrade for individualized therapy|Dispensary][$cash -= 10000*$upgradeMultiplierMedicine, $hormoneUpgradeMood = 1]]
+		//Costs ¤<<print 10000*$upgradeMultiplierMedicine>>//
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should eliminate the occasional moodiness caused by generalized therapy.//
+	<<else>>
+		//You lack the reputation to obtain advanced drug manufacturing components//
+	<</if>>
+<<else>>
+	individualized hormone replacement therapies.
+<</if>>
+
+<br>
+
+The hormone replacement therapies
+<<if $hormoneUpgradePower == 0>>
+	are traditional: they're formulated to mimic natural hormones.
+	<<if $rep > 4000>>
+		[[Purchase data on advanced HRT|Dispensary][$cash -= 25000*$upgradeMultiplierMedicine, $hormoneUpgradePower = 1]]
+		//Costs ¤<<print 25000*$upgradeMultiplierMedicine>>//
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should increase the power of hormone therapies.//
+	<<else>>
+		//You lack the reputation to obtain prototype medicines//
+	<</if>>
+<<else>>
+	are advanced: they're formulated to improve on natural hormones.
+<</if>>
+
+<br>
+
+The hormone replacement therapies
+<<if $hormoneUpgradeShrinkage == 0>>
+	are broad-spectrum.
+	<<if $rep > 4000>>
+		[[Purchase data on targeted HRT|Dispensary][$cash -= 25000*$upgradeMultiplierMedicine, $hormoneUpgradeShrinkage = 1]]
+		//Costs ¤<<print 25000*$upgradeMultiplierMedicine>>//
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should reduce atrophy of organs corresponding to original sex.//
+	<<else>>
+		//You lack the reputation to obtain prototype medicines//
+	<</if>>
+<<else>>
+	are targeted, reducing atrophy of organs corresponding to original sex.
+<</if>>
+
+<br><br>
+
+<<if ($curativeUpgrade == 0) && ($rep > 6000*$upgradeMultiplierMedicine)>>
+	[[Purchase data on advanced curatives|Dispensary][$cash -= 25000*$upgradeMultiplierMedicine, $curativeUpgrade = 1]]
+	//Costs ¤<<print 25000*$upgradeMultiplierMedicine>>//
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should improve the effectiveness of curative treatment.//
+<<elseif ($curativeUpgrade == 1)>>
+	The fabricator is producing highly effective curative cocktails.
+<</if>>
+
+<br><br>
+
+<<if ($aphrodisiacUpgrade == 0) && ($rep > 6000*$upgradeMultiplierMedicine)>>
+	[[Purchase data on aphrodisiac withdrawal treatment|Dispensary][$cash -= 10000*$upgradeMultiplierMedicine, $aphrodisiacUpgrade = 1]]
+	//Costs ¤<<print 10000*$upgradeMultiplierMedicine>>//
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Should prevent most negative effects of withdrawal.//
+<<elseif ($aphrodisiacUpgrade == 1)>>
+	The fabricator is producing a substitute that will protect slaves from aphrodisiac withdrawal.
+<</if>>
+
+<br><br>
+
+<<if ($healthyDrugsUpgrade == 0)>>
+	<<if (($organFarmUpgrade == 1) && ($injectionUpgrade != 0) && ($curativeUpgrade == 1) && ($aphrodisiacUpgrade == 1))>>
+	<<if ($rep >= 15000*$upgradeMultiplierMedicine)>>
+		[[Fund research into drug formulations without negative physical side effects|Dispensary][$cash -= 500000*$upgradeMultiplierMedicine,$rep -= 15000*$upgradeMultiplierMedicine,$healthyDrugsUpgrade = 1]] //Costs ¤<<print 500000*$upgradeMultiplierMedicine>> and a great deal of reputation. Will prevent the negative side effects of excessive drug usage on your slaves.//
+	<<else>>
+		// You lack the reputation to access the technology necessary to develop advanced drug formulations. //
+	<</if>>
+	<<else>>
+	// You must purchase all other upgrades before developing advanced drug formulations. //
+	<</if>>
+<<else>>
+	The fabricator has been upgraded to optimize the structures of your other drugs, eliminating their negative side effects.
+<</if>>
+/* Code [draft] contributed by Anon1888 */
+
+<br><br>
+
+<<if ($arcologies[0].FSBodyPuristLaw == 1)>>
+	//The pharmaceutical fabricator is working with your body purist arcology to reduce long term drug side effects.//
+<</if>>

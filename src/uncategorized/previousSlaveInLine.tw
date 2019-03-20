@@ -1,0 +1,17 @@
+:: Previous Slave In Line
+
+<<silently>>
+
+<<set $i = $slaves.findIndex(function(s) { return s.ID == $activeSlave.ID; })>>
+<<set $slaves[$i] = $activeSlave>> /* save changes before switching */
+
+<<if $place == 0>>
+	<<set $activeSlave = $slavesInLine[$slavesInLine.length-1]>>
+<<else>>
+	<<set $activeSlave = $slavesInLine[$place-1]>>
+<</if>>
+
+<<goto "Slave Interact">>
+
+<</silently>>
+

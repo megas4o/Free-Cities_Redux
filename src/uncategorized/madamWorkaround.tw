@@ -1,0 +1,13 @@
+:: Madam Workaround [silently]
+
+<<if $Madam != 0>>
+	<<removeJob $Madam "be the Madam">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the Madam">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Madam = $slaves[$i]>>
+<</if>>
+
+<<goto "Brothel">>
+

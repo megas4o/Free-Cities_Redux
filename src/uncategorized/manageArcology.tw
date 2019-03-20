@@ -1,0 +1,113 @@
+:: Manage Arcology [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+<<if $cheatMode == 1>>
+<center>
+//[[Cheat Edit Arcology|MOD_Edit Arcology Cheat][$cheater = 1]]//
+</center>
+<</if>>
+<<set $showEncyclopedia = 0>>
+
+<<DisplayBuilding>>
+<<include "Arcology Description">>
+
+<br><br>
+
+__Arcology Ownership__
+<br>
+<<UpdateOwnership>>
+You own ''$arcologies[0].ownership%'' of $arcologies[0].name, <<if $arcologies[0].minority > 0>>against ''$arcologies[0].minority%'' owned by the second most significant holder<<else>>and there are no other significant holders<</if>>.
+<<if $arcologies[0].minority > $arcologies[0].ownership-10>>
+	@@.red;This is a dangerously narrow margin of control.@@
+<</if>>
+
+<<if $FSAnnounced > 0>>
+	<<if $FSCredits > 0>>
+	<br><br>
+		@@.yellow;$arcologies[0].name's society is ready to begin accepting a new societal direction.@@
+	<</if>>
+<</if>>
+
+<br><br>
+
+__Construction__
+<br>
+
+<<set _oldCash = $cash>>
+<<if $arcologyUpgrade.drones != 1>>
+	//The first major upgrade needed is the installation of a drone security system so higher-class citizens will feel safe and protected should they choose to immigrate. This upgrade will cost ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>.// [[Install drone security system|Manage Arcology][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $arcologyUpgrade.drones = 1]]
+<<elseif $arcologyUpgrade.hydro != 1>>
+	//The next major upgrade needed is the installation of a better water reclamation system so your residents will have access to cheaper water and hydroponically grown food. This upgrade will cost ¤<<print Math.trunc(10000*$upgradeMultiplierArcology)>>.// [[Upgrade water reclamation system|Manage Arcology][$cash -= Math.trunc(10000*$upgradeMultiplierArcology), $arcologyUpgrade.hydro = 1]]
+<<elseif $arcologyUpgrade.apron != 1>>
+	//The next major upgrade needed is the installation of a broader apron at the bottom of the arcology to increase its surface area and gather more solar energy. Right now, tenants that use a lot of power have to import it from outside. This upgrade will cost ¤<<print Math.trunc(20000*$upgradeMultiplierArcology)>>.// [[Install solar apron|Manage Arcology][$cash -= Math.trunc(20000*$upgradeMultiplierArcology), $arcologyUpgrade.apron = 1]]
+<<elseif $arcologyUpgrade.grid != 1>>
+	//The next major upgrade needed is an improvement of the arcology's electrical transmission lines to make efficient use of the additional power from the solar apron. This upgrade will cost ¤<<print Math.trunc(50000*$upgradeMultiplierArcology)>>.// [[Upgrade transmission lines|Manage Arcology][$cash -= Math.trunc(50000*$upgradeMultiplierArcology), $arcologyUpgrade.grid = 1]]
+<<elseif $arcologyUpgrade.spire != 1>>
+	//The next major upgrade needed is the addition of a spire at the top of the arcology to increase the space available for the wealthiest citizens to own whole floors. This huge project will cost ¤<<print Math.trunc(250000*$upgradeMultiplierArcology)>>.// [[Add spire|Manage Arcology][$cash -= Math.trunc(250000*$upgradeMultiplierArcology), $arcologyUpgrade.spire = 1, $sectors[1].type = "Apartments", $sectors[2].type = "Apartments", $sectors[3].type = "Apartments", $sectors[4].type = "Apartments", $sectors[1].ownership = 1, $sectors[2].ownership = 1, $sectors[3].ownership = 1, $sectors[4].ownership = 1]]
+<<else>>
+	//The arcology's public areas are fully upgraded.//
+<</if>>
+<<if ($PC.engineering >= 100) || ($PC.career == "arcology owner")>>
+<<if $arcologyUpgrade.spire != 1>>
+	//Arcology upgrades are less expensive due to your @@.springgreen;<<if $PC.career == "arcology owner">>experience in the Free Cities<<else>>arcology engineering training<</if>>.@@//
+<</if>>
+<</if>>
+
+<br>
+
+<<if $weatherCladding == 0>>
+	//Extreme weather is becoming common worldwide. The arcology's exterior can be hardened to reduce damage in case of heavy weather, but this will reduce its beauty somewhat and will cost ¤<<print Math.trunc(50000*$upgradeMultiplierArcology)>>. Your citizens are <<if $weatherAwareness == 0>>likely to disapprove of this measure as alarmism.<<else>>@@.yellow;concerned that this measure has not been taken already.@@<</if>> // [[Apply weather cladding|Manage Arcology][$cash -= Math.trunc(50000*$upgradeMultiplierArcology), $weatherCladding = 1]]
+<<else>>
+	//The arcology's exterior is jacketed with unsightly but sturdy weather cladding.//
+<</if>>
+
+<<set $lastWeeksFinances.expensesArcologyImprovement = ($cash - _oldCash)>>
+<br><br>
+
+__Language__
+<br>The lingua franca of the arcology is ''$language''.
+<<link "Language options">><<set $seed = $language>><<goto "Change Language">><</link>>
+
+<br><br>
+
+__Special Arcology Upgrades__
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<<if ($personalArms == 0) && ($mercenaries == 0) && ($assistant == 0)>>
+//$arcologies[0].name has no special upgrades//
+<</if>>
+
+<<if ($personalArms == 1)>>
+You own a prototype powered exoskeleton that mounts armor and a smart mortar system, and has rifles mounted into its forearms.
+<<elseif ($personalArms > 1)>>
+You own a prototype powered exoskeleton that mounts armor and a smart mortar system, and has rifles mounted into its forearms. Furthermore, your security drones can rearm with small-caliber guns if necessary.
+<</if>>
+
+<<if ($mercenaries > 0)>>
+<<if ($mercenaries == 1)>>
+A squad of mercenaries is permanently quartered in $arcologies[0].name. They are grim men and women, heavily armed and armored.
+<<elseif ($mercenaries < 5)>>
+A full platoon of mercenaries is permanently quartered in $arcologies[0].name. They are grim men and women, heavily armed and armored.
+<<elseif ($mercenaries >= 5)>>
+You have permanently settled a full company of mercenaries in $arcologies[0].name as your $mercenariesTitle. They are grim men and women who appreciate their luxurious life here and train hard to keep their skills with their prototype armor sharp.
+<</if>>
+<</if>>
+
+<<if ($assistant > 0)>>
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> is using an alternative personality setting, speaking in a sultry, sexual voice, and talking as though the penthouse's sex toys are her body.
+<</if>>
+<<if ($assistant > 1)>>
+She also has charge of all smart piercings in the arcology, and is using her adaptations to sexual duties to improve their effectiveness.
+<</if>>
+
+<br><br>
+
+Your slaves have participated in approximately <<print $oralTotal+$vaginalTotal+$analTotal>> sexual encounters: $oralTotal primarily oral, $vaginalTotal vanilla, $mammaryTotal mammary, $analTotal anal, and $penetrativeTotal with the slave penetrating another. They have produced about $milkTotal liters of marketable milk, <<if $seeDicks != 0>>about $cumTotal deciliters of marketable cum, <</if>>and have given birth $birthsTotal times.
+
+<<if $pitKillsTotal > 0>>$pitKillsTotal slaves have died in your fighting pit.<</if>>
+<<if $fuckdollsSold > 0>>$fuckdollsSold mindbroken arcade slaves have been converted into Fuckdolls and sold.<</if>>
+
+<br><br>
+
+Your arcology is named <<textbox "$arcologies[0].name" $arcologies[0].name "Manage Arcology">>

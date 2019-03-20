@@ -1,0 +1,10 @@
+:: RE busy arcade [silently nobr]
+
+<<set $activeSlave = $slaves.find(function(s) { return s.assignment == "be confined in the arcade" && s.amp != 1 && s.fetish != "mindbroken"; })>>
+
+<<if (ndef $activeSlave)>>
+	<<goto "RIE Eligibility Check">>
+<<else>>
+	<<goto "RE busy arcade workaround">>
+<</if>>
+

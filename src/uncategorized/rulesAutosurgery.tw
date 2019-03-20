@@ -1,0 +1,263 @@
+:: Rules Autosurgery [nobr]
+
+<<set $surgeries = []>>
+
+<<if $HGTastes>>
+	<<if $HGTastes == 1>>
+		<<set $thisSurgery = {lactation: 0, cosmetic: 1, faceShape: "cute", lips: 10, hips: 0, hipsImplant: 0, butt: 0, accent: 0, shoulders: 0, shouldersImplant: 0, boobs: 0, holes: 0}>>
+	<<elseif $HGTastes == 2>>
+		<<set $thisSurgery = {lactation: 0, cosmetic: 1, faceShape: "cute", lips: 60, hips: 0, hipsImplant: 0, butt: 4, accent: 0, shoulders: 0, shouldersImplant: 0, boobs: 1200, holes: 0}>>
+	<<else>>
+		<<set $thisSurgery = {lactation: 0, cosmetic: 1, faceShape: "cute", lips: 95, hips: 0, hipsImplant: 0, butt: 8, accent: 0, shoulders: 0, shouldersImplant: 0, boobs: 10000, holes: 2}>>
+	<</if>>
+<<else>>
+	<<for _r = $defaultRules.length-1; _r >= 0; _r-->>
+		<<set _currentRule = $defaultRules[_r]>>
+		<<if (def _currentRule) && (_currentRule.autoSurgery != 0)>>
+			<<set $thisSurgery = _currentRule.surgery>>
+			<<set _temp = lastEyesSurgeryRule($slaves[$i], $defaultRules)>>
+			<<if _temp != null>>
+				<<set $thisSurgery.eyes = _temp.surgery.eyes>>
+			<</if>>
+			<<set _temp = lastLactationSurgeryRule($slaves[$i], $defaultRules)>>
+			<<if _temp != null>>
+				<<set $thisSurgery.lactation = _temp.surgery.lactation>>
+			<</if>>
+			<<set _temp = lastProstateSurgeryRule($slaves[$i], $defaultRules)>>
+			<<if _temp != null>>
+				<<set $thisSurgery.prostate = _temp.surgery.prostate>>
+			<</if>>
+			<<set _temp = lastLipSurgeryRule($slaves[$i], $defaultRules)>>
+			<<if _temp != null>>
+				<<set $thisSurgery.lips = _temp.surgery.lips>>
+			<</if>>
+			<<set _temp = lastButtSurgeryRule($slaves[$i], $defaultRules)>>
+			<<if _temp != null>>
+				<<set $thisSurgery.butt = _temp.surgery.butt>>
+			<</if>>
+			<<set _temp = lastBoobSurgeryRule($slaves[$i], $defaultRules)>>
+			<<if _temp != null>>
+				<<set $thisSurgery.boobs = _temp.surgery.boobs>>
+			<</if>>
+			<<if ($thisSurgery.hips !== "no default setting") && ($thisSurgery.butt !== "no default setting")>>
+				<<if $slaves[$i].hips < -1>>
+					<<if $thisSurgery.butt > 2>>
+						<<set $thisSurgery.butt = 2>>
+					<</if>>
+				<<elseif $slaves[$i].hips < 0>>
+					<<if $thisSurgery.butt > 4>>
+						<<set $thisSurgery.butt = 4>>
+					<</if>>
+				<<elseif $slaves[$i].hips > 0>>
+					<<if $thisSurgery.butt > 8>>
+						<<set $thisSurgery.butt = 8>>
+					<</if>>
+				<<elseif $slaves[$i].hips > 1>>
+				<<else>>
+					<<if $thisSurgery.butt > 6>>
+						<<set $thisSurgery.butt = 6>>
+					<</if>>
+				<</if>>
+			<</if>>
+			<<break>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if ndef $thisSurgery>>
+	<<set $thisSurgery = {eyes: "no default setting", lactation: "no default setting", cosmetic: 0, accent: "no default setting", shoulders: "no default setting", shouldersImplant: "no default setting", boobs: "no default setting", hips: "no default setting", hipsImplant: "no default setting", butt: "no default setting", faceShape: "no default setting", lips: "no default setting", holes: 0}>>
+<</if>>
+
+<<for>>
+<<set $surgeryCount = $surgeries.length>>
+
+<<if ($slaves[$i].health > 20) && ($cash >= $surgeryCost)>>
+		<<if ($slaves[$i].eyes == -1) && ($thisSurgery.eyes == 1)>>
+				<<set $surgeries.push("surgery to correct her vision"), $slaves[$i].eyes = 1>>
+		<<elseif ($slaves[$i].eyes != -1) && ($thisSurgery.eyes == -1)>>
+				<<set $surgeries.push("surgery to blur her vision"), $slaves[$i].eyes = -1>>
+		<<elseif ($slaves[$i].lactation == 2) && ($thisSurgery.lactation == 0)>>
+				<<set $surgeries.push("surgery to remove her lactation implants"), $slaves[$i].lactation = 0>>
+		<<elseif $slaves[$i].lactation != 2 && $thisSurgery.lactation>>
+				<<set $surgeries.push("lactation inducing implanted drugs"), $slaves[$i].lactation = 2>>
+		<<elseif ($slaves[$i].prostate == 2) && ($thisSurgery.prostate == 0)>>
+				<<set $surgeries.push("surgery to remove her prostate implant"), $slaves[$i].prostate = 0>>
+		<<elseif $slaves[$i].prostate == 1 && $thisSurgery.prostate>>
+				<<set $surgeries.push("a precum production enhancing drug implant"), $slaves[$i].prostate = 2>>
+		<<elseif ($slaves[$i].anus > 3) && ($thisSurgery.cosmetic > 0)>>
+				<<set $surgeries.push("a restored anus")>>
+				<<set $slaves[$i].anus = 3>>
+				<<if $slaves[$i].analSkill > 10>>
+						<<set $slaves[$i].analSkill -= 10>>
+				<</if>>
+		<<elseif ($slaves[$i].vagina > 3) && ($thisSurgery.cosmetic > 0)>>
+				<<set $surgeries.push("a restored pussy")>>
+				<<set $slaves[$i].vagina = 3>>
+				<<if $slaves[$i].vaginalSkill > 10>>
+						<<set $slaves[$i].vaginalSkill -= 10>>
+				<</if>>
+		<<elseif ($slaves[$i].faceImplant <= 15) && ($slaves[$i].face <= 95) && ($thisSurgery.cosmetic != 0)>>
+				<<set $surgeries.push("a nicer face")>>
+				<<if $slaves[$i].faceShape == "masculine">>
+						<<set $slaves[$i].faceShape = "androgynous">>
+				<</if>>
+				<<set $slaves[$i].faceImplant += 25-5*Math.trunc($PC.medicine/100)-5*$surgeryUpgrade>>
+				<<set $slaves[$i].face = Math.clamp($slaves[$i].face+20,-100,100)>>
+		<<elseif ($slaves[$i].faceImplant <= 15) && ($slaves[$i].ageImplant != 1) && ($slaves[$i].age >= 25) && ($thisSurgery.cosmetic != 0)>>
+				<<set $surgeries.push("an age lift")>>
+				<<set $slaves[$i].ageImplant = 1>>
+				<<set $slaves[$i].faceImplant += 25-5*Math.trunc($PC.medicine/100)-5*$surgeryUpgrade>>
+		<<elseif ($slaves[$i].voice == 1) && ($slaves[$i].voiceImplant == 0) && ($thisSurgery.cosmetic != 0)>>
+				<<set $surgeries.push("a feminine voice")>>
+				<<set $slaves[$i].voice += 1>>
+				<<set $slaves[$i].voiceImplant += 1>>
+		<<elseif ($slaves[$i].waist >= -10) && ($thisSurgery.cosmetic != 0)>>
+				<<set $surgeries.push("a narrower waist")>>
+				<<set $slaves[$i].waist -= 20>>
+		<<elseif (($slaves[$i].boobShape == "saggy") || ($slaves[$i].boobShape == "downward-facing")) && ($thisSurgery.cosmetic != 0)>>
+				<<set $surgeries.push("a breast lift")>>
+				<<set $slaves[$i].boobShape = "normal">>
+		<<elseif (($slaves[$i].boobShape == "normal") || ($slaves[$i].boobShape == "wide-set")) && ($thisSurgery.cosmetic != 0)>>
+				<<if $slaves[$i].boobs > 800>>
+						<<set $slaves[$i].boobShape = "torpedo-shaped">>
+				<<else>>
+						<<set $slaves[$i].boobShape = "perky">>
+				<</if>>
+				<<set $surgeries.push("more interestingly shaped breasts")>>
+		<<elseif ($thisSurgery.lips == 0) && ($slaves[$i].lipsImplant > 0)>>
+				<<set $surgeries.push("surgery to remove her lip implants")>>
+				<<set $slaves[$i].lips -= $slaves[$i].lipsImplant>>
+				<<set $slaves[$i].lipsImplant = 0>>
+				<<if $slaves[$i].oralSkill > 10>>
+						<<set $slaves[$i].oralSkill -= 10>>
+				<</if>>
+		<<elseif ($slaves[$i].lips <= 95) && ($slaves[$i].lips < $thisSurgery.lips)>>
+				<<if $thisSurgery.lips !== "no default setting">>
+						<<set $surgeries.push("bigger lips")>>
+						<<set $slaves[$i].lipsImplant += 10>>
+						<<set $slaves[$i].lips += 10>>
+						<<if $slaves[$i].oralSkill > 10>>
+								<<set $slaves[$i].oralSkill -= 10>>
+						<</if>>
+				<</if>>
+		<<elseif ($slaves[$i].faceImplant <= 45) && ($slaves[$i].face <= 95) && ($thisSurgery.cosmetic == 2)>>
+				<<set $surgeries.push("a nicer face")>>
+				<<if $slaves[$i].faceShape == "masculine">><<set $slaves[$i].faceShape = "androgynous">><</if>>
+				<<set $slaves[$i].faceImplant += 25-5*Math.trunc($PC.medicine/100)-5*$surgeryUpgrade>>
+				<<set $slaves[$i].face = Math.clamp($slaves[$i].face+20,-100,100)>>
+		<<elseif ($slaves[$i].faceImplant <= 45) && ($slaves[$i].ageImplant != 1) && ($slaves[$i].age >= 25) && ($thisSurgery.cosmetic == 2)>>
+				<<set $surgeries.push("an age lift")>>
+				<<set $slaves[$i].ageImplant = 1>>
+				<<set $slaves[$i].faceImplant += 25-5*Math.trunc($PC.medicine/100)-5*$surgeryUpgrade>>
+		<<elseif ($slaves[$i].waist >= -95) && ($thisSurgery.cosmetic == 2) && ($seeExtreme == 1)>>
+				<<set $surgeries.push("a narrower waist")>>
+				<<set $slaves[$i].waist = Math.clamp($slaves[$i].waist-20,-100,100)>>
+		<<elseif ($slaves[$i].voice < 3) && ($slaves[$i].voiceImplant == 0) && ($thisSurgery.cosmetic == 2)>>
+				<<set $surgeries.push("a bimbo's voice")>>
+				<<set $slaves[$i].voice += 1>>
+				<<set $slaves[$i].voiceImplant += 1>>
+		<<elseif ($thisSurgery.butt == 0) && ($slaves[$i].buttImplant > 0)>>
+				<<set $surgeries.push("surgery to remove her butt implants")>>
+				<<set $slaves[$i].butt -= $slaves[$i].buttImplant>>
+		<<elseif ($thisSurgery.boobs == 0) && ($slaves[$i].boobsImplant > 0)>>
+				<<set $surgeries.push("surgery to remove her boob implants")>>
+				<<set $slaves[$i].boobs -= $slaves[$i].boobsImplant>>
+				<<set $slaves[$i].boobsImplant = 0>>
+		<<elseif ($slaves[$i].butt <= 3) && ($slaves[$i].butt < $thisSurgery.butt)>>
+				<<if $thisSurgery.butt !== "no default setting">>
+						<<set $surgeries.push("a bigger butt")>>
+						<<set $slaves[$i].buttImplant = 1>>
+						<<set $slaves[$i].butt += 1>>
+				<</if>>
+		<<elseif ($slaves[$i].boobs <= 600) && ($slaves[$i].lactation < 2) && ($slaves[$i].boobs+400 <= $thisSurgery.boobs)>>
+				<<if $thisSurgery.boobs !== "no default setting">>
+						<<set $surgeries.push("bigger boobs")>>
+						<<set $slaves[$i].boobsImplant += 400>>
+						<<set $slaves[$i].boobs += 400>>
+				<</if>>
+		<<elseif ($slaves[$i].boobs <= 600) && ($slaves[$i].lactation < 2) && ($slaves[$i].boobs+200 <= $thisSurgery.boobs)>>
+				<<if $thisSurgery.boobs !== "no default setting">>
+						<<set $surgeries.push("modestly bigger boobs")>>
+						<<set $slaves[$i].boobsImplant += 200>>
+						<<set $slaves[$i].boobs += 200>>
+				<</if>>
+		<<elseif ($slaves[$i].butt <= 5) && ($slaves[$i].butt < $thisSurgery.butt)>>
+				<<if $thisSurgery.butt !== "no default setting">>
+						<<set $surgeries.push("a bigger butt")>>
+						<<set $slaves[$i].buttImplant = 1>>
+						<<set $slaves[$i].butt += 1>>
+				<</if>>
+		<<elseif ($slaves[$i].boobs <= 2000) && ($slaves[$i].lactation < 2) && ($slaves[$i].boobs+400 < $thisSurgery.boobs)>>
+				<<if $thisSurgery.boobs !== "no default setting">>
+						<<set $surgeries.push("bigger boobs")>>
+						<<set $slaves[$i].boobsImplant += 400>>
+						<<set $slaves[$i].boobs += 400>>
+				<</if>>
+		<<elseif ($slaves[$i].anus > 0) && ($surgeryUpgrade == 1) && ($thisSurgery.holes == 2)>>
+				<<set $surgeries.push("a virgin anus")>>
+				<<set $slaves[$i].anus = 0>>
+				<<if $slaves[$i].analSkill > 10>>
+						<<set $slaves[$i].analSkill -= 10>>
+				<</if>>
+		<<elseif ($slaves[$i].vagina > 0) && ($surgeryUpgrade == 1) && ($thisSurgery.holes == 2)>>
+				<<set $surgeries.push("a virgin pussy")>>
+				<<set $slaves[$i].vagina = 0>>
+				<<if $slaves[$i].vaginalSkill > 10>>
+						<<set $slaves[$i].vaginalSkill -= 10>>
+				<</if>>
+		<<elseif ($slaves[$i].anus > 1) && ($thisSurgery.holes == 1)>>
+				<<set $surgeries.push("a tighter anus")>>
+				<<set $slaves[$i].anus = 1>>
+				<<if $slaves[$i].analSkill > 10>>
+						<<set $slaves[$i].analSkill -= 10>>
+				<</if>>
+		<<elseif ($slaves[$i].vagina > 1) && ($thisSurgery.holes == 1)>>
+				<<set $surgeries.push("a tighter pussy")>>
+				<<set $slaves[$i].vagina = 1>>
+				<<if $slaves[$i].vaginalSkill > 10>>
+						<<set $slaves[$i].vaginalSkill -= 10>>
+				<</if>>
+		<<elseif ($slaves[$i].butt <= 8) && ($slaves[$i].butt < $thisSurgery.butt)>>
+				<<if $thisSurgery.butt !== "no default setting">>
+						<<set $surgeries.push("a bigger butt")>>
+						<<set $slaves[$i].buttImplant = 1>>
+						<<set $slaves[$i].butt += 1>>
+				<</if>>
+		<<elseif ($slaves[$i].boobs <= 9000) && ($slaves[$i].lactation < 2) && ($slaves[$i].boobs < $thisSurgery.boobs)>>
+				<<if $thisSurgery.boobs !== "no default setting">>
+						<<set $surgeries.push("bigger boobs")>>
+						<<set $slaves[$i].boobsImplant += 200>>
+						<<set $slaves[$i].boobs += 200>>
+				<</if>>
+		<</if>>
+<</if>>
+
+<<if $surgeryCount != $surgeries.length>>
+		<<set $cash -= $surgeryCost>>
+		<<if $PC.medicine >= 100>>
+				<<set $slaves[$i].health -= 5>>
+		<<else>>
+				<<set $slaves[$i].health -= 10>>
+		<</if>>
+<<else>>
+		<<break>>
+<</if>>
+<</for>>
+
+<<if $surgeries.length > 0>>
+	<<set $surgeriesDisplay = "">>
+	<<for $j = 0; $j < $surgeries.length; $j++>>
+		<<set $seed = $surgeries[$j]>>
+		<<set $surgeriesDisplay = ($surgeriesDisplay + $seed)>>
+		<<if $j < $surgeries.length-2>>
+		<<set $surgeriesDisplay = ($surgeriesDisplay + ", ")>>
+<<elseif $j < $surgeries.length-1>>
+		<<if $surgeries.length > 2>>
+				<<set $surgeriesDisplay = ($surgeriesDisplay + ", and ")>>
+		<<else>>
+				<<set $surgeriesDisplay = ($surgeriesDisplay + " and ")>>
+<</if>>
+		<</if>>
+	<</for>>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>>, ordered to apply surgery, gives $slaves[$i].slaveName @@.lime;$surgeriesDisplay.@@
+<</if>>

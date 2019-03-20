@@ -1,0 +1,1034 @@
+:: RE FS acquisition
+
+<<if Array.isArray($FSAcquisitionEvents)>>
+  <<if $cheatMode == 1>><<nobr>>
+	<<set $nextButton = "Back", $nextLink = "Nonrandom Event", $returnTo = "Nonrandom Event">> /* if user just clicks spacebar */
+	''A random FS acquisition event would have been selected from the following:''
+	<br>
+	<<for _i = 0; _i < $FSAcquisitionEvents.length; _i++>>
+		<<print "[[$FSAcquisitionEvents[_i]|RE FS acquisition][$FSAcquisitionEvents = $FSAcquisitionEvents[" + _i + "]]]">>
+		<br>
+	<</for>>
+	<br><br>[[Go Back to Random Nonindividual Event|Random Nonindividual Event][$eventSlave = 0]]
+	<</nobr>>
+  <<else>>
+	<<set $FSAcquisitionEvents = $FSAcquisitionEvents.random()>>
+	<<goto "RE FS acquisition">>
+  <</if>>
+<<else>>
+
+<<nobr>>
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check", $returnTo = "RIE Eligibility Check", $showEncyclopedia = 1, $encyclopedia = "Enslaving People">>
+
+<<switch $FSAcquisitionEvents>>
+<<case "Pastoralist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She offered herself for voluntary enslavement, choosing you as her new owner because you treat lactating girls well.">>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(5,15)>>
+<<set $activeSlave.preg = random(10,20)>>
+<<set $activeSlave.lactation = 1>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.boobs += 200*random(2,5)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Pastoralist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She offered herself for voluntary enslavement, hoping to become a valuable source of milk for you.">>
+<<set $activeSlave.age to random(32,$retirementAge-2)>>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(5,15)>>
+<<set $activeSlave.lactation = 1>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.boobs += 200*random(2,5)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Supremacist">>
+
+<<set $contractCost = 2000>>
+<<include "Generate New Slave">>
+<<if $activeSlave.race == $arcologies[0].FSSupremacistRace>>
+	<<goto "RE FSSupremacist acquisition">>
+<</if>>
+<<set $activeSlave.origin = "She was captured and enslaved in a conflict zone and fenced to you by a mercenary group.">>
+<<set $activeSlave.devotion -= 8>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 2000>>
+
+<<case "Supremacist Two">>
+
+<<set $contractCost = 2000>>
+<<include "Generate New Slave">>
+<<if $activeSlave.race == $arcologies[0].FSSupremacistRace>>
+	<<goto "RE FSSupremacist acquisition">>
+<</if>>
+<<set $activeSlave.origin = "She made the mistake of marrying into a $arcologies[0].FSSupremacistRace neighborhood and was kidnapped then sold to you.">>
+<<set $activeSlave.devotion -= 8>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 2000>>
+
+<<case "Subjugationist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She was beaten, sexually assaulted, and finally enslaved for being stupid enough to visit an arcology that doesn't like her kind.">>
+<<set $activeSlave.race = $arcologies[0].FSSubjugationistRace>>
+<<set $activeSlave.health = random(-80,-60)>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<set $activeSlave.devotion = random(-75,-65)>>
+<<set $activeSlave.anus = random(1,2)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Subjugationist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She came to your arcology to be enslaved out of a sense of self-loathing for her kind.">>
+<<set $activeSlave.race = $arcologies[0].FSSubjugationistRace>>
+<<set $activeSlave.health = random(-80,-60)>>
+<<set $activeSlave.trust = random(-25,-15)>>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.anus = random(1,2)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Gender Radicalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She offered herself for voluntary enslavement to escape life in an area that disapproved of her sexual tendencies.">>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(15,20)>>
+<<set $activeSlave.trust = random(0,10)>>
+<<set $activeSlave.anus = random(1,2)>>
+<<set $activeSlave.behavioralFlaw = "hates women">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Gender Radicalist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She offered herself for voluntary enslavement after a lifetime as an outcast due to her sexual tendencies.">>
+<<set $activeSlave.age to random(32,$retirementAge-2)>>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(15,20)>>
+<<set $activeSlave.trust = random(0,10)>>
+<<set $activeSlave.anus = random(1,2)>>
+<<set $activeSlave.behavioralFlaw = "hates women">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Gender Fundamentalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was sold to you as a way of disposing of an inconveniently pregnant young woman.">>
+<<set $activeSlave.career = setup.youngCareers.random()>>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<set $activeSlave.preg = random(20,30)>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.age = random(18,19)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Gender Fundamentalist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was raped and impregnated, then sold to you as a way of disposing of an inconveniently pregnant mother.">>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<set $activeSlave.preg = random(20,30)>>
+<<set $activeSlave.vagina = 1>>
+<<set $activeSlave.age to random(32,$retirementAge-2)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Paternalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She was voluntarily enslaved after she decided that your paternalistic arcology was a better place for advancement than the old world.">>
+<<set $activeSlave.career = setup.educatedCareers.random()>>
+<<set $activeSlave.health = random(40,60)>>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.intelligence = 2>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Paternalist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She was voluntarily enslaved after she decided that your paternalistic arcology was a better place to live than the old world.">>
+<<set $activeSlave.health = random(40,60)>>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Degradationist">>
+
+<<set $contractCost = 2000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was sold to you by an anonymous person who wanted her to suffer.">>
+<<set $activeSlave.boobsImplant += random(4,6)*200>>
+<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+<<set $activeSlave.nipples = "huge">>
+<<set $activeSlave.areolae = 1>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.buttImplant += 1>>
+<<set $activeSlave.lips += 10>>
+<<set $activeSlave.lipsImplant += 10>>
+<<set $activeSlave.face = Math.clamp($activeSlave.face+20,-100,100)>>
+<<set $activeSlave.faceImplant += 40>>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<set $activeSlave.health = random(20,40)>>
+<<set $activeSlave.anus = 2>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.clitPiercing = 1>>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 1>>
+<<set $activeSlave.nosePiercing = 1>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.vaginalSkill = random(50,100)>>
+<<set $activeSlave.oralSkill = random(50,100)>>
+<<set $activeSlave.analSkill = random(50,100)>>
+<<set $activeSlave.whoreSkill = random(50,100)>>
+<<set $activeSlave.entertainSkill = random(50,100)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy", "anorexic")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 2000>>
+
+<<case "Degradationist Two">>
+
+<<set $contractCost = 2000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was sold to you by an anonymous slave breaking group.">>
+<<set $activeSlave.age to random(32,$retirementAge-2)>>
+<<set $activeSlave.boobsImplant += random(3,6)*200>>
+<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+<<set $activeSlave.areolae = 1>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.buttImplant += 1>>
+<<set $activeSlave.lips += 10>>
+<<set $activeSlave.lipsImplant += 10>>
+<<set $activeSlave.face = Math.clamp($activeSlave.face+20,-100,100)>>
+<<set $activeSlave.devotion = random(-75,-55)>>
+<<set $activeSlave.trust = random(-65,-45)>>
+<<set $activeSlave.health = random(-40,20)>>
+<<set $activeSlave.anus = 2>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.weight = 0>>
+<<set $activeSlave.clitPiercing = 1>>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 1>>
+<<set $activeSlave.nosePiercing = 1>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 2000>>
+
+<<case "Body Purist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself for voluntary enslavement to get to an arcology in which implants are uncommon, since she has a fear of surgery.">>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Body Purist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself for voluntary enslavement after graduating from a slave school and passing her majority, because she heard you treat slaves without implants well.">>
+<<set $activeSlave.age = random(18,24)>>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Youth Preferentialist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She came to you for enslavement out of desperation, terrified that she was about to be enslaved into a worse situation by her abusive family.">>
+<<set $activeSlave.health = random(-40,30)>>
+<<set $activeSlave.devotion = random(10,15)>>
+<<set $activeSlave.trust = random(-55,-75)>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.anus = random(2,3)>>
+<<set $activeSlave.weight = random(-80,-20)>>
+<<set $activeSlave.boobs -= 50*random(1,2)>>
+<<set $activeSlave.butt -= random(0,1)>>
+<<set $activeSlave.behavioralFlaw = either("hates men", "hates women", "odd", "anorexic", "gluttonous", "devout")>>
+<<set $activeSlave.sexualFlaw = either("hates oral", "hates anal", "repressed", "shamefast", "apathetic")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Youth Preferentialist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She came to you for enslavement out of desperation, terrified that she was about to be asked to do something with her life by her family.">>
+<<set $activeSlave.health = random(-40,30)>>
+<<set $activeSlave.devotion = random(10,15)>>
+<<set $activeSlave.trust = random(-55,-75)>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.intelligence = -2>>
+<<set $activeSlave.anus = random(2,3)>>
+<<set $activeSlave.weight = random(-80,-20)>>
+<<set $activeSlave.boobs -= 50*random(1,2)>>
+<<set $activeSlave.butt -= random(0,1)>>
+<<set $activeSlave.behavioralFlaw = either("odd", "anorexic", "gluttonous")>>
+<<set $activeSlave.sexualFlaw = either("repressed", "apathetic")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Maturity Preferentialist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement after deciding you were her best hope of a good life as a slave.">>
+<<set $activeSlave.health = random(40,60)>>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.muscles = 20>>
+<<set $activeSlave.face = random(0,20)>>
+<<set $activeSlave.age to random($retirementAge-4,$retirementAge-2)>>
+<<set $activeSlave.anus to random(2,3)>>
+<<if $activeSlave.vagina != -1>><<set $activeSlave.vagina to random(2,3)>><</if>>
+<<set $activeSlave.weight to 20>>
+<<set $activeSlave.boobs += 50*random(1,10)>>
+<<set $activeSlave.butt += random(0,2)>>
+<<set $activeSlave.lips += random(5,15)>>
+<<set $activeSlave.entertainSkill = 35>>
+<<set $activeSlave.analSkill = 35>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.behavioralFlaw = "none">>
+<<set $activeSlave.sexualFlaw = "none">>
+<<set $activeSlave.energy = random(80,90)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Maturity Preferentialist Two">>
+
+<<set $contractCost = 3000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She was sold to you by her son, in order to raise funds for his business.">>
+<<set $activeSlave.boobs = random(4,6)*200>>
+<<set $activeSlave.weight = 20>>
+<<set $activeSlave.height to random(130,150)>>
+<<set $activeSlave.face = random(15,100)>>
+<<set $activeSlave.butt to random(3,4)>>
+<<set $activeSlave.lips to 1>>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.age = random(25,$retirementAge)>>
+<<set $activeSlave.career = setup.educatedCareers.random()>>
+<<set $activeSlave.health = random(-60,-50)>>
+<<set $activeSlave.intelligence = 2>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 3000>>
+
+<<case "Transformation Fetishist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "You received her from a surgeon who botched an implant operation on her and needed to get her out of sight.">>
+<<set $activeSlave.boobsImplant += random(10,20)*200>>
+<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+<<set $activeSlave.nipples = "tiny">>
+<<set $activeSlave.areolae = 2>>
+<<set $activeSlave.buttImplant += random(2,4)>>
+<<set $activeSlave.butt += $activeSlave.buttImplant>>
+<<set $activeSlave.lipsImplant += random(15,25)>>
+<<set $activeSlave.lips += $activeSlave.lipsImplant>>
+<<set $activeSlave.face = Math.clamp($activeSlave.face+20,-100,100)>>
+<<set $activeSlave.faceImplant += 40>>
+<<set $activeSlave.devotion = random(-100,-75)>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<set $activeSlave.health = random(-80,-70)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy", "anorexic", "odd")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Transformation Fetishist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "Her husband sold her into slavery to escape his debts.">>
+<<set $activeSlave.age to random(32,$retirementAge-2)>>
+<<set $activeSlave.career = "a trophy wife">>
+<<set $activeSlave.boobsImplant += random(5,10)*200>>
+<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+<<set $activeSlave.nipples = "tiny">>
+<<set $activeSlave.areolae = 2>>
+<<set $activeSlave.buttImplant += random(2,4)>>
+<<set $activeSlave.butt += $activeSlave.buttImplant>>
+<<set $activeSlave.lipsImplant += random(15,25)>>
+<<set $activeSlave.lips += $activeSlave.lipsImplant>>
+<<set $activeSlave.face = Math.clamp($activeSlave.face+20,-100,100)>>
+<<set $activeSlave.faceImplant += 40>>
+<<set $activeSlave.devotion = random(-100,-75)>>
+<<set $activeSlave.trust = random(-45,-25)>>
+<<set $activeSlave.health = random(-80,-70)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy", "anorexic", "odd")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Slimness Enthusiast">>
+
+<<set $contractCost = 3000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement because she felt your arcology was the best place for a woman of her appearance.">>
+<<set $activeSlave.boobs = random(4,6)*50>>
+<<set $activeSlave.weight = -20>>
+<<set $activeSlave.height to random(160,200)>>
+<<set $activeSlave.face = random(15,100)>>
+<<set $activeSlave.butt to random(1,2)>>
+<<set $activeSlave.lips to 0>>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.age = random(25,$retirementAge)>>
+<<set $activeSlave.career = setup.educatedCareers.random()>>
+<<set $activeSlave.health = random(-60,-50)>>
+<<set $activeSlave.intelligence = 2>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 3000>>
+
+<<case "Slimness Enthusiast Two">>
+
+<<set $contractCost = 3000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement to escape having plastic surgery foisted on her.">>
+<<set $activeSlave.boobs = random(4,6)*50>>
+<<set $activeSlave.weight = -20>>
+<<set $activeSlave.height to random(160,200)>>
+<<set $activeSlave.face = random(15,100)>>
+<<set $activeSlave.butt to random(1,2)>>
+<<set $activeSlave.lips to 0>>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(25,45)>>
+<<set $activeSlave.age = random(19,24)>>
+<<set $activeSlave.health = random(-60,-50)>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 3000>>
+
+<<case "Asset Expansionist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement after following a dangerous, illegal growth hormone regimen.">>
+<<set $activeSlave.boobs += random(10,20)*200>>
+<<set $activeSlave.nipples = "inverted">>
+<<set $activeSlave.areolae = 3>>
+<<set $activeSlave.weight = 50>>
+<<set $activeSlave.butt += random(2,4)>>
+<<set $activeSlave.lips = 35>>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+<<set $activeSlave.age = 19>>
+<<set $activeSlave.health = random(-60,-50)>>
+<<set $activeSlave.intelligence = random(0,2)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.behavioralFlaw = either("anorexic", "odd")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Asset Expansionist Two">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you to escape enslavement in her homeland for being older and unmarried.">>
+<<set $activeSlave.age = random(28,$retirementAge)>>
+<<set $activeSlave.boobs += random(6,15)*200>>
+<<set $activeSlave.nipples = "inverted">>
+<<set $activeSlave.areolae = 3>>
+<<set $activeSlave.weight = 50>>
+<<set $activeSlave.butt += random(2,4)>>
+<<set $activeSlave.lips = 35>>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+<<set $activeSlave.age = 19>>
+<<set $activeSlave.health = random(-60,-50)>>
+<<set $activeSlave.intelligence = random(0,2)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Physical Idealist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She was voluntarily enslaved after she decided that your arcology was the best place for her to get the steroids that she'd allowed to define her life.">>
+<<set $activeSlave.career = setup.uneducatedCareers.random()>>
+<<set $activeSlave.health = random(20,60)>>
+<<set $activeSlave.muscles = 100>>
+<<set $activeSlave.addict = 1>>
+<<set $activeSlave.devotion = random(0,15)>>
+<<set $activeSlave.trust = random(0,15)>>
+<<set $activeSlave.intelligence = either(-2,-1)>>
+<<set $activeSlave.intelligenceImplant = 0>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Physical Idealist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She was voluntarily enslaved after she decided that your arcology was the best place for her to get the steroids that she'd allowed to define her life.">>
+<<set $activeSlave.health = random(20,60)>>
+<<set $activeSlave.muscles = 100>>
+<<set $activeSlave.addict = 1>>
+<<set $activeSlave.devotion = random(0,15)>>
+<<set $activeSlave.trust = random(0,15)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Chattel Religionist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself for enslavement out of religious conviction.">>
+<<set $activeSlave.health = random(-10,10)>>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(60,75)>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Roman Revivalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement because she was swept up in the romanticism of a revival of Rome.">>
+<<set $activeSlave.devotion = random(-15,-5)>>
+<<set $activeSlave.trust = random(5,15)>>
+<<set $activeSlave.age = random(22,28)>>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.health = random(-10,10)>>
+<<set $activeSlave.face = random(-20,0)>>
+<<set $activeSlave.anus to 0>>
+<<if $activeSlave.vagina != -1>><<set $activeSlave.vagina to 0>><</if>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.intelligence = random(1,2)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Aztec Revivalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement because she needs to feel a higher call.">>
+<<set $activeSlave.devotion = random(25,50)>>
+<<set $activeSlave.trust = random(25,50)>>
+<<set $activeSlave.age = random(22,45)>>
+<<set $activeSlave.career = "a merchant">>
+<<set $activeSlave.health = random(-20,20)>>
+<<set $activeSlave.face = random(-20,0)>>
+<<set $activeSlave.anus to 0>>
+<<if $activeSlave.vagina != -1>><<set $activeSlave.vagina to 0>><</if>>
+<<set $activeSlave.vaginalSkill = 1>>
+<<set $activeSlave.analSkill = 1>>
+<<set $activeSlave.oralSkill = 1>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.intelligence = random(1,2)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Edo Revivalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement because she had a disgustingly naive view of medieval Japanese culture.">>
+<<set $activeSlave.devotion = random(-15,-5)>>
+<<set $activeSlave.trust = random(5,15)>>
+<<set $activeSlave.age = random(18,24)>>
+<<set $activeSlave.career = "a student">>
+<<set $activeSlave.health = random(-20,0)>>
+<<set $activeSlave.face = random(-60,10)>>
+<<set $activeSlave.weight to random(20,100)>>
+<<set $activeSlave.vagina to 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.intelligence = random(-1,1)>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.behavioralFlaw = either("gluttonous", "liberated")>>
+<<set $activeSlave.sexualFlaw = either("none", "none", "idealistic", "shamefast", "apathetic")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Arabian Revivalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement because she thought your harem her best hope for good treatment.">>
+<<set $activeSlave.devotion = random(30,35)>>
+<<set $activeSlave.trust = random(30,35)>>
+<<set $activeSlave.age = random(25,$retirementAge-5)>>
+<<set $activeSlave.career = "a professor">>
+<<set $activeSlave.health = random(10,30)>>
+<<set $activeSlave.face = random(15,100)>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.entertainSkill = 100>>
+<<set $activeSlave.intelligence = 2>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.sexualFlaw = either("idealistic")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<<case "Chinese Revivalist">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She offered herself to you for enslavement because she thought she would have prospects of advancement among your slaves.">>
+<<set $activeSlave.devotion = random(30,35)>>
+<<set $activeSlave.trust = random(30,35)>>
+<<set $activeSlave.age = random(26,$retirementAge-5)>>
+<<set $activeSlave.career = "a businesswoman">>
+<<set $activeSlave.health = random(10,30)>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.oralSkill to random(15,40)>>
+<<set $activeSlave.analSkill to random(15,40)>>
+<<set $activeSlave.whoreSkill to random(15,40)>>
+<<set $activeSlave.entertainSkill to random(15,40)>>
+<<set $activeSlave.intelligence to 2>>
+<<set $activeSlave.intelligenceImplant to 1>>
+<<set $activeSlave.teeth to "normal">>
+<<set $activeSlave.behavioralFlaw to either("arrogant")>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+<</switch>>
+
+<<set $activeSlave.slaveCost = $contractCost>>
+
+<</nobr>>\
+\
+<<switch $FSAcquisitionEvents>>\
+<<case "Pastoralist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This call is coming from a public kiosk, which is usually an indication that the person on the other end is a transient individual who has decided to take slavery over homelessness. This proves to be right on the money in this case, though the woman isn't too terribly bedraggled; her situation must be recent. She asks to be enslaved with the crushing sadness most such people experience during their last free hours. "I'm pregnant," she says through tears. "I know I'm not that pretty, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. But," and she brings her sizeable chest into view, "I've got pretty big boobs, and I started giving milk yesterday. I was searching the net, and I saw that you milk women, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. It seems like a better life than getting fucked all the time."
+\
+<<case "Pastoralist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This call is coming from a public kiosk, which is usually an indication that the person on the other end is a transient individual who has decided to take slavery over homelessness. You are understandably surprised when this turns out to not be the case, the woman in the video call is modestly dressed; so her newfound situation must be exceedingly recent. Nonetheless, she asks to be enslaved with the same poignant sadness most people experience during their last free hours. "All my children are gone and my husband left me," she says through tears. "I know I'm older than most, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. But," and she brings her motherly chest into view, "I've still got pretty big breasts, and they still give milk. One of my friends told me that you milk women, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. I can't do anything else to make a living."
+\
+<<case "Supremacist">>\
+\
+Ever since you have been steering $arcologies[0].name towards a belief in $arcologies[0].FSSupremacistRace supremacy, you've been receiving increasingly useful communications from groups that share your ideals. Many rebel, mercenary, and paramilitary groups active in conflict zones have racial beliefs of one stripe or other, and by taking the $arcologies[0].FSSupremacistRace side, you've automatically inserted yourself into a worldwide network of like-minded organizations. You receive an urgent communication from one such private military company.
+
+It seems that they've run into a serious cash flow problem. They may not have liquid assets, but they do have human assets. What they lack is the slaveholding and selling infrastructure to translate the latter into the former. They're interested in fencing some merchandise to you, no questions asked, on a flat fee basis. Included in the message is a slave dossier detailing the piece of human chattel they're offering.
+\
+<<case "Supremacist Two">>\
+\
+Ever since you have been steering $arcologies[0].name towards a belief in $arcologies[0].FSSupremacistRace supremacy, you've been receiving increasingly useful communications from groups that share your ideals. With much of the Old World in freefall many groups with particularly vehement racial beliefs are expanding unchecked by the mores of big government, and by taking the $arcologies[0].FSSupremacistRace side, you've automatically inserted yourself into a worldwide network of like-minded organizations. You receive a communication from one such group.
+
+It seems that in a man in their town made the mistake of marrying a woman of an undesirable racial background, and this group has stepped in to put an end to such a distasteful union. However, though they may be ruthless vigilantes, they don't consider themselves murderers. They're interested in fencing this former wife to you, no questions asked, on a flat fee basis. Included in the message is a slave dossier detailing the piece of human chattel they're offering.
+\
+<<case "Subjugationist">>\
+\
+Your security drones break up a minor disturbance on the lowest, poorest levels of the arcology without needing your direction, or indeed without even informing you. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> is good enough at filtering incidents down to what you need to know that you typically leave minor things to her discretion. This time $assistantName only informs you once it's apparent that that brawl left someone injured and unconscious.
+
+It seems the violence was racially motivated. The $arcologies[0].FSSubjugationistRace victim was publicly sodomized and left bruised and bleeding, her clothes torn off, beaten into insensibility, with anti-$arcologies[0].FSSubjugationistRace slogans written crudely across her $activeSlave.skin skin. It seems she came into the arcology despite the strong penalties for free $arcologies[0].FSSubjugationistRace subhumans found here. You can easily enslave her in return for her medical costs, though no one is likely to object to your enslaving one of her kind, whatever the situation.
+\
+<<case "Subjugationist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The caller is $arcologies[0].FSSubjugationistRace, and a particularly self-hating one at that. It seems she came into the arcology despite the strong penalties for free $arcologies[0].FSSubjugationistRace subhumans found here in order to seek enslavement, a curious turn of events. You can easily enslave her, no one is likely to object to your enslaving one of her kind, especially when she came so willingly.
+\
+<<case "Gender Radicalist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one is from a rather abused individual from one of the more traditionalist areas of the old world. It seems she's heard of the new and interesting way gender is thought of in the Free Cities, and in $arcologies[0].name in particular. "Being your slave has to be better than being a subhuman here," she says. "Being your sex slave is more accepted in your city than being me is, here."
+\
+<<case "Gender Radicalist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one is from a rather mature but otherwise visibly well-to-do individual from one of the more traditionalist areas of the old world. It seems she's heard of the new and interesting way gender is thought of in the Free Cities, and in $arcologies[0].name in particular. "I've lived my whole life as a subhuman here," she says. "Being your sex slave is more accepted in your city than being me is, here."
+\
+<<case "Gender Fundamentalist">>\
+\
+The sexual and moral revolution taking place in the Free Cites has spread back into the old world, producing an inevitable reaction. Thus there are still many places in the world where it is socially embarrassing for one's young female relatives to appear pregnant and unmarried, and where direct solutions to this unfortunate situation are frowned upon. You receive a communication from one such place, from a traditionalist family whose daughter has dishonored them in this way.
+
+Having her disappear discreetly into $arcologies[0].name would be a convenient and face-saving way of resolving the situation. Your society's respect for slave pregnancy gives them a plausible way to salve their own consciences where the baby is concerned. As for the girl, having her out of the way is what matters to them.
+\
+<<case "Gender Fundamentalist Two">>\
+\
+The sexual and moral revolution taking place in the Free Cites has spread back into the old world, producing an inevitable reaction. Thus there are still many places in the world where it is socially embarrassing for one's female relatives to be pregnant as a result of rape, and where direct solutions to this unfortunate situation are frowned upon. You receive a communication from one such place, from a traditionalist family whose mother was dishonored in this way.
+
+Having her disappear discreetly into $arcologies[0].name would be a convenient and face-saving way of resolving the situation. Your society's respect for slave pregnancy gives them a plausible way to salve their own consciences where the baby is concerned. As for the mother, having her out of the way is what matters to them.
+\
+<<case "Paternalist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one is interesting, even by the standards of messages from people who want to become slaves. The individual is neither sick nor abused, and speaks with intelligence and directness. "I've heard a lot about how $arcologies[0].name treats slaves," she says. "And, well, I don't know how closely you watch the old world from where you are, but it's pretty bad. Being smart and driven out here doesn't always keep you fed and clothed, or even alive. I'm smart and driven, and I understand that might make me a madam or a DJ or even a head girl in $arcologies[0].name. I'm not dumb enough to rely on that, but I'll take that chance."
+\
+<<case "Paternalist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one is interesting, even by the standards of messages from people who want to become slaves. The individual is a normal looking woman, neither sick nor visibly abused. "I've heard a lot about how $arcologies[0].name treats slaves," she says. "And, well, I don't know how closely you watch the old world from where you are, but it's pretty bad. Saving your whole life doesn't always keep you fed and clothed, or even alive. I never had much and now I have even less, and I'd rather live as your slave in $arcologies[0].name than on the streets back home."
+\
+<<case "Degradationist">>\
+\
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> does not typically permit anonymous messages through to you. If someone wishes to speak to you, they can do so under their own name and with their own face. She makes an exception, however, for a message offering you a slave so long as you pay the costs of enslavement, nothing else.
+
+The face and voice are obscured by a petty anonymization program, the sort that can be obtained with five minutes' work in the shadier parts of the net. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> could crack it nearly instantaneously, but you hold her back a moment to avoid spooking your correspondent. You are rewarded with video of the subject of the proposed enslavement, and the simple statement "I hate this fucking bitch, and I want her to suffer. Can't do it myself. You seem like the right <<if $PC.title == 1>>guy<<else>>woman<</if>> to break the cunt."
+\
+<<case "Degradationist Two">>\
+\
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> does not typically permit anonymous messages through to you. If someone wishes to speak to you, they can do so under their own name and with their own face. She makes an exception, however, for a message offering you a slave so long as you pay the costs of enslavement, nothing else.
+
+In lieu of a face, a plain page of mostly text and a scant few pictures fills the screen and details a number of potential slaves for sale, though most of the merchandise seems visibly too damaged to be worthy of purchase. Yet, one of the slaves catches your eye - an older woman covered in lashes, bruises and marks yet absent the dead-eyed expression of her peers. The document claims she has been in their possession longer than any of the other slaves, but has proven resistant to their breaking methods.
+\
+<<case "Body Purist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one is from another arcology, which is rather unusual. You are presented with a rather normal-looking, if obviously poor, free citizen. She says dejectedly, "I'm on my last few ¤ here, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. The owner here, he's planning to enslave me later today. I just know it. He fills his slaves up with silicone until they look like fucking barbie dolls." She shivers fearfully. "You don't do that, right? If I have to be a fucktoy, I don't want to be cut up first."
+\
+<<case "Body Purist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one is from one of the less prestigious slave schools, which is not in itself unusual, save that it comes directly from one of the graduating students. You are presented with a rather normal-looking slavegirl. "I'm past my majority," she says happily. "I know I'm not that pretty, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. But," and she pulls the camera back to reveal her fully nude body, "I've never had any plastic in me, the school couldn't afford it anyways. I was searching the net, and I saw that like women without surgery, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. If I'm to be owned, I'd like it to be by someone like you who won't cut me open."
+\
+<<case "Transformation Fetishist">>\
+\
+You receive a message coded urgent from a surgeon who you've hired in the past. You are on the point of opening the a call with a friendly businesslike salutation when you see his haggard, worried face, and change your greeting to one of commiseration and understanding. He pours out his troubles to you in a rush.
+
+It seems he botched an implant operation on a free woman. She's still out, and the implants are in successfully, but she's not too far from dead and will remain so for some time. He needs her out of sight, now. With your pull, you could easily manipulate the financial situation to enslave her and get her out of the doctor's area at the same time. It would be a favor to him, and by the medical records, a favor to you too, once you nurse her back to health. She's quite the implant queen.
+\
+<<case "Transformation Fetishist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The call comes in from an unusually well-to-do area. It appears that an aristocratic-looking man placing the call has fallen on hard times, and is doing the intelligent thing and staying ahead of his creditors by offering his trophy wife into slavery. Enslaving her will be costlier than usual, but it seems likely to be worth it. She's finely aged and completed worked over under a surgeon's knife. She's quite the implant queen, in fact.
+\
+<<case "Slimness Enthusiast">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The call comes in from an unusually well-to-do area. It appears that the aristocratic-looking woman placing the call has fallen on hard times, and is doing the intelligent thing and staying ahead of her creditors by offering herself into slavery. Enslaving her will be costlier than usual, but it seems likely to be worth it. She's well-spoken and seems both educated and intelligent. Even better, despite being middle-aged, she's extremely well-preserved, a tall, slim and graceful beauty with a face that must be the envy of girls half her age. She knows all this herself, and says, "I hear you appreciate a slender woman; if I'm going down into slavery, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I'd be happy to avoid too many implants. I understand $arcologies[0].name is a fine place for someone in my situation."
+\
+<<case "Slimness Enthusiast Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This call is coming from a public kiosk, which is usually an indication that the person on the other end is a transient individual who has decided to take slavery over homelessness. You are understandably surprised when this turns out to not be the case, the young woman in the video call is reasonably well dressed; so her newfound situation must be exceedingly recent. Without hesitation she immediately asks to be enslaved. "My boyfriend wants to turn me into some sort of bimbo," she says through tears. "I found all the surgery brochures that he hid, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. But," and she brings her slender chest, though covered by her top, into view, "I don't want to be cut up and filled with plastic. One of my friends told me that you care about woman with a good figure, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. I should have never sold myself to that bastard."
+\
+<<case "Asset Expansionist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The person placing the call is physically quite unusual, to the point of looking distinctly unnatural. She has absolutely enormous tits, an ass to match, and is generally plush all over; yet despite being able to compete with the lushest mother in the curves department, she appears to be very young. She explains herself quickly. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I just turned 19. Where I'm from, that means I'm very likely to be enslaved one way or another. So, I've been taking off-market hormones for a couple of years to raise myself out of the gutter as far as who might take me. I hear life is better if you're a valuable slave." She leans into the camera, displaying a solid acre of cleavage. "Can I be your valuable slave?"
+\
+<<case "Asset Expansionist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The person placing the call is physically quite unusual, to the point of looking distinctly unnatural. She has absolutely enormous tits, an ass to match, and is generally plush all over; perhaps one of the lushest mothers in the curves department you've ever seen. She explains herself quickly. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I'm not a young woman. Where I'm from, being this old and unmarried means I'm very likely to be enslaved one way or another. But I've always had big breasts. Well, big everything really. I hear life is better if you're a plush slave." She leans into the camera, displaying a solid acre of cleavage. "Can I be your plush slave?"
+\
+<<case "Youth Preferentialist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one, unusually, is voice-only. The caller explains why in a painfully quiet voice: she's turning 18 in the next few days, and she's fairly certain her family is about to sell her into slavery. The mixed notes of despair, apathy, and fear in her voice are heartrending, even to you. She begs you to make the necessary arrangements to enslave her. She's heard about you and how you like young girls, and she's also heard about brothels and arcades. There is very little hope discernible in her tone or the pictures she sends you,
+\
+<<case "Youth Preferentialist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one, unusually, is voice-only. The caller explains why in a unusually upbeat voice: she turned 18 a few days ago, and she's fairly certain her family is expecting her to make something of her life to help support them. The apathy to her family's wishes is readily evident in her tone of voice. She begs you to make the necessary arrangements to enslave her. She's heard about you and how you like younger girls, and that you take care of all the decision-making for your slaves. There's a lot of hope in her tone, she clearly wants an escape from responsibility - even if that means becoming a slave.
+\
+<<case "Maturity Preferentialist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+And this one is a rare one indeed. It's a personal file, and you suppress the urge to see whether $assistantName is bugged and has misfiled an application for employment. The beautiful older woman depicted has included a resume listing her skills, and a clever selection of photographs: tasteful shots of her in nice makeup and a fashionable business skirt, and fully nude mirror shots, flaws and all. Curious, you place a video call and get an immediate answer. It seems that 'personal circumstances' that she saw coming are forcing her to accept enslavement. She had some weeks of warning, however, and seems to have made use of the time to find an arcology owner that treats women of her age well, and then to make herself as appealing as possible in the hope you'll keep her.
+\
+<<case "Maturity Preferentialist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The call comes in from a middle-class area. It appears that the youthful man placing the call has a failing business, and is leveraging his last remaining asset by selling his stately-looking mother into slavery. Enslaving her will be costlier than usual, but it seems likely to be worth it. From the dossier her son forwarded to you, she's both educated and intelligent, both relics of her impressive pedigree. Even better, she's aged like a fine wine, a short, stacked and attractive beauty with a face and rack that must be the envy of girls half her age. She's aware of the situation at hand, and peeks in from the corner of the screen to say, "I hear you appreciate a mature woman; if I'm going down into slavery, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I hope for your sake that you know how to treat a woman of my caliber."
+\
+<<case "Physical Idealist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The subject line of the latest is badly misspelled, but the accompanying profile image is impressive, if trite, depicting the sender's massive bicep flexing, veins playing across the striated muscle. Getting her situation out of her proves to be something of a chore, since she scarcely has two functional neurons to rub together. It seems that she's on a fair number of drugs, not limited to aphrodisiacs and steroids, that she can't afford them, and that she has a distorted image of $arcologies[0].name as a sort of muscle-worshipping Valhalla of sex and gains. Hearing her describe her idea of life as one of your slaves, you understand why this idiot wants to be enslaved. If her idea of slave life were accurate, //you'd// want to be enslaved.
+\
+<<case "Physical Idealist Two">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+And this one is a rare one indeed. It's a personal file, and you suppress the urge to see whether $assistantName is bugged and has misfiled an application for employment. The muscular woman depicted has included a resume listing her various physical achievements, and a clever selection of photographs: tantalizing shots of her in skimpy workout clothes, and fully nude mirror shots of her flexing and posing. Curious, you place a video call and get an immediate answer. It seems that she's determined that life as a slave is the easiest means to access the drugs and steroids she needs to continue making massive gains. She had some weeks of planning, however, and seems to have made use of the time to find an arcology owner that values the pursuit of the physical ideal, and then to make herself as appealing as possible in the hope you'll take her.
+\
+<<case "Chattel Religionist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+This one is a little odd; it merely begs you for an in person audience and offers you the sender's "unworthy body" as payment for granting it. You surreptitiously scan her when she arrives to make sure this isn't an attack of some kind, but she's just a normal girl wearing conservative clothing. When admitted to your office, she immediately strips off her clothing, gets down before your desk, and presses her forehead to the floor. "<<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>," she says, "please accept me as your slave. I am a wretched whore, filled with sin, and freedom is a burden to me. Please free me from this torment and take me into your service."
+\
+<<case "Roman Revivalist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The call comes in from an old world university. The caller is a young woman who explains that she's struggling with extreme student debt, and has recently graduated with a history degree that she can't seem to turn into gainful employment. She gushes at length about how much she enjoyed ancient history, and how she's heard all about your ideas about reviving ancient culture in the Free Cities. She sees joining your household as a romantic way out of her difficult situation. Apparently she read all the idyllic parts of history and somehow missed out on learning about the salt mines and slave galleys. She's not terribly pretty and seems socially awkward, but that's likely to have its side benefits. She nervously sends you a complete dossier on herself.
+\
+<<case "Aztec Revivalist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The call comes in from an old world trading colony. The caller is a woman who humbly explains how tired she's from all the godless people and terrible conditions, and expresses interest to join the old empires. She probably knows only of the incredible architecture and the military accomplishments that are advertised in vids. Though the sacrifice and collaring of slaves is no secret, most people never find out the real truth to what you do. Nevertheless she's incredibly willing, so much so that she almost signs herself off to you by accident. Her file is displayed in front if you, pending your reaction.
+\
+<<case "Edo Revivalist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The caller is a young woman who struggles to stop herself from peppering her socially awkward babble with poorly pronounced Japanese colloquialisms. Insofar as you can parse her nonsense, she seems to have gotten a hilariously romanticized version of feudal Japan from somewhere, and is willing to submit to enslavement in order to join your revivalist arcology. Whoever's out there spreading this rubbish, you owe them one; this serf is in for an extremely rude awakening.
+\
+<<case "Arabian Revivalist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The call comes in from an old world university. The caller, surprisingly, is a beautiful woman in her thirties who speaks with a richly lilting accent and a literary vocabulary. "I'm afraid," she says sadly, "it's come to slavery, for me. I am no longer a girl, but I can make some claim to beauty. I know many stories and can tell them cleverly; I can sing and dance well. I know you are not looking for a Scheherazade, but I could play her part. Nor am I naive; I know the Sultan enjoyed her body as well as her wit, and I am not unskilled in those respects, either." She looks you straight in the eye. "May I come into your harem? I will do my best to brighten it."
+\
+<<case "Chinese Revivalist">>\
+\
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+The call comes in from an office, and you suppress the urge to check whether $assistantName has misidentified a business communication. The caller is a middle-aged woman, not unattractive, whose face is lined with stress and worry. She draws herself up and says, "I would like to apply to be your slave." There is a flash of bitter amusement at the absurd statement,  but she continues, "Business circumstances make it inevitable. I have considerable skills and experience, and it is my understanding that you value such things." She forwards her qualifications: they are comprehensive and open, including her sexual skills as if they were merely another business asset. Which, in a way, they are.
+\
+<</switch>>\
+
+<<include "Long Slave Description">>\
+
+<span id="result">
+<<if $cash >= $contractCost>>\
+<<link "Enslave her">>
+	<<set $cash -= $contractCost>>
+	<<replace "#result">>
+	<<switch $FSAcquisitionEvents>>\
+	<<case "Pastoralist">>\
+	She drags herself in, but as the enslavement process winds grindingly on, she shakes off her depression. The vast weight of her situation lifts from her. You've seen this before, the perverse internal freedom that comes with the knowledge that her life is in the hands of another now, and that all she has to do or can do is obey. Her last words to you as a free woman are an ironic statement that, when she was teased back in school for the size of her boobs, she never thought they'd save her one day.
+	<<case "Pastoralist Two">>\
+	She speaks to you as a free woman while working through the enslavement process, perhaps she hasn't quite grasped her new role. Nonetheless, it seems as if a vast weight has been lifted from her shoulders. You've seen this before, the perverse internal freedom that comes with the knowledge that her life is in the hands of another now, and that all she has to do or can do is obey. Her last words to you as a free woman are an ironic statement that, people always praised her milk filled udders as givers of life, yet she never thought they'd save hers one day.
+	<<case "Supremacist">>\
+	A battered VTOL craft arrives at $arcologies[0].name, broadcasting obviously bogus IFF codes. It seems this mercenary group is playing fast and loose in an attempt to get back on their feet. The aircraft doesn't even touch down on the pad they're directed to: it simply hovers six feet off the pad for the five seconds it takes to shove a canvas bag that obviously contains a struggling human form out of the side door.
+	<<case "Supremacist Two">>\
+	A clearly improvised VTOL craft arrives at $arcologies[0].name, broadcasting an erratic array of IFF codes. It seems this group hasn't quite mastered the intricacies of air travel. The aircraft doesn't seem capable of the delicate feat of landing on the pad it had been directed to: it simply hovers six feet off the pad for the five seconds it takes to shove a canvas bag that obviously contains a struggling human form out of the side door.
+	<<case "Subjugationist">>\
+	The enslavement process is disappointingly quiet, since she's still unconscious. As of this morning she was one of the last free $arcologies[0].FSSubjugationistRace people in the arcology. Now she's simply the newest sex slave of the inferior race to take her proper place.
+	<<case "Subjugationist Two">>\
+	The enslavement process is disappointingly quiet, since she does little more than stare blankly ahead and respond to any orders. As of this morning she was one of the last free $arcologies[0].FSSubjugationistRace people in the arcology. Now she's simply the newest, and perhaps most willing, sex slave of the inferior race to take her proper place.
+	<<case "Gender Radicalist">>\
+	When she arrives, she comes directly to your penthouse for enslavement. She wears an expression of doubt, fear, and wonder as she takes in the sights and sounds of the magnificent beast that is the new society taking shape in $arcologies[0].name. The enslavement process requires her to be nude, of course, so she doesn't need to strip to offer herself to you when it's over. She doesn't even have to be prompted: she just gets down on the floor in front of your desk and offers you her fuckhole.
+	<<case "Gender Radicalist Two">>\
+	When she arrives, she comes directly to your penthouse for enslavement. She wears an expression of doubt, fear, and wonder as she takes in the sights and sounds of the magnificent beast that is the new society taking shape in $arcologies[0].name. The enslavement process requires her to be nude, of course, so she doesn't need to strip to offer herself to you when it's over. She doesn't even have to be prompted: she just gets down on the floor in front of your desk and offers you her fuckhole.
+	<<case "Gender Fundamentalist">>\
+	When she arrives, she is the very picture of a lost and very pregnant young waif. She clearly feels some hope at leaving her traditionalist home for a more modern society, but she has just as clearly heard enough about the Free Cities to know that she's likely to buy her presence here through long years of sexual labor. She sighs with relief at getting off her feet when the enslavement process finally allows her to sit.
+	<<case "Gender Fundamentalist Two">>\
+	When she arrives, she is the very picture of a distraught and very pregnant mature woman. She clearly feels some resentment at her traditionalist home and family for selling her into slavery, but she has just as clearly heard enough about the Free Cities to know that she's likely traded one form of marginalization for another.
+	<<case "Paternalist">>\
+	She speaks to you as a free woman throughout the enslavement process, but as soon as it is completed, she stops and waits for instruction before talking. She does not look directly at your face, but keeps her gaze lower than that, and stands expectant and ready for commands. You are reminded of her intelligence by her precisely correct behavior for a new slave, even before you give any kind of direction.
+	<<case "Paternalist Two">>\
+	She speaks to you as a free woman throughout the enslavement process, but as soon as it is completed, she stops and waits for instruction before talking. She may not have had many prospects in her life back home, but if she remains this obedient she'll fit right in here in the Free Cities.
+	<<case "Degradationist">>\
+	When she arrives as part of the anonymous slave transfers that make up a good part of the inter-arcology commerce, she has clearly had some time to mull over her situation. As soon as she sees you, she blurts out, "Whatever that fucker told you, it isn't true. I'll be your little bitch bimbo, whatever you want. Just don't - just don't fucking hurt me." She sticks out her chest in a clear attempt to entice you with her fake tits.
+	<<case "Degradationist Two">>\
+	When she arrives as part of the anonymous slave transfers that make up a good part of the inter-arcology commerce, she has clearly had some time to mull over her situation. As soon as she sees you, she glares deep into your eyes and addresses you directly, "Those fuckers threw everything they could at me, you can't break me. No one can."
+	<<case "Body Purist">>\
+	When she arrives, it's obvious that she isn't particularly happy with the situation, but there is some evident relief to her. When asked about it, she says, "I really hate the idea of surgery, especially implant surgery, M-<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. Just - the idea of having fake shit in here -" she rubs her chest a little "- ugh." She laughs bitterly at herself, and then rubs her chest again, looking at you with mixed fear and invitation.
+	<<case "Body Purist Two">>\
+	When she arrives, it's obvious that she's fairly happy. After all, the slave school trained her for this. When asked about it, she says, "Some of the girls who graduated before me were given implants, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. Just - the idea of having fake shit in here -" she rubs her chest a little "- ugh. I'm glad you're not into that" She laughs bitterly at herself, and then rubs her chest again, looking at you with mixed fear and invitation.
+	<<case "Transformation Fetishist">>\
+	She arrives with various medical devices still attached to her, wrapped up in supportive hospital clothing. Despite this, it's obvious that you've made a good decision. The new tits that got her into this situation are so cartoonish that some of the medical tubing has been hastily routed between them. After a few weeks on curatives and a few more in training, she'll be ready to bounce those fake boobs up and down as she takes dick.
+	<<case "Transformation Fetishist Two">>\
+	She arrives unapologetically in her fine clothing. "I'm not sorry," she says harshly, "but I'm wearing my best one last time whether you like it or not." Eventually she sighs, squares her shoulders, and visibly steels herself. "I'll say as a free woman, since it's my last chance to say anything as a free woman, you're good-looking, for an evil slaveholding oligarch." She delivers this last with a little smile on her plush lips and a sense of bitter irony in her voice. "If we'd met at a nice party last week I might have made a pass at you. You'd be a better choice than my ex-husband at least."
+	<<case "Slimness Enthusiast">>\
+	She arrives apologizing for her fine clothing. "I'm sorry," she apologizes sadly, "but I wanted to wear my best one last time." She sighs, squares her shoulders, and visibly steels herself. "I'll say as a free woman, since it's my last chance to say anything as a free woman, you're good-looking, for an evil slaveholding oligarch." She delivers this last with a little smile on her lips and rich turn of humor in her voice. "If we'd met at a nice party last week I might have made a pass at you. I suppose that's beside the point now."
+	<<case "Slimness Enthusiast Two">>\
+	When she arrives, she is the very picture of a young waif out of her depth. It's clear she feels relief and escaping going under the knife, but she knows enough about the Free Cities to know that she's likely to buy her presence here through long years of sexual labor.
+	<<case "Asset Expansionist">>\
+	When she arrives, it's clear she's nobody's fool. She comes without personal effects of any kind, and is wearing cheap, sturdy clothes to travel in, since she knows she'll be taking them off immediately. She does, without being told, just as soon as the enslavement formalities are out of the way. Her breasts are capped by titanic, puffy nipples; she notices you appreciating them and gives you a hesitant little smile, swaying her shoulders back and forth a little to set her flesh deliciously into motion.
+	<<case "Asset Expansionist Two">>\
+	When she arrives, it's clear she's nobody's fool. She comes without personal effects of any kind, and is wearing cheap, sturdy clothes to travel in, since she knows she'll be taking them off immediately. She does, without being told, just as soon as the enslavement formalities are out of the way. Her breasts are capped by titanic, puffy nipples; she notices you appreciating them and gives you a hesitant little smile, swaying her shoulders back and forth a little to set her flesh deliciously into motion.
+	<<case "Physical Idealist">>\
+	She gets through the enslavement process without breaking anything, mostly due to your increasingly exasperated supervision. You wondered whether the destruction of her moronic ideas about life as one of your slaves was going to cause an explosion, but it seems that she's under fewer illusions than you thought. She's obviously familiar with getting fucked as a way of earning her keep, and hangs around, flexing idly and clearly wondering when you'll get on with it.
+	<<case "Physical Idealist Two">>\
+	When she arrives, you're impressed again. She's even more muscular in person than in her pictures. "<<Master>>," she growls, "I've done my very best to be the biggest, strongest slave before coming here. May I show you?" More than a little curious, you nod. She reaches down to place a palm on the ground. "Well, <<Master>>, I had a month. So I did my best to get in shape." She suddenly flips as if starting a cartwheel, but stops suspended in midair, holding her entire muscular frame off the ground with just one hand planted on the floor. She turns slowly, revealing the base of an impressively large buttplug nestling between her cheeks. She knows her audience.
+	<<case "Youth Preferentialist">>\
+	Your slaving network gets her out of her difficult situation without trouble, forwarding her the necessary travel documents. When she arrives, she displays the clear signs of someone who has learned to avoid abuse: she takes no initiative and does nothing without instructions, just standing dumbly until ordered; when told what to do, she does it quickly and carefully. Though her mind is not broken, there is something dead lurking in her eyes. When she looks at you, it is with the watchful caution of an abused animal.
+	<<case "Youth Preferentialist Two">>\
+	Your slaving network extracts her from her family's grasp easily, forwarding her the necessary travel documents. When she arrives, she displays the clear signs of someone who's never had to think for themselves: she takes no initiative and does nothing without instructions, just standing dumbly until ordered; when told what to do, she does it quickly and carefully. Though her mind is not broken, there's clearly not a lot in there. Being a slave may actually be her most fitting vocation.
+	<<case "Maturity Preferentialist">>\
+	When she arrives, you're impressed again. She elected to appear in black lace lingerie, and stalks into your office on high heels with a calculated sensuality. "<<Master>>," she purrs, "I've done my very best to get ready to be a good slave. May I show you?" More than a little curious, you nod. She starts to strip slowly and skillfully. "Well, <<Master>>, I had a month. So I did my best to get in shape." She rubs her hands down her toned belly, hooking fingers under her thong. "I practiced stripping. I practiced blowjobs." She turns slowly, revealing the base of an impressively large buttplug nestling between her cheeks. "I even practiced buttsex."
+	<<case "Maturity Preferentialist Two">>\
+	She arrives apologizing for her fine clothing. "I'm sorry," she apologizes sadly, "but I wanted to wear my best one last time." She sighs, squares her shoulders, and visibly steels herself. "My son's a bastard for selling me to you, and all to save that useless store of his." She delivers this last with a bitter smile on her lips. "At least he had the sense to sell me to someone with exquisite taste, like you. After all, you did buy me."
+	<<case "Chattel Religionist">>\
+	She lets out a convulsive sob when you accept her servitude, and is painfully obsequious as you complete the formalities of enslavement. Your exam reveals several minor indications of self-harm - chewed nails, bitten lips, and such. But for all that, a remarkable look of peace has settled on the poor woman's face. She waits patiently for a hint of your will, <<if $activeSlave.dick > 0>>her cock painfully erect<<else>>her pussy visibly moist<</if>> at the prospect of the servile sex she is convinced is her duty.
+	<<case "Roman Revivalist">>\
+	She arrives wide-eyed and enthusiastic about the historical style she saw on the way in. She swallows nervously throughout the enslavement process and even cries a little at the end. She's slow to undress, and when she's finished, she covers her modest breasts with one arm and her mons with the other. It seems that she's about to have a rude awakening about the realities of being a house slave.
+	<<case "Aztec Revivalist">>\
+	She arrives awestruck by all the sights she passed through to get to your abode. She probably didn't see anything too extreme, but she will soon. Feeling your gaze on her body, she quickly abandons all fears from her past life, strips off her clothes, and submits to you fully. Only time will tell if she made a mistake.
+	<<case "Edo Revivalist">>\
+	She arrives with doubt already clouding her eyes. It seems she passed one of the arcology's seedier bars on her way up to your penthouse; the sight of roaring patrons swilling cheap sake and manhandling whores in loose kimonos does not seem to have been part of her expectations. As the enslavement process winds on, she reflexively begins to look around for a means of escape, and slowly collapses into herself as she realizes there is none.
+	<<case "Arabian Revivalist">>\
+	Your estimation of her rises through the enslavement process: she doffs and discards her conservative business wear without complaint, and stands nude before you, obeying instructions without fuss. There is an indecipherable glint in her eyeColor: nerves? Excitement? Challenge, even? Perhaps she even feels this is an adventure. And that, it will certainly be.
+	<<case "Chinese Revivalist">>\
+	She arrives in a simple, sturdy suit, which she obviously wore in the correct anticipation of immediately removing and never seeing again. She cooperates with the enslavement process as best she can, her glance confident and watchful. She's obviously calculating how to get ahead within this new place, and she pays particularly close attention as the ebb and flow of business through your office brings your various slaves into her view for the first time.
+	<</switch>>\
+	<<include "New Slave Intro">>
+	<</replace>>
+<</link>> //This will cost ¤$contractCost//
+<<link "Sell her immediately">>
+	<<set $cash += $slaveCost>>
+	<<replace "#result">>
+	<<switch $FSAcquisitionEvents>>\
+	<<case "Pastoralist">>\
+	She drags herself in, but as the enslavement process winds grindingly on, she shakes off her depression. It threatens to descend again when a purchaser's agent comes in to take her away. She begs to know where she's going, so you tell her she's to be a cow in a slave dairy. She quails at the term, but you observe that she'll be well treated and lightly used, if at all, and she seems to take heart at this.
+	<<case "Pastoralist Two">>\
+	She speaks to you as a free woman while working through the enslavement process, perhaps she hasn't quite grasped her new role. Nonetheless, it seems as if a vast weight has been lifted from her shoulders. It threatens to descend again when a purchaser's agent comes in to take her away. She begs to know where she's going, so you tell her she's to be a cow in a slave dairy. She quails at the term, but you observe that she'll be well treated and lightly used, if at all, and she seems to take heart at this.
+	<<case "Supremacist">>\
+	A battered VTOL craft arrives at $arcologies[0].name, broadcasting obviously bogus IFF codes. It seems this mercenary group is playing fast and loose in an attempt to get back on their feet. The aircraft doesn't even touch down on the pad they're directed to: it simply hovers six feet off the pad for the five seconds it takes to shove a canvas bag that obviously contains a struggling human form out of the side door. You decide to do the simple thing, and leave the bag where it is. The purchaser's agent can deal with it.
+	<<case "Supremacist Two">>\
+	A clearly improvised VTOL craft arrives at $arcologies[0].name, broadcasting an erratic array of IFF codes. It seems this group hasn't quite mastered the intricacies of air travel. The aircraft doesn't seem capable of the delicate feat of landing on the pad it had been directed to: it simply hovers six feet off the pad for the five seconds it takes to shove a canvas bag that obviously contains a struggling human form out of the side door.  You decide to do the simple thing, and leave the bag where it is. The purchaser's agent can deal with it.
+	<<case "Subjugationist">>\
+	The purchasing agent is businesslike, even hurried. The inert slave receives a simple check, with some industrious fingering of orifices, and is bundled off. As is appropriate.
+	<<case "Subjugationist Two">>\
+	The enslavement process is disappointingly quiet, since she does little more than stare blankly ahead and respond to any orders. As of this morning she was one of the last free $arcologies[0].FSSubjugationistRace people in the arcology. Now she's simply the newest, and perhaps most willing, sex slave of the inferior race to take her proper place. She's taken away by a purchasing agent soon after.
+	<<case "Gender Radicalist">>\
+	When she arrives, she comes directly to your penthouse for enslavement. She wears an expression of doubt, fear, and wonder as she takes in the sights and sounds of the magnificent beast that is the new society taking shape in $arcologies[0].name. A purchaser's agent arrives to take charge of her, and she asks politely who bought her. A salon, you tell her; she'll be trained to wait tables, serve drinks, and entertain customers with her mouth and anus.
+	<<case "Gender Radicalist Two">>\
+	When she arrives, she comes directly to your penthouse for enslavement. She wears an expression of doubt, fear, and wonder as she takes in the sights and sounds of the magnificent beast that is the new society taking shape in $arcologies[0].name. A purchaser's agent arrives to take charge of her, and she asks politely who bought her. A salon, you tell her; she'll be trained to wait tables, serve drinks, and entertain customers with her mouth and anus.
+	<<case "Gender Fundamentalist">>\
+	When she arrives, she is the very picture of a lost and very pregnant young waif. She clearly feels some hope at leaving her traditionalist home for a more modern society, but she has just as clearly heard enough about the Free Cities to know that she's likely to buy her presence here through long years of sexual labor. A purchaser's agent appears to take her away, and she quietly asks who's bought her. A breeder, you tell her, who prefers stock proven to be fertile. She'll probably manage 20 pregnancies or so, before she's retired.
+	<<case "Gender Fundamentalist Two">>\
+	When she arrives, she is the very picture of a distraught and very pregnant mature woman. She clearly feels some resentment at her traditionalist home and family for selling her into slavery, but she has just as clearly heard enough about the Free Cities to know that she's likely traded one form of marginalization for another. A purchaser's agent appears to take her away, and she quietly asks who's bought her. A breeder, you tell her, who prefers to squeeze a few pregnancies out of mature women. She'll probably manage a few pregnancies before she's retired.
+	<<case "Paternalist">>\
+	She speaks to you as a free woman throughout the enslavement process, but as soon as it is completed, she stops and waits for instruction before talking. She does not look directly at your face, but keeps her gaze lower than that, and stands expectant and ready for commands. You are reminded of her intelligence by her presence of mind when a purchaser's agent arrives to take charge of her; she clearly calculates that making a scene will gain her nothing, and cooperates. You reward this by telling her the truth: she's been sold to a citizen of $arcologies[0].name who shares paternalistic beliefs; she'll be fine.
+	<<case "Paternalist Two">>\
+	She speaks to you as a free woman throughout the enslavement process, but as soon as it is completed, she stops and waits for instruction before talking. She may not have had many prospects in her life back home, but if she remains this obedient she'll fit right in here in the Free Cities. When the purchasing agent arrives she is momentarily surprised but not alarmed, she figures she'll been sold to a citizen of $arcologies[0].name who shares paternalistic beliefs.
+	<<case "Degradationist">>\
+	When she arrives as part of the anonymous slave transfers that make up a good part of the inter-arcology commerce, she has clearly had some time to mull over her situation. As soon as she sees you, she blurts out, "Whatever that fucker told you, it isn't true. I'll be your little bitch bimbo, whatever you want. Just don't - just don't fucking hurt me." She sticks out her chest in a clear attempt to entice you with her fake tits, and is rewarded with a bag over her head, courtesy of the purchaser's agent who arrived in the meantime. The agent clearly felt that she would be a handful worth corralling quickly, and this proves correct. She goes limp after being tazed, though.
+	<<case "Degradationist Two">>\
+	When she arrives as part of the anonymous slave transfers that make up a good part of the inter-arcology commerce, she has clearly had some time to mull over her situation. As soon as she sees you, she glares deep into your eyes and addresses you directly, "Those fuckers threw everything they could at me, you can't break me. No one can." She is rewarded with a bag over her head, courtesy of the purchaser's agent who arrived in the meantime. The agent clearly felt that she would be a handful worth corralling quickly, and this proves correct. She goes limp after being tazed, though.
+	<<case "Body Purist">>\
+	When she arrives, it's obvious that she isn't particularly happy with the situation, but there is some evident relief to her. It vanishes when a purchaser's agent arrives to take her away. She looks at you desperately, begging to know who's purchased her. You tell her truthfully that a wealthy citizen one arcology over bought her as a house slave; you neglect to mention that he likes big tits, and he isn't particular about whether they're natural.
+	<<case "Body Purist Two">>\
+	When she arrives, it's obvious that she's fairly happy. After all, the slave school trained her for this. When asked about it, she says, "Some of the girls who graduated before me were given implants, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. Just - the idea of having fake shit in here -" she rubs her chest a little "- ugh. I'm glad you're not into that" She laughs bitterly at herself, and then rubs her chest again, looking at you with mixed fear and invitation. Her playfulness vanishes when a purchaser's agent arrives to take her away. She looks at you desperately, begging to know who's purchased her. You tell her truthfully that a wealthy citizen one arcology over bought her as a house slave; you neglect to mention that he likes big tits, and he isn't particular about whether they're natural.
+	<<case "Transformation Fetishist">>\
+	The only downside to her condition is that reselling her is utterly anticlimactic. A purchaser's agent arrives and takes charge of her, transferring her to a medical transport bed. He takes her away, and it's done.
+	<<case "Transformation Fetishist Two">>\
+	She arrives unapologetically in her fine clothing. "I'm not sorry," she says harshly, "but I'm wearing my best one last time whether you like it or not." Eventually she sighs, squares her shoulders, and visibly steels herself. She's about to declaim something when a purchaser's agent arrives to bundle her off. Her face darkens and she mulls something over, probably preparing a really cutting remark, but before she can deliver it the agent fastens a bag over her head and she is heard no more.
+	<<case "Slimness Enthusiast">>\
+	She arrives apologizing for her fine clothing. "I'm sorry," she apologizes sadly, "but I wanted to wear my best one last time." She sighs, squares her shoulders, and visibly steels herself. She's about to declaim something when a purchaser's agent arrives to bundle her off. Her face darkens and she mulls something over, probably preparing a really cutting remark, but before she can deliver it the agent fastens a bag over her head and she is heard no more.
+	<<case "Slimness Enthusiast Two">>\
+	When she arrives, she is the very picture of a young waif out of her depth. It's clear she feels relief and escaping going under the knife, but she knows enough about the Free Cities to know that she's likely to buy her presence here through long years of sexual labor. A purchaser's agent appears to take her away, and she quietly asks who's bought her. A citizen, you tell her, who prefers his women slender and unimplanted. She seems relieved by this.
+	<<case "Asset Expansionist">>\
+	When she arrives, it's clear she's nobody's fool. She comes without personal effects of any kind, and is wearing cheap, sturdy clothes to travel in, since she knows she'll be taking them off immediately. She does, without being told, just as soon as the enslavement formalities are out of the way. Her breasts are capped by titanic, puffy nipples; she notices you appreciating them and gives you a hesitant little smile, swaying her shoulders back and forth a little to set her flesh deliciously into motion. Her playfulness vanishes when a purchaser's agent arrives to take her away. She looks at you desperately, begging to know who's purchased her. You tell her truthfully that a wealthy citizen one arcology over bought her as a house slave; you neglect to mention that he likes big tits.
+	<<case "Asset Expansionist Two">>\
+	When she arrives, it's clear she's nobody's fool. She comes without personal effects of any kind, and is wearing cheap, sturdy clothes to travel in, since she knows she'll be taking them off immediately. She does, without being told, just as soon as the enslavement formalities are out of the way. Her breasts are capped by titanic, puffy nipples; she notices you appreciating them and gives you a hesitant little smile, swaying her shoulders back and forth a little to set her flesh deliciously into motion. Her playfulness vanishes when a purchaser's agent arrives to take her away. She looks at you desperately, begging to know who's purchased her. You tell her truthfully that a wealthy citizen one arcology over bought her as a house slave; you neglect to mention that he likes big tits.
+	<<case "Physical Idealist">>\
+	She gets through the enslavement process without breaking anything, mostly due to your increasingly exasperated supervision. Her buyer's agent arrives to take her away, and it takes the poor man ten minutes to get the situation through her thick skull. He sees the beginnings of rage building in her as she realizes how she's been tricked, but he's a quick draw, and before she can do anything he's got his tazer unholstered and deployed. The bitch gives off an antediluvian roar as she goes stiff as a board and crashes to the floor.
+	<<case "Physical Idealist Two">>\
+	When she arrives, you're impressed again. She's even more muscular in person than in her pictures. "<<Master>>," she growls, "I've done my very best to be the biggest, strongest slave before coming here. May I show you?" Though more than a little curious, the arrival of the purchasing agent cuts short any theatrics. Though initially confused, the promise of steroids and other drugs by her new owner has her follow the agent out of your penthouse without fuss.
+	<<case "Youth Preferentialist">>\
+	Your slaving network gets her out of her difficult situation without trouble, forwarding her the necessary travel documents. When she arrives, she displays the clear signs of someone who has learned to avoid abuse: she takes no initiative and does nothing without instructions, just standing dumbly until ordered; when told what to do, she does it quickly and carefully. When a buyer's agent arrives to take her away, she follows him without a backward glance.
+	<<case "Youth Preferentialist Two">>\
+	Your slaving network extracts her from her family's grasp easily, forwarding her the necessary travel documents. When she arrives, she displays the clear signs of someone who's never had to think for themselves: she takes no initiative and does nothing without instructions, just standing dumbly until ordered; when told what to do, she does it quickly and carefully. Though her mind is not broken, there's clearly not a lot in there. Being a slave may actually be her most fitting vocation. When a buyer's agent arrives to take her away, she follows him without a backward glance, clearly unaware of who he is.
+	<<case "Maturity Preferentialist">>\
+	She and the buyer's agent arrive at the same time. She accepts this defeat with good grace, and cooperates with him as best she can. She gives you a single questioning glance, with just a glint of hope; you take pity, and tell her she won't be going far. She's to be employed in one of the arcology's better MILF brothels. She'll be fucked ten times tomorrow, it's true, but she'll be well treated when she doesn't have dicks in her.
+	<<case "Maturity Preferentialist Two">>\
+	She arrives apologizing for her fine clothing. "I'm sorry," she apologizes sadly, "but I wanted to wear my best one last time." She sighs, squares her shoulders, and visibly steels herself. "My son's a bastard for selling me to you, and all to save that useless store of his." She delivers this last with a bitter smile on her lips. "At least he had the sense to sell me to someone with exquisite taste, like you. After all, you did buy me."  She's about to declaim something else when a purchaser's agent arrives to bundle her off. Her face darkens and she mulls something over, probably preparing a really cutting remark, but before she can deliver it the agent fastens a bag over her head and she is heard no more.
+	<<case "Chattel Religionist">>\
+	She lets out a convulsive sob when you accept her servitude, and is painfully obsequious as you complete the formalities of enslavement. When her buyer arrives to take her away, the realization agonizes her, but she snuffs out her saddened reaction almost as soon as it dawns on her face. She visibly draws herself up, obviously telling herself that service under one master is as righteous as service under another.
+	<<case "Roman Revivalist">>\
+	She arrives with doubt already clouding her eyes. It seems she got an introduction to the reality of Roman Revivalism on her way up the arcology to your villa. The violence it did to her vision of Rome is deeply ironic; $arcologies[0].name is a fair reproduction of the decadence and vigor of imperial Rome. If she's shocked by the screams of a slave dying in gladiatorial combat or the spectacle of prisoners from the provinces being sold at auction, that's her ignorance. When you cause a price placard to be affixed to her chest so she can be sold at auction, the reality of her future finally comes home to her.
+	<<case "Aztec Revivalist">>\
+	She arrives so terrified, she can't stop shaking and won't acknowledge most of your commands. It seems she realized what really goes on in this arcology. The blood and gruesome mutilation is very far from she envisioned for her future; $arcologies[0].name is a close reproduction of the miasma of death that accompanied the Aztecs. She's currently too shaken to realize what awaits her. Whether good or bad, she can't back out. She's yours.
+	<<case "Edo Revivalist">>\
+	She arrives with doubt already clouding her eyes. It seems she passed one of the arcology's seedier bars on her way up to your penthouse; the sight of roaring patrons swilling cheap sake and manhandling whores in loose kimonos does not seem to have been part of her expectations. When a buyer's agent arrives to take charge of her low-value body, she manages to spit out a last bit of bad Japanese (a childish insult) before he bags her. The body in the bag struggles spastically until he knuckles it hard in the kidney, slings it over his shoulder, and carries the package out, grinning at you in commiseration.
+	<<case "Arabian Revivalist">>\
+	She arrives and works her way through the enslavement process without fuss. When a buyer's agent arrives, she immediately understands that she has been sold. She looks rueful for a moment, obviously realizing that you made no commitment not to do this, and that such a commitment would have been worthless in any case. She flawlessly performs the only successful insult available to her, ignoring you utterly from that moment on, but obeying the agent faultlessly.
+	<<case "Chinese Revivalist">>\
+	She arrives and works her way through the enslavement process, doing her best to ingratiate herself. When a buyer's agent arrives, she immediately understands that she has been sold. She looks rueful for a moment, obviously realizing that you made no commitment not to do this, and that such a commitment would have been worthless in any case. She transfers her focus to the agent without hesitation, doing her best to improve her rapidly changing position.
+	<</switch>>\
+	<</replace>>
+<</link>> //This will bring in ¤$slaveCost//
+<<else>>\
+	//You lack the necessary funds to enslave her.//
+<</if>>\
+
+<<if $cheatMode == 1>>
+	<br><br>DEBUG: &nbsp;&nbsp;&nbsp;&nbsp;[[Go back to Nonrandom Event|Nonrandom Event][$activeSlave = 0, $eventSlave = 0]]
+<</if>>
+
+</span>
+
+<</if>>

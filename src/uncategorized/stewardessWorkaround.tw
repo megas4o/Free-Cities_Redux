@@ -1,0 +1,13 @@
+:: Stewardess Workaround [silently]
+
+<<if $Stewardess != 0>>
+	<<removeJob $Stewardess "be the Stewardess">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the Stewardess">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Stewardess = $slaves[$i]>>
+<</if>>
+
+<<goto "Servants' Quarters">>
+

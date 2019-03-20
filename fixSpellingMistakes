@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ ! -d ".git" ]; then
+	#not running in git repo, so can't use git commands :-)
+	echo "No .git repo found - skipping sanity checks"
+	exit 0
+fi
+
+git ls-files  -z src/*.tw | xargs -0 sed -i -f devTools/spell_check.txt
+

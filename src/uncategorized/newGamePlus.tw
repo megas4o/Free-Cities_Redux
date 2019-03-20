@@ -1,0 +1,21 @@
+:: New Game Plus [nobr]
+
+<<set $ui = "start", $slavesToImport = 0>>
+
+<<silently>><<include "Backwards Compatibility">><</silently>>
+
+You have decided to start over. You'll be able to take a few things with you: a few slaves, a small fraction of your current reserves of money, and your experience as an arcology owner, which will give you a very powerful career background. Many of your other customizations and settings will be carried over as the defaults for your new game, but can be revised freely. Select up to five slaves to be imported into a new game and then [[click here.|init][$saveImported = 1]]
+
+<br><br>''These slaves will be imported into the new game:''
+<<set $Flag = 1>>
+<<include "Slave Summary">>
+
+<br><br>
+<<if $slavesToImport >= 5>>
+	//Maximum number of slaves for import selected.//
+<<elseif ($slaves.length > $slavesToImport)>>
+	''These slaves are available to be imported into the new game:''
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<</if>>
+<<unset $Flag>>

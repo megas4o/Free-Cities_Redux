@@ -1,0 +1,141 @@
+:: extended family widgets [nobr widget]
+
+<<widget "Family">>
+
+<<if $activeSlave.father == -1 && $activeSlave.mother == -1>>
+	$pronounCap's @@.lightgreen;your child;@@ you knocked yourself up and gave birth to $object.
+<</if>>
+
+<<if $activeSlave.father == -1 && $activeSlave.mother != -1>>
+	$pronounCap's @@.lightgreen;your child;@@ you knocked $possessive mother up.
+<<elseif $activeSlave.father > 0>>
+	<<set _efw = $slaves.findIndex(function(s) { return s.ID == $activeSlave.father; })>>
+	$pronounCap was @@.lightgreen;sired by $slaves[_efw].slaveName's@@ virile dick.
+<</if>>
+
+<<if $activeSlave.father != -1 && $activeSlave.mother == -1>>
+	$pronounCap's @@.lightgreen;your child;@@ you gave birth to $object.
+<<elseif $activeSlave.mother > 0>>
+	<<set _efw = $slaves.findIndex(function(s) { return s.ID == $activeSlave.mother; })>>
+	$pronounCap was @@.lightgreen;born from $slaves[_efw].slaveName's@@ fertile womb.
+<</if>>
+
+<<set _children = $slaves.filter(function(s) { return $activeSlave.ID == s.father; })>>
+<<if _children.length > 2>>
+	$pronounCap @@.lightgreen;sired
+	<<for _efw = 0; _efw < _children.length; _efw++>>
+		<<if _efw < _children.length-1>>
+			_children[_efw].slaveName,
+		<<else>>
+			and _children[_efw].slaveName.@@
+		<</if>>
+	<</for>>
+<<elseif _children.length > 1>>
+	$pronounCap @@.lightgreen;sired a pair of your slaves: _children[0].slaveName, and _children[1].slaveName.@@
+<<elseif _children.length > 0>>
+	$pronounCap @@.lightgreen;sired a single slave of yours: _children[0].slaveName.@@
+<</if>>
+
+<<set _children = $slaves.filter(function(s) { return $activeSlave.ID == s.mother; })>>
+<<if _children.length > 2>>
+	$pronounCap @@.lightgreen;gave birth to
+	<<for _efw = 0; _efw < _children.length; _efw++>>
+		<<if _efw < _children.length-1>>
+			_children[_efw].slaveName,
+		<<else>>
+			and _children[_efw].slaveName.@@
+		<</if>>
+	<</for>>
+<<elseif _children.length > 1>>
+	$pronounCap @@.lightgreen;gave birth to a pair of your slaves: _children[0].slaveName, and _children[1].slaveName.@@
+<<elseif _children.length > 0>>
+	$pronounCap @@.lightgreen;gave birth to a single of your slaves: _children[0].slaveName.@@
+<</if>>
+
+/* FCGudder's Fixings */
+<<set _twins = [], _sisters = [], _brothers = [], _halfsisters = [], _halfbrothers = []>>
+<<for _efw = 0; _efw < $slaves.length; _efw++>>
+	<<set _sisterCheck = areSisters($slaves[_efw], $activeSlave)>>
+	<<if _sisterCheck == 1>>
+		<<run _twins.push($slaves[_efw])>>
+	<</if>>
+	<<if _sisterCheck == 2>>
+		<<run ($slaves[_efw].genes == 'XX' ? _sisters : _brothers).push($slaves[_efw])>>
+	<</if>>
+	<<if _sisterCheck == 3>>
+		<<run ($slaves[_efw].genes == 'XX' ? _halfsisters : _halfbrothers).push($slaves[_efw])>>
+	<</if>>
+<</for>>
+
+/*testtest twins? - determines how many twins a slave has*/
+<<if _twins.length > 0>>
+	$pronounCap
+	<<if _twins.length > 2>>
+		@@.lightgreen;shared a cramped womb with <<print _twins.reduce(function(res, ch, i, arr) { return (res.slaveName || res) + (i == arr.length - 1 ? ' and ' : ', ') + ch.slaveName; })>>.@@
+	<<elseif _twins.length > 1>>
+		is a @@.lightgreen;one of a set of triplets; _twins[0].slaveName and _twins[1].slaveName@@ complete the trio.
+	<<else>>
+		is @@.lightgreen;twins with _twins[0].slaveName.@@
+	<</if>>
+<</if>>
+
+/*testtest sister - determines how many sisters a slave has*/
+<<if _sisters.length > 0>>
+	<<if _sisters.length > 1>>
+		@@.lightgreen;<<print _sisters.reduce(function(res, ch, i, arr) { return (res.slaveName || res) + (i == arr.length - 1 ? ' and ' : ', ') + ch.slaveName; })>> are $possessive sisters.@@
+	<<else>>
+		@@.lightgreen; _sisters[0].slaveName is $possessive sister.@@
+	<</if>>
+<</if>>
+
+/*testtest brother - determines how many brothers a slave has*/
+<<if _brothers.length > 0>>
+	<<if _brothers.length > 1>>
+		@@.lightgreen;<<print _brothers.reduce(function(res, ch, i, arr) { return (res.slaveName || res) + (i == arr.length - 1 ? ' and ' : ', ') + ch.slaveName; })>> are $possessive dickgirl sisters.@@
+	<<else>>
+		@@.lightgreen;_brothers[0].slaveName is $possessive dickgirl sisters.@@
+	<</if>>
+<</if>>
+
+/*testtest half-sister - determines how many half-sisters a slave has*/
+<<set _children = $slaves.filter(function(s) { return s.ID != $activeSlave.ID && areSisters($activeSlave, s) == 3 && s.genes == "XX"; })>>
+<<if _children.length > 2>>
+	@@.lightgreen;
+	<<for _efw = 0; _efw < _children.length; _efw++>>
+		<<if _efw < _children.length-1>>
+			_children[_efw].slaveName,
+		<<else>>
+			and _children[_efw].slaveName
+		<</if>>
+	<</for>>
+	are half-sisters to $object.@@
+<<elseif _children.length > 1>>
+	@@.lightgreen;_children[0].slaveName and _children[1].slaveName are half-sisters to $object.@@
+<<elseif _children.length > 0>>
+	@@.lightgreen;_children[0].slaveName is a half-sister to $object.@@
+<</if>>
+
+/*testtest half-brother - determines how many half-brothers a slave has*/
+<<set _children = $slaves.filter(function(s) { return s.ID != $activeSlave.ID && areSisters($activeSlave, s) == 3 && s.genes == "XY"; })>>
+<<if _children.length > 2>>
+	@@.lightgreen;
+	<<for _efw = 0; _efw < _children.length; _efw++>>
+		<<if _efw < _children.length-1>>
+			_children[_efw].slaveName,
+		<<else>>
+			and _children[_efw].slaveName
+		<</if>>
+	<</for>>
+	are dickgirl half-sisters to $object.@@
+<<elseif _children.length > 1>>
+	@@.lightgreen;_children[0].slaveName and _children[1].slaveName are dickgirl half-sisters to $object.@@
+<<elseif _children.length > 0>>
+	@@.lightgreen;_children[0].slaveName is a dickgirl half-sisters to $object.@@
+<</if>>
+
+<<if $cheatMode == 1>>
+	$activeSlave.sisters sisters, $activeSlave.daughters daughters.
+<</if>>
+
+<</widget>>
+

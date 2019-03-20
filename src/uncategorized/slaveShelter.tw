@@ -1,0 +1,218 @@
+:: Slave Shelter [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Buy Slaves", $returnTo = "Buy Slaves", $showEncyclopedia = 1, $encyclopedia = "Kidnapped Slaves">>
+
+<<if $shelterSlaveBought == 1>><<goto $returnTo>><</if>>
+
+You contact the Slave Shelter to review the profile of the slave the Shelter is offering to a good <<if $PC.title == 1>>Master<<else>>Mistress<</if>> willing to pay the Shelter's nominal placement fee. The severe, tired-looking woman who answers your call hurries through the disclaimers. "All Shelter Slaves are provided as-is... the Shelter provides a single slave for placement each week... resale of Shelter slaves is contractually forbidden... we reserve the right to unannounced inspection of placed slaves... the Shelter follows up on reports of abuse or resale of its slaves..."
+
+<br><br>
+
+<<set _num = random(1,99)>>
+
+<<set _possibleOrigins = []>>
+
+<<set _possibleOrigins.push("She has never communicated anything about her background, since she arrived at the shelter with a broken mind.")>>
+<<if $seeExtreme == 1>>
+	<<set _possibleOrigins.push("It's not clear why her previous owner cut her arms and legs off.")>>
+<</if>>
+<<if _num < $seeDicks>>
+	<<set _possibleOrigins.push("Her previous owner gelded her and used her for anal abuse.")>>
+	<<set _possibleOrigins.push("Her background is obscure, but seems to have involved terrible abuse of her huge cock and balls.")>>
+<</if>>
+<<if _num > $seeDicks>>
+	<<set _possibleOrigins.push("Her holes were cruelly stretched by constant plug use.")>>
+	<<set _possibleOrigins.push("Her previous owner discarded her after many pregnancies.")>>
+	<<set _possibleOrigins.push("She was worn out by twenty years of brothel service.")>>
+	<<set _possibleOrigins.push("She was discarded after suffering a terrible reaction to growth hormone treatment.")>>
+<</if>>
+
+<<set _origin = ("You got her at the Slave Shelter. " + _possibleOrigins.random())>>
+
+<<switch _origin>>
+<<case "You got her at the Slave Shelter. She has never communicated anything about her background, since she arrived at the shelter with a broken mind.">>
+	<<include "Generate New Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "a slave">>
+	<<set $shelterSlave.devotion = random(-25,-45)>>
+	<<set $shelterSlave.trust = random(-25,-45)>>
+	<<set $shelterSlave.health = random(-30,-10)>>
+	<<set $shelterSlave.anus = 3>>
+	<<set $shelterSlave.oralSkill = 0>>
+	<<set $shelterSlave.analSkill = 0>>
+	<<set $shelterSlave.whoreSkill = 0>>
+	<<set $shelterSlave.entertainSkill = 0>>
+	<<set $shelterSlave.combatSkill = 0>>
+	<<set $shelterSlave.intelligence = -2>>
+	<<set $shelterSlave.intelligenceImplant = 0>>
+	<<set $shelterSlave.behavioralFlaw = "none">>
+	<<set $shelterSlave.sexualFlaw = "none">>
+	<<set $shelterSlave.fetish = "mindbroken">>
+	<<set $shelterSlave.fetishStrength = 0>>
+<<case "You got her at the Slave Shelter. It's not clear why her previous owner cut her arms and legs off.">>
+	<<include "Generate New Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "a slave">>
+	<<set $shelterSlave.amp = 1>>
+	<<set $shelterSlave.devotion = random(-100,-90)>>
+	<<set $shelterSlave.trust = random(-100,-90)>>
+	<<set $shelterSlave.health = random(-80,-60)>>
+	<<set $shelterSlave.behavioralFlaw = either("odd", "hates men", "hates women")>>
+	<<set $shelterSlave.sexualFlaw = either("hates anal", "hates oral", "hates penetration", "apathetic")>>
+<<case "You got her at the Slave Shelter. Her previous owner gelded her and used her for anal abuse.">>
+	<<include "Generate XY Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "a slave">>
+	<<set $shelterSlave.age = random(20,42)>>
+	<<set $shelterSlave.devotion  = random(-75,-60)>>
+	<<set $shelterSlave.trust = random(-100,-75)>>
+	<<set $shelterSlave.health = random(-50,-30)>>
+	<<set $shelterSlave.face = random(-60,-20)>>
+	<<set $shelterSlave.dick to random(1,2)>>
+	<<set $shelterSlave.balls to 0>>
+	<<set $shelterSlave.anus to 4>>
+	<<set $shelterSlave.oralSkill = 0>>
+	<<set $shelterSlave.analSkill = 15>>
+	<<set $shelterSlave.whoreSkill = 0>>
+	<<set $shelterSlave.entertainSkill = 0>>
+	<<set $shelterSlave.combatSkill = 0>>
+	<<set $shelterSlave.attrXY = random(40,60)>>
+	<<set $shelterSlave.behavioralFlaw = either("odd", "hates men", "anorexic", "gluttonous")>>
+	<<set $shelterSlave.sexualFlaw = either("hates anal", "apathetic")>>
+<<case "You got her at the Slave Shelter. Her background is obscure, but seems to have involved terrible abuse of her huge cock and balls.">>
+	<<include "Generate XY Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "a slave">>
+	<<set $shelterSlave.age = random(20,42)>>
+	<<set $shelterSlave.devotion  = random(-75,-60)>>
+	<<set $shelterSlave.trust = random(-100,-75)>>
+	<<set $shelterSlave.health = random(-50,-30)>>
+	<<set $shelterSlave.face = random(-60,-20)>>
+	<<set $shelterSlave.dick to random(4,5)>>
+	<<set $shelterSlave.balls to random(4,5)>>
+	<<set $shelterSlave.anus to 0>>
+	<<set $shelterSlave.oralSkill = 0>>
+	<<set $shelterSlave.analSkill = 0>>
+	<<set $shelterSlave.whoreSkill = 0>>
+	<<set $shelterSlave.entertainSkill = 0>>
+	<<set $shelterSlave.combatSkill = 0>>
+	<<set $shelterSlave.energy = random(5,10)>>
+	<<set $shelterSlave.attrXX = 0>>
+	<<set $shelterSlave.behavioralFlaw = either("odd", "hates women")>>
+	<<set $shelterSlave.sexualFlaw = either("apathetic")>>
+<<case "You got her at the Slave Shelter. Her holes were cruelly stretched by constant plug use.">>
+	<<include "Generate XX Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "a slave">>
+	<<set $shelterSlave.age = random(20,42)>>
+	<<set $shelterSlave.devotion  = random(-75,-60)>>
+	<<set $shelterSlave.trust = random(-100,-75)>>
+	<<set $shelterSlave.health = random(-50,-30)>>
+	<<set $shelterSlave.vagina = 4>>
+	<<set $shelterSlave.anus = 4>>
+	<<set $shelterSlave.oralSkill = 15>>
+	<<set $shelterSlave.analSkill = 15>>
+	<<set $shelterSlave.vaginalSkill = 15>>
+	<<set $shelterSlave.whoreSkill = 0>>
+	<<set $shelterSlave.entertainSkill = 0>>
+	<<set $shelterSlave.combatSkill = 0>>
+	<<set $shelterSlave.behavioralFlaw = either("odd", "anorexic", "gluttonous")>>
+	<<set $shelterSlave.sexualFlaw = either("hates penetration", "hates anal", "hates oral")>>
+<<case "You got her at the Slave Shelter. Her previous owner discarded her after many pregnancies.">>
+	<<include "Generate XX Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "housewife">>
+	<<set $shelterSlave.age = random(30,42)>>
+	<<set $shelterSlave.devotion  = random(-75,-60)>>
+	<<set $shelterSlave.trust = random(-100,-75)>>
+	<<set $shelterSlave.health = random(-50,-30)>>
+	<<set $shelterSlave.preg = -2>>
+	<<set $shelterSlave.vagina = 3>>
+	<<set $shelterSlave.oralSkill = 0>>
+	<<set $shelterSlave.analSkill = 0>>
+	<<set $shelterSlave.vaginalSkill = 0>>
+	<<set $shelterSlave.whoreSkill = 0>>
+	<<set $shelterSlave.entertainSkill = 0>>
+	<<set $shelterSlave.combatSkill = 0>>
+	<<set $shelterSlave.behavioralFlaw = either("odd", "hates men", "gluttonous")>>
+	<<set $shelterSlave.sexualFlaw = either("hates penetration", "apathetic", "repressed")>>
+<<case "You got her at the Slave Shelter. She was worn out by twenty years of brothel service.">>
+	<<include "Generate XX Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "a prostitute">>
+	<<set $shelterSlave.age = random(32,42)>>
+	<<set $shelterSlave.devotion  = random(-75,-60)>>
+	<<set $shelterSlave.trust = random(-100,-75)>>
+	<<set $shelterSlave.health = random(-80,-60)>>
+	<<set $shelterSlave.face = random(-60,-20)>>
+	<<set $shelterSlave.preg to -2>>
+	<<set $shelterSlave.vagina to 4>>
+	<<set $shelterSlave.anus to 4>>
+	<<set $shelterSlave.oralSkill = 35>>
+	<<set $shelterSlave.analSkill = 35>>
+	<<set $shelterSlave.vaginalSkill = 35>>
+	<<set $shelterSlave.whoreSkill = 35>>
+	<<set $shelterSlave.entertainSkill = 15>>
+	<<set $shelterSlave.combatSkill = 0>>
+	<<set $shelterSlave.behavioralFlaw = either("odd", "hates men", "gluttonous", "anorexic")>>
+	<<set $shelterSlave.sexualFlaw = either("hates penetration", "hates oral", "hates anal", "apathetic")>>
+<<case "You got her at the Slave Shelter. She was discarded after suffering a terrible reaction to growth hormone treatment.">>
+	<<include "Generate New Slave">>
+	<<set $shelterSlave = $activeSlave>>
+	<<set $shelterSlave.origin = _origin>>
+	<<set $shelterSlave.career = "a slave">>
+	<<set $shelterSlave.devotion  = random(-75,-60)>>
+	<<set $shelterSlave.trust = random(-100,-75)>>
+	<<set $shelterSlave.health = random(-80,-60)>>
+	<<set $shelterSlave.chem = 1000>>
+	<<if ($shelterSlave.dick > 0) && (random(1,2) == 1)>>
+	<<set $shelterSlave.dick = random(5,6)>>
+	<</if>>
+	<<if ($shelterSlave.balls > 0) && (random(1,2) == 1)>>
+	<<set $shelterSlave.balls = random(5,10)>>
+	<</if>>
+	<<if (random(1,3) == 1)>>
+	<<set $shelterSlave.boobs += 100*random(10,30)>>
+	<</if>>
+	<<if (random(1,3) == 1)>>
+	<<set $shelterSlave.butt += random(3,5)>>
+	<</if>>
+	<<set $shelterSlave.behavioralFlaw = either("odd", "gluttonous", "anorexic")>>
+	<<set $shelterSlave.sexualFlaw = either("hates penetration", "hates oral", "hates anal", "apathetic")>>
+<</switch>>
+
+<<set $slaveCost = 1000>>
+
+The placement fee is ¤<<print $slaveCost>>.
+
+<br><br>
+
+<<set $activeSlave = $shelterSlave, $saleDescription = 1, $applyLaw = 1>><<include "Long Slave Description">>
+
+<br><br>
+
+<<print _origin>>
+
+<br><br>
+
+<span id="result">
+
+<<if $cash >= $slaveCost>>
+	<<link "Buy her slave contract">>
+		<<replace "#result">>
+			<<set $cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost,$shelterSlaveBought = 1, $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Main">>
+			<<include "New Slave Intro">>
+		<</replace>>
+	<</link>>
+<<else>>
+	//You lack the necessary funds to buy this slave.//
+<</if>>
+
+</span>

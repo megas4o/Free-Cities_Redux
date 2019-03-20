@@ -1,0 +1,275 @@
+:: Options [nobr]
+
+<<set $showEncyclopedia = 0, $nextButton = "Back to Main", $nextLink = "Main">>
+
+<h2>SAVES</h2>
+
+This save was created using FC version $ver build $releaseID.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[[Apply Backwards Compatibility Update|Backwards Compatibility]]
+
+<br>
+<<if ($autosave == 0)>>
+End of week autosaving is currently @@.red;DISABLED@@. [[Enable|Options][$autosave = 1]]
+<<else>>
+End of week autosaving is currently @@.cyan;ENABLED@@. [[Disable|Options][$autosave = 0]]
+<</if>>
+
+<<if ($releaseID >= 1000) || $ver.startsWith("0.9") or $ver.startsWith("0.8") or $ver.startsWith("0.7") or $ver.startsWith("0.6")>>
+	<h2>NEW GAME PLUS</h2>
+	//You can begin a new game with up to five of your current slaves, although starting resources other than these five slaves will be reduced. New Game Plus @@.yellow;MAY@@ work across versions. To attempt to migrate a save across versions://
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//1) Save on this screen//
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//2) Use your browser to open the new .html file in this tab//
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//3) [[Activate New Game Plus.|New Game Plus][$ui to "start"]]
+<<else>>
+	//New Game Plus is not available because this game was not started with a compatible version.//
+<</if>>
+
+<br>
+
+<<if isNaN($rep)>>
+<br>[[Reset Reputation|Options][$rep = 0]]
+<</if>>
+<<if isNaN($cash)>>
+<br>[[Reset Money|Options][$cash = 500]]
+<</if>>
+
+
+
+<h2>IMAGES</h2>
+Image display
+<<if $seeImages == 1>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$seeImages = 0]]
+	<br>
+	<<if $imageChoice == 1>>
+		@@.yellow;Vector art by NoX@@ is selected. [[Switch to rendered imagepack|Options][$imageChoice = 0]]
+		<br>
+		Highlights on shiny clothing
+		<<if $seeVectorArtHighlights == 1>>
+			@@.cyan;ENABLED@@. [[Disable|Options][$seeVectorArtHighlights = 0]]
+		<<else>>
+			@@.red;DISABLED@@. [[Enable|Options][$seeVectorArtHighlights = 1]]
+		<</if>>
+	<<else>>
+		@@.yellow;Rendered imagepack by Shokushu@@ is selected. [[Switch to vector art|Options][$imageChoice = 1]] //Requires image resources.//
+		<br>
+		Slave summary fetish images
+		<<if $seeMainFetishes == 1>>
+			@@.cyan;ENABLED@@. [[Disable|Options][$seeMainFetishes = 0]]
+		<<else>>
+			@@.red;DISABLED@@. [[Enable|Options][$seeMainFetishes = 1]]
+		<</if>>
+	<</if>>
+	<br>
+	Slave images in lists are
+	<<if $seeSummaryImages == 1>>
+		@@.cyan;ENABLED@@. [[Disable|Options][$seeSummaryImages = 0]]
+	<<else>>
+		@@.red;DISABLED@@. [[Enable|Options][$seeSummaryImages = 1]]
+	<</if>>
+	<br>
+	Slave images in the weekly report are
+	<<if $seeReportImages == 1>>
+		@@.cyan;ENABLED@@. [[Disable|Options][$seeReportImages = 0]]
+	<<else>>
+		@@.red;DISABLED@@. [[Enable|Options][$seeReportImages = 1]]
+	<</if>>
+<<else>>
+	@@.red;DISABLED@@. [[Enable|Options][$seeImages = 1]]
+<</if>>
+
+<h2>''MAIN ARCOLOGY SCREEN OPTIONS''</h2>
+<<if $newModelUI != 0>>
+New Model UI @@.cyan;ENABLED@@. [[Disable|Options][$newModelUI = 0]]
+<<else>>
+New Model UI @@.red;DISABLED@@. [[Enable|Options][$newModelUI = 1]]
+<</if>>
+
+<br>
+
+<<if $seeArcology == 1>>
+Main menu arcology description @@.cyan;ENABLED@@. [[Disable|Options][$seeArcology = 0]]
+<<else>>
+Main menu arcology description @@.red;DISABLED@@. [[Enable|Options][$seeArcology = 1]]
+<</if>>
+
+<br>
+
+<<if ($seeDesk == 0)>>
+Main menu desk description @@.red;DISABLED@@. [[Enable|Options][$seeDesk = 1]]
+<<else>>
+Main menu desk description @@.cyan;ENABLED@@. [[Disable|Options][$seeDesk = 0]]
+<</if>>
+
+<br>
+
+<<if ($seeFCNN == 0)>>
+Main menu newsfeed @@.red;DISABLED@@. [[Enable|Options][$seeFCNN = 1]]
+<<else>>
+Main menu newsfeed @@.cyan;ENABLED@@. [[Disable|Options][$seeFCNN = 0]]
+<</if>>
+
+<br>
+
+Main menu leadership controls displayed
+<<if ($positionMainLinks == 1)>>
+	@@.cyan;ABOVE@@ slave list.
+	[[Below|Options][$positionMainLinks = -1]] |
+	[[Both|Options][$positionMainLinks = 0]]
+<<elseif ($positionMainLinks == -1)>>
+	@@.cyan;BELOW@@ slave list.
+	[[Above|Options][$positionMainLinks = 1]] |
+	[[Both|Options][$positionMainLinks = 0]]
+<<else>>
+	@@.cyan;ABOVE AND BELOW@@ slave list.
+	[[Above|Options][$positionMainLinks = 1]] |
+	[[Below|Options][$positionMainLinks = -1]]
+<</if>>
+
+<br>
+
+Tips from the Encyclopedia are
+<<if ($showTipsFromEncy == 0)>>
+	@@.red;DISABLED@@. [[Enable|Options][$showTipsFromEncy = 1]]
+<<else>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$showTipsFromEncy = 0]]
+<</if>>
+
+<h2>REPORTS</h2>
+End week report descriptive details are
+<<if ($showEWD == 0)>>
+	@@.red;DISABLED@@. [[Enable|Options][$showEWD = 1]]
+<<else>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$showEWD = 0]]
+<</if>>
+
+<br>
+
+End week report performance modifier descriptions are
+<<if ($showEWM == 0)>>
+	@@.red;DISABLED@@. [[Enable|Options][$showEWM = 1]]
+<<else>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$showEWM = 0]]
+<</if>>
+
+<br>
+
+Economic report neighbor details such as trade impacts on culture are
+<<if ($showNeighborDetails != 0)>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$showNeighborDetails = 0]]
+<<else>>
+	@@.red;DISABLED@@. [[Enable|Options][$showNeighborDetails = 1]]
+<</if>>
+
+<br>
+
+Master Suite report details such as slave changes are
+<<if ($verboseDescriptions == 1)>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$verboseDescriptions = 0]]
+<<else>>
+	@@.red;DISABLED@@. [[Enable|Options][$verboseDescriptions = 1]]
+<</if>>
+
+<br>
+
+/* Accordion 000-250-006 */
+<br />
+	Accordion effects on weekly reports are
+<<if ($useAccordion != 1)>>
+	@@.red;DISABLED@@. [[Enable|Options][$useAccordion = 1]]
+<<else>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$useAccordion = 0]]
+<</if>>
+/* Accordion 000-250-006 */
+
+
+<h2>FLAVOR SCENES</h2>
+Slave reactions to facility assignments are
+<<if ($showAssignToScenes == 0)>>
+	@@.red;DISABLED@@. [[Enable|Options][$showAssignToScenes = 1]]
+<<else>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$showAssignToScenes = 0]]
+<</if>>
+
+<br>
+
+Appraisal miniscenes on slave sale are
+<<if ($showAppraisal == 0)>>
+	@@.red;DISABLED@@. [[Enable|Options][$showAppraisal = 1]]
+<<else>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$showAppraisal = 0]]
+<</if>>
+
+<br>
+
+Assignment performance vignettes on the end week report are
+<<if ($showVignettes == 0)>>
+	@@.red;DISABLED@@. [[Enable|Options][$showVignettes = 1]]
+<<else>>
+	@@.cyan;ENABLED@@. [[Disable|Options][$showVignettes = 0]]
+<</if>>
+
+
+<h2>CONTENT</h2>
+<<if ($seeExtreme == 0)>>
+Extreme content like amputation is currently @@.red;DISABLED@@. [[Enable|Options][$seeExtreme = 1]]
+<<else>>
+Extreme content like amputation is currently @@.cyan;ENABLED@@. [[Disable|Options][$seeExtreme = 0]]
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will not affect extreme surgeries already applied already in-game.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;More granular control of what appears is in// [[Description Options]].
+
+<h2>INTERSECTING MECHANICS</h2>
+<<if ($weightAffectsAssets != 0)>>
+Slave assets affected by weight is @@.cyan;ENABLED@@. [[Disable|Options][$weightAffectsAssets = 0]]
+<<else>>
+Slave assets affected by weight is @@.red;DISABLED@@. [[Enable|Options][$weightAffectsAssets = 1]]
+<</if>> //Diet will still affect asset size.//
+
+<br>
+<<if ($curativeSideEffects != 0)>>
+Curative side effects are @@.cyan;ENABLED@@. [[Disable|Options][$curativeSideEffects = 0]]
+<<else>>
+Curative side effects are @@.red;DISABLED@@. [[Enable|Options][$curativeSideEffects = 1]]
+<</if>> //If enabled, curatives have a chance to give slaves harmful side effects.//
+
+<h2>CHEATING/DEV OPTIONS</h2>
+<<if $seeAge == 1>>
+	Slaves ''will'' age.
+	[[Disable|Options][$seeAge = 0]]
+<<else>>
+	Slaves ''will not'' age.
+	[[Enable|Options][$seeAge = 1]]
+<</if>>
+<br>
+<<if ($cheatMode == 1)>>
+<br>
+Cheatmode is currently @@.cyan;ENABLED@@. [[Disable|Options][$cheatMode = 0]]
+	<br>
+	<<if ($cheatModeM == 1)>>
+	Sidebar Cheats are currently @@.cyan;SHOWN@@. [[Disable|Options][$cheatModeM = 0]]
+	<<else>>
+	Sidebar Cheats are currently @@.red;HIDDEN@@. [[Enable|Options][$cheatModeM = 1]]
+	<</if>>
+<<else>>
+Cheatmode is currently @@.red;DISABLED@@. [[Enable|Options][$cheatMode = 1]]
+//This will allow manual selection of events and unlock some options that would usually be restricted by progress//
+<</if>>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[[Add money|Options][$cheater = 1, $cash += 100000]] | [[Add rep|Options][$cheater = 1, $rep += 10000]] //Cheating will be flagged in your save//
+<br>
+
+<<if ($debugMode == 1)>>
+	Debug Mode is currently @@.cyan;ENABLED@@. [[Disable|Options][$debugMode = 0]]
+<<else>>
+	Debug Mode is currently @@.red;DISABLED@@. [[Enable|Options][$debugMode = 1]]
+	//This will add a Display Variables and Bug Report passage to the sidebar.//
+<</if>>
+
+
+/*
+<br><br>
+
+[[Enable backwards compatibility|Backwards Compatibility]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Select this option to make saves older than 0.9 compatible. If you see a lot of red error messages after loading a save file, using this option may make it possible to continue. Untested for saves earlier than 0.6.//
+*/

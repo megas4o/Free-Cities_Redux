@@ -1,0 +1,146 @@
+:: Brothel [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Brothel", $showEncyclopedia = 1, $encyclopedia = "Brothel", $brothelSlaves = $BrothiIDs.length>>
+
+<<if $brothelName != "the Brothel">>
+	<<set $brothelNameCaps = $brothelName.replace("the ", "The ")>>
+<</if>>
+
+<<brothelDescriptionFS>>
+
+<<if $brothelAdsSpending > 0>>
+	Screens outside the entrance are showing porn to advertise $brothelNameCaps.
+	<<if $brothelAdsOld == 1>>
+		The featured slave actresses are all MILFs.
+	<<elseif $brothelAdsOld == -1>>
+		The featured slave actresses are all nice and young.
+	<<else>>
+		The featured slave actresses vary in age.
+	<</if>>
+	<<if $brothelAdsStacked == 1>>
+		Lots of bouncing breasts and butts
+	<<elseif $brothelAdsStacked == -1>>
+		Lots of trim breasts and shapely butts
+	<<else>>
+		A variety of breast and butt sizes and shapes
+	<</if>>
+	are on display, and
+	<<if $brothelAdsImplanted == 1>>
+		most of these are augmented by implants.
+	<<elseif $brothelAdsImplanted == -1>>
+		they're all natural.
+	<<else>>
+		some are augmented by implants.
+	<</if>>
+	<<if $brothelAdsModded == 1>>
+		Everything is heavily pierced and tattooed.
+	<<elseif $brothelAdsModded == -1>>
+		Everything is free of tattoos and piercings.
+	<<else>>
+		Some of these assets are tattooed and pierced, and some aren't.
+	<</if>>
+	The slaves in the ads are
+	<<if $brothelAdsXX == 1>>
+		sucking dick and taking cock in their pussies and asses.
+	<<elseif $brothelAdsXX == -1>>
+		sucking cock and being assfucked while their dicks flop around.
+	<<else>>
+		sucking dick and taking anal, and the ones that have pussies are being fucked there, too.
+	<</if>>
+	The ads are shown on media across $arcologies[0].name.
+	<<if ($brothelAdsXX == 1) && ($brothelAdsImplants == 1) && ($brothelAdsStacked == 1)>>
+		As a result, $brothelName is known as the place to go if you want to rent a bimbo's pussy.
+	<<elseif ($brothelAdsXX == 1) && ($brothelAdsOld == 1)>>
+		As a result, $brothelName is known as the place to go if you want to rent a MILF's tits.
+	<<elseif ($brothelAdsXX == -1) && ($brothelAdsStacked == 1)>>
+		As a result, $brothelName is known as the place to go if you want to rent a shemale's asspussy.
+	<<elseif ($brothelAdsXX == -1) && ($brothelAdsStacked == -1)>>
+		As a result, $brothelName is known as the place to go if you want to rent a trap's tight ass.
+	<</if>>
+<</if>>
+
+<<if $brothelSlaves > 2>>
+	$brothelNameCaps is bustling with activity. Customers are coming and going and slave girls are displaying themselves. When a slave catches a customer's eye, he leads her back into a little cubicle.
+<<elseif $brothelSlaves > 0>>
+	$brothelNameCaps is working steadily. Customers are present and slave girls are on offer. When a slave catches a customer's eye, he leads her back into a little cubicle.
+<<elseif $Madam != 0>>
+	$Madam.slaveName is alone in $brothelName, and has nothing to do but keep the place clean and plan future sales efforts.
+<<else>>
+	$brothelNameCaps is empty and desolate.
+	<<link "Decommission the brothel">>
+		<<set $brothel = 0, $brothelUpgradeDrugs = 0, $brothelDecoration = "standard">>
+		<<for _i = 0; _i < $sectors.length; _i++>>
+		<<if $sectors[_i].type == "Brothel">>
+			<<set $sectors[_i].type = "Shops">><<break>>
+		<</if>>
+		<</for>>
+		<<goto "Main">>
+	<</link>>
+<</if>>
+
+<<set _Tmult0 = Math.trunc($brothel*1000*$upgradeMultiplierArcology)>>
+<br>It can support $brothel whores.
+[[Expand the brothel|Brothel][$cash -= _Tmult0, $brothel += 5]] //Costs ¤_Tmult0 and will increase upkeep costs//
+
+<br>
+<<if $brothelUpgradeDrugs == 1>>
+	It has been upgraded with aphrodisiac injection systems that monitor the whores and adjust dosage to keep them healthy but desperately horny and hopelessly addicted. [[Disable the aphrodisiac injection systems|Brothel][$brothelUpgradeDrugs = 0.1]] //Will reduce upkeep costs//
+<<elseif $brothelUpgradeDrugs == 0.1>>
+	It has been upgraded with aphrodisiac injection systems that monitor the whores and adjust dosage to keep them healthy but desperately horny and hopelessly addicted. The systems are currently disabled. [[Enable them|Brothel][$brothelUpgradeDrugs = 1]] //Will increase upkeep costs//
+<<else>>
+	<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+	It is a standard brothel. [[Upgrade the brothel with aphrodisiac injection systems|Brothel][$cash -= _Tmult1, $brothelUpgradeDrugs = 1]] //Costs ¤_Tmult1 and will increase upkeep costs//
+<</if>>
+
+<br>$brothelNameCaps is
+<<if $brothelAdsSpending > 0>>
+	the subject of an active ad campaign.
+<<else>>
+	not being advertised.
+<</if>>
+<<link "Manage brothel advertisements">><<set $nextLink = passage(), $nextButton = "Back">><<goto "Brothel Advertisement">><</link>>
+
+<br><br>
+<<if $Madam != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<<else>>
+	You do not have a slave serving as a Madam. [[Appoint one|Madam Select]]
+<</if>>
+
+<br><br>
+<<if ($brothel <= $brothelSlaves)>>
+	''$brothelNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $brothelSlaves)>>
+	<<link "''Send a slave to $brothelName''">>
+		<<set $leaveBrothel = 0>>
+		<<replace #brothelComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $brothelSlaves > 0>>
+	| <<link "''Bring a slave out of $brothelName''">>
+		<<set $leaveBrothel = 1>>
+		<<replace #brothelComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//$brothelNameCaps is empty for the moment.<br>//
+<</if>>
+
+<span id="brothelComingGoing">
+<<if $leaveBrothel == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<br><br>Rename $brothelName: <<textbox "$brothelName" $brothelName "Brothel">> //Use a noun or similar short phrase//

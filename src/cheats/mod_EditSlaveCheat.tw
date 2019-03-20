@@ -1,0 +1,1324 @@
+:: MOD_Edit Slave Cheat [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "MOD_Edit Slave Cheat Datatype Cleanup">>
+<<set $oldName = $activeSlave.slaveName, $oldSurname = $activeSlave.slaveSurname>>
+
+''Cheating Edit Slave''
+
+<br><br>
+
+''Birth Name:''
+<<textbox "$activeSlave.birthName" $activeSlave.birthName>>
+<br>''Birth Surname:''
+<<textbox "$activeSlave.birthSurname" $activeSlave.birthSurname>>
+<br>''Slave Name (birth name was $activeSlave.birthName):''
+<<textbox "$activeSlave.slaveName" $activeSlave.slaveName>>
+<br>''Slave Surname (birth surname was $activeSlave.birthSurname):''
+<<textbox "$activeSlave.slaveSurname" $activeSlave.slaveSurname>>
+
+<br><br>
+
+''Current Slave ID: ($activeSlave.ID)''
+
+<br>
+
+''Slave Blood Relations (twin, sister, mother, daughter):''
+<<textbox "$activeSlave.relation" $activeSlave.relation>>
+
+<br>
+
+''Blood Relations Target ID:''
+<<textbox "$activeSlave.relationTarget" $activeSlave.relationTarget>>
+
+<br>
+''Relationship (-3:married to you, -2:relationship, -1:emotional slut, 0:none, 1:like, 2:friend, 3:sex friend, 4:lover, 5:married): $activeSlave.relationship |''
+<<textbox "$activeSlave.relationship" $activeSlave.relationship>>
+<br>
+<<radiobutton "$activeSlave.relationship" -3>> Married to You
+<<radiobutton "$activeSlave.relationship" -2>> In Relationship with You
+<<radiobutton "$activeSlave.relationship" -1>> Emotional Slut
+<<radiobutton "$activeSlave.relationship" 0>> None
+<<radiobutton "$activeSlave.relationship" 1>> Like
+<<radiobutton "$activeSlave.relationship" 2>> Friend
+<<radiobutton "$activeSlave.relationship" 3>> Sex Friend
+<<radiobutton "$activeSlave.relationship" 4>> Lover
+<<radiobutton "$activeSlave.relationship" 5>> Married
+<br>
+''Relationship Target ID:'' <<textbox "$activeSlave.relationshipTarget" $activeSlave.relationshipTarget>>
+
+<br><br>
+
+''Career ($activeSlave.career)''
+<<textbox "$activeSlave.career" $activeSlave.career>>
+
+<br>
+
+''Origin ($activeSlave.origin)''
+<<textbox "$activeSlave.origin" $activeSlave.origin>>
+
+<br>
+
+''Legal status: (-1: slave, 0 or more: indentured for x weeks)''
+<<textbox "$activeSlave.indenture" $activeSlave.indenture>>
+
+<br>
+
+''Fuckdoll: (0-100)''
+<<textbox "$activeSlave.fuckdoll" $activeSlave.fuckdoll>>
+<br>
+<<radiobutton "$activeSlave.fuckdoll" 0>> Not a fuckdoll
+<<radiobutton "$activeSlave.fuckdoll" 15>> Barely a fuckdoll
+<<radiobutton "$activeSlave.fuckdoll" 25>> Slight fuckdoll
+<<radiobutton "$activeSlave.fuckdoll" 45>> Basic fuckdoll
+<<radiobutton "$activeSlave.fuckdoll" 65>> Intermediate fuckdoll
+<<radiobutton "$activeSlave.fuckdoll" 85>> Advanced fuckdoll
+<<radiobutton "$activeSlave.fuckdoll" 100>> Total fuckdoll
+
+<br>
+
+''Nationality: ($activeSlave.nationality)''
+<<textbox "$activeSlave.nationality" $activeSlave.nationality>>
+&nbsp;&nbsp;&nbsp;&nbsp;//This will not alter name or race//
+
+<br>
+
+
+''Race: ($activeSlave.race)''
+<<textbox "$activeSlave.race" $activeSlave.race>>
+<br>
+<<radiobutton "$activeSlave.race" "white">> White
+<<radiobutton "$activeSlave.race" "asian">> Asian
+<<radiobutton "$activeSlave.race" "latina">> Latina
+<<radiobutton "$activeSlave.race" "middle eastern">> Middle eastern
+<<radiobutton "$activeSlave.race" "black">> Black
+<<radiobutton "$activeSlave.race" "semitic">> Semitic
+<<radiobutton "$activeSlave.race" "southern european">> Southern European
+<<radiobutton "$activeSlave.race" "indo-aryan">> Indo-aryan
+<<radiobutton "$activeSlave.race" "amerindian">> Amerindian
+<<radiobutton "$activeSlave.race" "pacific islander">> Pacific Islander
+<<radiobutton "$activeSlave.race" "malay">> Malay
+<<radiobutton "$activeSlave.race" "mixed race">> Mixed race
+
+<br>
+
+''Skin color: ($activeSlave.skin)''
+<<textbox "$activeSlave.skin" $activeSlave.skin>>
+<br>
+<<radiobutton "$activeSlave.skin" "white">> White
+<<radiobutton "$activeSlave.skin" "fair">> Fair
+<<radiobutton "$activeSlave.skin" "tanned">> Tanned
+<<radiobutton "$activeSlave.skin" "olive">> Olive
+<<radiobutton "$activeSlave.skin" "light brown">> Light brown
+<<radiobutton "$activeSlave.skin" "brown">> Brown
+<<radiobutton "$activeSlave.skin" "black">> Black
+<<radiobutton "$activeSlave.skin" "pale">> Pale
+<<radiobutton "$activeSlave.skin" "dark">> Dark
+<<radiobutton "$activeSlave.skin" "light">> Light
+<<radiobutton "$activeSlave.skin" "extremely pale">> Extremely pale
+
+<br>
+
+''Accent: ($activeSlave.accent)''
+<<textbox "$activeSlave.accent"  $activeSlave.accent>>
+<br>
+<<radiobutton "$activeSlave.accent" 0>> None
+<<radiobutton "$activeSlave.accent" 1>> Distinctive
+<<radiobutton "$activeSlave.accent" 2>> Thick
+<<radiobutton "$activeSlave.accent" 3>> Barely Understands Language
+
+<br><br>
+
+''Age:''
+<<textbox "$activeSlave.age" $activeSlave.age>>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+''Birth week:''
+<<textbox "$activeSlave.birthWeek" $activeSlave.birthWeek>>
+&nbsp;&nbsp;&nbsp;&nbsp;
+''Age Implant (0 or 1):''
+<<textbox "$activeSlave.ageImplant" $activeSlave.ageImplant>>
+<br>
+''Health (-99 to 100, -100 is death):''
+<<textbox "$activeSlave.health" $activeSlave.health>>
+<br>
+''Addiction:''
+<<textbox "$activeSlave.addict" $activeSlave.addict>>
+<br>
+''DNA Damage:''
+<<textbox "$activeSlave.chem" $activeSlave.chem>>
+
+<br><br>
+
+//Don't set devotion too far away from old devotion otherwise it won't stick//
+<br>
+''Devotion (-100 to 100):''
+<<textbox "$activeSlave.devotion" $activeSlave.devotion>>
+<br>
+''Old Devotion (-100 to 100):''
+<<textbox "$activeSlave.oldDevotion" $activeSlave.oldDevotion>>
+
+<br>
+//Don't set trust too far away from old trust otherwise it won't stick//
+<br>
+''Trust (-100 to 100):''
+<<textbox "$activeSlave.trust" $activeSlave.trust>>
+<br>
+''Old Trust (-100 to 100):''
+<<textbox "$activeSlave.oldTrust" $activeSlave.oldTrust>>
+
+<br><br>
+
+<<switch $activeSlave.hStyle>>
+<<case "tails" "dreadlocks" "cornrows">>
+''Her hair is in $activeSlave.hStyle''
+<<case "ponytail">>
+''Her hair is in a $activeSlave.hStyle''
+<<default>>
+''Her hair is $activeSlave.hStyle''
+<</switch>>
+Custom hair description: <<textbox "$activeSlave.hStyle" $activeSlave.hStyle>>
+<br>
+//For best results, use a short, uncapitalized and unpunctuated description; for example: 'back in a ponytail'//
+
+<br>
+''Hair length: $activeSlave.hLength''
+Custom hair length: <<textbox "$activeSlave.hLength" $activeSlave.hLength>>
+
+<br>
+''Her hair is $activeSlave.hColor in color''
+Custom hair color: <<textbox "$activeSlave.hColor" $activeSlave.hColor>>
+<br>
+//For best results, use a short, uncapitalized and unpunctuated description; for example: 'black with purple highlights'//
+
+<br>
+''Her pubic hair is $activeSlave.pubicHColor in color''
+Custom pubic hair color: <<textbox "$activeSlave.pubicHColor" $activeSlave.pubicHColor>>
+
+<br>
+''Pubic Hair Style: ($activeSlave.pubicHStyle)''
+<<textbox "$activeSlave.pubicHStyle" $activeSlave.pubicHStyle>>
+<br>
+<<radiobutton "$activeSlave.pubicHStyle" "neat">> Neat
+<<radiobutton "$activeSlave.pubicHStyle" "waxed">> Waxed
+<<radiobutton "$activeSlave.pubicHStyle" "in a strip">> Strip
+<<radiobutton "$activeSlave.pubicHStyle" "bushy">> Bushy
+<<radiobutton "$activeSlave.pubicHStyle" "bald">> Hairless
+
+<br><br>
+
+''Her eyes are $activeSlave.eyeColor in color''
+Custom eye color: <<textbox "$activeSlave.eyeColor" $activeSlave.eyeColor>>
+
+<br>
+''Her vision is (-1: nearsighted, 1: normal): $activeSlave.eyes''
+<br>Eyes: <<textbox "$activeSlave.eyes" $activeSlave.eyes>>
+<<radiobutton "$activeSlave.eyes" 1>> Normal
+<<radiobutton "$activeSlave.eyes" -1>> Nearsighted
+
+<br><br>
+
+''Change her custom tattoo:'' <<textbox "$activeSlave.customTat" $activeSlave.customTat>>
+<br>
+//For best results, use complete, capitalized and punctuated sentences; for example: 'She has blue stars tattooed along her cheekbones, and a blue arrow down each arm.'//
+
+<br>
+''Change her custom description:'' <<textbox "$activeSlave.customDesc" $activeSlave.customDesc>>
+<br>
+//For best results, use complete, capitalized and punctuated sentences; for example: 'She has a beauty mark above her left nipple.'//
+
+<br>
+''Change her custom label:'' <<textbox "$activeSlave.customLabel" $activeSlave.customLabel>>
+<br>
+//For best results, use a short phrase; for example: 'Breeder.'//
+
+<br><br>
+
+''Face (-100 to 100): $activeSlave.face |''
+<<textbox "$activeSlave.face" $activeSlave.face>>
+<br>
+<<radiobutton "$activeSlave.face" -100>> Very ugly
+<<radiobutton "$activeSlave.face" -55>> Ugly
+<<radiobutton "$activeSlave.face" -15>> Unattractive
+<<radiobutton "$activeSlave.face" 0>> Pretty
+<<radiobutton "$activeSlave.face" 15>> Attractive
+<<radiobutton "$activeSlave.face" 55>> Beautiful
+<<radiobutton "$activeSlave.face" 100>> Very beautiful
+<br>
+
+''Face Shape: $activeSlave.faceShape |''
+<<textbox "$activeSlave.faceShape" $activeSlave.faceShape>>
+<br>
+<<radiobutton "$activeSlave.faceShape" masculine>> Masculine
+<<radiobutton "$activeSlave.faceShape" androgynous>> Androgynous
+<<radiobutton "$activeSlave.faceShape" normal>> Normal
+<<radiobutton "$activeSlave.faceShape" cute>> Cute
+<<radiobutton "$activeSlave.faceShape" sensual>> Sensual
+<<radiobutton "$activeSlave.faceShape" exotic>> Exotic
+
+<br>
+
+''Facial Artificiality (0 to 100): $activeSlave.faceImplant |''
+<<textbox "$activeSlave.faceImplant" $activeSlave.faceImplant>>
+<br>
+<<radiobutton "$activeSlave.faceImplant" 0>> None
+<<radiobutton "$activeSlave.faceImplant" 15>> Subtle Improvements
+<<radiobutton "$activeSlave.faceImplant" 35>> Noticeable Work
+<<radiobutton "$activeSlave.faceImplant" 65>> Heavily Reworked
+<<radiobutton "$activeSlave.faceImplant" 100>> Uncanny Valley
+
+<br>
+
+''Natural Skin Distinctiveness: $activeSlave.markings |''
+<<textbox "$activeSlave.markings" $activeSlave.markings>>
+<br>
+<<radiobutton "$activeSlave.markings" none>> None
+<<radiobutton "$activeSlave.markings" freckles>> Freckles
+<<radiobutton "$activeSlave.markings" heavily freckled>> Heavy Freckles
+<<radiobutton "$activeSlave.markings" beauty mark>> Beauty Mark
+<<radiobutton "$activeSlave.markings" birthmark>> Birth Mark
+
+<br>
+
+''Oral sex (0 to 100):''
+<<if $activeSlave.oralSkill <= 10>>
+Unskilled.
+<<elseif $activeSlave.oralSkill <= 30>>
+@@.cyan;Basic.@@
+<<elseif $activeSlave.oralSkill <= 60>>
+@@.cyan;Skilled.@@
+<<elseif $activeSlave.oralSkill < 100>>
+@@.cyan;Expert.@@
+<<else>>
+@@.cyan;Masterful.@@
+<</if>>
+<<textbox "$activeSlave.oralSkill" $activeSlave.oralSkill>>
+<br>
+<<radiobutton "$activeSlave.oralSkill" 0>> Unskilled
+<<radiobutton "$activeSlave.oralSkill" 15>> Basic
+<<radiobutton "$activeSlave.oralSkill" 35>> Skilled
+<<radiobutton "$activeSlave.oralSkill" 65>> Expert
+<<radiobutton "$activeSlave.oralSkill" 100>> Masterful
+
+<br>
+
+''Prestige:''
+<<textbox "$activeSlave.prestige" $activeSlave.prestige>>
+<<radiobutton "$activeSlave.prestige" 0>> 0
+<<radiobutton "$activeSlave.prestige" 1>> 1
+<<radiobutton "$activeSlave.prestige" 2>> 2
+<<radiobutton "$activeSlave.prestige" 3>> 3
+
+<br>
+
+''Prestige description:''
+<<textbox "$activeSlave.prestigeDesc" $activeSlave.prestigeDesc>>
+
+<br><br>
+
+''Muscles (0 to 100): $activeSlave.muscles |''
+<<textbox "$activeSlave.muscles" $activeSlave.muscles>>
+<br>
+<<radiobutton "$activeSlave.muscles" 0>> None
+<<radiobutton "$activeSlave.muscles" 20>> Tone
+<<radiobutton "$activeSlave.muscles" 50>> Muscular
+<<radiobutton "$activeSlave.muscles" 100>> Hugely Muscular
+
+<br>
+
+''Height: $activeSlave.height |''
+<<textbox "$activeSlave.height" $activeSlave.height>>
+<br>
+(149 or lower: Petite, 150-159: Short, 160-169: Average, 170-184: Tall, 185 or higher: Very Tall)
+
+<br>
+
+''Height Implant (-1 to 1): $activeSlave.heightImplant |''
+<<textbox "$activeSlave.heightImplant" $activeSlave.heightImplant>>
+<br>
+<<radiobutton "$activeSlave.heightImplant" -1>> Artificially Shortened
+<<radiobutton "$activeSlave.heightImplant" 0>> Normal
+<<radiobutton "$activeSlave.heightImplant" 1>> Artificially Lengthened
+
+<br><br>
+
+''Lips (0 to 100): $activeSlave.lips |''
+<<textbox "$activeSlave.lips" $activeSlave.lips>>
+<br>
+<<radiobutton "$activeSlave.lips" 0>> Thin
+<<radiobutton "$activeSlave.lips" 15>> Normal
+<<radiobutton "$activeSlave.lips" 35>> Plush
+<<radiobutton "$activeSlave.lips" 65>> Big
+<<radiobutton "$activeSlave.lips" 85>> Huge
+<<radiobutton "$activeSlave.lips" 100>> Enormous facepussy
+<br>
+''Lip Implants (0 to 30): $activeSlave.lipsImplant |''
+<<radiobutton "$activeSlave.lipsImplant" 0>> None
+<<radiobutton "$activeSlave.lipsImplant" 10>> Normal
+<<radiobutton "$activeSlave.lipsImplant" 20>> Large
+<<radiobutton "$activeSlave.lipsImplant" 30>> Enormous
+
+<br>
+''Teeth: $activeSlave.teeth |''
+<<textbox "$activeSlave.teeth" $activeSlave.teeth>>
+<br>
+<<radiobutton "$activeSlave.teeth" normal>> Normal
+<<radiobutton "$activeSlave.teeth" pointy>> Pointy
+<<radiobutton "$activeSlave.teeth" crooked>> Crooked
+<<radiobutton "$activeSlave.teeth" straightening braces>> Straightening Braces
+<<radiobutton "$activeSlave.teeth" cosmetic braces>> Cosmetic Braces
+<<radiobutton "$activeSlave.teeth" removable>> Removable
+
+<br>
+''Voice (0,1,2,3): $activeSlave.voice |''
+<<textbox "$activeSlave.voice" $activeSlave.voice>>
+<br>
+<<radiobutton "$activeSlave.voice" 0>> Mute
+<<radiobutton "$activeSlave.voice" 1>> Deep
+<<radiobutton "$activeSlave.voice" 2>> Normal
+<<radiobutton "$activeSlave.voice" 3>> High
+
+<br><br>
+
+''Weight (-100 to 100):''
+<<if $activeSlave.weight < -95>>
+@@.red;Emaciated.@@
+<<elseif $activeSlave.weight < -30>>
+@@.red;Skinny.@@
+<<elseif $activeSlave.weight < -10>>
+Thin.
+<<elseif $activeSlave.weight <= 10 >>
+Average.
+<<elseif $activeSlave.weight <= 30>>
+Plush.
+<<elseif $activeSlave.weight <= 95>>
+@@.red;Chubby.@@
+<<else>>
+@@.red;Fat.@@
+<</if>>
+<<textbox "$activeSlave.weight" $activeSlave.weight>>
+<br>
+<<radiobutton "$activeSlave.weight" -100>> Emaciated
+<<radiobutton "$activeSlave.weight" -50>> Skinny
+<<radiobutton "$activeSlave.weight" -20>> Thin
+<<radiobutton "$activeSlave.weight" 0>> Average
+<<radiobutton "$activeSlave.weight" 20>> Plush
+<<radiobutton "$activeSlave.weight" 50>> Chubby
+<<radiobutton "$activeSlave.weight" 100>> Fat
+
+<br>
+
+''Waist (Masculine:100 | Ugly:55 | Unattractive:15 | Average:0 | Feminine:-15 | hourglass:-55 | Absurd:-100): "$activeSlave.waist" |''
+<<textbox "$activeSlave.waist" $activeSlave.waist>>
+<br>
+<<radiobutton "$activeSlave.waist" 100>> Masculine
+<<radiobutton "$activeSlave.waist" 55>> Ugly
+<<radiobutton "$activeSlave.waist" 15>> Unattractive
+<<radiobutton "$activeSlave.waist" 0>> Average
+<<radiobutton "$activeSlave.waist" -15>> Feminine
+<<radiobutton "$activeSlave.waist" -55>> Hourglass
+<<radiobutton "$activeSlave.waist" -100>> Absurd
+
+<br><br>
+
+''Shoulders (-2 to 2): $activeSlave.shoulders |''
+<<textbox "$activeSlave.shoulders" $activeSlave.shoulders>>
+<br>
+<<radiobutton "$activeSlave.shoulders" -2>> Very narrow
+<<radiobutton "$activeSlave.shoulders" -1>> Narrow
+<<radiobutton "$activeSlave.shoulders" -0>> Normal
+<<radiobutton "$activeSlave.shoulders" 1>> Broad
+<<radiobutton "$activeSlave.shoulders" 2>> Very broad
+
+<br>
+
+''Shoulder Surgery (-2 to 2): $activeSlave.shouldersImplant |''
+<<textbox "$activeSlave.shouldersImplant" $activeSlave.shouldersImplant>>
+<br>
+<<radiobutton "$activeSlave.shouldersImplant" -2>> Adv. Narrowed
+<<radiobutton "$activeSlave.shouldersImplant" -1>> Narrowed
+<<radiobutton "$activeSlave.shouldersImplant" -0>> None
+<<radiobutton "$activeSlave.shouldersImplant" 1>> Broadened
+<<radiobutton "$activeSlave.shouldersImplant" 2>> Adv. Broadened
+
+<br>
+
+''Hips (-2 to 2): $activeSlave.hips |''
+<<textbox "$activeSlave.hips" $activeSlave.hips>>
+<br>
+<<radiobutton "$activeSlave.hips" -2>> Very narrow
+<<radiobutton "$activeSlave.hips" -1>> Narrow
+<<radiobutton "$activeSlave.hips" -0>> Normal
+<<radiobutton "$activeSlave.hips" 1>> Broad
+<<radiobutton "$activeSlave.hips" 2>> Very broad
+
+<br>
+
+''Hip Surgery(-2 to 2): $activeSlave.hipsImplant |''
+<<textbox "$activeSlave.hipsImplant" $activeSlave.hipsImplant>>
+<br>
+<<radiobutton "$activeSlave.hipsImplant" -2>> Adv. Narrowed
+<<radiobutton "$activeSlave.hipsImplant" -1>> Narrowed
+<<radiobutton "$activeSlave.hipsImplant" -0>> None
+<<radiobutton "$activeSlave.hipsImplant" 1>> Broadened
+<<radiobutton "$activeSlave.hipsImplant" 2>> Adv. Broadened
+
+<br><br>
+
+''Amputated (0:normal, 1: amputated, -1 to -5 prosthetic limbs):'' $activeSlave.amp
+<<textbox "$activeSlave.amp" $activeSlave.amp>>
+<br>
+<<radiobutton "$activeSlave.amp" 0>> Normal
+<<radiobutton "$activeSlave.amp" 1>> Amputated
+<<radiobutton "$activeSlave.amp" -1>> Basic prosthetic limbs
+<<radiobutton "$activeSlave.amp" -2>> Sexy prosthetic limbs
+<<radiobutton "$activeSlave.amp" -3>> Beauty prosthetic limbs
+<<radiobutton "$activeSlave.amp" -4>> Combat prosthetic limbs
+<<radiobutton "$activeSlave.amp" -5>> Cybernetic limbs
+
+<br><br>
+
+''Genes (XX:female, XY:male):'' $activeSlave.genes
+<<textbox "$activeSlave.genes" $activeSlave.genes>>
+<br>
+<<radiobutton "$activeSlave.genes" "XX">> Female
+<<radiobutton "$activeSlave.genes" "XY">> Male
+
+<br><br>
+
+''Breasts (200 to 50000):''
+<<textbox "$activeSlave.boobs" $activeSlave.boobs>>
+<br>
+''Breast Implants:''
+<<textbox "$activeSlave.boobsImplant" $activeSlave.boobsImplant>>
+<br>
+''Breast String Implants (no:0 | yes:1):''
+<<textbox "$activeSlave.boobsImplantType" $activeSlave.boobsImplantType>>
+<<radiobutton "$activeSlave.boobsImplantType" 0>> No
+<<radiobutton "$activeSlave.boobsImplantType" 1>> Yes
+<br>
+
+''Lactation (none:0 | natural:1 | artificial:2): $activeSlave.lactation |''
+<<textbox "$activeSlave.lactation" $activeSlave.lactation>>
+<br>
+<<radiobutton "$activeSlave.lactation" 0>> None
+<<radiobutton "$activeSlave.lactation" 1>> Natural
+<<radiobutton "$activeSlave.lactation" 2>> Artificial
+
+''Lactation Adaptation (0 to 100): $activeSlave.lactationAdaptation |''
+<<textbox "$activeSlave.lactationAdaptation" $activeSlave.lactationAdaptation>>
+
+<br><br>
+
+''Breast Shape: $activeSlave.boobShape |''
+<<textbox "$activeSlave.boobShape" $activeSlave.boobShape>>
+<br>
+<<radiobutton "$activeSlave.boobShape" "perky">> perky
+<<radiobutton "$activeSlave.boobShape" "torpedo-shaped">> torpedo-shaped
+<<radiobutton "$activeSlave.boobShape" "wide-set">> wide-set
+<<radiobutton "$activeSlave.boobShape" "downward-facing">> downward-facing
+<<radiobutton "$activeSlave.boobShape" "saggy">> saggy
+
+<br>
+
+''Nipples: $activeSlave.nipples |''
+<<textbox "$activeSlave.nipples" $activeSlave.nipples>>
+<br>
+<<radiobutton "$activeSlave.nipples" "tiny">> Tiny
+<<radiobutton "$activeSlave.nipples" "cute">> Cute
+<<radiobutton "$activeSlave.nipples" "puffy">> Puffy
+<<radiobutton "$activeSlave.nipples" "inverted">> Inverted
+<<radiobutton "$activeSlave.nipples" "huge">> Huge
+
+<br>
+
+''Areolae (Normal:0 to Huge:3): $activeSlave.areolae |''
+<<textbox "$activeSlave.areolae" $activeSlave.areolae>>
+<br>
+<<radiobutton "$activeSlave.areolae" 0>> Normal
+<<radiobutton "$activeSlave.areolae" 1>> Large
+<<radiobutton "$activeSlave.areolae" 2>> Wide
+<<radiobutton "$activeSlave.areolae" 3>> Huge
+
+<br><br>
+
+''Butt Size (1 to 7): ''
+<<textbox "$activeSlave.butt" $activeSlave.butt>>
+<br>
+''Butt Implants (0,1,2,3): $activeSlave.buttImplant'' |
+<<radiobutton "$activeSlave.buttImplant" 0>> None
+<<radiobutton "$activeSlave.buttImplant" 1>> Normal
+<<radiobutton "$activeSlave.buttImplant" 2>> Large
+<<radiobutton "$activeSlave.buttImplant" 3>> Huge
+<br>
+''Butt String Implants (no:0 | yes:1):''
+<<textbox "$activeSlave.buttImplantType" $activeSlave.boobsImplantType>>
+<<radiobutton "$activeSlave.buttImplantType" 0>> No
+<<radiobutton "$activeSlave.buttImplantType" 1>> Yes
+
+<br><br>
+
+''Anus Size:''
+<<if $activeSlave.anus == 0>>@@.lime;Virgin.@@
+<<elseif $activeSlave.anus == 1>>Normal.
+<<elseif $activeSlave.anus == 2>>Veteran.
+<<else>>Gaping.
+<</if>>
+<br>
+<<radiobutton "$activeSlave.anus" 0>> Virgin
+<<radiobutton "$activeSlave.anus" 1>> Normal
+<<radiobutton "$activeSlave.anus" 2>> Veteran
+<<radiobutton "$activeSlave.anus" 3>> Gaping
+
+<br>
+
+''Anal sex (0 to 100):''
+<<if $activeSlave.analSkill <= 10>>
+Unskilled.
+<<elseif $activeSlave.analSkill <= 30>>
+@@.cyan;Basic.@@
+<<elseif $activeSlave.analSkill <= 60>>
+@@.cyan;Skilled.@@
+<<elseif $activeSlave.analSkill < 100>>
+@@.cyan;Expert.@@
+<<else>>
+@@.cyan;Masterful.@@
+<</if>>
+<<textbox "$activeSlave.analSkill" $activeSlave.analSkill>>
+<br>
+<<radiobutton "$activeSlave.analSkill" 0>> Unskilled
+<<radiobutton "$activeSlave.analSkill" 15>> Basic
+<<radiobutton "$activeSlave.analSkill" 35>> Skilled
+<<radiobutton "$activeSlave.analSkill" 65>> Expert
+<<radiobutton "$activeSlave.analSkill" 100>> Masterful
+
+<br><br>
+
+''Vagina (no vagina:-1,0,1,2,3):''
+<<if $activeSlave.vagina == -1>>
+//No vagina.//
+<<elseif $activeSlave.vagina == 0>>
+@@.lime;Virgin.@@
+<<elseif $activeSlave.vagina == 1>>
+Normal.
+<<elseif $activeSlave.vagina == 2>>
+Veteran.
+<<else>>
+Gaping.
+<</if>>
+<<textbox "$activeSlave.vagina" $activeSlave.vagina>>
+<br>
+<<radiobutton "$activeSlave.vagina" -1>> No vagina
+<<radiobutton "$activeSlave.vagina" 0>> Virgin
+<<radiobutton "$activeSlave.vagina" 1>> Normal
+<<radiobutton "$activeSlave.vagina" 2>> Veteran
+<<radiobutton "$activeSlave.vagina" 3>> Gaping
+
+<br>
+
+''Vagina Wetness (0,1,2):''
+<<if $activeSlave.vaginaLube == 0>>
+Dry.
+<<elseif $activeSlave.vaginaLube == 1>>
+Normal.
+<<else>>
+Excessive.
+<</if>>
+<<textbox "$activeSlave.vaginaLube" $activeSlave.vaginaLube>>
+<br>
+<<radiobutton "$activeSlave.vaginaLube" 0>> Dry
+<<radiobutton "$activeSlave.vaginaLube" 1>> Normal
+<<radiobutton "$activeSlave.vaginaLube" 2>> Excessive
+
+<br>
+
+''Ovaries (none: 0 | exist: 1): $activeSlave.ovaries''
+<<textbox "$activeSlave.ovaries" $activeSlave.ovaries>>
+
+<br>
+
+''Vaginal sex (0 to 100):''
+<<if $activeSlave.vaginalSkill <= 10>>
+Unskilled.
+<<elseif $activeSlave.vaginalSkill <= 30>>
+@@.cyan;Basic.@@
+<<elseif $activeSlave.vaginalSkill <= 60>>
+@@.cyan;Skilled.@@
+<<elseif $activeSlave.vaginalSkill < 100>>
+@@.cyan;Expert.@@
+<<else>>
+@@.cyan;Masterful.@@
+<</if>>
+<<textbox "$activeSlave.vaginalSkill" $activeSlave.vaginalSkill>>
+<br>
+<<radiobutton "$activeSlave.vaginalSkill" 0>> Unskilled
+<<radiobutton "$activeSlave.vaginalSkill" 15>> Basic
+<<radiobutton "$activeSlave.vaginalSkill" 35>> Skilled
+<<radiobutton "$activeSlave.vaginalSkill" 65>> Expert
+<<radiobutton "$activeSlave.vaginalSkill" 100>> Masterful
+
+<br>
+
+''Clit:''
+<<if $activeSlave.clit == 0>>
+Normal. |
+<<elseif $activeSlave.clit == 1>>
+Big. |
+<<elseif $activeSlave.clit == 2>>
+Huge. |
+<<else>>
+Enormous. |
+<</if>>
+<<textbox "$activeSlave.clit" $activeSlave.clit>>
+<br>
+<<radiobutton "$activeSlave.clit" 0>> Normal
+<<radiobutton "$activeSlave.clit" 1>> Large
+<<radiobutton "$activeSlave.clit" 2>> Huge
+<<radiobutton "$activeSlave.clit" 3>> Enormous
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<br>
+
+''Labia:''
+<<if $activeSlave.labia == 0>>
+Minimal. |
+<<elseif $activeSlave.labia == 1>>
+Normal. |
+<<elseif $activeSlave.labia == 2>>
+Large. |
+<<else>>
+Huge. |
+<</if>>
+<<textbox "$activeSlave.labia" $activeSlave.labia>>
+<br>
+<<radiobutton "$activeSlave.labia" 0>> Minimal
+<<radiobutton "$activeSlave.labia" 1>> Normal
+<<radiobutton "$activeSlave.labia" 2>> Large
+<<radiobutton "$activeSlave.labia" 3>> Huge
+
+<br>
+
+''Pregnancy Level (-2: sterile, -1: contraceptives, 0: not pregnant, 1 to 25: pregnant):''
+<<if $activeSlave.preg > 20>>
+Advanced.
+<<elseif $activeSlave.preg > 5>>
+Early.
+<<elseif $activeSlave.preg == 0>>
+None.
+<<elseif $activeSlave.preg == -1>>
+Using contraceptives.
+<<else>>
+Sterile.
+<</if>>
+<<textbox "$activeSlave.preg" $activeSlave.preg>>
+
+<br>
+''Number of babies (0: none, 1 - 5):''
+<<if $activeSlave.pregType == 1>>
+A single baby.
+<<elseif $activeSlave.pregType == 2>>
+Twins.
+<<elseif $activeSlave.pregType == 3>>
+Triples.
+<<elseif $activeSlave.pregType == 4>>
+Quadruplets.
+<<elseif $activeSlave.pregType > 4>>
+Quintuplets.
+<<else>>
+None.
+<</if>>
+<<textbox "$activeSlave.pregType" $activeSlave.pregType>>
+<br>
+<<radiobutton "$activeSlave.pregType" 0>> None
+<<radiobutton "$activeSlave.pregType" 1>> Single
+<<radiobutton "$activeSlave.pregType" 2>> Twins
+<<radiobutton "$activeSlave.pregType" 3>> Triplets
+<<radiobutton "$activeSlave.pregType" 4>> Quadruplets
+<<radiobutton "$activeSlave.pregType" 5>> Quintuplets
+
+<br>
+''Sire (0: none, -1: you, -2: unknown, slave ID):''
+<<textbox "$activeSlave.pregSource" $activeSlave.pregSource>>
+
+<br><br>
+
+''Penis (none:0, 1 to 10):''
+<<if $activeSlave.dick == 0>>
+None.
+<<elseif $activeSlave.dick == 1>>
+Tiny.
+<<elseif $activeSlave.dick == 2>>
+Small.
+<<elseif $activeSlave.dick == 3>>
+Normal.
+<<elseif $activeSlave.dick == 4>>
+Large.
+<<elseif $activeSlave.dick == 5>>
+Massive.
+<<elseif $activeSlave.dick == 6>>
+Huger
+<<elseif $activeSlave.dick == 7>>
+Still huge.
+<<elseif $activeSlave.dick == 8>>
+Enormous.
+<<else>>
+Monstrous.
+<</if>>
+<<textbox "$activeSlave.dick" $activeSlave.dick>>
+<br>
+<<radiobutton "$activeSlave.dick" 0>> None
+<<radiobutton "$activeSlave.dick" 1>> Tiny
+<<radiobutton "$activeSlave.dick" 2>> Small
+<<radiobutton "$activeSlave.dick" 3>> Normal
+<<radiobutton "$activeSlave.dick" 4>> Large
+<<radiobutton "$activeSlave.dick" 5>> Massive
+<<radiobutton "$activeSlave.dick" 6>> Huge
+<<radiobutton "$activeSlave.dick" 7>> More Huge
+<<radiobutton "$activeSlave.dick" 8>> Enormous
+<<radiobutton "$activeSlave.dick" 9>> Monstrous
+<<radiobutton "$activeSlave.dick" 10>> Big McLargeHuge
+
+<br>
+''Foreskin (0 to 5):''
+<<if $activeSlave.foreskin == 0>> None.
+<<elseif $activeSlave.foreskin == 1>> Tiny.
+<<elseif $activeSlave.foreskin == 2>> Small.
+<<elseif $activeSlave.foreskin == 3>> Normal.
+<<elseif $activeSlave.foreskin == 4>> Large.
+<<else>>Massive.<</if>>
+<<textbox "$activeSlave.foreskin" $activeSlave.foreskin>>
+<br>
+<<radiobutton "$activeSlave.foreskin" 0>> None
+<<radiobutton "$activeSlave.foreskin" 1>> Vestigial
+<<radiobutton "$activeSlave.foreskin" 2>> Small
+<<radiobutton "$activeSlave.foreskin" 3>> Normal
+<<radiobutton "$activeSlave.foreskin" 4>> Large
+<<radiobutton "$activeSlave.foreskin" 5>> Massive
+
+<br>
+
+''Testicles (0 to 6):''
+<<if $activeSlave.balls == 0>>
+None.
+<<elseif $activeSlave.balls == 1>>
+Vestigial.
+<<elseif $activeSlave.balls == 2>>
+Small.
+<<elseif $activeSlave.balls == 3>>
+Normal.
+<<elseif $activeSlave.balls == 4>>
+Large.
+<<elseif $activeSlave.balls == 5>>
+Huge.
+<<else>>
+Titanic.
+<</if>>
+<<textbox "$activeSlave.balls" $activeSlave.balls>>
+<br>
+<<radiobutton "$activeSlave.balls" 0>> None / Invisible
+<<radiobutton "$activeSlave.balls" 1>> Vestigial
+<<radiobutton "$activeSlave.balls" 2>> Small
+<<radiobutton "$activeSlave.balls" 3>> Normal
+<<radiobutton "$activeSlave.balls" 4>> Large
+<<radiobutton "$activeSlave.balls" 5>> Massive
+<<radiobutton "$activeSlave.balls" 6>> Huge
+<<radiobutton "$activeSlave.balls" 7>> More Huge
+<<radiobutton "$activeSlave.balls" 8>> Enormous
+<<radiobutton "$activeSlave.balls" 9>> Monstrous
+<<radiobutton "$activeSlave.balls" 10>> Big McLargeHuge
+
+<br>
+
+''Ballsack (0 to 8):''
+<<if $activeSlave.scrotum == 0>>
+None.
+<<elseif $activeSlave.scrotum == 1>>
+Vestigial.
+<<elseif $activeSlave.scrotum == 2>>
+Small.
+<<elseif $activeSlave.scrotum == 3>>
+Normal.
+<<elseif $activeSlave.scrotum == 4>>
+Large.
+<<elseif $activeSlave.scrotum == 5>>
+Huge.
+<<elseif $activeSlave.scrotum == 6>>
+Massive.
+<<elseif $activeSlave.scrotum == 7>>
+Enormous.
+<<else>>
+Monstrous.
+<</if>>
+<<textbox "$activeSlave.scrotum" $activeSlave.scrotum>>
+<br>
+<<radiobutton "$activeSlave.scrotum" 0>> None
+<<radiobutton "$activeSlave.scrotum" 1>> Vestigial
+<<radiobutton "$activeSlave.scrotum" 2>> Small
+<<radiobutton "$activeSlave.scrotum" 3>> Normal
+<<radiobutton "$activeSlave.scrotum" 4>> Large
+<<radiobutton "$activeSlave.scrotum" 5>> Huge
+<<radiobutton "$activeSlave.scrotum" 6>> Massive
+<<radiobutton "$activeSlave.scrotum" 7>> Enormous
+<<radiobutton "$activeSlave.scrotum" 8>> Monstrous
+
+<br>
+
+''Prostate (0: no prostate, 1:prostate, 2:hyperactive):'' $activeSlave.prostate
+<<textbox "$activeSlave.prostate" $activeSlave.prostate>>
+<br>
+<<radiobutton "$activeSlave.prostate" 0>> No prostate
+<<radiobutton "$activeSlave.prostate" 1>> Prostate
+<<radiobutton "$activeSlave.prostate" 2>> Hyperactive prostate
+
+<br><br>
+
+''Prostitution (0 to 100):''
+<<if $activeSlave.whoreSkill <= 10>>
+Unskilled.
+<<elseif $activeSlave.whoreSkill <= 30>>
+@@.cyan;Basic.@@
+<<elseif $activeSlave.whoreSkill <= 60>>
+@@.cyan;Skilled.@@
+<<elseif $activeSlave.whoreSkill < 100>>
+@@.cyan;Expert.@@
+<<else>>
+@@.cyan;Masterful.@@
+<</if>>
+<<textbox "$activeSlave.whoreSkill" $activeSlave.whoreSkill>>
+<br>
+<<radiobutton "$activeSlave.whoreSkill" 0>> Unskilled
+<<radiobutton "$activeSlave.whoreSkill" 15>> Basic
+<<radiobutton "$activeSlave.whoreSkill" 35>> Skilled
+<<radiobutton "$activeSlave.whoreSkill" 65>> Expert
+<<radiobutton "$activeSlave.whoreSkill" 100>> Masterful
+
+<br>
+
+''Entertainment (0 to 100):''
+<<if $activeSlave.entertainSkill <= 10>>
+Unskilled.
+<<elseif $activeSlave.entertainSkill <= 30>>
+@@.cyan;Basic.@@
+<<elseif $activeSlave.entertainSkill <= 60>>
+@@.cyan;Skilled.@@
+<<elseif $activeSlave.entertainSkill < 100>>
+@@.cyan;Expert.@@
+<<else>>
+@@.cyan;Masterful.@@
+<</if>>
+<<textbox "$activeSlave.entertainSkill" $activeSlave.entertainSkill>>
+<br>
+<<radiobutton "$activeSlave.entertainSkill" 0>> Unskilled
+<<radiobutton "$activeSlave.entertainSkill" 15>> Basic
+<<radiobutton "$activeSlave.entertainSkill" 35>> Skilled
+<<radiobutton "$activeSlave.entertainSkill" 65>> Expert
+<<radiobutton "$activeSlave.entertainSkill" 100>> Masterful
+
+<br>
+
+''Combat (0,1):''
+<<if $activeSlave.combatSkill == 0>>
+Unskilled.
+<<else>>
+@@.cyan;Skilled.@@
+<</if>>
+<<textbox "$activeSlave.combatSkill" $activeSlave.combatSkill>>
+<br>
+<<radiobutton "$activeSlave.combatSkill" 0>> Unskilled
+<<radiobutton "$activeSlave.combatSkill" 1>> Skilled
+
+<br><br>
+
+''Intelligence (-3 to 3):''
+<<if $activeSlave.intelligence == 3>>
+@@.deepskyblue;Brilliant.@@
+<<elseif $activeSlave.intelligence == 2>>
+@@.deepskyblue;Very Smart.@@
+<<elseif $activeSlave.intelligence == 1>>
+@@.deepskyblue;Smart.@@
+<<elseif $activeSlave.intelligence == 0>>
+Average.
+<<elseif $activeSlave.intelligence == -1>>
+@@.orangered;Stupid.@@
+<<elseif $activeSlave.intelligence == -2>>
+@@.orangered;Very Stupid.@@
+<<else>>
+@@.orangered;Moronic.@@
+<</if>>
+<<textbox "$activeSlave.intelligence" $activeSlave.intelligence>>
+<br>
+<<radiobutton "$activeSlave.intelligence" -3>> Moronic
+<<radiobutton "$activeSlave.intelligence" -2>> Very Stupid
+<<radiobutton "$activeSlave.intelligence" -1>> Stupid
+<<radiobutton "$activeSlave.intelligence" 0>> Average
+<<radiobutton "$activeSlave.intelligence" 1>> Smart
+<<radiobutton "$activeSlave.intelligence" 2>> Very Smart
+<<radiobutton "$activeSlave.intelligence" 3>> Brilliant
+
+<br>
+
+''Education (0,1):''
+<<if $activeSlave.intelligenceImplant == 1>>
+@@.deepskyblue;Educated.@@
+<<else>>
+Uneducated.
+<</if>>
+<<textbox "$activeSlave.intelligenceImplant" $activeSlave.intelligenceImplant>>
+<br>
+<<radiobutton "$activeSlave.intelligenceImplant" 0>> Uneducated
+<<radiobutton "$activeSlave.intelligenceImplant" 1>> Educated
+
+<br><br>
+
+''Fetish Known (Unknown:0 | Known:1): $activeSlave.fetishKnown |''
+<<textbox "$activeSlave.fetishKnown" $activeSlave.fetishKnown>>
+<br>
+<<radiobutton "$activeSlave.fetishKnown" 0>> Unknown
+<<radiobutton "$activeSlave.fetishKnown" 1>> Known
+
+<br>
+
+<<if $activeSlave.fetish == "none">>
+''Fetish:'' @@.pink;$activeSlave.fetish.@@
+<<else>>
+''Fetish:'' @@.lightcoral;$activeSlave.fetish.@@
+<</if>>
+<<textbox "$activeSlave.fetish" $activeSlave.fetish>>
+<br>
+<<radiobutton "$activeSlave.fetish" "none">> None
+<<radiobutton "$activeSlave.fetish" "submissive">> Submissive
+<<radiobutton "$activeSlave.fetish" "dom">> Dom
+<<radiobutton "$activeSlave.fetish" "cumslut">> Cumslut
+<<radiobutton "$activeSlave.fetish" "humiliation">> Humiliation
+<<radiobutton "$activeSlave.fetish" "buttslut">> Buttslut
+<<radiobutton "$activeSlave.fetish" "boobs">> Boobs
+<<radiobutton "$activeSlave.fetish" "pregnancy">> Pregnancy
+<<radiobutton "$activeSlave.fetish" "sadist">> Sadist
+<<radiobutton "$activeSlave.fetish" "masochist">> Masochist
+
+<br>
+
+''Fetish strength (0 to 100):''
+<<if $activeSlave.fetishStrength > 95>>
+@@.lightcoral;High.@@
+<<elseif $activeSlave.fetishStrength <= 60>>
+@@.pink;Low.@@
+<<else>>
+@@.hotpink;Normal.@@
+<</if>>
+<<textbox "$activeSlave.fetishStrength" $activeSlave.fetishStrength>>
+<br>
+<<radiobutton "$activeSlave.fetishStrength" 0>> Low
+<<radiobutton "$activeSlave.fetishStrength" 70>> Normal
+<<radiobutton "$activeSlave.fetishStrength" 100>> High
+
+<br><br>
+
+''Sexuality (unknown:0 | known:1):'' $activeSlave.attrKnown
+<<textbox "$activeSlave.attrKnown" $activeSlave.attrKnown>>
+<br>
+<<radiobutton "$activeSlave.attrKnown" 0>> Unknown
+<<radiobutton "$activeSlave.attrKnown" 1>> Known
+
+<br>
+
+''Male Attraction (0 - 100):''
+<<if $activeSlave.attrXY <= 5>>
+	@@.red;Disgusted by guys,@@
+<<elseif $activeSlave.attrXY <= 15>>
+	@@.red;Turned off by guys,@@
+<<elseif $activeSlave.attrXY <= 35>>
+	@@.red;Not attracted to guys,@@
+<<elseif $activeSlave.attrXY <= 65>>
+	Indifferent to guys,
+<<elseif $activeSlave.attrXY <= 85>>
+	@@.green;Attracted to guys,@@
+<<elseif $activeSlave.attrXY <= 95>>
+	@@.green;Aroused by guys,@@
+<<else>>
+	@@.green;Passionate about guys,@@
+<</if>>
+<<textbox "$activeSlave.attrXY" $activeSlave.attrXY>>
+<br>
+<<radiobutton "$activeSlave.attrXY" 0>> Disgusted by guys
+<<radiobutton "$activeSlave.attrXY" 10>> Turned off by guys
+<<radiobutton "$activeSlave.attrXY" 20>> Not attracted to guys
+<<radiobutton "$activeSlave.attrXY" 50>> Indifferent to guys
+<<radiobutton "$activeSlave.attrXY" 80>> Attracted to guys
+<<radiobutton "$activeSlave.attrXY" 90>> Aroused by guys
+<<radiobutton "$activeSlave.attrXY" 100>> Passionate about guys
+
+<br>
+
+''Female Attraction (0 - 100):''
+<<if $activeSlave.attrXX <= 5>>
+	@@.red;disgusted by girls.@@
+<<elseif $activeSlave.attrXX <= 15>>
+	@@.red;turned off by girls.@@
+<<elseif $activeSlave.attrXX <= 35>>
+	@@.red;not attracted to girls.@@
+<<elseif $activeSlave.attrXX <= 65>>
+	indifferent to girls.
+<<elseif $activeSlave.attrXX <= 85>>
+	@@.green;attracted to girls.@@
+<<elseif $activeSlave.attrXX <= 95>>
+	@@.green;aroused by girls.@@
+<<else>>
+	@@.green;passionate about girls.@@
+<</if>>
+<<textbox "$activeSlave.attrXX" $activeSlave.attrXX>>
+<br>
+<<radiobutton "$activeSlave.attrXX" 0>> Disgusted by girls
+<<radiobutton "$activeSlave.attrXX" 10>> Turned off by girls
+<<radiobutton "$activeSlave.attrXX" 20>> Not attracted to girls
+<<radiobutton "$activeSlave.attrXX" 50>> Indifferent to girls
+<<radiobutton "$activeSlave.attrXX" 80>> Attracted to girls
+<<radiobutton "$activeSlave.attrXX" 90>> Aroused by girls
+<<radiobutton "$activeSlave.attrXX" 100>> Passionate about girls
+
+<br>
+
+''Sex drive (0 - 100):''
+<<if $activeSlave.energy == 100>>
+@@.green;Nympho!@@
+<<elseif $activeSlave.energy > 80>>
+@@.green;Sex addict.@@
+<<elseif $activeSlave.energy > 60>>
+@@.green;Powerful.@@
+<<elseif $activeSlave.energy > 40>>
+@@.yellow;Average.@@
+<<elseif $activeSlave.energy > 20>>
+@@.red;Poor.@@
+<<else>>
+@@.red;Frigid.@@
+<</if>>
+<<textbox "$activeSlave.energy" $activeSlave.energy>>
+
+<br><br>
+
+''Behavioral Flaw:''
+<<if $activeSlave.behavioralFlaw == "none">>
+//$activeSlave.behavioralFlaw.//
+<<else>>
+@@.red;$activeSlave.behavioralFlaw.@@
+<</if>>
+<<textbox "$activeSlave.behavioralFlaw" $activeSlave.behavioralFlaw>>
+<br>
+<<radiobutton "$activeSlave.behavioralFlaw" "none">> None
+<<radiobutton "$activeSlave.behavioralFlaw" "arrogant">> Arrogant
+<<radiobutton "$activeSlave.behavioralFlaw" "bitchy">> Bitchy
+<<radiobutton "$activeSlave.behavioralFlaw" "odd">> Odd
+<<radiobutton "$activeSlave.behavioralFlaw" "hates men">> Men
+<<radiobutton "$activeSlave.behavioralFlaw" "hates women">> Women
+<<radiobutton "$activeSlave.behavioralFlaw" "anorexic">> Anorexic
+<<radiobutton "$activeSlave.behavioralFlaw" "gluttonous">> Gluttonous
+<<radiobutton "$activeSlave.behavioralFlaw" "devout">> Devout
+<<radiobutton "$activeSlave.behavioralFlaw" "liberated">> Liberated
+
+<br><br>
+
+''Behavioral Quirk:''
+<<if $activeSlave.behavioralQuirk == "none">>
+//$activeSlave.behavioralQuirk.//
+<<else>>
+@@.green;$activeSlave.behavioralQuirk.@@
+<</if>>
+<<textbox "$activeSlave.behavioralQuirk" $activeSlave.behavioralQuirk>>
+<br>
+<<radiobutton "$activeSlave.behavioralQuirk" "none">> None
+<<radiobutton "$activeSlave.behavioralQuirk" "confident">> Confident
+<<radiobutton "$activeSlave.behavioralQuirk" "cutting">> Cutting
+<<radiobutton "$activeSlave.behavioralQuirk" "funny">> Funny
+<<radiobutton "$activeSlave.behavioralQuirk" "adores women">> Adores Women
+<<radiobutton "$activeSlave.behavioralQuirk" "adores men">> Adores Men
+<<radiobutton "$activeSlave.behavioralQuirk" "insecure">> Insecure
+<<radiobutton "$activeSlave.behavioralQuirk" "fitness">> Fitness
+<<radiobutton "$activeSlave.behavioralQuirk" "sinful">> Sinful
+<<radiobutton "$activeSlave.behavioralQuirk" "advocate">> Advocate
+<<if $activeSlave.behavioralQuirk != "none">>
+<<set $activeSlave.behavioralFlaw = "none">>
+<</if>>
+
+<br><br>
+
+''Sexual Flaw / Paraphilias:''
+<<if $activeSlave.sexualFlaw == "none">>
+//$activeSlave.sexualFlaw.//
+<<else>>
+@@.red;$activeSlave.sexualFlaw.@@
+<</if>>
+<<textbox "$activeSlave.sexualFlaw" $activeSlave.sexualFlaw>>
+<br>
+Flaws:
+<<radiobutton "$activeSlave.sexualFlaw" "none">> None
+<<radiobutton "$activeSlave.sexualFlaw" "hates oral">> Oral
+<<radiobutton "$activeSlave.sexualFlaw" "hates anal">> Anal
+<<radiobutton "$activeSlave.sexualFlaw" "hates penetration">> Penetration
+<<radiobutton "$activeSlave.sexualFlaw" "repressed">> Repressed
+<<radiobutton "$activeSlave.sexualFlaw" "shamefast">> Shamefast
+<<radiobutton "$activeSlave.sexualFlaw" "apathetic">> Apathetic
+<<radiobutton "$activeSlave.sexualFlaw" "idealistic">> Sexually Idealistic
+<<radiobutton "$activeSlave.sexualFlaw" "crude">> Crude
+<<radiobutton "$activeSlave.sexualFlaw" "judgemental">> Judgemental
+
+<br>
+Paraphilias:
+<<radiobutton "$activeSlave.sexualFlaw" "cum addict">> Cum addict
+<<radiobutton "$activeSlave.sexualFlaw" "anal addict">> Anal addict
+<<radiobutton "$activeSlave.sexualFlaw" "attention whore">> Attention whore
+<<radiobutton "$activeSlave.sexualFlaw" "breast growth">> Breast obsession
+<<radiobutton "$activeSlave.sexualFlaw" "abusive">> Abusive
+<<radiobutton "$activeSlave.sexualFlaw" "malicious">> Malicious
+<<radiobutton "$activeSlave.sexualFlaw" "self hating">> Self hatred
+<<radiobutton "$activeSlave.sexualFlaw" "neglectful">> Self neglect
+<<radiobutton "$activeSlave.sexualFlaw" "breeder">> Breeding obsession
+
+<br><br>
+
+''Sexual Quirk:''
+<<if $activeSlave.sexualQuirk == "none">>
+//$activeSlave.sexualQuirk.//
+<<else>>
+@@.green;$activeSlave.sexualQuirk.@@
+<</if>>
+<<textbox "$activeSlave.sexualQuirk" $activeSlave.sexualQuirk>>
+<br>
+<<radiobutton "$activeSlave.sexualQuirk" "none">> None
+<<radiobutton "$activeSlave.sexualQuirk" "gagfuck queen">> Gagfuck Queen
+<<radiobutton "$activeSlave.sexualQuirk" "painal queen">> Painal Queen
+<<radiobutton "$activeSlave.sexualQuirk" "strugglefuck queen">> Strugglefuck Queen
+<<radiobutton "$activeSlave.sexualQuirk" "perverted">> Perverted
+<<radiobutton "$activeSlave.sexualQuirk" "tease">> Tease
+<<radiobutton "$activeSlave.sexualQuirk" "caring">> Caring
+<<radiobutton "$activeSlave.sexualQuirk" "romantic">> Romantic
+<<radiobutton "$activeSlave.sexualQuirk" "unflinching">> Unflinching
+<<radiobutton "$activeSlave.sexualQuirk" "size queen">> Size Queen
+<<if $activeSlave.sexualQuirk != "none">>
+	<<if ($activeSlave.sexualFlaw != "cum addict") && ($activeSlave.sexualFlaw != "anal addict") && ($activeSlave.sexualFlaw != "attention whore") && ($activeSlave.sexualFlaw != "breast growth") && ($activeSlave.sexualFlaw != "abusive") && ($activeSlave.sexualFlaw != "malicious") && ($activeSlave.sexualFlaw != "self hating") && ($activeSlave.sexualFlaw != "neglectful") && ($activeSlave.sexualFlaw != "breeder")>>
+		<<set $activeSlave.sexualFlaw = "none">>
+	<</if>>
+<</if>>
+
+<br><br>
+
+''Lips Tattoo ($activeSlave.lipsTat)''
+<<textbox "$activeSlave.lipsTat" $activeSlave.lipsTat>>
+<br>
+''Shoulders Tattoo ($activeSlave.shouldersTat)''
+<<textbox "$activeSlave.shouldersTat" $activeSlave.shouldersTat>>
+<br>
+''Arms Tattoo ($activeSlave.armsTat)''
+<<textbox "$activeSlave.armsTat" $activeSlave.armsTat>>
+<br>
+''Legs Tattoo ($activeSlave.legsTat)''
+<<textbox "$activeSlave.legsTat" $activeSlave.legsTat>>
+<br>
+''Boobs Tattoo ($activeSlave.boobsTat)''
+<<textbox "$activeSlave.boobsTat" $activeSlave.boobsTat>>
+<br>
+''Back Tattoo ($activeSlave.backTat)''
+<<textbox "$activeSlave.backTat" $activeSlave.backTat>>
+<br>
+''Butt Tattoo ($activeSlave.buttTat)''
+<<textbox "$activeSlave.buttTat" $activeSlave.buttTat>>
+<br>
+''Vagina Tattoo ($activeSlave.vaginaTat)''
+<<textbox "$activeSlave.vaginaTat" $activeSlave.vaginaTat>>
+<br>
+''Anus Tattoo ($activeSlave.anusTat)''
+<<textbox "$activeSlave.anusTat" $activeSlave.anusTat>>
+<br>
+''Tramp Stamp Tattoo ($activeSlave.stampTat)''
+<<textbox "$activeSlave.stampTat" $activeSlave.stampTat>>
+
+<br><br>
+
+''Lips piercings (0-2): $activeSlave.lipsPiercing''
+|
+<<radiobutton "$activeSlave.lipsPiercing" 0>> None
+<<radiobutton "$activeSlave.lipsPiercing" 1>> Standard
+<<radiobutton "$activeSlave.lipsPiercing" 2>> Heavy
+
+<br>
+''Tongue piercings (0-2): $activeSlave.tonguePiercing''
+|
+<<radiobutton "$activeSlave.tonguePiercing" 0>> None
+<<radiobutton "$activeSlave.tonguePiercing" 1>> Standard
+<<radiobutton "$activeSlave.tonguePiercing" 2>> Heavy
+
+<br>
+''Ear piercings (0-2): $activeSlave.earPiercing''
+|
+<<radiobutton "$activeSlave.earPiercing" 0>> None
+<<radiobutton "$activeSlave.earPiercing" 1>> Standard
+<<radiobutton "$activeSlave.earPiercing" 2>> Heavy
+
+<br>
+''Nose piercings (0-2): $activeSlave.nosePiercing''
+|
+<<radiobutton "$activeSlave.nosePiercing" 0>> None
+<<radiobutton "$activeSlave.nosePiercing" 1>> Standard
+<<radiobutton "$activeSlave.nosePiercing" 2>> Heavy
+
+<br>
+''Eyebrow piercings (0-2): $activeSlave.eyebrowPiercing''
+|
+<<radiobutton "$activeSlave.eyebrowPiercing" 0>> None
+<<radiobutton "$activeSlave.eyebrowPiercing" 1>> Standard
+<<radiobutton "$activeSlave.eyebrowPiercing" 2>> Heavy
+
+<br>
+''Navel piercings (0-2): $activeSlave.navelPiercing''
+|
+<<radiobutton "$activeSlave.navelPiercing" 0>> None
+<<radiobutton "$activeSlave.navelPiercing" 1>> Standard
+<<radiobutton "$activeSlave.navelPiercing" 2>> Heavy
+
+<br>
+''Corset piercings (0-1): $activeSlave.corsetPiercing''
+|
+<<radiobutton "$activeSlave.corsetPiercing" 0>> None
+<<radiobutton "$activeSlave.corsetPiercing" 1>> Pierced
+
+<br>
+''Nipples piercings (0-2): $activeSlave.nipplesPiercing''
+|
+<<radiobutton "$activeSlave.nipplesPiercing" 0>> None
+<<radiobutton "$activeSlave.nipplesPiercing" 1>> Standard
+<<radiobutton "$activeSlave.nipplesPiercing" 2>> Heavy
+
+<br>
+''Areolae piercings (0-2): $activeSlave.areolaePiercing''
+|
+<<radiobutton "$activeSlave.areolaePiercing" 0>> None
+<<radiobutton "$activeSlave.areolaePiercing" 1>> Standard
+<<radiobutton "$activeSlave.areolaePiercing" 2>> Heavy
+
+<br>
+''Clit/frenulum piercing (0-3): $activeSlave.clitPiercing''
+|
+<<radiobutton "$activeSlave.clitPiercing" 0>> None
+<<radiobutton "$activeSlave.clitPiercing" 1>> Standard
+<<radiobutton "$activeSlave.clitPiercing" 2>> Big
+<<radiobutton "$activeSlave.clitPiercing" 3>> Smart piercing
+
+<br>
+''Pussylips piercings (0-2): $activeSlave.vaginaPiercing''
+|
+<<radiobutton "$activeSlave.vaginaPiercing" 0>> None
+<<radiobutton "$activeSlave.vaginaPiercing" 1>> Standard
+<<radiobutton "$activeSlave.vaginaPiercing" 2>> Heavy
+
+<br>
+''Anus piercing (0-2): $activeSlave.anusPiercing''
+|
+<<radiobutton "$activeSlave.anusPiercing" 0>> None
+<<radiobutton "$activeSlave.anusPiercing" 1>> Standard
+<<radiobutton "$activeSlave.anusPiercing" 2>> Heavy
+
+<br>
+''Shaft piercings (0-2): $activeSlave.dickPiercing''
+|
+<<radiobutton "$activeSlave.dickPiercing" 0>> None
+<<radiobutton "$activeSlave.dickPiercing" 1>> Standard
+<<radiobutton "$activeSlave.dickPiercing" 2>> Heavy

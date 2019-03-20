@@ -1,0 +1,48 @@
+:: AS Dump
+
+<<if (ndef $activeSlave) || ($activeSlave == 0)>>
+
+	@@.red;ERROR:@@  AS Dump, activeSlave invalid, returnTo is '$returnTo', previous passage was '<<print previous()>>'. Please report this.
+
+	<<link "Continue">><<goto $returnTo>><</link>> | [[Go Back|previous()]]
+
+<<else>>
+
+	<<silently>>
+
+	<<set _SL = $slaves.length, _ID = $activeSlave.ID>>
+
+	<<if $i >= 0 && $i < _SL && $slaves[$i].ID == _ID>> /* shortcut if $i is already pointing to this slave */
+		<<set $slaves[$i] = $activeSlave>>
+	<<else>>
+		<<set $i = $slaves.findIndex(function(s) { return s.ID == _ID; })>> /* find $i if exists */
+		<<if $i == -1>> /* not found, so new slave */
+			<<AddSlave $activeSlave>>
+		<<else>>
+			<<set $slaves[$i] = $activeSlave>>
+		<</if>>
+	<</if>>
+
+	<<switch _ID>>
+		<<case $HeadGirl.ID>><<set $HeadGirl = $activeSlave>>
+		<<case $Recruiter.ID>><<set $Recruiter = $activeSlave>>
+		<<case $Bodyguard.ID>><<set $Bodyguard = $activeSlave>>
+		<<case $Madam.ID>><<set $Madam = $activeSlave>>
+		<<case $DJ.ID>><<set $DJ = $activeSlave>>
+		<<case $Milkmaid.ID>><<set $Milkmaid = $activeSlave>>
+		<<case $Schoolteacher.ID>><<set $Schoolteacher = $activeSlave>>
+		<<case $Attendant.ID>><<set $Attendant = $activeSlave>>
+		<<case $Nurse.ID>><<set $Nurse = $activeSlave>>
+		<<case $Stewardess.ID>><<set $Stewardess = $activeSlave>>
+		<<case $Wardeness.ID>><<set $Wardeness = $activeSlave>>
+		<<case $Concubine.ID>><<set $Concubine = $activeSlave>>
+		<<case $Collectrix.ID>><<set $Collectrix = $activeSlave>>
+	<</switch>>
+
+	<</silently>>
+
+	<<goto $returnTo>>
+
+<</if>>
+
+

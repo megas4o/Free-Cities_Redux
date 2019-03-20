@@ -1,0 +1,409 @@
+:: StoryCaption
+\
+<<set _Pass = passage()>>\
+<<if _Pass == "Encyclopedia">>\
+<span id="nextButton"><strong><<link [[($nextButton)|($nextLink)]]>><</link>> to Free Cities</strong></span>
+/* Intro, new players, PC/Gameplay focused */
+[[Playing Free Cities|Encyclopedia][$encyclopedia = "Playing Free Cities"]]
+[[Design your master|Encyclopedia][$encyclopedia = "PC Customization"]]
+[[Being in charge|Encyclopedia][$encyclopedia = "Being in charge"]]
+/* Section for slaves */
+[[Slaves|Encyclopedia][$encyclopedia = "Slaves"]]
+[[Obtaining Slaves|Encyclopedia][$encyclopedia = "Obtaining Slaves"]]
+[[Slave Assignments|Encyclopedia][$encyclopedia = "Slave Assignments"]]
+[[Slave Body|Encyclopedia][$encyclopedia = "Body"]] / [[ Skills|Encyclopedia][$encyclopedia = "Skills"]]
+[[Slave Fetishes|Encyclopedia][$encyclopedia = "Fetishes"]] / [[ Quirks|Encyclopedia][$encyclopedia = "Quirks"]] / [[ Flaws|Encyclopedia][$encyclopedia = "Flaws"]]
+[[Slave Relationships|Encyclopedia][$encyclopedia = "Relationships"]]
+/* Section for arcology and Lore */
+[[The X-Series Arcology|Encyclopedia][$encyclopedia = "What the Upgrades Do"]]
+[[Arcology Facilities|Encyclopedia][$encyclopedia = "Facilities"]]
+[[Terrain Types|Encyclopedia][$encyclopedia = "Terrain Types"]]
+[[Future Societies|Encyclopedia][$encyclopedia = "Future Societies"]]
+[[Lore|Encyclopedia][$encyclopedia = "Lore"]]
+/* Extras */
+[[Credits|Encyclopedia][$encyclopedia = "Credits"]]
+<<elseif _Pass == "Starting Girls">>\
+<span id="cost"><<SlaveCostDescription>></span>
+
+<<elseif $ui == "disclaimer">>\
+<span id="nextButton"><strong><<link [[($nextButton)|($nextLink)]]>><</link>></strong></span>
+<<elseif $ui != "start">>\
+<<nobr>>
+
+<<set _SL = $slaves.length>>
+<<if $cheatMode>>_Pass<br><</if>>
+<span id="week">''Week $week''</span>
+<br>Week of $month $day, $year
+<<if (_Pass == "Main") && ($cheatMode)&& ($cheatModeM)>>
+	<<set _TWeek = $week>>
+	<<textbox "$week" $week>>
+	<<link "Apply">>
+	<<set $week = Math.trunc(Number($week) || _TWeek)>>
+	<<if $week < 1>><<set $week = 1>><</if>>
+	<<replace "#week">>''Week $week''<</replace>>
+	<</link>>
+<</if>>
+<br>
+<<if $weatherToday.severity == 1>>
+	//@@.cyan;$weatherToday.name@@//
+<<elseif $weatherToday.severity == 2>>
+	//@@.yellow;$weatherToday.name@@//
+<<elseif $weatherToday.severity == 3>>
+	//@@.orange;$weatherToday.name@@//
+<<else>>
+	//@@.red;$weatherToday.name@@//
+<</if>>
+<br><br>
+<<if $nextButton == "END WEEK">>
+	<span id="endWeekButton"><strong><<link [[($nextButton)|($nextLink)]]>><</link>></strong></span> @@.cyan;[Enter]@@
+<<else>>
+	<span id="nextButton"> /* target for miscWidgets' <<UpdateNextButton>> */
+		<strong><<link "$nextButton">> /* must use link so spacebar shortcut will work */
+			<<if $nextButton != " ">> /* but no effect if nextButton is set to a blank space */
+				<<set $ui = "main">>
+				<<goto $nextLink>>
+			<</if>>
+		<</link>></strong>
+		<<if $nextButton != " ">>@@.cyan;[Space]@@<</if>>
+	</span>
+<</if>>
+<br><br>
+<<if $newModelUI == 0>>
+	<<if _Pass == "Main">>
+		<span id="manageArcology"><<link "Manage Arcology">><<set $nextButton = "Back", $nextLink = _Pass>><<goto "Manage Arcology">><</link>></span> @@.cyan;[C]@@
+	<</if>>
+	<br>
+<</if>>
+<<set $cash = Math.trunc($cash)>>
+<span id="cash">
+<<if $cash > 0>>
+	@@.yellowgreen;Cash@@
+<<else>>
+	__@@.red;Cash@@__
+<</if>>
+| ''¤''$cash
+</span>
+<br>
+<<if _Pass == "Main">>
+	<<set _TCash2 = ($cash-$cashLastWeek)>>
+	<span id="oldcash">
+	<<if _TCash2 < 0>>
+		(@@.red;_TCash2@@
+	<<else>>
+		(@@.yellowgreen;+_TCash2@@
+	<</if>>
+	</span>
+	since last week)
+	<<if ($cheatMode) && ($cheatModeM)>>
+		<<set _TCash1 = $cash>>
+		<<textbox "$cash" $cash>>
+		<<link "Apply">>
+		<<set $cash = Math.trunc(Number($cash) || _TCash1), $cheater = 1>>
+		<<replace "#cash">>
+		<<if $cash > 0>>
+			@@.yellowgreen;Cash@@
+		<<else>>
+			__@@.red;Cash@@__
+		<</if>>
+		| ''¤''$cash
+		<</replace>>
+		<<set _TCash2 = ($cash-$cashLastWeek)>>
+		<<replace "#oldcash">>
+		<<if _TCash2 < 0>>
+			(@@.red;_TCash2@@
+		<<else>>
+			(@@.yellowgreen;+_TCash2@@
+		<</if>>
+		<</replace>>
+		since last week)
+		<</link>>
+	<</if>>
+	<br>[[Upkeep|Costs Budget]] |
+<<else>>
+	<br>Upkeep |
+<</if>>¤$costs
+<br>@@.pink;Total Sex Slaves@@ | _SL
+<br>@@.pink;Penthouse Beds@@ |
+<<if $dormitoryPopulation+$roomsPopulation > ($dormitory+$rooms)>>@@.red;<<print $dormitoryPopulation+$roomsPopulation>>@@<<else>><<print $dormitoryPopulation+$roomsPopulation>><</if>>/<<print ($dormitory+$rooms)>>
+<br>@@.pink;Luxury Rooms@@ | <<if $roomsPopulation > $rooms>>@@.red;<<print $roomsPopulation>>@@<<else>><<print $roomsPopulation>><</if>>/<<print $rooms>>
+<br>@@.yellowgreen;GSP@@ |
+<<print Math.trunc(0.1*$arcologies[0].prosperity)>>m
+<<if $arcologies[0].ownership >= $arcologies[0].minority>>
+	<<if $arcologies[0].ownership >= $arcologies[0].minority+5>>
+		(<<print $arcologies[0].ownership>>%)
+	<<else>>
+		@@.yellow;(<<print $arcologies[0].ownership>>%)@@
+	<</if>>
+<<else>>
+	@@.red;(<<print $arcologies[0].ownership>>%)@@
+<</if>>
+<br>@@.green;Rep@@ |
+<<set $rep = Math.clamp(Math.trunc($rep), 0, 20000)>>
+<span id="rep">
+<<if $rep > 19000>>
+	@@color:rgb(0,145,0);worshipped@@
+<<elseif $rep > 18000>>
+	@@color:rgb(0,150,0);great@@
+<<elseif $rep > 17000>>
+	@@color:rgb(0,155,0);exalted@@
+<<elseif $rep > 16000>>
+	@@color:rgb(0,160,0);illustrious@@
+<<elseif $rep > 15000>>
+	@@color:rgb(0,165,0);prestigious@@
+<<elseif $rep > 14000>>
+	@@color:rgb(0,170,0);renowned@@
+<<elseif $rep > 13000>>
+	@@color:rgb(0,175,0);famed@@
+<<elseif $rep > 12000>>
+	@@color:rgb(0,180,0);celebrated@@
+<<elseif $rep > 11000>>
+	@@color:rgb(0,185,0);honored@@
+<<elseif $rep > 10000>>
+	@@color:rgb(0,190,0);acclaimed@@
+<<elseif $rep > 9000>>
+	@@color:rgb(0,195,0);eminent@@
+<<elseif $rep > 8250>>
+	@@color:rgb(0,200,0);prominent@@
+<<elseif $rep > 7000>>
+	@@color:rgb(0,205,0);distinguished@@
+<<elseif $rep > 6750>>
+	@@color:rgb(0,210,0);admired@@
+<<elseif $rep > 6000>>
+	@@color:rgb(0,215,0);esteemed@@
+<<elseif $rep > 5250>>
+	@@color:rgb(0,220,0);respected@@
+<<elseif $rep > 4500>>
+	@@color:rgb(0,225,0);known@@
+<<elseif $rep > 3750>>
+	@@color:rgb(0,230,0);recognized@@
+<<elseif $rep > 3000>>
+	@@color:rgb(0,235,0);rumored@@
+<<elseif $rep > 2250>>
+	@@color:rgb(0,240,0);envied@@
+<<elseif $rep > 1500>>
+	@@color:rgb(0,245,0);resented@@
+<<elseif $rep > 750>>
+	@@color:rgb(0,250,0);disliked@@
+<<else>>
+	@@color:rgb(0,255,0);unknown@@
+<</if>>
+($rep)
+</span>
+<<if (_Pass == "Main")>>
+	<<if ($cheatMode) && ($cheatModeM)>>
+	<<set _TRep = $rep>>
+	<<textbox "$rep" $rep>>
+	<<link "Apply">>
+	<<set $rep = Math.clamp(Math.trunc(Number($rep) || _TRep), 0, 20000), $cheater = 1>>
+	<<replace "#rep">>
+	<<if $rep > 19000>>
+		@@color:rgb(0,145,0);worshipped@@
+	<<elseif $rep > 18000>>
+		@@color:rgb(0,150,0);great@@
+	<<elseif $rep > 17000>>
+		@@color:rgb(0,155,0);exalted@@
+	<<elseif $rep > 16000>>
+		@@color:rgb(0,160,0);illustrious@@
+	<<elseif $rep > 15000>>
+		@@color:rgb(0,165,0);prestigious@@
+	<<elseif $rep > 14000>>
+		@@color:rgb(0,170,0);renowned@@
+	<<elseif $rep > 13000>>
+		@@color:rgb(0,175,0);famed@@
+	<<elseif $rep > 12000>>
+		@@color:rgb(0,180,0);celebrated@@
+	<<elseif $rep > 11000>>
+		@@color:rgb(0,185,0);honored@@
+	<<elseif $rep > 10000>>
+		@@color:rgb(0,190,0);acclaimed@@
+	<<elseif $rep > 9000>>
+		@@color:rgb(0,195,0);eminent@@
+	<<elseif $rep > 8250>>
+		@@color:rgb(0,200,0);prominent@@
+	<<elseif $rep > 7000>>
+		@@color:rgb(0,205,0);distinguished@@
+	<<elseif $rep > 6750>>
+		@@color:rgb(0,210,0);admired@@
+	<<elseif $rep > 6000>>
+		@@color:rgb(0,215,0);esteemed@@
+	<<elseif $rep > 5250>>
+		@@color:rgb(0,220,0);respected@@
+	<<elseif $rep > 4500>>
+		@@color:rgb(0,225,0);known@@
+	<<elseif $rep > 3750>>
+		@@color:rgb(0,230,0);recognized@@
+	<<elseif $rep > 3000>>
+		@@color:rgb(0,235,0);rumored@@
+	<<elseif $rep > 2250>>
+		@@color:rgb(0,240,0);envied@@
+	<<elseif $rep > 1500>>
+		@@color:rgb(0,245,0);resented@@
+	<<elseif $rep > 750>>
+		@@color:rgb(0,250,0);disliked@@
+	<<else>>
+		@@color:rgb(0,255,0);unknown@@
+	<</if>>
+	($rep)
+	<</replace>>
+	<</link>>
+	<</if>>
+	<br>
+	<<if $newModelUI == 0>>
+		<<if ($HGSuite)>>
+			<br>[[$HGSuiteNameCaps|Head Girl Suite]]
+			<<if $HGSuiteSlaves>>
+				<<if $abbreviateSidebar == 2>>
+					($HGSuiteSlaves slave)
+				<<else>>
+					($HGSuiteSlaves)
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if ($brothel)>>
+			<br>[[$brothelNameCaps|Brothel]]
+			<<if $abbreviateSidebar == 2>>
+				($brothelSlaves/<<print $brothel>> whores<<if $Madam>>, madam<</if>>)
+			<<else>>
+				($brothelSlaves/<<print $brothel>><<if $Madam>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($club)>>
+			<br>[[$clubNameCaps|Club]]
+			<<if $abbreviateSidebar == 2>>
+				($clubSlaves/<<print $club>> sluts<<if $DJ>>, DJ<</if>>)
+			<<else>>
+				($clubSlaves/<<print $club>><<if $DJ>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($arcade)>>
+			<br>[[$arcadeNameCaps|Arcade]]
+			<<if $abbreviateSidebar == 2>>
+				($arcadeSlaves/<<print $arcade>> inmates)
+			<<else>>
+				($arcadeSlaves/<<print $arcade>>)
+			<</if>>
+		<</if>>
+		<<if ($dairy)>>
+			<br>[[$dairyNameCaps|Dairy]]
+			<<set _SCapT9 = $bioreactorsXY+$bioreactorsXX+$bioreactorsHerm+$bioreactorsBarren>>
+			<<if $abbreviateSidebar == 2>>
+				($dairySlaves<<if _SCapT9>>+_SCapT9<</if>>/<<print $dairy>> cows<<if $Milkmaid>>, milkmaid<</if>>)
+			<<else>>
+				($dairySlaves<<if _SCapT9>>+_SCapT9<</if>>/<<print $dairy>><<if $Milkmaid>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($servantsQuarters)>>
+			<br>[[$servantsQuartersNameCaps|Servants' Quarters]]
+			<<if $abbreviateSidebar == 2>>
+				($servantsQuartersSlaves/$servantsQuarters servants<<if $Stewardess>>, stewardess<</if>>)
+			<<else>>
+				($servantsQuartersSlaves/$servantsQuarters<<if $Stewardess>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($masterSuite)>>
+			<br>[[$masterSuiteNameCaps|Master Suite]]
+			<<if $abbreviateSidebar == 2>>
+				($masterSuiteSlaves/$masterSuite <<if $masterSuiteSlaves != 1>>fucktoys<<else>>fucktoy<</if>><<if $Concubine>>, Concubine<</if>>)
+			<<else>>
+				($masterSuiteSlaves/$masterSuite<<if $Concubine>>, C<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($schoolroom)>>
+			<br>[[$schoolroomNameCaps|Schoolroom]]
+			<<if $abbreviateSidebar == 2>>
+				($schoolroomSlaves/$schoolroom <<if $schoolroomSlaves != 1>>students<<else>>student<</if>><<if $Schoolteacher>>, schoolteacher<</if>>)
+			<<else>>
+				($schoolroomSlaves/$schoolroom<<if $Schoolteacher>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($spa)>>
+			<br>[[$spaNameCaps|Spa]]
+			<<if $abbreviateSidebar == 2>>
+				($spaSlaves/$spa <<if $spaSlaves != 1>>bathers<<else>>bathing<</if>><<if $Attendant>>, attendant<</if>>)
+			<<else>>
+				($spaSlaves/$spa<<if $Attendant>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($clinic)>>
+			<br>[[$clinicNameCaps|Clinic]]
+			<<if $abbreviateSidebar == 2>>
+				($clinicSlaves/$clinic <<if $clinicSlaves != 1>>patients<<else>>patient<</if>><<if $Nurse>>, nurse<</if>>)
+			<<else>>
+				($clinicSlaves/$clinic<<if $Nurse>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($cellblock)>>
+			<br>[[$cellblockNameCaps|Cellblock]]
+			<<if $abbreviateSidebar == 2>>
+				($cellblockSlaves/$cellblock <<if $cellblockSlaves != 1>>prisoners<<else>>prisoner<</if>><<if $Wardeness>>, wardeness<</if>>)
+			<<else>>
+				($cellblockSlaves/$cellblock<<if $Wardeness>>, L<</if>>)
+			<</if>>
+		<</if>>
+		<<if ($pit)>>
+			<br>[[$pitNameCaps|Pit]]
+			<<set _SCapT = $fighterIDs.length>>
+			<<if $abbreviateSidebar == 2>>
+				(_SCapT <<if _SCapT != 1>>combatants<<else>>combatant<</if>>)
+			<<else>>
+				(_SCapT)
+			<</if>>
+		<</if>>
+		<br>
+	<<else>>
+		<br><span id="manageArcology"><<link "Manage Arcology">><<set $nextButton = "Back", $nextLink = _Pass>><<goto "Manage Arcology">><</link>></span> @@.cyan;[C]@@
+		<br><span id="managePenthouse"><<link "Manage Penthouse">><<set $nextButton = "Back", $nextLink = _Pass>><<goto "Manage Penthouse">><</link>></span> @@.cyan;[P]@@
+		<br><span id="PAOButton"><<link [[Personal Assistant|Personal assistant options]]>><</link>></span> @@.cyan;[T]@@
+		<br>
+		<br><span id="policyButton"><<link [[Policies]]>><</link>></span> @@.cyan;[Y]@@
+		<<if $FSAnnounced>>
+	     <br><span id="FSButton"><<link [[Future Societies|Future Society]]>><</link>></span> @@.cyan;[F]@@ <<if $FSCredits > 0>>@@.yellow;[!]@@<</if>>
+		<</if>>
+		<br><span id="URButton"><<link [[Universal Rules]]>><</link>></span> @@.cyan;[V]@@
+	<</if>>
+	<br>
+	<br><span id="optionsButton"><<link "Game Options">><<set $nextButton = "Back", $nextLink = _Pass>><<goto "Options">><</link>></span> @@.cyan;[O]@@
+	<br>
+
+<<elseif _Pass == "Manage Arcology">>
+	<br><br>
+	<br><span id="managePenthouse"><<link "Manage Penthouse">><<set $nextButton = "Back", $nextLink = _Pass>><<goto "Manage Penthouse">><</link>></span> @@.cyan;[P]@@
+	<br><span id="PAOButton"><<link [[Personal Assistant|Personal assistant options]]>><</link>></span> @@.cyan;[T]@@
+	<br>
+	<br><span id="policyButton"><<link [[Policies]]>><</link>></span> @@.cyan;[Y]@@
+	<<if $FSAnnounced>>
+    	<br><span id="FSButton"><<link [[Future Societies|Future Society]]>><</link>></span> @@.cyan;[F]@@ <<if $FSCredits > 0>> @@.yellow;[!]@@<</if>>
+	<</if>>
+	<br><span id="URButton"><<link [[Universal Rules]]>><</link>></span> @@.cyan;[V]@@
+	<br>
+	<br><span id="optionsButton"><<link "Game Options">><<set $nextButton = "Back", $nextLink = _Pass>><<goto "Options">><</link>></span> @@.cyan;[O]@@
+	<br>
+<<elseif _Pass == "Manage Penthouse">>
+	<br>
+	<br><<link [[Wardrobe]]>><</link>>
+	<br><<if $dispensary>>[[Pharmaceutical Fabricator|Dispensary]]<</if>>
+	<br><br><br><br><br>
+<<elseif _Pass == "Options">>
+	<br>
+	<br>[[Summary Options]]
+	<br>[[Description Options]]
+	<br>
+<<else>>
+	<br><br><br><br><br><br><br><br>
+<</if>>
+<</nobr>>
+<</if>>\
+<<nobr>>
+<<if (_Pass == "Encyclopedia") || ($showEncyclopedia == 0) || ($encyclopedia == " ")>>
+<<else>>
+	//FCE:// [[$encyclopedia|Encyclopedia][$nextButton = "Back", $nextLink = _Pass]]
+<</if>>
+	<br><br>
+<<if ($debugMode == 1)>>
+	Debugging
+	<br>
+	<<link "Display Variables">><<checkvars>><</link>>
+	<br>
+	<<link "Bug Report">><<bugreport>><</link>>
+<</if>>
+<</nobr>>

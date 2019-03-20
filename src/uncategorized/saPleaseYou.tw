@@ -1,0 +1,589 @@
+:: SA please you [nobr]
+
+serves you this week.
+
+<<set _trainingEfficiency = 5+Math.trunc($slaves[$i].devotion/30)+$slaves[$i].intelligence>>
+<<set $skillIncrease = _trainingEfficiency>>
+<<set _oralUse = 0, _analUse = 0, _vaginalUse = 0, _mammaryUse = 0, _penetrativeUse = 0>>
+
+<<if ($slaves[$i].toyHole != "all her holes")>>
+	<<if $slaves[$i].toyHole == "pussy">>
+		<<if !canDoVaginal($slaves[$i])>>
+			<<set $slaves[$i].toyHole = "all her holes">>
+		<</if>>
+	<<elseif $slaves[$i].toyHole == "ass">>
+		<<if !canDoAnal($slaves[$i])>>
+			<<set $slaves[$i].toyHole = "all her holes">>
+		<</if>>
+	<</if>>
+	<<if ($slaves[$i].toyHole == "pussy")>>
+		<<set _vaginalUse = random(5,10)>>
+		<<set $slaves[$i].vaginalCount += _vaginalUse>>
+		<<set $vaginalTotal += _vaginalUse>>
+		<<if $slaves[$i].fuckdoll == 0>>
+		<<if ($slaves[$i].trust < -20)>>
+			$pronounCap spends the week in terrified compliance with your use of $possessive pussy.
+		<<elseif ($slaves[$i].devotion < -20)>>
+			$pronounCap spends the week alternately struggling and lying corpselike as you use $possessive pussy.
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			$pronounCap spends the week reluctantly accepting your use of $possessive pussy.
+		<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "submissive")>>
+			$pronounCap spends the week as your adoring submissive, seeing to your pleasure with $possessive womanhood.
+		<<elseif ($slaves[$i].devotion <= 50)>>
+			$pronounCap spends the week obediently serving you in the classical way, taking you into $possessive womanhood.
+		<<else>>
+			$pronounCap spends the week serving you in the classical way,  warming your bed and lovingly taking you into $possessive womanhood.
+		<</if>>
+		<<if ($slaves[$i].trust > -20) && ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to fuck $object several times a day; the constant rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 5>>
+			<<set $slaves[$i].trust -= 15>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to fuck $object at least once a day; the regular rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 9>>
+			<<else>>
+			You have the sexual energy to fuck $object on occasion; the threat of rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 3>>
+			<</if>>
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to fuck $object several times a day; submitting to your constant use @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to fuck $object at least once a day; submitting to your regular use @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 2>>
+			<<else>>
+			You have the sexual energy to fuck $object on occasion; submitting to your use @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 1>>
+			<</if>>
+		<<else>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to fuck $object several times a day; constant, enjoyable sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 3>>
+			<<set $slaves[$i].trust += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to fuck $object several times a day; regular, enjoyable sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 2>>
+			<<set $slaves[$i].trust += 2>>
+			<<else>>
+			You have the sexual energy to fuck $object on occasion; enjoyable sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 1>>
+			<<set $slaves[$i].trust += 1>>
+			<</if>>
+		<</if>>
+		<<if ($slaves[$i].sexualFlaw == "hates penetration") && ($slaves[$i].devotion > 50)>>
+			The emotional closeness @@.green;resolves $possessive hatred of penetration.@@
+			<<set $slaves[$i].sexualFlaw = "none">>
+		<</if>>
+		<<if ($slaves[$i].vaginalSkill < 100)>>
+			After a lot of time spent having vanilla sex, $possessive vaginal skill improves.
+			<<VaginalSkillIncrease $slaves[$i]>>
+		<</if>>
+		<<if ($slaves[$i].fetishStrength <= 60) && (random(1,500) < 100+$slaves[$i].devotion)>>
+			<<set $slaves[$i].fetish = "submissive">>
+			<<set $slaves[$i].fetishKnown = 1>>
+			<<set $slaves[$i].fetishStrength = 10>>
+			$pronounCap climaxes with your strong hands holding $object and your cock spreading heat through $possessive core, teaching $object that @@.lightcoral;a girl's role is to please a man.@@
+		<</if>>
+		<</if>>
+
+	<<elseif ($slaves[$i].toyHole == "ass")>>
+		<<set _analUse = random(5,10)>>
+		<<set $slaves[$i].analCount += _analUse>>
+		<<set $analTotal += _analUse>>
+		<<if $slaves[$i].fuckdoll == 0>>
+		<<if ($slaves[$i].trust < -20)>>
+			$pronounCap spends the week in terrified compliance with your use of $possessive anus.
+		<<elseif ($slaves[$i].devotion < -20)>>
+			$pronounCap spends the week struggling and screaming as you sodomize $object.
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			$pronounCap spends the week writhing in pain as you sodomize $object.
+		<<elseif ($slaves[$i].devotion <= 50)>>
+			$pronounCap spends the week obediently submitting to your use of $possessive butthole.
+		<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "buttslut")>>
+			$pronounCap spends the week as your adoring anal slave, orgasming to the feel of you shooting your seed up $possessive ass.
+		<<else>>
+			$pronounCap spends the week warming your bed and devotedly serving your sexual needs with $possessive anus.
+		<</if>>
+		<<if ($slaves[$i].trust > -20) && ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to fuck $possessive butt several times a day; the constant anal rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 5>>
+			<<set $slaves[$i].trust -= 15>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to fuck $possessive butt at least once a day; the regular anal rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 9>>
+			<<else>>
+			You have the sexual energy to fuck $possessive butt on occasion; the threat of anal rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 3>>
+			<</if>>
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to fuck $possessive butt several times a day; constantly allowing you to penetrate $possessive anus @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to fuck $possessive butt at least once a day; regularly allowing you to penetrate $possessive anus @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 2>>
+			<<else>>
+			You have the sexual energy to fuck $possessive butt on occasion; allowing you to penetrate $possessive anus @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 1>>
+			<</if>>
+		<<else>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to fuck $possessive butt several times a day; constantly climaxing to your penetration of $possessive anus brings $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 3>>
+			<<set $slaves[$i].trust += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to fuck $possessive butt  several times a day; regularly climaxing to your penetration of $possessive anus brings $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 2>>
+			<<set $slaves[$i].trust += 2>>
+			<<else>>
+			You have the sexual energy to fuck $possessive butt on occasion; climaxing to your penetration of $possessive anus brings $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 1>>
+			<<set $slaves[$i].trust += 1>>
+			<</if>>
+		<</if>>
+		<<if ($slaves[$i].sexualFlaw == "hates anal") && ($slaves[$i].devotion > 50)>>
+			$pronounCap's devoted enough to derive emotional closeness from buttsex, which @@.green;resolves $possessive hatred of the act.@@
+			<<set $slaves[$i].sexualFlaw = "none">>
+		<</if>>
+		<<if ($slaves[$i].analSkill < 100)>>
+			After a lot of time spent getting buttfucked, $possessive anal skill improves.
+			<<AnalSkillIncrease $slaves[$i]>>
+		<</if>>
+		<<if ($slaves[$i].fetishStrength <= 60) && (random(1,500) < 100+$slaves[$i].devotion)>>
+			<<set $slaves[$i].fetishKnown = 1>>
+			<<set $slaves[$i].fetishStrength = 10>>
+			<<set $slaves[$i].fetish = "buttslut">>
+			After repeated anal orgasms, @@.lightcoral;$pronoun begins to crave $possessive next buttfuck.@@
+		<</if>>
+		<</if>>
+
+	<<elseif ($slaves[$i].toyHole == "mouth")>>
+		<<set _oralUse = random(5,10)>>
+		<<set $slaves[$i].oralCount += _oralUse>>
+		<<set $oralTotal += _oralUse>>
+		<<if $slaves[$i].fuckdoll == 0>>
+		<<if ($slaves[$i].trust < -20)>>
+			$pronounCap spends the week in terrified compliance with your use of $possessive <<if ($PC.dick == 1)>>throat<<else>>mouth<</if>>.
+		<<elseif ($slaves[$i].devotion < -20)>>
+			$pronounCap spends the week struggling and gagging as you <<if ($PC.dick == 1)>>throatfuck $object<<else>>ride $possessive face<</if>>.
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			$pronounCap spends the week reluctantly <<if ($PC.dick == 1)>>servicing your cock with $possessive mouth<<else>>licking your pussy<</if>>.
+		<<elseif ($slaves[$i].devotion <= 50)>>
+			$pronounCap spends the week obediently <<if ($PC.dick == 1)>>sucking your cock<<else>>eating you out<</if>>.
+		<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "cumslut")>>
+			$pronounCap spends the week as your adoring oral slave, orgasming to the <<if $PC.dick == 1>>feel of you shooting your seed down $possessive throat<<if $PC.vagina == 1>> and the <</if>><</if>><<if $PC.vagina == 1>>taste of your pussyjuice<</if>>.
+		<<else>>
+			$pronounCap spends the week warming your bed and lavishing devoted attention on your <<if $PC.dick == 1>>cock<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>pussy<</if>> with $possessive loving mouth.
+		<</if>>
+		<<if ($slaves[$i].trust > -20) && ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>rape $possessive face<<else>>force $object to eat you out<</if>> $object several times a day; the constant sexual abuse fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 5>>
+			<<set $slaves[$i].trust -= 15>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>rape $possessive face<<else>>force $object to eat you out<</if>> $object at least once a day; the regular sexual abuse fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 9>>
+			<<else>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>rape $possessive face<<else>>force $object to eat you out<</if>> $object on occasion; the threat of sexual abuse fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 3>>
+			<</if>>
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>use $possessive mouth<<else>>make $object eat you out<</if>> several times a day; constantly performing oral on you @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>use $possessive mouth<<else>>make $object eat you out<</if>> at least once a day; regularly performing oral on you @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 2>>
+			<<else>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>use $possessive mouth<<else>>make $object eat you out<</if>> on occasion; performing oral on you @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 1>>
+			<</if>>
+		<<else>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>get a blowjob<<if $PC.vagina == 1>> and some pussy licking<</if>> from $object<<else>>let $object eat you out<</if>> several times a day; constantly giving you pleasure brings $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 3>>
+			<<set $slaves[$i].trust += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>get a blowjob from $object<<else>>let $object eat you out<</if>> several times a day; regularly giving you pleasure brings $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 2>>
+			<<set $slaves[$i].trust += 2>>
+			<<else>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>get a blowjob<<if $PC.vagina == 1>> and some pussy licking<</if>> from $object<<else>>let $object eat you out<</if>> on occasion; giving you pleasure brings $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 1>>
+			<<set $slaves[$i].trust += 1>>
+			<</if>>
+		<</if>>
+		<<if ($slaves[$i].sexualFlaw == "hates oral") && ($slaves[$i].devotion > 50)>>
+			$pronounCap's devoted enough to derive emotional closeness from giving you oral, which @@.green;resolves $possessive hatred of the act.@@
+			<<set $slaves[$i].sexualFlaw = "none">>
+		<</if>>
+		<<if ($slaves[$i].behavioralFlaw == "hates men") && ($PC.dick == 1) && ($slaves[$i].devotion > 20)>>
+			Spending so much time in close proximity to your dick @@.green;reconciles $object to serving cocks.@@
+			<<set $slaves[$i].behavioralFlaw = "none">>
+		<</if>>
+		<<if ($slaves[$i].behavioralFlaw == "hates women") && ($PC.vagina == 1) && ($slaves[$i].devotion > 20)>>
+			Spending so much time in close proximity to your womanhood @@.green;reconciles $object to serving a pussy.@@
+			<<set $slaves[$i].behavioralFlaw = "none">>
+		<</if>>
+		<<if ($slaves[$i].oralSkill < 100)>>
+			After a lot of time spent sucking you off, $possessive oral skill improves.
+			<<OralSkillIncrease $slaves[$i]>>
+		<</if>>
+		<<if ($slaves[$i].fetishStrength <= 60) && (random(1,500) < 100+$slaves[$i].devotion)>>
+			<<set $slaves[$i].fetishKnown = 1>>
+			<<set $slaves[$i].fetishStrength = 10>>
+			<<set $slaves[$i].fetish = "cumslut">>
+			$pronounCap climaxes with <<if $PC.dick == 1>>your dick in $possessive mouth<<else>>$possessive mouth on your cunt<</if>>, learning that giving @@.lightcoral;blowjobs is a lot of fun.@@
+		<</if>>
+		<</if>>
+
+	<<elseif $slaves[$i].toyHole == "boobs">>
+		<<set _mammaryUse = random(5,10)>>
+		<<set $slaves[$i].mammaryCount += _mammaryUse>>
+		<<set $mammaryTotal += _mammaryUse>>
+		<<if $slaves[$i].fuckdoll == 0>>
+		<<if ($slaves[$i].trust < -20)>>
+			$pronounCap spends the week in terrified compliance with your use of $possessive breasts.
+		<<elseif ($slaves[$i].devotion < -20)>>
+			$pronounCap spends the week trying to keep $possessive tits away from your grasping hands.
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			$pronounCap spends the week reluctantly presenting $possessive tits for your use.
+		<<elseif ($slaves[$i].devotion <= 50)>>
+			$pronounCap spends the week obediently offering $possessive tits for your use.
+		<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "boobs")>>
+			$pronounCap spends the week moaning and shivering as you give it to $possessive where $pronoun likes it best: $possessive tits.
+		<<else>>
+			$pronounCap spends the week keeping $possessive tits in constant contact with you, giving you titjobs, resting them against you as you work, and serving as a comfortable pillow at bedtime.
+		<</if>>
+		<<if ($slaves[$i].trust > -20) && ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>cum on $possessive boobs<<else>>thoroughly grope $possessive boobs<</if>> $object several times a day; the constant sexual abuse fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 5>>
+			<<set $slaves[$i].trust -= 15>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>cum on $possessive boobs<<else>>thoroughly grope $possessive boobs<</if>> $object at least once a day; the regular sexual abuse fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 9>>
+			<<set $slaves[$i].trust -= 3>>
+			<<else>>
+			You have the sexual energy to <<if ($PC.dick == 1)>>cum on $possessive boobs<<else>>thoroughly grope $possessive boobs<</if>> $object on occasion; the threat of sexual abuse fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 3>>
+			<</if>>
+		<<elseif ($slaves[$i].devotion <= 20)>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to play with $possessive tits several times a day; constantly submitting to your games @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to play with $possessive tits at least once a day; regularly submitting to your games @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 2>>
+			<<else>>
+			You have the sexual energy to play with $possessive tits on occasion; submitting to your games @@.hotpink;habituates $object@@ to being your sex slave.
+			<<set $slaves[$i].devotion += 1>>
+			<</if>>
+		<<else>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to <<if ($PC.boobs == 1)>>have mutual mammary intercourse until you both orgasm to nipple stimulation<<else>>have mammary intercourse with $object<</if>> several times a day; constantly giving you pleasure @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 3>>
+			<<set $slaves[$i].trust += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to <<if ($PC.boobs == 1)>>have mutual mammary intercourse until you both orgasm to nipple stimulation<<else>>have mammary intercourse with $object<</if>> several times a day; regularly giving you pleasure @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 2>>
+			<<set $slaves[$i].trust += 2>>
+			<<else>>
+			You have the sexual energy to <<if ($PC.boobs == 1)>>have mutual mammary intercourse until you both orgasm to nipple stimulation<<else>>have mammary intercourse with $object<</if>> on occasion; giving you pleasure @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 1>>
+			<<set $slaves[$i].trust += 1>>
+			<</if>>
+		<</if>>
+		<<if ($slaves[$i].sexualFlaw == "hates oral") && ($slaves[$i].devotion > 50)>>
+			$pronounCap's devoted enough to derive emotional closeness from giving you oral, which @@.green;resolves $possessive hatred of the act.@@
+			<<set $slaves[$i].sexualFlaw = "none">>
+		<</if>>
+		<<if ($slaves[$i].behavioralFlaw == "hates men") && ($slaves[$i].devotion > 20)>>
+			Spending so much time in close proximity to your masculinity @@.green;reconciles $object to serving the male gender.@@
+			<<set $slaves[$i].behavioralFlaw = "none">>
+		<</if>>
+		<<if ($slaves[$i].fetishStrength <= 60) && (random(1,500) < 100+$slaves[$i].devotion)>>
+			<<set $slaves[$i].fetishKnown = 1>>
+			<<set $slaves[$i].fetishStrength = 10>>
+			<<set $slaves[$i].fetish = "boobs">>
+			$pronounCap climaxes to nipple stimulation alone, and starts acting as though $pronoun has @@.lightcoral;three pleasure buttons@@ rather than just one.
+		<</if>>
+		<</if>>
+	<</if>>
+
+<<else>>
+
+	<<if $slaves[$i].fuckdoll > 0>>
+		You keep $object with you all week, using it as your personal sex toy. When you're not using it, it <<if $activeSlave.amp > 0>>rests<<else>>stands<</if>> nearby, waiting silently.
+		<<set $slaves[$i].trust += 4>>
+
+	<<elseif ($slaves[$i].anus == 0) && ($slaves[$i].vagina == 0)>>
+		Since you haven't yet decided to sell or take $possessive virginity or $possessive tight little anus, you let $object please you with $possessive mouth. $pronounCap is @@.mediumaquamarine;duly grateful@@ you let $object keep $possessive innocence for another week, though $possessive throat gets a little sore doing the work of three holes.
+		<<set $slaves[$i].trust += 1>>
+
+	<<elseif ($slaves[$i].vagina == 0) && canDoVaginal($slaves[$i])>>
+		Since you haven't yet decided to sell or take $possessive virginity, but $pronoun's taken it up the ass, you let $object be your anal whore. $pronounCap is @@.mediumaquamarine;duly grateful@@ you let $possessive keep $possessive innocence for another week, though $possessive butt gets a little sore.
+		<<set $slaves[$i].trust += 1>>
+
+	<<elseif ($slaves[$i].anus == 0) && canDoAnal($slaves[$i])>>
+		Since you haven't yet decided to sell or take $possessive tight little anus, you let $object confine $possessive efforts to $possessive <<if canDoVaginal($slaves[$i])>>pussy and <</if>>mouth. $pronounCap is @@.mediumaquamarine;duly grateful@@ you let $object put off taking it up the butt another week.
+		<<set $slaves[$i].trust += 1>>
+
+	<<elseif !canWalk($slaves[$i])>>
+		You carry $object around with you all week, using $object as your personal sex toy and bedwarmer. <<if ($slaves[$i].amp == 1)>>Without arms and legs<<elseif $slaves[$i].heels == 1>>Immobilized by $possessive clipped heels<<else>>Immobilized by $possessive own tits<</if>>, $pronoun is your @@.hotpink;helpless sexual appliance@@ and is @@.mediumaquamarine;forced to trust you.@@
+		<<set $slaves[$i].trust += 4>>
+
+	<<elseif ($slaves[$i].devotion > 50)>>
+		$pronounCap devotedly accompanies you all week, keeping $possessive
+		<<if canDoAnal($slaves[$i]) && canDoVaginal($slaves[$i])>>
+			mouth, vagina and asshole
+		<<elseif ($slaves[$i].vagina == -1)>>
+			mouth and asshole
+		<<elseif ($slaves[$i].vaginalAccessory == "chastity belt") || ($slaves[$i].vaginalAccessory == "combined chastity") && canDoAnal($slaves[$i])>>
+			mouth and, since $possessive pussy is covered by $possessive chastity belt, asshole
+		<<else>>
+			mouth
+		<</if>>
+		available for you at all times.
+		<<if ($slaves[$i].dick != 0) && canAchieveErection($slaves[$i])>>
+			Every time $possessive beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>> fucks $object, $pronoun gets a hardon.
+		<<elseif ($slaves[$i].dick != 0) && canDoAnal($slaves[$i])>>
+			$pronounCap doesn't get a hardon as you use $object, but $pronoun comes from the prostate stimulation when $possessive beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>> uses $possessive butt.
+		<<elseif ($slaves[$i].dick != 0) && canDoVaginal($slaves[$i])>>
+			$pronounCap doesn't get a hardon as you use $object, but $pronoun comes from the prostate stimulation when $possessive beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>> uses $possessive pussy.
+			<<else>>
+			$pronounCap comes indecently hard whenever $possessive beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>> uses $possessive body.
+		<</if>>
+			<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+			You have the sexual energy to fuck $object several times a day; constant, loving sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 3>>
+			<<set $slaves[$i].trust += 3>>
+			<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+			You have the sexual energy to fuck $object several times a day; regular, loving sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 2>>
+			<<set $slaves[$i].trust += 2>>
+			<<else>>
+			You have the sexual energy to fuck $object on occasion; loving sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+			<<set $slaves[$i].devotion += 1>>
+			<<set $slaves[$i].trust += 1>>
+			<</if>>
+		<<set _acts = random(3,5)>>
+
+	<<elseif ($slaves[$i].devotion > 20)>>
+		Whenever you feel the need, you use whichever of $possessive available holes that appears most appealing at the moment, since $pronoun's up for anything.
+		<<if ($slaves[$i].dick != 0) && canAchieveErection($slaves[$i])>>
+			By the end of the week $pronoun gets a hardon when you use $object.
+		<</if>>
+		<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+		You have the sexual energy to fuck $object several times a day; constant, enjoyable sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+		<<set $slaves[$i].devotion += 3>>
+		<<set $slaves[$i].trust += 3>>
+		<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+		You have the sexual energy to fuck $object several times a day; regular, enjoyable sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+		<<set $slaves[$i].devotion += 2>>
+		<<set $slaves[$i].trust += 2>>
+		<<else>>
+		You have the sexual energy to fuck $object on occasion; enjoyable sex with you draws $object @@.hotpink;closer to you@@ and encourages $object to @@.mediumaquamarine;trust you.@@
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+		<</if>>
+
+	<<elseif ($slaves[$i].trust < -20)>>
+		$pronounCap is afraid of you and does $possessive best to offer you $possessive
+		<<if canDoAnal($slaves[$i]) && canDoVaginal($slaves[$i])>>
+			mouth, vagina and asshole
+		<<elseif ($slaves[$i].vagina == -1)>>
+			mouth and asshole
+		<<elseif ($slaves[$i].vaginalAccessory == "chastity belt") || ($slaves[$i].vaginalAccessory == "combined chastity") && canDoAnal($slaves[$i])>>
+			mouth and, since $possessive pussy is covered by $possessive chastity belt, asshole
+		<<else>>
+			mouth
+		<</if>>
+		to save herself from worse treatment than mere rape.
+		<<if ($slaves[$i].dick != 0) && canAchieveErection($slaves[$i])>>
+			By the end of the week $pronoun gets a hardon when you use $object.
+		<</if>>
+		<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+		You have the sexual energy to fuck $object several times a day; submitting to your constant use @@.hotpink;habituates $object@@ to being your sex slave.
+		<<set $slaves[$i].devotion += 3>>
+		<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+		You have the sexual energy to fuck $object at least once a day; submitting to your regular use @@.hotpink;habituates $object@@ to being your sex slave.
+		<<set $slaves[$i].devotion += 2>>
+		<<else>>
+		You have the sexual energy to fuck $object on occasion; submitting to your use @@.hotpink;habituates $object@@ to being your sex slave.
+		<<set $slaves[$i].devotion += 1>>
+		<</if>>
+
+	<<else>>
+		Whenever you feel the need, you grab $object and use whichever of $possessive available holes that appears most appealing at the moment.
+		<<if ($slaves[$i].dick != 0)>>
+			$possessiveCap dick stays limp as you rape $object.
+		<</if>>
+		<<if ($fuckSlaves <= $PC.sexualEnergy/2)>>
+		You have the sexual energy to fuck $object several times a day; the constant rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+		<<set $slaves[$i].devotion -= 5>>
+		<<set $slaves[$i].trust -= 15>>
+		<<elseif ($fuckSlaves <= $PC.sexualEnergy)>>
+		You have the sexual energy to fuck $object at least once a day; the regular rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+		<<set $slaves[$i].devotion -= 9>>
+		<<set $slaves[$i].trust -= 3>>
+		<<else>>
+		You have the sexual energy to fuck $object on occasion; the threat of rape fills $object with @@.mediumorchid;revulsion@@ and @@.gold;fear.@@
+		<<set $slaves[$i].devotion -= 3>>
+		<<set $slaves[$i].trust -= 3>>
+		<</if>>
+	<</if>>
+
+	<<set _acts = random(5,10)>>
+	<<set _oralUse = 1>>
+	<<if canDoAnal($slaves[$i])>><<set _analUse = 1>><</if>>
+	<<if canDoVaginal($slaves[$i])>><<set _vaginalUse = 1>><</if>>
+	<<set _mammaryUse = random(0,1)>>
+	<<set _demand = _oralUse+_analUse+_vaginalUse+_mammaryUse>>
+	<<set _oralUse = Math.trunc((_oralUse/_demand)*_acts)>>
+	<<set _analUse = Math.trunc((_analUse/_demand)*_acts)>>
+	<<set _vaginalUse = Math.trunc((_vaginalUse/_demand)*_acts)>>
+	<<set _mammaryUse = Math.trunc((_mammaryUse/_demand)*_acts)>>
+	<<set $slaves[$i].oralCount += _oralUse, $oralTotal += _oralUse>>
+	<<set $slaves[$i].analCount += _analUse, $analTotal += _analUse>>
+	<<set $slaves[$i].vaginalCount += _vaginalUse, $vaginalTotal += _vaginalUse>>
+	<<set $slaves[$i].mammaryCount += _mammaryUse, $mammaryTotal += _mammaryUse>>
+
+	<<if $slaves[$i].fuckdoll == 0>>
+	<<if ($slaves[$i].health < 0) && (random(1,100) > 50)>>
+		Under your personal supervision, @@.green;$possessive health improves@@.
+		<<set $slaves[$i].health += 10>>
+	<</if>>
+	<<if ($slaves[$i].oralSkill < 100)>>
+		After a lot of time spent with <<if $PC.dick == 1>>your dick in $possessive mouth<<else>>$possessive mouth on your cunt<</if>>, $possessive oral skill improves.
+		<<OralSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].vaginalSkill < 100) && ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+		After a lot of time spent getting fucked, $possessive vaginal skill improves.
+		<<VaginalSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].analSkill < 100) && ($slaves[$i].anus != 0) && canDoAnal($slaves[$i])>>
+		After a lot of time spent taking it up the ass, $possessive anal skill improves.
+		<<AnalSkillIncrease $slaves[$i]>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].need>>
+	<<if $slaves[$i].energy > 95 && $masterSuiteUpgradeLuxury == 2 && $fuckSlaves > 1>>
+		She's a nymphomaniac and very difficult to sate, but the fuckpit allows her all the sex even she could ever want.
+		<<set $slaves[$i].need = 0>>
+	<<elseif $slaves[$i].devotion > 95>>
+		She's so devoted to you that any intimacy with you at all gives her sexual satisfaction.
+		<<set $slaves[$i].need = 0>>
+	<<elseif $slaves[$i].fetishKnown>>
+		<<switch $slaves[$i].fetish>>
+		<<case "submissive" "masochist">>
+			<<if _analUse+_vaginalUse > 0>>
+				She got tremendous sexual satisfaction from the <<print _analUse+_vaginalUse>> times you really fucked her this week.
+				<<set $slaves[$i].need = 0>>
+			<</if>>
+		<<case "dom" "sadist">>
+		<<case "cumslut">>
+			<<if _oralUse > 0>>
+				She got tremendous sexual satisfaction from the _oralUse times you fucked her face this week.
+				<<set $slaves[$i].need = 0>>
+			<</if>>
+		<<case "buttslut">>
+			<<if _analUse > 0>>
+				She got tremendous sexual satisfaction from the _analUse times you fucked her ass this week.
+				<<set $slaves[$i].need = 0>>
+			<</if>>
+		<<case "pregnancy">>
+			<<if _vaginalUse > 0>>
+				She got tremendous sexual satisfaction from the _vaginalUse times you fucked her pussy this week.
+				<<set $slaves[$i].need = 0>>
+			<</if>>
+		<<case "humiliation">>
+		<</switch>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].relation != 0)>>
+	<<set _spy = $slaves.findIndex(function(s) { return s.ID == $slaves[$i].relationTarget && s.assignment == "please you"; })>>
+	<<if _spy != -1>>
+		Since you are also keeping $possessive $slaves[_spy].relation as a sexual servant, you often use them together, which leaves quite a public impression.
+	<</if>>
+<</if>>
+
+<<FResult $slaves[$i]>>
+<<Beauty $slaves[$i]>>
+
+<<set _multiplier = 0.1>>
+<<if $slaves[$i].relationship == -2>>
+	<<set _multiplier += 0.04>>
+<<elseif $slaves[$i].relationship == -3>>
+	<<set _multiplier += 0.06>>
+<</if>>
+<<if $slaves[$i].prestige > 0>>
+	<<set _multiplier += 0.03*$slaves[$i].prestige>>
+<</if>>
+<<if ($slaves[$i].ID == $Concubine.ID)>>
+	<<set _multiplier += 0.05>>
+<<elseif ($slaves[$i].ID == $HeadGirl.ID) && ($arcologies[0].FSEgyptianRevivalistLaw == 1)>>
+	<<set _multiplier += 0.05>>
+<</if>>
+
+<<set _repGain = Math.trunc(($beauty*$FResult)*_multiplier)>>
+<<set $repGain += _repGain>>
+<<set $lastWeeksFinances.incomeFucktoy += _repGain>>
+
+Keeping $object as nothing but your personal
+<<if ($slaves[$i].toyHole == "pussy")>>
+	pussy toy
+<<elseif ($slaves[$i].toyHole == "ass")>>
+	anal toy
+<<elseif ($slaves[$i].toyHole == "mouth")>>
+	oral toy
+<<elseif ($slaves[$i].devotion <= 20)>>
+	rapebait
+<<else>>
+	fucktoy
+<</if>>
+<<if ($slaves[$i].prestige > 0)>>
+	@@.green;adds considerably to your reputation,@@ since $pronoun's prestigious.
+<<else>>
+	@@.green;adds slightly to your reputation@@ as a prosperous citizen.
+<</if>>
+
+<<if $slaves[$i].fuckdoll == 0>>
+<<if $slaves[$i].relationship == -2>>
+	$possessiveCap satisfaction with $possessive place near you is obvious, @@.green;bringing attention@@ to how completely you've broken $object.
+<<elseif $slaves[$i].relationship == -3>>
+	$possessiveCap satisfaction with $possessive wifely duties is obvious, @@.green;bringing attention@@ to the slave future you're building.
+<</if>>
+<<if ($slaves[$i].behavioralQuirk == "confident")>>
+	$slaves[$i].slaveName @@.mediumaquamarine;confidently enjoys@@ the prestige within the slave hierarchy that comes with being your fucktoy.
+	<<set $slaves[$i].trust += 1>>
+<<elseif ($slaves[$i].behavioralQuirk == "insecure")>>
+	$slaves[$i].slaveName @@.mediumaquamarine;constantly reassures herself@@ that $pronoun must be pretty, since you keep $object as a fucktoy.
+	<<set $slaves[$i].trust += 1>>
+<</if>>
+<<if ($slaves[$i].behavioralQuirk == "adores men")>>
+	<<if ($PC.dick == 1)>>
+	$slaves[$i].slaveName @@.hotpink;adores your company,@@ and is happy to spend time with you, even when you don't have your cock in $object.
+	<<set $slaves[$i].devotion += 1>>
+	<</if>>
+<<elseif ($slaves[$i].behavioralQuirk == "adores women")>>
+	<<if ($PC.vagina == 1)>>
+	$slaves[$i].slaveName @@.hotpink;adores your company,@@ and is happy to spend time with you, even when you aren't fucking.
+	<<set $slaves[$i].devotion += 1>>
+	<</if>>
+<<elseif ($slaves[$i].sexualQuirk == "romantic")>>
+	$slaves[$i].slaveName knows being part of your harem is the best romance $pronoun can realistically expect, and does $possessive best to @@.mediumaquamarine;be content@@ with it.
+	<<set $slaves[$i].trust += 1>>
+<</if>>
+<</if>>

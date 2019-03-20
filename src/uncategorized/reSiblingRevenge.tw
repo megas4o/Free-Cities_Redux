@@ -1,0 +1,62 @@
+:: RE sibling revenge [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check">>
+
+<<set $i = $slaves.findIndex(function(s) { return s.ID == $youngerSister.ID; })>>
+<<set $j = $slaves.findIndex(function(s) { return s.ID == $olderSister.ID; })>>
+
+$youngerSister.slaveName, whose older sister tried to sell her to you, is up for inspection. As usual, you pepper your inspection with questions about her duties, her feelings about her physical condition, and experiences. More information about one's property is never a bad thing. When the inspection reaches $youngerSister.slaveName's asshole, you ask whether she enjoyed having her older sister sell her butt.
+
+"No, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>," she says.
+
+<br><br>
+
+<span id="result">
+<br><<link "Turnabout is fair play">>
+	<<replace "#result">>
+	$olderSister.slaveName is brought in. You gag her, throw the resisting bitch down on the couch, and hold her there. Then, you peremptorily order the wide-eyed $youngerSister.slaveName to <<if canDoAnal($olderSister)>>sodomize<<else>>face-fuck<</if>> her sister. She stares open mouthed for a moment, but comes over obediently. Her face is a strange mix of vengeful eagerness, revulsion, and even a little lust. She shoves herself into the frantically struggling girl's <<if canDoAnal($olderSister)>>butt<<else>>jaw<</if>> without mercy. Her cock is pathetically small, but by how $olderSister.slaveName reacts it might as well be a baseball bat. $youngerSister.slaveName rarely gets to penetrate anything, mostly serving as an oral slut<<if canDoAnal($youngerSister)>> and anal cocksleeve<</if>>, so she comes in no time and takes a turn holding $olderSister.slaveName down <<if canDoAnal($olderSister)>>so you can claim sloppy seconds on her spasming butthole<</if>>.
+	@@.hotpink;$youngerSister.slaveName has become more devoted to you,@@ while $olderSister.slaveName @@.mediumorchid;hates you@@ and has become @@.gold;more afraid of you,@@<<if canDoAnal($olderSister)>> and @@.lime;$olderSister.slaveName has lost her anal virginity.@@<<else>>.<</if>>
+	<<set $slaves[$i].devotion += 4>>
+	<<set $slaves[$i].penetrativeCount += 1>>
+	<<set $penetrativeTotal += 1>>
+
+	<<set $slaves[$j].trust -= 5>>
+	<<set $slaves[$j].devotion -= 4>>
+	<<if canDoAnal($olderSister)>>
+		<<set $slaves[$j].anus = 1>>
+		<<set $slaves[$j].analCount += 1>>
+		<<set $analTotal += 1>>
+	<<else>>
+		<<set $slaves[$j].oralCount += 1>>
+		<<set $oralTotal += 1>>
+	<</if>>
+	<</replace>>
+<</link>>
+<br><<link "Let her have her revenge, but remind her of her place">>
+	<<replace "#result">>
+	$olderSister.slaveName is brought in. You gag her, throw the resisting bitch down on the couch, and hold her there. Then, you peremptorily order the wide-eyed $youngerSister.slaveName to put her cock <<if canDoAnal($olderSister)>>up her sister's ass<<else>>in her sister's mouth<</if>>, and then hold it there. She stares open mouthed for a moment, but comes over obediently. Her face is a strange mix of vengeful eagerness, revulsion, and even a little lust. She shoves herself into the frantically struggling girl's <<if canDoAnal($olderSister)>>butt<<else>>jaw<</if>> without mercy. Her cock is pathetically small, but by how $olderSister.slaveName reacts it might as well be a baseball bat. $youngerSister.slaveName obeys your orders and holds still after inserting herself. You<<if $PC.dick == 0>> don a strap-on,<</if>> move around <<if canDoAnal($youngerSister)>>behind her and start ass<<else>>in front of her and start face-<</if>>fucking her in turn, slowly permitting her to find a rhythm where she can fuck and get fucked at the same time. She's getting it much harder than she's giving it but she's experienced enough that she comes quickly.
+	@@.hotpink;$youngerSister.slaveName has become more devoted to you,@@ while @@.mediumorchid;$olderSister.slaveName has become more rebellious,@@<<if canDoAnal($olderSister)>> and @@.lime;$olderSister.slaveName has lost her anal virginity.@@<<else>>.<</if>>
+	<<set $slaves[$i].devotion += 4>>
+	<<if canDoAnal($youngerSister)>>
+		<<set $slaves[$i].analCount += 1>>
+		<<set $analTotal += 1>>
+	<<else>>
+		<<set $slaves[$i].oralCount += 1>>
+		<<set $oralTotal += 1>>
+	<</if>>
+	<<set $slaves[$i].penetrativeCount += 1>>
+	<<set $penetrativeTotal += 1>>
+
+	<<set $slaves[$j].devotion -= 5>>
+	<<if canDoAnal($olderSister)>>
+		<<set $slaves[$j].anus = 1>>
+		<<set $slaves[$j].analCount += 2>>
+		<<set $analTotal += 2>>
+	<<else>>
+		<<set $slaves[$j].oralCount += 2>>
+		<<set $oralTotal += 2>>
+	<</if>>
+	<</replace>>
+<</link>>
+</span>
+

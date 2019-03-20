@@ -1,0 +1,249 @@
+:: description widgets [widget nobr]
+
+<<widget "MainLinks">>
+
+<center>
+<<switch $personalAttention>>
+<<case "business">>You plan to focus on business this week.
+<<case "HG">>You plan to support your Head Girl this week, so $pronoun can give more slaves $possessive attention.
+<<case "sex">>You plan to have as much sex with your slaves as possible this week.
+<<case "trading">>This week you will learn trading.
+<<case "warfare">>This week you will learn modern combat tactics.
+<<case "slaving">>This week you will learn slaving.
+<<case "engineering">>This week you will learn engineering.
+<<case "medicine">>This week you will learn medicine.
+<<default>>
+	<<if _PA > -1>>
+		You plan to train ''__@@.pink;<<SlaveFullName $slaves[_PA]>>@@__'' to $trainingRegimen this week.
+	<</if>>
+<</switch>>
+
+<span id="managePA"><strong><<link "Change plans">><<goto "Personal Attention Select">><</link>></strong></span> @@.cyan;[A]@@
+
+	<br>
+	<<if _HG > -1>>
+		''__@@.pink;<<SlaveFullName $HeadGirl>>@@__'' is <<if ndef $headGirlFocus>>serving as your head girl<<if $arcologies[0].FSEgyptianRevivalistLaw == 1>> and Consort<</if>>.<<else>>your head girl<<if $arcologies[0].FSEgyptianRevivalistLaw == 1>> and Consort,<</if>> and is focusing on your slaves' $headGirlFocus.<</if>>
+		<span id="manageHG"><strong><<link "Manage Head Girl">><<goto "HG Select">><</link>></strong></span> @@.cyan;[H]@@
+		<<set $showOneSlave = "Head Girl">>
+	<<elseif (_HG == -1) && ($slaves.length > 1)>>
+		You have @@.red;not@@ selected a Head Girl<<if $arcologies[0].FSEgyptianRevivalistLaw == 1>> and Consort<</if>>. <span id="manageHG"><strong><<link "Select one">><<goto "HG Select">><</link>></strong></span> @@.cyan;[H]@@
+	<<elseif (_HG == -1)>>
+		//You do not have enough slaves to keep a Head Girl//
+	<</if>>
+	<br>
+	<<if _RC > -1>>
+		''__@@.pink;<<SlaveFullName $Recruiter>>@@__'' is working
+		<<if $recruiterTarget != "other arcologies">>
+			to recruit girls.
+		<<else>>
+			as a Sexual
+			<<if $arcologies[0].influenceTarget == -1>>
+				Ambassador,  but @@.red;she has no target to influence.@@
+			<<else>>
+				Ambassador to <<for $i = 0; $i < $arcologies.length; $i++>><<if $arcologies[$i].direction == $arcologies[0].influenceTarget>>$arcologies[$i].name<<break>><</if>><</for>>.
+			<</if>>
+		<</if>>
+		<span id="manageRecruiter"><strong><<link "Manage Recruiter">><<goto "Recruiter Select">><</link>></strong></span> @@.cyan;[U]@@
+		<<set $showOneSlave = "recruit girls">>
+	<<else>>
+		You have @@.red;not@@ selected a Recruiter.
+		<span id="manageRecruiter"><strong><<link "Select one">><<goto "Recruiter Select">><</link>></strong></span> @@.cyan;[U]@@
+	<</if>>
+	<<if ($dojo != 0)>>
+		<br>
+		<<if _BG > -1>>
+			''__@@.pink;<<SlaveFullName $Bodyguard>>@@__'' is serving as your bodyguard. <span id="manageBG"><strong><<link "Manage Bodyguard">><<goto "BG Select">><</link>></strong></span> @@.cyan;[B]@@
+			<<set $showOneSlave = "guard you">>
+		<<else>>
+			You have @@.red;not@@ selected a Bodyguard. <span id="manageBG"><strong><<link "Select one">><<goto "BG Select">><</link>></strong></span> @@.cyan;[B]@@
+		<</if>>
+	<</if>>
+
+<<if $organsCompleted > 0>>
+<<for _dwj = 0; _dwj < $organs.length; _dwj++>>
+	<<set _validHost = 0>>
+	<<set $dumped = 0>>
+	<<for _dwi = 0; _dwi < $slaves.length; _dwi++>>
+		<<set _Slave = $slaves[_dwi]>>
+		<<if ($organs[_dwj] != 0) && ($organs[_dwj].ID == _Slave.ID)>>
+			<<set _validHost = 1>>
+			<<if ($organs[_dwj].weeksToCompletion <= 0)>>
+				<br>@@.yellow;The fabricator has completed an organ for@@ <span id="name"><<print "[[_Slave.slaveName|Slave Interact][$activeSlave = $slaves[" + _dwi + "]]]">></span>, @@.yellow; which is ready to be implanted.@@
+			<</if>>
+		<</if>>
+	<</for>>
+	<<if _validHost == 0>>
+		<<set $dump = $organs.deleteAt(_dwj), _dwj-->>
+	<</if>>
+<</for>>
+<</if>>
+<<if $limbsCompleted > 0>>
+<<for _dwj = 0; _dwj < $limbs.length; _dwj++>>
+	<<set _validHost = 0>>
+	<<set $dumped = 0>>
+	<<for _dwi = 0; _dwi < $slaves.length; _dwi++>>
+		<<set _Slave = $slaves[_dwi]>>
+		<<if ($limbs[_dwj] != 0) && ($limbs[_dwj].ID == _Slave.ID)>>
+			<<set _validHost = 1>>
+			<<if ($limbs[_dwj].weeksToCompletion <= 0)>>
+				<br>@@.yellow;The facility has completed a set of limbs for@@ <span id="name"><<print "[[_Slave.slaveName|Slave Interact][$activeSlave = $slaves[" + _dwi + "]]]">></span>, @@.yellow; which is ready to be attached.@@
+			<</if>>
+		<</if>>
+	<</for>>
+	<<if _validHost == 0>>
+		<<set $dump = $limbs.deleteAt(_dwj), _dwj-->>
+	<</if>>
+<</for>>
+<</if>>
+<<if ($organsCompleted > 0) && ($limbsCompleted > 0)>>
+	<br>[[Implant and Attach|Multiple Organ Implant]] @@.yellow;all organs and limbs that are ready.@@
+<<elseif ($organsCompleted > 0)>>
+	<br>[[Implant|Multiple Organ Implant]] @@.yellow;all organs that are ready for implantation.@@
+<<elseif ($limbsCompleted > 0)>>
+	<br>[[Attach|Multiple Organ Implant]] @@.yellow;all sets of limbs that are ready to be attached.@@
+<</if>>
+<br>
+<<if ($slaveCostFactor > 1.05)>>
+	@@.yellow;There is a bull market for slaves; the price of slaves is very high.@@
+<<elseif ($slaveCostFactor > 1)>>
+	@@.yellow;The slave market is bullish; the price of slaves is high.@@
+<<elseif ($slaveCostFactor < 0.95)>>
+	@@.yellow;There is a bear market for slaves; the price of slaves is very low.@@
+<<elseif ($slaveCostFactor < 1)>>
+	@@.yellow;The slave market is bearish; the price of slaves is low.@@
+<<else>>
+	The slave market is stable; the price of slaves is average.
+<</if>>
+<span id="buySlaves"><strong><<link "Buy Slaves">><<goto "Buy Slaves">><</link>></strong></span> @@.cyan;[S]@@
+	<<if $TSS.schoolSale != 0>>
+		<br>@@.yellow;For your first purchase, @@<strong>[[The Slavegirl School][$slavesSeen += 1]]</strong>@@.yellow; will sell at half price this week.@@
+	<</if>>
+	<<if $GRI.schoolSale != 0>>
+		<br>@@.yellow;For your first purchase, @@<strong>[[Growth Research Institute][$slavesSeen += 1]]</strong>@@.yellow; will sell at half price this week.@@
+	<</if>>
+	<<if $SCP.schoolSale != 0>>
+		<br>@@.yellow;For your first purchase, @@<strong>[[St. Claver Preparatory][$slavesSeen += 1]]</strong>@@.yellow; will sell at half price this week.@@
+	<</if>>
+	<<if ($seeDicks != 0)>>
+		<<if $LDE.schoolSale != 0>>
+			<br>@@.yellow;For your first purchase, @@<strong>[[L'école des Enculées][$slavesSeen += 1]]</strong>@@.yellow; will sell at half price this week.@@
+		<</if>>
+		<<if $TGA.schoolSale != 0>>
+			<br>@@.yellow;For your first purchase, @@<strong>[[The Gymnasium-Academy][$slavesSeen += 1]]</strong>@@.yellow; will sell at half price this week.@@
+		<</if>>
+		<<if $TFS.schoolSale != 0>>
+			<br>@@.yellow;For your first purchase, @@<strong>[[The Futanari Sisters][$slavesSeen += 1]]</strong>@@.yellow; will sell at half price this week.@@
+		<</if>>
+	<</if>>
+</center>
+
+<</widget>>
+
+
+
+<<widget "FlowerDesc">>
+
+<<if $activeSlave.dick > 0 && $activeSlave.balls == 0>>
+	a white orchid, its black stamen stiffly erect.
+<<elseif $activeSlave.dick > 0>>
+	a morning glory, light around its edges with a puckered pink center.
+<<elseif $activeSlave.addict > 5>>
+	a large poppy, its pod glistening with black opiate juice.
+<<elseif $activeSlave.vagina == 0>>
+	a white lily, pure and unspoiled.
+<<elseif $activeSlave.pregType > 3>>
+	a pink lotus, beautiful and fertile.
+<<elseif $activeSlave.energy > 95>>
+	a flamboyant tiger lily.
+<<elseif $activeSlave.age > 40>>
+	an elegant, mature orchid.
+<<elseif $activeSlave.age < 20>>
+	an innocent little peony.
+<<elseif $activeSlave.boobs > 2000>>
+	a huge round sunflower.
+<<else>>
+	a nice red rose.
+<</if>>
+
+<</widget>>
+
+
+<<widget "ImageDesc">>
+
+<<if $activeSlave.dick > 0 && $activeSlave.balls == 0>>
+	sodomy.
+<<elseif $activeSlave.dick > 0>>
+	stiff pricks.
+<<elseif $activeSlave.oralSkill >= 100>>
+	oral sex.
+<<elseif $activeSlave.boobs > 1000>>
+	boobs.
+<<elseif $activeSlave.vagina == -1>>
+	sodomy.
+<<else>>
+	pussies.
+<</if>>
+
+<</widget>>
+
+
+<<widget "InscripDesc">>
+
+"I <3
+<<if ($activeSlave.fetishKnown == 1)>>
+	<<switch $activeSlave.fetish>>
+		<<case "buttslut">>
+			Buttsex!"
+		<<case "cumslut">>
+			Cum!"
+		<<case "masochist" "sadist">>
+			Rape!"
+		<<case "dom">>
+			Topping!"
+		<<case "submissive">>
+			Subbing!"
+		<<case "boobs">>
+			Tits!"
+		<<case "pregnancy">>
+			Sperm!"
+		<<default>>
+			<<if ($activeSlave.energy > 95)>>
+				Cock!"
+			<<elseif ($PC.title == 0)>>
+				Mistress!"
+			<<else>>
+				Master!"
+			<</if>>
+		<</switch>>
+<<elseif ($PC.title == 0)>>
+	Mistress!"
+<<else>>
+	Master!"
+<</if>>
+
+<</widget>>
+
+
+<<widget "SlavePronouns">>
+
+<<if $args[0].fuckdoll > 0>>
+	<<set $pronoun = "it", $pronounCap = "It", $possessive = "its", $possessiveCap = "Its", $object = "it">>
+<<else>>
+	<<set $pronoun = "she", $pronounCap = "She", $possessive = "her", $possessiveCap = "Her", $object = "her">>
+<</if>>
+
+<</widget>>
+
+
+<<widget "brandDescription">>
+
+<<if ($activeSlave.brand != 0)>>
+	<<set $bellyAccessory = $activeSlave.bellyAccessory>>
+	<<if setup.fakeBellies.includes($bellyAccessory) && ($activeSlave.brandLocation == "belly")>>
+		$possessiveCap fake belly has $activeSlave.brand branded on it.
+	<<else>>
+		$pronounCap has $activeSlave.brand branded into the flesh of $possessive $activeSlave.brandLocation.
+	<</if>>
+<</if>>
+
+<</widget>>

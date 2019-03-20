@@ -1,0 +1,14 @@
+:: HG Workaround [silently]
+
+<<if $HeadGirl != 0>>
+	<<removeJob $HeadGirl "be your Head Girl">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be your Head Girl">>
+	<<set $HeadGirl = $slaves[$i]>>
+<</if>>
+
+<<set $HGTimeInGrade = 0>>
+
+<<goto "Main">>
+

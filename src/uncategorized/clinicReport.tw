@@ -1,0 +1,242 @@
+:: Clinic Report [nobr]
+
+<<SlaveSort $CliniciIDs>>
+<<set _DL = $CliniciIDs.length, $clinicSlaves = _DL, _healthBonus = 0, _idleBonus = 0, _FLsFetish = 0, _restedSlaves = 0>>
+
+<<if $clinicDecoration != "standard">>
+	<<set _devBonus = 1>>
+<<else>>
+	<<set _devBonus = 0>>
+<</if>>
+
+<<if $Nurse != 0>>
+	<<set _FLs = $slaves.findIndex(function(s) { return s.ID == $Nurse.ID; })>>
+
+	<<if ($slaves[_FLs].health < 100)>>
+		<<set $slaves[_FLs].health += 20>>
+	<</if>>
+	<<if ($slaves[_FLs].devotion <= 60)>>
+		<<set $slaves[_FLs].devotion++>>
+	<</if>>
+	<<if $slaves[_FLs].trust < 60>>
+		<<set $slaves[_FLs].trust++>>
+	<</if>>
+	<<set $slaves[_FLs].devotion += _devBonus>>
+	<<if $slaves[_FLs].fetishStrength <= 95>>
+		<<if $slaves[_FLs].fetish != "dom">>
+			<<fetishChangeChance $slaves[_FLs]>>
+			<<if $fetishChangeChance > random(0,100)>>
+				<<set _FLsFetish = 1, $slaves[_FLs].fetishKnown = 1, $slaves[_FLs].fetish = "dom">>
+			<</if>>
+		<<elseif $slaves[_FLs].fetishKnown == 0>>
+			<<set _FLsFetish = 1, $slaves[_FLs].fetishKnown = 1>>
+		<<else>>
+			<<set _FLsFetish = 2, $slaves[_FLs].fetishStrength += 4>>
+		<</if>>
+	<</if>>
+	<<set $Nurse = $slaves[_FLs]>>
+	&nbsp;&nbsp;&nbsp;&nbsp;$Nurse.slaveName is serving as the clinical nurse.
+	<<if $Nurse.relationship == -3>>
+		She does her best to be a caring and nurturing wife.
+		<<set _healthBonus += 2>>
+	<</if>>
+	<<if (_FLsFetish == 1)>>
+		Her job involves giving naked sex slaves orders for their own good. Even though most of these commands are medical rather than sexual, she can be forgiven for not always seeing the difference, and @@.lightsalmon;becomes more dominant.@@
+	<<elseif (_FLsFetish == 2)>>
+		Every new patient in the clinic is a new target for her authority. @@.lightsalmon;She becomes more dominant.@@
+	<</if>>
+	<<if setup.nurseCareers.includes($Nurse.career)>>
+		She has experience with medicine from her life before she was a slave, and can often recognize conditions before even the medical scanners can.
+		<<set _idleBonus++, _healthBonus++>>
+	<</if>>
+	<<if ($Nurse.fetish == "dom")>>
+		She raps out commands with the confidence of long and partly sexual experience, so patients are inclined to follow even unpleasant medical instructions.
+		<<set _idleBonus++, _healthBonus++>>
+	<</if>>
+	<<if ($Nurse.muscles > 5)>>
+		She's strong enough to gently but firmly restrain resistant slaves, allowing her to be sparing with the inescapable but less healthy restraints.
+		<<set _idleBonus++>>
+	<</if>>
+	<<if ($Nurse.intelligence > 1)>>
+		The diagnostic equipment is state-of-the-art, but she's smart and perceptive enough that on occasion, she can add meaningfully to its medical scans.
+		<<set _idleBonus++, _healthBonus++>>
+	<</if>>
+	<<if ($Nurse.face > 40)>>
+		Patients rarely object to seeing her gorgeous face hovering over them.
+		<<set _idleBonus++, _devBonus++>>
+	<</if>>
+	<<if ($Nurse.muscles > 5) || ($slaves[_FLs].devotion >= 60)>>
+		<<set _healthBonus++>>
+	<</if>>
+	<<for _dI = 0; _dI < _DL; _dI++>>
+		<<set $i = $slaveIndices[$CliniciIDs[_dI]]>>
+		<<if $Nurse.rivalryTarget == $slaves[$i].ID>>
+			She purposefully neglects the needs of her <<if $Nurse.rivalry == 1>>growing rival<<elseif $Nurse.rivalry == 2>>rival<<elseif $Nurse.rivalry == 3>>bitter rival<</if>>, $slaves[$i].slaveName, hindering her recovery and deepening their dislike for each other.
+			<<set $slaves[$i].devotion--, $slaves[$i].trust--, $slaves[$i].health -= 3>>
+			<<if random(1,100) > 65>>
+				<<set $Nurse.rivalry++, $slaves[_FLs].rivalry++, $slaves[$i].rivalry++>>
+			<</if>>
+		<<elseif $Nurse.relationshipTarget == $slaves[$i].ID>>
+			She dedicates most of her attention to her <<if $Nurse.relationship == 1>>friend<<elseif $Nurse.relationship == 2>>best friend<<elseif $Nurse.relationship == 3>>friend with benefits<<elseif $Nurse.relationship == 4>>lover<<elseif $Nurse.relationship == 5>>slave wife<</if>>, $slaves[$i].slaveName, making sure she has everything she needs and more.  This lavish attention detracts from her overall effectiveness.
+			<<set _idleBonus -= 3, $slaves[$i].devotion++, $slaves[$i].trust++, $slaves[$i].health += 3>>
+		<<elseif $Nurse.relationTarget == $slaves[$i].ID>>
+			She makes sure to spend extra time caring for her $slaves[$i].relation, $slaves[$i].slaveName.
+			<<set $slaves[$i].trust++, $slaves[$i].health++>>
+		<</if>>
+		<<switch $slaves[$i].prestigeDesc>>
+		<<case "She is a famed Free Cities whore, and commands top prices.">>
+			She does her best to aid the famous whore, $slaves[$i].slaveName, making sure to pay special attention to her worn holes.
+			<<set $slaves[$i].health += 2>>
+		<<case "She is a famed Free Cities slut, and can please anyone.">>
+			She does her best to aid the famous entertainer, $slaves[$i].slaveName, making sure she can show off as soon as possible.
+			<<set $slaves[$i].health += 2>>
+		<<case "She is remembered for winning best in show as a cockmilker.">>
+			<<if ($slaves[$i].balls > 4) && ($slaves[$i].dick != 0)>>
+				She does her best to aid the dribbling $slaves[$i].slaveName, paying special attention to her huge cock and balls as well as making sure to milk her erect dick hourly.
+				<<set $slaves[$i].health += 4>>
+				<<if (random(1,100) > 65) && (($Nurse.fetish == "none") || ($Nurse.fetish == "cumslut"))>>
+					<<if $Nurse.fetish == "none">>
+						<<set $Nurse.fetish = "cumslut", $slaves[_FLs].fetish = "cumslut">>
+					<<else>>
+						<<set $Nurse.fetishStrength += 4, $slaves[_FLs].fetishStrength += 4>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<<case "She is remembered for winning best in show as a dairy cow.">>
+			<<if ($slaves[$i].lactation > 0) && (($slaves[$i].boobs-$slaves[$i].boobsImplant) > 6000)>>
+				She does her best to aid the leaking $slaves[$i].slaveName, paying special attention to her huge breasts as well as making sure to milk her hourly.
+				<<set $slaves[$i].health += 4>>
+				<<if (random(1,100) > 65) && (($Nurse.fetish == "none") || ($Nurse.fetish == "boobs"))>>
+					<<if $Nurse.fetish == "none">>
+						<<set $Nurse.fetish = "boobs", $slaves[_FLs].fetish = "boobs">>
+					<<else>>
+						<<set $Nurse.fetishStrength += 4, $slaves[_FLs].fetishStrength += 4>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</switch>>
+	<</for>>
+	<<if (_DL < 5)>>
+		<<set _seed = random(1,10)+((5-_DL)*(random(150,170)+(_idleBonus*10)))>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;Since she doesn't have enough girls to occupy all her time, the clinic takes in citizens' slaves on a contract basis and she helps them too, earning @@.yellowgreen;¤_seed.@@
+		<<slavePaid $Nurse _seed>>
+		<<set $lastWeeksFinances.incomeClinic = _seed>>
+	<</if>>
+	<<if (_DL > 0)>><br><br><</if>>
+<</if>>
+
+<<if (_DL > 0)>>
+	&nbsp;&nbsp;&nbsp;&nbsp;<<if (_DL == 1)>>''There is one slave receiving treatment in the clinic.''<<else>>''There are _DL slaves receiving treatment in the clinic.''<</if>>
+<</if>>
+
+<<if ($Nurse != 0)>>
+	<<set $i = _FLs>> /* apply following SA passages to facility leader */
+	<<if $showEWD != 0>>
+		<br><br>
+		/* 000-250-006 */
+		<<if $seeImages == 1 && $imageChoice == 0>>
+		<div class="imageRef tinyImg">
+			<<SlaveArt $slaves[_FLs] 0 0>>
+		</div>
+		<</if>>
+		/* 000-250-006 */
+		''__@@.pink;$slaves[_FLs].slaveName@@__'' is serving as the clinical nurse.
+		<br>&nbsp;&nbsp;&nbsp;
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<br><<include "SA devotion">>
+	<<else>>
+		<<silently>>
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<<include "SA devotion">>
+		<</silently>>
+	<</if>>
+	<<set $Nurse = $slaves[_FLs]>>
+<</if>>
+
+<<for _dI = 0; _dI < _DL; _dI++>>
+	<<set $i = $slaveIndices[$CliniciIDs[_dI]]>>
+	<<if $slaves[$i].devotion < 45>>
+		<<set $slaves[$i].devotion += 4>>
+	<</if>>
+	<<set $slaves[$i].devotion += _devBonus>>
+	<<if $slaves[$i].trust < 45>>
+		<<set $slaves[$i].trust += 4>>
+	<</if>>
+	<<if $slaves[$i].health < 90>>
+		<<set $slaves[$i].health += 10 + ($curativeUpgrade * 10) + _healthBonus>>
+	<</if>>
+	<<if ($Nurse != 0) && ($slaves[$i].chem > 0) && ($clinicUpgradeFilters == 1)>>
+		<<set $slaves[$i].chem -= 5>>
+		<<set $slaves[$i].chem = Math.max($slaves[$i].chem, 0)>>
+	<</if>>
+	<<if ($slaves[$i].health <= 40)>>
+	<<elseif ($Nurse != 0) && ($slaves[$i].chem > 15) && ($clinicUpgradeFilters == 1)>>
+	<<else>>
+		<br><br>''__@@.pink;$slaves[$i].slaveName@@__'' has been returned to health<<if ($Nurse != 0) && ($clinicUpgradeFilters == 1)>> and purity<</if>>, so @@.yellow;her assignment has defaulted to rest.@@
+		<<removeJob $slaves[$i] "get treatment in the clinic">>
+		<<set _restedSlaves++, _dI--, _DL-->>
+		<<continue>>
+	<</if>>
+	<<if $showEWD != 0>>
+		<br><br>
+		/* 000-250-006 */
+		<<if $seeImages == 1 && $imageChoice == 0>>
+		<div class="imageRef tinyImg">
+			<<SlaveArt $slaves[$i] 0 0>>
+		</div>
+		<</if>>
+		/* 000-250-006 */
+		''__@@.pink;$slaves[$i].slaveName@@__''
+		<<if $slaves[$i].choosesOwnAssignment == 2>>
+			<<include "SA chooses own job">>
+		<<else>>
+			is receiving treatment in $clinicName.
+		<</if>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;She <<include "SA rest">>
+		<br>&nbsp;&nbsp;&nbsp;
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<br><<include "SA devotion">>
+	<<else>>
+		<<silently>>
+		<<include "SA chooses own job">>
+		<<include "SA rest">>
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<<include "SA devotion">>
+		<</silently>>
+	<</if>>
+<</for>>
+<<if (_restedSlaves > 0)>>
+	<br><br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<if (_restedSlaves == 1)>>
+		One slave has
+	<<else>>
+		_restedSlaves slaves have
+	<</if>>
+	been returned to @@.green;health<<if ($Nurse != 0) && ($clinicUpgradeFilters == 1)>> and purity<</if>>@@ and will be released from the clinic before the end of the week.
+	<<if $clinicDecoration != "standard">>
+		$clinicNameCaps's $clinicDecoration atmosphere @@.hotpink;had an impact on <<if _restedSlaves == 1>>her while she<<else>>them while they<</if>>@@ were getting treatment.
+	<</if>>
+<</if>>
+<<if _DL > 0 || $Nurse != 0>>
+	<br><br>
+<</if>>

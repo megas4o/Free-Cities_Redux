@@ -1,0 +1,14 @@
+:: Attendant Select [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Spa", $showEncyclopedia = 1, $encyclopedia = "Attendant">>
+
+<<if ($Attendant != 0)>>
+	''__@@.pink;$Attendant.slaveName@@__'' is serving as your Attendant.<br><br>She will help pamper and counsel your slaves.
+<<else>>
+	You have not selected an Attendant.
+<</if>>
+
+<br><br>''Appoint an Attendant from your devoted slaves:''
+<<include "Slave Summary">>
+
+<br><br>[[None|Attendant Workaround][$i = -1]]

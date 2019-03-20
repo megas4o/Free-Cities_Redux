@@ -1,0 +1,337 @@
+:: FVagina [nobr]
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+<<if $imageChoice == 1>>
+    <div class="imageRef lrgVector"><<SlaveArt $activeSlave 2 0>></div>
+<<else>>
+    <div class="imageRef lrgRender"><<SlaveArt $activeSlave 2 0>></div>
+<</if>>
+<</if>>
+/* 000-250-006 */
+
+<<SlaveTitle $activeSlave>>
+<<set $activeSlave.currentSummary = 0>>
+
+You call her over so you can
+<<if ($activeSlave.vagina > 3)>>
+	use her gaping vagina.
+<<elseif ($activeSlave.vagina == 3)>>
+	fuck her loose cunt.
+<<elseif ($activeSlave.vagina == 2)>>
+	fuck her whorish cunt.
+<<elseif ($activeSlave.vagina == 1)>>
+	fuck her tight cunt.
+<<elseif ($activeSlave.vagina == 0)>>
+	take her virginity.
+<<else>>
+	fuck her $desc butt.
+<</if>>
+
+<<if ($activeSlave.vaginaTat == "tribal patterns")>>
+	The tattoos on her abdomen certainly drawn attention there.
+<<elseif ($activeSlave.vaginaTat == "scenes")>>
+	The tattoos on her abdomen nicely illustrate what you mean to do to her.
+<<elseif ($activeSlave.vaginaTat == "degradation")>>
+	The tattoos on her abdomen ask you to, after all.
+<</if>>
+
+<<if $activeSlave.devotion <= 20>>
+	<<if $activeSlave.clit == 1>>
+		Her big clit peeks out from under its hood.
+	<<elseif $activeSlave.clit == 2>>
+		Her huge clit is impossible to miss.
+	<<elseif $activeSlave.clit > 2>>
+		Her pseudophallus-sized clit is soft.
+	<</if>>
+	<<if $activeSlave.labia == 1>>
+		Her lovely petals are quite inviting.
+	<<elseif $activeSlave.labia == 2>>
+		Her prominent petals are inviting.
+	<<elseif $activeSlave.labia > 2>>
+		Her labia are so large they present a slight obstacle to entry.
+	<</if>>
+<<else>>
+	<<if $activeSlave.clit == 1>>
+		Her big, hard clit peeks out from under its hood.
+	<<elseif $activeSlave.clit == 2>>
+		Her huge, stiff clit is impossible to miss.
+	<<elseif $activeSlave.clit > 2>>
+		Her pseudophallus-sized clit is engorged with arousal.
+	<</if>>
+	<<if $activeSlave.labia == 1>>
+		Her lovely petals are moist with arousal.
+	<<elseif $activeSlave.labia == 2>>
+		Her prominent petals bear a sheen of arousal.
+	<<elseif $activeSlave.labia > 2>>
+		Her huge labia are almost dripping with arousal.
+	<</if>>
+<</if>>
+
+<<if ($activeSlave.vaginaPiercing > 1)>>
+	<<if ($activeSlave.vagina != -1)>>
+		Her pierced lips and clit have her nice and wet.
+	<</if>>
+	<<if ($activeSlave.dick != 0)>>
+		Metal glints all up and down her cock.
+	<</if>>
+<<elseif ($activeSlave.vaginaPiercing == 1)>>
+	<<if ($activeSlave.vagina != -1)>>
+		Her pierced clit has her nice and moist.
+	<</if>>
+	<<if ($activeSlave.dick != 0)>>
+		Metal glints at the head of her cock.
+	<</if>>
+<</if>>
+
+<<set _fPosition = random(1,100)>>
+You decide to fuck her
+<<if (_fPosition <= 20)>>
+	in the missionary position. You tell her to lie down on the couch next to your desk.
+<<elseif (_fPosition <= 40)>>
+	in the cowgirl position. You lie on the couch beside your desk and tell her to straddle you, facing towards you.
+<<elseif (_fPosition <= 60)>>
+	doggy-style. You tell her to get on the couch beside your desk on her hands and knees.
+<<elseif (_fPosition <= 80)>>
+	in the reverse cowgirl position. You lie on the couch beside your desk and tell her to straddle you facing away from you.
+<<else>>
+	in the wheelbarrow position. You tell her to get on the couch beside your desk, stand next to her and lift her legs up into the air.
+<</if>>
+<<set _fSpeed = random(1,100)>>
+
+<<if ($activeSlave.vagina == 0) && ($activeSlave.vaginalAccessory != "chastity belt")>>
+	<<if ($activeSlave.fetish == "mindbroken")>>
+		She accepts your orders dumbly and presents her virgin pussy for defloration<<if ($PC.dick == 0)>>, watching without real interest as you don a strap-on<</if>>. Since she is mindbroken, @@.lime;losing her virginity@@ has no impact on any part of her other than her vagina.
+	<<elseif ($activeSlave.devotion > 20)>>
+		She accepts your orders without comment and presents her virgin pussy for defloration<<if ($PC.dick == 0)>>, watching with some small trepidation as you don a strap-on<</if>>. You gently ease into her pussy before gradually increasing the intensity of your thrusts into her. Before long, she's moaning loudly as you pound away. Since she is already well broken, this new connection with her <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>master<<else>>mistress<</if>> @@.hotpink;increases her devotion to you.@@ @@.lime;Her pussy has been broken in.@@ She looks forward to having her pussy fucked by you again.
+		<<set $activeSlave.devotion += 10>>
+	<<elseif ($activeSlave.devotion >= -20)>>
+		She is clearly unhappy at losing her pearl of great price to you; this probably isn't what she imagined her first real sex would be like.<<if ($PC.dick == 0)>>Her lower lip quivers with trepidation as she watches you don a strap-on and maneuver to fuck her virgin hole.<</if>> You gently ease into her pussy before gradually increasing the intensity of your thrusts into her. Before long, she's moaning as you pound away. Nevertheless, this new connection with her <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>master<<else>>mistress<</if>> @@.hotpink;increases her devotion to you.@@ @@.lime;Her pussy has been broken in,@@ and she is @@.gold;fearful@@ that sex will continue to be painful.
+		<<set $activeSlave.devotion += 4, $activeSlave.trust -= 4>>
+	<<else>>
+		As you anticipated, she refuses to give you her virginity. And as you expected, she is unable to resist you. She cries as <<if ($PC.dick == 0)>>your strap-on<<else>>your cock<</if>> opens her fresh, tight hole. You force your way into her pussy and continue thrusting into her. She sobs and cries with horror as you pound away. The rape @@.mediumorchid;decreases her devotion to you.@@ @@.lime;Her pussy has been broken in,@@ and she @@.gold;fears further abuse.@@
+		<<set $activeSlave.devotion -= 4, $activeSlave.trust -= 4>>
+	<</if>>
+	<<set $activeSlave.vagina++>>
+<<elseif ($activeSlave.fetish == "mindbroken")>>
+	Since her mind is gone, she's yours to use as a human sex doll. You throw her over the couch and amuse yourself with her for a while; her body retains its instinctual responses, at least. You finish inside her and leave your toy for one of your other slaves to clean and maintain.
+<<elseif ($activeSlave.amp == 1)>>
+	Since she's a quadruple amputee, she's yours to use as a human sex toy. You set her
+	<<if ($PC.dick != 0)>>
+		atop your cock and slide her up and down, managing her with your arms.
+		<<if $activeSlave.dick > 0>>
+			<<if $activeSlave.dickAccessory == "chastity" || $activeSlave.dickAccessory == "combined chastity">>
+				Her dick chastity keeps her useless bitchclit out of the way.
+			<<elseif !canAchieveErection($activeSlave)>>
+				As you use her as a helpless cock jacket, her 
+				<<if $activeSlave.dick < 7>>
+					flaccid dick flops around, ignored.
+				<<else>>
+					massive dick flops against you, no longer able to get hard.
+				<</if>>
+			<<else>>
+				As you use her as a helpless cock jacket, your pounding keeps her prick stiff.
+			<</if>>
+		<</if>>
+		You finish inside her and leave your toy for one of your other slaves to clean and maintain.
+	<<else>>
+		on the couch and straddle her hips, bringing your already-wet pussy hard against her. You grind against her helpless body, using her as a living sybian until her warmth and movement brings you to orgasm.
+	<</if>>
+<<elseif canWalk($activeSlave) == -2>>
+	You tell her to get situated on the couch, face down. This position pins her down by the massive weight of her tits, pushing her face in amongst the cushions. Her tits serve as an anchor, allowing you to take her doggy style without any real contribution from her. The position muffles her reaction entirely, other than the rhythmic jiggling of the breastflesh that sticks out to either side of her torso.
+<<elseif ($activeSlave.fetish == "submissive") && ($activeSlave.fetishStrength > 60) && ($activeSlave.fetishKnown == 1) && ($PC.dick != 0)>>
+	She comes over, smiling a little submissive smile, and spreads herself for you. You take her on the couch next to your desk after she gets into position.
+	<<if (_fPosition <= 20)>> /* missionary */
+		She hugs her torso to you and her breasts press against your chest;
+	<<elseif (_fPosition <= 40)>> /* cowgirl */
+		She puts her hands on your chest and leans forward as you continue to thrust upwards;
+	<<elseif (_fPosition <= 60)>> /* doggy-style */
+		She arches her back as you continue to pound her;
+	<<elseif (_fPosition <= 80)>> /* reverse cowgirl */
+		She puts her hands on your chest starts to lean back as you continue to thrust upwards;
+	<<else>> /* wheelbarrow */
+		She begins to tire as you keep pounding;
+	<</if>>
+	you can feel her heart beating hard. As the sex reaches its climax, she begs you to cum inside her unworthy body.
+	<<if ($activeSlave.dick != 0) && canAchieveErection($activeSlave)>>
+		<<if $activeSlave.dickAccessory == "chastity" || ($activeSlave.dickAccessory == "combined chastity")>>
+			She does her submissive best to stay completely soft within her dick chastity.
+		<<else>>
+			As a submissive she spares no attention for her own orgasm, so her rock hard erection swings untended.
+		<</if>>
+	<<elseif ($activeSlave.dickAccessory == "chastity") || ($activeSlave.dickAccessory == "combined chastity")>>
+		Her cock is forgotten inside its chastity cage as you take what you want from her.
+	<<elseif ($activeSlave.dick != 0)>>
+		As a submissive she spares no attention for her own orgasm, so her flaccid cock swings untended.
+	<</if>>
+	<<if $PC.vagina == 1>>
+		When you finally climax, you pull out and press your wet cunt against her mouth, letting her lavish attention on you that brings you to another quick orgasm.
+		<<set $activeSlave.oralCount += 1>>
+		<<set $oralTotal += 1>>
+	<</if>>
+<<elseif $activeSlave.devotion < -20>>
+	She tries to refuse, so you
+	<<if ($PC.dick != 0)>>
+		bend the disobedient slave over your desk and take  her hard from behind. Her breasts <<if ($activeSlave.dick != 0)>>and cock <</if>>slide back and forth across the desk. You give her buttocks some nice hard swats as you pound her. She grunts and moans but knows better than to try to get away.
+		<<if ($activeSlave.dick != 0) && canAchieveErection($activeSlave)>>
+			Despite her unwillingness to be raped, the stimulation
+			<<if $activeSlave.dickAccessory == "chastity" || ($activeSlave.dickAccessory == "combined chastity")>>
+				starts to give her an erection, which her dick chastity makes horribly uncomfortable. She bucks with the pain, her hole spasming delightfully.
+			<<else>>
+				gives her an erection. She's mortified that she would get hard while being raped.
+			<</if>>
+		<<elseif ($activeSlave.dickAccessory == "chastity") || ($activeSlave.dickAccessory == "combined chastity")>>
+			Her dick chastity keeps her bitch cock hidden away while you use her whore hole.
+		<<elseif ($activeSlave.dick != 0)>>
+			Her flaccid dick is ground into the back of the couch as you rape her.
+		<</if>>
+		<<if $PC.vagina == 1>>
+			After your first orgasm, you pull out and grind your pussy against her face for another, enjoying the stimulation of her muffled crying.
+			<<set $activeSlave.oralCount += 1>>
+			<<set $oralTotal += 1>>
+		<</if>>
+	<<else>>
+		stand and seize her, shoving her down to sit in your chair. You jump atop her hips, pinning her down into the chair with your legs and pressing your pussy hard against her groin. She struggles and whimpers, but you give her a hard warning slap to the cheek and kiss her unwilling mouth, forcing your tongue past her lips as you grind against her.
+	<</if>>
+<<elseif $activeSlave.devotion <= 20>>
+	<<if ($PC.dick != 0)>>
+		She obeys, lying on the couch next to your desk with her legs spread. You kneel on the ground and enter her, a hand on each of her legs to give you a good grip. <<if _fSpeed > 75>>The pounding is hard and fast<<elseif _fSpeed > 50>>You pound her firmly and vigorously<<elseif _fSpeed > 25>>You fuck her steadily and controlled<<else>>You fuck her slowly and tenderly<</if>>, and she gasps and <<if _fSpeed > 50>>whines<<else>>moans<</if>>. You reach a hand down to maul her breasts.
+		<<if ($activeSlave.dick != 0) && canAchieveErection($activeSlave)>>
+			<<if ($activeSlave.dickAccessory == "chastity") || ($activeSlave.dickAccessory == "combined chastity")>>
+				She enjoys herself, even though her dick chastity keeps her soft by making the beginnings of erection very uncomfortable.
+			<<else>>
+				She bites her lip and moans as she climaxes. You fill her squeezing fuckhole with your cum. She already dribbled her own weak load all over her stomach.
+			<</if>>
+		<<elseif ($activeSlave.dickAccessory == "chastity") || ($activeSlave.dickAccessory == "combined chastity")>>
+			She bites her lip and moans as she climaxes. You fill her squeezing fuckhole with your cum. Precum has been dribbling out of her dick chastity for some time, apparently the best her soft bitchclit can manage.
+		<<elseif ($activeSlave.dick != 0)>>
+			She bites her lip and moans as she climaxes. You fill her squeezing fuckhole with your cum. She already blew her own load all over her stomach despite her inability to get hard.
+		<</if>>
+		<<if $PC.vagina == 1>>
+			You got so wet fucking her that when you climax, you stand up and let her clean your pussy with her mouth. The oral attention brings you to a quick aftershock orgasm.
+			<<set $activeSlave.oralCount += 1>>
+			<<set $oralTotal += 1>>
+		<</if>>
+	<<else>>
+		You pat the tops of your thighs, and she obediently comes over to sit atop them, wrapping her legs around you. Your hands reach around her and seize her buttocks, drawing her in even closer so that the warmth between her legs is pressed hard against your pussy. She grinds dutifully against you, only pausing for a moment when she finds your insistent tongue probing past her lips.
+	<</if>>
+<<else>>
+	<<if ($PC.dick != 0)>>
+		She skips over smiling and gives you a quick kiss. You take her on the couch next to your desk after she gets into position.
+		<<if (_fPosition <= 20)>> /* missionary */
+			She hugs her torso to you and her breasts press against your chest;
+		<<elseif (_fPosition <= 40)>> /* cowgirl */
+			She puts her hands on your chest and leans forward as you continue to thrust upwards;
+		<<elseif (_fPosition <= 60)>> /* doggy-style */
+			She arches her back as you continue to pound her;
+		<<elseif (_fPosition <= 80)>> /* reverse cowgirl */
+			She puts her hands on your chest starts to lean back as you continue to thrust upwards;
+		<<else>> /* wheelbarrow */
+			She begins to tire as you keep pounding;
+		<</if>>
+		you can feel her heart beating hard.
+		<<if (_fPosition <= 40)>> As the sex reaches its climax, her kisses grow urgent and passionate. <</if>>
+		<<if ($activeSlave.dick != 0) && canAchieveErection($activeSlave)>>
+			<<if $activeSlave.dickAccessory == "chastity" || ($activeSlave.dickAccessory == "combined chastity")>>
+				She enjoys herself, even though her dick chastity keeps her soft by making the beginnings of erection very uncomfortable.
+			<<else>>
+				When you orgasm together, her erect cock squirts cum up towards her tits while your cock fills her with cum.
+			<</if>>
+		<<elseif ($activeSlave.dickAccessory == "chastity") || ($activeSlave.dickAccessory == "combined chastity")>>
+			She bites her lip and moans as she climaxes. You fill her squeezing fuckhole with your cum. Precum has been dribbling out of her dick chastity for some time, apparently the best her soft bitchclit can manage.
+		<<elseif ($activeSlave.dick != 0)>>
+			When you orgasm together, her limp, neglected cock dribbles weakly while your cock fills her with cum.
+		<<elseif ($activeSlave.clit > 2)>>
+			As you fuck her, she plays with her huge clit. It's so large it almost looks like she's jacking off a cock.
+		<</if>>
+		<<if $PC.vagina == 1>>
+			You got so wet fucking her that when you climax, you stand up; she knows what that means, and hurries to eat you out. The oral attention brings you to a quick aftershock orgasm.
+			<<set $activeSlave.oralCount += 1>>
+			<<set $oralTotal += 1>>
+		<</if>>
+	<<else>>
+		You pat the tops of your thighs, and she skips over smiling and gives you a quick kiss. Without breaking the lip lock, she sits down, wrapping her legs around you. Your hands reach around her and seize her buttocks, drawing her in even closer so that the warmth between her legs is pressed hard against your pussy, and you can play with her asshole. She grinds enthusiastically against you, moaning into your mouth with pleasure.
+	<</if>>
+<</if>>
+<<if canDoVaginal($activeSlave)>>
+	<<VaginalVCheck>>
+<<else>>
+	<<AnalVCheck>>
+<</if>>
+
+<<if ($activeSlave.preg > 10)>>
+	The poor slave's belly gets in the way, but the added perversion of fucking a pregnant hole makes the inconvenience worthwhile.
+<</if>>
+
+<<if (random(1,100) > (100 + $activeSlave.devotion))>>
+	<<if ($activeSlave.fetish != "pregnancy") && ($activeSlave.energy <= 95) && ($activeSlave.sexualFlaw != "hates penetration")>>
+		Being taken by force has given her a @@.red;hatred of penetration.@@
+		<<set $activeSlave.sexualFlaw = "hates penetration">>
+	<</if>>
+<<elseif (random(1,100) > (110 - $activeSlave.devotion))>>
+	<<if ($activeSlave.fetish == "none") && ($activeSlave.energy <= 95) && ($activeSlave.sexualFlaw != "hates penetration")>>
+		Enjoying sex with you seems to have @@.lightcoral;encouraged her biological clock.@@
+		<<set $activeSlave.fetish = "pregnancy", $activeSlave.fetishKnown = 1, $activeSlave.fetishStrength = 10>>
+	<</if>>
+<</if>>
+
+<<if ($PC.dick != 0)>>
+
+<<if ($activeSlave.vagina == 3)>>
+	Cum drips out of her fucked-out hole.
+<<elseif ($activeSlave.vagina == 2)>>
+	Cum drips out of her stretched vagina.
+<<elseif ($activeSlave.vagina == 1)>>
+	Her still-tight vagina keeps your load inside her.
+<<elseif ($activeSlave.vagina < 0)>>
+	Cum drips out of her girly ass.
+<<else>>
+	Your cum slides right out of her gaping hole.
+<</if>>
+
+<<if (canWalk($activeSlave) == true)>>
+	She uses <<if $activeSlave.vagina > 0>>a quick douche to clean her <<if $activeSlave.vagina < 2>>tight<<elseif $activeSlave.vagina > 3>>loose<</if>> pussy<<else>>an enema to clean her <<if $activeSlave.anus < 2>>tight<<elseif $activeSlave.anus < 3>>used<<else>>gaping<</if>> butthole<</if>>,
+	<<switch $activeSlave.assignment>>
+	<<case "work in the brothel">>
+		just like she does between each customer.
+	<<case "serve in the club">>
+		just like she does in the club.
+	<<case "work in the dairy">>
+		to avoid besmirching the nice clean dairy.
+	<<case "work as a servant">>
+		mostly to keep everything she has to clean from getting any dirtier.
+	<<case "whore">>
+		before returning to offering it for sale.
+	<<case "serve the public">>
+		before returning to offering it for free.
+	<<case "rest">>
+		before crawling back into bed.
+	<<case "get milked">>
+		<<if $activeSlave.lactation > 0>>before going to get her uncomfortably milk-filled tits drained<<else>>and then rests until her balls are ready to be drained again<</if>>.
+	<<case "be a servant">>
+		since her chores didn't perform themselves while you used her fuckhole.
+	<<case "please you">>
+		before returning to await your next use of her fuckhole, as though nothing had happened.
+	<<case "be a subordinate slave">>
+		though it's only a matter of time before another slave decides to play with her fuckhole.
+	<<case "be your Head Girl">>
+		worried that her charges got up to trouble while she enjoyed her <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>'s use.
+	<<case "guard you">>
+		so she can be fresh and ready for more sexual use even as she guards your person.
+	<<case "train slaves">>
+		before she returns to teaching her classes.
+	<<default>>
+		before she returns to $activeSlave.assignment.
+	<</switch>>
+<</if>>
+<</if>>
+
+<<if passage() != "Slave Interact">>
+	<<set _SL = $slaves.length>>
+	<<for _i = 0; _i < _SL; _i++>>
+	<<if $slaves[_i].ID == $activeSlave.ID>>
+		<<set $slaves[_i] = $activeSlave>>
+		<<break>>
+	<</if>>
+	<</for>>
+<</if>>

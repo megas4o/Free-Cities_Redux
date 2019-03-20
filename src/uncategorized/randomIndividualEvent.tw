@@ -1,0 +1,1807 @@
+:: Random Individual Event [nobr]
+
+<<set $showEncyclopedia = 0>>
+<<if $eventSlave == 0>>
+  <<set $eventSlave = $eligibleSlaves.random()>>
+  <<if $cheatMode == 1>>
+	<<set $nextButton = "Refresh", $nextLink = "Random Individual Event", $returnTo = "Random Individual Event">>
+	''One of the following eligible slaves would have been selected for an individual random event:''
+	<br>
+	<<for $i = 0; $i < $eligibleSlaves.length; $i++>>
+		<br><<print "[[$eligibleSlaves[$i].slaveName|Random Individual Event][$eventSlave = $eligibleSlaves[" + $i + "]]]">>
+	<</for>>
+	<br><br>[[Switch to Random Nonindividual Event|Random Nonindividual Event][$activeSlave = 0, $eventSlave = 0]]
+  <<else>>
+	<<goto "Random Individual Event">>
+  <</if>>
+<<else>>
+<<silently>>
+/* initialize event lists as arrays [], not objects {} */
+<<set $events = [], $RESSevent = [], $RESSTRevent = [], $RETSevent = [], $RECIevent = [], $activeSlave = 0, $groomSlave = 0, $brideSlave = 0, $legendaryFacility = 0>>
+
+/* SUB CHECKS */
+
+<<set $RERelationshipSlave = 0>>
+<<set $REAnalCowgirlSubIDs = [], $RETasteTestSubIDs = [], $RESimpleAssaultIDs = [], $REInterslaveBeggingIDs = [], $RECockmilkInterceptionIDs = [], $REShowerForceSubIDs = [], $RESadisticDescriptionSubIDs = [], $REIfYouEnjoyItSubIDs = [], $REBoobCollisionSubIDs = [], $RERepressedAnalVirginSubIDs = []>>
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+<<if $slaves[$i].fetish != "mindbroken">>
+	<<if canWalk($slaves[$i])>>
+	<<if canTalk($slaves[$i])>>
+		<<if ($slaves[$i].assignment != "be confined in the cellblock")>>
+		<<if ($slaves[$i].assignment != "stay confined")>>
+		<<if (($slaves[$i].assignment != "work in the dairy") || ($dairyRestraintsSetting < 2))>>
+			<<if $slaves[$i].devotion <= 20>>
+				<<if ($slaves[$i].fetish != "buttslut") || ($slaves[$i].fetishKnown == 0)>>
+				<<if $slaves[$i].anus != 0>>
+					<<set $REShowerForceSubIDs.push($slaves[$i].ID)>>
+					<<set $REIfYouEnjoyItSubIDs.push($slaves[$i].ID)>>
+				<<else>>
+					<<set $RESadisticDescriptionSubIDs.push($slaves[$i].ID)>>
+				<</if>>
+				<</if>>
+				<<if $slaves[$i].anus != 0 && canDoAnal($slaves[$i])>>
+				<<if $slaves[$i].vagina != 0 && canDoVaginal($slaves[$i])>>
+				<<if $slaves[$i].combatSkill == 0>>
+				<<if $slaves[$i].muscles <= 30>>
+					<<set $RESimpleAssaultIDs.push($slaves[$i].ID)>>
+				<</if>>
+				<</if>>
+				<</if>>
+				<</if>>
+			<<else>>
+				<<if $slaves[$i].boobs > 3000>>
+					<<set $REBoobCollisionSubIDs.push($slaves[$i].ID)>>
+				<</if>>
+				<<if $slaves[$i].releaseRules != "restrictive">>
+				<<if $slaves[$i].energy > 40>>
+				<<if canDoVaginal($slaves[$i]) || canDoAnal($slaves[$i])>>
+					<<set $REInterslaveBeggingIDs.push($slaves[$i].ID)>>
+				<</if>>
+				<</if>>
+				<</if>>
+			<</if>>
+			<<if $slaves[$i].devotion >= -20>>
+			<<if $slaves[$i].devotion <= 60>>
+			<<if $slaves[$i].fetish != "buttslut">>
+			<<if $slaves[$i].anus != 0>>
+				<<set $REAnalCowgirlSubIDs.push($slaves[$i].ID)>>
+			<</if>>
+			<</if>>
+			<</if>>
+			<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<<if $slaves[$i].assignmentVisible == 1>>
+		<<if $slaves[$i].livingRules == "luxurious">>
+		<<if $slaves[$i].devotion >= -20>>
+			<<if $slaves[$i].anus != 0>>
+				<<set $RETasteTestSubIDs.push($slaves[$i].ID)>>
+			<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<<if $slaves[$i].anus > 0>>
+		<<if $slaves[$i].devotion > 50>>
+		<<if $slaves[$i].amp == 0>>
+			<<set $RERepressedAnalVirginSubIDs.push($slaves[$i].ID)>>
+		<</if>>
+		<</if>>
+		<</if>>
+	<</if>>
+	<</if>>
+	<<if $slaves[$i].assignment == "work in the dairy" || $slaves[$i].assignment == "get milked">>
+	<<if $slaves[$i].balls>>
+	<<if $slaves[$i].dick>>
+	<<if canDoAnal($slaves[$i])>>
+		<<set $RECockmilkInterceptionIDs.push($slaves[$i].ID)>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<</for>>
+
+<<if $eventSlave.relationship > 0>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+  <<if $slaves[$i].ID == $eventSlave.relationshipTarget>>
+	<<set $RERelationshipSlave = $slaves[$i]>>
+  <</if>>
+<</for>>
+<</if>>
+
+/* STANDARD EVENTS */
+
+<<if ($eventSlave.fetish != "mindbroken")>>
+<<if canWalk($eventSlave)>>
+<<if canTalk($eventSlave)>>
+
+<<if $RECockmilkInterceptionIDs.length > 1 || ($RECockmilkInterceptionIDs.length == 1 && $eventSlave.ID != $RECockmilkInterceptionIDs[0])>>
+<<if $eventSlave.devotion > 20>>
+<<if $eventSlave.dietCum > 0 || ($eventSlave.fetishKnown && $eventSlave.fetish == "cumslut")>>
+	<<set $RETSevent.push("cockmilk interception")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $REInterslaveBeggingIDs.length > 1 || ($REInterslaveBeggingIDs.length == 1 && $eventSlave.ID != $REInterslaveBeggingIDs[0])>>
+<<if $universalRulesConsent == 1>>
+<<if $eventSlave.devotion > 20>>
+<<if $eventSlave.energy > 40>>
+<<if canAchieveErection($eventSlave)>>
+<<if $eventSlave.releaseRules != "restrictive">>
+	<<set $RETSevent.push("interslave begging")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+	<<if $eventSlave.devotion > 20>>
+	<<if $eventSlave.sexualQuirk == "perverted" || $eventSlave.energy > 80>>
+	<<if $eventSlave.relation == "mother">>
+	<<if $eventSlave.lactation>>
+	<<if $eventSlave.releaseRules != "restrictive">>
+		<<set $RETSevent.push("incestuous nursing")>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+
+<<if ($eventSlave.intelligence > 1)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.intelligenceImplant > 0)>>
+	<<set $RESSevent.push("devoted educated slave")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.intelligence > 1)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.intelligenceImplant > 0)>>
+	<<set $RESSevent.push("devoted educated slave")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.entertainSkill >= 60)>>
+<<if ($eventSlave.health > 40)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 50)>>
+	<<set $RESSevent.push("happy dance")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $RERepressedAnalVirginSubIDs.length > 0>>
+<<if ($eventSlave.anus == 0)>>
+<<if ($eventSlave.devotion >= -50)>>
+<<if ($eventSlave.trust >= -50)>>
+<<if ($eventSlave.sexualFlaw == "repressed")>>
+	<<set $RETSevent.push("repressed anal virgin")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($assistant > 0)>>
+<<if ($assistantAppearance != "normal")>>
+<<if ($eventSlave.anus != 0)>>
+<<if ($eventSlave.vagina != 0)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if canSee($eventSlave)>>
+  <<if ($eventSlave.devotion <= 50)>>
+	<<if ($eventSlave.assignment == "be a servant")>>
+	  <<set $RESSevent.push("PA servant")>>
+	<</if>>
+  <<elseif ($eventSlave.trust > 75)>>
+	<<if ($eventSlave.energy > 60)>>
+	  <<set $RESSevent.push("PA flirting")>>
+	<</if>>
+  <</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.clothes == "a succubus outfit")>>
+<<if ($eventSlave.anus != 0)>>
+<<if ($eventSlave.vagina != 0)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+	<<set $RESSevent.push("sexy succubus")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($HeadGirl != 0)>>
+  <<if ($eventSlave.devotion <= 50)>>
+  <<if ($eventSlave.anus != 0)>>
+	<<if ($HGSeverity >= 0)>>
+	  <<set $events.push("RE anal punishment")>>
+	<</if>>
+	<<set $events.push("RE shower punishment")>>
+  <</if>>
+  <</if>>
+  <<if ($eventSlave.ID == $HeadGirl.ID)>>
+  <<if ($eventSlave.trust > 50)>>
+	<<set $RESSevent.push("trusting HG")>>
+  <</if>>
+  <</if>>
+  <<if ($eventSlave.ID != $HeadGirl.ID)>>
+  <<if ($eventSlave.speechRules != "restrictive")>>
+  <<if ($eventSlave.trust > 75)>>
+  <<if ($eventSlave.devotion > 50)>>
+  <<if ($eventSlave.oralSkill > 30)>>
+  <<if ($eventSlave.intelligence >= $HeadGirl.intelligence)>>
+  <<if ($eventSlave.oralSkill > $HeadGirl.oralSkill)>>
+	<<set $events.push("RE HG replacement")>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+<</if>>
+
+<<if ($eventSlave.livingRules == "spare")>>
+<<if ($eventSlave.devotion <= 20)>>
+	<<if ($eventSlave.devotion > -10)>>
+		<<set $RESSevent.push("sleeping ambivalent")>>
+	<</if>>
+	<<if ($eventSlave.trust < -20)>>
+		<<set $RESSevent.push("bad dream")>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($week-$eventSlave.weekAcquired < 10)>>
+<<if ($eventSlave.anus != 0)>>
+<<if ($eventSlave.vagina != 0)>>
+	<<set $RESSevent.push("ignorant horny")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($RETasteTestSubIDs.length > 1)>>
+<<if ($eventSlave.livingRules == "luxurious")>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.energy > 80)>>
+	<<set $RETSevent.push("taste test")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($modRequestsAllowed > 0)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.dick != 0) || ($eventSlave.vagina != -1)>>
+<<if ($eventSlave.speechRules == "permissive")>>
+<<if ($eventSlave.corsetPiercing == 0)>>
+<<if ($eventSlave.tonguePiercing == 0)>>
+<<if ($eventSlave.anusPiercing == 0)>>
+<<if ($eventSlave.nipplesPiercing == 0)>>
+<<if ($eventSlave.dickPiercing == 0)>>
+<<if ($eventSlave.vaginaPiercing == 0)>>
+<<if ($eventSlave.lipsTat == 0) || ($eventSlave.lipsTat == "none")>>
+<<if ($eventSlave.vaginaTat == 0) || ($eventSlave.vaginaTat == "none")>>
+	<<set $RESSevent.push("mods please")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.muscles > 5)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.diet != "slimming")>>
+	<<set $RESSevent.push("sore shoulders")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $RERelationshipSlave != 0>>
+<<if ($eventSlave.relationship > 3)>>
+<<if ($RERelationshipSlave.devotion > 20)>>
+<<if canWalk($RERelationshipSlave)>>
+<<if canTalk($RERelationshipSlave)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 50)>>
+	<<if ($eventSlave.speechRules != "restrictive")>>
+		<<set $RETSevent.push("date please")>>
+	<</if>>
+	<<if ($RERelationshipSlave.anus != 0)>>
+	<<if ($RERelationshipSlave.dick != 1)>>
+	<<if ($RERelationshipSlave.dick == 0) || (canAchieveErection($RERelationshipSlave))>>
+	<<if ($RERelationshipSlave.fetish == "dom") || ($RERelationshipSlave.fetish == "sadist")>>
+		<<set $RETSevent.push("top exhaustion")>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $REAnalCowgirlSubIDs.length > 1 || ($REAnalCowgirlSubIDs.length == 1 && $eventSlave.ID != $REAnalCowgirlSubIDs[0])>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.releaseRules != "restrictive")>>
+<<if ($eventSlave.fetish == "buttslut") || ($eventSlave.fetish == "sadist") || ($eventSlave.fetish == "dom")>>
+<<if ($eventSlave.dickAccessory != "chastity") || ($eventSlave.dick == 0)>>
+	<<set $RETSevent.push("anal cowgirl")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $REBoobCollisionSubIDs.length > 1>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.boobs > 3000)>>
+<<if ($eventSlave.attrXX >= 50) || (($eventSlave.fetish == "boobs") && ($eventSlave.fetishStrength > 95))>>
+	<<set $RETSevent.push("boob collision")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($weatherToday.severity <= 1)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.anus != 0)>>
+<<if ($eventSlave.vagina != 0)>>
+	<<set $RESSevent.push("confident tanning")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.anus != 0)>>
+<<if ($eventSlave.vagina != 0)>>
+  <<set $seed = 0>>
+  <<if $HeadGirl == 0>>
+	<<set $seed = 1>>
+  <<elseif $HeadGirl.ID != $eventSlave.ID>>
+	<<set $seed = 1>>
+  <</if>>
+  <<if $seed == 1>>
+	<<set $RESSevent.push("a gift")>>
+  <</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.relationship >= 2)>>
+<<if ($eventSlave.relationship < 5)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > -20)>>
+	<<set $events.push("RE relationship advice")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.devotion > 50>>
+<<if $eventSlave.anus > 0>>
+<<if $eventSlave.vagina != 0>>
+  <<if $eventSlave.trust > 20>>
+	<<set $RESSevent.push("devoted exhibition")>>
+	<<set $RESSevent.push("devoted lotion")>>
+  <</if>>
+  <<if $eventSlave.energy > 95>>
+	<<set $RESSevent.push("devoted nympho")>>
+  <</if>>
+  <<if $eventSlave.releaseRules == "permissive">>
+  <<if ($eventSlave.dickAccessory != "chastity") || ($eventSlave.dick == 0)>>
+	<<set $RESSevent.push("permitted masturbation")>>
+  <</if>>
+  <</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.trust < -50>>
+<<if $eventSlave.devotion <= 20>>
+	<<set $RESSevent.push("terrified inspection")>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.dick > 0>>
+  <<if $eventSlave.anus > 0>>
+  <<if $eventSlave.devotion >= 10>>
+	<<if $REFeminizationCheckinIDs.includes($eventSlave.ID)>>
+	  <<set $RECIevent.push("feminization")>>
+	<</if>>
+	<<if $eventSlave.trust >= 10>>
+	<<if $eventSlave.balls >= 0>>
+	<<if $eventSlave.hormones <= 0>>
+	  <<if $REFutaSisterCheckinIDs.includes($eventSlave.ID)>>
+		<<set $RECIevent.push("futa")>>
+	  <</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+  <</if>>
+  <</if>>
+<</if>>
+
+<<if $eventSlave.analSkill > 30>>
+  <<if $eventSlave.devotion >= 10>>
+  <<if $REMILFCheckinIDs.includes($eventSlave.ID)>>
+	<<set $RECIevent.push("MILF")>>
+  <</if>>
+  <</if>>
+<</if>>
+
+<<if $eventSlave.attrXY > 50>>
+  <<if $eventSlave.anus != 0>>
+  <<if $eventSlave.vagina != 0>>
+  <<if $eventSlave.devotion >= 10>>
+  <<if $REOrientationCheckinIDs.includes($eventSlave.ID)>>
+	<<set $RECIevent.push("orientation")>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+<</if>>
+
+<<if $eventSlave.face >= -10>>
+  <<if $eventSlave.devotion >= 10>>
+  <<if ($eventSlave.assignment is "serve the public") || ($eventSlave.assignment is "whore")>>
+  <<if $REUglyCheckinIDs.includes($eventSlave.ID)>>
+	<<set $RECIevent.push("ugly")>>
+  <</if>>
+  <</if>>
+  <</if>>
+<</if>>
+
+<<if $eventSlave.anus > 1>>
+  <<if $eventSlave.anus < 4>>
+  <<if $eventSlave.analArea > 1>>
+  <<if $eventSlave.devotion > 50>>
+  <<if $eventSlave.trust > 50>>
+  <<if $REButtholeCheckinIDs.includes($eventSlave.ID)>>
+	<<set $RECIevent.push("butthole")>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+<</if>>
+
+/*
+<<if $eventSlave.drugs == "breast injections">>
+  <<if ($eventSlave.anus > 0) || ($eventSlave.vagina > 0)>>
+  <<if $eventSlave.devotion <= 50>>
+  <<if $eventSlave.devotion >= -20>>
+  <<if $eventSlave.trust >= -50>>
+	<<if $REReductionCheckinIDs.includes($eventSlave.ID)>>
+	  <<set $RECIevent.push("reduction")>>
+	<</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <</if>>
+<</if>>
+*/
+
+<<if ($eventSlave.assignment == "be a servant")>>
+<<if ($eventSlave.devotion <= 95)>>
+<<if ($eventSlave.intelligence < -1)>>
+	<<set $RESSevent.push("cooler lockin")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($universalRulesConsent == 0)>>
+<<if ($eventSlave.devotion > 50)>>
+	<<if ($eventSlave.fetish == "sadist") || ($eventSlave.fetish == "dom") || ($eventSlave.energy > 95)>>
+	  <<if ($REShowerForceSubIDs.length > 0)>>
+	  <<if ($eventSlave.trust <= 75)>>
+		  <<set $RETSevent.push("shower force")>>
+	  <</if>>
+	  <</if>>
+	  <<if ($eventSlave.anus > 0)>>
+	  <<if ($RESadisticDescriptionSubIDs.length > 0)>>
+		<<set $RETSevent.push("sadistic description")>>
+	  <</if>>
+	  <</if>>
+	  <<if ($cockFeeder > 0)>>
+	  <<if ($eventSlave.dickAccessory != "chastity" && $eventSlave.dickAccessory != "combined chastity") || ($eventSlave.dick == 0)>>
+		<<set $RESSevent.push("kitchen molestation")>>
+	  <</if>>
+	  <</if>>
+	<</if>>
+	<<if ($REIfYouEnjoyItSubIDs.length > 0)>>
+	  <<set $RETSevent.push("if you enjoy it")>>
+	<</if>>
+	<<if $RESimpleAssaultIDs.length > 0>>
+	<<if canAchieveErection($eventSlave)>>
+		<<set $RETSevent.push("simple assault")>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion < -50)>>
+<<if ($eventSlave.trust > -20)>>
+<<if ($eventSlave.speechRules == "restrictive")>>
+	<<set $RESSevent.push("vocal disobedience")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($boobAccessibility != 1)>>
+<<if ($eventSlave.boobs > 10000)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($slaves.length > 2)>>
+	<<set $RESSevent.push("huge tits")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.age > 30)>>
+<<if ($eventSlave.ageImplant > 0)>>
+<<if ($eventSlave.devotion > 20)>>
+	<<set $RESSevent.push("age implant")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($seeAge == 1)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.speechRules != "restrictive")>>
+<<if ($eventSlave.birthWeek >= 51)>>
+	<<set $RESSevent.push("birthday")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.clothes == "a penitent nuns habit")>>
+<<if ($eventSlave.anus > 0)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.devotion <= 50)>>
+	<<set $RESSevent.push("penitent")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.slaveName != $eventSlave.birthName)>>
+<<if ($eventSlave.devotion <= 20)>>
+<<if ($eventSlave.trust > -20)>>
+<<if ($eventSlave.vagina != 0)>>
+<<if ($eventSlave.anus > 0)>>
+	<<set $RESSevent.push("not my name")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($slaves.length > 2)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.heels == 1)>>
+<<if ($eventSlave.shoes == "heels") || ($eventSlave.shoes == "boots") || ($eventSlave.shoes == "extreme heels")>>
+	<<set $RESSevent.push("tendon fall")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 20) || ($eventSlave.trust < -20)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.vagina < 0)>>
+<<if ($eventSlave.anus > 0)>>
+<<if ($eventSlave.analSkill <= 30)>>
+	<<set $RESSevent.push("obedient shemale")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.age > 37)>>
+<<if ($eventSlave.anus > 0)>>
+<<if ($eventSlave.vagina > 0)>>
+	<<set $RESSevent.push("devoted old")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.age > 35)>>
+<<if ($eventSlave.anus > 0)>>
+<<if ($eventSlave.vagina > 0)>>
+<<if ($PC.age == 1)>>
+	<<set $RESSevent.push("young PC age difference")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.age < 22)>>
+<<if ($eventSlave.anus > 0)>>
+<<if ($eventSlave.vagina > 0)>>
+<<if ($PC.age == 3)>>
+	<<set $RESSevent.push("old PC age difference")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.fetish == "humiliation") || ($eventSlave.energy > 95)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.vagina != 0)>>
+<<if ($eventSlave.anus != 0)>>
+<<if ($eventSlave.fetishKnown == 1)>>
+	<<set $RESSevent.push("fearful humiliation")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.livingRules == "luxurious")>>
+<<if ($eventSlave.devotion <= 75)>>
+<<if ($eventSlave.devotion > 50)>>
+	<<set $RESSevent.push("newly devoted sunrise")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($spa > 0)>>
+<<if ($eventSlave.boobs > 2000)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+	<<set $RESSevent.push("spa boobs")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.lactation > 0)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.vagina != 0)>>
+<<if ($eventSlave.anus != 0)>>
+	<<set $RESSevent.push("cow milking")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.dietCum > 0)>>
+<<if ($eventSlave.devotion < 20)>>
+<<if (($eventSlave.fetish != "cumslut") && ($eventSlave.fetish != "masochist")  && ($eventSlave.fetishStrength < 60)) || ($eventSlave.fetishKnown == 0)>>
+  <<set $RESSevent.push("retching cum feeding")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSSubjugationist != "unset")>>
+<<if ($eventSlave.race != $arcologies[0].FSSubjugationistRace)>>
+<<if ($week-$eventSlave.weekAcquired > 1)>>
+<<if ($week-$eventSlave.weekAcquired < 10)>>
+<<if ($eventSlave.devotion < -20)>>
+<<if ($eventSlave.trust > -20)>>
+<<if ($eventSlave.health > -20)>>
+<<set $toSearch = $eventSlave.race>>
+<<if ($toSearch.indexOf("surgically") == -1)>>
+<<if ($eventSlave.indentureRestrictions < 1)>>
+  <<set $RESSevent.push("subjugation blues")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.accent < 3)>>
+<<if ($eventSlave.dietCum > 0)>>
+<<if ($eventSlave.diet == "fattening")>>
+<<if ($eventSlave.trust > -50)>>
+<<if ($eventSlave.fetish != "cumslut")>>
+<<if ($eventSlave.weight < -30)>>
+<<if ($eventSlave.health > -80)>>
+<<if ($eventSlave.behavioralFlaw != "anorexic")>>
+<<if ($eventSlave.sexualFlaw != "self hating")>>
+<<if ($eventSlave.fetishStrength <= 60) || ($eventSlave.fetishKnown != 1)>>
+  <<set $RESSevent.push("too thin for cum diet")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.drugs == "intensive breast injections">>
+<<if $eventSlave.boobs <= 8000>>
+<<if $eventSlave.boobs > 2000>>
+<<if $eventSlave.devotion <= 50>>
+<<if $eventSlave.devotion >= -50>>
+<<if $eventSlave.trust >= -50>>
+<<if $eventSlave.fetish != "boobs">>
+<<if $eventSlave.intelligence > -2>>
+	<<set $RESSevent.push("breast expansion blues")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.age > 35>>
+<<if $eventSlave.speechRules != "restrictive">>
+<<if ($eventSlave.assignment == "serve the public") || ($eventSlave.assignment == "whore")>>
+<<if $eventSlave.devotion > -20>>
+<<if $eventSlave.devotion <= 95>>
+	<<set $RESSevent.push("ara ara")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.anus > 3>>
+<<if $eventSlave.devotion > 50>>
+<<if $eventSlave.trust > 50>>
+	<<set $RESSevent.push("gaped asshole")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.health > 90>>
+<<if $eventSlave.muscles > 5>>
+<<if $eventSlave.weight <= 30>>
+<<if $eventSlave.weight >= -30>>
+<<if $eventSlave.trust > 50>>
+<<if $eventSlave.devotion > 50>>
+	<<set $RESSevent.push("passing declaration")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.trust < -50>>
+<<if $eventSlave.devotion < 50>>
+	<<set $RESSevent.push("im scared")>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.fetish == "sadist">>
+<<if $eventSlave.fetishStrength > 20>>
+<<if $arcade != 0>>
+<<if $eventSlave.trust > -20>>
+<<if $eventSlave.devotion > 50>>
+	<<set $RESSevent.push("arcade sadist")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.dick == 0>>
+<<if $eventSlave.vagina == -1>>
+<<if canDoAnal($eventSlave)>>
+<<if $eventSlave.energy > 20>>
+<<if $eventSlave.devotion >= -50>>
+<<if $eventSlave.fetish != "buttslut" || $eventSlave.fetishStrength <= 20>>
+	<<set $RESSevent.push("desperate null")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.devotion >= -20>>
+<<if $eventSlave.trust > 20>>
+<<if $eventSlave.boobs > 2000>>
+	<<set $RESSTRevent.push("back stretch")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.devotion > 20>>
+<<if $eventSlave.trust > 20>>
+<<if $eventSlave.speechRules != "restrictive">>
+<<if setup.modestClothes.includes($eventSlave.clothes)>>
+	<<set $RESSTRevent.push("modest clothes")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<</if>> /* closes mute exempt */
+
+<<if ($eventSlave.devotion >= 20)>>
+<<if ($eventSlave.collar == "ball gag" || $eventSlave.collar == "bit gag" || $eventSlave.collar == "dildo gag")>>
+	<<set $RESSTRevent.push("gagged slave")>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.devotion > 20>>
+<<if $eventSlave.butt > 5>>
+<<if $eventSlave.anus != 0>>
+<<if $eventSlave.vagina != 0>>
+<<if $eventSlave.clothes != "no clothing">>
+<<if $eventSlave.clothes != "body oil">>
+<<if $eventSlave.clothes != "a toga">>
+<<if $eventSlave.clothes != "a kimono">>
+<<if $eventSlave.clothes != "shibari ropes">>
+<<if $eventSlave.clothes != "a slutty maid outfit">>
+<<if $eventSlave.clothes != "a string bikini">>
+<<if $eventSlave.clothes != "a chattel habit">>
+<<if $eventSlave.clothes != "a slave gown">>
+<<if $eventSlave.clothes != "a halter top dress">>
+<<if $eventSlave.clothes != "a ball gown">>
+<<if $eventSlave.clothes != "a mini dress">>
+<<if $eventSlave.clothes != "harem gauze">>
+	<<set $RESSevent.push("ass fitting")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.trust > 20>>
+<<if $eventSlave.energy > 40>>
+<<if canSee($eventSlave)>>
+	<<set $RESSevent.push("comfortable seat")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.vaginaLube > 1>>
+<<if $eventSlave.devotion > 20>>
+<<if $eventSlave.vagina > -1>>
+	<<set $RESSevent.push("moist pussy")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.devotion <= 20>>
+<<if $eventSlave.trust <= -20>>
+<<if $eventSlave.dick > 0>>
+<<if $eventSlave.attrXY < 50>>
+	<<set $RESSevent.push("transition anxiety")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.devotion >= -150>>
+<<if $eventSlave.devotion <= 50>>
+	<<set $events.push("RE standard punishment")>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.boobs > 600>>
+<<if $eventSlave.boobShape == "torpedo-shaped">>
+<<if $eventSlave.devotion >= -50>>
+	<<set $RESSevent.push("torpedo squeeze")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.assignment == "serve the public">>
+<<if $eventSlave.fetishKnown == 1>>
+<<if $FSDegradationist == "unset">>
+<<if $arcologyUpgrade.drones == 1>>
+	<<set $RESSevent.push("mean girls")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.balls > 0)>>
+<<if ($eventSlave.hormones > 0)>>
+<<if ($hormoneUpgradeMood == 0)>>
+<<if ($eventSlave.trust >= -50)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.devotion <= 50)>>
+	<<set $RESSevent.push("orchiectomy please")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.devotion > 50)>>
+	<<set $RESSevent.push("shower slip")>>
+	<<if ($eventSlave.amp < 0)>>
+		<<set $RESSevent.push("plimb help")>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion < -50)>>
+<<if ($eventSlave.trust > 20)>>
+	<<if ($suppository != 0)>>
+	<<if ($eventSlave.fetish != "buttslut")>>
+		<<set $RESSevent.push("suppository resistance")>>
+	<</if>>
+	<</if>>
+	<<if ($cockFeeder != 0)>>
+	<<if ($eventSlave.fetish != "cumslut")>>
+		<<set $RESSevent.push("cockfeeder resistance")>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.relationship <= -2)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.devotion > 50)>>
+	<<set $RESSevent.push("bonded love")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.devotion > 50)>>
+	<<set $RESSTRevent.push("objectifying visit")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > -10)>>
+<<if ($eventSlave.ID != $HeadGirl.ID)>>
+<<if ($eventSlave.ID != $Concubine.ID)>>
+	<<set $RESSevent.push("refreshment delivery")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.dick > 8)>>
+<<if ($eventSlave.balls > 0)>>
+<<if ($eventSlave.energy > 60)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.vagina != 0)>>
+<<if ($eventSlave.anus != 0)>>
+	<<set $RESSevent.push("dick wringing")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.balls > 0)>>
+<<if ($eventSlave.dickAccessory == "chastity") || ($eventSlave.dickAccessory == "combined chastity")>>
+<<if ($eventSlave.devotion <= 95)>>
+<<if ($eventSlave.energy > 50)>>
+<<if ($eventSlave.energy < 95)>>
+<<if ($eventSlave.devotion >= -20) || ($eventSlave.trust < -20)>>
+	<<set $RESSevent.push("cage relief")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($PC.dick > 0)>>
+<<if ($PC.boobs > 0)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.anus != 0)>>
+<<if (($eventSlave.attrXY <= 35) && ($eventSlave.attrXX > 65)) || (($eventSlave.attrXX <= 35) && ($eventSlave.attrXY > 65))>>
+	<<set $RESSevent.push("dickgirl PC")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if canTalk($eventSlave)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.trust > -10)>>
+<<if ($eventSlave.devotion >= -20) || ($eventSlave.trust < -20)>>
+	<<set $RESSevent.push("language lesson")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.energy > 40)>>
+<<if canSee($eventSlave)>>
+<<if ($eventSlave.trust >= -50)>>
+<<if ($eventSlave.devotion > 0)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if (($eventSlave.attrXX >= 50) && ($PC.boobs == 1)) || (($eventSlave.attrXY >= 50) && ($PC.dick == 1))>>
+	<<set $RESSevent.push("hot PC")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.trust <= 20)>>
+<<if ($eventSlave.trust >= -75)>>
+<<if ($eventSlave.devotion <= 30)>>
+<<if ($eventSlave.devotion >= -20)>>
+	<<set $RESSevent.push("like me")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.boobs > 1400)>>
+<<if ($eventSlave.boobsImplant == 0)>>
+<<if ($eventSlave.nipples != "tiny")>>
+<<if ($eventSlave.devotion > 20)>>
+	<<set $RESSevent.push("huge naturals")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.boobs > 800)>>
+<<if ($eventSlave.boobsImplant > 1)>>
+<<if ($eventSlave.devotion > 20)>>
+	<<set $RESSTRevent.push("implant inspection")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion < -20)>>
+<<if ($eventSlave.trust >= -20)>>
+<<if ($eventSlave.clothes == "uncomfortable straps")>>
+	<<set $RESSevent.push("bondage gear")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.labia > 1)>>
+<<if ($eventSlave.muscles > 30)>>
+<<if ($eventSlave.vagina > -1)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+	<<set $RESSevent.push("inconvenient labia")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 20) || ($eventSlave.trust < -20)>>
+<<if ($eventSlave.addict > 20)>>
+<<if ($eventSlave.aphrodisiacs > 0)>>
+	<<set $RESSevent.push("obedient addict")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($seeExtreme == 1)>>
+<<if ($eventSlave.devotion < -50)>>
+<<if ($eventSlave.trust >= -50)>>
+<<if ($eventSlave.assignment != "stay confined")>>
+<<if ($eventSlave.heels != 1)>>
+	<<set $RESSevent.push("escapee")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.trust >= -50)>>
+<<if ($eventSlave.behavioralFlaw == "gluttonous")>>
+<<if ($eventSlave.diet == "restricted")>>
+	<<set $RESSevent.push("diet")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion <= 20)>>
+<<if ($eventSlave.devotion >= -50)>>
+	<<set $RESSevent.push("resistant shower")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.speechRules != "restrictive")>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.trust >= -20)>>
+<<if ($eventSlave.energy > 75)>>
+<<if ($eventSlave.fetish != "buttslut")>>
+<<if ($eventSlave.vagina != 0) || ($eventSlave.anus != 0)>>
+	<<set $RESSevent.push("night visit")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.releaseRules == "restrictive")>>
+<<if $eventSlave.need>>
+  <<if ($eventSlave.devotion <= 95)>>
+  <<if ($eventSlave.trust >= -20)>>
+  <<if ($eventSlave.dickAccessory != "chastity" && $eventSlave.dickAccessory != "combined chastity") || ($eventSlave.dick == 0)>>
+	<<set $RESSevent.push("forbidden masturbation")>>
+  <</if>>
+  <</if>>
+  <</if>>
+  <<if ($eventSlave.devotion >= -20)>>
+  <<if ($eventSlave.trust >= -50)>>
+	<<set $RESSevent.push("desperately horny")>>
+  <</if>>
+  <</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.releaseRules != "restrictive") >>
+<<if ($eventSlave.dick != 0) >>
+<<if ($eventSlave.hormones < 1)>>
+<<if ($eventSlave.balls > 0)>>
+<<if ($eventSlave.dickAccessory != "chastity" && $eventSlave.dickAccessory != "combined chastity")>>
+<<if ($eventSlave.vaginalAccessory != "chastity belt") && ($eventSlave.vaginalAccessory != "combined chastity")>>
+	<<set $RESSevent.push("slave dick on slave")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.muscles > 30)>>
+<<if ($eventSlave.anus != 0) || $PC.dick == 0>>
+<<if ($eventSlave.vagina != 0) || $PC.dick == 0>>
+	<<set $RESSevent.push("muscles")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.lactation > 1)>>
+<<if ($eventSlave.vaginalAccessory != "chastity belt")  && $eventSlave.vaginaAccessory != "combined chastity">>
+	<<set $RESSevent.push("milkgasm")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.waist < -95)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > -20)>>
+<<if ($eventSlave.anus > 0)>>
+	<<set $RESSevent.push("devoted waist")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.entertainSkill >= 100)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.assignment == "serve the public")>>
+	<<set $RESSevent.push("masterful entertainer")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.whoreSkill >= 100)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.assignment == "whore")>>
+	<<set $RESSevent.push("masterful whore")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.dick > 0)>>
+<<if ($eventSlave.balls == 0)>>
+<<if ($eventSlave.ovaries == 0)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.trust < -50)>>
+<<if ($eventSlave.anus > 0)>>
+	<<set $RESSevent.push("resistant gelding")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if isFertile($eventSlave)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($PC.dick != 0)>>
+<<if ($eventSlave.fetish == "pregnancy") || ($eventSlave.energy > 95)>>
+<<if ($eventSlave.fetishKnown == 1)>>
+<<if ($eventSlave.vagina > 0)>>
+<<if ($eventSlave.anus > 0)>>
+	<<set $RESSevent.push("impregnation please")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.buttplug == "large plug") || ($eventSlave.buttplug == "long, large plug")>>
+<<if ($eventSlave.assignment != "stay confined")>>
+<<if ($eventSlave.devotion <= 20)>>
+<<if ($eventSlave.trust >= -50)>>
+<<if ($eventSlave.anus < 3)>>
+	<<set $RESSevent.push("plug disobedience")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if (($eventSlave.assignment == "whore") || ($eventSlave.assignment == "serve the public"))>>
+<<if ($eventSlave.devotion <= 50)>>
+	<<set $RESSevent.push("used whore")>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.assignment == "serve the public">>
+<<if $eventSlave.devotion >= -20>>
+	<<set $RESSevent.push("nice guys")>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.assignment == "please you">>
+<<if $eventSlave.devotion > 20>>
+	<<set $RESSevent.push("lazy evening")>>
+<</if>>
+<</if>>
+
+<<if $eventSlave.height < 155>>
+<<if $eventSlave.devotion > 20>>
+<<if $eventSlave.trust <= 95>>
+	<<set $RESSevent.push("devoted shortstack")>>
+<</if>>
+<</if>>
+<</if>>
+
+<</if>> /* closes amp/crawling exempt */
+
+<<if canTalk($eventSlave)>>
+
+<<if ($eventSlave.speechRules != "restrictive")>>
+<<if ($eventSlave.boobsImplant > 400)>>
+<<if (($eventSlave.lipsImplant + $eventSlave.buttImplant) > 3)>>
+<<if ($eventSlave. boobs < 90) || ($eventSlave. butt < 8)>>
+<<if ($eventSlave.relation == 0)>>
+	<<set $RESSevent.push("surgery addict")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.assignment == "please you")>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > -20)>>
+<<if ($eventSlave.anus > 0)>>
+	<<if ($eventSlave.vagina != 0)>>
+	<<if ($eventSlave.dickAccessory != "chastity" && $eventSlave.dickAccessory != "combined chastity") || ($eventSlave.dick == 0)>>
+	  <<if ($corpIncorporated != 0)>>
+		<<set $RESSevent.push("shift sleep")>>
+	  <</if>>
+	  <<if ($eventSlave.releaseRules == "permissive")>>
+		<<set $RESSevent.push("shift masturbation")>>
+	  <</if>>
+	  <<if ($eventSlave.entertainSkill >= 60)>>
+		<<set $RESSevent.push("shift doorframe")>>
+	  <</if>>
+	<</if>>
+	<</if>>
+	<<if ($PC.vagina == 1)>>
+	<<if ($eventSlave.dick == 0)>>
+	<<if ($fuckSlaves > 2)>>
+		<<set $RESSevent.push("fucktoy tribbing")>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.speechRules != "restrictive") >>
+<<if ($eventSlave.oralCount+$eventSlave.vaginalCount+$eventSlave.analCount > 900)>>
+<<if ($eventSlave.oralCount+$eventSlave.vaginalCount+$eventSlave.analCount < 1100)>>
+<<if ($eventSlave.vagina != 0)>>
+<<if ($eventSlave.anus > 0)>>
+	<<set $RESSevent.push("millenary")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.assignment == "stay confined")>>
+<<if ($eventSlave.devotion <= 50)>>
+	<<set $RESSevent.push("solitary desperation")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.speechRules == "restrictive")>>
+<<if ($eventSlave.devotion > 60)>>
+<<if ($eventSlave.trust >= -20)>>
+	<<set $RESSevent.push("restricted profession")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.speechRules == "restrictive")>>
+<<if ($eventSlave.intelligence > 0)>>
+<<if ($eventSlave.trust >= -20)>>
+<<if ($eventSlave.devotion <= 20)>>
+	<<set $RESSevent.push("restricted smart")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($expansionRequestsAllowed > 0)>>
+<<if ($eventSlave.drugs == "no drugs")>>
+<<if ($eventSlave.speechRules == "permissive")>>
+<<if ($eventSlave.health > 20)>>
+<<if ($eventSlave.devotion >= -20)>>
+<<if ($eventSlave.trust > 20)>>
+<<if ($arcologies[0].FSSlimnessEnthusiast == "unset")>>
+	<<set $RESSevent.push("injections please")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.assignment == "serve the public")>>
+<<if ($eventSlave.devotion > 50)>>
+	<<set $RESSevent.push("serve the public devoted")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.behavioralFlaw == "bitchy")>>
+<<if canSee($eventSlave)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust >= -20)>>
+	<<set $RESSevent.push("obedient bitchy")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<</if>> /* closes mute exempt */
+
+<<if ($cockFeeder == 0)>>
+<<if ($eventSlave.intelligence < -1)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.devotion >= -20) || ($eventSlave.trust < -20)>>
+	<<set $RESSevent.push("obedient idiot")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.boobs > 15000)>>
+	<<set $RESSevent.push("tittymonster inspection")>>
+<</if>>
+
+<<if ($assistant > 1)>>
+<<if ($eventSlave.fetishKnown == 1)>>
+<<if ($eventSlave.energy > 95)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.releaseRules == "permissive")>>
+	<<set $RESSevent.push("nympho with assistant")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 50)>>
+<<if ($eventSlave.assignment == "please you") || ($eventSlave.assignment == "serve in the master suite") || ($eventSlave.assignment == "be your Concubine")>>
+	<<set $RESSevent.push("bed snuggle")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.minorInjury == "sore ass")>>
+<<if ($eventSlave.devotion <= 50)>>
+	<<set $RESSevent.push("sore ass")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.sexualFlaw == "hates oral")>>
+<<if ($PC.dick != 0)>>
+<<if ($eventSlave.devotion <= 50)>>
+	<<set $RESSevent.push("hates oral")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.anus == 0)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 20)>>
+<<if ($eventSlave.speechRules != "restrictive")>>
+	<<set $RESSevent.push("devoted anal virgin")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($seeExtreme == 1)>>
+<<if ($eventSlave.balls > 1)>>
+<<if ($eventSlave.devotion <= 20)>>
+<<if ($eventSlave.trust <= 20)>>
+<<if ($eventSlave.speechRules != "restrictive")>>
+	<<set $RESSevent.push("fearful balls")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.assignment == "be a servant")>>
+	<<set $RESSevent.push("scrubbing")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.devotion <= 20)>>
+<<if ($eventSlave.assignment == "work as a servant") || ($eventSlave.assignment == "be a servant")>>
+<<if ($eventSlave.clothes == "a slutty maid outfit") || ($eventSlave.clothes == "a nice maid outfit")>>
+	<<set $RESSevent.push("servant maid")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.speechRules != "restrictive")>>
+<<if canDoVaginal($eventSlave)>>
+<<if ($eventSlave.fetish != "buttslut")>>
+<<if ($eventSlave.vagina == 0)>>
+<<if ($eventSlave.anus != 0)>>
+<<if ($eventSlave.oralCount+$eventSlave.vaginalCount+$eventSlave.analCount > 100)>>
+	<<set $RESSevent.push("unhappy virgin")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.aphrodisiacs > 1)>>
+<<if ($eventSlave.speechRules == "restrictive") && ($eventSlave.releaseRules !== "permissive")>>
+	<<set $RESSevent.push("extreme aphrodisiacs")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.releaseRules != "restrictive") >>
+<<if ($eventSlave.clit > 2)>>
+<<if ($eventSlave.vaginalAccessory != "chastity belt" && $eventSlave.vaginalAccessory != "combined chastity")>>
+	<<set $RESSevent.push("slave clit on slave")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.releaseRules != "restrictive") >>
+<<if ($eventSlave.dick > 4) >>
+<<if ($eventSlave.hormones < 1)>>
+<<if ($eventSlave.balls != 0)>>
+<<if ($eventSlave.dickAccessory != "chastity" && $eventSlave.dickAccessory != "combined chastity")>>
+	<<set $RESSevent.push("slave dick huge")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.heels == 1) >>
+<<if ($eventSlave.shoes == "heels") || ($eventSlave.shoes == "extreme heels")>>
+<<if ($eventSlave.anus != 0)>>
+	<<set $RESSevent.push("heels")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.releaseRules != "restrictive") >>
+<<if ($eventSlave.anus > 2)>>
+<<if ($eventSlave.fetish == "buttslut") || ($eventSlave.energy > 95)>>
+<<if ($eventSlave.fetish != "none")>>
+<<if canDoAnal($eventSlave)>>
+	<<set $RESSevent.push("loose buttslut")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.assignment == "whore")>>
+<<if ($eventSlave.devotion < -20) && ($eventSlave.trust > -20)>>
+	<<set $RESSevent.push("whore rebellious")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.amp == 1)>>
+	<<if ($eventSlave.devotion > 20)>>
+	<<if ($eventSlave.anus > 0)>>
+		<<set $RESSevent.push("devoted amp")>>
+	<</if>>
+	<</if>>
+	<<if ($eventSlave.assignment == "rest")>>
+		<<set $RESSevent.push("resting amp")>>
+	<</if>>
+<</if>>
+
+<<if ($eventSlave.boobs < 500)>>
+<<if ($eventSlave.butt < 3)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.devotion > 20) && ($eventSlave.trust > -20)>>
+<<if ($eventSlave.anus > 0)>>
+<<if ($eventSlave.weight <= 10)>>
+<<if ($eventSlave.muscles <= 30)>>
+	<<set $RESSevent.push("obedient girlish")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.boobs > 1200)>>
+<<if ($eventSlave.areolae > 3)>>
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.anus > 0)>>
+	<<set $RESSevent.push("shaped areolae")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.behavioralFlaw == "arrogant")>>
+<<if ($eventSlave.devotion < -50)>>
+<<if ($eventSlave.trust >= -50)>>
+	<<set $RESSevent.push("rebellious arrogant")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.preg > 20)>>
+	<<set $RESSevent.push("hugely pregnant")>>
+<</if>>
+
+<<if ($eventSlave.hormones > 0)>>
+<<if ($eventSlave.vagina == -1)>>
+<<if ($eventSlave.balls >= 0)>>
+<<if ($eventSlave.devotion > 20) || ($eventSlave.trust < -20)>>
+<<if ($eventSlave.devotion <= 50)>>
+<<if ($eventSlave.fetish != "buttslut")>>
+<<if ($eventSlave.speechRules == "permissive")>>
+	<<set $RESSevent.push("hormone dysfunction")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.vaginaPiercing > 1)>>
+<<if ($eventSlave.nipplesPiercing > 1)>>
+<<if ($eventSlave.clitPiercing > 1)>>
+<<if ($eventSlave.devotion > 20) || ($eventSlave.trust < -20)>>
+<<if ($eventSlave.devotion <= 50)>>
+	<<set $RESSevent.push("heavy piercing")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.fetishKnown == 1)>>
+<<if ($eventSlave.fetish == "cumslut") || ($eventSlave.energy > 95)>>
+<<if (($eventSlave.assignment == "whore") || ($eventSlave.assignment == "serve the public"))>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($PC.dick != 0)>>
+	<<set $RESSevent.push("cumslut whore")>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.anus == 0)>>
+<<if ($eventSlave.devotion < -20)>>
+<<if ($eventSlave.trust >= -20)>>
+	<<set $RESSevent.push("resistant anal virgin")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.relationship == 4)>>
+<<if ($eventSlave.devotion > 20)>>
+<<if ($eventSlave.trust > 20)>>
+	<<set $events.push("RE slave marriage")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.prestige == 0)>>
+
+<<if ($eventSlave.devotion > 50)>>
+<<if ($eventSlave.trust > 50)>>
+
+<<if ($eventSlave.entertainSkill >= 100)>>
+<<if ($eventSlave.assignment == "serve the public")>>
+	<<set $events.push("RE legendary entertainer")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.whoreSkill >= 100)>>
+<<if ($eventSlave.assignment == "whore")>>
+	<<set $events.push("RE legendary whore")>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.lactation > 0)>>
+<<if (($eventSlave.boobs-$eventSlave.boobsImplant) > 6000)>>
+<<if ($eventSlave.assignment == "get milked")>>
+	<<set $events.push("RE legendary cow")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.balls > 6)>>
+<<if ($eventSlave.dick > 6)>>
+<<if ($eventSlave.assignment == "work in the dairy") || ($eventSlave.assignment == "get milked")>>
+	<<set $events.push("RE legendary balls")>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if ($eventSlave.origin == "You sentenced her to enslavement as a punishment for attempted theft of a slave.") || ($eventSlave.origin == "She is an enslaved Daughter of Liberty.")>>
+<<if ($eventSlave.devotion > 95) && ($eventSlave.assignment == "please you")>>
+	<<set $events.push("RE former abolitionist")>>
+<</if>>
+<</if>>
+
+<</if>>
+<</if>>
+
+<</if>>
+
+/* NICKNAME EVENTS */
+
+<<if $nicknamesAllowed == 1>>
+<<set $toSearch = $eventSlave.slaveName.toLowerCase();>>
+<<if ($toSearch.indexOf("'") == -1)>>
+  <<if ($week-$eventSlave.weekAcquired >= 4)>>
+	<<set $events.push("RE nickname")>>
+	<<set $seed = 0>>
+  <</if>>
+<</if>> /* closes nickname check */
+<</if>> /* closes no nicknames option */
+
+<</if>> /* closes mindbreak exempt */
+
+<<if ($eventSlave.fetish == "mindbroken")>>
+<<if canWalk($eventSlave)>>
+	<<set $RESSevent.push("mindbroken morning")>>
+<</if>>
+<</if>>
+
+/* EVENT STRIPPING */
+
+<<if $normalizedEvents == 1>>
+  <<for $i = 0; $i < $events.length; $i++>>
+	<<if $events.count($events[$i]) > 1>>
+	  <<set $events.deleteAt($i), $i-->>
+	<</if>>
+  <</for>>
+<</if>>
+
+/* EVENT RANDOMIZATION */
+
+<<for $i = 0; $i < $RESSevent.length; $i++>>
+  <<set $events.push("RESS")>>
+<</for>>
+<<for $i = 0; $i < $RESSTRevent.length; $i++>>
+  <<set $events.push("RESSTR")>>
+<</for>>
+<<for $i = 0; $i < $RETSevent.length; $i++>>
+  <<set $events.push("RETS")>>
+<</for>>
+<<for $i = 0; $i < $RECIevent.length; $i++>>
+  <<set $events.push("RECI")>>
+<</for>>
+<<if $events.length == 0>>
+	<<set $events.push("RE no event")>>
+<</if>>
+<<if $cheatMode == 1>>
+  <<goto "random event select">>
+<<else>>
+  <<goto "random event roll">>
+<</if>>
+
+<</silently>>
+<</if>> /* CLOSES SLAVE SELECT */

@@ -1,0 +1,258 @@
+:: P citizens and civilians [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event">>
+
+<<if $assistant > 0>>
+	While working at your desk, you are accompanied by the luscious sound of $assistantName humming to herself, which she does to indicate she's working on a difficult task. After this goes on for a while,
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		her monstergirl avatar uses its tentacle hair to wave for your attention
+	<<case "shemale">>
+		her avatar helicopters its dick until she has your attention
+	<<case "amazon">>
+		her avatar jumps up and down for your attention, hooting cheerfully,
+	<<case "businesswoman">>
+		her avatar takes off its reading glasses, straightens its suit jacket,
+	<<case "goddess">>
+		her avatar hefts up her gravid body, glowing brighter than usual to get your attention,
+	<<case "schoolgirl">>
+		her schoolgirl avatar bounces up and down for your attention
+	<<default>>
+		her symbol glows to get your attention
+	<</switch>>
+	and says, "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I have a suggestion. At your request I have been reviewing historical slave societies for parallels with our current situation. I calculate it would be very advantageous to bind your mercenaries more closely to the arcology. It would be expensive, but if they were all given slaves, better weapons, and some sort of title, they would defend this place to the death."<<else>><<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> catches your attention as you work at your desk. It says, "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, a suggestion. Review of historical slave societies for parallels with your current situation is complete. Analysis indicates it would be advantageous to increase the loyalty of your mercenaries. It would be expensive, but if they were given slaves, better weapons, and an honorary title, they would defend the arcology with increased effectiveness."
+<</if>>
+
+<br><br>
+
+''This is a unique and very important opportunity'' and must not be taken lightly. //All of these choices have the same gameplay effect, and only differ in theme.//
+
+<br><br>
+
+<span id="result">
+<<link "Decline">>
+	<<replace "#result">>
+	The suggestion is absurd; no historical lessons are necessary for a world where drones and supercomputers rule the day. Your mercenaries will doubtless perform well enough as mercenaries.
+	<</replace>>
+<</link>>
+<br><<link "They shall be my Knights">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Knight-Captain reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Knights - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Knights">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<<if $arcologies[0].FSRomanRevivalist >= 10>>
+<br><<link "They shall be my Evocati">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Centurion reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Evocati - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons and bearing a Roman standard. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Evocati">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSAztecRevivalist >= 10>>\
+<<link "They shall be my Shorn Ones">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Centurion reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Shorn Ones - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons and bearing an Aztec standard adorned on a spear. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $nextButton = "Continue">>
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Shorn Ones">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSChineseRevivalist >= 10>>\
+<<link "They shall be my Imperial Guards">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "General of the Imperial Guard, reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Imperial Guards - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons and bearing an Imperial Chinese war banner. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $nextButton = "Continue">>
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Imperial Guards">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSEgyptianRevivalist >= 10>>
+<br><<link "They shall be my Medjay">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "First Medjay reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Medjay - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons and bearing a faux cheetah cloak. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Medjay">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSEdoRevivalist >= 10>>
+<br><<link "Naturally, they shall be the Samurai">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Your Samurai-Lord reports for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Samurai - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons, exterior plates styled after lacquered Samurai armor, and an enraged mask covering the face. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Samurai">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSArabianRevivalist >= 10>>
+<br><<link "They shall be my Janissaries">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Corbaci reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Janissaries - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons and cloaked in an outer garment of fine oriental silks. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Janissaries">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist >= 10>>
+<br><<link "They shall be the Knights Templar">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Inquisitor-General reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Knights Templar - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons and bearing a cloak emblazoned with the symbol of God. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Knights Templar">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSDegradationist >= 10>>
+<br><<link "They shall be my Immortals">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Satrap reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Immortals - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons and more than one wicked, curved blade. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Immortals">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSAssetExpansionist >= 10>>
+<br><<link "They shall be the Vast Legions">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "The Vast Legions reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Vast Legions - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of bulky, heavily armored prototype armor. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Vast Legions">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSTransformationFetishist >= 10>>
+<br><<link "They shall be the Surgical Corps">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Surgeon-General reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Surgical Corps - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest medical equipment. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Surgical Corps">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist >= 10>>
+<br><<link "They shall be the Inglorious Bitches">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Guess that makes me a bitch, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Inglorious Bitches - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor slathered in garish neon paint. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Inglorious Bitches">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderFundamentalist >= 10>>
+<br><<link "They shall be the Thousand Sons">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Allfather reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Thousand Sons - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, a private gym, and a suit of prototype armor that preserves a sample of the wearer's genetic material in the event of death. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Thousand Sons">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSPhysicalIdealist >= 10>>
+<br><<link "They shall be the Asgardians">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Foehammer reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Asgardians - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, a private gym, and a suit of prototype armor equipped with the latest weapons. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Asgardians">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSSupremacist >= 10>>
+<br><<link "They shall be the Knights of the Blood">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Knights of the Blood reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Knights of the Blood - are well looked after. They are each assigned a nice apartment, three freshly enslaved servants of inferior races, and a suit of prototype armor equipped with the latest weapons. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Knights of the Blood">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist >= 10>>
+<br><<link "They shall be the Knights of the Purge">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Knights of the Purge reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Knights of the Purge - are well looked after. They are each assigned a nice apartment, three freshly enslaved servants of the inferior race, and a suit of prototype armor equipped with the latest weapons. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Knights of the Purge">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSPaternalist >= 10>>
+<br><<link "They shall be the Peacekeepers">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Chief Peacekeeper reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Peacekeepers - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest advancements in non-lethal weaponry. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Peacekeepers">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist >= 10>>
+<br><<link "They shall be the Purifiers">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Master Purifier reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Purifiers - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with a cleansing flamethrower. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Purifiers">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast >= 10>>
+<br><<link "They shall be the Abstemious">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Lord-Abstinent reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Abstemious - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of sleek prototype armor equipped with advanced restraining weapons. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Abstemious">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+<<if $arcologies[0].FSPastoralist >= 10>>
+<br><<link "They shall be the Rangers">>
+	<<replace "#result">>
+	You ask for a meeting with your mercenaries' captain and lay out a proposal for a new contract between you over $PC.refreshment. As he reviews the terms, he looks skeptical, then surprised, then interested, and finally, he breaks out into laughter. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," he says, "you have no idea how fun this is going to be." He rises and gives you a short bow. "Lead Ranger reporting for duty, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>." The mercenaries - no, the Rangers - are well looked after. They are each assigned a nice apartment, a freshly enslaved servant, and a suit of prototype armor equipped with the latest weapons - and an improbably massive revolver on the hip. Word of the innovation runs through the Free Cities @@.green;like wildfire.@@
+	<<set $rep += 1000>>
+	<<set $cash -= 20000>>
+	<<set $mercenaries = 5>>
+	<<set $mercenariesTitle = "Rangers">>
+	<</replace>>
+<</link>>  <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤20000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤20000 and incur significant upkeep costs//<</if>>
+<</if>>
+</span>

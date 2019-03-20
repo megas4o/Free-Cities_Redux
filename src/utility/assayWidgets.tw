@@ -1,0 +1,1296 @@
+:: assay widgets [widget nobr]
+
+<<widget "Beauty">>
+
+<<modScore $args[0]>>
+<<if $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+	<<set $modded += 1>>
+<<elseif $args[0].corsetPiercing == 0 && $piercingScore < 3 && $tatScore < 2>>
+	<<set $unmodded += 1>>
+<</if>>
+<<if $args[0].vagina == -1>>
+	<<set $XY += 1>>
+<<else>>
+	<<set $XX += 1>>
+<</if>>
+<<if $args[0].age >= 30>>
+	<<set $old += 1>>
+<<else>>
+	<<set $young += 1>>
+<</if>>
+
+<<set $beauty = 0>>
+
+<<if $args[0].fuckdoll == 0>> /* NOT A FUCKDOLL */
+
+<<set $beauty += 150 - ($args[0].age*3) + (Math.min($args[0].health,100)/5) - ($args[0].waist/20) - ($args[0].muscles/30) +($args[0].lips/10) + ($args[0].face/5) +(1.5*$args[0].butt) - (3*$args[0].dick) - (2*$args[0].balls) + ($args[0].clit) + (($args[0].height-160)/10) + ($args[0].voice) + (3*$args[0].intelligence) + ($args[0].entertainSkill/10) + ($args[0].whoreSkill/10) + (2*$args[0].hips)>>
+
+<<if $arcologies[0].FSDegradationist != "unset">>
+	<<set $beauty -= ($arcologies[0].FSDegradationist/10)*$args[0].intelligence>>
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalistLawBimbo == 1>>
+	<<set $beauty -= 6*$args[0].intelligence>>
+<</if>>
+
+<<if $args[0].teeth == "crooked">>
+	<<set $beauty -= 3>>
+<<elseif $args[0].teeth != "normal">>
+	<<set $beauty -= 1>>
+<</if>>
+
+<<if $args[0].faceShape == "masculine">>
+	<<if ($arcologies[0].FSGenderRadicalist != "unset")>>
+	<<set $beauty -= (2-($arcologies[0].FSGenderRadicalist/25))*($args[0].face/30)>>
+	<<elseif ($arcologies[0].FSGenderFundamentalist != "unset")>>
+	<<set $beauty -= (2+($arcologies[0].FSGenderFundamentalist/25))*($args[0].face/30)>>
+	<<else>>
+	<<set $beauty -= 2*($args[0].face/30)>>
+	<</if>>
+<<elseif $args[0].faceShape == "androgynous">>
+	<<if ($arcologies[0].FSGenderRadicalist != "unset")>>
+	<<set $beauty -= (0-($arcologies[0].FSGenderRadicalist/25))*($args[0].face/30)>>
+	<<elseif ($arcologies[0].FSGenderFundamentalist != "unset")>>
+	<<set $beauty -= ($arcologies[0].FSGenderFundamentalist/25)*($args[0].face/30)>>
+	<<else>>
+	<<set $beauty -= $args[0].face/30>>
+	<</if>>
+<<elseif $args[0].faceShape is "exotic">>
+	<<set $beauty += 2*($args[0].face/30)>>
+<<elseif $args[0].faceShape is "sensual">>
+	<<set $beauty += 2+($args[0].face/30)>>
+<<elseif $args[0].faceShape is "cute">>
+	<<set $beauty += 4>>
+<</if>>
+
+<<if $args[0].brand != 0>>
+	<<if $rep > 10000>>
+	<<set $beauty += 1>>
+	<<elseif $rep < 5000>>
+	<<set $beauty -= 1>>
+	<</if>>
+<</if>>
+
+<<if $args[0].minorInjury != 0>>
+	<<set $beauty -= 2>>
+<</if>>
+
+<<if $args[0].cSec == 1>>
+	<<set $beauty -= 2>>
+<</if>>
+
+<<if $args[0].nails > 0>><<set $beauty += 1>><</if>>
+<<if $args[0].makeup > 0>><<set $beauty += 1>><</if>>
+
+<<if ($arcologies[0].FSTransformationFetishist > 20) || ($arcologies[0].FSDegradationist > 20)>>
+	<<if $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+	<<set $beauty += 8+($modScore*0.25)>>
+	<<elseif $modScore > 7>>
+	<<set $beauty += $modScore-7>>
+	<</if>>
+<<elseif ($arcologies[0].FSBodyPurist > 20) || ($arcologies[0].FSPaternalist > 20)>>
+	<<if $modScore <= 7>>
+	<<set $beauty += 10>>
+	<<else>>
+	<<set $beauty += 15-$modScore>>
+	<</if>>
+<<else>>
+	<<if $modScore <= 7>>
+	<<set $beauty += $modScore>>
+	<<elseif $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+	<<set $beauty += 11>>
+	<<else>>
+	<<set $beauty += 7+(0.5*($modScore-7))>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSupremacist != "unset">>
+<<if $args[0].race != $arcologies[0].FSSupremacistRace>>
+	<<set $beauty += ($arcologies[0].FSSupremacist/30)+$arcologies[0].FSSupremacistLawME>>
+<</if>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+<<if $args[0].race == $arcologies[0].FSSubjugationistRace>>
+	<<set $beauty += ($arcologies[0].FSSubjugationist/20)+$arcologies[0].FSSubjugationistLawME>>
+<</if>>
+<</if>>
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+<<if ($args[0].nationality == "Japanese") || ($args[0].nationality == "Edo Revivalist")>>
+	<<set $beauty += ($arcologies[0].FSEdoRevivalist/20)>>
+<</if>>
+<</if>>
+<<if $arcologies[0].FSChineseRevivalist != "unset">>
+<<if ($args[0].nationality == "Chinese") || ($args[0].nationality == "Chinese Revivalist")>>
+	<<set $beauty += ($arcologies[0].FSChineseRevivalist/20)>>
+<</if>>
+<</if>>
+
+<<if $args[0].race == "white">>
+	<<set $beauty += 4>>
+<<elseif $args[0].race == "surgically altered to look white">>
+	<<set $beauty += 2>>
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<if $args[0].age >= 30>>
+		<<set $beauty -= ($arcologies[0].FSYouthPreferentialist/30)+$arcologies[0].FSYouthPreferentialistLaw>>
+	<<else>>
+		<<set $beauty += ($arcologies[0].FSYouthPreferentialist/20)-$arcologies[0].FSYouthPreferentialistLaw>>
+	<</if>>
+	<<if $args[0].ageImplant>><<set $beauty += ($args[0].age-25)/3>><</if>>
+<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<if $args[0].age >= 30>>
+		<<set $beauty += ($arcologies[0].FSMaturityPreferentialist/20)+$arcologies[0].FSMaturityPreferentialistLaw>>
+	<<else>>
+		<<set $beauty -= ($arcologies[0].FSMaturityPreferentialist/30)-$arcologies[0].FSMaturityPreferentialistLaw>>
+	<</if>>
+	<<if $args[0].ageImplant>><<set $beauty += ($args[0].age-25)/5>><</if>>
+<<else>>
+	<<if $args[0].ageImplant>><<set $beauty += ($args[0].age-25)/4>><</if>>
+<</if>>
+
+<<if ($args[0].markings != "none")>>
+	<<if ($args[0].markings is "beauty mark")>>
+	<<if ($args[0].face > 40)>>
+		<<set $beauty += 2>>
+	<<elseif ($args[0].face < -10)>>
+		<<set $beauty -= 2>>
+	<</if>>
+	<<elseif ($args[0].markings == "birthmark")>>
+	<<if ($args[0].prestige > 0)>>
+		<<set $beauty += 2>>
+	<<else>>
+		<<set $beauty -= 2>>
+	<</if>>
+	<<else>>
+	<<if ($args[0].skin == "pale") || ($args[0].skin == "fair")>>
+		<<set $beauty += 1>>
+		<<if ($args[0].hColor == "red")>>
+		<<set $beauty += 1>>
+		<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if setup.entertainmentCareers.includes($args[0].career)>>
+	<<set $beauty += 1>>
+<<elseif ($week-$args[0].weekAcquired >= 20) && ($args[0].entertainSkill >= 100)>>
+	<<set $beauty += 1>>
+<</if>>
+
+<<if $seeAge == 1>>
+<<if $args[0].age == 18>>
+	<<set $beauty += 1>>
+	<<if $args[0].birthWeek == 0>>
+	<<set $beauty += 0.8*$beauty>>
+	<<elseif $args[0].birthWeek < 4>>
+	<<set $beauty += 0.1*$beauty>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<else>> /* FUCKDOLL */
+
+<<set $beauty += 100 + ($args[0].waist/20) - ($args[0].muscles/30) +($args[0].lips/10) + ($args[0].face/10) +(1.5*$args[0].butt) - (3*$args[0].dick) - (2*$args[0].balls) + ($args[0].clit) + (($args[0].height-160)/10) + (2*$args[0].hips)>>
+
+<</if>> /* CLOSES FUCKDOLL CHECK */
+
+<<if ($arcologies[0].FSTransformationFetishist > 20) || ($arcologies[0].FSAssetExpansionist > 20)>>
+	<<if $args[0].boobs <= 500>>
+	<<set $beauty += (0.02*($args[0].boobs-250))>>
+	<<elseif $args[0].boobs <= 1500>>
+	<<set $beauty += 5+(0.015*($args[0].boobs-500))>>
+	<<elseif $args[0].boobs <= 3000>>
+	<<set $beauty += 20+(0.01*($args[0].boobs-1500))>>
+	<<else>>
+	<<set $beauty += 50+(0.005*($args[0].boobs-3000))>>
+	<</if>>
+	<<if $args[0].butt <= 2>>
+	<<set $beauty += (2*($args[0].butt-1))>>
+	<<elseif $args[0].butt <= 4>>
+	<<set $beauty += 2+(1.5*($args[0].butt-2))>>
+	<<else>>
+	<<set $beauty += 5+(1*($args[0].butt-4))>>
+	<</if>>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast > 20)>>
+	<<if $args[0].boobs <= 500>>
+	<<set $beauty += (0.05*($args[0].boobs))>>
+	<<elseif $args[0].boobs <= 1000>>
+	<<set $beauty += 25+(0.01*($args[0].boobs-500))>>
+	<<elseif $args[0].boobs <= 3000>>
+	<<set $beauty += 30>>
+	<<else>>
+	<<set $beauty += 30-(0.005*($args[0].boobs-3000))>>
+	<</if>>
+	<<if $args[0].butt <= 3>>
+	<<set $beauty += (3*($args[0].butt-1))>>
+	<<elseif $args[0].butt <= 5>>
+	<<set $beauty += 9>>
+	<<else>>
+	<<set $beauty += 9-(1*($args[0].butt-5))>>
+	<</if>>
+<<else>>
+	<<if $args[0].boobs <= 1200>>
+	<<set $beauty += (0.02*($args[0].boobs-200))>>
+	<<elseif $args[0].boobs <= 2400>>
+	<<set $beauty += 20+(0.01*($args[0].boobs-1200))>>
+	<<elseif $args[0].boobs <= 3600>>
+	<<set $beauty += 32+(0.005*($args[0].boobs-2400))>>
+	<<else>>
+	<<set $beauty += 38>>
+	<</if>>
+	<<if $args[0].butt <= 2>>
+	<<set $beauty += (2*($args[0].butt-1))>>
+	<<elseif $args[0].butt <= 4>>
+	<<set $beauty += 2+(1.5*($args[0].butt-2))>>
+	<<elseif $args[0].butt <= 8>>
+	<<set $beauty += 2+(1.5*($args[0].butt-2))>>
+	<<else>>
+	<<set $beauty += 9>>
+	<</if>>
+<</if>>
+
+<<if $args[0].hips < -1>>
+	<<if $args[0].butt > 2>>
+	<<if $arcologies[0].FSTransformationFetishist == "unset">>
+		<<set $beauty += 2-$args[0].butt>>
+	<<else>>
+		<<set $beauty += 1>>
+	<</if>>
+	<<else>>
+	<<set $beauty += 1>>
+	<</if>>
+<<elseif $args[0].hips < 0>>
+	<<if $args[0].butt > 4>>
+	<<if $arcologies[0].FSTransformationFetishist == "unset">>
+		<<set $beauty += 4-$args[0].butt>>
+	<<else>>
+		<<set $beauty += 1>>
+	<</if>>
+	<<else>>
+	<<set $beauty += 1>>
+	<</if>>
+<<elseif $args[0].hips > 1>>
+	<<if $args[0].butt <= 3>>
+	<<set $beauty += $args[0].butt-4>>
+	<<else>>
+	<<set $beauty += 1>>
+	<</if>>
+<<elseif $args[0].hips > 0>>
+	<<if $args[0].butt > 8>>
+	<<if $arcologies[0].FSTransformationFetishist == "unset">>
+		<<set $beauty += 8-$args[0].butt>>
+	<<else>>
+		<<set $beauty += 1>>
+	<</if>>
+	<<elseif $args[0].butt <= 2>>
+	<<set $beauty += $args[0].butt-3>>
+	<<else>>
+	<<set $beauty += 1>>
+	<</if>>
+<<else>>
+	<<if $args[0].butt > 6>>
+	<<if $arcologies[0].FSTransformationFetishist == "unset">>
+		<<set $beauty += 6-$args[0].butt>>
+	<<else>>
+		<<set $beauty += 1>>
+	<</if>>
+	<<elseif $args[0].butt <= 1>>
+	<<set $beauty += $args[0].butt-2>>
+	<<else>>
+	<<set $beauty += 1>>
+	<</if>>
+<</if>>
+
+<<if $args[0].boobs > 250>>
+<<if $args[0].boobShape == "perky">>
+	<<set $beauty += 1>>
+<<elseif $args[0].boobShape == "torpedo-shaped">>
+	<<set $beauty += 1>>
+<<elseif $args[0].boobShape == "downward-facing">>
+	<<set $beauty -= 1>>
+<<elseif $args[0].boobShape == "saggy">>
+	<<set $beauty -= 1>>
+<</if>>
+<</if>>
+
+<<if $args[0].nipples == "huge">>
+	<<set $beauty += 2>>
+<<elseif $args[0].nipples == "inverted">>
+	<<set $beauty += 1>>
+<<elseif $args[0].nipples == "puffy">>
+	<<set $beauty += 1>>
+<<elseif $args[0].nipples == "dick shaped">>
+	<<set $beauty += 1>>
+<<elseif $args[0].nipples == "tiny">>
+	<<set $beauty -= 1>>
+<</if>>
+
+<<if $args[0].anus > 3>>
+	<<set $beauty -= 1>>
+<</if>>
+<<if $args[0].vagina > 3>>
+	<<set $beauty -= 1>>
+<</if>>
+
+<<if ($args[0].hips > 1)>>
+	<<if ($args[0].weight < -30) || ($args[0].weight > 95)>>
+		<<set $beauty -= Math.abs($args[0].weight)/10>>
+	<</if>>
+<<elseif ($args[0].hips < -1)>>
+	<<if ($args[0].weight < -95) || ($args[0].weight > 30)>>
+		<<set $beauty -= Math.abs($args[0].weight)/10>>
+	<</if>>
+<<else>>
+	<<if Math.abs($args[0].weight) > 30>>
+		<<set $beauty -= Math.abs($args[0].weight)/10>>
+	<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSGenderRadicalist > 20) || ($arcologies[0].FSSlimnessEnthusiast > 20)>>
+	<<if $args[0].hips < 0>>
+	<<set $beauty += Math.abs($args[0].hips)>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<if $args[0].dick > 0>>
+	<<set $beauty += $args[0].dick*(1+($arcologies[0].FSGenderRadicalist/100))>>
+	<</if>>
+	<<if $args[0].scrotum > 0>>
+	<<set $beauty += $args[0].balls*(1+($arcologies[0].FSGenderRadicalist/200))>>
+	<</if>>
+	<<if $args[0].preg > 5>>
+	<<set $beauty = ($beauty*0.7)>>
+	<</if>>
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<if $args[0].scrotum > 0>>
+	<<set $beauty -= $args[0].balls*(1+($arcologies[0].FSGenderFundamentalist/200))>>
+	<</if>>
+	<<if $args[0].shoulders > $args[0].hips>>
+	<<if $args[0].boobs <= 2000*($args[0].shoulders-$args[0].hips)>>
+		<<set $beauty -= ($args[0].shoulders-$args[0].hips)*(1+($arcologies[0].FSGenderFundamentalist/200))>>
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $args[0].shoulders > $args[0].hips>>
+	<<if $args[0].boobs <= 2000*($args[0].shoulders-$args[0].hips)>>
+		<<set $beauty -= $args[0].shoulders-$args[0].hips>>
+	<</if>>
+	<</if>>
+	<<if $args[0].dick > 4>>
+		<<set $beauty += $args[0].dick - 4>>
+	<</if>>
+	<<if $args[0].scrotum > 4>>
+		<<set $beauty += $args[0].balls - 4>>
+	<</if>>
+	<<if $args[0].preg > 10>>
+		<<set $beauty = ($beauty*0.8)>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+<<if $args[0].muscles > 30>>
+	<<set $beauty += ($args[0].muscles*($arcologies[0].FSPhysicalIdealist/40))>>
+<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalistLawFuta != 0>>
+<<if $arcologies[0].FSGenderRadicalistLawFuta == 1>>
+	<<if $args[0].dick > 0>>
+	<<if $args[0].vagina > -1>>
+		<<set $beauty += 2*$args[0].dick>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[0].FSGenderRadicalistLawFuta == 2>>
+	<<if $args[0].dick > 0>>
+	<<if $args[0].balls > 0>>
+		<<set $beauty += $args[0].dick+$args[0].balls>>
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $args[0].butt >= 5>>
+	<<if $args[0].anus >= 2>>
+	<<if $args[0].hips >= 1>>
+	<<if $args[0].analSkill > 60>>
+		<<set $beauty += ($args[0].butt-5) + 2*($args[0].anus-2) + 4*($args[0].hips-1)>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($args[0].butt > 4) && ($args[0].boobs > 800)>>
+	<<if $arcologies[0].FSSlimnessEnthusiast == "unset">>
+	<<set $beauty += 1>>
+	<</if>>
+	<<set $stacked += 1>>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">>
+	<<set $beauty += ($arcologies[0].FSAssetExpansionist/20)>>
+	<<if canTalk($args[0])>>
+	<<if $args[0].voice == 3>>
+		<<set $beauty += ($arcologies[0].FSAssetExpansionist/40)>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if ($args[0].boobs < 500) && ($args[0].butt < 3) && ($args[0].weight <= 10) && ($args[0].muscles <= 30)>>
+	<<set $beauty += 3>>
+	<<set $slim += 1>>
+	<<if $arcologies[0].FSSlimnessEnthusiast > 20>>
+	<<set $beauty += ($arcologies[0].FSSlimnessEnthusiast/20)>>
+	<<if canTalk($args[0])>>
+	<<if $args[0].voice == 3>>
+		<<set $beauty += ($arcologies[0].FSSlimnessEnthusiast/40)>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $args[0].boobsImplant == 0 && $args[0].buttImplant == 0 && $args[0].waist >= -95 && $args[0].lipsImplant == 0 && $args[0].faceImplant <= 30>>
+	<<set $pure += 1>>
+	<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<set $beauty += ($arcologies[0].FSBodyPurist/20)>>
+	<</if>>
+	<<if $arcologies[0].FSTransformationFetishist == "unset">>
+	<<set $beauty += 2>>
+	<</if>>
+<<else>>
+	<<set $implanted += 1>>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">>
+	<<set $beauty += ($arcologies[0].FSTransformationFetishist/40)>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<if $args[0].faceImplant > 5>>
+		<<set $beauty -= ($arcologies[0].FSBodyPurist/100)*($args[0].faceImplant/10)>>
+	<</if>>
+<<elseif $arcologies[0].FSTransformationFetishist == "unset">>
+	<<if $args[0].faceImplant > 30>>
+		<<set $beauty -= ($args[0].faceImplant-30)/10>>
+	<</if>>
+<</if>>
+
+<<if canTalk($args[0]) == false>>
+	<<set $beauty -= 2>>
+<<else>>
+	<<if ($args[0].accent == 3)>>
+	<<set $beauty -= 1>>
+	<<elseif ($args[0].accent == 1)>>
+	<<set $beauty += 1>>
+	<</if>>
+<</if>>
+
+<<if $args[0].amp == 0>>
+<<elseif $args[0].amp == 1>>
+	<<set $beauty -= 3>>
+<<elseif $args[0].amp == -3>>
+<<elseif $args[0].amp == -5>>
+<<else>>
+	<<set $beauty -= 2>>
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalistLawBeauty + $arcologies[0].FSGenderRadicalistLawBeauty > 0>>
+<<if ($args[0].boobs >= 500)>>
+<<if ($args[0].boobs <= 800)>>
+<<if ($args[0].butt >= 3)>>
+<<if ($args[0].butt <= 4)>>
+<<if (Math.abs($args[0].weight) <= 30)>>
+<<if ($args[0].muscles <= 30)>>
+	<<set $beauty += 3>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionistCreed == 1>>
+<<if $nicaeaAssignment == $args[0].assignment>>
+	<<set $beauty += $nicaeaPower*2>>
+<</if>>
+<</if>>
+
+<<if $args[0].prestige > 0>>
+	<<set $beauty = $beauty+($beauty*$args[0].prestige*0.1)>>
+<</if>>
+
+<<if $beauty < 1>>
+	<<set $beauty = 1>>
+<<else>>
+	<<set $beauty = Math.trunc($beauty*0.5)>>
+<</if>>
+
+<</widget>>
+
+<<widget "FResult">>
+
+<<set $FResult = (3-$args[0].anus)+($args[0].muscles/30)>>
+
+<<set $seed = $oralUseWeight + $vaginalUseWeight + $analUseWeight>>
+
+<<if $seed > 0>>
+<<set $FResult += (6+$args[0].tonguePiercing)*($oralUseWeight/$seed)*($args[0].oralSkill/30)>>
+<<if $args[0].sexualFlaw == "cum addict">>
+	<<set $FResult += ($oralUseWeight/$seed)*($args[0].oralSkill/30)>>
+<</if>>
+<<if $args[0].vagina > -1>>
+<<if $args[0].vaginalAccessory != "chastity belt">>
+	<<set $FResult += 6*($vaginalUseWeight/$seed)*($args[0].vaginalSkill/30)>>
+	<<set $FResult += (3-$args[0].vagina)>>
+	<<set $FResult += ($args[0].vaginaLube)>>
+<</if>>
+<</if>>
+	<<set $FResult += 6*($analUseWeight/$seed)*($args[0].analSkill/30)>>
+<<if $args[0].sexualFlaw == "anal addict">>
+	<<set $FResult += ($analUseWeight/$seed)*($args[0].analSkill/30)>>
+<</if>>
+<</if>>
+
+<<if $args[0].fuckdoll == 0>> /* NOT A FUCKDOLL */
+
+<<if $args[0].relation != 0>>
+<<for $j = 0; $j < $slaves.length; $j++>>
+	<<if $slaves[$j].ID == $args[0].relationTarget>>
+		<<if $slaves[$j].assignment == $args[0].assignment>>
+		<<set $FResult += 2>>
+			<<if $arcologies[0].FSEgyptianRevivalist > 20>>
+				<<set $FResult += 2>>
+			<</if>>
+		<</if>>
+		<<break>>
+	<</if>>
+<</for>>
+<</if>>
+<<if $args[0].relationship > 0>>
+	<<for $j = 0; $j < $slaves.length; $j++>>
+	<<if $slaves[$j].ID == $args[0].relationshipTarget>>
+		<<if $slaves[$j].assignment == $args[0].assignment>>
+		<<set $FResult += 1>>
+		<</if>>
+		<<break>>
+	<</if>>
+	<</for>>
+<<elseif $args[0].relationship == -1>>
+	<<set $FResult += 2>>
+<</if>>
+<<if $args[0].rivalry != 0>>
+	<<for $j = 0; $j < $slaves.length; $j++>>
+	<<if $slaves[$j].ID == $args[0].rivalryTarget>>
+		<<if $slaves[$j].assignment == $args[0].assignment>>
+		<<set $FResult -= 1>>
+		<</if>>
+		<<break>>
+	<</if>>
+	<</for>>
+<</if>>
+
+<<if ($args[0].clitPiercing > 2)>>
+	<<set $FResult += 1>>
+<</if>>
+
+<<if ($args[0].fetishKnown == 1)>>
+<<if ($args[0].fetishStrength > 60)>>
+<<if ($args[0].fetish != "none")>>
+	<<set $FResult += $args[0].fetishStrength/5>>
+<</if>>
+<</if>>
+<</if>>
+<<if ($args[0].attrKnown == 1)>>
+<<set $FResult += Math.trunc($args[0].attrXX/20)>>
+<<set $FResult += Math.trunc($args[0].attrXY/20)>>
+<<if ($args[0].energy > 95)>>
+	<<set $FResult += 3>>
+<<elseif ($args[0].energy > 80)>>
+	<<set $FResult += 2>>
+<<elseif ($args[0].energy > 60)>>
+	<<set $FResult += 1>>
+<<elseif ($args[0].energy <= 40)>>
+	<<set $FResult -= 1>>
+<<elseif ($args[0].energy <= 20)>>
+	<<set $FResult -= 2>>
+<</if>>
+<</if>>
+
+<<if ($args[0].sexualFlaw != "none")>>
+	<<set $FResult -= 2>>
+<</if>>
+<<if ($args[0].sexualQuirk != "none")>>
+	<<set $FResult += 2>>
+<</if>>
+<<if ($args[0].behavioralFlaw != "none")>>
+	<<set $FResult -= 2>>
+<</if>>
+<<if ($args[0].behavioralQuirk != "none")>>
+	<<set $FResult += 2>>
+<</if>>
+
+<<if setup.whoreCareers.includes($args[0].career)>>
+	<<set $FResult += 1>>
+<<elseif ($args[0].oralCount + $args[0].analCount + $args[0].vaginalCount + $args[0].mammaryCount + $args[0].penetrativeCount > 1000)>>
+	<<set $FResult += 1>>
+<</if>>
+
+<<if !canSee($args[0])>>
+	<<set $FResult -= 3>>
+<<elseif $args[0].eyes <= -1>>
+	<<if $args[0].eyewear != "corrective glasses">>
+	<<if $args[0].eyewear != "corrective contacts">>
+	<<set $FResult -= 1>>
+	<</if>>
+	<</if>>
+<<elseif $args[0].eyewear == "blurring glasses">>
+	<<set $FResult -= 1>>
+<<elseif $args[0].eyewear == "blurring contacts">>
+	<<set $FResult -= 1>>
+<</if>>
+
+<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<if ndef $racialVarieties>>
+	<<set $racialVarieties = []>>
+	<</if>>
+	<<set $seed = 0>>
+	<<for $j = 0; $j < $racialVarieties.length; $j++>>
+	<<if $args[0].race == $racialVarieties[$j]>>
+		<<set $seed = 1>>
+	<</if>>
+	<</for>>
+	<<if $seed == 0>>
+	<<set $racialVarieties.push($args[0].race)>>
+	<</if>>
+<</if>>
+
+<<else>> /* FUCKDOLL */
+
+<<set $FResult += $args[0].fuckdoll/10>>
+
+<</if>> /* CLOSES FUCKDOLL CHECK */
+
+<<set $FResult += $args[0].aphrodisiacs*2>>
+
+<<if ($args[0].lactation > 0)>>
+	<<set $FResult += 1>>
+<</if>>
+
+<<if $seeAge == 1>>
+<<if $args[0].age == 18>>
+	<<set $FResult += 1>>
+	<<if $args[0].birthWeek == 0>>
+	<<set $FResult += 0.5*$FResult>>
+	<<elseif $args[0].birthWeek < 4>>
+	<<set $FResult += 0.1*$FResult>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($args[0].fetish == "mindbroken")>>
+	<<set $FResult = Math.trunc($FResult*0.4)>>
+<<else>>
+	<<set $FResult = Math.trunc($FResult*0.7)>>
+<</if>>
+
+<<if $args[0].amp == 0>>
+<<elseif $args[0].amp == 1>>
+	<<set $FResult -= 2>>
+<<elseif $args[0].amp == -2>>
+<<elseif $args[0].amp == -5>>
+<<else>>
+	<<set $FResult -= 1>>
+<</if>>
+
+<<if $FResult < 2>>
+	<<set $FResult = 2>>
+<</if>>
+
+<</widget>>
+
+<<widget "Deadliness">>
+
+<<set $deadliness = 2>>
+
+<<if $args[0].combatSkill > 0>>
+	<<set $deadliness += 2>>
+<</if>>
+
+<<if setup.bodyguardCareers.includes($Bodyguard.career)>>
+	<<set $deadliness += 1>>
+<</if>>
+
+<<if ($args[0].muscles > 30) && ($args[0].muscles <= 95)>>
+	<<set $deadliness += 1>>
+<</if>>
+
+<<if $args[0].height >= 170>>
+	<<set $deadliness += 1>>
+<</if>>
+
+<<if $args[0].health > 50>>
+	<<set $deadliness += 1>>
+<</if>>
+
+<<if $args[0].boobs > 4000>>
+	<<set $deadliness -= 2>>
+<<elseif $args[0].boobs > 2000>>
+	<<set $deadliness -= 1>>
+<</if>>
+
+<<if $args[0].butt > 6>>
+	<<set $deadliness -= 1>>
+<</if>>
+
+<<if Math.abs($args[0].weight) > 30>>
+	<<set $deadliness -= 1>>
+<</if>>
+
+<<if $args[0].health < -50>>
+	<<set $deadliness -= 1>>
+<</if>>
+
+<<if $args[0].preg > 10>>
+	<<set $deadliness -= 1>>
+<</if>>
+
+<<if $args[0].amp == 0>>
+  <<if !canWalk($args[0])>>
+	<<set $deadliness -= 20>>
+  <</if>>
+<<elseif $args[0].amp == 1>>
+	<<set $deadliness -= 20>>
+<<elseif $args[0].amp == -5>>
+	<<set $deadliness += 10>>
+<<elseif $args[0].amp == -4>>
+<<else>>
+	<<set $deadliness -= 1>>
+<</if>>
+
+<<if !canSee($args[0])>>
+	<<set $deadliness -= 8>>
+<<elseif ($args[0].eyes == -1 && ($args[0].eyewear != "corrective glasses" || $args[0].eyewear != "corrective contacts")) || ($args[0].eyes == 1 && ($args[0].eyewear == "blurring glasses" || $args[0].eyewear == "blurring contacts"))>>
+	<<set $deadliness -= 1>>
+<</if>>
+
+<<if $deadliness < 1>>
+	<<set $deadliness = 1>>
+<</if>>
+
+<</widget>>
+
+
+<<widget "SlaveTitle">>
+
+/* NULLS */
+<<if ($args[0].dick == 0) && ($args[0].vagina == -1)>>
+	<<set $desc = "null">>
+		<<if ($args[0].lactation > 0) && ($args[0].boobs > 2000)>>
+			<<set $desc = $desc + " cow">>
+		<<elseif ($args[0].boobsImplant > 0) && ($args[0].buttImplant > 0)>>
+			<<set $desc = $desc + " bimbo ">>
+		<<elseif $args[0].boobs > 6000>>
+			<<set $desc = $desc + " boob">>
+		<<elseif $args[0].butt > 6>>
+			<<set $desc = $desc + " ass">>
+		<<elseif ($args[0].muscles > 30) && ($args[0].height < 185)>>
+				<<set $desc = $desc + " muscle">>
+		<</if>>
+			<<if $args[0].age > 35>>
+				<<set $desc = $desc + "MILF">>
+			<<elseif $args[0].age >= 25>>
+				<<set $desc = $desc + "slave">>
+			<<else>>
+				<<set $desc = $desc + "girl">>
+			<</if>>
+
+/* FEMALES */
+<<elseif ($args[0].dick == 0) && ($args[0].vagina != -1)>>
+	<<if $args[0].age > 35>>
+		<<set $desc = "MILF">>
+	<<elseif $args[0].age >= 25>>
+		<<set $desc = "slave">>
+	<<else>>
+		<<set $desc = "slavegirl">>
+	<</if>>
+		<<if ($args[0].muscles > 30) && ($args[0].height < 185)>>
+				<<set $desc = "muscle " + $desc>>
+		<<elseif ($args[0].lactation > 0) && ($args[0].boobs > 2000)>>
+			<<set $desc = $desc + " cow">>
+		<<elseif ($args[0].boobsImplant > 0) && ($args[0].buttImplant > 0)>>
+			<<set $desc = $desc + " bimbo">>
+		<<elseif $args[0].boobs > 6000>>
+			<<set $desc = "boob" + $desc>>
+		<<elseif $args[0].butt > 6>>
+			<<set $desc = "ass" + $desc>>
+		<</if>>
+
+/* FUTANARI */
+<<elseif ($args[0].dick != 0) && ($args[0].vagina != -1)>>
+
+		/* FUTANARI: cock & balls & vagina */
+		<<if $args[0].balls > 0>>
+			<<set $desc = "futanari ">>
+
+		/* FUTANARI: cock & vagina */
+		<<else>>
+			<<set $desc = "futa ">>
+		<</if>>
+			<<if ($args[0].lactation > 0) && ($args[0].boobs > 2000)>>
+				<<set $desc = $desc + "cow">>
+			<<elseif ($args[0].boobsImplant > 0) && ($args[0].buttImplant > 0)>>
+				<<set $desc = $desc + "bimbo ">>
+			<<elseif $args[0].boobs > 6000>>
+				<<set $desc = $desc + "boob">>
+			<<elseif $args[0].butt > 6>>
+				<<set $desc = $desc + "ass">>
+			<<elseif ($args[0].muscles > 30) && ($args[0].height < 185)>>
+				<<set $desc = $desc + "muscle">>
+			<</if>>
+				<<if $args[0].age > 35>>
+					<<set $desc = $desc + "MILF">>
+				<<elseif $args[0].age >= 25>>
+					<<set $desc = $desc + "slave">>
+				<<else>>
+					<<set $desc = $desc + "girl">>
+				<</if>>
+					<<if $args[0].dick > 5 && $args[0].balls > 5 && $args[0].boobs > 5000>>
+						<<set $desc = "hyper " + $desc>>
+					<</if>>
+
+/* DICK AND BALLS ONLY */
+<<elseif ($args[0].dick != 0) && ($args[0].vagina == -1) && ($args[0].balls > 0) >>
+
+	/* BITCHES: masculine shoulders or muscles */
+	<<if ($args[0].shoulders > 1) || ($args[0].muscles >= 30)>>
+		<<set $desc = "bitch">>
+			<<if ($args[0].muscles > 30) && ($args[0].height < 185)>>
+					<<set $desc = "muscle" + $desc>>
+			<<elseif $args[0].lactation > 0>>
+					<<set $desc = $desc + "cow">>
+			<<elseif ($args[0].boobsImplant > 0) && ($args[0].buttImplant > 0)>>
+					<<set $desc = "bimbo " + $desc>>
+			<</if>>
+				<<if $args[0].age > 35>>
+					<<set $desc = "mature " + $desc>>
+				<<elseif $args[0].age < 25>>
+					<<set $desc = "young " + $desc>>
+				<</if>>
+
+	/* SHEMALES: cock & balls, T&A above minimum */
+	<<elseif ($args[0].boobs > 300) && ($args[0].butt > 2)>>
+		<<if $args[0].age > 35>>
+			<<set $desc = "sheMILF">>
+		<<elseif $args[0].age >= 25>>
+			<<set $desc = "shemale">>
+		<<else>>
+			<<set $desc = "tgirl">>
+		<</if>>
+			<<if ($args[0].muscles > 30) && ($args[0].height < 185)>>
+					<<set $desc = "muscle" + $desc>>
+			<<elseif ($args[0].lactation > 0) && ($args[0].boobs > 2000)>>
+				<<set $desc = $desc + " cow">>
+			<<elseif ($args[0].boobsImplant > 0) && ($args[0].buttImplant > 0)>>
+				<<set $desc = $desc + " bimbo">>
+			<<elseif $args[0].boobs > 6000>>
+				<<set $desc = "topheavy " + $desc>>
+			<<elseif $args[0].butt > 6>>
+				<<set $desc = "bottomheavy " + $desc>>
+			<</if>>
+
+	/* SISSIES and TRAPS:cock & balls, T&A below minimum */
+	<<else>>
+		<<if ($args[0].shoulders < 1) || ($args[0].muscles <= 30)>>
+			/* SISSIES: feminine shoulders or muscles, masculine faces */
+			<<if ($args[0].faceShape == "masculine") || ($args[0].faceShape == "androgynous")>>
+				<<if $args[0].age > 35>>
+					<<set $desc = "sissyMILF">>
+				<<else>>
+					<<set $desc = "sissy">>
+				<</if>>
+			/* TRAPS: feminine shoulders or muscles, feminine faces */
+			<<else>>
+				<<if $args[0].age > 35>>
+					<<set $desc = "trapMILF">>
+				<<elseif $args[0].age >= 25>>
+					<<set $desc = "trap">>
+				<<else>>
+					<<set $desc = "trapgirl">>
+				<</if>>
+			<</if>>
+				<<if $args[0].lactation > 0>>
+					<<set $desc = $desc + " cow">>
+				<<elseif ($args[0].boobsImplant > 0) && ($args[0].buttImplant > 0)>>
+					<<set $desc = $desc + " bimbo">>
+				<</if>>
+		<</if>>
+	<</if>>
+
+/* CASTRATI */
+<<elseif ($args[0].dick != 0) && ($args[0].vagina == -1) && ($args[0].balls == 0)>>
+	<<set $desc = "dick">>
+		<<if $args[0].age > 35>>
+			<<set $desc = $desc + "MILF">>
+		<<elseif $args[0].age >= 25>>
+			<<set $desc = $desc + "slave">>
+		<<else>>
+			<<set $desc = $desc + "girl">>
+		<</if>>
+			<<if ($args[0].muscles > 30) && ($args[0].height < 185)>>
+				<<set $desc = "muscle" + $desc>>
+			<<elseif ($args[0].lactation > 0) && ($args[0].boobs > 2000)>>
+				<<set $desc = $desc + " cow">>
+			<<elseif ($args[0].boobsImplant > 0) && ($args[0].buttImplant > 0)>>
+				<<set $desc = $desc + " bimbo">>
+			<<elseif $args[0].boobs > 6000>>
+				<<set $desc = "boob " + $desc>>
+			<<elseif $args[0].butt > 6>>
+				<<set $desc = "ass " + $desc>>
+			<</if>>
+
+/* ERROR CHECK */
+<<else>>
+	<<set $desc = "TITLE ERROR">>
+<</if>>
+
+<<if ($args[0].muscles > 30) && ($args[0].height > 185)>>
+	<<set $desc = "amazon " + $desc>>
+<<elseif ($args[0].muscles < 30) && ($args[0].height > 185)>>
+	<<set $desc = "statuesque " + $desc>>
+<<elseif ($args[0].boobs < 800) && ($args[0].height < 150)>>
+	<<set $desc = "petite " + $desc>>
+<<elseif ($args[0].boobs > 800) && ($args[0].height < 150)>>
+	<<set $desc = "shortstack " + $desc>>
+<</if>>
+
+<<if $args[0].births >= 5>>
+	<<set $desc = $desc + " broodmother">>
+<<elseif $args[0].births >= 2>>
+	<<set $desc = $desc + " breeder">>
+<</if>>
+
+<<if $args[0].indenture > -1>>
+	<<set $desc = "indentured " + $desc>>
+<</if>>
+
+<<if $args[0].preg > 10>>
+	<<set $desc = "pregnant " + $desc>>
+<</if>>
+
+<<if $args[0].fuckdoll > 0>>
+	<<set $desc = $desc + " fuckdoll">>
+<</if>>
+
+<</widget>>
+
+/* Use is <<modScore $someSlave>> where $someSlave is any variable that points to a valid slave */
+
+<<widget "modScore">>
+<<set $piercingScore = 0>>
+<<set $tatScore = 0>>
+<<if $args[0].earPiercing > 0>><<set $piercingScore += $args[0].earPiercing*0.75-0.5>><</if>>
+<<if $args[0].nosePiercing > 0>><<set $piercingScore += $args[0].nosePiercing*0.75-0.5>><</if>>
+<<if $args[0].eyebrowPiercing > 0>><<set $piercingScore += $args[0].eyebrowPiercing*0.75-0.5>><</if>>
+<<if $args[0].navelPiercing > 0>><<set $piercingScore += $args[0].navelPiercing*0.75-0.5>><</if>>
+<<if $args[0].corsetPiercing > 0>><<set $piercingScore += $args[0].corsetPiercing*0.75+0.5>><</if>>
+<<if $args[0].nipplesPiercing > 0>><<set $piercingScore += $args[0].nipplesPiercing*0.75-0.25>><</if>>
+<<if $args[0].areolaePiercing > 0>><<set $piercingScore += $args[0].areolaePiercing*0.75+0.5>><</if>>
+<<if $args[0].lipsPiercing > 0>><<set $piercingScore += $args[0].lipsPiercing*0.75-0.25>><</if>>
+<<if $args[0].tonguePiercing > 0 >><<set $piercingScore += $args[0].tonguePiercing*0.75-0.25>><</if>>
+<<if $args[0].clitPiercing == 3>><<set $piercingScore += 1.25>> /* smart piercing */
+	<<elseif $args[0].clitPiercing > 0>><<set $piercingScore += $args[0].clitPiercing*0.75-0.25>><</if>>
+<<if $args[0].vaginaPiercing > 0>><<set $piercingScore += $args[0].vaginaPiercing*0.75-0.25>><</if>>
+<<if $args[0].dickPiercing > 0>><<set $piercingScore += $args[0].dickPiercing*0.75-0.25>><</if>>
+<<if $args[0].anusPiercing > 0>><<set $piercingScore += $args[0].anusPiercing*0.75-0.25>><</if>>
+<<if $args[0].boobsTat != 0>><<set $tatScore += 1.25>><</if>>
+<<if $args[0].buttTat != 0>><<set $tatScore += 1.25>><</if>>
+<<if $args[0].lipsTat != 0>><<set $tatScore += 1.25>><</if>>
+<<if $args[0].shouldersTat != 0>><<set $tatScore += 1>><</if>>
+<<if $args[0].backTat != 0>><<set $tatScore += 1.25>><</if>>
+<<if $args[0].armsTat != 0>><<set $tatScore += 1>><</if>>
+<<if $args[0].legsTat != 0>><<set $tatScore += 1>><</if>>
+<<if $args[0].stampTat != 0>><<set $tatScore += 1>><</if>>
+<<if $args[0].vaginaTat != 0>><<set $tatScore += 1>><</if>>
+<<if $args[0].dickTat != 0>><<set $tatScore += 1>><</if>>
+<<if $args[0].anusTat == "bleached">><<set $tatScore += 0.5>>
+	<<elseif $args[0].anusTat != 0>><<set $tatScore += 1.25>><</if>>
+<<set $modScore = $piercingScore+$tatScore>> /* note: always overwrites previous $modScore */
+<</widget>>
+
+<<widget "fetishChangeChance">>
+
+<<if $args[0].clitSetting != $args[0].fetish>>
+	<<set $fetishChangeChance = Math.trunc(Math.clamp(($args[0].devotion/4)-($args[0].fetishStrength/4), 0, 100))>>
+<<else>>
+	<<set $fetishChangeChance = 0>>
+<</if>>
+
+<</widget>>
+
+<<widget "slaveCost">>
+
+<<Beauty $args[0]>>
+<<FResult $args[0]>>
+
+<<set $slaveCost = ($beauty*$FResult)>>
+
+<<set _slaveMultiplier = $slaveCostFactor>>
+
+<<if $args[0].behavioralFlaw != "none">>
+	<<set _slaveMultiplier -= 0.1>>
+<</if>>
+<<if $args[0].behavioralQuirk != "none">>
+	<<set _slaveMultiplier += 0.1>>
+<</if>>
+<<if $args[0].sexualFlaw != "none">>
+	<<set _slaveMultiplier -= 0.1>>
+<</if>>
+<<if $args[0].sexualQuirk != "none">>
+	<<set _slaveMultiplier += 0.1>>
+<</if>>
+
+<<if $args[0].fetishKnown == 1>>
+	<<if $args[0].fetish == "mindbroken">>
+		<<set _slaveMultiplier -= 0.3>>
+	<<elseif $args[0].fetish != "none">>
+		<<set _slaveMultiplier += $args[0].fetishStrength/1000>>
+	<</if>>
+<<else>>
+	<<set _slaveMultiplier -= 0.1>>
+<</if>>
+
+<<if $args[0].attrKnown == 1>>
+	<<if $args[0].energy > 95>>
+	<<set _slaveMultiplier += 0.2>>
+	<</if>>
+<</if>>
+
+<<if $args[0].vagina == 0>>
+	<<set _slaveMultiplier += 0.1>>
+<</if>>
+<<if $args[0].preg < -1>>
+	<<set _slaveMultiplier -= 0.1>>
+<<elseif $args[0].preg > 10>>
+	<<set _slaveMultiplier -= 0.1>>
+<</if>>
+<<set _slaveMultiplier += 0.05*$args[0].intelligence>>
+<<if $args[0].intelligenceImplant == 1>>
+	<<set _slaveMultiplier += 0.1-($args[0].intelligence*0.02)>>
+<</if>>
+
+<<if $args[0].vagina > -1>>
+	<<if $args[0].dick > 0>>
+		<<if ($ui != "start") || ($PC.dick == 0) || ($PC.vagina == 0)>>
+			<<set _slaveMultiplier += 0.2>>
+			<<if $args[0].ovaries > 0>>
+			<<if $args[0].balls > 0>>
+				<<set _slaveMultiplier += 0.8>>
+			<</if>>
+			<</if>>
+		<<else>>
+			<<set _slaveMultiplier += 0.1>>
+			<<if $args[0].ovaries > 0>>
+			<<if $args[0].balls > 0>>
+				<<set _slaveMultiplier += 0.2>>
+			<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $args[0].prestige > 0>>
+	<<set _slaveMultiplier += 0.7*$args[0].prestige>>
+<</if>>
+
+<<set _slaveMultiplier += $args[0].devotion/200>>
+<<if $args[0].devotion <= 50>>
+	<<set _slaveMultiplier += $args[0].trust/200>>
+<<else>>
+	<<if $args[0].trust > 0>>
+		<<set _slaveMultiplier += $args[0].trust/200>>
+	<</if>>
+<</if>>
+
+<<if $args[0].brand != 0>>
+	<<if $rep > 10000>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif $rep < 5000>>
+	<<set _slaveMultiplier -= 0.1>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSupremacistLawME != 0>>
+	<<if $args[0].race != $arcologies[0].FSSupremacistRace>>
+	<<set _slaveMultiplier -= 0.1>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSubjugationistLawME != 0>>
+	<<if $args[0].race == $arcologies[0].FSSubjugationistRace>>
+	<<set _slaveMultiplier -= 0.2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderFundamentalistSMR != 0>>
+	<<if $args[0].dick > 0>>
+	<<set _slaveMultiplier -= 0.1>>
+	<</if>>
+	<<if $args[0].balls > 0>>
+	<<set _slaveMultiplier -= 0.1>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalistLaw != 0>>
+	<<if $args[0].dick > 0>>
+	<<set _slaveMultiplier += 0.1>>
+	<</if>>
+	<<if $args[0].balls > 0>>
+	<<set _slaveMultiplier -= 0.1>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSArabianRevivalist > 50>>
+	<<set _slaveMultiplier += 0.1>>
+<</if>>
+
+<<if $args[0].career != 0>>
+	<<if $args[0].career == "a slave">>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.bodyguardCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.wardenessCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.attendantCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.schoolteacherCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.stewardessCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.milkmaidCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.madamCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.DJCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.HGCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.1>>
+	<<elseif setup.entertainmentCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.05>>
+	<<elseif setup.whoreCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.05>>
+	<<elseif setup.gratefulCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.05>>
+	<<elseif setup.menialCareers.includes($args[0].career)>>
+	<<set _slaveMultiplier += 0.05>>
+	<</if>>
+<</if>>
+<<if ($week-$args[0].weekAcquired >= 20) && ($args[0].entertainSkill >= 100)>>
+<<if setup.entertainmentCareers.includes($args[0].career)>>
+<<else>>
+	<<set _slaveMultiplier += 0.05>>
+<</if>>
+<</if>>
+<<if ($args[0].oralCount + $args[0].analCount + $args[0].vaginalCount + $args[0].mammaryCount + $args[0].penetrativeCount > 1000)>>
+<<if setup.whoreCareers.includes($args[0].career)>>
+<<else>>
+	<<set _slaveMultiplier += 0.05>>
+<</if>>
+<</if>>
+
+<<if $seeAge == 1>>
+<<if $args[0].age == 18>>
+	<<if $args[0].birthWeek == 0>>
+	<<set _slaveMultiplier -= 0.2>>
+	<<elseif $args[0].birthWeek < 4>>
+	<<set _slaveMultiplier -= 0.05>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $args[0].amp == 1>>
+	<<set _slaveMultiplier -= 0.2>>
+<</if>>
+
+<<if $args[0].eyes == -2>>
+	<<set _slaveMultiplier -= 0.2>>
+<</if>>
+
+<<if $args[0].indenture > -1>>
+	<<set _slaveMultiplier -= 0.1*$args[0].indentureRestrictions>>
+	<<set _slaveMultiplier -= (260-$args[0].indenture)/260>>
+<<elseif $seeAge == 1>>
+<<if $args[0].age >= ($retirementAge-5)>>
+	<<set $seed = 52*($retirementAge-$args[0].age)>>
+	<<set _slaveMultiplier = _slaveMultiplier*($seed/260)>>
+<</if>>
+<</if>>
+
+<<set $slaveCost = ($slaveCost*_slaveMultiplier*50)>>
+
+<<if $slaveCost < $minimumSlaveCost>>
+	<<set $slaveCost = $minimumSlaveCost>>
+<<elseif $slaveCost <= 100000>>
+<<elseif $slaveCost <= 200000>>
+	<<set $slaveCost -= (($slaveCost-100000)*0.1)>>
+<<elseif $slaveCost <= 300000>>
+	<<set $slaveCost -= 10000 + (($slaveCost-200000)*0.2)>>
+<<elseif $slaveCost <= 400000>>
+	<<set $slaveCost -= 30000 + (($slaveCost-300000)*0.3)>>
+<<elseif $slaveCost <= 500000>>
+	<<set $slaveCost -= 60000 + (($slaveCost-400000)*0.4)>>
+<<else>>
+	<<set $slaveCost -= 100000 + (($slaveCost-500000)*0.5)>>
+<</if>>
+<<if $slaveCost < 1000>>
+	<<set $slaveCost = 1000>>
+<</if>>
+
+<<set $slaveCost = 500*Math.trunc($slaveCost/500)>>
+
+<</widget>>
+
+/%
+ Call as <<StartingSlaveCost $activeSlave>> or equivalent
+ $args[0] is the slave.
+ Fires <<slaveCost>> and adds punishment multipliers for starting with trained and/or devoted slaves.
+%/
+<<widget "StartingSlaveCost">>
+
+<<slaveCost $args[0]>>
+
+<<set _slaveMultiplier = 0>>
+
+<<if $args[0].devotion > 20>>
+	<<set _slaveMultiplier += (0.000117*($args[0].devotion-20)*($args[0].devotion-20))+(0.003167*($args[0].devotion-20))>>
+<</if>>
+
+<<if $args[0].whoreSkill>>
+	<<set _slaveMultiplier += 0.00001*$args[0].whoreSkill*$args[0].whoreSkill>>
+<</if>>
+<<if $args[0].entertainSkill>>
+	<<set _slaveMultiplier += 0.00001*$args[0].entertainSkill*$args[0].entertainSkill>>
+<</if>>
+<<if $args[0].vaginalSkill>>
+	<<set _slaveMultiplier += 0.00001*$args[0].vaginalSkill*$args[0].vaginalSkill>>
+<</if>>
+<<if $args[0].analSkill>>
+	<<set _slaveMultiplier += 0.00001*$args[0].analSkill*$args[0].analSkill>>
+<</if>>
+<<if $args[0].oralSkill>>
+	<<set _slaveMultiplier += 0.00001*$args[0].oralSkill*$args[0].oralSkill>>
+<</if>>
+<<if $args[0].combatSkill>>
+	<<set _slaveMultiplier += 0.1>>
+<</if>>
+
+<<if _slaveMultiplier>>
+	<<if $args[0].age > 25>>
+		<<set _slaveMultiplier -= _slaveMultiplier*($args[0].age-25)*0.05>>
+	<</if>>
+<</if>>
+
+<<if $args[0].prestige>>
+	<<set _slaveMultiplier += $args[0].prestige>>
+<</if>>
+
+<<if _slaveMultiplier>>
+	<<set _slaveMultiplier = Math.clamp(_slaveMultiplier,0,10)>>
+	<<set $slaveCost += $slaveCost*_slaveMultiplier>>
+	<<set $slaveCost = 500*Math.trunc($slaveCost/500)>>
+<</if>>
+
+<</widget>>

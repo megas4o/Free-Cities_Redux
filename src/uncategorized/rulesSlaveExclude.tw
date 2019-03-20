@@ -1,0 +1,23 @@
+:: Rules Slave Exclude
+
+<<nobr>>
+<<set $nextButton = "Continue", $nextLink = "Rules Assistant">>
+
+<<if ndef $currentRule.excludedSlaves>>
+	<<set $currentRule.excludedSlaves to []>>
+<</if>>
+
+<<if ($currentRule.excludedSlaves.length < 1)>>
+	<<set $Flag = 0>>
+	Select slaves to exclude from Rule $r:
+	<<include "Slave Summary">>
+<<else>>
+	Slaves currently excluded from Rule $r: [[Clear list|Rules Slave Exclude][$currentRule.excludedSlaves = []]]
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+	<br><br>
+	Select more slaves to exclude from Rule $r:
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<</if>>
+<</nobr>>

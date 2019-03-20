@@ -1,0 +1,350 @@
+:: P rivalry victory [nobr]
+
+<<set $nextButton = " ", $nextLink = "Random Nonindividual Event",  $rivalOwner = 0, $rivalryPower = 0, _num = random(1,99)>> /* hide button until user makes a selection */
+
+For the first time, you receive a direct call from your rival. You pictured the moment as feeling grander than this, sitting at your desk as usual looking into <<if _num < $seeDicks>>his<<else>>her<</if>> downcast face. You're the victor in a new form of warfare in which bankruptcy has replaced surrender. If the world survives in its present state, you may one day be remembered as an innovator in the evolution of (nearly) bloodless war. Today, your reputation has @@.green;greatly improved.@@ But today all you have that's tangible is a view of a still-dignified arcology owner, self-possessed despite the situation.
+
+<br><br>
+
+"For what it's worth," <<if _num < $seeDicks>>he<<else>>she<</if>> says without preamble, "I had nothing against you. The Daughters wouldn't accept a straight buy-off. Their leadership needed a target to attack, or the rank and file would have killed them themselves and gone ahead attacking me. I had to give them an alternative, or it would have been me." <<if _num < $seeDicks>>He<<else>>She<</if>> looks nervous for the first time. "So, what do we do now? I've still got enough resources to make the end of this story a messy one for you. Let me go, and I won't. I'll walk away, and I'll sign everything I've got left over to you.<<if $hostageAnnounced == 1>> Including $hostage.slaveName, of course.<</if>>"
+
+<br><br>
+
+<span id="result">
+<<link "Accept">>
+	<<set $nextButton = "Continue">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	You accept, magnanimous in victory. "I don't think I would have done that," your rival replies. "Thank you. When they write the book, I'll make sure you look good."
+	<<if $rivalSet != 0>>
+		<<if _num < $seeDicks>>His<<else>>Her<</if>> remaining liquid assets will go to satisfy her great debts, <<if _num < $seeDicks>>his<<else>>her<</if>> @@.yellowgreen;arcology holdings are yours.@@
+		<<for _prv = 0; _prv < $arcologies.length; _prv++>>
+		<<if $arcologies[_prv].rival == 1>>
+		  <<set $arcologies[_prv].embargo = 0>>
+		  <<set $arcologies[_prv].embargoTarget = -1>>
+		  <<set $arcologies[_prv].influenceTarget = -1>>
+		  <<set $arcologies[_prv].rival = 0>>
+		  <<set $arcologies[_prv].government = "direct democracy">>
+		  <<set $arcologies[_prv].PCminority += $arcologies[_prv].ownership>>
+		  <<set $arcologies[_prv].PCminority = Math.clamp($arcologies[_prv].PCminority, 0, 49)>>
+		  <<break>>
+		<</if>>
+		<</for>>
+		<<if $hostageAnnounced == 1>><<set $hostageRescued = 1>><</if>>
+	<<else>>
+		<<if _num < $seeDicks>>His<<else>>Her<</if>> arcology will go to satisfy her great debts, but you will still profit @@.yellowgreen;immensely@@ from your victory<<if $hostageAnnounced == 1>>, and acquire $hostage.slaveName as a slave<</if>>.
+		<<set $cash += random(100000,250000)>>
+	<</if>>
+	<</replace>>
+<</link>>
+<br><<link "Refuse">>
+	<<set $nextButton = "Continue">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	You coldly decline. "That was a mistake," your rival replies, entering a computer command.
+	<<if $rivalSet != 0>>
+		"All my remaining liquid assets have just been @@.red;carefully dispersed to deny you control of my arcology.@@ You'll get nothing from me." It's true. The financial self-destruction ensures that the fiscal wreckage goes to the arcology's citizens, not you.
+		<<for _prv = 0; _prv < $arcologies.length; _prv++>>
+		<<if $arcologies[_prv].rival == 1>>
+		  <<set $arcologies[_prv].embargo = 0>>
+		  <<set $arcologies[_prv].embargoTarget = -1>>
+		  <<set $arcologies[_prv].influenceTarget = -1>>
+		  <<set $arcologies[_prv].rival = 0>>
+		  <<set $arcologies[_prv].government = "direct democracy">>
+		  <<break>>
+		<</if>>
+		<</for>>
+		<<if $hostageAnnounced == 1>>
+			<br><br>
+			<span id="result2">
+			<br><<link "Place a bounty of ¤10000 on your rival's psychological warfare tool">>
+				<<replace "#result2">>
+				<<set $cash -= 10000>>
+				You make sure to post a bounty sufficient to ensure that $hostage.slaveName, your rival's psychological warfare tool, does not escape or go unrescued, depending on one's point of view. She is quickly picked out of the chaos of your rival's escape and delivered to you.
+				<<set $hostageRescued = 1>>
+				<<set $hostage.slaveCost = 10000>>
+				<</replace>>
+			<</link>>
+			</span>
+		<</if>>
+	<<else>>
+		"All my remaining liquid assets have just been @@.red;expended in an attack on the value of your holdings,@@ and my arcology has been heavily sabotaged. You'll get nothing from me." It's not entirely true, but the damage to your holdings does outweigh your gains by a significant margin. Your rival vanishes back into the old world.
+		<<set $cash -= random(10000,25000)>>
+	<</if>>
+	<</replace>>
+<</link>>
+<br><<link "Refuse, and place a bounty of ¤50000 on your rival's enslavement">>
+	<<set $nextButton = "Continue">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	<<set $nextLink = "AS Dump">>
+	You coldly decline. "That was a mistake," your rival replies, entering a computer command.
+	<<if $rivalSet != 0>>
+		"All my remaining liquid assets have just been @@.red;carefully dispersed to deny you control of my arcology.@@ You'll get nothing from me." It's true. The financial self-destruction ensures that the fiscal wreckage goes to the arcology's citizens, not you.
+		<<for _prv = 0; _prv < $arcologies.length; _prv++>>
+		<<if $arcologies[_prv].rival == 1>>
+		  <<set $arcologies[_prv].embargo = 0>>
+		  <<set $arcologies[_prv].embargoTarget = -1>>
+		  <<set $arcologies[_prv].influenceTarget = -1>>
+		  <<set $arcologies[_prv].rival = 0>>
+		  <<set $arcologies[_prv].government = "direct democracy">>
+		  <<break>>
+		<</if>>
+		<</for>>
+		<<if $hostageAnnounced == 1>>
+			<br><br>
+			<span id="result2">
+			<br><<link "Place a bounty of ¤10000 on your rival's psychological warfare tool">>
+				<<replace "#result2">>
+				<<set $cash -= 10000>>
+				You make sure to post a bounty sufficient to ensure that $hostage.slaveName, your rival's psychological warfare tool, does not escape or go unrescued, depending on one's point of view. She is quickly picked out of the chaos of your rival's escape and delivered to you.
+				<<set $hostageRescued = 1>>
+				<<set $hostage.slaveCost = 10000>>
+				<</replace>>
+			<</link>>
+			</span>
+		<</if>>
+	<<else>>
+		"All my remaining liquid assets have just been @@.red;expended in an attack on the value of your holdings,@@ and my arcology has been heavily sabotaged. You'll get nothing from me." It's not entirely true, but the damage to your holdings does outweigh your gains by a significant margin.
+		<<set $cash -= random(10000,25000)>>
+	<</if>>
+	<<set $cash -= 50000>>
+	<<set $rivalOwner = -1>>
+	<<set $seed = []>>
+	<<if _num <= $seeDicks>>
+	  <<set $seed.push("expansionist shemale")>>
+	  <<set $seed.push("masculine")>>
+	  <<set $seed.push("micropenis")>>
+	<</if>>
+	<<if _num > $seeDicks>>
+	  <<set $seed.push("bull dyke")>>
+	  <<set $seed.push("cow")>>
+	  <<set $seed.push("bimbo")>>
+	  <<set $seed.push("addict")>>
+	<</if>>
+	<<set $seed = $seed.random()>>
+	<br><br>
+	Your bounty is quickly claimed, and you are treated to the delicious moment of finding your rival on her knees in front of you with a black bag over her head and her hands cuffed behind her. She's one of your slaves now, fundamentally no different than any other. Looking her over, the causes of her downfall are
+	<<if $seed == "expansionist shemale">>
+		immediately apparent: she's obviously been indulging in self-transformation to excess.
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.face = 100>>
+		<<set $activeSlave.faceImplant = 15>>
+		<<set $activeSlave.faceShape to "androgynous">>
+		<<set $activeSlave.muscles = 20>>
+		<<set $activeSlave.height = random(185,215)>>
+		<<set $activeSlave.lips = 35>>
+		<<set $activeSlave.butt = either(4, 5, 6)>>
+		<<set $activeSlave.boobs = either(800, 1000, 1200)>>
+		<<set $activeSlave.dick = 10>>
+		<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+		<<set $activeSlave.balls = 10>>
+		<<set $activeSlave.anus = 3>>
+		<<set $activeSlave.vagina = -1>>
+		<<set $activeSlave.weight = 20>>
+		<<set $activeSlave.oralSkill = 100>>
+		<<set $activeSlave.analSkill = 100>>
+		<<set $activeSlave.whoreSkill = 15>>
+		<<set $activeSlave.entertainSkill = 100>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.clitPiercing = 2>>
+		<<set $activeSlave.nipplesPiercing = 1>>
+		<<set $activeSlave.earPiercing = 1>>
+		<<set $activeSlave.tonguePiercing = 1>>
+		<<set $activeSlave.eyebrowPiercing = 1>>
+		<<set $activeSlave.behavioralFlaw = "odd">>
+		<<set $activeSlave.behavioralQuirk = "confident">>
+		<<set $activeSlave.sexualFlaw = "judgemental">>
+		<<set $activeSlave.sexualQuirk = "romantic">>
+		<<set $activeSlave.hStyle = "luxurious">>
+		<<set $activeSlave.hLength = 80>>
+	<<elseif $seed == "masculine">>
+		not immediately apparent: she's in good shape, if quite masculine.
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.face = 55>>
+		<<set $activeSlave.faceImplant to 0>>
+		<<set $activeSlave.faceShape to "masculine">>
+		<<set $activeSlave.muscles to either(20, 50, 100)>>
+		<<set $activeSlave.height to random(185,195)>>
+		<<set $activeSlave.butt to either(2, 3)>>
+		<<set $activeSlave.boobs to either(100, 200)>>
+		<<set $activeSlave.dick to 5>>
+		<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin to $activeSlave.dick>><</if>>
+		<<set $activeSlave.balls to 5>>
+		<<set $activeSlave.anus to 0>>
+		<<set $activeSlave.vagina to -1>>
+		<<set $activeSlave.weight to 0>>
+		<<set $activeSlave.vaginalSkill = 0>>
+		<<set $activeSlave.oralSkill = 15>>
+		<<set $activeSlave.analSkill = 0>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 15>>
+		<<set $activeSlave.combatSkill = 1>>
+		<<set $activeSlave.behavioralFlaw = "hates men">>
+		<<set $activeSlave.behavioralQuirk = "fitness">>
+		<<set $activeSlave.sexualFlaw = "hates anal">>
+		<<set $activeSlave.sexualQuirk = "perverted">>
+		<<set $activeSlave.hStyle = "neat">>
+		<<set $activeSlave.hLength = 5>>
+	<<elseif $seed == "micropenis">>
+		immediately apparent: she's got a slavegirl's cock and balls, not an arcology owner's.
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.face = 55>>
+		<<set $activeSlave.faceImplant to 0>>
+		<<set $activeSlave.faceShape to "masculine">>
+		<<set $activeSlave.muscles = 0>>
+		<<set $activeSlave.height = random(145,160)>>
+		<<set $activeSlave.butt = either(2, 4)>>
+		<<set $activeSlave.boobs = either(100, 400)>>
+		<<set $activeSlave.dick = 1>>
+		<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+		<<set $activeSlave.balls = 2>>
+		<<set $activeSlave.anus = 1>>
+		<<set $activeSlave.vagina = -1>>
+		<<set $activeSlave.weight = 100>>
+		<<set $activeSlave.vaginalSkill = 0>>
+		<<set $activeSlave.oralSkill = 15>>
+		<<set $activeSlave.analSkill = 15>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 15>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.behavioralFlaw = "hates men">>
+		<<set $activeSlave.behavioralQuirk = "insecure">>
+		<<set $activeSlave.sexualFlaw = "shamefast">>
+		<<set $activeSlave.sexualQuirk = "perverted">>
+		<<set $activeSlave.hStyle = "neat">>
+		<<set $activeSlave.hLength = 5>>
+	<<elseif $seed == "bull dyke">>
+		not immediately apparent: though female, she's obviously no stranger to taking a dominant sexual role, to put it politely.
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.face = 55>>
+		<<set $activeSlave.faceImplant to 0>>
+		<<set $activeSlave.faceShape to "androgynous">>
+		<<set $activeSlave.muscles = 100>>
+		<<set $activeSlave.height = random(185,195)>>
+		<<set $activeSlave.lipsImplant = 10>>
+		<<set $activeSlave.lips = 35>>
+		<<set $activeSlave.buttImplant = 1>>
+		<<set $activeSlave.butt += $activeSlave.buttImplant>>
+		<<set $activeSlave.boobs -= 100>>
+		<<set $activeSlave.boobsImplant = either(400, 600, 800)>>
+		<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+		<<set $activeSlave.clit = 2>>
+		<<set $activeSlave.anus = 1>>
+		<<set $activeSlave.vagina = 1>>
+		<<set $activeSlave.preg = -1>>
+		<<set $activeSlave.vaginalSkill = 15>>
+		<<set $activeSlave.oralSkill = 0>>
+		<<set $activeSlave.analSkill = 15>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 0>>
+		<<set $activeSlave.combatSkill = 1>>
+		<<set $activeSlave.clitPiercing = 1>>
+		<<set $activeSlave.earPiercing = 1>>
+		<<set $activeSlave.behavioralFlaw = "hates men">>
+		<<set $activeSlave.behavioralQuirk = "fitness">>
+		<<set $activeSlave.sexualFlaw = "hates penetration">>
+		<<set $activeSlave.sexualQuirk = "unflinching">>
+		<<set $activeSlave.hStyle = "neat">>
+		<<set $activeSlave.hLength = 5>>
+	<<elseif $seed == "cow">>
+		immediately apparent: there's nothing wrong with having lactation and breast expansion fetishes, but applying them to oneself can be addictive.
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.face = 55>>
+		<<set $activeSlave.faceImplant to 0>>
+		<<set $activeSlave.faceShape to "cute">>
+		<<set $activeSlave.muscles = 50>>
+		<<set $activeSlave.height = random(185,195)>>
+		<<set $activeSlave.lips = 35>>
+		<<set $activeSlave.butt = either(6, 7, 8)>>
+		<<set $activeSlave.boobs = 10000>>
+		<<set $activeSlave.nipples = "huge">>
+		<<set $activeSlave.lactation = 2>>
+		<<set $activeSlave.anus = 1>>
+		<<set $activeSlave.vagina = 2>>
+		<<set $activeSlave.preg = 0>>
+		<<set $activeSlave.vaginalSkill = 15>>
+		<<set $activeSlave.oralSkill = 15>>
+		<<set $activeSlave.analSkill = 0>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 15>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.behavioralFlaw = "odd">>
+		<<set $activeSlave.behavioralQuirk = "insecure">>
+		<<set $activeSlave.sexualFlaw = "apathetic">>
+		<<set $activeSlave.sexualQuirk = "perverted">>
+		<<set $activeSlave.hStyle = "neat">>
+		<<set $activeSlave.hLength = 5>>
+	  <<elseif $seed == "bimbo">>
+		immediately apparent: there's nothing wrong with having a bimbo fetish, but applying it to oneself can be addictive.
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.face = 100>>
+		<<set $activeSlave.faceImplant = 65>>
+		<<set $activeSlave.faceShape to "sensual">>
+		<<set $activeSlave.muscles = 0>>
+		<<set $activeSlave.height = random(180,190)>>
+		<<set $activeSlave.lipsImplant = 2>>
+		<<set $activeSlave.lips = random(25,55)>>
+		<<set $activeSlave.buttImplant = 2>>
+		<<set $activeSlave.butt += $activeSlave.buttImplant>>
+		<<set $activeSlave.boobsImplant = either(600, 800, 1000)>>
+		<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+		<<set $activeSlave.anus = 2>>
+		<<set $activeSlave.vagina = 1>>
+		<<set $activeSlave.preg = -1>>
+		<<set $activeSlave.vaginalSkill = 100>>
+		<<set $activeSlave.oralSkill = 100>>
+		<<set $activeSlave.analSkill = 35>>
+		<<set $activeSlave.whoreSkill = 35>>
+		<<set $activeSlave.entertainSkill = 35>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.clitPiercing = 1>>
+		<<set $activeSlave.earPiercing = 1>>
+		<<set $activeSlave.behavioralFlaw = "arrogant">>
+		<<set $activeSlave.behavioralQuirk = "insecure">>
+		<<set $activeSlave.sexualFlaw = "crude">>
+		<<set $activeSlave.sexualQuirk = "caring">>
+		<<set $activeSlave.hStyle = "tails">>
+		<<set $activeSlave.hLength = 80>>
+	  <<else>>
+		immediately apparent: she seems to have recently fallen into serious aphrodisiac addiction.
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.face = 100>>
+		<<set $activeSlave.faceImplant = 15>>
+		<<set $activeSlave.muscles = 0>>
+		<<set $activeSlave.lips = 35>>
+		<<set $activeSlave.butt += random(1,3)>>
+		<<set $activeSlave.boobs += 200*random(1,3)>>
+		<<set $activeSlave.anus = 4>>
+		<<set $activeSlave.vagina = 4>>
+		<<set $activeSlave.preg = 2>>
+		<<set $activeSlave.vaginalSkill = 100>>
+		<<set $activeSlave.oralSkill = 100>>
+		<<set $activeSlave.analSkill = 100>>
+		<<set $activeSlave.whoreSkill = 100>>
+		<<set $activeSlave.entertainSkill = 0>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.clitPiercing = 1>>
+		<<set $activeSlave.earPiercing = 1>>
+		<<set $activeSlave.behavioralFlaw = "bitchy">>
+		<<set $activeSlave.behavioralQuirk = "funny">>
+		<<set $activeSlave.sexualFlaw = "crude">>
+		<<set $activeSlave.sexualQuirk = "size queen">>
+		<<set $activeSlave.hStyle = "neat">>
+		<<set $activeSlave.hLength = 80>>
+		<<set $activeSlave.addict = 10>>
+	<</if>>
+	<<set $activeSlave.intelligence = 3>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.devotion = -20>>
+	<<set $activeSlave.trust = -10>>
+	<<set $activeSlave.origin = "She was once an arcology owner like yourself.">>
+	<<set $activeSlave.career = "an arcology owner">>
+	<<set $activeSlave.prestige = 3>>
+	<<set $activeSlave.prestigeDesc = "You bankrupted and enslaved her in revenge for her part in the attack on your arcology by the Daughters of Liberty.">>
+	<<set $activeSlave.health = 100>>
+	<<set $activeSlave.age = random(25,42)>>
+	<<if $activeSlave.age > 35>><<set $activeSlave.ageImplant = 1>><</if>>
+	<<set $activeSlave.pubicHStyle = "waxed">>
+	<<set $activeSlave.slaveCost = 50000>>
+	<<include "New Slave Intro">>
+	<</replace>>
+<</link>>
+</span>

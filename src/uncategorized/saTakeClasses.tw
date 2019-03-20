@@ -1,0 +1,188 @@
+:: SA take classes [nobr]
+
+<<SlavePronouns $slaves[$i]>>
+
+<<set _learning = 1>>
+
+<<if ($slaves[$i].assignment == "learn in the schoolroom")>>
+	<<if ($Schoolteacher != 0)>>
+		<<set _seed = $Schoolteacher.intelligence+$Schoolteacher.intelligenceImplant>>
+		<<if ($Schoolteacher.age > 35)>>
+			<<set _seed += 1>>
+		<</if>>
+		<<if setup.schoolteacherCareers.includes($Schoolteacher.career)>>
+			<<set _seed += 1>>
+		<</if>>
+		<<if ($Schoolteacher.face > 40)>>
+			<<set _seed += 1>>
+		<</if>>
+		<<if (random(1,100) < 20+(_seed*20))>>
+			<<set _learning += 1>>
+		<</if>>
+	<</if>>
+<</if>>
+
+takes courses in slavery<<if $schoolroomUpgradeSkills + $schoolroomUpgradeRemedial + $schoolroomUpgradeLanguage != 0>>, using $schoolroomName's improved educational materials, <</if>> under $assistantName's supervision;
+<<if ($slaves[$i].devotion > 20)>>
+	$pronoun is such an obedient slave that your assistant mostly @@.hotpink;encourages $object.@@
+	<<set $slaves[$i].devotion += 2>>
+<<elseif ($slaves[$i].trust < -20)>>
+	$pronoun obeys out of fear, so your assistant mostly @@.hotpink;encourages $object.@@
+	<<set $slaves[$i].devotion += 1>>
+<<else>>
+	$pronoun is resistant, so your assistant mostly @@.gold;punishes $object,@@ increasing $possessive @@.mediumorchid;dislike for slavery.@@
+	<<set $slaves[$i].devotion -= 2>>
+	<<set $slaves[$i].trust -= 4>>
+<</if>>
+
+<<if ($slaves[$i].intelligence >= 3)>>
+	$pronounCap is a genius,
+	<<set _learning += 1>>
+<<elseif ($slaves[$i].intelligence >= 2)>>
+	$pronounCap is highly intelligent
+	<<set _learning += 1>>
+<<elseif ($slaves[$i].intelligence >= 1)>>
+	$pronounCap is of above average intelligence
+	<<if (random(1,100) < 70)>>
+		<<set _learning += 1>>
+	<</if>>
+<<elseif ($slaves[$i].intelligence >= 0)>>
+	$pronounCap is of average intelligence
+	<<if (random(1,100) < 50)>>
+		<<set _learning += 1>>
+	<</if>>
+<<else>>
+	<<set _seed = 50 + $slaves[$i].intelligence*20>>
+	<<if ($schoolroomUpgradeRemedial == 1) && random(1,100) < 50>>
+		<<set _seed = 50>>
+	<</if>>
+	<<if (random(1,100) < _seed)>>
+		<<set _learning += 1>>
+	<</if>>
+	<<if ($slaves[$i].intelligence >= -1)>>
+		$pronounCap is of below average intelligence
+	<<elseif ($slaves[$i].intelligence >= -2)>>
+		$pronounCap is quite stupid
+	<<else>>
+		$pronounCap is an imbecile,
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].devotion > 95)>>
+	and worshipful of you,
+	<<set _learning += 1>>
+<<elseif ($slaves[$i].devotion > 50)>>
+	and devoted to you,
+	<<if (random(1,100) < 70)>>
+		<<set _learning += 1>>
+	<</if>>
+<<elseif ($slaves[$i].devotion > 20)>>
+	and obedient to you,
+	<<if (random(1,100) < 50)>>
+		<<set _learning += 1>>
+	<</if>>
+<<elseif ($slaves[$i].trust < -20)>>
+	and frightened of you,
+	<<if (random(1,100) < 50)>>
+		<<set _learning += 1>>
+	<</if>>
+<<else>>
+	and neither likes you nor is afraid of you,
+<</if>>
+
+<<if (_learning <= 1)>>
+	and $pronoun learns slowly this week.
+<<elseif (_learning == 2)>>
+	and $pronoun does well with $possessive studies this week.
+<<else>>
+	and $pronoun is perfectly studious this week.
+<</if>>
+
+<<set _seed = 0>>
+<<set $skillIncrease = 10+$slaves[$i].intelligence>>
+<<for _j = 0; _j < _learning; _j++>>
+	<<if ($slaves[$i].devotion <= 20) && (_seed == 0)>>
+		Since $pronoun is wanting in basic obedience, $pronoun suffers through courses on @@.hotpink;$possessive place@@ in the Free Cities world.
+		<<set $slaves[$i].devotion += 10>>
+		<<set _seed = 1>>
+	<<elseif ($slaves[$i].oralSkill <= 10)>>
+		Since $pronoun is orally incompetent, $pronoun is taught basic gag reflex suppression exercises and other simple oral things.
+		<<OralSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].vaginalSkill <= 10) && ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+		Since $pronoun is unskilled at using $possessive pussy, $pronoun is taught kegel exercises and other simple vaginal skills.
+		<<VaginalSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].analSkill <= 10) && ($slaves[$i].anus > 0) && canDoAnal($slaves[$i])>>
+		Since $pronoun is a novice at taking it up $possessive butt, $pronoun is taught relaxation exercises and other simple anal basics.
+		<<AnalSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].whoreSkill <= 10)>>
+		Since $pronoun has little idea what's involved in selling $possessive body, $pronoun is taught basic safety practices and other simple prostitution skills.
+		<<WhoreSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].entertainSkill <= 10)>>
+		Since $possessive entertainment value is limited to $possessive holes, $pronoun is taught simple conversational skills and other courtesan's essentials.
+		<<EntertainSkillIncrease $slaves[$i]>>
+	<<elseif ($schoolroomUpgradeSkills == 1)>>
+		<<if ($slaves[$i].oralSkill <= 30)>>
+			Having completed the basic sex slave curriculum, $pronoun studies more advanced ways to use $possessive lips and tongue to please cocks, cunts, and asses.
+			<<OralSkillIncrease $slaves[$i]>>
+		<<elseif ($slaves[$i].whoreSkill <= 30)>>
+			Having completed the basic sex slave curriculum, $pronoun studies intermediate prostitution, including how to stay as safe as possible and maximize $possessive efficiency.
+			<<WhoreSkillIncrease $slaves[$i]>>
+		<<elseif ($slaves[$i].entertainSkill <= 30)>>
+			Having completed the basic sex slave curriculum, $pronoun studies courtesanship, including social dynamics and flirtation more subtle than straightforward begging for sex.
+			<<EntertainSkillIncrease $slaves[$i]>>
+		<<elseif ($slaves[$i].vaginalSkill <= 30) && ($slaves[$i].vagina >= 0)>>
+			Having completed the basic sex slave curriculum, $pronoun studies more advanced techniques and exotic positions to make use of $possessive <<if $slaves[$i].vagina == 0>>virgin pussy for use in $possessive first time<<else>>pussy<</if>>.
+			<<VaginalSkillIncrease $slaves[$i]>>
+		<<elseif ($slaves[$i].analSkill <= 30)>>
+			Having completed the basic sex slave curriculum, $pronoun studies more advanced techniques and exotic positions to make use of $possessive <<if $slaves[$i].vagina == 0>>virgin ass for use in $possessive first time<<else>>ass<</if>>.
+			<<AnalSkillIncrease $slaves[$i]>>
+		<</if>>
+	<</if>>
+<</for>>
+
+<<if ($slaves[$i].intelligenceImplant < 1) || ($slaves[$i].intelligenceImplant > 1)>>
+	$pronounCap makes some progress towards a basic education.
+	<<set $slaves[$i].intelligenceImplant += 0.1*_learning>>
+	<<if ($slaves[$i].intelligenceImplant >= 1)>>
+		<<set $slaves[$i].intelligenceImplant = 1>>
+		$pronounCap has completed a course of slave education, and for most purposes $pronoun is now @@.deepskyblue;more intelligent.@@
+		<<if ($slaves[$i].intelligence < 3)>>
+			<<set $slaves[$i].intelligence += 1>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].intelligenceImplant == 1)>>
+<<if $slaves[$i].voice != 0>>
+	<<if ($slaves[$i].intelligence > random(-4,4))>>
+	<<if ($schoolroomUpgradeLanguage == 0)>>
+		<<if ($slaves[$i].accent >= 3)>>
+		$pronounCap has @@.green;learned functional $language,@@ and can make <<print $object>>self understood, though $possessive $slaves[$i].nationality accent is still quite heavy.
+		<<set $slaves[$i].accent = 2>>
+		<</if>>
+	<<else>>
+		<<if ($slaves[$i].accent >= 2)>>
+		$pronounCap has @@.green;learned decent $language,@@ though $pronoun retains enough of $possessive $slaves[$i].nationality accent to make $possessive voice distinctly sexy.
+		<<set $slaves[$i].accent = 1>>
+		<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].intelligenceImplant == 1) && ($slaves[$i].assignment == "take classes")>>
+<<if ($slaves[$i].voice == 0) || ($slaves[$i].accent <= 1) || (($schoolroomUpgradeLanguage == 0) && ($slaves[$i].accent <= 2))>>
+<<if ($slaves[$i].oralSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].oralSkill > 10))>>
+<<if ($slaves[$i].whoreSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].whoreSkill > 10))>>
+<<if ($slaves[$i].entertainSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].entertainSkill > 10))>>
+<<if ($slaves[$i].analSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].analSkill > 10)) || ($slaves[$i].anus < 1)>>
+<<if ($slaves[$i].vaginalSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].vaginalSkill > 10)) || ($slaves[$i].vagina < 1)>>
+	$pronounCap can learn little from further classes, so @@.yellow;$possessive assignment has defaulted to rest.@@
+	<<removeJob $slaves[$i] "take classes">>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>

@@ -1,0 +1,39 @@
+:: Assign [nobr]
+
+<<if $i >= 0 && $i <= $slaves.length && (ndef $activeSlave || $activeSlave.ID != $slaves[$i].ID)>> /* don't overwrite activeSlave unnecessarily */
+	<<set $activeSlave = $slaves[$i]>>
+<</if>>
+
+<<if (ndef $activeSlave)>>
+	@@.red;ERROR: $activeSlave undefined in Assign.tw, $$i = $i, previous passage was '<<print previous()>>'@@ <<link "Continue">><<goto $returnTo>><</link>>
+<<else>>
+
+	<<switch $assignTo>>
+	<<case "Pit">>
+		<<set $fighterIDs.push($activeSlave.ID)>>
+		<<goto $returnTo>>
+
+	<<case "Coursing Association">>
+		<<set $Lurcher = $activeSlave>>
+		<<goto $returnTo>>
+
+	<<default>>
+		<<assignJob $activeSlave $assignTo>>
+		
+		<<if ($showAssignToScenes == 1) && ($activeSlave.fetish != "mindbroken")>>
+			<<if ($assignTo == "Dairy") && (($dairyStimulatorsSetting >= 2) || ($dairyFeedersSetting >= 2) || ($dairyPregSetting >= 2))>>
+				<<goto "Industrial Dairy Assignment Scene">>
+			<<elseif ($assignTo == "Dairy") && ($dairyRestraintsSetting == 0 && $activeSlave.devotion > 0)>>
+				<<goto "Free Range Dairy Assignment Scene">>
+			<<elseif ($assignTo == "Brothel")>>
+				<<goto "Brothel Assignment Scene">>
+			<<else>>
+				<<goto $returnTo>>
+			<</if>>
+		<<else>>
+			<<goto $returnTo>>
+		<</if>>
+	<</switch>>
+
+<</if>>
+

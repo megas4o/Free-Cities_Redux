@@ -1,0 +1,39 @@
+:: Private [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+<<UpdateOwnership>>
+
+This is a privately-owned
+<<switch $sectors[$AS].type>>
+<<case "Shops">>
+	section of the promenade filled with a variety of small, higher-end shops, salons, brothels, and clubs.
+<<case "Apartments">>
+	sector of the arcology's living areas, occupied by citizens of varying wealth and social standing.
+<<case "DenseApartments">>
+	sector of the arcology's living areas, upgraded for dense occupancy by as many citizens as possible.
+<<case "LuxuryApartments">>
+	sector of the arcology's living areas, mproved for occupancy by the Free Cities' wealthiest citizens.
+<<case "Markets">>
+	area of the concourse occupied by large stores and markets, many of which sell slaves.
+<<case "Manufacturing">>
+	space in the arcology's service areas, rented to a variety of tenants for manufacturing purposes.
+<<case "Sweatshops">>
+	space in the arcology's service areas, rented to a variety of tenants for sweatshop labor.
+<<case "Pens">>
+	space in the arcology's service areas, designed to house hundreds of slaves for paying owners.
+<<default>>ERROR: bad sector type
+<</switch>>
+
+<<set $price = 1000*Math.trunc($arcologies[0].prosperity*(1+($arcologies[0].demandFactor/100)))>>
+You will have to acquire an additional 4% interest in $arcologies[0].name to take control of this sector. Such an interest is worth ¤$price and will require a transaction cost of ¤10000 to acquire for a total cost of ¤<<print $price+10000>>.
+<<if $arcologies[0].ownership+$arcologies[0].minority <= 96>>
+	[[Buy|Main][$cash -= $price+10000, $arcologies[0].demandFactor += 20, $sectors[$AS].ownership = 1]]
+	<<if $rep >= 18000>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<<set $repPrice = Math.clamp($price/2, 0, 18000)>>
+		You have so much political capital that you can spend reputation to acquire ownership by spending reputation. [[Use reputation|Main][$rep -= $repPrice, $arcologies[0].ownership += 4, $arcologies[0].demandFactor += 20, $sectors[$AS].ownership = 1]]
+	<</if>>
+<<else>>
+	Too much of the arcology is owned by a single minority holder for you to force a purchase of this sector right now. Your control of the arcology should naturally resolve this situation in a few weeks.
+<</if>>

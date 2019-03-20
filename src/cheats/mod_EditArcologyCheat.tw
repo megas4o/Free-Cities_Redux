@@ -1,0 +1,400 @@
+:: MOD_Edit Arcology Cheat [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "MOD_Edit Arcology Cheat Datatype Cleanup">>
+
+''Cheating Edit Arcology''
+
+<<if ($economy != 1) || ($seeDicks != 25) || ($continent != "North America") || ($internationalTrade != 1) || ($internationalVariety != 1) || ($seeRace != 1) || ($seeNationality != 1) || ($seeExtreme != 0) || ($plot != 1)>>
+	//[[restore defaults|MOD_Edit Arcology Cheat][$seeDicks = 25,$economy = 1,$continent = "North America",$internationalTrade = 1,$internationalVariety = 1,$seeRace = 1,$seeNationality = 1,$seeExtreme = 0,$plot = 1]]//
+<</if>>
+
+<br><br>The world economy is
+<<if $economy == 1>>
+	in ''doubtful'' shape.
+	[[Easier|MOD_Edit Arcology Cheat][$economy = 0.5]] | [[Harder|MOD_Edit Arcology Cheat][$economy = 1.5]]
+<<elseif $economy < 1>>
+	still in ''good'' shape.
+	[[Harder|MOD_Edit Arcology Cheat][$economy = 1]]
+<<else>>
+	in ''terrible'' shape.
+	[[Easier|MOD_Edit Arcology Cheat][$economy = 1]]
+<</if>>
+
+<<set $drugsCost = Math.trunc(100*$economy)>>
+<<set $rulesCost = Math.trunc(100*$economy)>>
+<<set $modCost = Math.trunc(50*$economy)>>
+<<set $surgeryCost = Math.trunc(300*$economy)>>
+
+<br>The arcology is located in ''$continent''.
+[[North America|MOD_Edit Arcology Cheat][$continent = "North America", $language = "English"]] | [[South America|MOD_Edit Arcology Cheat][$continent = "South America", $language = "Spanish"]] | [[Europe|MOD_Edit Arcology Cheat][$continent = "Europe", $language = "English"]] | [[the Middle East|MOD_Edit Arcology Cheat][$continent = "the Middle East", $language = "Arabic"]] | [[Africa|MOD_Edit Arcology Cheat][$continent = "Africa", $language = "Arabic"]] | [[Asia|MOD_Edit Arcology Cheat][$continent = "Asia", $language = "Chinese"]] | [[Australia|MOD_Edit Arcology Cheat][$continent = "Australia", $language = "English"]]
+
+<br>The lingua franca of the arcology is ''$language''.
+<<if $language != "English">>
+	[[English|MOD_Edit Arcology Cheat][$language = "English"]] |
+<<else>>
+	English |
+<</if>>
+<<if $language != "Spanish">>
+	[[Spanish|MOD_Edit Arcology Cheat][$language = "Spanish"]] |
+<<else>>
+	Spanish |
+<</if>>
+<<if $language != "Arabic">>
+	[[Arabic|MOD_Edit Arcology Cheat][$language = "Arabic"]] |
+<<else>>
+	Arabic |
+<</if>>
+<<if $language != "Chinese">>
+	[[Chinese|MOD_Edit Arcology Cheat][$language = "Chinese"]] |
+<<else>>
+	Chinese |
+<</if>>
+Custom: <<textbox "$language" $language "MOD_Edit Arcology Cheat">>
+
+<br><br>The slave trade is
+<<if $internationalTrade == 0>>
+	''continental,'' so a narrower variety of slaves will be available.
+	[[Allow intercontinental trade|MOD_Edit Arcology Cheat][$internationalTrade = 1]]
+<<else>>
+	''international,'' so a wider variety of slaves will be available.
+	[[Restrict the trade to continental|MOD_Edit Arcology Cheat][$internationalTrade = 0]]
+<</if>>
+
+<br>
+<<if $internationalTrade == 1>>
+International slave variety is
+<<if $internationalVariety == 0>>
+	''semi-realistic,'' so more populous nations will be more common.
+	[[Normalized national variety|MOD_Edit Arcology Cheat][$internationalVariety = 1]]
+<<else>>
+	''normalized,'' so small nations will appear nearly as much as large ones.
+	[[Semi-realistic national variety|MOD_Edit Arcology Cheat][$internationalVariety = 0]]
+<</if>>
+<</if>>
+
+<br>Ethnicity will
+<<if $seeRace == 1>>
+	''occasionally'' be mentioned.
+	[[Disable most mentions of race|MOD_Edit Arcology Cheat][$seeRace = 0]]
+<<else>>
+	''almost never'' be mentioned.
+	[[Enable mentions of race|MOD_Edit Arcology Cheat][$seeRace = 1]]
+<</if>>
+
+<br>Nationality will
+<<if $seeNationality == 1>>
+	''occasionally'' be mentioned.
+	[[Disable most mentions of nationality|MOD_Edit Arcology Cheat][$seeNationality = 0]]
+<<else>>
+	''almost never'' be mentioned.
+	[[Enable mentions of nationality|MOD_Edit Arcology Cheat][$seeNationality = 1]]
+<</if>>
+be mentioned.
+
+<br>Extreme content like amputation is
+<<if $seeExtreme == 1>>
+	''enabled''.
+	[[Disable|MOD_Edit Arcology Cheat][$seeExtreme = 0]]
+<<else>>
+	''disabled''.
+	[[Enable|MOD_Edit Arcology Cheat][$seeExtreme = 1]]
+<</if>>
+
+<br>Slave assets affected by weight is
+<<if ($weightAffectsAssets != 0)>>
+	''enabled''. [[Disable|MOD_Edit Arcology Cheat][$weightAffectsAssets = 0]]
+<<else>>
+	''disabled''. [[Enable|MOD_Edit Arcology Cheat][$weightAffectsAssets = 1]]
+<</if>>
+//If enabled, thin slaves will have large assets drop in size and vice versa at week end. (Diet still affects asset sizes).//
+
+<br>Curative side effects are
+<<if ($curativeSideEffects != 0)>>
+	''enabled''. [[Disable|MOD_Edit Arcology Cheat][$curativeSideEffects = 0]]
+<<else>>
+	''disabled''. [[Enable|MOD_Edit Arcology Cheat][$curativeSideEffects = 1]]
+<</if>>
+//If enabled, curatives have a chance to give slaves harmful side effects.//
+
+<br>Slave girls will
+<<if $seeDicks >= 90>>
+	''almost always'' have dicks.
+	[[No chicks with dicks pls (0%)|MOD_Edit Arcology Cheat][$seeDicks = 0]]
+	 | [[Side order of girl dick (25%)|MOD_Edit Arcology Cheat][$seeDicks = 25]]
+	 | [[Balanced dick chick diet (50%)|MOD_Edit Arcology Cheat][$seeDicks = 50]]
+	 | [[Dickgirl main course (75%)|MOD_Edit Arcology Cheat][$seeDicks = 75]]
+<<elseif $seeDicks > 50>>
+	''more likely than not'' have dicks.
+	[[No chicks with dicks pls (0%)|MOD_Edit Arcology Cheat][$seeDicks = 0]]
+	 | [[Side order of girl dick (25%)|MOD_Edit Arcology Cheat][$seeDicks = 25]]
+	 | [[Balanced dick chick diet (50%)|MOD_Edit Arcology Cheat][$seeDicks = 50]]
+	 | [[All of the dicks (100%)|MOD_Edit Arcology Cheat][$seeDicks = 100]]
+<<elseif $seeDicks > 25>>
+	''occasionally'' have dicks.
+	[[No chicks with dicks pls (0%)|MOD_Edit Arcology Cheat][$seeDicks = 0]]
+	 | [[Side order of girl dick (25%)|MOD_Edit Arcology Cheat][$seeDicks = 25]]
+	 | [[Dickgirl main course (75%)|MOD_Edit Arcology Cheat][$seeDicks = 75]]
+	 | [[All of the dicks (100%)|MOD_Edit Arcology Cheat][$seeDicks = 100]]
+<<elseif $seeDicks > 0>>
+	''rarely'' have dicks.
+	[[No chicks with dicks pls (0%)|MOD_Edit Arcology Cheat][$seeDicks = 0]]
+	 | [[Balanced dick chick diet (50%)|MOD_Edit Arcology Cheat][$seeDicks = 50]]
+	 | [[Dickgirl main course (75%)|MOD_Edit Arcology Cheat][$seeDicks = 75]]
+	 | [[All of the dicks (100%)|MOD_Edit Arcology Cheat][$seeDicks = 100]]
+<<else>>
+	''almost never'' have dicks.
+	 [[Side order of girl dick (25%)|MOD_Edit Arcology Cheat][$seeDicks = 25]]
+	 | [[Balanced dick chick diet (50%)|MOD_Edit Arcology Cheat][$seeDicks = 50]]
+	 | [[Dickgirl main course (75%)|MOD_Edit Arcology Cheat][$seeDicks = 75]]
+	 | [[All of the dicks (100%)|MOD_Edit Arcology Cheat][$seeDicks = 100]]
+<</if>>
+
+<<link "Go your own dick way">>
+	<<textbox "$seeDicks" $seeDicks>>
+	[[Apply|MOD_Edit Arcology Cheat][$seeDicks = Number($seeDicks) || 25]]
+<</link>>
+
+<br>Game mode:
+<<if $plot == 1>>
+	''two-handed''. Includes non-erotic events concerning the changing world.
+	[[Disable non-erotic events|MOD_Edit Arcology Cheat][$plot = 0]]
+<<else>>
+	''one-handed''. No non-erotic events concerning the changing world.
+	[[Enable non-erotic events|MOD_Edit Arcology Cheat][$plot = 1]]
+<</if>>
+
+<br><br>
+/*<<nobr>>
+<<if $normalizedEvents == 1>>
+	Random events distribution: ''normalized''. Random events will happen with equal frequency.
+	[[Realistic|MOD_Edit Arcology Cheat][$normalizedEvents = 0]]
+<<else>>
+	Random events distribution: ''realistic''. Events will happen more frequently if more slaves qualify for them.
+	[[Normalize|MOD_Edit Arcology Cheat][$normalizedEvents = 1]]
+<</if>>
+<</nobr>>*/
+
+__Player Character__
+<br>Conversational title:
+<<if $PC.title > 0>>
+	''Master''.
+	[[Switch to Mistress|MOD_Edit Arcology Cheat][$PC.title = 0]]
+<<else>>
+	''Mistress''.
+	[[Switch to Master|MOD_Edit Arcology Cheat][$PC.title = 1]]
+<</if>>
+
+<br>Career: ''$PC.career''.
+	[[Wealth|MOD_Edit Arcology Cheat][$PC.career = "wealth"]] |
+	[[Business|MOD_Edit Arcology Cheat][$PC.career = "capitalist"]] |
+	[[PMC work|MOD_Edit Arcology Cheat][$PC.career = "mercenary"]] |
+	[[Slaving|MOD_Edit Arcology Cheat][$PC.career = "slaver"]] |
+	[[Engineering|MOD_Edit Arcology Cheat][$PC.career = "engineer"]] |
+	[[Medicine|MOD_Edit Arcology Cheat][$PC.career = "medicine"]] |
+	[[Celebrity|MOD_Edit Arcology Cheat][$PC.career = "celebrity"]]
+
+<br>Method of acquiring the arcology: ''$PC.rumor''.
+	[[Wealth|MOD_Edit Arcology Cheat][$PC.rumor = "wealth"]] |
+	[[Hard work|MOD_Edit Arcology Cheat][$PC.rumor = "diligence"]] |
+	[[Force|MOD_Edit Arcology Cheat][$PC.rumor = "force"]] |
+	[[Social engineering|MOD_Edit Arcology Cheat][$PC.rumor = "social engineering"]] |
+	[[Luck|MOD_Edit Arcology Cheat][$PC.rumor = "luck"]]
+
+<br>Genitalia:
+<<if $PC.dick > 0>>
+	''penis''. Standard sex scenes; easier reputation maintenance.
+	[[Switch to vagina|MOD_Edit Arcology Cheat][$PC.dick = 0]]
+<<else>>
+	''vagina''. Sex scene variations; more difficult reputation maintenance.
+	[[Switch to penis|MOD_Edit Arcology Cheat][$PC.dick = 1]]
+<</if>>
+
+<br>Chest:
+<<if $PC.boobs > 0>>
+	''breasts''. Sex scene variations; more difficult reputation maintenance.
+	[[Remove breasts|MOD_Edit Arcology Cheat][$PC.boobs = 0]]
+<<else>>
+	''masculine''. Standard sex scenes; easier reputation maintenance.
+	[[Add breasts|MOD_Edit Arcology Cheat][$PC.boobs = 1]]
+<</if>>
+
+<br>Age:
+<<if $PC.age == 3>>
+	''well into middle age''.
+	[[Younger|MOD_Edit Arcology Cheat][$PC.age = 2]]
+<<elseif $PC.age == 2>>
+	''entering middle age''.
+	[[Younger|MOD_Edit Arcology Cheat][$PC.age = 1]] | [[Older|MOD_Edit Arcology Cheat][$PC.age = 3]]
+<<else>>
+	''surprisingly young''.
+	[[Older|MOD_Edit Arcology Cheat][$PC.age = 2]]
+<</if>>
+
+<br>Rename your character: (given name) <<textbox "$PC.name" $PC.name "MOD_Edit Arcology Cheat">> (surname) <<textbox "$PC.surname" $PC.surname "MOD_Edit Arcology Cheat">>
+<br>Preferred refreshment: <<textbox "$PC.refreshment" $PC.refreshment "MOD_Edit Arcology Cheat">> [[Cigars|MOD_Edit Arcology Cheat][$PC.refreshment = "cigar",$PC.refreshmentType = 0]] | [[Whiskey|MOD_Edit Arcology Cheat][$PC.refreshment = "whiskey",$PC.refreshmentType = 1]]
+<br>Preferred method of consumption: <<if $PC.refreshmentType == 0>>Smoked<<elseif $PC.refreshmentType == 1>>Drank<<elseif $PC.refreshmentType == 2>>Eaten<<elseif $PC.refreshmentType == 3>>Snorted<<else>>Injected<</if>>
+<br>[[Smoked|MOD_Edit Arcology Cheat][$PC.refreshmentType = 0]] | [[Drank|MOD_Edit Arcology Cheat][$PC.refreshmentType = 1]] | [[Eaten|MOD_Edit Arcology Cheat][$PC.refreshmentType = 2]] | [[Snorted|MOD_Edit Arcology Cheat][$PC.refreshmentType = 3]] | [[Injected|MOD_Edit Arcology Cheat][$PC.refreshmentType = 4]]
+
+<br><br>Arcology citizens: $ACitizens
+<<textbox "$ACitizens" $ACitizens>>
+<br>Arcology sex slaves: $ASlaves
+<<textbox "$ASlaves" $ASlaves>>
+<br>Arcology prosperity cap: $AProsperityCap
+<<textbox "$AProsperityCap" $AProsperityCap>>
+
+<br><br>Shelter Abuse Counter: $shelterAbuse
+<<textbox "$shelterAbuse" $shelterAbuse>>
+
+<br><br>''The Slavegirl School:''
+<br>TSS Students Bought: <<textbox "$TSS.studentsBought" $TSS.studentsBought>>
+
+<br>TSS Upgrades: ''$TSS.schoolUpgrade'' |
+<<radiobutton "$TSS.schoolUpgrade" 0>> 0
+| <<radiobutton "$TSS.schoolUpgrade" 1>> 1
+| <<radiobutton "$TSS.schoolUpgrade" 2>> 2
+
+<br>TSS Moved to Arcology: ''$TSS.schoolPresent'' |
+<<radiobutton "$TSS.schoolPresent" 0>> 0
+| <<radiobutton "$TSS.schoolPresent" 1>> 1 (Moved)
+
+<br>TSS Prosperity: <<textbox "$TSS.schoolProsperity" $TSS.schoolProsperity>>
+<br>TSS Failed: ''$TSS.schoolAnnexed'' |
+<<radiobutton "$TSS.schoolAnnexed" 0>> 0
+| <<radiobutton "$TSS.schoolAnnexed" 1>> 1 (Failed)
+
+<br><br>''The Growth Research Institute:''
+<br>GRI Students Bought: <<textbox "$GRI.studentsBought" $GRI.studentsBought>>
+<br>GRI Upgrades: ''$GRI.schoolUpgrade'' |
+<<radiobutton "$GRI.schoolUpgrade" 0>> 0
+| <<radiobutton "$GRI.schoolUpgrade" 1>> 1
+| <<radiobutton "$GRI.schoolUpgrade" 2>> 2
+
+<br>GRI Moved to Arcology: ''$GRI.schoolPresent'' |
+<<radiobutton "$GRI.schoolPresent" 0>> 0
+| <<radiobutton "$GRI.schoolPresent" 1>> 1 (Moved)
+
+<br>GRI Prosperity: <<textbox "$GRI.schoolProsperity" $GRI.schoolProsperity>>
+<br>GRI Failed: ''$GRI.schoolAnnexed'' |
+<<radiobutton "$GRI.schoolAnnexed" 0>> 0
+| <<radiobutton "$GRI.schoolAnnexed" 1>> 1 (Failed)
+
+<br><br>''St. Claver Preparatory:''
+<br>SCP Students Bought: <<textbox "$SCP.studentsBought" $SCP.studentsBought>>
+<br>SCP Upgrades: ''$SCP.schoolUpgrade'' |
+<<radiobutton "$SCP.schoolUpgrade" 0>> 0
+| <<radiobutton "$SCP.schoolUpgrade" 1>> 1
+| <<radiobutton "$SCP.schoolUpgrade" 2>> 2
+
+<br>SCP Moved to Arcology: ''$SCP.schoolPresent'' |
+<<radiobutton "$SCP.schoolPresent" 0>> 0
+| <<radiobutton "$SCP.schoolPresent" 1>> 1 (Moved)
+
+<br>SCP Prosperity: <<textbox "$SCP.schoolProsperity" $SCP.schoolProsperity>>
+<br>SCP Failed: ''$SCP.schoolAnnexed'' |
+<<radiobutton "$SCP.schoolAnnexed" 0>> 0
+| <<radiobutton "$SCP.schoolAnnexed" 1>> 1 (Failed)
+
+<<if ($seeDicks != 0)>>
+<br><br>''L'Ecole des Enculees:''
+<br>LDE Students Bought: <<textbox "$LDE.studentsBought" $LDE.studentsBought>>
+<br>LDE Upgrades: ''$LDE.schoolUpgrade'' |
+<<radiobutton "$LDE.schoolUpgrade" 0>> 0
+| <<radiobutton "$LDE.schoolUpgrade" 1>> 1
+| <<radiobutton "$LDE.schoolUpgrade" 2>> 2
+
+<br>LDE Moved to Arcology: ''$LDE.schoolPresent'' |
+<<radiobutton "$LDE.schoolPresent" 0>> 0
+| <<radiobutton "$LDE.schoolPresent" 1>> 1 (Moved)
+
+<br>LDE Prosperity: <<textbox "$LDE.schoolProsperity" $LDE.schoolProsperity>>
+<br>LDE Failed: ''$LDE.schoolAnnexed'' |
+<<radiobutton "$LDE.schoolAnnexed" 0>> 0
+| <<radiobutton "$LDE.schoolAnnexed" 1>> 1 (Failed)
+
+<br><br>''The Gymnasium-Academy:''
+<br>TGA Students Bought: <<textbox "$TGA.studentsBought" $TGA.studentsBought>>
+<br>TGA Upgrades: ''$TGA.schoolUpgrade''
+<<radiobutton "$TGA.schoolUpgrade" 0>> 0
+| <<radiobutton "$TGA.schoolUpgrade" 1>> 1
+| <<radiobutton "$TGA.schoolUpgrade" 2>> 2
+
+<br>TGA Moved to Arcology: ''$TGA.schoolPresent'' |
+<<radiobutton "$TGA.schoolPresent" 0>> 0
+| <<radiobutton "$TGA.schoolPresent" 1>> 1 (Moved)
+
+<br>TGA Prosperity: <<textbox "$TGA.schoolProsperity" $TGA.schoolProsperity>>
+<br>TGA Failed: ''$TGA.schoolAnnexed'' |
+<<radiobutton "$TGA.schoolAnnexed" 0>> 0
+| <<radiobutton "$TGA.schoolAnnexed" 1>> 1 (Failed)
+
+<br><br>''The Futanari Sisters:''
+<br>TFS Students Bought: <<textbox "$TFS.studentsBought" $TFS.studentsBought>>
+<br>TFS Upgrades: ''$TFS.schoolUpgrade'' |
+<<radiobutton "$TFS.schoolUpgrade" 0>> 0
+| <<radiobutton "$TFS.schoolUpgrade" 1>> 1
+| <<radiobutton "$TFS.schoolUpgrade" 2>> 2
+
+<br>TFS Moved to Arcology: ''$TFS.schoolPresent'' |
+<<radiobutton "$TFS.schoolPresent" 0>> 0
+| <<radiobutton "$TFS.schoolPresent" 1>> 1 (Moved)
+
+<br>TFS Prosperity:<<textbox "$TFS.schoolProsperity" $TFS.schoolProsperity>>
+<br>TFS Failed: ''$TFS.schoolAnnexed'' |
+<<radiobutton "$TFS.schoolAnnexed" 0>> 0
+| <<radiobutton "$TFS.schoolAnnexed" 1>> 1 (Failed)
+<</if>>
+
+<br><br>__Arcologies:__
+<br>&nbsp;&nbsp;&nbsp;&nbsp;__''$arcologies[0].name''__ is your arcology.
+<br>You own: ''$arcologies[0].ownership%'' of the arcology <<textbox "$arcologies[0].ownership" $arcologies[0].ownership>>
+<br>Other minority ownership: ''$arcologies[0].minority%'' <<textbox "$arcologies[0].minority" $arcologies[0].minority>>
+<br>$arcologies[0].name's GSP is @@.yellowgreen;¤<<print Math.trunc(0.1*$arcologies[0].prosperity)>>m@@.
+
+<<if $arcologies.length > 1>>
+	<<set _neighbors = $arcologies.length-1>>
+	<br><br>Your arcology has _neighbors
+	<<if _neighbors == 1>>neighbor<<else>>neighbors<</if>>.
+<<else>>
+	Your arcology has no neighbors.
+<</if>>
+
+<<if $arcologies.length <= 8>>
+<<link "Add neighbor">>
+	<<set _seed = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"]>>
+	<<for _eca = 0; _eca < $arcologies.length; _eca++>>
+		<<set _seed.delete($arcologies[_eca].direction)>> /* remove directions already in use */
+	<</for>>
+	<<set _govtypes = ["elected officials", "a committee", "an oligarchy", "an individual", "a corporation", "direct democracy"]>>
+	<<set $activeArcology = {name: "Arcology X-", direction: _seed.random(), government: _govtypes.random(), honeymoon: 0, prosperity: 50, ownership: 50, minority: 20, PCminority: 0, demandFactor:0, FSSupremacist: "unset", FSSupremacistRace: 0, FSSubjugationist: "unset", FSSubjugationistRace: 0, FSGenderRadicalist: "unset", FSGenderFundamentalist: "unset", FSPaternalist: "unset", FSDegradationist: "unset", FSBodyPurist: "unset", FSTransformationFetishist: "unset", FSYouthPreferentialist: "unset", FSMaturityPreferentialist: "unset", FSSlimnessEnthusiast: "unset", FSAssetExpansionist: "unset", FSPastoralist: "unset", FSPhysicalIdealist: "unset", FSChattelReligionist: "unset", FSRomanRevivalist: "unset", FSAztecRevivalist: "unset", FSEgyptianRevivalist: "unset", FSEdoRevivalist: "unset", FSArabianRevivalist: "unset", FSChineseRevivalist: "unset", FSNull: "unset", embargo: 1, embargoTarget: -1, influenceTarget: -1, influenceBonus: 0, rival: 0}>>
+
+	<<if $arcologies.length < 4>> /* X-4 is reserved for player's arcology, so X-1 is available */
+		<<set $activeArcology.name += ($arcologies.length)>>
+	<<else>>
+		<<set $activeArcology.name += ($arcologies.length+1)>>
+	<</if>>
+
+	<<set $activeArcology.prosperity += random(-20,20)>>
+	<<set $activeArcology.ownership += random(-10,0)>>
+	<<set $activeArcology.minority += random(-5,5)>>
+	<<set $arcologies.push($activeArcology)>>
+
+	<<goto "MOD_Edit Arcology Cheat">>
+<</link>>
+<</if>>
+
+<br>
+<<set $averageProsperity = 0, _seed = 0>>
+<<for _eca = 0; _eca < $arcologies.length; _eca++>>
+	<<set $averageProsperity += $arcologies[_eca].prosperity, _seed++>>
+<</for>>
+<<set $averageProsperity = $averageProsperity/_seed>>
+
+<<for $i = 0; $i < $arcologies.length; $i++>>
+	<<if $arcologies[$i].direction != 0>>
+		<<include "Neighbor Description">> /* uses $arcologies[$i] */
+	<</if>>
+
+	<<if $i != 0>>
+		<<print "[[Remove neighbor|MOD_Edit Arcology Cheat][$arcologies.deleteAt(" + $i + ")]]">>
+	<</if>>
+<</for>>

@@ -1,0 +1,341 @@
+:: JE slave dispute [nobr]
+
+<<set $nextLink = "RIE Eligibility Check", $returnTo = "RIE Eligibility Check", $nextButton = "Continue", _event = $justiceEvents.pluck()>> /* pick a random event and remove it from the array so it will not occur again */
+
+<<switch _event>>
+<<case "slave deal">>
+	<<set $contractCost = 5000>>
+	<<include "Generate New Slave">>
+	<<set $activeSlave.origin = "She sold herself into slavery to buy medical care for her daughter.">>
+	<<set $activeSlave.devotion = random(25,30)>>
+	<<set $activeSlave.trust = $activeSlave.devotion-20>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+	<<set $activeSlave.health = random(0,20)>>
+	<<set $activeSlave.age = random(24,42)>>
+	<<set $activeSlave.earPiercing = 1>>
+	<<if $activeSlave.dick == 0>>
+		<<set $activeSlave.vagina = random(1,2)>>
+		<<set $activeSlave.ovaries = 1>>
+	<</if>>
+	<<set $activeSlave.shouldersTat = either("tribal patterns", "flowers")>>
+	<<set $activeSlave.stampTat = either("tribal patterns", "flowers")>>
+	<<set $activeSlave.slaveCost = 5000>>
+<<case "slave training">>
+	<<set $contractCost = 10000>>
+	<<include "Generate XY Slave">>
+	<<set $activeSlave.origin = "You bought out a deal involving her training to be an expert gelded sex slave.">>
+	<<set $activeSlave.devotion = random(30,40)>>
+	<<set $activeSlave.trust = $activeSlave.devotion>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+	<<set $activeSlave.health = random(60,80)>>
+	<<set $activeSlave.balls = 0>>
+	<<set $activeSlave.anus = 2>>
+	<<set $activeSlave.analSkill = 35>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.whoreSkill = 35>>
+	<<set $activeSlave.entertainSkill = 35>>
+	<<set $activeSlave.nipplesPiercing = 1>>
+	<<set $activeSlave.clitPiercing = 1>>
+	<<set $activeSlave.dickPiercing = 1>>
+	<<set $activeSlave.anusPiercing = 1>>
+	<<set $activeSlave.lipsPiercing = 1>>
+	<<set $activeSlave.tonguePiercing = 1>>
+	<<set $activeSlave.earPiercing = 1>>
+	<<set $activeSlave.nosePiercing = 1>>
+	<<set $activeSlave.eyebrowPiercing = 1>>
+	<<set $activeSlave.navelPiercing = 1>>
+	<<set $activeSlave.boobsTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.buttTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.vaginaTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.dickTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.lipsTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.anusTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.shouldersTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.armsTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.legsTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.stampTat = either("advertisements", "degradation", "rude words")>>
+	<<set $activeSlave.slaveCost = 10000>>
+<<case "majority deal">>
+	<<set $contractCost = 20000>>
+	<<include "Generate New Slave">>
+	<<set $activeSlave.origin = "She was raised to be a slave, since she was mistakenly thought to be from good slave stock.">>
+	<<set $activeSlave.career = "a slave">>
+	<<set $activeSlave.devotion = random(10,15)>>
+	<<set $activeSlave.trust = $activeSlave.devotion>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+	<<set $activeSlave.health = random(80,90)>>
+	<<set $activeSlave.age = 18>>
+	<<if $activeSlave.dick == 0>>
+		<<set $activeSlave.vagina = 0>>
+		<<set $activeSlave.ovaries = 1>>
+	<<elseif $activeSlave.balls == 0>>
+		<<set $activeSlave.balls = 1>>
+	<</if>>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.oralSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.slaveCost = 20000>>
+<<case "indenture deal">>
+	<<set $contractCost = 7500>>
+	<<include "Generate New Slave">>
+	<<set $activeSlave.origin = "She was enslaved after you manipulated her deal for indentured servitude.">>
+	<<set $activeSlave.devotion = random(-10,-15)>>
+	<<set $activeSlave.trust = $activeSlave.devotion+4>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+	<<set $activeSlave.health = random(-20,20)>>
+	<<set $activeSlave.age = random(24,42)>>
+	<<set $activeSlave.anus = 2>>
+	<<if $activeSlave.vagina > -1>>
+		<<set $activeSlave.vagina = 2>>
+	<</if>>
+	<<set $activeSlave.vaginalSkill = 15>>
+	<<set $activeSlave.oralSkill = 15>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 15>>
+	<<set $activeSlave.boobs += 600>>
+	<<set $activeSlave.boobsImplant = 600>>
+	<<set $activeSlave.butt += 1>>
+	<<set $activeSlave.buttImplant = 1>>
+	<<set $activeSlave.lips += 10>>
+	<<set $activeSlave.lipsImplant = 10>>
+	<<set $activeSlave.lipsPiercing = 1>>
+	<<set $activeSlave.tonguePiercing = 1>>
+	<<set $activeSlave.earPiercing = 1>>
+	<<set $activeSlave.nosePiercing = 1>>
+	<<set $activeSlave.eyebrowPiercing = 1>>
+	<<set $activeSlave.navelPiercing = 1>>
+	<<set $activeSlave.nipplesPiercing = 1>>
+	<<set $activeSlave.clitPiercing = 1>>
+	<<set $activeSlave.stampTat = either("tribal patterns", "flowers")>>
+	<<set $activeSlave.slaveCost = 7500>>
+<<default>>
+	<<set $contractCost = 10000>>
+	<<include "Generate New Slave">>
+	<<set $activeSlave.origin = "You bought out a deal for her sale after the seller took her virginity and the buyer no longer wanted her.">>
+	<<set $activeSlave.devotion = random(25,30)>>
+	<<set $activeSlave.trust = $activeSlave.devotion-20>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+	<<set $activeSlave.health = random(0,20)>>
+	<<set $activeSlave.age = random(18,22)>>
+	<<set $activeSlave.anus = 2>>
+	<<if $activeSlave.dick == 0>>
+		<<set $activeSlave.vagina = 2>>
+		<<set $activeSlave.ovaries = 1>>
+		<<if isFertile($activeSlave)>>
+			<<set $activeSlave.preg = 1>>
+		<</if>>
+	<</if>>
+	<<set $activeSlave.slaveCost = 10000>>
+<</switch>>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+<<if $imageChoice == 1>>
+    <div class="imageRef lrgVector"><<SlaveArt $activeSlave 2 0>></div>
+<<else>>
+    <div class="imageRef lrgRender"><<SlaveArt $activeSlave 2 0>></div>
+<</if>>
+<</if>>
+/* 000-250-006 */
+
+<<switch _event>>
+<<case "slave deal">>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> breaks in on your sleep with an urgent message. You push a slave off you and sit up to take it. As the owner of the arcology, you perform some functions that would traditionally be the province of a government. In this anarcho-liberal polity, it's still necessary for people making deals to have someone to appeal to when disputes arise. Part of your agreement with your tenants is that you will perform this duty on deals between two tenants. The message is about just such a disagreement; they always seem to happen in the middle of the night, and they're always urgent.
+	<br><br>
+	An older woman who has signed an enslavement contract with a slave trader is accusing her of not living up to the terms. The contract requires that the trader pay the medical costs of the woman's daughter in return for the woman's voluntary enslavement. The woman claims that the payments have not been made and the trader is still insisting on enslavement.
+	<br><br>
+	The trader states that the daughter was thought to only have a minor condition, but has proven to be suffering from serious cancer. She protests that she will lose a great deal of money, and that there's no way she would have made the deal if the woman had been honest with her about how bad her daughter's condition was. The woman responds that she didn't know.
+<<case "slave training">>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> breaks in on your sleep with an urgent message. You push a slave off you and sit up to take it. As the owner of the arcology, you perform some functions that would traditionally be the province of a government. In this anarcho-liberal polity, it's still necessary for people making deals to have someone to appeal to when disputes arise. Part of your agreement with your tenants is that you will perform this duty on deals between two tenants. The message is about just such a disagreement; they always seem to happen in the middle of the night, and they're always urgent.
+	<br><br>
+	One of your prominent tenants is accusing another of failing to train a slave for him according to the terms of a slave training contract. He highlights a part of the contract that requires that the slave be expert in "all common sexual skills." He self-righteously declares that the delivered slave has no vaginal skills to speak of, that he doesn't want her as a result, and requests that you release him from the contract.
+	<br><br>
+	The trainer replies with some aspersion that the accuser is technically correct: the slave has no vaginal skills at all. This is, however, due to the fact that the slave has no vagina. He claims that the accuser verbally requested a gelded slave, though there's nothing about that either way in the contract. He protests that he did his best to train an expert gelding, and offers many lengthy videos to prove that he did.
+<<case "majority deal">>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> breaks in on your sleep with an urgent message. You push a slave off you and sit up to take it. As the owner of the arcology, you perform some functions that would traditionally be the province of a government. In this anarcho-liberal polity, it's still necessary for people making deals to have someone to appeal to when disputes arise. Part of your agreement with your tenants is that you will perform this duty on deals between two tenants. The message is about just such a disagreement; they always seem to happen in the middle of the night, and they're always urgent.
+	<br><br>
+	A prominent citizen is accusing a slave school of lying to him about the pedigree of a girl about to reach her majority. She'll be enslaved once she's of age, and he owns the rights to her. He produces many messages from the school about her progress; they all reference her excellent bloodline. The slave's genes were sequenced recently for an unrelated treatment, and it appears she's not the child of the slaves the school stated she was. He angrily demands compensation for the effort he's put into planning for her.
+	<br><br>
+	The school's representative is apologetic, but firm. The school readily admits an error, but he protests that they weren't aware of the confusion, either. They've offered to buy her back, with interest, but reject what they call an exorbitant demand for compensation. They produce the original pedigree, protesting that it shows that they were lied to, too. The slave does resemble the supposed parents closely; only an unusually invasive check would have disclosed the fraud.
+<<case "indenture deal">>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> breaks in on your sleep with an urgent message. You push a slave off you and sit up to take it. As the owner of the arcology, you perform some functions that would traditionally be the province of a government. In this anarcho-liberal polity, it's still necessary for people making deals to have someone to appeal to when disputes arise. Part of your agreement with your tenants is that you will perform this duty on deals between two tenants. The message is about just such a disagreement; they always seem to happen in the middle of the night, and they're always urgent.
+	<br><br>
+	A slutty-looking girl appears, bearing a split lip and a black eye, accusing a slave trader of tricking her. She sends you a lengthy contract of indentured servitude. Nothing seems out of order, though indentured servants are becoming less common, since slave labor is usually cheaper and less limited. The angry accuser claims that the trader told her that she wouldn't be required to have sex while indentured. The promise doesn't seem to be in writing, but the girl bitterly insists that it was made. "And now," she almost shrieks, "he's making me be a whore. I got assfucked five times yesterday. Five!"
+	<br><br>
+	The trader indignantly denies ever making any such commitment, and points out, correctly, that she has no proof. He protests that he only made the indentured servitude deal as a favor to her, and is angry that she's repaying his courtesy in not insisting on enslavement by this ingratitude. "I see here in the record that she was indeed used anally five times yesterday," he observes acidly. "But that's her job."
+<<default>>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> breaks in on your sleep with an urgent message. You push a slave off you and sit up to take it. As the owner of the arcology, you perform some functions that would traditionally be the province of a government. In this anarcho-liberal polity, it's still necessary for people making deals to have someone to appeal to when disputes arise. Part of your agreement with your tenants is that you will perform this duty on deals between two tenants. The message is about just such a disagreement; they always seem to happen in the middle of the night, and they're always urgent.
+	<br><br>
+	A wealthy slaveowner, clearly nursing a ferocious hangover, is accusing a less prominent citizen of refusing to honor the terms of a sale they signed in the early hours of the morning. Already shaking your head, you pull up the security logs with his permission. You verify that yes, indeed, they're visible at a loud party hosted by the wealthy slaveowner, talking over a tablet for a long time before shaking hands and signing.
+	<br><br>
+	The putative buyer protests that though the terms of sale don't show it, their conversation before the sale focused on the slave's virginity. The logs show that this, too, is true. And then, he rages, the slaveowner got even drunker, and brought the slave up to join the party, encouraging other guests to gangbang her. The logs show this too; the slave is definitely not a virgin any longer. The would-be buyer says he understands that he should have gotten the part about the virginity in writing and guaranteed up until he got his hands on her, but requests that you honor the spirit of the deal by letting him out of a contract to buy a now-ruined slave.
+<</switch>>
+
+<br><br>
+
+<span id="result">
+<<switch _event>>
+<<case "slave deal">>
+	<<link "Privately inform both parties you'll settle this in favor of the most generous">>
+		<<replace "#result">>
+		You privately inform both parties you'll settle this in favor of the most generous. You instantly receive a single notice of escrow payment contingent on the case going the payer's way. You select the @@.yellowgreen;bigger of the two@@ and decide the matter before returning to bed in a good mood. However, the next day it becomes apparent that although she isn't stupid enough to make a public accusation of corruption, the older woman made use of her few remaining hours of freedom to @@.red;slander@@ your administration of justice.
+		<<set $rep -= 100>>
+		<<set $cash += 2000>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the older woman">>
+		<<replace "#result">>
+		You settle the dispute in favor of the slave-to-be. She is resigned, knowing that she's now owned by a woman who almost certainly hates her, but her daughter's treatments are assured. The story gets around quickly, @@.green;capturing the hearts@@ of more romantic citizens. The angry slave trader leaves the arcology, @@.red;reducing prosperity.@@
+		<<set $arcologies[0].prosperity -= 5>>
+		<<set $rep += 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the slave trader">>
+		<<replace "#result">>
+		You settle the dispute in favor of the slave trader. The story of the mother's enslavement, along with the prompt death of the daughter due to inadequate treatment, gets around the Free Cities, @@.red;appalling@@ more romantic citizens. The trader lets it be known amongst her peers that you do not brook uppity behavior from poor bitches, and that slave traders can expect to do well in your arcology, @@.green;increasing prosperity.@@
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep -= 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Offer to buy out the contract">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		You offer to simply buy out the contract, taking the slave for yourself, letting the slave trader out of her side of the deal, and providing for the daughter's medical care. The trader lets it be known amongst her peers that you will make things right no matter the cost to yourself, @@.green;increasing prosperity.@@ The story of the mother willing to be enslaved gets around quickly, @@.green;capturing the hearts@@ of more romantic citizens. The mother, meanwhile, presents herself for enslavement, @@.hotpink;very grateful@@ that you've saved her daughter's life.
+		<br><br>
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep += 500>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>> //This will cost ¤$contractCost and give you the slave//
+<<case "slave training">>
+	<<link "Privately inform both parties you'll settle this in favor of the most generous">>
+		<<replace "#result">>
+		You privately inform both parties you'll settle this in favor of the most generous. You instantly receive two notices of escrow payments contingent on the case going the payer's way. You select the @@.yellowgreen;bigger of the two@@ and decide the matter before returning to bed in a good mood. However, the next day it becomes apparent that although he isn't stupid enough to make a public accusation of corruption, the loser is proclaiming that he is @@.red;not pleased@@ with your administration of justice.
+		<<set $rep -= 100>>
+		<<set $cash += 2000>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the accuser">>
+		<<replace "#result">>
+		You settle the dispute in favor of the wealthy accuser. He lets you know privately that he recently had a business deal go bad, so he's in a tough cash situation right now; he's so grateful for your assistance in this embarrassing situation that he talks @@.green;effusively@@ for days to anyone who will listen about your good administration of the arcology. Unfortunately, the furious trainer has packed up his equipment and his gelding and left for another arcology, somewhat @@.red;reducing prosperity.@@
+		<<set $arcologies[0].prosperity -= 5>>
+		<<set $rep += 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the trainer">>
+		<<replace "#result">>
+		You settle the dispute in favor of the slave trainer. It transpires that the wealthy accuser was no longer wealthy at all, and was looking to get out of the deal; he's furious, and spends a long day @@.red;spewing invectives@@ against you to anyone who will listen before decamping back to the old world. The trainer, on the other hand, lets it be known that you support businessmen, who can trust you to look after their interests, @@.green;increasing prosperity.@@
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep -= 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Offer to buy out the deal">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		You offer to simply buy out the deal, paying the trainer and taking the slave yourself, and letting the buyer out of the payment. The trainer, on the other hand, lets it be known that you support businessmen, who can trust you to ensure they don't come out second best, @@.green;increasing prosperity.@@ The buyer lets you know privately that he recently had a business deal go bad, so he's in a tough cash situation right now; he's so grateful for your assistance in this embarrassing situation that he talks @@.green;effusively@@ for days to anyone who will listen about your discreet administration of the arcology. The slave, meanwhile, arrives at your penthouse, @@.hotpink;rather hopeful@@ that she's going to a good master.
+		<br><br>
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep += 500>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>> //This will cost ¤$contractCost and give you the slave//
+<<case "majority deal">>
+	<<link "Privately inform both parties you'll settle this in favor of the most generous">>
+		<<replace "#result">>
+		You privately inform both parties you'll settle this in favor of the most generous. You instantly receive two notices of escrow payments contingent on the case going the payer's way. You select the @@.yellowgreen;bigger of the two@@ and decide the matter before returning to bed in a good mood. However, the next day it becomes apparent that although he isn't stupid enough to make a public accusation of corruption, the loser is proclaiming that he is @@.red;not pleased@@ with your administration of justice.
+		<<set $rep -= 100>>
+		<<set $cash += 2000>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the accuser">>
+		<<replace "#result">>
+		You settle the dispute in favor of the prominent accuser. He dabbles in slave breeding himself, and was looking forward to using the slave in question for breeding stock; like many breeders he cares deeply about his stable, and speaks @@.green;positively@@ in public about how you helped an innocent breeder protect his prize bloodlines. Slave trading to and from your arcology is @@.red;somewhat lessened@@ however, since the school lets it be known that trading in your arcology is a risk.
+		<<set $arcologies[0].prosperity -= 5>>
+		<<set $rep += 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the trainer">>
+		<<replace "#result">>
+		You settle the dispute in favor of the school, and against the prominent accuser. He dabbles in slave breeding himself, and was looking forward to using the slave in question for breeding stock; like many breeders he cares deeply about his stable, and speaks @@.red;furiously@@ in public about how you denied an innocent breeder justice against those swindling slave schools. The school, however, passes a @@.green;good word@@ around the industry that schools trading with your arcology can expect to be protected from frivolous claims.
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep -= 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Compromise on the compensation and offer to buy out the deal">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		You offer to buy out the deal, paying the school and taking the slave yourself, and compromising on the demanded compensation. The citizen was looking forward to using the slave in question for breeding stock; like many breeders he cares deeply about his stable and is mollified by the moderate payment, and speaks @@.green;kindly@@ in public about how you helped an innocent breeder protect his prize bloodlines. The school sends a @@.green;positive note@@ around the industry to the effect that schools trading with your arcology can expect to have excessive claims sensibly reduced.
+		<br><br>
+		<<set $arcologies[0].prosperity += 3>>
+		<<set $rep += 300>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>> //This will cost ¤$contractCost and give you the slave//
+<<case "indenture deal">>
+	<<link "Privately inform both parties you'll settle this in favor of the most generous">>
+		<<replace "#result">>
+		You privately inform both parties you'll settle this in favor of the most generous. You instantly receive a single notice of escrow payment contingent on the case going the payer's way. You select the @@.yellowgreen;bigger of the two@@ and decide the matter before returning to bed in a good mood. However, the next day it becomes apparent that although she isn't stupid enough to make a public accusation, the whore has been @@.red;whispering@@ to her peers that you helped the trader cheat her into prostitution. Few citizens care, but there is a faint scent of corruption.
+		<<set $rep -= 50>>
+		<<set $cash += 2000>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the indentured whore">>
+		<<replace "#result">>
+		You settle the dispute in favor of the indentured whore, adding a requirement to the indentured servitude that she not be required to fuck against her will. The story of the brave prostitute and the conniving trader is @@.green;told and retold,@@ impressing the more credulous citizens. It also @@.red;raises doubts@@ among the wealthier, more business-minded residents about whether you can be depended on to promote their interests.
+		<<set $arcologies[0].prosperity -= 5>>
+		<<set $rep += 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the indenture holder">>
+		<<replace "#result">>
+		You settle the dispute in favor of the owner of the indenture. No change in the contract is necessary, since it already says what it should: that he controls her for the required period. That's all. The story of your strictness in business disputes @@.green;impresses@@ some of the more commercially powerful citizens of the arcology, but is @@.red;hissed@@ by the stupider, more romantic residents, who see only a brave whore being beaten down by a conniving slave trader.
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep -= 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Buy out the contract and enslave her">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		You quietly contact the trader and suggest an alternative method of settling the dispute. He is surprised, but agrees readily, chuckling at how the "recalcitrant bitch" is going to be dealt with. To her horror, she finds that your near-total power over deals made in your arcology has been employed to saddle her with additional debts that, under her indentured servitude, she cannot hope to repay. It is then the work of ten minutes to demand payment, and when she cannot pay, demand her body for enslavement. The story of your cunning @@.green;impresses@@ the slave traders, but is @@.red;booed@@ by fairer-minded citizens.
+		<br><br>
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep -= 100>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>> //This will cost ¤$contractCost and give you the slave//
+<<default>>
+	<<link "Privately inform both parties you'll settle this in favor of the most generous">>
+		<<replace "#result">>
+		You privately inform both parties you'll settle this in favor of the most generous. You instantly receive two notices of escrow payment contingent on the case going the payer's way. You select the @@.yellowgreen;bigger of the two@@ and decide the matter before returning to bed in a good mood. However, the next day it becomes apparent that although he isn't stupid enough to make a public accusation of corruption, the buyer is furious at paying virgin prices for a defiled slave, and is privately @@.red;slandering@@ your administration of justice.
+		<<set $rep -= 100>>
+		<<set $cash += 2000>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the prospective buyer">>
+		<<replace "#result">>
+		What's most important is the justice of the outcome. You settle the dispute in favor of the buyer, who would otherwise be forced to buy something he did not mean to pay for. He lets it be known far and wide that you are willing to stand up for what's right, no matter what and no matter who, @@.green;improving@@ your reputation. The angry seller, now afflicted with a devalued slave in addition to a bad headache, lets his group of friends know that social superiors have no advantage at justice here. They become more reticent about dealmaking in your arcology, @@.red;damaging@@ its prosperity.
+		<<set $arcologies[0].prosperity -= 5>>
+		<<set $rep += 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Settle the dispute in favor of the prominent slaveowner">>
+		<<replace "#result">>
+		A deal is a deal; buyer beware. You settle the dispute in favor of the slaveowner. He lets it be known amongst his peers that you do not let social inferiors insist on justice against their betters. Citizens of quality become more willing to consider dealmaking in your arcology, @@.green;increasing prosperity.@@ On the other hand, the angry buyer shows himself to be not a person to treat lightly, either; he maintains a @@.red;malicious@@ whispering campaign to the effect that your administration of justice is fatally biased.
+		<<set $arcologies[0].prosperity += 5>>
+		<<set $rep -= 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Offer to buy out the contract">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		You offer to simply buy out the contract, taking the slave for yourself. This lets the buyer out of buying her, and the slaveowner gets his money; but it soon becomes apparent that what both of them were really looking for is an opportunity to put one over on the other. Neither is pleased to be denied a petty victory, but they both have the sense to keep their mouths shut. The poor slave, meanwhile, appears in the penthouse entryway, @@.hotpink;hopeful@@ that she's been lucky enough to end up in a less abusive situation.
+		<br><br>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>> //This will cost ¤$contractCost and give you the slave//
+<</switch>>
+</span>

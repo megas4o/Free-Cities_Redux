@@ -1,0 +1,36 @@
+:: PE combat training
+
+<<nobr>>
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check">>
+
+<<set $activeSlave = $Bodyguard>>
+
+<</nobr>>\
+\
+<<EventNameLink $activeSlave>> has many duties as a bodyguard, and her schedule is carefully built to allow her to complete them. When you're at your desk in your penthouse and there are no guests to intimidate, her services are least needed, so she typically uses these lulls to catch up on sleep or train.
+
+The feed from the small armory next door shows her doing the latter. She has finished working with a heavy practice sword, and has moved to the tiny, one-shooter range. She seems frustrated, hurrying her shots and missing unnecessarily.
+\
+<span id="result">
+<<link "Instruct her">>
+	<<replace "#result">>
+	$activeSlave.slaveName starts as you enter the range and don ear protection. She is distracted by your body against hers as you come in close to correct her stance, but she concentrates hard for you. You take whatever time you can spare over the week for serious lessons. She @@.green;is diligent and learns well,@@ and @@.mediumaquamarine;places greater trust@@ in your judgment.
+	<<set $activeSlave.trust += 4>>
+	<<set $activeSlave.combatSkill = 1>>
+	<</replace>>
+<</link>>
+<<link "Promise her a sexual reward if she improves">>
+	<<replace "#result">>
+	Over the feed, you tell $activeSlave.slaveName that she can have her choice of sexual release if she scores well on the next set of targets. She concentrates desperately, trying to ignore her mounting arousal as she imagines enjoying <<if $activeSlave.fetish == "none">>passionate sexual<<elseif $activeSlave.fetish == "boobs">>breast<<else>>$activeSlave.fetish<</if>> play. She barely makes the stated score, and hurries smiling in for her reward. She feels @@.hotpink;closer to you,@@ but is distracted from any real learning and does not become a better fighter.
+	<<set $activeSlave.devotion += 4>>
+	<<if ($activeSlave.vagina > -1) && ($activeSlave.vaginalAccessory != "chastity belt")>>
+		<<set $activeSlave.vaginalCount += 1>>
+		<<set $vaginalTotal += 1>>
+	<<else>>
+		<<set $activeSlave.analCount += 1>>
+		<<set $analTotal += 1>>
+	<</if>>
+	<</replace>>
+<</link>>
+</span>

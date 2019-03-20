@@ -1,0 +1,162 @@
+:: Scheduled Event
+
+<<set $showEncyclopedia = 0>>
+
+<<if $expired == 1>>
+	<<set $expiree = 0>>
+	<<include "Remove activeSlave">>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].indenture == 0>>
+		<<set $expiree = $slaves[$i]>>
+		<<break>>
+	<</if>>
+	<</for>>
+<</if>>
+<<set $expired = 0>>
+
+<<if $retired == 1>>
+	<<set $activeSlave = $slaves.find(function(s) { return s.ID == $retiree.ID; }), $retiree = 0>>
+	<<include "Remove activeSlave">>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].indenture < 0>>
+	<<if $slaves[$i].age >= $retirementAge>>
+		<<set $retiree = $slaves[$i]>>
+		<<break>>
+	<</if>>
+	<<if $SexMilestoneRetirement == 1>>
+		<<if $slaves[$i].oralCount + $slaves[$i].analCount + $slaves[$i].vaginalCount + $slaves[$i].penetrativeCount + $slaves[$i].mammaryCount >= $retirementSex>>
+		<<set $retiree = $slaves[$i]>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if $MilkMilestoneRetirement == 1>>
+		<<if $slaves[$i].milk >= $retirementMilk>>
+		<<set $retiree = $slaves[$i]>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if $BirthsMilestoneRetirement == 1>>
+		<<if $slaves[$i].births >= $retirementBirths>>
+		<<set $retiree = $slaves[$i]>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if $KillsMilestoneRetirement == 1>>
+		<<if $slaves[$i].pitkills >= $retirementKills>>
+		<<set $retiree = $slaves[$i]>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<</if>>
+	<</for>>
+<</if>>
+<<set $retired = 0>>
+
+/* birth scheduled event */
+<<if $birthed == 1>>
+	<<set $birthee = 1>>
+<</if>>
+<<set $birthed = 0>>
+
+<<if $week == 30>>
+	<<set $fcnn.push("...is where I'll be when the bombs hit. Survival is my first...")>>
+	<<set $fcnn.push("...time to prepare for major shortages is now, since there's no likelihood...")>>
+	<<set $fcnn.push("...construction of shelters accelerated last quarter, due to fears...")>>
+	<<set $fcnn.push("...major drought across the entire hemisphere shows no signs of...")>>
+	<<set $fcnn.push("...medical organization offered no explanation, stating that...")>>
+<<elseif $week == 50>>
+	<<set $fcnn.push("...tested a thermonuclear device of some five megatons last night...")>>
+	<<set $fcnn.push("...heavy fighting for the third week in the capital city of...")>>
+	<<set $fcnn.push("...economic recovery looking increasingly unlikely in the event of...")>>
+	<<set $fcnn.push("...complete exhaustion of safe water reserves across...")>>
+	<<set $fcnn.push("...climate refugees streamed across the border despite...")>>
+<<elseif $week == 70>>
+	<<set $fcnn.push("...second low-order nuclear detonation in the city of...")>>
+	<<set $fcnn.push("...total societal collapse induced by rising sea levels declared today in...")>>
+	<<set $fcnn.push("...likelihood of containing Influenza-M was downgraded to a lower...")>>
+	<<set $fcnn.push("...threatened immediate use of chemical weapons should those forces not withdraw...")>>
+	<<set $fcnn.push("...relief organizations unable to deal with casualties from nuclear exchange between...")>>
+<<elseif $week == 90>>
+	<<set $fcnn = ["FCNN service has been temporarily suspended. Please stand by."]>>
+<</if>>
+
+<<if $rivalOwner == -1>>
+	<<goto "P rival initiation">>
+<<elseif ($independenceDay == 1) && (Math.trunc(($week-23)/52) == ($week-23)/52)>>
+	<<goto "SE independence day">>
+<<elseif ($weddingPlanned > 0)>>
+	<<set $seed = 0>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].ID == $weddingSlaveID)>>
+		<<set $activeSlave = $slaves[$i]>>
+		<<set $seed = 1>>
+		<<goto "SE wedding">>
+	<</if>>
+	<</for>>
+	<<if $seed == 0>>
+		<<set $weddingPlanned = 0, $cash += 10000>>
+		<<goto "Scheduled Event">>
+	<</if>>
+<<elseif ($retiree != 0)>>
+	<<goto "SE retirement">>
+<<elseif ($expiree != 0)>>
+	<<goto "SE expiration">>
+<<elseif ($birthee != 0)>>
+	<<set $birthed = 0>>
+	<<goto "SE Birth">>
+<<elseif ($recruiterEugenics == 0 and $recruiterProgress >= 13)>>
+	<<goto "SE recruiter success">>
+<<elseif ($recruiterEugenics == 1 and $recruiterProgress >= (13 + ($IntelligenceEugenicsSMR+$HeightEugenicsSMR+$FaceEugenicsSMR)*6))>>
+	<<goto "SE recruiter success">>
+<<elseif ($customSlaveOrdered == 1)>>
+	<<goto "SE custom slave delivery">>
+<<elseif ($Lurcher != 0) && ($CoursingAssociation != 0) && (Math.trunc($week/4) == ($week/4)) && ($coursed != 1)>>
+	<<goto "SE coursing">>
+<<elseif ($RaidingMercenaries != 0) && ($week > ($raided + 6))>>
+	<<goto "SE raiding">>
+<<elseif ((($fighterIDs.length > 1) && ($pitBG == 0)) || (($fighterIDs.length > 0) && ($Bodyguard != 0) && ($pitBG == 1))) && ($pitFought == 0)>>
+	<<if $pitLethal == 1>><<goto "SE lethal pit">><<else>><<goto "SE nonlethal pit">><</if>>
+<<elseif ($bioreactorPerfectedID != 0) && ($bioreactorsAnnounced != 1)>>
+	<<goto "P bioreactor perfected">>
+<<elseif ($TSS.schoolPresent == 1) && ($TSS.schoolProsperity <= -10)>>
+	<<goto "RES Failure">>
+<<elseif ($GRI.schoolPresent == 1) && ($GRI.schoolProsperity <= -10)>>
+	<<goto "RES Failure">>
+<<elseif ($SCP.schoolPresent == 1) && ($SCP.schoolProsperity <= -10)>>
+	<<goto "RES Failure">>
+<<elseif ($LDE.schoolPresent == 1) && ($LDE.schoolProsperity <= -10)>>
+	<<goto "RES Failure">>
+<<elseif ($TGA.schoolPresent == 1) && ($TGA.schoolProsperity <= -10)>>
+	<<goto "RES Failure">>
+<<elseif ($TFS.schoolPresent == 1) && ($TFS.schoolProsperity <= -10)>>
+	<<goto "RES Failure">>
+<<elseif ($TFS.schoolPresent == 1) && ($organFarmUpgrade != 0) && ($TFS.farmUpgrade == 0)>>
+	<<goto "TFS Farm Upgrade">>
+<<elseif ($nicaea == 1) && ($organFarmUpgrade != 0) && ($TFS.farmUpgrade == 0)>>
+	<<goto "TFS Farm Upgrade">>
+<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+	<<if $nicaeaHeld == 1>>
+		<<if $plot == 1>><<goto "Nonrandom Event">><<else>><<goto "Random Nonindividual Event">><</if>>
+	<<elseif ($nicaeaAnnounceable == 1) && ($nicaeaAnnounced != 1)>>
+		<<goto "SE nicaea announcement">>
+	<<elseif $nicaeaPreparation == 1>>
+		<<if $nicaeaInvolvement != 0>>
+			<<goto "SE nicaea preparation">>
+		<<else>>
+			<<set $nicaeaPreparation = 0>>
+			<<if $plot == 1>><<goto "Nonrandom Event">><<else>><<goto "Random Nonindividual Event">><</if>>
+		<</if>>
+	<<elseif $nicaeaInvolvement >= 0>>
+		<<set $nicaeaRollA = random(-1,0), $nicaeaRollB = random(-1,0), $nicaeaRollC = random(-1,0)>>
+		<<set $nicaeaFocus = either("owners", "slaves")>>
+		<<set $nicaeaAssignment = either("whore", "serve the public", "please you")>>
+		<<set $nicaeaAchievement = either("devotion", "trust", "slaves")>>
+		<<goto "SE nicaea council">>
+	<<else>>
+		<<if $plot == 1>><<goto "Nonrandom Event">><<else>><<goto "Random Nonindividual Event">><</if>>
+	<</if>>
+<<elseif $plot == 1>>
+	<<goto "Nonrandom Event">>
+<<else>>
+	<<goto "Random Nonindividual Event">>
+<</if>>

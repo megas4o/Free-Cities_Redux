@@ -1,0 +1,442 @@
+:: Matchmaking [nobr]
+
+<<set $nextButton = "Back", $nextLink = "AS Dump">>
+
+<<if $subSlave == 0>>
+
+<<SlaveTitle $eventSlave>>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+    <div class="imageRef medImg">
+    <<SlaveArt $eventSlave 2 0>>
+</div>
+<</if>>
+/* 000-250-006 */
+
+You order $eventSlave.slaveName to come to your office. The <<if $eventSlave.relationship == -2>>worshipful<<else>>slutty<</if>> $desc arrives promptly, greets you correctly, and waits <<if $eventSlave.relationship == -2>>adoringly for a command<<else>>eagerly for you to fuck her<</if>>. You consider the situation carefully.
+<<if $eventSlave.relationship == -2>>
+	She's emotionally bonded to you, and loves you with all her heart. She would probably do anything you command and love you all the more for it. If you were to decide that you were tired of her adoration, you could probably set her up with another similarly broken slave. If you ordered them to love each other like they love you, they'd obey.
+<<else>>
+	She's an emotional slut, and worships you and values herself primarily in terms of sex. She's such a perfect sex slave that she'd probably fuck anyone or anything you told her to, and love you all the more for giving her the chance. If you were to decide that even a sex slave like her needs a little more structure than constant omnisexual lust, you could probably set her up with another universal slut.
+<</if>>
+Their relationship would probably be somewhat artificial at first, and they'd have to struggle at it, but after a period of adjustment, you'd have two worshipful slaves again, except that they'd be together. It'd definitely help if they had compatible behavioral quirks and sexual fetishes.
+<br><br>
+
+<span id="result">
+
+<<if ($MixedMarriage == 1)>>
+<<if $eventSlave.relationship == -2>>
+<<if ($weddingPlanned != 0)>>
+You could marry her yourself, but that would have to wait, since you already have a wedding planned this week.
+<<else>>
+Of course, you could marry her yourself, since you've decide to enable marriage between slaves and owners in your domain. Marriage with her wouldn't be binding, of course, since she'd still be a slave. She'd probably be pleased, however.
+<<link "Marry her">>
+<<replace "#result">>
+
+<<set $weddingSlaveID = $eventSlave.ID>>
+
+You tell $eventSlave.slaveName that you're going to marry her. (A proposal, of course, would be inappropriate, even in so enlightened a place as your arcology.) You're not exactly lacking in ways to make <<if $eventSlave.age > 30>>women<<else>>girls<</if>> burst into tears, but this one is unusually effective. When she's gotten herself under control again, <<if $eventSlave.amp == 1>>looking somewhat embarrassed that she can't wipe her own tears<<else>>distractedly cuffing away her tears<</if>> and consciously breathing deeply,
+<<if canTalk($eventSlave)>>
+	she says, "Thank you, <<Master $eventSlave>>. I am going to do my <<if SlaveStatsChecker.checkForLisp($eventSlave)>>betht<<else>>best<</if>> to be a
+	<<if ($eventSlave.fetishKnown == 1) && ($eventSlave.fetishStrength > 60)>>
+		<<if ($eventSlave.fetish == "submissive")>>
+		perfect submissive wife to you,
+		<<elseif ($eventSlave.fetish == "cumslut")>>
+		perfect oral wifey,
+		<<elseif ($eventSlave.fetish == "humiliation")>>
+		hot wife for you,
+		<<elseif ($eventSlave.fetish == "buttslut")>>
+		perfect little anal wifey,
+		<<elseif ($eventSlave.fetish == "boobs")>>
+		<<if $eventSlave.boobs > 800>>perfect big-boobed<<else>>perfect-boobed<</if>> wife
+		<<elseif ($eventSlave.fetish == "pregnancy")>>
+		perfect barefoot breeding wife,
+		<<elseif ($eventSlave.fetish == "dom")>>
+		perfect, you know, sharing wife with other <<if SlaveStatsChecker.checkForLisp($eventSlave)>>thlaveth<<else>>slaves<</if>>,
+		<<elseif ($eventSlave.fetish == "sadist")>>
+		perfect wife to <<if SlaveStatsChecker.checkForLisp($eventSlave)>>uthe on other thlaveth<<else>>use on other slaves<</if>>,
+		<<elseif ($eventSlave.fetish == "masochist")>>
+		good, beaten wife,
+		<<else>>
+		good wife,
+		<</if>>
+	<<else>>
+		good wife,
+	<</if>>
+	<<Master $eventSlave>>. Oh, thank you, <<Master $eventSlave>>," she blubbers, and starts crying again.
+<<elseif $eventSlave.amp != 1>>
+	she shakily signs her thanks twice in a row before breaking down again.
+<<else>>
+	she painstakingly mouths her thanks, since she cannot speak or use hands to sign.
+<</if>>
+Despite her devotion and trust, she is still a slave, and probably knows that her position could always change. This brings her one step closer to true permanence, and she knows it.
+<br><br>
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> prompts you for wedding
+<<if $assistant == 0>>
+	instructions.
+<<else>>
+	instructions, her
+	<<if $assistantAppearance == "monstergirl">>
+		monstergirl avatar appearing in a surprisingly conventional surplice that covers her up decently. All except for her horns, which protrude from under the headpiece.
+	<<elseif $assistantAppearance == "shemale">>
+		shemale avatar appears in a collar patterned to look like a minister's, and absolutely nothing else, stroking herself with anticipation.
+	<<elseif $assistantAppearance == "amazon">>
+		amazon avatar wearing a tribal shaman's cape and carrying a medicine stick adorned with all sorts of little charms and baubles.
+	<<elseif $assistantAppearance == "businesswoman">>
+		businesswoman avatar looking rather severe in a minister's collar.
+	<<elseif $assistantAppearance == "goddess">>
+		goddess avatar completely unchanged, since she considers her usual form perfectly appropriate for a marriage.
+	<<elseif $assistantAppearance == "schoolgirl">>
+		schoolgirl avatar looking willfully absurd in a minister's collar and her usual short plaid skirt.
+	<<else>>
+		symbol appearing in white.
+	<</if>>
+<</if>>
+
+<span id="result2">
+<br><<link "Just redesignate her as your slave wife">>
+	<<replace "#result2">>
+	You order $assistantName to simply redesignate $eventSlave.slaveName as your slave wife.
+	<<if $assistant == 0>>
+		"Slave redesignated," it responds immediately. The thing is done.
+	<<else>>
+		<<if $assistantAppearance == "monstergirl">>
+			Her avatar snaps its fingers and shrugs off its surplice, revealing her tentacle hair, pale skin, and cocks once more.
+		<<elseif $assistantAppearance == "shemale">>
+			Her avatar snaps its fingers and starts to masturbate more energetically.
+		<<elseif $assistantAppearance == "amazon">>
+			Her avatar gives its medicine stick a shake.
+		<<elseif $assistantAppearance == "businesswoman">>
+			Her avatar snaps its fingers.
+		<<elseif $assistantAppearance == "goddess">>
+			Her avatar makes a complex hand gesture, looking beatific.
+		<<elseif $assistantAppearance == "schoolgirl">>
+			Her avatar snaps its fingers and gives a little twirl.
+		<<else>>
+			Her symbol flashes.
+		<</if>>
+		"Done," she says.
+	<</if>>
+	<<set $eventSlave.relationship = -3>>
+	<<if $PC.surname>>
+		<br><br><span id="surnaming">
+		<<link "Give her your surname">>
+			<<replace "#surnaming">>
+				<<set $eventSlave.slaveSurname = $PC.surname, $eventSlave.devotion += 5, $eventSlave.trust += 5>>
+				You also command $assistantName to rename your new slave wife $eventSlave.slaveName $eventSlave.slaveSurname. The new Mrs. $eventSlave.slaveSurname hears this, of course, and breaks down again. Being brusquely redesignated as your slave wife was such a sterile experience that she wasn't sure it was real, and hearing that she's to take your surname @@.mediumaquamarine;reassures her@@ that it is. Not to mention, she might be a $desc, but she's still a girl, and hearing that she wouldn't get a decent wedding did disappoint her, but this makes up for it. You might not be all that expressive, but @@.hotpink;she's your wife,@@ and that's what matters to her.
+				<<set $activeSlave = $eventSlave>>
+			<</replace>>
+		<</link>>
+		</span>
+	<</if>>
+	<<set $activeSlave = $eventSlave>>
+	<</replace>>
+<</link>>
+<br><<link "Have your assistant marry her to you">>
+	<<replace "#result2">>
+	You order $eventSlave.slaveName to go change into bridal lingerie. She hurries off, still crying. When she returns, she's wearing
+	<<if ($eventSlave.vagina == 0)>>
+		white, since she's a virgin.
+	<<elseif ($eventSlave.preg > 0)>>
+		light pink, since she is pregnant.
+	<<elseif ($eventSlave.vagina < 0) && ($eventSlave.anus == 0)>>
+		white, since she's an anal virgin.
+	<<elseif ($eventSlave.vagina < 0) && ($eventSlave.boobs > 500)>>
+		electric blue, since she's a shemale.
+	<<elseif ($eventSlave.vagina < 0)>>
+		pale blue, since she's a sissy slave.
+	<<elseif ($eventSlave.dick > 0)>>
+		hot pink, since she's a futa slave.
+	<<else>>
+		light pink, since she's an experienced sex slave.
+	<</if>>
+	A flimsy veil covers her head and shoulders.
+	<<if ($eventSlave.boobs > 4000)>>
+		On such short notice, no bridal bra for boobs of her size was available, so she's topless. Not a tragedy.
+	<<elseif ($eventSlave.boobs > 1200)>>
+		Her lacy bridal bra just barely restrains her huge boobs, leaving the tops of her areolae visible.
+	<<elseif ($eventSlave.boobs > 400)>>
+		Her lacy bridal bra flatters her pretty breasts.
+	<<else>>
+		Her lacy bridal bra flatters her pretty chest.
+	<</if>>
+	<<if ($eventSlave.preg > 10)>>
+		Her pregnant belly protrudes out the front of her bridal wear.
+	<</if>>
+	<<if $eventSlave.dickAccessory == ("chastity")>>
+		Her slave dick is hidden by its chastity cage.
+	<<elseif ($eventSlave.dick > 0) && canAchieveErection($eventSlave)>>
+		<<if ($eventSlave.dick > 4) && ($eventSlave.preg > 10)>>
+		She's hugely erect, with her lacy g-string only serving to hold her dick agonizingly pressed against the bottom of her pregnant belly.
+		<<elseif $eventSlave.dick > 4>>
+		She's hugely erect, with her lacy g-string only serving to hold her dick upright along her belly.
+		<<else>>
+		Her erection tents the front of her lacy g-string.
+		<</if>>
+	<<elseif ($eventSlave.dick > 0)>>
+		<<if $eventSlave.dick > 4>>
+		Her big soft cock forms a lewd mass, stuffed into her lacy g-string.
+		<<else>>
+		Her lacy g-string perfectly conceals her soft dick.
+		<</if>>
+	<<else>>
+		<<if $eventSlave.clit > 1>>
+		Her huge clit is quite hard, making her shift uncomfortably as her lacy g-string stimulates it.
+		<<else>>
+		Her lacy g-string is starting to look a bit moist in front.
+		<</if>>
+	<</if>>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> marries her to you in a brief ceremony adapted for slaves and their owners. You place a simple steel ring on her finger; she does not reciprocate, since this marriage does not bind you.
+	<<if $assistant == 0>>
+		"The marriage protocol now requires you to <<if $PC.dick == 1>>fellate<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>perform cunnilingus on<</if>> the <<if $PC.title == 1>>groom<<else>>the bride<</if>>," $assistantName orders her, and she hurries to obey.
+	<<else>>
+		<<if $assistantAppearance == "monstergirl">>
+			"To consecrate the ceremony," $assistantName concludes, "$eventSlave.slaveName, you will now <<if $PC.dick == 1>>suck the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s dick<<if $PC.vagina == 1>> and eat <<if $PC.title == 1>>his<<else>>her<</if>> pussy<</if>><<else>>eat the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s pussy<</if>>." The slave complies eagerly. Pleased by the sight, $assistantName's avatar begins to play with her dicks.
+		<<elseif $assistantAppearance == "shemale">>
+			"To get this marriage started," $assistantName concludes, "$eventSlave.slaveName, you will now <<if $PC.dick == 1>>suck the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s dick<<if $PC.vagina == 1>> and eat <<if $PC.title == 1>>his<<else>>her<</if>> pussy<</if>><<else>>eat the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s pussy<</if>>." The slave complies eagerly. Pleased by the sight, $assistantName's avatar starts to jill off.
+		<<elseif $assistantAppearance == "amazon">>
+			"To complete this ritual," $assistantName concludes, "$eventSlave.slaveName, you will now <<if $PC.dick == 1>>suck the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s dick<<if $PC.vagina == 1>> and eat <<if $PC.title == 1>>his<<else>>her<</if>> pussy<</if>><<else>>eat the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s pussy<</if>>." The slave complies eagerly. Pleased by the sight, $assistantName's avatar starts to jill off.
+		<<elseif $assistantAppearance == "businesswoman">>
+			"To consecrate the marriage," $assistantName concludes, "$eventSlave.slaveName, you will now <<if $PC.dick == 1>>fellate<<else>>perform cunnilingus on<</if>> the <<if $PC.title == 1>>groom<<else>>the bride<</if>>." The slave complies eagerly. Pleased by the sight, $assistantName's avatar sneaks a hand down her suit skirt, blushing furiously.
+		<<elseif $assistantAppearance == "goddess">>
+			"To consummate the marriage," $assistantName concludes, "$eventSlave.slaveName, you must now <<if $PC.dick == 1>>drink the <<if $PC.title == 1>>groom<<else>>the bride<</if>>'s seed<<else>>drink the <<if $PC.title == 1>>groom<<else>>the bride<</if>>'s female juices<</if>>." The slave complies eagerly. $assistantName's avatar looks on approvingly, cradling her perpetual pregnancy.
+		<<elseif $assistantAppearance == "schoolgirl">>
+			"To get this marriage started," $assistantName concludes, "$eventSlave.slaveName, the rules say you should now <<if $PC.dick == 1>>suck the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s dick<<if $PC.vagina == 1>> and eat <<if $PC.title == 1>>his<<else>>her<</if>> pussy<</if>><<else>>eat the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s pussy<</if>>." The slave complies eagerly. Pleased by the sight, $assistantName's avatar starts to jill off.
+		<<else>>
+			"To get this marriage started," $assistantName concludes, "$eventSlave.slaveName, the rules say you should now <<if $PC.dick == 1>>suck the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s dick<<if $PC.vagina == 1>> and eat <<if $PC.title == 1>>his<<else>>her<</if>> pussy<</if>><<else>>eat the <<if $PC.title == 1>>groom<<else>>bride<</if>>'s pussy<</if>>." The slave complies eagerly. With only a symbol to express her approval, $assistantName is forced to content herself with spinning the symbol and making it glow in time with your new slave wife's efforts.
+		<</if>>
+		"Done," she says when you climax. "Enjoy your
+		<<if ($eventSlave.fetishKnown == 1) && ($eventSlave.fetishStrength > 60)>>
+			<<if ($eventSlave.fetish == "submissive")>>
+			submissive slave wife!"
+			<<elseif ($eventSlave.fetish == "cumslut")>>
+			slave wife's mouth!"
+			<<elseif ($eventSlave.fetish == "humiliation")>>
+			exhibitionist slave wife!"
+			<<elseif ($eventSlave.fetish == "buttslut")>>
+			slave wife's butthole!"
+			<<elseif ($eventSlave.fetish == "boobs")>>
+			slave wife's boobs!"
+			<<elseif ($eventSlave.fetish == "pregnancy")>>
+			breeder wife!"
+			<<elseif ($eventSlave.fetish == "dom")>>
+			slave wife's aggression!"
+			<<elseif ($eventSlave.fetish == "sadist")>>
+			slave wife's sadistic tendencies!"
+			<<elseif ($eventSlave.fetish == "masochist")>>
+			slave wife's pain!"
+			<<else>>
+			slave wife!"
+			<</if>>
+		<<else>>
+			slave wife!"
+		<</if>>
+	<</if>>
+	<<set $eventSlave.relationship = -3>>
+	<<if $PC.surname>>
+		<br><br><span id="surnaming">
+		<<link "Give her your surname">>
+			<<replace "#surnaming">>
+				<<set $eventSlave.slaveSurname = $PC.surname, $eventSlave.devotion += 5, $eventSlave.trust += 5>>
+				Before you get too distracted, you tell your lovely new wife that she's now to be known as $eventSlave.slaveName $eventSlave.slaveSurname. It would be an understatement to say she's delighted. She's a good $desc, but even she has to retain a kernel of doubt about whether a marriage between an owner and a piece of property is really worth much. This @@.mediumaquamarine;reassures her@@ that it is. Her special day probably wasn't exactly like she might once have imagined it, but she obviously thinks it's been @@.hotpink;very nice,@@ all things considered.
+				<<if canTalk($eventSlave)>>"$eventSlave.slaveName $eventSlave.slaveSurname," she murmurs to herself occasionally, smiling.<</if>>
+				<<set $activeSlave = $eventSlave>>
+			<</replace>>
+		<</link>>
+		</span>
+	<</if>>
+	<<set $activeSlave = $eventSlave>>
+	<</replace>>
+<</link>>
+<<if $cash > 10000>>
+<br>Invite prominent citizens to a wedding (This will cost ¤10000):
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Straightforward ceremony">>
+	<<replace "#result2">>
+	You order $assistantName to invite deserving citizens to a straightforward ceremony for a slave being married to a slaveowner, and to make the arrangement. The wedding will take place during the upcoming week.
+	<<set $weddingPlanned = 1>>
+	<<set $cash -= 10000>>
+	<</replace>>
+<</link>>
+<<if ($eventSlave.vagina != 0) && ($eventSlave.anus != 0)>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Orgiastic ceremony">>
+	<<replace "#result2">>
+	You order $assistantName to invite deserving citizens to an orgiastic ceremony for a slave being married to a slaveowner, and to make the arrangements. The wedding orgy will take place during the upcoming week.
+	<<set $weddingPlanned = 2>>
+	<<set $cash -= 10000>>
+	<</replace>>
+<</link>> //This will involve the slave having sex with a very large number of citizens//
+<</if>>
+<<if isFertile($eventSlave) && ($PC.dick == 1)>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Impregnation ceremony">>
+	<<replace "#result2">>
+	You order $assistantName to invite deserving citizens to a ceremony for a fertile slave being married to a slaveowner, and to make the arrangements. The wedding will take place during the upcoming week.
+	<<set $weddingPlanned = 3>>
+	<<set $cash -= 10000>>
+	<</replace>>
+<</link>> //This will involve you impregnating the slave//
+<</if>>
+<<else>>
+<br>//You cannot afford an elaborate ceremony//
+<</if>>
+</span>
+
+<</replace>>
+<</link>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $seeImages == 1>><br style="clear:both" /><</if>>
+
+<br><br>__Put her with another worshipful <<if $eventSlave.relationship == -2>>emotionally bonded emotionally slave<<else>>emotional slut<</if>>:__
+<<set $Flag = 1>>
+<<include "Slave Summary">>
+
+</span>
+
+<<else>>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+    <div class="imageRef medImg">
+    <<SlaveArt $eventSlave 2 0>>
+    </div>
+    <div class="imageRef medImg">
+    <<SlaveArt $subSlave 2 0>>
+    </div>
+<</if>>
+/* 000-250-006 */
+
+You decide to set $eventSlave.slaveName up with $subSlave.slaveName. Telling the former to wait, you have the latter hurry up to your office. When the <<if $eventSlave.relationship == -2>>slaves are waiting adoringly<<else>>sluts are waiting with barely concealed lust<</if>> in front of your desk together, you inform them of your decision.
+<<if $eventSlave.relationship == -2>>
+	You commend their love for you, and let them know that it's all right for it to continue, but command them to love each other, too. They look doubtful, but at your orders they obediently take each other by the hand, and share a kiss. It will do for now. You assign them to live together as much as possible for a few days, and inform them that you'll be limiting your personal contact with them during this period. They give you identical looks of horror, and fail to notice how much of a perfect couple they already are.
+<<else>>
+	You praise their total commitment to sexual slavery, and let them know they'll continue to be sex slaves, but tell them that it's time for them to settle down. They give you identical looks of horror, and fail to notice how much of a perfect couple they already are. Patiently, you explain that their sex lives will remain more or less unchanged; just because two slaves are together doesn't mean they can't and won't have sex with other people. They look doubtful, but cheer up when you inform them that they'll be spending a lot of alone time together for a few days.
+<</if>>
+<br><br>
+Being ordered into a relationship would be difficult for anyone, but they're so obedient that @@.lightgreen;they do their best and make it work.@@ You ensure that they do, and your determined efforts to do so @@.mediumorchid;reduce their devotion to you,@@ though it's mostly by redirection towards each other. And in any case, they remain devoted enough, and will likely return to their earlier worshipfulness in a few weeks at most.
+<<set _matched = 1>>
+<<if ($eventSlave.fetish == "submissive") && ($subSlave.fetish == "dom")>>
+	$subSlave.slaveName is a dom and $eventSlave.slaveName is a sub. It's a match out of bad fiction.
+<<elseif ($subSlave.fetish == "submissive") && ($eventSlave.fetish == "dom")>>
+	$eventSlave.slaveName is a dom and $subSlave.slaveName is a sub. It's a match out of bad fiction.
+<<elseif ($eventSlave.fetish == "masochist") && ($subSlave.fetish == "sadist")>>
+	$subSlave.slaveName is a sadist and $eventSlave.slaveName is a masochist. They're a perfect ouroboros of agony.
+<<elseif ($subSlave.fetish == "masochist") && ($eventSlave.fetish == "sadist")>>
+	$eventSlave.slaveName is a sadist and $subSlave.slaveName is a masochist. They're a perfect ouroboros of agony.
+<<elseif ($eventSlave.fetish == "cumslut") && ($subSlave.balls > 0)>>
+	$subSlave.slaveName has balls and $eventSlave.slaveName has the appetite to drain them of every drop of cum.
+<<elseif ($subSlave.fetish == "cumslut") && ($eventSlave.balls > 0)>>
+	$eventSlave.slaveName has balls and $subSlave.slaveName has the appetite to drain them of every drop of cum.
+<<elseif ($eventSlave.fetish == "humiliation") && ($subSlave.fetish == "sadist")>>
+	$eventSlave.slaveName loves to be humiliated, and $subSlave.slaveName can definitely get off on another girl's shame.
+<<elseif ($subSlave.fetish == "humiliation") && ($eventSlave.fetish == "sadist")>>
+	$subSlave.slaveName loves to be humiliated, and $eventSlave.slaveName can definitely get off on another girl's shame.
+<<elseif ($eventSlave.fetish == "buttslut") && ($subSlave.fetish == "dom")>>
+	$subSlave.slaveName likes fucking other girls, so once $eventSlave.slaveName asks her to just do it to her ass all the time, they're both happy.
+<<elseif ($subSlave.fetish == "buttslut") && ($eventSlave.fetish == "dom")>>
+	$eventSlave.slaveName likes fucking other girls, so once $subSlave.slaveName asks her to just do it to her ass all the time, they're both happy.
+<<elseif ($eventSlave.fetish == "boobs") && ($subSlave.boobs > 4000)>>
+	$eventSlave.slaveName fetishized breasts so much that she thinks $subSlave.slaveName's udders are one of the sexiest things she's ever seen.
+<<elseif ($subSlave.fetish == "boobs") && ($eventSlave.boobs > 4000)>>
+	$subSlave.slaveName fetishized breasts so much that she thinks $eventSlave.slaveName's udders are one of the sexiest things she's ever seen.
+<<elseif ($eventSlave.fetish == "pregnancy") && ($subSlave.fetish == "pregnancy") && $subSlave.preg > 20 && $eventSlave.preg > 20>>
+	$activeSlave.slaveName and $subSlave.slaveName are both heavily pregnant, much to the other's delight.
+<<elseif ($subSlave.fetish == "pregnancy") && $eventSlave.preg > 20>>
+	$subSlave.slaveName fetishizes pregnant bellies so much that she thinks $eventSlave.slaveName gravid middle is one of the sexiest things she's ever seen.
+<<elseif ($eventSlave.fetish == "pregnancy") && $subSlave.preg > 20>>
+	$eventSlave.slaveName fetishizes pregnant bellies so much that she thinks $subSlave.slaveName's gravid middle is one of the sexiest things she's ever seen.
+<<elseif ($eventSlave.fetish == "pregnancy") && ($subSlave.fetish == "pregnancy") && $subSlave.preg > 5 && $eventSlave.preg > 5>>
+	$eventSlave.slaveName and $subSlave.slaveName are both pregnant and just beginning to show. They'll both be able to enjoy the other's swelling body.
+<<elseif ($eventSlave.fetish == "pregnancy") && canAchieveErection($subSlave)>>
+	$eventSlave.slaveName can indulge the fantasy that she's getting pregnant each and every time $subSlave.slaveName cums inside her.
+<<elseif ($subSlave.fetish == "pregnancy") && canAchieveErection($eventSlave)>>
+	$subSlave.slaveName can indulge the fantasy that she's getting pregnant each and every time $eventSlave.slaveName cums inside her.
+<<else>>
+	<<set _matched = 0>>
+<</if>>
+<<if _matched == 1>>
+	Their sexual compatibility is excellent, and they @@.mediumaquamarine;trust you more@@ for matching them so perfectly.
+	<<set $eventSlave.trust += 10>>
+	<<set $subSlave.trust += 10>>
+<<elseif $eventSlave.fetish == $subSlave.fetish>>
+	They're a couple of
+	<<switch $eventSlave.fetish>>
+	<<case "submissive">>
+		cringing submissives,
+	<<case "cumslut">>
+		hungry oral fiends,
+	<<case "humiliation">>
+		public sex aficionados,
+	<<case "buttslut">>
+		shameless anal whores,
+	<<case "boobs">>
+		breast obsessives,
+	<<case "pregnancy">>
+		breeding bitches,
+	<<case "dom">>
+		dominating spirits,
+	<<case "sadist">>
+		inveterate sadists,
+	<<case "masochist">>
+		pain sluts,
+	<<default>>
+		vanilla girls,
+	<</switch>>
+	and they bond over their shared sexual tastes, easing their acclimation to having another slave play a major role in their sex lives. They're almost as happy sharing stories about their past sexual exploits as they are actually having sex.
+<<else>>
+	Their fetishes aren't very compatible, and though as a couple of inventive nymphos they do their absolute best to fuck each other senseless, they @@.gold;trust you a less@@ out of doubt in the sexual match.
+	<<set $eventSlave.trust -= 10>>
+	<<set $subSlave.trust -= 10>>
+<</if>>
+<<if $eventSlave.behavioralQuirk == $subSlave.behavioralQuirk && $eventSlave.behavioralQuirk != "none">>
+	They're both
+	<<switch $eventSlave.behavioralQuirk>>
+	<<case "confident">>
+		confident, and soon come to an understanding that they'll be able to <<if $eventSlave.relationship == -2>>serve you better together<<else>>fuck third parties better as a pair<</if>>.
+	<<case "cutting">>
+		witty, and each quickly discovers that her new partner can hold up her end of a battle of quips. Their loving snippiness develops rapidly, and it's pretty cute.
+	<<case "funny">>
+		a little weird. It takes a while for them to adjust to how funny her new partner is, but they learn to support each other soon enough.
+	<<case "adores women">>
+		pretty crazy about ladies. They're both slave girls themselves, which helps, and they've also got a never-ending parade of female bodies to discuss together.
+	<<case "adores men">>
+		guy crazy. They discuss nothing else together, and their discussions frequently turn into makeouts and then mutual masturbation.
+	<<case "fitness">>
+		fitness fanatics, and being together feels natural for them, since they've already worked out together often enough.
+	<<case "insecure">>
+		very insecure. Perhaps unsurprisingly, they soon grow to depend on each other, each relying on her partner to support her low self-esteem.
+	<<case "sinful">>
+		<<if $arcologies[0].FSChattelReligionist == "unset">>
+			eagerly sinful, and they grow close by opening up and sharing their fraught histories of faith with each other.
+		<<else>>
+			fanatical about being slave acolytes of the new faith, and their partnership is strengthened by their belief that it's divinely ordained.
+		<</if>>
+	<<case "advocate">>
+		advocates for slavery. Not only do they share this, but they believe that your orders are good for them, including your order that they be together.
+	<</switch>>
+<<else>>
+	They approach life as slaves differently, and it's @@.gold;tough for them to reconcile their differences over their values.@@
+	<<set $eventSlave.trust -= 10>>
+	<<set $subSlave.trust -= 10>>
+<</if>>
+
+<<set $subSlave.relationship = 4>>
+<<set $subSlave.relationshipTarget = $eventSlave.ID>>
+<<set $subSlave.devotion -= 20>>
+<<set $eventSlave.relationship = 4>>
+<<set $eventSlave.relationshipTarget = $subSlave.ID>>
+<<set $eventSlave.devotion -= 20>>
+
+<<for _i = 0; _i < $slaves.length; _i++>>
+	<<if $slaves[_i].ID == $subSlave.ID>>
+		<<set $slaves[_i] = $subSlave>>
+	<</if>>
+<</for>>
+
+<<set $activeSlave = $eventSlave>>
+
+<</if>>
+
+<<set $activeSlave = $eventSlave>>

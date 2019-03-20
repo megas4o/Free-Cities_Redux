@@ -1,0 +1,1137 @@
+:: SE raiding
+
+<<nobr>>
+
+<<set $nextLink = "Scheduled Event">>
+<<set $returnTo = "Scheduled Event">>
+<<set $nextButton = "Continue">>
+<<set $raided = $week>>
+<<set _raidseed = 0>>
+<<set _raidescape = random(1,3)>>
+
+The leader of your $mercenariesTitle has contacted you from the world outside your arcology. It seems that your $mercenariesTitle have enjoyed a profitable series of raids in their time outside the arcology and have decided to push their luck by plundering one last location on their way back to the arcology. As their nominal leader, they ask your opinion of a small number of potential targets. Given the distance from the arcology and the time sensitivity of conducting such a mission, you have little to base your decision on besides a brief description.
+<br><br>
+Worthy of consideration is that although the $mercenariesTitle will enslave the lion's share of enslaved prisoners for the corporation, they will present you the finest slave captured as a gesture of respect for your high position.
+
+<<set $target1 = 0>>
+<<set $target2 = 0>>
+<<set $target3 = 0>>
+
+<<set $origins = []>>
+<<if $seeDicks != 100>>
+	<<set $origins.push("housewife")>>
+	<<set $origins.push("university professor")>>
+	<<set $origins.push("university student")>>
+	<<set $origins.push("female military officer")>>
+	<<set $origins.push("military soldier")>>
+	<<set $origins.push("doctor")>>
+	<<set $origins.push("nun")>>
+	<<set $origins.push("journalist")>>
+	<<set $origins.push("local news anchor")>>
+	<<set $origins.push("classical dancer")>>
+	<<set $origins.push("law enforcement officer")>>
+	<<set $origins.push("classical musician")>>
+	<<set $origins.push("politician")>>
+	<<set $origins.push("shut-in")>>
+	<<set $origins.push("procuress")>>
+	<<set $origins.push("investor")>>
+	<<set $origins.push("scientist")>>
+	<<set $origins.push("lawyer")>>
+<</if>>
+<<if $seeDicks != 0>>
+	<<set $origins.push("male military officer")>>
+<</if>>
+
+<<for $i = 0; $i < 3; $i++>>
+
+<<if $i == 0>>
+<br><br>
+	The first target
+<<elseif $i == 1>>
+<br><br>
+	The second target
+<<else>>
+<br><br>
+	The third and final target
+<</if>>
+
+<<set $origin = $origins.pluck()>>
+<<if $origin == "housewife">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.boobs += 800>>
+	<<set $activeSlave.boobsImplant += 800>>
+	<<set $activeSlave.butt += 1>>
+	<<set $activeSlave.buttImplant += 1>>
+	<<set $activeSlave.face = 55>>
+	<<set $activeSlave.faceImplant += 20>>
+	<<set $activeSlave.anus = 1>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.analCount += 1>>
+	<<set $analTotal += 1>>
+	<<set $activeSlave.preg = -1>>
+	<<set $activeSlave.ovaries = 1>>
+	<<set $activeSlave.vaginalSkill = 35>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 35>>
+	<<set $activeSlave.age = random(35,39)>>
+	<<set $activeSlave.career = either("a housewife", "a trophy wife")>>
+	is an idyllic manse in the countryside of an Old World nation. It's owner is a businessman of some notoriety, but is often away from his expansive estate. A number of servants and maids are in residence, but the primary resident of the manse is his wife. From the sound of things, she is not a young woman but attractive enough in a fake sort of way.
+<<elseif $origin == "university professor">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(35,$retirementAge-1)>>
+	<<set $activeSlave.career = "a professor">>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligence = 2>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	is the department offices of a still operational Old World university. The University prides itself on a diverse and capable faculty, often touting its wealth of female professors as a symbol of its progressive agenda. Though they are unlikely to be young, these professors will be educated and quite intelligent. The head of the department is no exception, a woman of considerable academic credentials.
+<<elseif $origin == "university student">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(18,22)>>
+	<<set $activeSlave.career = "a student">>
+	<<set $activeSlave.face = random(-20,0)>>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.oralSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.intelligence = random(1,2)>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	is the residence dormitories of a still operational Old World university. The University prides itself on a diverse and inspired student body, often touting its wealth of female students as a symbol of its progressive agenda. Though they are young, these students will likely have benefited from their education and fairly intelligent. By all accounts the prettiest of them is no exception, a student with a shining academic record.
+<<elseif $origin == "female military officer">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(26,$retirementAge-1)>>
+	<<set $activeSlave.career = "a military officer">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.combatSkill = 1>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligence = random(1,2)>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	is a military officer currently traveling to the front of a fresh conflict between rival powers in the Old World. In an attempt to disguise her high rank, she is traveling with only a small escort of soldiers and is a prime target for enslavement. The officer is a graduate of a renowned Old World military college and no stranger to the battlefield, yet has retained her femininity despite her considerable achievements.
+<<elseif $origin == "male military officer">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(26,$retirementAge-1)>>
+	<<set $activeSlave.career = "a military officer">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = Math.clamp($activeSlave.face+20,-100,100)>>
+	<<set $activeSlave.faceImplant += 20>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.oralSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.combatSkill = 1>>
+	<<set $activeSlave.age = random(26,$retirementAge-1)>>
+	<<set $activeSlave.hStyle = either("very short", "short")>>
+	<<set $activeSlave.boobs = 150>>
+	<<set $activeSlave.vagina = -1>>
+	<<set $activeSlave.clit = 0>>
+	<<set $activeSlave.ovaries = 0>>
+	<<set $activeSlave.preg = 0>>
+	<<set $activeSlave.dick = random(3,5)>>
+	<<set $activeSlave.balls = random(2,4)>>
+	<<set $activeSlave.scrotum = $activeSlave.balls>>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.weight = 0>>
+	<<set $activeSlave.muscles = 50>>
+	is a military officer currently traveling to the front of a fresh conflict between rival powers in the Old World. In an attempt to disguise his high rank, he is traveling with only a small escort of soldiers and is a prime target for enslavement. The officer is a graduate of a renowned Old World military college and no stranger to the battlefield.
+<<elseif $origin == "military soldier">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(18,25)>>
+	<<set $activeSlave.career = "a soldier">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.combatSkill = 1>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligenceImplant = 0>>
+	<<set $activeSlave.teeth = "normal">>
+	is the barracks of a local garrison in an Old World town. The majority of the town's young men have already been sent to the front of a new conflict, so the town has conscripted a number of young women to fill the ranks of their garrison. Though the soldiers are likely to be untested, they have still received some measure of combat training. Their sergeant is the nominal leader of the group, though she holds the position due to familial connections rather than any real military seniority.
+<<elseif $origin == "doctor">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(28,$retirementAge-1)>>
+	<<set $activeSlave.career = "a doctor">>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligence = 2>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	is a hospital located in an impoverished Old World City. Despite its crime ridden surroundings, the hospital possesses a sterling reputation as a result of its distinguished staff of veteran doctors and nurses. Chief among these medical professionals is a female doctor, an accomplished pioneer in her field.
+<<elseif $origin == "nun">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.career = "a nun">>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.vagina = 0>>
+	<<set $activeSlave.weight = random(-20,-100)>>
+	<<set $activeSlave.attrXX = random(10,50)>>
+	<<set $activeSlave.attrXY = random(10,50)>>
+	<<set $activeSlave.energy = random(5,20)>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.oralSkill = 15>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.age = random(18,$retirementAge-1)>>
+	<<set $activeSlave.behavioralFlaw = "devout">>
+	<<set $activeSlave.sexualFlaw = "repressed">>
+	is a reclusive religious community in a mountain range between two current conflict zones. The members of the community have withdrawn from the collapsing social order of the world and established a commune in their mountain retreat, filling their days with peaceful reflection and prayer. Though the nuns have no true leader, one among them has emerged as the most pious of the sisters.
+<<elseif $origin == "journalist">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(18,26)>>
+	<<set $activeSlave.career = "a journalist">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = random(-20,0)>>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.oralSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 35>>
+	<<set $activeSlave.behavioralFlaw = "liberated">>
+	<<set $activeSlave.sexualFlaw = "idealistic">>
+	is the offices of an esteemed Old World newspaper firm. The paper is known for its investigative journalism, particularly as one of the few firms willing to delve into the brave new world of the Free Cities. The rising star of the paper is undoubtedly a young journalist who has been an outspoken critic of slaveholding and other Free Cities traditions.
+<<elseif $origin == "local news anchor">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.boobs += 800>>
+	<<set $activeSlave.boobsImplant += 800>>
+	<<set $activeSlave.butt += 1>>
+	<<set $activeSlave.buttImplant += 1>>
+	<<set $activeSlave.face = 55>>
+	<<set $activeSlave.faceImplant += 20>>
+	<<set $activeSlave.anus = 1>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.analCount += 1>>
+	<<set $analTotal += 1>>
+	<<set $activeSlave.preg = -1>>
+	<<set $activeSlave.ovaries = 1>>
+	<<set $activeSlave.vaginalSkill = 35>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 35>>
+	<<set $activeSlave.entertainSkill = 35>>
+	<<set $activeSlave.age = random(35,39)>>
+	<<set $activeSlave.career = "a local news anchor">>
+	is the recording studio of a sleepy Old World town's local news channel. The news channel itself is unremarkable, a quaint reminder of the tedious life of a small town, save for its news anchor. The anchor stands in stark contrast to her fellow residents by the abundance of her plastic surgery, likely an attempt to cling to youth lest her coveted anchor position be snatched away by a younger woman.
+<<elseif $origin == "classical dancer">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(18,20)>>
+	<<set $activeSlave.career = "a classical dancer">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = random(-20,40)>>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.oralSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 50>>
+	<<set $activeSlave.teeth = "normal">>
+	<<set $activeSlave.weight = random(-100,-10)>>
+	is the performing arts theater at the heart of an aristocratic Old World city. The theater itself would usually not be considered a choice target, except that tonight its stage is graced by a renowned dance troupe. The jewel of the troupe's cast is a young girl, barely past her majority, whose performance has been said to bring tears to the eyes of audiences the world over.
+<<elseif $origin == "law enforcement officer">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(18,25)>>
+	<<set $activeSlave.career = "a law enforcement officer">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.combatSkill = 1>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligenceImplant = 0>>
+	is the precinct of a small Old World town's police department. The department is notoriously underfunded and unlikely to be particularly well staffed. Nonetheless, one of the officers is well known in the area for her adherence to the letter of the law despite her small town cop status.
+<<elseif $origin == "classical musician">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(36,43)>>
+	<<set $activeSlave.career = "a classical musician">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = random(-20,0)>>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.oralSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 50>>
+	<<set $activeSlave.teeth = "normal">>
+	is the concert hall at the heart of an aristocratic Old World city. The concert hall itself would usually not be considered a choice target, except that tonight its stage is graced by a renowned orchestra. The pride of the orchestra's cast is a mature woman, whose skill with her instrument has been known to move listeners to tears.
+<<elseif $origin == "politician">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(35,$retirementAge-1)>>
+	<<set $activeSlave.career = "a politician">>
+	<<set $activeSlave.prestige = 2>>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligence = 2>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	is a campaign rally for the reelection of an Old World politician. Though the rally will be an extremely public affair, the benefits of capturing a prestigious politician could outweigh the risks.
+<<elseif $origin == "shut-in">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(37,$retirementAge-1)>>
+	<<set $activeSlave.career = "a shut-in">>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 0>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 10>>
+	is the shack of a notorious shut-in located just outside your arcology. Not a particularly distinguished target, but it would save your $mercenariesTitle considerable time and effort. The shut-in herself has been a fixture of the landscape for decades, with many speculating that she remains a virgin despite her mature age.
+<<elseif $origin == "procuress">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(35,$retirementAge-1)>>
+	<<set $activeSlave.career = "a procuress">>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 25>>
+	<<set $activeSlave.entertainSkill = 25>>
+	<<set $activeSlave.intelligence = 2>>
+	is a halfway house for vulnerable woman operating in a nearby conflict zone. Far from being a wholesome institution, the proprietor of this halfway house is a notorious procuress who sells her guests into slavery. Raiding the halfway house avoids the procuress' fees on a new shipment of slaves, with the procuress herself as a tempting bonus.
+<<elseif $origin == "investor">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(35,$retirementAge-1)>>
+	<<set $activeSlave.career = "an investor">>
+	<<set $activeSlave.prestige = 1>>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligence = 2>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	is one of the last remaining business expositions still operating in the Old World. In years past, such expositions were often a showcase for innovation and corporate development but in recent years have become a sad spectacle of industry stagnation. This particular exposition's keynote speaker is a reputable investor with decades of experience, hoping to breathe new life into some valuable yet dying firms.
+<<elseif $origin == "scientist">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(28,$retirementAge-1)>>
+	<<set $activeSlave.career = "a scientist">>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 10>>
+	<<set $activeSlave.intelligence = 2>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	is a research lab operating on the lawless fringe between the Old World and the Free Cities. Here, scientists push the boundaries of the known world without the burden of governmental oversight or moral restrictions. Their defacto leader is a fellow scientist, one of the first to leave the Old World behind in pursuit of knowledge.
+<<elseif $origin == "lawyer">>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.age = random(30,$retirementAge-1)>>
+	<<set $activeSlave.career = "a lawyer">>
+	<<set $activeSlave.face = random(15,100)>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 20>>
+	<<set $activeSlave.intelligence = 1>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	is the offices of a law firm operating on the boundary between the Old World and the Free Cities. The lawyers within profit from the shaky legal channels between Old World nations and new Free Cities, largely drawing up contracts or facilitating the transfer of goods, services, and slaves. The sole senior partner of the firm is one of the pioneers of this new field of legal work, having been a staunch corporate advocate for much of her life.
+<</if>>
+
+<<set $activeSlave.origin = "Your " + $mercenariesTitle + " caught her while raiding; she was a " + $origin + ".">>
+<<set $activeSlave.health = random(30,50)>>
+<<set $activeSlave.devotion = random(-45,-25)>>
+<<set $activeSlave.trust = random(-60,-75)>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+
+	The $origin is the primary target of the raid. They're $activeSlave.race.
+<<if $activeSlave.weight > 95>>
+	They're a catastrophically fat individual, so much so that they might be better off rolling around than walking.
+	<<set $targetEscape -= 2>>
+<<elseif $activeSlave.weight > 30>>
+	Their figure is fairly chubby.
+	<<set $targetEscape -= 1>>
+<<elseif $activeSlave.weight < -95>>
+	They're so skinny that they appear almost emaciated.
+	<<set $targetEscape -= 1>>
+<<else>>
+	They have a fairly average weight.
+<</if>>
+<<if $activeSlave.muscles > 30>>
+	Their heavy musculature weighs them down.
+	<<set $targetEscape -= 1>>
+<<elseif $activeSlave.muscles <= 5>>
+	Their body is soft and toneless.
+	<<set $targetEscape -= 1>>
+<<else>>
+	Their body is fairly muscular.
+<</if>>
+<<if $activeSlave.height >= 185>>
+	They're tall enough that their height makes them easy to spot.
+	<<set $targetEscape -= 2>>
+<<elseif $activeSlave.height < 150>>
+	They're short enough that their height makes them difficult to spot.
+	<<set $targetEscape += 1>>
+<<else>>
+	They're of an average height.
+<</if>>
+<<if $activeSlave.boobs >= 2000>>
+	They have absurdly large breasts.
+	<<set $targetEscape -= 3>>
+<<elseif $activeSlave.boobs >= 800>>
+	They have fairly large breasts.
+	<<set $targetEscape -= 1>>
+<<elseif $activeSlave.boobs >= 400>>
+	They have medium sized breasts.
+<<else>>
+	They're fairly flat chested.
+	<<set $targetEscape += 1>>
+<</if>>
+<<if $activeSlave.butt >= 6>>
+	They have an immense posterior.
+	<<set $targetEscape -= 1>>
+<<elseif $activeSlave.butt >= 4>>
+	They have a large ass.
+<<elseif $activeSlave.butt >= 2>>
+	They've got a big butt.
+<<else>>
+	They've got a flat ass.
+	<<set $targetEscape += 1>>
+<</if>>
+<<if $activeSlave.dick >= 5>>
+	Their cock is large enough to slow them down.
+	<<set $targetEscape -= 1>>
+<</if>>
+<<if ($activeSlave.balls >= 5) && ($activeSlave.scrotum > 0)>>
+	Their balls are likely to hurt while running, enough to slow them down.
+	<<set $targetEscape -= 1>>
+<</if>>
+<<if $activeSlave.preg >= 20>>
+	Their pregnant belly is likely to preclude them from escaping on foot at all.
+	<<set $targetEscape -= 5>>
+<</if>>
+
+<<if $i == 0>>
+	<<set $target1 = $activeSlave>>
+	<<set $origin1 = $origin>>
+	<<set $targetEscape1 = $targetEscape>>
+<<elseif $i == 1>>
+	<<set $target2 = $activeSlave>>
+	<<set $origin2 = $origin>>
+	<<set $targetEscape2 = $targetEscape>>
+<<else>>
+	<<set $target3 = $activeSlave>>
+	<<set $origin3 = $origin>>
+	<<set $targetEscape3 = $targetEscape>>
+<</if>>
+
+<</for>>
+<br><br>
+
+Your $mercenariesTitle look to you for guidance and will strike the target of your choosing.
+
+<</nobr>>\
+
+<span id="result">
+<<link "The first">>
+<<replace "#result">>
+<<nobr>>
+<<set $activeSlave = $target1>>
+<<set $activeSlave.slaveCost = 0>>
+<<set $origin = $origin1>>
+<<set $targetEscape = $targetEscape1>>
+
+You make your selection and direct your $mercenariesTitle to attack the target.
+
+<<set $MercCapture = random(-4,4)>>
+
+<<if $origin == "housewife">>
+	<<if $targetEscape >= $MercCapture>>
+		Somehow the housewife manages to evade your mercenaries.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle pry open the door to the manse's panic room to find that the woman has hung herself to escape capture. A waste.
+	<<else>>
+		Your $mercenariesTitle pry open the door to the manse's panic room and pull the protesting housewife from its depths.
+		The housewife watches in terror as your $mercenariesTitle slake their lust on her servants and maids, knowing that her respite from a brutal rape must only be a temporary blessing.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "university professor">>
+	<<if $targetEscape >= $MercCapture>>
+		A confrontation with the University's security team allows the professors to escape capture by the $mercenariesTitle.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with surprising resistance by the university's professors and are forced to bid a hasty retreat before security can arrive in greater numbers.
+	<<else>>
+		Your $mercenariesTitle corner the professors and their department head in one of the university's many conference rooms, hauling them off to the VTOLs when the academics promptly surrender.
+		The department head spends the VTOL ride back to your arcology watching in terror as her colleagues and peers are raped wholesale by your mercenaries. With her educated mind, she knows that being singled out from a similar fate must mean she is being saved for someone and worries about who that might be.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "university student">>
+	<<if $targetEscape >= $MercCapture>>
+		A confrontation with the University's security team allows the students to escape capture by the $mercenariesTitle.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with surprising resistance by the university's students and are forced to bid a hasty retreat before security can arrive in greater numbers.
+	<<else>>
+		Your $mercenariesTitle corner the students in their rooms, hauling them off one by one to the VTOLs as they protest feebly.
+		The peerless student spends the VTOL ride back to your arcology watching in terror as her friends and peers are raped wholesale by your mercenaries. With her educated mind, she knows that being singled out from a similar fate must mean she is being saved for someone and worries about who that might be.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "female military officer">>
+	<<if $targetEscape >= $MercCapture>>
+		The officer's escort engages the $mercenariesTitle in a gunfight and in the confusion the officer manages to escape capture on foot.
+	<<elseif _raidescape == 1>>
+		As your mercenaries gain the upper hand on the officer's escort, she promptly puts her service weapon to her temple and pulls the trigger. A waste.
+	<<else>>
+		As your mercenaries gain the upper hand on the officer's escort, she promptly puts her service weapon to her temple but hesitates. Luckily one of your $mercenariesTitle is close by and able to pluck the pistol from her stiff fingers. The despondent officer is cuffed and taken back to the VTOL for transport.
+		The officer spends the VTOL ride back to your arcology watching as your $mercenariesTitle rape her defeated subordinates. Given their brutal treatment, she doubts her respite from such a fate is due to any battlefield rules of conduct.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "male military officer">>
+	<<if $targetEscape >= $MercCapture>>
+		The officer's escort engages the $mercenariesTitle in a gunfight and in the confusion the officer manages to escape capture on foot.
+	<<elseif _raidescape == 1>>
+		As your mercenaries gain the upper hand on the officer's escort, he promptly puts his service weapon to his temple and pulls the trigger. A waste.
+	<<else>>
+		As your mercenaries gain the upper hand on the officer's escort, he promptly puts his service weapon to his temple but hesitates. Luckily one of your $mercenariesTitle is close by and able to pluck the pistol from his stiff fingers. The despondent officer is cuffed and taken back to the VTOL for transport.
+		The officer spends the VTOL ride back to your arcology watching as your $mercenariesTitle rape his defeated subordinates. Given their brutal treatment, he doubts his respite from such a fate is due to any battlefield rules of conduct.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "military soldier">>
+	<<if $targetEscape >= $MercCapture>>
+		The young soldiers fight valiantly against the $mercenariesTitle until they are routed. Despite defeating them in the field, your $mercenariesTitle are unable to capture any of the soldiers who escape on foot.
+	<<elseif _raidescape == 1>>
+		The young soldiers are unfaltering in their conviction and fight to their last last. When the smoke clears, the barracks is chocked with corpses for none of the soldiers are left alive to capture.
+	<<else>>
+		The young soldiers fight valiantly, but when the battle turns against them they decide to surrender. Their sergeant is cuffed with the remaining survivors and taken back to the VTOL for transport.
+		The sergeant spends the VTOL ride back to the arcology watching as her childhood friends turned comrades in arms are raped by your mercenaries. She wonders why she has been spared this seemingly shared fate, but suspects it has little to do with her nominally higher rank.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "doctor">>
+	<<if $targetEscape >= $MercCapture>>
+		The hospital's security staff alone would prove little match for the $mercenariesTitle, but just as they are about to be overrun an uneasy coalition of rival gangster and criminals who had been committed as patients join the fray and turn the tide of battle.
+	<<elseif _raidescape == 1>>
+		The hospital's security staff alone would prove little match for your mercenaries, but they are joined by an uneasy coalition of rival gangster and criminals who had been committed as patients. Though your $mercenariesTitle prevail, they discover to their chagrin that the doctors and their staff were slain during the wanton exchange of fire.
+	<<else>>
+		The security staff of the hospital is easily overpowered and surrender rapidly, allowing your $mercenariesTitle to take the doctors and their staff into custody with little fuss.
+		The distinguished doctor spends the VTOL ride looking on at her colleagues and peers being raped by your mercenaries. She naively hopes that she has been spared from that fate out of a desire for her medical knowledge rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "nun">>
+	<<if $targetEscape >= $MercCapture>>
+		As the $mercenariesTitle close in on the commune, they are spotted by a group of young nuns tending to their grounds. Before your $mercenariesTitle can close the distance, they retreat behind the walls of their community and seal the gate behind them.
+	<<elseif _raidescape == 1>>
+		The nuns flee into their inner sanctum as your $mercenariesTitle approach and bar the doors behind them as they go. When the last barrier is pried open, your $mercenariesTitle discover the nuns have committed suicide as a group rather than be taken prisoner.
+	<<else>>
+		Unarmed and defenseless, the nuns are easily cowed by your $mercenariesTitle and taken away one by one to the VTOLs. The most pious sister prays vehemently until she is dragged out of the inner sanctum in cuffs.
+		The pious nun spends the VTOL ride engaged in fervent prayer as her sisters are raped by your mercenaries. She naively believes that her devotion and piety will see her spared from the same fate as her sisters.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "journalist">>
+	<<if $targetEscape >= $MercCapture>>
+		Though the $mercenariesTitle easily overwhelm the single security guard posted at the firm, they are unable to do so before he triggers an alarm. Faced with the prospect of local law enforcement arriving, your $mercenariesTitle beat a hasty retreat.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with fierce resistance by the staff of the newspaper firm, who take the raid as an opportunity to turn their abolitionist words into violent action. Eventually, your $mercenariesTitle retreat from the building before law enforcement can arrive.
+	<<else>>
+		Once the lone security guard is subdued, the journalists and editors of the firm quietly accept their restraints and file out of the building and into the waiting VTOL.
+		The journalist spends the VTOL ride watching as her colleagues are raped by your mercenaries. She studies every brutal detail, records ever anguished scream in her mind, hoping that one day she might escape to produce an editorial to surpass all others.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "local news anchor">>
+	<<if $targetEscape >= $MercCapture>>
+		Unfortunately for the $mercenariesTitle, the news channel appears to have been interviewing members of the local militia garrison at the time of the raid. Upon encountering more firepower than they had anticipated, your $mercenariesTitle wisely retreat from the engagement.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are able to subdue the news anchor and bid a hasty exit from the recording studio. Before they can board the waiting VTOL however, the anchor is struck in the head by a bullet fired by a man who was her longtime fan turned stalker. It seems if he cannot have her, neither can you.
+	<<else>>
+		The news anchor is subdued without issue and quietly escorted out of the recording studio and into the waiting VTOL.
+		The anchor is initially resistant during the VTOL ride, but soon grows complacent when she is told of the luxury of your penthouse.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "classical dancer">>
+	<<if $targetEscape >= $MercCapture>>
+		Though they are excellent soldiers, the $mercenariesTitle are crude and uncultured. They are unable to blend into the audience and are soon discovered, giving the dance troupe the warning need to make an escape from the theater.
+	<<elseif _raidescape == 1>>
+		As your $mercenariesTitle close in on the stage and reveal their concealed weapons, the darling star of the dance troupe loses her footing in shock and tumbles off the stage. The sharp crack as she hits the ground drives the crowd and remaining members of the troupe hysterical, while your $mercenariesTitle exit the theater as chaos surges around them.
+	<<else>>
+		Once your $mercenariesTitle close in on the stage and reveal their concealed weapons, the dance troupe promptly surrenders. With the shocked audience looking on, each member is cuffed and escorted out the door to the waiting VTOL.
+		The dancer spends the VTOL ride in abject terror as her friends and peers are raped by your $mercenariesTitle all around her. She clings to the hope that she is being spared from the same fate out of a desire for her dancing talent rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "law enforcement officer">>
+	<<if $targetEscape >= $MercCapture>>
+		Despite the lack of staff, it seems this particular precinct has been the recipient of an alarming quantity of military grade equipment. With their overwhelming firepower, the officers are able to hold off your $mercenariesTitle until reinforcements arrive and force your troops to retreat.
+	<<elseif _raidescape == 1>>
+		Despite being outnumbered and outgunned, the officers stand their ground to the last. The sterling officer of the law your $mercenariesTitle sought to capture is the last to fall, stifled by a hail of bullets.
+	<<else>>
+		Your $mercenariesTitle break through the door of the precinct with their guns drawn. The precinct is so understaffed that each officer has a number of weapons drawn on them from every angle, so its no surprise when the precinct's sterling policewoman formally surrenders the precinct and its officers to your mercenaries.
+		The officer spends the VTOL ride watching impassively as her fellow officers are raped by your $mercenariesTitle all around her. Before she exits the VTOL upon her arrival, she informs your $mercenariesTitle that she intends to bring each of them to justice for their supposed crimes.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "classical musician">>
+	<<if $targetEscape >= $MercCapture>>
+		Though they are excellent soldiers, the $mercenariesTitle are crude and uncultured. They are unable to blend into the audience and are soon discovered, giving the orchestra the warning need to make an escape from the concert hall.
+	<<elseif _raidescape == 1>>
+		As your $mercenariesTitle close in on the stage and reveal their concealed weapons, the crown jewel of the orchestra loses her footing in shock and tumbles off the stage. The sharp crack as she hits the ground drives the crowd and remaining members of the orchestra hysterical, while your $mercenariesTitle exit the concert hall as chaos surges around them.
+	<<else>>
+		Once your $mercenariesTitle close in on the stage and reveal their concealed weapons, the orchestra promptly surrenders. With the shocked audience looking on, each member is cuffed and escorted out the door to the waiting VTOL.
+		The musician spends the VTOL ride in abject terror as her friends and peers are raped by your $mercenariesTitle all around her. She clings to the hope that she is being spared from the same fate out of a desire for her musical talent rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "politician">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle clash with the politician's security detail amidst a maelstrom of terrified civilians and the confrontation drags out for some time. By the time your $mercenariesTitle can advance, they discover that the politician has already been evacuated.
+	<<elseif _raidescape == 1>>
+		With their security detail defeated and their crowd of supporters offering no protection, the politician tries to take up one of her fallen protector's pistols to defend herself. Unfortunately for her and for your mercenaries, the politician has a staggeringly poor understanding of firearms and manages to shoot themselves in the face when they discharge the weapon. With the politician dead, there is little your $mercenariesTitle can do but exit the venue.
+	<<else>>
+		With their security detail defeated and their crowd of supporters offering no protection, the politician promptly surrenders in the hopes that they won't be harmed and is escorted to the waiting VTOL.
+		The politician spends the VTOL ride quietly, only breaking her silence to ask your $mercenariesTitle about where she is being brought and why. When they do not answer she simply fusses with her outfit, as if headed to an important interview.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "shut-in">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle pry open the shut-in's door to discover an empty shack. From the cooked meal still steaming on the dining room table and the remarkable absence of dust, it seems she left only recently. Somehow the crafty old minx must have seen your $mercenariesTitle coming.
+	<<elseif _raidescape == 1>>
+		When the $mercenariesTitle break down the door to the shut-in's shack, they are met with a terrible stench of dust and decay. Judging by the body hanging limply from the banisters, the shut-in took their own life some time ago.
+	<<else>>
+		When your $mercenariesTitle break down the door to the shut-in's shack, they are met with a surprised and somewhat unkempt woman staring at them. Despite their lack of social interaction, they know better than to argue with a small army of armed $mercenariesTitle and quietly accepts being escorted back to the waiting VTOL.
+		The shut-in spends the VTOL ride sitting quietly in their seat. Confused by her silence, your $mercenariesTitle attempt to engage her in conversation but are granted no response.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "procuress">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle break down the door to the halfway home to discover a throng of sniffling young women, who cling to their boots and beg for rescue. Once they have been accounted for, your $mercenariesTitle discover the procuress is nowhere to be found. It seems the wily old minx has somehow made her escape before your $mercenariesTitle even arrived.
+	<<elseif _raidescape == 1>>
+		When your $mercenariesTitle enter the halfway house, the impoverished women within mistake them for an international rescue mission. Before your $mercenariesTitle can say otherwise, the women go berserk with the prospect of freedom and break into the procuress' office to tear her apart with their bare hands.
+	<<else>>
+		When your $mercenariesTitle enter the halfway house, the impoverished women within mistake them for an international rescue mission. Before your $mercenariesTitle can say otherwise, the women band together and drag the procuress out of her office and restrain her themselves. The $mercenariesTitle have to do little more than escort the grinning women to the waiting VTOLs, while they drag the protesting procuress with them.
+		The procuress spends the VTOL ride watching uneasily as the girls she intended to sell into slavery are raped by your mercenaries. Far from having a conscience, she realizes that her own capture indicates that she will not be long spared from such treatment. The revelation brings her to weep tears down her mature face, doomed to the same fate she herself sent many girls to.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "investor">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle raid the business exposition and thoroughly search the premises, only to discover that the investor never arrived. A terrified businessman informs your $mercenariesTitle that she cited heightened security risks as the reason for her absence.
+	<<elseif _raidescape == 1>>
+		When your $mercenariesTitle corner the investor in the exposition, she seemingly mistakes them for international police intent on taking her in for prior economic crimes. Before she can be subdued, the investor swallows a concealed pill and crumples to the ground dead.
+	<<else>>
+		When your $mercenariesTitle corner the investor in the exposition, she seemingly mistakes them for international police intent on taking her in for prior economic crimes. She begrudgingly surrenders and is subsequently escorted back to a waiting VTOL.
+		The investor spends the VTOL ride practicing their sales pitches, techniques and speeches. It seems they haven't grasped what their destination is, nor the fate that awaits them upon arrival.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "scientist">>
+	<<if $targetEscape >= $MercCapture>>
+		When the $mercenariesTitle make an explosive entrance into the lab with their guns drawn, the chief scientist throws a vial of some mysterious liquid in front of them. The resultant smoke is so thick and choking that your $mercenariesTitle are forced to retreat from the building, during which time the scientists make their own escape. When your $mercenariesTitle reenter the building, they find it abandoned.
+	<<elseif _raidescape == 1>>
+		The bulk of the scientists surrender shortly after your $mercenariesTitle make an explosive entrance into their lab. Before she can be cuffed, the chief scientist takes a swig from some mysterious beaker of liquid. From the triumphant look on her face as she keels over dead, your $mercenariesTitle suspect the liquid was intended to have a transformative effect rather than a suicidal one.
+	<<else>>
+		The bulk of the scientists surrender shortly after your $mercenariesTitle make an explosive entrance into their lab. Before she can be cuffed, the chief scientist takes a swig from some mysterious beaker of liquid. As the triumphant look on her face fades, it becomes clear that the liquid did not have the transformative effect that she desired.
+		The scientist spends the VTOL ride watching as her colleagues and peers are raped around her. That some of the earth's greatest minds have been reduced to sexual objects is disquieting enough, but the realization that she is not likely to be spared from such a fate brings the woman to tears.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "lawyer">>
+	<<if $targetEscape >= $MercCapture>>
+		It seems the lawyer had anticipated the possibility of conflict on the frontier on the outer rim of the Old World, so the $mercenariesTitle are able to do little more than enter the building before the law firm's offices seal themselves off. Faced with the prospect of lingering in a conflict zone, your $mercenariesTitle cut their losses and retreat back to their VTOLs.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle capture the law firm's staff without much difficulty, but when they open the door to the lawyer's office they find her frothing from the mouth and unresponsive. From the quantity of pill bottles evident on her desk, it seems she found the sole loophole to escape capture.
+	<<else>>
+		Your $mercenariesTitle capture the law firm's staff without much difficulty, but when they open the door to the lawyer's office they find her frothing from the mouth and unresponsive. Despite her attempts to drug herself into suicide, the effects are temporary and the lawyer  soon finds herself being hauled off to a waiting VTOL with her staff.
+		The lawyer spends the VTOL ride scarcely sparing any attention to the rape of her staff all about her. Instead she seems almost lost in thought, as if concentrating on finding some loophole or legal means to escape the fate that has befallen her staff.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if ($targetEscape >= $MercCapture) || (_raidescape == 1)>>
+	Your $mercenariesTitle return without their final prize, but remain in high spirits given their other successes out in the field.
+<</if>>
+<</nobr>>
+<</replace>>
+<</link>>
+<<link "The second">>
+<<replace "#result">>
+<<nobr>>
+<<set $activeSlave = $target2>>
+<<set $origin = $origin2>>
+<<set $targetEscape = $targetEscape2>>
+
+You make your selection and direct your $mercenariesTitle to attack the target.
+
+<<set $MercCapture = random(-4,4)>>
+
+<<if $origin == "housewife">>
+	<<if $targetEscape >= $MercCapture>>
+		Somehow the housewife manages to evade your mercenaries.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle pry open the door to the manse's panic room to find that the woman has hung herself to escape capture. A waste.
+	<<else>>
+		Your $mercenariesTitle pry open the door to the manse's panic room and pull the protesting housewife from its depths.
+		The housewife watches in terror as your $mercenariesTitle slake their lust on her servants and maids, knowing that her respite from a brutal rape must only be a temporary blessing.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "university professor">>
+	<<if $targetEscape >= $MercCapture>>
+		A confrontation with the University's security team allows the professors to escape capture by the $mercenariesTitle.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with surprising resistance by the university's professors and are forced to bid a hasty retreat before security can arrive in greater numbers.
+	<<else>>
+		Your $mercenariesTitle corner the professors and their department head in one of the university's many conference rooms, hauling them off to the VTOLs when the academics promptly surrender.
+		The department head spends the VTOL ride back to your arcology watching in terror as her colleagues and peers are raped wholesale by your mercenaries. With her educated mind, she knows that being singled out from a similar fate must mean she is being saved for someone and worries about who that might be.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "university student">>
+	<<if $targetEscape >= $MercCapture>>
+		A confrontation with the University's security team allows the students to escape capture by the $mercenariesTitle.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with surprising resistance by the university's students and are forced to bid a hasty retreat before security can arrive in greater numbers.
+	<<else>>
+		Your $mercenariesTitle corner the students in their rooms, hauling them off one by one to the VTOLs as they protest feebly.
+		The peerless student spends the VTOL ride back to your arcology watching in terror as her friends and peers are raped wholesale by your mercenaries. With her educated mind, she knows that being singled out from a similar fate must mean she is being saved for someone and worries about who that might be.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "female military officer">>
+	<<if $targetEscape >= $MercCapture>>
+		The officer's escort engages the $mercenariesTitle in a gunfight and in the confusion the officer manages to escape capture on foot.
+	<<elseif _raidescape == 1>>
+		As your mercenaries gain the upper hand on the officer's escort, she promptly puts her service weapon to her temple and pulls the trigger. A waste.
+	<<else>>
+		As your mercenaries gain the upper hand on the officer's escort, she promptly puts her service weapon to her temple but hesitates. Luckily one of your $mercenariesTitle is close by and able to pluck the pistol from her stiff fingers. The despondent officer is cuffed and taken back to the VTOL for transport.
+		The officer spends the VTOL ride back to your arcology watching as your $mercenariesTitle rape her defeated subordinates. Given their brutal treatment, she doubts her respite from such a fate is due to any battlefield rules of conduct.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "male military officer">>
+	<<if $targetEscape >= $MercCapture>>
+		The officer's escort engages the $mercenariesTitle in a gunfight and in the confusion the officer manages to escape capture on foot.
+	<<elseif _raidescape == 1>>
+		As your mercenaries gain the upper hand on the officer's escort, he promptly puts his service weapon to his temple and pulls the trigger. A waste.
+	<<else>>
+		As your mercenaries gain the upper hand on the officer's escort, he promptly puts his service weapon to his temple but hesitates. Luckily one of your $mercenariesTitle is close by and able to pluck the pistol from his stiff fingers. The despondent officer is cuffed and taken back to the VTOL for transport.
+		The officer spends the VTOL ride back to your arcology watching as your $mercenariesTitle rape his defeated subordinates. Given their brutal treatment, he doubts his respite from such a fate is due to any battlefield rules of conduct.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "military soldier">>
+	<<if $targetEscape >= $MercCapture>>
+		The young soldiers fight valiantly against the $mercenariesTitle until they are routed. Despite defeating them in the field, your $mercenariesTitle are unable to capture any of the soldiers who escape on foot.
+	<<elseif _raidescape == 1>>
+		The young soldiers are unfaltering in their conviction and fight to their last last. When the smoke clears, the barracks is chocked with corpses for none of the soldiers are left alive to capture.
+	<<else>>
+		The young soldiers fight valiantly, but when the battle turns against them they decide to surrender. Their sergeant is cuffed with the remaining survivors and taken back to the VTOL for transport.
+		The sergeant spends the VTOL ride back to the arcology watching as her childhood friends turned comrades in arms are raped by your mercenaries. She wonders why she has been spared this seemingly shared fate, but suspects it has little to do with her nominally higher rank.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "doctor">>
+	<<if $targetEscape >= $MercCapture>>
+		The hospital's security staff alone would prove little match for the $mercenariesTitle, but just as they are about to be overrun an uneasy coalition of rival gangster and criminals who had been committed as patients join the fray and turn the tide of battle.
+	<<elseif _raidescape == 1>>
+		The hospital's security staff alone would prove little match for your mercenaries, but they are joined by an uneasy coalition of rival gangster and criminals who had been committed as patients. Though your $mercenariesTitle prevail, they discover to their chagrin that the doctors and their staff were slain during the wanton exchange of fire.
+	<<else>>
+		The security staff of the hospital is easily overpowered and surrender rapidly, allowing your $mercenariesTitle to take the doctors and their staff into custody with little fuss.
+		The distinguished doctor spends the VTOL ride looking on at her colleagues and peers being raped by your mercenaries. She naively hopes that she has been spared from that fate out of a desire for her medical knowledge rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "nun">>
+	<<if $targetEscape >= $MercCapture>>
+		As the $mercenariesTitle close in on the commune, they are spotted by a group of young nuns tending to their grounds. Before your $mercenariesTitle can close the distance, they retreat behind the walls of their community and seal the gate behind them.
+	<<elseif _raidescape == 1>>
+		The nuns flee into their inner sanctum as your $mercenariesTitle approach and bar the doors behind them as they go. When the last barrier is pried open, your $mercenariesTitle discover the nuns have committed suicide as a group rather than be taken prisoner.
+	<<else>>
+		Unarmed and defenseless, the nuns are easily cowed by your $mercenariesTitle and taken away one by one to the VTOLs. The most pious sister prays vehemently until she is dragged out of the inner sanctum in cuffs.
+		The pious nun spends the VTOL ride engaged in fervent prayer as her sisters are raped by your mercenaries. She naively believes that her devotion and piety will see her spared from the same fate as her sisters.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "journalist">>
+	<<if $targetEscape >= $MercCapture>>
+		Though the $mercenariesTitle easily overwhelm the single security guard posted at the firm, they are unable to do so before he triggers an alarm. Faced with the prospect of local law enforcement arriving, your $mercenariesTitle beat a hasty retreat.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with fierce resistance by the staff of the newspaper firm, who take the raid as an opportunity to turn their abolitionist words into violent action. Eventually, your $mercenariesTitle retreat from the building before law enforcement can arrive.
+	<<else>>
+		Once the lone security guard is subdued, the journalists and editors of the firm quietly accept their restraints and file out of the building and into the waiting VTOL.
+		The journalist spends the VTOL ride watching as her colleagues are raped by your mercenaries. She studies every brutal detail, records ever anguished scream in her mind, hoping that one day she might escape to produce an editorial to surpass all others.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "local news anchor">>
+	<<if $targetEscape >= $MercCapture>>
+		Unfortunately for the $mercenariesTitle, the news channel appears to have been interviewing members of the local militia garrison at the time of the raid. Upon encountering more firepower than they had anticipated, your $mercenariesTitle wisely retreat from the engagement.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are able to subdue the news anchor and bid a hasty exit from the recording studio. Before they can board the waiting VTOL however, the anchor is struck in the head by a bullet fired by a man who was her longtime fan turned stalker. It seems if he cannot have her, neither can you.
+	<<else>>
+		The news anchor is subdued without issue and quietly escorted out of the recording studio and into the waiting VTOL.
+		The anchor is initially resistant during the VTOL ride, but soon grows complacent when she is told of the luxury of your penthouse.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "classical dancer">>
+	<<if $targetEscape >= $MercCapture>>
+		Though they are excellent soldiers, the $mercenariesTitle are crude and uncultured. They are unable to blend into the audience and are soon discovered, giving the dance troupe the warning need to make an escape from the theater.
+	<<elseif _raidescape == 1>>
+		As your $mercenariesTitle close in on the stage and reveal their concealed weapons, the darling star of the dance troupe loses her footing in shock and tumbles off the stage. The sharp crack as she hits the ground drives the crowd and remaining members of the troupe hysterical, while your $mercenariesTitle exit the theater as chaos surges around them.
+	<<else>>
+		Once your $mercenariesTitle close in on the stage and reveal their concealed weapons, the dance troupe promptly surrenders. With the shocked audience looking on, each member is cuffed and escorted out the door to the waiting VTOL.
+		The dancer spends the VTOL ride in abject terror as her friends and peers are raped by your $mercenariesTitle all around her. She clings to the hope that she is being spared from the same fate out of a desire for her dancing talent rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "law enforcement officer">>
+	<<if $targetEscape >= $MercCapture>>
+		Despite the lack of staff, it seems this particular precinct has been the recipient of an alarming quantity of military grade equipment. With their overwhelming firepower, the officers are able to hold off your $mercenariesTitle until reinforcements arrive and force your troops to retreat.
+	<<elseif _raidescape == 1>>
+		Despite being outnumbered and outgunned, the officers stand their ground to the last. The sterling officer of the law your $mercenariesTitle sought to capture is the last to fall, stifled by a hail of bullets.
+	<<else>>
+		Your $mercenariesTitle break through the door of the precinct with their guns drawn. The precinct is so understaffed that each officer has a number of weapons drawn on them from every angle, so its no surprise when the precinct's sterling policewoman formally surrenders the precinct and its officers to your mercenaries.
+		The officer spends the VTOL ride watching impassively as her fellow officers are raped by your $mercenariesTitle all around her. Before she exits the VTOL upon her arrival, she informs your $mercenariesTitle that she intends to bring each of them to justice for their supposed crimes.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "classical musician">>
+	<<if $targetEscape >= $MercCapture>>
+		Though they are excellent soldiers, the $mercenariesTitle are crude and uncultured. They are unable to blend into the audience and are soon discovered, giving the orchestra the warning need to make an escape from the concert hall.
+	<<elseif _raidescape == 1>>
+		As your $mercenariesTitle close in on the stage and reveal their concealed weapons, the crown jewel of the orchestra loses her footing in shock and tumbles off the stage. The sharp crack as she hits the ground drives the crowd and remaining members of the orchestra hysterical, while your $mercenariesTitle exit the concert hall as chaos surges around them.
+	<<else>>
+		Once your $mercenariesTitle close in on the stage and reveal their concealed weapons, the orchestra promptly surrenders. With the shocked audience looking on, each member is cuffed and escorted out the door to the waiting VTOL.
+		The musician spends the VTOL ride in abject terror as her friends and peers are raped by your $mercenariesTitle all around her. She clings to the hope that she is being spared from the same fate out of a desire for her musical talent rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "politician">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle clash with the politician's security detail amidst a maelstrom of terrified civilians and the confrontation drags out for some time. By the time your $mercenariesTitle can advance, they discover that the politician has already been evacuated.
+	<<elseif _raidescape == 1>>
+		With their security detail defeated and their crowd of supporters offering no protection, the politician tries to take up one of her fallen protector's pistols to defend herself. Unfortunately for her and for your mercenaries, the politician has a staggeringly poor understanding of firearms and manages to shoot themselves in the face when they discharge the weapon. With the politician dead, there is little your $mercenariesTitle can do but exit the venue.
+	<<else>>
+		With their security detail defeated and their crowd of supporters offering no protection, the politician promptly surrenders in the hopes that they won't be harmed and is escorted to the waiting VTOL.
+		The politician spends the VTOL ride quietly, only breaking her silence to ask your $mercenariesTitle about where she is being brought and why. When they do not answer she simply fusses with her outfit, as if headed to an important interview.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "shut-in">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle pry open the shut-in's door to discover an empty shack. From the cooked meal still steaming on the dining room table and the remarkable absence of dust, it seems she left only recently. Somehow the crafty old minx must have seen your $mercenariesTitle coming.
+	<<elseif _raidescape == 1>>
+		When the $mercenariesTitle break down the door to the shut-in's shack, they are met with a terrible stench of dust and decay. Judging by the body hanging limply from the banisters, the shut-in took their own life some time ago.
+	<<else>>
+		When your $mercenariesTitle break down the door to the shut-in's shack, they are met with a surprised and somewhat unkempt woman staring at them. Despite their lack of social interaction, they know better than to argue with a small army of armed $mercenariesTitle and quietly accepts being escorted back to the waiting VTOL.
+		The shut-in spends the VTOL ride sitting quietly in their seat. Confused by her silence, your $mercenariesTitle attempt to engage her in conversation but are granted no response.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "procuress">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle break down the door to the halfway home to discover a throng of sniffling young women, who cling to their boots and beg for rescue. Once they have been accounted for, your $mercenariesTitle discover the procuress is nowhere to be found. It seems the wily old minx has somehow made her escape before your $mercenariesTitle even arrived.
+	<<elseif _raidescape == 1>>
+		When your $mercenariesTitle enter the halfway house, the impoverished women within mistake them for an international rescue mission. Before your $mercenariesTitle can say otherwise, the women go berserk with the prospect of freedom and break into the procuress' office to tear her apart with their bare hands.
+	<<else>>
+		When your $mercenariesTitle enter the halfway house, the impoverished women within mistake them for an international rescue mission. Before your $mercenariesTitle can say otherwise, the women band together and drag the procuress out of her office and restrain her themselves. The $mercenariesTitle have to do little more than escort the grinning women to the waiting VTOLs, while they drag the protesting procuress with them.
+		The procuress spends the VTOL ride watching uneasily as the girls she intended to sell into slavery are raped by your mercenaries. Far from having a conscience, she realizes that her own capture indicates that she will not be long spared from such treatment. The revelation brings her to weep tears down her mature face, doomed to the same fate she herself sent many girls to.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "investor">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle raid the business exposition and thoroughly search the premises, only to discover that the investor never arrived. A terrified businessman informs your $mercenariesTitle that she cited heightened security risks as the reason for her absence.
+	<<elseif _raidescape == 1>>
+		When your $mercenariesTitle corner the investor in the exposition, she seemingly mistakes them for international police intent on taking her in for prior economic crimes. Before she can be subdued, the investor swallows a concealed pill and crumples to the ground dead.
+	<<else>>
+		When your $mercenariesTitle corner the investor in the exposition, she seemingly mistakes them for international police intent on taking her in for prior economic crimes. She begrudgingly surrenders and is subsequently escorted back to a waiting VTOL.
+		The investor spends the VTOL ride practicing their sales pitches, techniques and speeches. It seems they haven't grasped what their destination is, nor the fate that awaits them upon arrival.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "scientist">>
+	<<if $targetEscape >= $MercCapture>>
+		When the $mercenariesTitle make an explosive entrance into the lab with their guns drawn, the chief scientist throws a vial of some mysterious liquid in front of them. The resultant smoke is so thick and choking that your $mercenariesTitle are forced to retreat from the building, during which time the scientists make their own escape. When your $mercenariesTitle reenter the building, they find it abandoned.
+	<<elseif _raidescape == 1>>
+		The bulk of the scientists surrender shortly after your $mercenariesTitle make an explosive entrance into their lab. Before she can be cuffed, the chief scientist takes a swig from some mysterious beaker of liquid. From the triumphant look on her face as she keels over dead, your $mercenariesTitle suspect the liquid was intended to have a transformative effect rather than a suicidal one.
+	<<else>>
+		The bulk of the scientists surrender shortly after your $mercenariesTitle make an explosive entrance into their lab. Before she can be cuffed, the chief scientist takes a swig from some mysterious beaker of liquid. As the triumphant look on her face fades, it becomes clear that the liquid did not have the transformative effect that she desired.
+		The scientist spends the VTOL ride watching as her colleagues and peers are raped around her. That some of the earth's greatest minds have been reduced to sexual objects is disquieting enough, but the realization that she is not likely to be spared from such a fate brings the woman to tears.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "lawyer">>
+	<<if $targetEscape >= $MercCapture>>
+		It seems the lawyer had anticipated the possibility of conflict on the frontier on the outer rim of the Old World, so the $mercenariesTitle are able to do little more than enter the building before the law firm's offices seal themselves off. Faced with the prospect of lingering in a conflict zone, your $mercenariesTitle cut their losses and retreat back to their VTOLs.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle capture the law firm's staff without much difficulty, but when they open the door to the lawyer's office they find her frothing from the mouth and unresponsive. From the quantity of pill bottles evident on her desk, it seems she found the sole loophole to escape capture.
+	<<else>>
+		Your $mercenariesTitle capture the law firm's staff without much difficulty, but when they open the door to the lawyer's office they find her frothing from the mouth and unresponsive. Despite her attempts to drug herself into suicide, the effects are temporary and the lawyer  soon finds herself being hauled off to a waiting VTOL with her staff.
+		The lawyer spends the VTOL ride scarcely sparing any attention to the rape of her staff all about her. Instead she seems almost lost in thought, as if concentrating on finding some loophole or legal means to escape the fate that has befallen her staff.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if ($targetEscape >= $MercCapture) || (_raidescape == 1)>>
+	Your $mercenariesTitle return without their final prize, but remain in high spirits given their other successes out in the field.
+<</if>>
+<</nobr>>
+<</replace>>
+<</link>>
+<<link "The third">>
+<<replace "#result">>
+<<nobr>>
+<<set $activeSlave = $target3>>
+<<set $origin = $origin3>>
+<<set $targetEscape = $targetEscape3>>
+
+You make your selection and direct your $mercenariesTitle to attack the target.
+
+<<set $MercCapture = random(-4,4)>>
+
+<<if $origin == "housewife">>
+	<<if $targetEscape >= $MercCapture>>
+		Somehow the housewife manages to evade your mercenaries.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle pry open the door to the manse's panic room to find that the woman has hung herself to escape capture. A waste.
+	<<else>>
+		Your $mercenariesTitle pry open the door to the manse's panic room and pull the protesting housewife from its depths.
+		The housewife watches in terror as your $mercenariesTitle slake their lust on her servants and maids, knowing that her respite from a brutal rape must only be a temporary blessing.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "university professor">>
+	<<if $targetEscape >= $MercCapture>>
+		A confrontation with the University's security team allows the professors to escape capture by the $mercenariesTitle.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with surprising resistance by the university's professors and are forced to bid a hasty retreat before security can arrive in greater numbers.
+	<<else>>
+		Your $mercenariesTitle corner the professors and their department head in one of the university's many conference rooms, hauling them off to the VTOLs when the academics promptly surrender.
+		The department head spends the VTOL ride back to your arcology watching in terror as her colleagues and peers are raped wholesale by your mercenaries. With her educated mind, she knows that being singled out from a similar fate must mean she is being saved for someone and worries about who that might be.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "university student">>
+	<<if $targetEscape >= $MercCapture>>
+		A confrontation with the University's security team allows the students to escape capture by the $mercenariesTitle.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with surprising resistance by the university's students and are forced to bid a hasty retreat before security can arrive in greater numbers.
+	<<else>>
+		Your $mercenariesTitle corner the students in their rooms, hauling them off one by one to the VTOLs as they protest feebly.
+		The peerless student spends the VTOL ride back to your arcology watching in terror as her friends and peers are raped wholesale by your mercenaries. With her educated mind, she knows that being singled out from a similar fate must mean she is being saved for someone and worries about who that might be.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "female military officer">>
+	<<if $targetEscape >= $MercCapture>>
+		The officer's escort engages the $mercenariesTitle in a gunfight and in the confusion the officer manages to escape capture on foot.
+	<<elseif _raidescape == 1>>
+		As your mercenaries gain the upper hand on the officer's escort, she promptly puts her service weapon to her temple and pulls the trigger. A waste.
+	<<else>>
+		As your mercenaries gain the upper hand on the officer's escort, she promptly puts her service weapon to her temple but hesitates. Luckily one of your $mercenariesTitle is close by and able to pluck the pistol from her stiff fingers. The despondent officer is cuffed and taken back to the VTOL for transport.
+		The officer spends the VTOL ride back to your arcology watching as your $mercenariesTitle rape her defeated subordinates. Given their brutal treatment, she doubts her respite from such a fate is due to any battlefield rules of conduct.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "male military officer">>
+	<<if $targetEscape >= $MercCapture>>
+		The officer's escort engages the $mercenariesTitle in a gunfight and in the confusion the officer manages to escape capture on foot.
+	<<elseif _raidescape == 1>>
+		As your mercenaries gain the upper hand on the officer's escort, he promptly puts his service weapon to his temple and pulls the trigger. A waste.
+	<<else>>
+		As your mercenaries gain the upper hand on the officer's escort, he promptly puts his service weapon to his temple but hesitates. Luckily one of your $mercenariesTitle is close by and able to pluck the pistol from his stiff fingers. The despondent officer is cuffed and taken back to the VTOL for transport.
+		The officer spends the VTOL ride back to your arcology watching as your $mercenariesTitle rape his defeated subordinates. Given their brutal treatment, he doubts his respite from such a fate is due to any battlefield rules of conduct.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "military soldier">>
+	<<if $targetEscape >= $MercCapture>>
+		The young soldiers fight valiantly against the $mercenariesTitle until they are routed. Despite defeating them in the field, your $mercenariesTitle are unable to capture any of the soldiers who escape on foot.
+	<<elseif _raidescape == 1>>
+		The young soldiers are unfaltering in their conviction and fight to their last last. When the smoke clears, the barracks is chocked with corpses for none of the soldiers are left alive to capture.
+	<<else>>
+		The young soldiers fight valiantly, but when the battle turns against them they decide to surrender. Their sergeant is cuffed with the remaining survivors and taken back to the VTOL for transport.
+		The sergeant spends the VTOL ride back to the arcology watching as her childhood friends turned comrades in arms are raped by your mercenaries. She wonders why she has been spared this seemingly shared fate, but suspects it has little to do with her nominally higher rank.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "doctor">>
+	<<if $targetEscape >= $MercCapture>>
+		The hospital's security staff alone would prove little match for the $mercenariesTitle, but just as they are about to be overrun an uneasy coalition of rival gangster and criminals who had been committed as patients join the fray and turn the tide of battle.
+	<<elseif _raidescape == 1>>
+		The hospital's security staff alone would prove little match for your mercenaries, but they are joined by an uneasy coalition of rival gangster and criminals who had been committed as patients. Though your $mercenariesTitle prevail, they discover to their chagrin that the doctors and their staff were slain during the wanton exchange of fire.
+	<<else>>
+		The security staff of the hospital is easily overpowered and surrender rapidly, allowing your $mercenariesTitle to take the doctors and their staff into custody with little fuss.
+		The distinguished doctor spends the VTOL ride looking on at her colleagues and peers being raped by your mercenaries. She naively hopes that she has been spared from that fate out of a desire for her medical knowledge rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "nun">>
+	<<if $targetEscape >= $MercCapture>>
+		As the $mercenariesTitle close in on the commune, they are spotted by a group of young nuns tending to their grounds. Before your $mercenariesTitle can close the distance, they retreat behind the walls of their community and seal the gate behind them.
+	<<elseif _raidescape == 1>>
+		The nuns flee into their inner sanctum as your $mercenariesTitle approach and bar the doors behind them as they go. When the last barrier is pried open, your $mercenariesTitle discover the nuns have committed suicide as a group rather than be taken prisoner.
+	<<else>>
+		Unarmed and defenseless, the nuns are easily cowed by your $mercenariesTitle and taken away one by one to the VTOLs. The most pious sister prays vehemently until she is dragged out of the inner sanctum in cuffs.
+		The pious nun spends the VTOL ride engaged in fervent prayer as her sisters are raped by your mercenaries. She naively believes that her devotion and piety will see her spared from the same fate as her sisters.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "journalist">>
+	<<if $targetEscape >= $MercCapture>>
+		Though the $mercenariesTitle easily overwhelm the single security guard posted at the firm, they are unable to do so before he triggers an alarm. Faced with the prospect of local law enforcement arriving, your $mercenariesTitle beat a hasty retreat.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are met with fierce resistance by the staff of the newspaper firm, who take the raid as an opportunity to turn their abolitionist words into violent action. Eventually, your $mercenariesTitle retreat from the building before law enforcement can arrive.
+	<<else>>
+		Once the lone security guard is subdued, the journalists and editors of the firm quietly accept their restraints and file out of the building and into the waiting VTOL.
+		The journalist spends the VTOL ride watching as her colleagues are raped by your mercenaries. She studies every brutal detail, records ever anguished scream in her mind, hoping that one day she might escape to produce an editorial to surpass all others.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "local news anchor">>
+	<<if $targetEscape >= $MercCapture>>
+		Unfortunately for the $mercenariesTitle, the news channel appears to have been interviewing members of the local militia garrison at the time of the raid. Upon encountering more firepower than they had anticipated, your $mercenariesTitle wisely retreat from the engagement.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle are able to subdue the news anchor and bid a hasty exit from the recording studio. Before they can board the waiting VTOL however, the anchor is struck in the head by a bullet fired by a man who was her longtime fan turned stalker. It seems if he cannot have her, neither can you.
+	<<else>>
+		The news anchor is subdued without issue and quietly escorted out of the recording studio and into the waiting VTOL.
+		The anchor is initially resistant during the VTOL ride, but soon grows complacent when she is told of the luxury of your penthouse.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "classical dancer">>
+	<<if $targetEscape >= $MercCapture>>
+		Though they are excellent soldiers, the $mercenariesTitle are crude and uncultured. They are unable to blend into the audience and are soon discovered, giving the dance troupe the warning need to make an escape from the theater.
+	<<elseif _raidescape == 1>>
+		As your $mercenariesTitle close in on the stage and reveal their concealed weapons, the darling star of the dance troupe loses her footing in shock and tumbles off the stage. The sharp crack as she hits the ground drives the crowd and remaining members of the troupe hysterical, while your $mercenariesTitle exit the theater as chaos surges around them.
+	<<else>>
+		Once your $mercenariesTitle close in on the stage and reveal their concealed weapons, the dance troupe promptly surrenders. With the shocked audience looking on, each member is cuffed and escorted out the door to the waiting VTOL.
+		The dancer spends the VTOL ride in abject terror as her friends and peers are raped by your $mercenariesTitle all around her. She clings to the hope that she is being spared from the same fate out of a desire for her dancing talent rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "law enforcement officer">>
+	<<if $targetEscape >= $MercCapture>>
+		Despite the lack of staff, it seems this particular precinct has been the recipient of an alarming quantity of military grade equipment. With their overwhelming firepower, the officers are able to hold off your $mercenariesTitle until reinforcements arrive and force your troops to retreat.
+	<<elseif _raidescape == 1>>
+		Despite being outnumbered and outgunned, the officers stand their ground to the last. The sterling officer of the law your $mercenariesTitle sought to capture is the last to fall, stifled by a hail of bullets.
+	<<else>>
+		Your $mercenariesTitle break through the door of the precinct with their guns drawn. The precinct is so understaffed that each officer has a number of weapons drawn on them from every angle, so its no surprise when the precinct's sterling policewoman formally surrenders the precinct and its officers to your mercenaries.
+		The officer spends the VTOL ride watching impassively as her fellow officers are raped by your $mercenariesTitle all around her. Before she exits the VTOL upon her arrival, she informs your $mercenariesTitle that she intends to bring each of them to justice for their supposed crimes.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "classical musician">>
+	<<if $targetEscape >= $MercCapture>>
+		Though they are excellent soldiers, the $mercenariesTitle are crude and uncultured. They are unable to blend into the audience and are soon discovered, giving the orchestra the warning need to make an escape from the concert hall.
+	<<elseif _raidescape == 1>>
+		As your $mercenariesTitle close in on the stage and reveal their concealed weapons, the crown jewel of the orchestra loses her footing in shock and tumbles off the stage. The sharp crack as she hits the ground drives the crowd and remaining members of the orchestra hysterical, while your $mercenariesTitle exit the concert hall as chaos surges around them.
+	<<else>>
+		Once your $mercenariesTitle close in on the stage and reveal their concealed weapons, the orchestra promptly surrenders. With the shocked audience looking on, each member is cuffed and escorted out the door to the waiting VTOL.
+		The musician spends the VTOL ride in abject terror as her friends and peers are raped by your $mercenariesTitle all around her. She clings to the hope that she is being spared from the same fate out of a desire for her musical talent rather than her body.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "politician">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle clash with the politician's security detail amidst a maelstrom of terrified civilians and the confrontation drags out for some time. By the time your $mercenariesTitle can advance, they discover that the politician has already been evacuated.
+	<<elseif _raidescape == 1>>
+		With their security detail defeated and their crowd of supporters offering no protection, the politician tries to take up one of her fallen protector's pistols to defend herself. Unfortunately for her and for your mercenaries, the politician has a staggeringly poor understanding of firearms and manages to shoot themselves in the face when they discharge the weapon. With the politician dead, there is little your $mercenariesTitle can do but exit the venue.
+	<<else>>
+		With their security detail defeated and their crowd of supporters offering no protection, the politician promptly surrenders in the hopes that they won't be harmed and is escorted to the waiting VTOL.
+		The politician spends the VTOL ride quietly, only breaking her silence to ask your $mercenariesTitle about where she is being brought and why. When they do not answer she simply fusses with her outfit, as if headed to an important interview.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "shut-in">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle pry open the shut-in's door to discover an empty shack. From the cooked meal still steaming on the dining room table and the remarkable absence of dust, it seems she left only recently. Somehow the crafty old minx must have seen your $mercenariesTitle coming.
+	<<elseif _raidescape == 1>>
+		When the $mercenariesTitle break down the door to the shut-in's shack, they are met with a terrible stench of dust and decay. Judging by the body hanging limply from the banisters, the shut-in took their own life some time ago.
+	<<else>>
+		When your $mercenariesTitle break down the door to the shut-in's shack, they are met with a surprised and somewhat unkempt woman staring at them. Despite their lack of social interaction, they know better than to argue with a small army of armed $mercenariesTitle and quietly accepts being escorted back to the waiting VTOL.
+		The shut-in spends the VTOL ride sitting quietly in their seat. Confused by her silence, your $mercenariesTitle attempt to engage her in conversation but are granted no response.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "procuress">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle break down the door to the halfway home to discover a throng of sniffling young women, who cling to their boots and beg for rescue. Once they have been accounted for, your $mercenariesTitle discover the procuress is nowhere to be found. It seems the wily old minx has somehow made her escape before your $mercenariesTitle even arrived.
+	<<elseif _raidescape == 1>>
+		When your $mercenariesTitle enter the halfway house, the impoverished women within mistake them for an international rescue mission. Before your $mercenariesTitle can say otherwise, the women go berserk with the prospect of freedom and break into the procuress' office to tear her apart with their bare hands.
+	<<else>>
+		When your $mercenariesTitle enter the halfway house, the impoverished women within mistake them for an international rescue mission. Before your $mercenariesTitle can say otherwise, the women band together and drag the procuress out of her office and restrain her themselves. The $mercenariesTitle have to do little more than escort the grinning women to the waiting VTOLs, while they drag the protesting procuress with them.
+		The procuress spends the VTOL ride watching uneasily as the girls she intended to sell into slavery are raped by your mercenaries. Far from having a conscience, she realizes that her own capture indicates that she will not be long spared from such treatment. The revelation brings her to weep tears down her mature face, doomed to the same fate she herself sent many girls to.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "investor">>
+	<<if $targetEscape >= $MercCapture>>
+		The $mercenariesTitle raid the business exposition and thoroughly search the premises, only to discover that the investor never arrived. A terrified businessman informs your $mercenariesTitle that she cited heightened security risks as the reason for her absence.
+	<<elseif _raidescape == 1>>
+		When your $mercenariesTitle corner the investor in the exposition, she seemingly mistakes them for international police intent on taking her in for prior economic crimes. Before she can be subdued, the investor swallows a concealed pill and crumples to the ground dead.
+	<<else>>
+		When your $mercenariesTitle corner the investor in the exposition, she seemingly mistakes them for international police intent on taking her in for prior economic crimes. She begrudgingly surrenders and is subsequently escorted back to a waiting VTOL.
+		The investor spends the VTOL ride practicing their sales pitches, techniques and speeches. It seems they haven't grasped what their destination is, nor the fate that awaits them upon arrival.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "scientist">>
+	<<if $targetEscape >= $MercCapture>>
+		When the $mercenariesTitle make an explosive entrance into the lab with their guns drawn, the chief scientist throws a vial of some mysterious liquid in front of them. The resultant smoke is so thick and choking that your $mercenariesTitle are forced to retreat from the building, during which time the scientists make their own escape. When your $mercenariesTitle reenter the building, they find it abandoned.
+	<<elseif _raidescape == 1>>
+		The bulk of the scientists surrender shortly after your $mercenariesTitle make an explosive entrance into their lab. Before she can be cuffed, the chief scientist takes a swig from some mysterious beaker of liquid. From the triumphant look on her face as she keels over dead, your $mercenariesTitle suspect the liquid was intended to have a transformative effect rather than a suicidal one.
+	<<else>>
+		The bulk of the scientists surrender shortly after your $mercenariesTitle make an explosive entrance into their lab. Before she can be cuffed, the chief scientist takes a swig from some mysterious beaker of liquid. As the triumphant look on her face fades, it becomes clear that the liquid did not have the transformative effect that she desired.
+		The scientist spends the VTOL ride watching as her colleagues and peers are raped around her. That some of the earth's greatest minds have been reduced to sexual objects is disquieting enough, but the realization that she is not likely to be spared from such a fate brings the woman to tears.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if $origin == "lawyer">>
+	<<if $targetEscape >= $MercCapture>>
+		It seems the lawyer had anticipated the possibility of conflict on the frontier on the outer rim of the Old World, so the $mercenariesTitle are able to do little more than enter the building before the law firm's offices seal themselves off. Faced with the prospect of lingering in a conflict zone, your $mercenariesTitle cut their losses and retreat back to their VTOLs.
+	<<elseif _raidescape == 1>>
+		Your $mercenariesTitle capture the law firm's staff without much difficulty, but when they open the door to the lawyer's office they find her frothing from the mouth and unresponsive. From the quantity of pill bottles evident on her desk, it seems she found the sole loophole to escape capture.
+	<<else>>
+		Your $mercenariesTitle capture the law firm's staff without much difficulty, but when they open the door to the lawyer's office they find her frothing from the mouth and unresponsive. Despite her attempts to drug herself into suicide, the effects are temporary and the lawyer  soon finds herself being hauled off to a waiting VTOL with her staff.
+		The lawyer spends the VTOL ride scarcely sparing any attention to the rape of her staff all about her. Instead she seems almost lost in thought, as if concentrating on finding some loophole or legal means to escape the fate that has befallen her staff.
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+<</if>>
+<<if ($targetEscape >= $MercCapture) || (_raidescape == 1)>>
+	Your $mercenariesTitle return without their final prize, but remain in high spirits given their other successes out in the field.
+<</if>>
+<</nobr>>
+<</replace>>
+<</link>>
+</span>

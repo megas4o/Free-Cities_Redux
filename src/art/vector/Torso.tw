@@ -1,0 +1,24 @@
+:: Art_Vector_Torso_ [nobr]
+
+/* Torso size switch courtesy of Nov-X */
+
+/* BEWARE: _torsoSize might be used in torso outfit */
+
+<<if _artSlave.waist < -40>>
+	<<if _artSlave.weight > 30>>
+		<<set _torsoSize = "Hourglass">>
+	<<else>>
+		<<set _torsoSize = "Unnatural">>
+	<</if>>
+<<elseif _artSlave.waist <= 10>>
+	<<if _artSlave.weight > 30>>
+		<<set _torsoSize = "Normal">>
+	<<else>>
+		<<set _torsoSize = "Hourglass">>
+	<</if>>
+<<else>>
+	<<set _torsoSize = "Normal">>
+<</if>>
+
+<<set _art = "Art_Vector_Torso_"+_torsoSize >>
+<<include _art >>

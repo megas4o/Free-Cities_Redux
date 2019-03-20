@@ -1,0 +1,625 @@
+:: art widgets [nobr widget]
+
+/%
+Call as <<AssistantArt>>
+Displays assistant images. Currently passage-based.
+$args[0]: Image size/center.
+	3: Large, right. Example: description.
+	2: Medium, right. Example: random events.
+%/
+<<widget "AssistantArt">>
+
+<<if $imageChoice == 0>> /* RENDERED IMAGES BY SHOKUSHU */
+
+<<switch $assistantAppearance>>
+<<case "monstergirl">>
+	<<set _fileName = "'resources/renders/assistant monstergirl.png' ">>
+<<case "shemale">>
+	<<set _fileName = "'resources/renders/assistant shemale.png' ">>
+<<case "amazon">>
+	<<set _fileName = "'resources/renders/assistant amazon.png' ">>
+<<case "businesswoman">>
+	<<set _fileName = "'resources/renders/assistant businesswoman.png' ">>
+<<case "goddess">>
+	<<set _fileName = "'resources/renders/assistant goddess.png' ">>
+<<case "schoolgirl">>
+	<<set _fileName = "'resources/renders/assistant schoolgirl.png' ">>
+<<default>>
+	<<set _fileName = "'resources/renders/assistant default.png' ">>
+<</switch>>
+<<if $args[1] == 3>>
+	<<print "<img src=" + _fileName + "style='float:right; border:3px hidden'/>">>
+<<else>>
+	<<print "<img src=" + _fileName + "style='float:right; border:3px hidden' width='300' height='300'/>">>
+<</if>>
+
+<</if>> /* CLOSES IMAGE CHOICE */
+
+<</widget>>
+
+/%
+Call as <<SlaveArt>>
+Displays slave images. Currently passage-based.
+$args[0]: Slave.
+$args[1]: Image size/center.
+	3: Large, right. Example: long slave description.
+	2: Medium, right. Example: random events.
+	1: Small, left. Example: lists.
+	0: Tiny, left. Example: facilities
+$args[2]: icon UI Display for vector art, 1 for on.
+%/
+<<widget "SlaveArt">>
+
+<<if ndef $args[0].customImage>><<set $args[0].customImage = 0>><</if>>
+<<if $args[0].customImage != 0>>
+	<<set _fileFormat = ($args[0].customImageFormat || "png"),
+		_fileName = "'resources/" + $args[0].customImage + "." + _fileFormat + "' ",
+		_fileTypeStart = (_fileFormat === "webm" ? "video loop autoplay" : "img"),
+		_fileTypeEnd = (_fileFormat === "webm" ? "</video>" : "")>>
+	<<if $args[1] == 3>>
+		<<print "<" + _fileTypeStart + " src=" + _fileName + "style='float:right; border:3px hidden'>" + _fileTypeEnd>>
+	<<elseif $args[1] == 2>>
+		<<print "<" + _fileTypeStart + " src=" + _fileName + "style='float:right; border:3px hidden' width='300' height='300'>" + _fileTypeEnd>>
+	<<elseif $args[1] == 1>>
+		<<print "<" + _fileTypeStart + " src=" + _fileName + "style='float:left; border:3px hidden' width='150' height='150'>" + _fileTypeEnd>>
+	<<else>>
+		<<print "<" + _fileTypeStart + " src=" + _fileName + "style='float:left; border:3px hidden' width='120' height='120'>" + _fileTypeEnd>>
+	<</if>>
+
+<<elseif $imageChoice == 1>> /* VECTOR ART BY NOX*/
+
+<<if ndef $seeVectorArtHighlights>>
+	<<set $seeVectorArtHighlights = 1>>
+<</if>>
+<<set _artSlave to $args[0] >>
+<<silently>>
+/* prepare HTML colour codes for slave display */
+/* note: latex clothing is mostly emulated by rubber colour for skin (and shoes) */
+/* TODO: consistently use american "color" instead of "colour" for all identifiers */
+<<include Art_Vector_Set_Colour_Outfit_>> 
+<<include Art_Vector_Set_Colour_Skin_>> 
+<<include Art_Vector_Set_Colour_Hair_>>
+<<include Art_Vector_Set_Colour_Shoe_>>
+<</silently>>
+<<include Art_Vector_Generate_Stylesheet_>>
+/* 
+each passage adds one layer of vector art
+vector art added later is drawn over previously added art
+(what is listed on the bottom in the code appears on the top of the image)
+*/
+<<include Art_Vector_Hair_Back_>>
+<<include Art_Vector_Arm_>>
+<<include Art_Vector_Butt_>>
+<<include Art_Vector_Leg_>>
+<<include Art_Vector_Feet_>> /* includes shoes */
+<<include Art_Vector_Torso_>>
+<<include Art_Vector_Pussy_>>
+<<include Art_Vector_Pubic_Hair_>>
+<<include Art_Vector_Pussy_Piercings_>>
+<<include Art_Vector_Chastity_Belt_>>
+<<include Art_Vector_Torso_Outfit_>> /* note: clothing covers chastity belts */
+<<include Art_Vector_Belly_>> /* includes navel piercing and belly-related clothing options */
+<<include Art_Vector_Balls_>>
+<<include Art_Vector_Penis_>> /* for dicks behind boobs */
+<<include Art_Vector_Boob_>> /* includes areolae and piercings */
+<<include Art_Vector_Penis_>> /* for dicks in front of boobs */
+<<include Art_Vector_Boob_Addons_>> /* piercings always appear in front of boobs AND dick */
+<<include Art_Vector_Clavicle>>
+<<include Art_Vector_Collar_>>
+<<include Art_Vector_Head_>> /* includes glasses */
+<<include Art_Vector_Hair_Fore_>>
+
+
+<<elseif $imageChoice == 2>> /* VECTOR ART BY NOX - Pregmod Legacy Version */
+<<SVGFilters>>
+
+/* 000-250-006 */
+/* <div class="imageRef"> */
+/* 000-250-006 */
+
+<<set _folderLoc = "'resources/vector">>
+
+<<if $args[2] == 1>>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/test ui.svg'" + "/>">>
+<</if>>
+
+/% Set skin colour %/
+<<set _skinFilter = "filter: url(#skin-" + _.kebabCase($args[0].skin) + ");">>
+/% Set hair colour %/
+<<set _hairFilter = "filter: url(#hair-" + _.kebabCase($args[0].hColor) + ");">>
+<<set _underArmFilter = "filter: url(#hair-" + _.kebabCase($args[0].underArmHColor) + ");">>
+<<set _pubesFilter = "filter: url(#hair-" + _.kebabCase($args[0].pubicHColor) + ");">>
+<<set _axillaryFilter = "filter: url(#hair-" + _.kebabCase($args[0].underArmHColor) + ");">>
+<<if $args[0].customHairVector>>
+	<<set _hairStyle = $args[0].customHairVector>>
+<<else>>
+	<<set _hairStyle = ["neat", "up", "ponytail", "tails", "bun", "luxurious", "messy", "eary", "dreadlocks", "braided", "afro", "strip", "trimmed", "buzzcut"].includes($args[0].hStyle) ? $args[0].hStyle : "neat">>
+<</if>>
+<<set _underArmHStyle = $args[0].underArmHStyle>>
+
+<<set _imgSkinLoc = _folderLoc + "/body/white">>
+
+/% Shoulder width and arm or no arm %/
+<<if $args[0].amp != 1>>
+	<<if $args[0].devotion > 50>>
+		<<set _leftArmType = "high">>
+		<<set _rightArmType = "high">>
+	<<elseif $args[0].trust >= -20>>
+		<<if $args[0].devotion < -20>>
+			<<set _leftArmType = "rebel">>
+			<<set _rightArmType = "low">>
+		<<elseif $args[0].devotion <= 20>>
+			<<set _leftArmType = "low">>
+			<<set _rightArmType = "low">>
+		<<else>>
+			<<set _leftArmType = "mid">>
+			<<set _rightArmType = "high">>
+		<</if>>
+	<<else>>
+		<<set _leftArmType = "mid">>
+		<<set _rightArmType = "mid">>
+	<</if>>
+
+	<<if $args[0].fuckdoll == 0 && $args[0].clothes != "restrictive latex" && $args[0].clothes != "a latex catsuit">>
+		<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/arm right " + _rightArmType + ".svg'" + " style='"+ _skinFilter + "'>">>
+		<<if $args[0].underArmHStyle == "bushy">>
+			<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/underArm " + _underArmHStyle + " right.svg'" + " style='" + _underArmFilter + "'/>">>
+		<</if>>
+	<<else>>
+		<<if $args[0].fuckdoll != 0>>
+			<<set _rightArmType = "mid">>
+		<</if>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/arm right " + _rightArmType + " latex.svg'" + "/>">>
+	<</if>>
+
+<<else>>
+	<<if $args[0].fuckdoll == 0 && $args[0].clothes != "restrictive latex" && $args[0].clothes != "a latex catsuit" && $args[0].underArmHStyle == "bushy">>
+		<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/underArm " + _underArmHStyle + " right.svg'" + " style='" + _underArmFilter + "'/>">>
+	<</if>>
+<</if>>
+
+/% Hair Aft %/
+<<if $args[0].hStyle != "shaved" && $args[0].fuckdoll == 0>>
+	<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/" + _hairStyle + " back.svg'" + " style='" + _hairFilter + "'/>">>
+<</if>>
+
+/% Tailed Plug %/
+<<if $args[0].buttplugAttachment == "tail">>
+	<<= "<img class='paperdoll' src=" + _folderLoc + "/outfit/tail plug.svg'" + " style='" + _hairFilter + "'/>">>
+<</if>>
+
+/% Butt %/
+<<if $args[0].amp != 1>>
+<<if $args[0].butt > 6>>
+	<<set _buttSize = 3>>
+<<elseif $args[0].butt > 4>>
+	<<set _buttSize = 2>>
+<<elseif $args[0].butt > 2>>
+	<<set _buttSize = 1>>
+<<else>>
+	<<set _buttSize = 0>>
+<</if>>
+<<if $args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit">>
+	<<set _buttSize = _buttSize + " latex">>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/butt " + _buttSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+<<else>>
+	<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/butt " + _buttSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+<</if>>
+<</if>>
+
+/% Leg + 1 size up when chubby or fat%/
+<<if $args[0].hips < 0>>
+	<<if $args[0].weight > 95>>/%Chubby%/
+		<<set _legSize = "normal">>
+	<<else>>
+		<<set _legSize = "narrow">>
+	<</if>>
+<<elseif $args[0].hips == 0>>
+	<<if $args[0].weight > 95>>/%Chubby%/
+		<<set _legSize = "wide">>
+	<<else>>
+		<<set _legSize = "normal">>
+	<</if>>
+<<elseif $args[0].hips > 0>>
+	<<set _legSize = "wide">>
+<</if>>
+<<if $args[0].amp == 1>>
+	<<set _legSize = "stump " + _legSize>>
+<</if>>
+<<if ($args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit") && $args[0].amp != 1>>
+	<<set _legSize = _legSize + " latex">>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/leg " + _legSize + ".svg'" + "/>">>
+<<else>>
+	<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/leg " + _legSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+<</if>>
+
+/% Feet %/
+<<if $args[0].amp != 1>>
+<<if $args[0].shoes == "heels">>
+	<<set _shoesType = "heel">>
+<<elseif $args[0].shoes == "extreme heels">>
+	<<if $args[0].weight > 95>>/%Chubby%/
+		<<set _shoesType = "extreme heel wide">>
+	<<else>>
+		<<set _shoesType = "extreme heel">>
+	<</if>>
+<<elseif $args[0].shoes == "boots">>
+	<<if $args[0].weight > 95>>/%Chubby%/
+		<<set _shoesType = "boot wide">>
+	<<else>>
+		<<set _shoesType = "boot">>
+	<</if>>
+<<elseif $args[0].shoes == "flats">>
+	<<set _shoesType = "flat">>
+<<else>>
+	<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/feet.svg'" + " style='"+ _skinFilter + "'>">>
+<</if>>
+<<if $args[0].shoes == "extreme heels" or $args[0].shoes == "boots">>
+	<<if $args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit">>
+		<<set _shoesType = _shoesType + " latex">>
+	<</if>>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/" + _shoesType + ".svg'" + "/>">>
+<</if>>
+<<if $args[0].shoes == "heels" or $args[0].shoes == "flats">>
+	<<if $args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit">>
+		<<set _shoesType = _shoesType + " latex">>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/" + _shoesType + ".svg'" + "/>">>
+	<<else>>
+		<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/" + _shoesType + ".svg'" + " style='"+ _skinFilter + "'>">>
+	<</if>>
+<</if>>
+<</if>>
+
+/% Torso %/
+<<if $args[0].waist < -40>>/*Unnatural*/
+	<<if $args[0].weight > 30>>/%Chubby%/
+		<<set _torsoSize = "hourglass">>
+	<<else>>
+		<<set _torsoSize = "unnatural">>
+	<</if>>
+<<elseif $args[0].waist <= 10>>/%Hour glass%/
+	<<if $args[0].weight > 30>>/%Chubby%/
+		<<set _torsoSize = "normal">>
+	<<else>>
+		<<set _torsoSize = "hourglass">>
+	<</if>>
+<<else>>/*Normal*/
+	<<set _torsoSize = "normal">>
+<</if>>
+<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/torso " + _torsoSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+<<set _torsoOutfit = false>>
+<<if $args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit">>
+	<<set _torsoOutfit = " latex">>
+<<elseif $args[0].clothes == "uncomfortable straps">>
+	<<set _torsoOutfit = " straps">>
+<</if>>
+<<if _torsoOutfit>>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/torso " + _torsoSize + _torsoOutfit + ".svg'" + "/>">>
+<</if>>
+
+<<if $args[0].amp != 1>>
+	<<if $args[0].fuckdoll == 0 && $args[0].clothes != "restrictive latex" && $args[0].clothes != "a latex catsuit">>
+		<<if  _leftArmType == "high">>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/arm left " + _leftArmType + ".svg'" + " style='"+ _skinFilter + "'>">>
+			<<if $args[0].underArmHStyle == "bushy">>
+				<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/underArm " + _underArmHStyle + " left.svg'" + " style='" + _underArmFilter + "'/>">>
+			<</if>>
+		<<else>>
+			<<if $args[0].underArmHStyle == "bushy">>
+				<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/underArm " + _underArmHStyle + " left.svg'" + " style='" + _underArmFilter + "'/>">>
+			<</if>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/arm left " + _leftArmType + ".svg'" + " style='"+ _skinFilter + "'>">>
+		<</if>>
+		<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/arm left " + _leftArmType + ".svg'" + " style='"+ _skinFilter + "'>">>
+	<<else>>
+		<<if $args[0].fuckdoll != 0>>
+			<<set _leftArmType = "mid">>
+		<</if>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/arm left " + _leftArmType + " latex.svg'" + "/>">>
+	<</if>>
+<<else>>
+	<<if $args[0].fuckdoll == 0 && $args[0].clothes != "restrictive latex" && $args[0].clothes != "a latex catsuit" && $args[0].underArmHStyle == "bushy">>
+		<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/underArm " + _underArmHStyle + " left.svg'" + " style='" + _underArmFilter + "'/>">>
+	<</if>>
+<</if>>
+
+/% Vagina %/
+<<if $args[0].vagina >= 0>>
+	<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/vagina.svg'" + " style='"+ _skinFilter + "'>">>
+	<<if $args[0].clitPiercing == 1>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/clit piercing.svg'" + "/>">>
+	<<elseif $args[0].clitPiercing == 2>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/clit piercing heavy.svg'" + "/>">>
+	<<elseif $args[0].clitPiercing == 3>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/clit piercing smart.svg'" + "/>">>
+	<</if>>
+	<<if $args[0].vaginaPiercing == 1>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/pussy piercing.svg'" + "/>">>
+	<<elseif $args[0].vaginaPiercing == 2>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/pussy piercing heavy.svg'" + "/>">>
+	<</if>>
+<</if>>
+
+/% Collar %/
+<<switch $args[0].collar>>
+<<case "bowtie">>
+<<case "ancient Egyptian">>
+<<case "nice retirement counter" "cruel retirement counter" "leather with cowbell" "pretty jewelry" "heavy gold" "satin choker" "stylish leather" "neck corset" "shock punishment" "tight steel" "uncomfortable leather" "dildo gag">>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/" + $args[0].collar + ".svg'" + "/>">>
+<</switch>>
+
+/% Head base image %/
+<<if $args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit">>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/head latex.svg'" + "/>">>
+<<else>>
+	<<print "<img class='paperdoll' src=" +_imgSkinLoc + "/head.svg'" + " style='"+ _skinFilter + "'>">>
+<</if>>
+
+/% Glasses %/
+<<if $args[0].eyewear == "corrective glasses" or $args[0].eyewear == "glasses" or $args[0].eyewear == "blurring glasses">>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/glasses.svg'" + "/>">>
+<</if>>
+
+/% Chastity belt or Pubic hair %/
+<<if $args[0].dickAccessory == "chastity" || $args[0].dickAccessory == "anal chastity" || $args[0].dickAccessory == "combined chastity" || $args[0].vaginalAccessory == "chastity belt" || $args[0].vaginalAccessory == "anal chastity" || $args[0].vaginalAccessory == "combined chastity">>
+	<<if $args[0].dickAccessory == "chastity" || $args[0].dickAccessory == "combined chastity">>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/chastity male aft.svg'" + "/>">>
+	<</if>>
+	<<if $args[0].vaginalAccessory == "chastity belt" || $args[0].vaginalAccessory == "combined chastity">>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/chastity female.svg'" + "/>">>
+	<</if>>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/chastity base.svg'" + "/>">>
+<<else>>
+	<<if $args[0].pubicHStyle != "waxed">>
+		<<set _pubicHStyle = ($args[0].pubicHStyle == "in a strip" ? "strip" : $args[0].pubicHStyle)>>
+		<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/pubes " + _pubicHStyle + ".svg' style='" + _pubesFilter + "'/>">>
+	<</if>>
+<</if>>
+
+/%if pregnant or has a belly%/
+<<if $args[0].belly >= 5000>>
+	<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/preg belly 5000.svg'" + " style='"+ _skinFilter + "'>">>
+	<<if $args[0].navelPiercing >= 1>>/*Navel Piercing*/
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/preg navel piercing.svg'" + "/>">>
+	<</if>>
+	<<if $args[0].navelPiercing == 2>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/preg navel piercing heavy.svg'" + "/>">>
+	<</if>>
+<<elseif $args[0].belly <= -100>> /* condition is currently reversed until the vector can be fixed */
+	<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/preg belly 100.svg'" + " style='"+ _skinFilter + "'>">>
+	/*
+	<<if $args[0].navelPiercing >= 1>>/Navel Piercing/
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/preg navel piercing.svg'" + "/>">>
+	<</if>>
+	<<if $args[0].navelPiercing == 2>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/preg navel piercing heavy.svg'" + "/>">>
+	<</if>>
+	*/
+<<else>>
+	/*Navel Piercing*/
+	<<if $args[0].navelPiercing >= 1>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/navel piercing.svg'" + "/>">>
+	<</if>>
+	<<if $args[0].navelPiercing == 2>>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/navel piercing heavy.svg'" + "/>">>
+	<</if>>
+<</if>>
+
+/% Boob %/
+<<if $args[0].boobs < 250>>
+	<<set _boobSize = 0>>
+<<elseif $args[0].boobs < 500>>
+	<<set _boobSize = 1>>
+<<elseif $args[0].boobs < 800>>
+	<<set _boobSize = 2>>
+<<elseif $args[0].boobs < 1600>>
+	<<set _boobSize = 3>>
+<<elseif $args[0].boobs < 3200>>
+	<<set _boobSize = 4>>
+<<elseif $args[0].boobs < 6400>>
+	<<set _boobSize = 5>>
+<<elseif $args[0].boobs < 12000>>
+	<<set _boobSize = 6>>
+<<else>>
+	<<set _boobSize = 7>>
+<</if>>
+
+/% Scrotum %/
+<<if $args[0].scrotum > 0>>
+	<<if $args[0].scrotum >= 6>>
+		<<set _ballSize = 4>>
+	<<elseif $args[0].scrotum >= 4>>
+		<<set _ballSize = 3>>
+	<<elseif $args[0].scrotum >= 3>>
+		<<set _ballSize = 2>>
+	<<elseif $args[0].scrotum >= 2>>
+		<<set _ballSize = 1>>
+	<<else>>
+		<<set _ballSize = 0>>
+	<</if>>
+<</if>>
+
+/% Penis %/
+<<if $args[0].dick > 0>>
+	<<if $args[0].dick >= 8>>
+		<<set _penisSize = 6>>
+	<<elseif $args[0].dick >= 7>>
+		<<set _penisSize = 5>>
+	<<elseif $args[0].dick >= 6>>
+		<<set _penisSize = 4>>
+	<<elseif $args[0].dick >= 5>>
+		<<set _penisSize = 3>>
+	<<elseif $args[0].dick >= 4>>
+		<<set _penisSize = 2>>
+	<<elseif $args[0].dick >= 2>>
+		<<set _penisSize = 1>>
+	<<else>>
+		<<set _penisSize = 0>>
+	<</if>>
+<</if>>
+
+/% Boob %/
+<<set _needBoobs = 1>>
+<<if $args[0].dick > 0>>
+<<if canAchieveErection($args[0])>>
+<<if _boobSize < 6>>
+	<<if $args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit">>
+		/* normal case: outfit hides boobs */
+		<<set _boobOutfit = " latex" >>
+	<</if>>
+	<<if _boobOutfit >>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/boob " +_boobSize + _boobOutfit + ".svg'" + "/>">>
+		<<if $args[0].lactation > 0>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/boob " +_boobSize + " areola.svg'" + " style='"+ _skinFilter + "'>">>
+		<</if>>
+	<<else>>
+		<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/boob " +_boobSize +".svg'" + " style='"+ _skinFilter + "'>">>
+		<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/boob " +_boobSize + " areola.svg'" + " style='"+ _skinFilter + "'>">>
+	<</if>>
+	/* special case: straps are actually dawn over the boobs */
+	<<if $args[0].clothes == "uncomfortable straps">>
+		<<set _boobOutfit = " straps" >>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/boob " +_boobSize + _boobOutfit + ".svg'" + "/>">>
+	<</if>>
+	<<set _needBoobs = 0>>
+<</if>>
+<</if>>
+<</if>>
+<<if $args[0].vagina > 0>>
+	<<if $args[0].dick > 0>>
+		<div class="highPenis">
+		<<if $args[0].scrotum > 0>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/ball " + _ballSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+		<</if>>
+		<<if canAchieveErection($args[0])>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/penis " + _penisSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+		<<else>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/flaccid " + _penisSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+			<<if $args[0].dickAccessory == "chastity" || $args[0].dickAccessory == "combined chastity">>
+				<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/chastity male fore " + _penisSize + ".svg'" + "/>">>
+			<</if>>
+		<</if>>
+		</div>
+	<</if>>
+<<else>>
+	<<if $args[0].dick > 0>>
+		<div class="lowPenis">
+		<<if $args[0].scrotum > 0>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/ball " + _ballSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+		<</if>>
+		<<if canAchieveErection($args[0])>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/penis " + _penisSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+		<<else>>
+			<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/flaccid " + _penisSize + ".svg'" + " style='"+ _skinFilter + "'>">>
+			<<if $args[0].dickAccessory == "chastity" || $args[0].dickAccessory == "combined chastity">>
+				<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/chastity male fore " + _penisSize + ".svg'" + "/>">>
+			<</if>>
+		<</if>>
+		</div>
+	<</if>>
+<</if>>
+<<if _needBoobs>>
+	<<if $args[0].fuckdoll != 0 || $args[0].clothes == "restrictive latex" || $args[0].clothes == "a latex catsuit">>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/boob " +_boobSize +" latex.svg'" + "/>">>
+		<<if $args[0].lactation > 0>><<print "<img class='paperdoll' src=" + _imgSkinLoc + "/boob " +_boobSize + " areola.svg'" + " style='"+ _skinFilter + "'>">><</if>>
+	<<else>>
+		<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/boob " +_boobSize +".svg'" + " style='"+ _skinFilter + "'>">>
+		<<print "<img class='paperdoll' src=" + _imgSkinLoc + "/boob " +_boobSize + " areola.svg'" + " style='"+ _skinFilter + "'>">>
+	<</if>>
+	/* special case: straps are actually dawn over the boobs */
+	<<if $args[0].clothes == "uncomfortable straps">>
+		<<set _boobOutfit = " straps" >>
+		<<print "<img class='paperdoll' src=" + _folderLoc + "/outfit/boob " +_boobSize + _boobOutfit + ".svg'" + "/>">>
+	<</if>>
+<</if>>
+
+/% piercings %/
+<<if $args[0].nipplesPiercing == 1>>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/boob " +_boobSize +" piercing.svg'" + "/>">>
+<<elseif $args[0].nipplesPiercing == 2>>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/boob " +_boobSize +" piercing heavy.svg'" + "/>">>
+<</if>>
+<<if $args[0].areolaePiercing == 1>>
+	<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/boob " +_boobSize +" areola piercing.svg'" + "/>">>
+<</if>>
+
+/% clavicle %/
+<<print "<img class='paperdoll' src=" + _folderLoc + "/body/addon/clavicle.svg'" + "/>">>
+
+/% Hair Foreground %/
+<<if $args[0].hStyle != "shaved" && $args[0].fuckdoll == 0>>
+	<<= "<img class='paperdoll' src=" + _folderLoc + "/hair/" + _hairStyle + " front.svg'" + " style='" + _hairFilter + "'/>">>
+<</if>>
+
+<<elseif $imageChoice == 3>> /* VECTOR ART REVAMP*/
+	<<include Art_Vector_Revamped_Control_>> 
+<<else>> /* RENDERED IMAGES BY SHOKUSHU */
+
+<<if $args[0].vagina > -1>>
+	<<if $args[0].dick > 0>>
+		<<if $args[0].balls > 0>>
+			<<set _fileName = "futanari">>
+		<<else>>
+			<<set _fileName = "herm">>
+		<</if>>
+	<<else>>
+		<<set _fileName = "female">>
+	<</if>>
+<<else>>
+	<<if $args[0].balls > 0>>
+		<<set _fileName = "shemale">>
+	<<else>>
+		<<set _fileName = "gelding">>
+	<</if>>
+<</if>>
+<<if $args[0].belly > 1500>>
+	<<set _fileName = "preg " + _fileName>>
+<</if>>
+<<if $args[0].boobs < 400>>
+	<<set _fileName = _fileName + " small">>
+<<elseif $args[0].boobs < 800>>
+	<<set _fileName = _fileName + " big">>
+<<elseif $args[0].boobs < 6000>>
+	<<set _fileName = _fileName + " huge">>
+<<else>>
+	<<set _fileName = _fileName + " hyper">>
+<</if>>
+<<if $args[0].muscles > 30>>
+	<<set _fileName = _fileName + " muscle">>
+<<else>>
+	<<set _fileName = _fileName + " soft">>
+<</if>>
+<<if $args[0].fuckdoll > 0>>
+	<<set _fileName = _fileName + " rebellious">>
+<<elseif $args[0].devotion <= 20>>
+	<<if $args[0].trust < -20>>
+		<<set _fileName = _fileName + " reluctant">>
+	<<else>>
+		<<set _fileName = _fileName + " rebellious">>
+	<</if>>
+<<elseif $args[0].fetish == "mindbroken">>
+	<<set _fileName = _fileName + " reluctant">>
+<<elseif $args[0].devotion <= 50 || $args[0].fetishKnown != 1 || ($seeMainFetishes == 0 && $args[1] < 2)>>
+	<<set _fileName = _fileName + " obedient">>
+<<else>>
+	<<if $args[0].fetish == "none">>
+		<<set _fileName = _fileName + " obedient">>
+	<<else>>
+		<<set _fileName = _fileName + " " + $args[0].fetish>>
+	<</if>>
+<</if>>
+
+<<set _fileName = "'resources/renders/" + _fileName + ".png' ">>
+<<if $args[1] == 3>>
+	<<print "<img src=" + _fileName + "style='float:right; border:3px hidden'/>">>
+<<elseif $args[1] == 2>>
+	<<print "<img src=" + _fileName + "style='float:right; border:3px hidden' width='300' height='300'/>">>
+<<elseif $args[1] == 1>>
+	<<print "<img src=" + _fileName + "style='float:left; border:3px hidden' width='150' height='150'/>">>
+<<else>>
+	<<print "<img src=" + _fileName + "style='float:left; border:3px hidden' width='120' height='120'/>">>
+<</if>>
+
+<</if>> /* CLOSES IMAGE CHOICE */
+
+<</widget>>

@@ -1,0 +1,450 @@
+:: RecETS [nobr]
+
+<<if Array.isArray($RecETSevent)>>
+  <<set $activeSlave = $eventSlave>>
+  <<if $cheatMode == 1>>
+	<<set $nextButton = "Back", $nextLink = "Nonrandom Event", $returnTo = "Nonrandom Event">> /* if user just clicks spacebar */
+	''A random two slave recruitment event would have been selected from the following:''
+	<br>
+	<<for _i = 0; _i < $RecETSevent.length; _i++>>
+		<<print "[[$RecETSevent[_i]|RecETS][$RecETSevent = $RecETSevent[" + _i + "]]]">>
+		<br>
+	<</for>>
+	<br><br>[[Go Back to Random Nonindividual Event|Random Nonindividual Event][$eventSlave = 0]]
+  <<else>>
+	<<set $RecETSevent = $RecETSevent.random()>>
+	<<goto "RecETS">>
+  <</if>>
+<<else>>
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check", $showEncyclopedia = 1, $encyclopedia = "Enslaving People">>
+
+<<switch $RecETSevent>>
+
+<<case "addict mother daughter">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "She sold herself into slavery to escape addiction debts.">>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.addict = 8>>
+<<set $activeSlave.boobs += 100>>
+<<set $activeSlave.face = -15>>
+<<set $activeSlave.butt += 1>>
+<<if $activeSlave.vagina > -1>><<set $activeSlave.vagina += 1>><</if>>
+<<set $activeSlave.anus += 1>>
+<<set $activeSlave.age = random(35,40)>>
+<<set $activeSlave.health = random(-60,-20)>>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.relation = "mother">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+A matronly woman comes to your penthouse in tears. It seems she is a tenant of yours, and has fallen deeply into debt as a result of aphrodisiac addiction. She offers to sell herself into slavery if you will pay off her debts. She is strangely eager about this, and after some probing it becomes apparent that she is living with her daughter and wants to avoid having her daughter involved in this debt.
+
+<br><br>
+
+//Enslaving her will cost ¤<<print $contractCost>>. Alternatively, you could sell your rights to her. Less costs, this will bring in  ¤<<print $slaveCost>>. As a third option, for ¤<<print ($contractCost*2)>> you could manipulate her to bind both mother and daughter, but you wouldn't be able to examine the daughter first.//
+
+<<case "posh mother daughter">>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+<<set $contractCost = 1500>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was enslaved after you called in her business debts.">>
+<<set $activeSlave.career = "a business owner">>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+	<<set $activeSlave.oldDevotion to $activeSlave.devotion>>
+<<set $activeSlave.vagina to 2>>
+<<set $activeSlave.preg to -2>>
+<<set $activeSlave.ovaries to 1>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.boobs += 400>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.buttImplant = 1>>
+<<set $activeSlave.clothes = "nice business attire">>
+<<set $activeSlave.age = random(35,40)>>
+<<set $activeSlave.health = random(20,40)>>
+<<set $activeSlave.pubicHStyle = "neat">>
+<<set $activeSlave.relation = "mother">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1500>>
+
+An older woman comes to see you representing her family business. She's pretty enough, but extremely unpleasant to deal with. She pushes hard for a deal that strongly favors her, and is not above leaning over your desk to give you an eyeful of probably-enhanced cleavage behind her business attire. As you argue, a discreet alert appears on your desk: her family business is actually on the verge of bankruptcy. With a press of your thumb you could acquire enough of her debts to be able to enslave her. And what's more, her daughter just came of age and became a partner in the business. She's in play, too. Based on the desk report, she's likely to be a spoiled little bitch.
+
+<br><br>
+
+//Enslaving the mother will cost ¤<<print $contractCost>>. Alternatively, you could sell your rights to her. Less costs, this will bring in  ¤<<print $slaveCost>>. As a third option, for ¤<<print ($contractCost*2)>> you could enslave both mother and daughter, but you wouldn't be able to examine the daughter first.//
+
+<<case "incest mother son">>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+<<set $contractCost = 10000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She offered to become your slave to protect her incestuous relationship.">>
+<<set $activeSlave.career = "a housewife">>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.preg = 25>>
+<<set $activeSlave.pregType = 1>>
+<<set $activeSlave.pregSource = $activeSlave.ID + 1000>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.vaginalSkill = 35>>
+<<set $activeSlave.anus = 1>>
+<<set $activeSlave.boobs += 600>>
+<<set $activeSlave.lactation = 1>>
+<<set $activeSlave.boobsImplant = 0>>
+<<set $activeSlave.butt += 2>>
+<<set $activeSlave.buttImplant = 0>>
+<<set $activeSlave.clothes = "conservative clothing">>
+<<set $activeSlave.health = random(20,40)>>
+<<set $activeSlave.pubicHStyle = "bushy">>
+<<set $activeSlave.behavioralQuirk = "sinful">>
+<<set $activeSlave.age = random(36,40)>>
+<<set $activeSlave.relation = "mother">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<set $activeSlave.relationship = 3>>
+<<set $activeSlave.relationshipTarget = $activeSlave.ID + 1000>>
+
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+<br><br>
+
+This call is coming from a public kiosk, which is usually an indication that the person on the other end is a transient individual who has decided to take slavery over homelessness. In this case, however, the story is more unusual - the callers seem stressed, but otherwise normal. They haltingly and quietly explain that they are a mother and son who had to flee their home after her husband found out the child in her rounded middle was not his, but his son's. They feel that life in an arcology together, even as slaves, would be better than their new life on the streets.
+
+<br><br>
+
+It would cost ¤<<print $contractCost>> to enslave the two of them.
+
+<<case "incest father daughter">>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+<<set $contractCost = 10000>>
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She offered to become your slave to protect her incestuous relationship.">>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.dick = 4>>
+<<set $activeSlave.balls = 3>>
+<<set $activeSlave.scrotum = 3>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.faceShape = "masculine">>
+<<set $activeSlave.clothes = "conservative clothing">>
+<<set $activeSlave.health = random(20,40)>>
+<<set $activeSlave.behavioralQuirk = "sinful">>
+<<set $activeSlave.age = random(37,40)>>
+<<set $activeSlave.relation = "mother">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<set $activeSlave.relationship = 3>>
+<<set $activeSlave.relationshipTarget = $activeSlave.ID + 1000>>
+
+You receive so many messages, as a noted titan of the new Free Cities world, that $assistantName has to be quite draconian in culling them. She lets only the most important through to you. One category of message that always gets through regardless of content, though, is requests for voluntary enslavement. As the new world takes shape, they've become less rare than they once were.
+
+<br><br>
+
+This call is coming from a public kiosk, which is usually an indication that the person on the other end is a transient individual who has decided to take slavery over homelessness. In this case, however, the story is more unusual - the callers seem stressed, but otherwise normal. They haltingly and quietly explain that they are a father and daughter who had to flee their home after his wife found out he was having sex with their daughter. Her gravid middle is testament to that. They feel that life in an arcology together, even as slaves, would be better than their current life on the streets.
+
+<br><br>
+
+It would cost ¤<<print $contractCost>> to enslave the two of them.
+
+<<case "mismatched pair">>
+
+<<set $contractCost = 1500>>
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "She was sold into slavery by her older sister.">>
+<<set $activeSlave.career = "a reluctant anal whore">>
+<<set $activeSlave.devotion = random(-15,15)>>
+<<set $activeSlave.trust = random(-15,15)>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.anus to 1>>
+<<set $activeSlave.vagina to -1>>
+<<set $activeSlave.dick to 1>>
+<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin to $activeSlave.dick>><</if>>
+<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum to $activeSlave.balls>><</if>>
+<<set $activeSlave.clit to 0>>
+<<set $activeSlave.balls to 1>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.weight to 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.boobs = 600>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.butt = either(1,2)>>
+<<set $activeSlave.preg = -2>>
+<<set $activeSlave.age = 18>>
+<<set $activeSlave.birthWeek = 0>>
+<<set $activeSlave.sexualFlaw = "hates anal">>
+<<set $activeSlave.hStyle = "in twin tails">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.relation = "sister">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<set $activeSlave.rivalry = 3>>
+<<set $activeSlave.rivalryTarget = $activeSlave.ID + 1000>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1500>>
+
+Your head girl comes to see you. She flags a slave posted for sale on your desk. The posting seems completely unimpressive - just a bitch barely past her 18th birthday with basic implants and a pathetic little dick - until she points out that the person posting her for sale is her sister. Her slightly older, naturally female sister. Who, to go by the pictures, the younger sibling has desperately been trying to mold herself to look more like.
+
+<br><br>
+
+"It won't show on the desk yet, but rumor is the little cunt's gotten them both in bad debt, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. You could grab them both cheap."
+
+<br><br>
+
+You bring up a video feed of the one-room apartment they share. A man, clearly a client, is sitting on the bed while the sissy rides him. She's facing away from the john, so she isn't trying to hide the fact that she isn't happy selling her anus for money. The older sister is naked, but she's trying to act as a pimp of sorts rather than helping fuck. She alternately poses and preens for the john and nonverbally scolds the wincing sissy when he's not paying attention. After the customer finishes, the sissy heads to the toilet to clean herself, and her older sister whispers to the john that the sissy's for sale. The john laughs at her and excuses himself.
+
+<br><br>
+
+//Enslaving the younger, sissy sister will cost ¤<<print $contractCost>>. Alternatively, you could sell your rights to her. Less costs, this will bring in  ¤<<print $slaveCost>>. As a third option, for ¤<<print ($contractCost*2)>> you could enslave both sisters, but you wouldn't be able to examine the older one first. She'll likely be very rebellious and sexually unskilled.//
+
+<<case "matched pair">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was brought up in a radical slave school to match her twin.">>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(-15,15)>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.anus to 1>>
+<<set $activeSlave.vagina to -1>>
+<<set $activeSlave.dick to 1>>
+<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin to $activeSlave.dick>><</if>>
+<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum to $activeSlave.balls>><</if>>
+<<set $activeSlave.balls to 1>>
+<<set $activeSlave.ovaries to 0>>
+<<set $activeSlave.clit to 0>>
+<<set $activeSlave.weight to 0>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.boobs = either(500,600)>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.butt = either(2,3)>>
+<<set $activeSlave.buttImplant = 1>>
+<<set $activeSlave.preg = -3>>
+<<set $activeSlave.age = 20>>
+<<set $activeSlave.hStyle = "in twin tails">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.sexualFlaw = "none">>
+<<set $activeSlave.behavioralFlaw = "none">>
+<<set $activeSlave.relation = "twin">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<set $activeSlave.relation = "twin">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<set $activeSlave.relationship = 2>>
+<<set $activeSlave.relationshipTarget = $activeSlave.ID + 1000>>
+<<slaveCost $activeSlave>>
+<<set $contractCost = $slaveCost*2>>
+
+A pair of young slaves is going door to door offering themselves for sale on behalf of their owner. It's rare to see a slave obedient enough to be entrusted with her own sale, and the price alone suggests there's something interesting, so you let them up. They stand in front of your desk and wait for instructions. They appear to be twins, and are dressed identically: they're wearing very skimpy miniskirts and bikini tops so brief that their areolae are clearly visible around the scrap of cloth over each nipple. You instruct them to tell you about themselves.
+
+<br><br>
+
+One of them speaks up. "We're twins, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. Fraternal twins. We have been given hormone treatments and surgery to match one another more closely, except for one detail." They lift their skirts; the speaker has a hormone-atrophied cock, while her sister has a pussy, along with a large clit that almost matches her sibling's member in size. "We've also been trained ever since we turned 18 to be completely obedient, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, in everything, and sexually proficient."
+
+<br><br>
+
+"We cost ¤<<print $contractCost>>, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>."
+
+<br><br>
+
+//Her sister is identical except that she is naturally female and lacks implants, having reached that size the normal way.//
+
+<<case "identical pair">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was brought up in a radical slave school to match her twin.">>
+<<set $activeSlave.career = "a slave">>
+<<set $activeSlave.devotion = random(25,45)>>
+<<set $activeSlave.trust = random(-15,15)>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.anus to 1>>
+<<set $activeSlave.dick to 0>>
+<<set $activeSlave.foreskin to 0>>
+<<set $activeSlave.balls to 0>>
+<<set $activeSlave.scrotum to 0>>
+<<set $activeSlave.clit to 2>>
+<<set $activeSlave.vagina to 1>>
+<<set $activeSlave.weight to 0>>
+<<set $activeSlave.face = 15>>
+<<set $activeSlave.faceShape to "cute">>
+<<set $activeSlave.teeth to "normal">>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.boobs = either(500,600)>>
+<<set $activeSlave.boobsImplant = 0>>
+<<set $activeSlave.butt = either(2,3)>>
+<<set $activeSlave.buttImplant = 0>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.age = 20>>
+<<set $activeSlave.hStyle = "in twin tails">>
+<<set $activeSlave.pubicHStyle = "waxed">>
+<<set $activeSlave.sexualQuirk = "none">>
+<<set $activeSlave.behavioralQuirk = "none">>
+<<set $activeSlave.relation = "twin">>
+<<set $activeSlave.relationTarget = $activeSlave.ID + 1000>>
+<<set $activeSlave.relationship = 2>>
+<<set $activeSlave.relationshipTarget = $activeSlave.ID + 1000>>
+<<slaveCost $activeSlave>>
+<<set $contractCost = $slaveCost*2>>
+
+A pair of young slaves is going door to door offering themselves for sale on behalf of their owner. It's rare to see a slave obedient enough to be entrusted with her own sale, and the price alone suggests there's something interesting, so you let them up. They stand in front of your desk and wait for instructions. They appear to be twins, and are dressed identically: they're wearing very skimpy miniskirts and bikini tops so brief that their areolae are clearly visible around the scrap of cloth over each nipple. You instruct them to tell you about themselves.
+
+<br><br>
+
+One of them speaks up. "We're twins, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>. Identical twins.  "We've also been trained ever since we turned 18 to be completely obedient, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>, in everything, and sexually proficient."
+
+<br><br>
+
+"We cost ¤<<print $contractCost>>, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>."
+
+<br><br>
+
+//Her sister is identical.//
+
+<<default>>
+	<br>ERROR: bad recETS event $RecETSevent
+<</switch>>
+
+<<set $activeSlave.slaveCost = $contractCost>>
+
+<br><br>
+
+<<set $saleDescription = 1, $applyLaw = 1>><<include "Long Slave Description">>
+
+<br><br>
+<span id="result">
+
+<<if $cash >= $contractCost>>
+<<switch $RecETSevent>>
+
+<<case "addict mother daughter">>
+
+<<link "Accept her proposal and enslave her">>
+	<<set $activeSlave.relation = 0>>
+	<<set $activeSlave.relationTarget = 0>>
+		<<set $activeSlave.oralCount += 1>>
+		<<set $oralTotal += 1>>
+	<<AddSlave $activeSlave>>
+	<<set $cash -= $contractCost>>
+	<<replace "#result">>
+	Despite herself, she sobs with relief when you agree. She offers to <<if $PC.dick == 1>>suck you off<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>eat you out<</if>> while you complete the necessary legalities, so you work away with a <<if $PC.dick == 1>>pair of motherly lips wrapped around your dick<<else>>motherly tongue pleasuring your clit<</if>> as she pumps away eagerly under the desk. She's definitely on aphrodisiacs. She masturbates while she sucks.
+	<</replace>>
+<</link>>
+
+<<case "posh mother daughter">>
+
+<<link "Enslave the mother">>
+	<<set $activeSlave.relation = 0>>
+	<<set $activeSlave.relationTarget = 0>>
+	<<AddSlave $activeSlave>>
+	<<set $cash -= $contractCost>>
+	<<replace "#result">>
+	You press your thumb down on your desk interface and then tell her to read the display, strip, and show you her body. She knits her brow in confusion and begins to curse at you but reads anyway. Comprehension dawns on her and she stares you in the eye for a long moment - and then drops her gaze. She knows the Free Cities well enough to understand. She stands and sadly strips off her blouse and slacks. Following orders, she rotates slowly for you. Then, she bends over facing away from you and spreads her buttocks to display her holes. Unsurprisingly, she's got a well-used pussy but has clearly never taken it up the ass. That will change.
+	<</replace>>
+<</link>>
+
+<<case "mismatched pair">>
+
+<<link "Enslave the sissy slut">>
+	<<set $activeSlave.mother = 0>>
+	<<set $activeSlave.father = 0>>
+	<<set $activeSlave.relation = 0>>
+	<<set $activeSlave.relationTarget = 0>>
+	<<AddSlave $activeSlave>>
+	<<set $cash -= $contractCost>>
+	<<replace "#result">>
+	The poor sissy isn't happy to become a slave, but she's clearly relieved to be away from her sister. The bitch isn't likely to have an easy time; the sale didn't clear her from debt. $activeSlave.slaveName describes her basic sexual experience, which includes a lot of sucking and anal whoring. Without more ado she moves from practical sexual slavery at the hands of her sister to actual sexual slavery.
+	<</replace>>
+<</link>>
+
+<<case "matched pair" "identical pair" "incest mother son" "incest father daughter">>
+
+<<default>>
+	<br>ERROR: bad recETS event $RecETSevent
+<</switch>>
+<<else>>
+	//You lack the necessary funds to enslave her.//
+<</if>>
+
+<<if $cash >= $contractCost>>
+<br>
+<<switch $RecETSevent>>
+
+<<case "addict mother daughter">>
+
+<<link "Manipulate her to enslave both mother and daughter">>
+	<<set $mother = $activeSlave, $mother.devotion -= 50, $cash -= ($contractCost*2)>>
+	<<AddSlave $mother>>
+	<<goto "RecETS workaround">>
+<</link>>
+
+<<case "posh mother daughter">>
+
+<<link "Manipulate her to enslave both mother and daughter">>
+	<<set $mother = $activeSlave, $mother.devotion -= 25, $cash -= ($contractCost*2)>>
+	<<AddSlave $mother>>
+	<<goto "RecETS workaround">>
+<</link>>
+
+<<case "mismatched pair">>
+
+<<link "Enslave both">>
+	<<set $sissy = $activeSlave, $cash -= ($contractCost*2)>>
+	<<AddSlave $sissy>>
+	<<goto "RecETS workaround">>
+<</link>>
+
+<<case "incest mother son" "incest father daughter">>
+
+<<link "Buy both">>
+	<<set $sissy = $activeSlave, $cash -= $contractCost>>
+	<<AddSlave $sissy>>
+	<<goto "RecETS workaround">>
+<</link>>
+
+<<case "matched pair" "identical pair">>
+
+<<link "Buy both">>
+	<<set $sissy = $activeSlave, $cash -= $contractCost>>
+	<<AddSlave $sissy>>
+	<<goto "RecETS workaround">>
+<</link>>
+
+<<default>>
+	<br>ERROR: bad recETS event $RecETSevent <<print "[[Go back to previous passage '" + previous() +"'][previous()]]">>
+
+<</switch>>
+<<else>>
+	<<if $cash < $contractCost>>//You lack the necessary funds to enslave them both.//<</if>>
+<</if>>
+
+<<if $cheatMode == 1>>
+	<br><br>DEBUG: &nbsp;&nbsp;&nbsp;&nbsp;[[Go back to Nonrandom Event|Nonrandom Event][$activeSlave = 0, $eventSlave = 0]]
+<</if>>
+
+</span>
+
+<</if>> /* CLOSES EVENT SELECTION */

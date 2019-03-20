@@ -1,0 +1,53 @@
+:: RE busy dairy
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+
+<</nobr>>\
+\
+$dairyNameCaps is working away steadily. Its high-quality product @@.green;reflects well on you,@@<<set $rep += 100>> you muse one day as you inspect the premises. The gentle pneumatic sounds of the milkers and the whimpers of the cows being milked are a pleasant background for the thought.
+
+Even with high doses of modern drugs, human cows simply do not produce a very high volume of milk. This isn't much of a business problem, since it just means that the product can be sold at a high price. However, some of the more grandiose ideas about how to use milk have had to wait until you have enough cows producing enough milk to make them possible.
+\
+<span id="result">
+<<link "Share a milk bath with the cows">>
+	<<replace "#result">>
+	Milk is a fashionable skin treatment in the Free Cities, and many of the cows fetishize their breasts and their milk. Many of them giggle with delight when you bring them all into a large spa room with a huge tub full of their fresh milk. A pittance will be lost from sales, but it's hard to think of such things when swimming and splashing in warm, nutty mother's milk with so many huge-breasted slaves, many of whom are milking themselves into the bath. Some of the older ones relax and luxuriate, gently milking themselves and masturbating or each other, according to taste. The younger cows prefer to rub themselves against you, taking turns being fucked. Regardless, they all @@.hotpink;appreciate such a special experience.@@
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].assignment == "work in the dairy">>
+		<<set $slaves[$i].devotion += 4>>
+		<<if ($slaves[$i].vagina > -1) && ($slaves[$i].vaginalAccessory != "chastity belt")>>
+		<<set $slaves[$i].vaginalCount += 1>>
+		<<set $vaginalTotal += 1>>
+		<<else>>
+		<<set $slaves[$i].analCount += 1>>
+		<<set $analTotal += 1>>
+		<</if>>
+		<<set $slaves[$i].oralCount += 1>>
+		<<set $oralTotal += 1>>
+		<</if>>
+	<</for>>
+	<<set $cash -= 1000>>
+	<</replace>>
+<</link>> //This will cost ¤1000//
+<<if $club != 0>>\
+<<link "Add fresh milk to the club for a day to advertise">>
+	<<replace "#result">>
+	Sexual sights and sounds are all over the arcology. Nevertheless, passersby on the club are surprised to find one morning that a previously normal screen advertising your brand of milk has a luscious pair of breasts protruding through it at head height. The advertisement encourages anyone to try a free sample. The slaves constantly rotate, pressing fresh tits through the gap for public suckling. It is @@.green;generally agreed that your product is of the finest quality@@ and you even have enquiries about how it might be exported outside the arcology, should you manage to increase production.
+	<<set $cash -= 2000>>
+	<<set $rep += 500>>
+	<</replace>>
+<</link>> //This will cost ¤2000//
+<</if>>\
+<<if ($cumSlaves >= 5) && ($activeSlave.fetish != "cumslut")>>
+	<<link "Cum in, milk out">>
+		<<replace "#result">>
+		As a promotional gimmick, you announce with considerable fanfare a special, experimental brand of milk, available at the normal price for a short time only. The milk will be unique in that it will be from cows fed mostly on slaves' cum; the cockmilked slaves will in turn be given as much milk as possible to produce a 'pure slave product,' recursively. The sad realities of nutrition stop it from being much more than a marketing ploy, but it's certainly a @@.green;successful@@ attempt to spark discussion.
+	<<set $rep += 1000>>
+	<<set $cash -= 1000>>
+		<</replace>>
+	<</link>> //This will cost ¤1000//
+<</if>>
+</span>

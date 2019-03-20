@@ -1,0 +1,184 @@
+:: RE shelter inspection [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check">>
+
+<<set $contractCost = 10000>>
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was once an inspector for the Shelter, but you put a stop to that.">>
+<<set $activeSlave.career = "a charity worker">>
+<<set $activeSlave.devotion = random(-90,-75)>>
+<<set $activeSlave.trust = random(-75,-60)>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.oldTrust = $activeSlave.trust>>
+<<set $activeSlave.health = random(30,50)>>
+<<set $activeSlave.age = random(21,42)>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.entertainSkill = 0>>
+<<set $activeSlave.butt = random(4,6)>>
+<<set $activeSlave.boobs = 100*random(12,18)>>
+<<set $activeSlave.weight = random(20,80)>>
+<<set $activeSlave.face = -1>>
+<<set $activeSlave.voice = 1>>
+<<set $activeSlave.hColor = "graying">>
+<<set $activeSlave.hLength = 40>>
+<<set $activeSlave.hStyle = "up">>
+<<set $activeSlave.energy = random(5,50)>>
+<<set $activeSlave.behavioralQuirk = either("hates men", "hates women", "gluttonous", "liberated")>>
+<<set $activeSlave.sexualQuirk = either("apathetic", "idealistic")>>
+<<set $activeSlave.slaveCost = $contractCost>>
+
+<<set $seed = $shelterGirlsIDs.random()>>
+<<set $subSlave = $slaves.find(function(s) { return s.ID == $seed; })>>
+/*
+ * this check is currently unnecessary but if in the future the shelter girl IDs list is changed to updated only when acquiring shelter girls, this should be enabled
+ *
+<<if (ndef $subSlave)>>
+	<<set $shelterGirlsIDs.delete($seed)>>
+	<<goto "Random Nonindividual Event">>
+<</if>>
+*/
+
+<<Enunciate $subSlave>>
+
+Your assistant announces a visitor in the entryway of your penthouse, and adds<<if $assistant > 0>> with disapproval<</if>> that it's an inspector from the Slave Shelter.
+<<if $assistant > 0>>
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		Her avatar's cocks and tentacle hair are all hanging limply; she's a dejected little picture of a cockblocked monstergirl.
+	<<case "shemale">>
+		Her avatar's cock is (shockingly) flaccid; she's a dejected little picture of a cockblocked shemale.
+	<<case "amazon">>
+		Her avatar throws itself down into a sitting position and sulks, playing idly with her bone necklace.
+	<<case "businesswoman">>
+		Her avatar taps a toe and tsks, looking reprovingly over the tops of her eyeglasses.
+	<<case "goddess">>
+		Her avatar crosses her arms over her chest (barely) and makes a face like she wants to scold someone.
+	<<case "schoolgirl">>
+		Her avatar throws a little schoolgirl fit, sticking out its tongue and blowing a rasberry.
+	<<default>>
+		Her avatar turns a reproving blue and shrinks a little.
+	<</switch>>
+<</if>>
+Not waiting to be greeted, the inspector looks up at the nearest camera and demands to be let in. She's an older woman with graying hair up in a bun, holding a tablet against her chest like a shield. "I'm here to inspect $subSlave.slaveName," she bellows up at the camera.
+
+<br><br>
+
+<span id="result">
+<<link "Amusing. Enslave her">>
+	<<set $cash -= $contractCost>>
+	<<replace "#result">>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> ushers her into your penthouse and keeps her busy for the few minutes you need to circumvent the Shelter's various legal and contractual defenses to prevent slaveowners from doing exactly what you're doing. Fortunately, you're cleverer and richer than most, and you succeed. You have her brought into your office, and you are pleased to see her. She's not young and she's not pretty, but her suit cannot disguise her big bottom, and she's using the tablet she has clasped protectively against her chest to conceal a huge pair of mature breasts. She knows exactly what's happened, and fixes you with a gimlet stare. "In a couple of months," she says with venom, "when you've filled me full of hormones and drugs and training, and I'm begging you to <<if $PC.dick == 1>>stick your tiny little dick up<<else>>fist<</if>> my asshole, remember this. It'll be conditioning and self-preservation and Stockholm Syndrome talking, not me. I think you're a <<if $PC.title == 1>>sad bastard<<else>>vile cunt<</if>>, and I always will."
+	<<set $shelterAbuse += 10>>
+	<<include "New Slave Intro">>
+	<</replace>>
+<</link>> //This will cost ¤$contractCost//
+<<if ($dairy > 0) && ($dairyRestraintsSetting > 1) && ($subSlave.assignment == "work in the dairy")>>
+<br><<link "The slave is attached to a milking machine, and so will be the inspector">>
+	<<assignJob $activeSlave "work in the dairy">>
+	<<set $activeSlave.clothes = "no clothing">>
+	<<set $cash -= $contractCost/2>>
+	<<replace "#result">>
+	$subSlave.slaveName is attached to a milking machine, so it would be extremely unwise to let the inspector report on $subSlave.slaveName's industrial fate in all its gorgeous productivity. So, you greet her politely, and bring her down to $dairyName to show her $subSlave.slaveName. The inspector has a single moment to stiffen in shock at the sight before she stiffens involuntarily due to the security drone tazing her unconscious. It takes a few credits here and there to circumvent the Shelter's various legal and contractual defenses to prevent slaveowners from doing exactly what you're doing, but you finish the day richer by one more big-boobed milk producer. You leave the inspector's drug dosage low to start, so she can appreciate her situation for a while. When the inspector awakes, her visor is set to show an overhead view of her bay in $dairyName. She sees her breasts, already larger than she remembers, gently swaying with the pumping of the milkers.<<if $dairyFeedersSetting > 1>> She sees the huge phallus occupying her mouth, and feels nutrition sliding down her throat.<</if>><<if $dairyPregSetting > 1>> She sees her vagina drooling as it's fucked in preparation for pregnancy.<</if>><<if $dairyPregSetting > 1>> She sees a massive piston moving slowly back and forth beneath her buttocks, and understands what the ache of impossible fullness in her bottom is.<</if>> Her hands ball into fists.
+	<<set $shelterAbuse += 10>>
+	<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</replace>>
+<</link>> //This will cost ¤<<print $contractCost/2>>//
+<</if>>
+<<if ($dairyRestraintsSetting < 2) || ($subSlave.assignment != "work in the dairy")>>
+<br><<link "Allow the inspection">>
+	<<replace "#result">>
+	You have her ushered up to your office, and order $subSlave.slaveName brought in.
+	<br><br>
+	<<if $subSlave.origin == "You got her at the Slave Shelter. She has never communicated anything about her background, since she arrived at the shelter with a broken mind.">>
+		<<if $subSlave.fetish == "mindbroken">>
+			Of course, the poor girl is just as mindbroken as ever. The inspector asks some cursory questions and gives up. "Don't worry," she says. "I know she was like this when you got her. Just - just keep trying, would you?" She leaves, looking bitter.
+		<<else>>
+			The inspector asks some cursory questions and is shocked when she responds.  "S-she came back?" she mutters, "You restored her mind, I can't believe it.  This is incredible."  She carries on while writing notes on her tablet, "You're more than welcome to adopt slaves from our shelter."  You swear she seems in much better spirits as she leaves your penthouse.
+			<<set $shelterAbuse -= 5>>
+		<</if>>
+	<<elseif $subSlave.fetish == "mindbroken">>
+		Of course, the poor girl is mindbroken now. The inspector is horrified, though she tries to conceal it. She makes lengthy notes on her tablet, and almost runs out of the penthouse.
+		<<set $shelterAbuse += 5>>
+	<<elseif $subSlave.trust < -20>>
+		She is sufficiently afraid of you that she tells the inspector whatever she thinks you'd want her to say. The inspector, experienced at this, is not amused. She offers you a few choice words, makes notes on her tablet, and storms out.
+	<<elseif $subSlave.devotion <= 20>>
+		She does not like you and isn't particularly terrified of you, so she is not flattering. She's not stupid enough to really criticise you, but she is honest and makes no effort to conceal troubling particulars. The inspector takes copious notes. She offers you a few choice words, makes notes on her tablet, and storms out.
+	<<elseif $subSlave.anus > 2>>
+		She cooperates with the inspector, who pulls on a pair of latex gloves and performs a complete examination. When she pulls the girl's buttocks apart and probes the slave's asshole, she pulls her hand away as if scalded. "Oh my God," she says. "$subSlave.birthName, what happened to your anus?"
+		<br><br>
+		<<if ($subSlave.devotion < 10)>>
+			<<if ($subSlave.buttplug == "large plug") || ($subSlave.buttplug == "huge plug") || ($subSlave.buttplug == "long, large plug") || ($subSlave.buttplug == "long, huge plug")>>
+				"W-well," she says, "I wear a buttplug." The inspector frowns. "A buttplug shouldn't do that!" The slave looks worried and replies, "It'<<s>> kinda big? And I wear it all the time. B-but I like it! It d-doe<<s>>n't hurt. Well, anymore." The inspector is not amused. She offers you a few choice words, makes notes on her tablet, and storms out.
+			<<elseif ($subSlave.assignment == "whore") || ($subSlave.assignment == "work in the brothel") || ($subSlave.assignment == "serve the public") || ($subSlave.assignment == "serve in the club")>>
+				"W-well," she says, "I get fucked there at work." The inspector frowns. "How often!?" The slave looks worried and replies, "L-let me think. Four time<<s>> today? After the third time, it u<<s>>ually <<s>>top<<s>> clo<<s>>ing up again between cock<<s>>." The inspector is not amused. She offers you a few choice words, makes notes on her tablet, and storms out.
+			<<elseif ($subSlave.fetish == "buttslut") && ($subSlave.fetishKnown == 1)>>
+				"Hey," she protests, "that'<<s>> normal." The inspector looks incredulous. "What!?" The slave looks insulted and replies, "I love anal <<s>>ex! Don't judge me. I want cock up that hole right now, you bitch. I'm going to beg for butt<<s>>ex the moment you leave." She defiantly sticks her rump out at you. The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<elseif ($subSlave.energy > 95) && ($subSlave.fetishKnown == 1)>>
+				"Hey," she protests, "that'<<s>> normal." The inspector looks incredulous. "What!?" The slave looks insulted and replies, "I love <<s>>ex! Don't judge me. I take cock in all my hole<<s>>, and I like it. I'm going to beg for butt<<s>>ex the moment you leave, you bitch." She defiantly sticks her rump out at you. The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<else>>
+				"W-well," she says, "I'm a <<s>>lave." The inspector frowns. "What does that have to do with it?" The slave looks worried and replies, "I-it'<<s>> a hole, right? I get fucked in all my hole<<s>>." The inspector is not amused. She offers you a few choice words, makes notes on her tablet, and storms out.
+			<</if>>
+		<<else>>
+			<<if ($subSlave.buttplug == "large plug") || ($subSlave.buttplug == "huge plug") || ($subSlave.buttplug == "long, large plug") || ($subSlave.buttplug == "long, huge plug")>>
+				"I wear a buttplug!" she says confidently. The inspector frowns. "A buttplug shouldn't do that!" The slave looks worried and replies, "It'<<s>> really big, and I wear it all the time. I like it! It keep<<s>> my hole ready for anything." The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<elseif ($subSlave.assignment == "whore") || ($subSlave.assignment == "work in the brothel") || ($subSlave.assignment == "serve the public") || ($subSlave.assignment == "serve in the club")>>
+				"I get fucked there at work!" she says confidently. The inspector frowns. "How often!?" The slave thinks for a moment and replies, "Four time<<s>> today. After the third time, it u<<s>>ually <<s>>top<<s>> clo<<s>>ing up again between cock<<s>>. I'm good at my job!" The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<elseif ($subSlave.fetish == "buttslut") && ($subSlave.fetishKnown == 1)>>
+				"Hey," she protests, "that'<<s>> normal." The inspector looks incredulous. "What!?" The slave looks insulted and replies, "I love anal <<s>>ex! Don't judge me. I want cock up that hole right now, you bitch. I'm going to beg for butt<<s>>ex the moment you leave." She defiantly sticks her rump out at you. The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<elseif ($subSlave.energy > 95) && ($subSlave.fetishKnown == 1)>>
+				"Hey," she protests, "that'<<s>> normal." The inspector looks incredulous. "What!?" The slave looks insulted and replies, "I love <<s>>ex! Don't judge me. I take cock in all my hole<<s>>, and I like it. I'm going to beg for butt<<s>>ex the moment you leave, you bitch." She defiantly sticks her rump out at you. The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<else>>
+				"I'm a <<s>>lave," she says confidently. The inspector frowns. "What does that have to do with it?" The slave beams and replies, "It'<<s>> a hole. I'm a good girl, <<s>>o I get fucked in all my hole<<s>>." The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<</if>>
+		<</if>>
+	<<else>>
+		The inspector asks, "What do you do for work, $subSlave.birthName?"
+		<br><br>
+		<<switch $subSlave.assignment>>
+		<<case "whore" "work in the brothel">>
+			<<if ($subSlave.fetishStrength > 95) || ($subSlave.energy > 95)>>
+				$subSlave.slaveName says happily, "I'm a whore!" The inspector makes a go-on gesture, and the slave continues, "It'<<s>> awe<<s>>ome. Nothing but cock, every day." The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<else>>
+				$subSlave.slaveName says confidently, "I'm a whore!" The inspector makes a go-on gesture, and the slave continues, "It'<<s>> hard work <<s>>ometime<<s>>, but I'm okay. I'm much happier with my current owner, thank you." The inspector looks pleased, and says she'll put out a @@.green;good word@@ about you.
+				<<set $rep += 100>>
+				<<set $shelterAbuse -= 1>>
+			<</if>>
+		<<case "serve the public" "serve in the club">>
+			<<if ($subSlave.fetishStrength > 95) || ($subSlave.energy > 95)>>
+				$subSlave.slaveName says happily, "I'm a <<s>>lut!" The inspector makes a go-on gesture, and the slave continues, "It'<<s>> awe<<s>>ome. Nothing but cute boy<<s>> and girl<<s>>, every day." The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<<else>>
+				$subSlave.slaveName says confidently, "I'm a <<s>>lut!" The inspector makes a go-on gesture, and the slave continues, "It'<<s>> not bad. I'm much happier with my current owner, thank you." The inspector looks pleased, and says she'll put out a @@.green;good word@@ about you.
+				<<set $rep += 100>>
+				<<set $shelterAbuse -= 1>>
+			<</if>>
+		<<case "get milked" "work in the dairy">>
+			<<if $subSlave.lactation > 0>>
+				$subSlave.slaveName says happily, "I'm a milk cow!" The inspector arches an eyebrow skeptically, and the slave continues, "I give milk. <<s>>ee?" She expresses a squirt of milk from one nipple. It'<<s>> a ni<<c>>e life. I'm much happier with my current owner, thank you." The inspector looks pleased, and says she'll put out a @@.green;good word@@ about you.
+				<<set $rep += 100>>
+				<<set $shelterAbuse -= 1>>
+			<<else>>
+				$subSlave.slaveName says happily, "I get cockmilked!" The inspector arches an eyebrow skeptically, and the slave continues, "I give cum. It'<<s>> actually lot<<s>> of fun!" She shakes her penis for emphasis. "The machine feel<<s>> <<s>>o good. And when I'm almo<<s>>t empty, I get buttfucked to get the la<<s>>t drop out of me!" She shivers. "It'<<s>> really ni<<c>>e..." The inspector looks deflated, and reluctantly makes a positive note on her tablet.
+				<<set $shelterAbuse -= 1>>
+			<</if>>
+		<<default>>
+			$subSlave.slaveName <<say>>s flatly, "Whatever my beloved <<Master>> require<<s>>. I have a good life now, and I would appre<<c>>iate it if you would <<s>>upport me by doing everything you can for <<if $PC.title == 1>>him<<else>>her<</if>>." Taken aback, the inspector says she'll put out a @@.green;good word@@ about you.
+			<<set $rep += 100>>
+			<<set $shelterAbuse -= 1>>
+		<</switch>>
+	<</if>>
+	<</replace>>
+<</link>>
+<</if>>
+</span>

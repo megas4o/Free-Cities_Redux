@@ -1,0 +1,31 @@
+:: Abort [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Slave Interact">>
+
+The remote surgery makes aborting a pregnancy quick and efficient. $activeSlave.slaveName is
+<<if $activeSlave.fetish == "pregnancy">>
+	@@.red;fundamentally broken.@@ Her entire concept of self and sexuality was wrapped up in the life growing within her, and now it is gone.
+	<<set  $activeSlave.fetish to "mindbroken">>
+<<elseif $activeSlave.devotion < -50>>
+	@@.mediumorchid;filled with violent, consuming hatred@@. Even though she knew her baby was destined for a slave orphanage, it seems she cared for it and views you as its killer. She is @@.gold;terrified of your power@@ over her body.
+	<<set  $activeSlave.trust -= 10>>
+	<<set  $activeSlave.devotion -= 25>>
+<<elseif $activeSlave.devotion < -20>>
+	@@.mediumorchid;afflicted by desperate, inconsolable sobbing@@. Even though she knew her baby was destined for a slave orphanage, it seems she cared for it. She is @@.gold;terrified of your power@@ over her body.
+	<<set  $activeSlave.trust -= 10>>
+	<<set  $activeSlave.devotion -= 10>>
+<<elseif $activeSlave.devotion <= 20>>
+	@@.mediumorchid;consumed by muted weeping and enduring sorrow@@. Even though she knew her baby was destined for a slave orphanage, it seems she cared for it. She is @@.gold;terrified of your power@@ over her body.
+	<<set  $activeSlave.trust -= 10>>
+	<<set  $activeSlave.devotion -= 5>>
+<<elseif $activeSlave.devotion <= 50>>
+	dully obedient. She has been broken to slave life so thoroughly that even this is neither surprising nor affecting. She is @@.gold;terrified of your power@@ over her body.
+	<<set  $activeSlave.trust -= 10>>
+<<else>>
+	@@.hotpink;pleased by this stark development@@, since she is so attentive to your will. She also expects she'll be able to fuck better now.
+	<<set  $activeSlave.devotion += 4>>
+<</if>>
+
+<<if lastPregRule($activeSlave,$defaultRules)>><<set $activeSlave.preg = -1>><<else>><<set $activeSlave.preg = 0>><</if>>
+<<set $activeSlave.pregType = 0>>
+<<set $activeSlave.pregSource = 0>>

@@ -1,0 +1,64 @@
+:: Agent Company [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Neighbor Interact", _SL = $slaves.length, _ID = $activeSlave.ID>>
+
+<<assignJob $activeSlave "live with your agent">>
+
+<<if $activeSlave.rivalry > 0>>
+	<<for _i = 0; _i < _SL; _i++>>
+		<<if _ID == $slaves[_i].rivalryTarget>>
+			<<set $slaves[_i].rivalry = 0, $slaves[_i].rivalryTarget = 0>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<set $activeSlave.rivalry = 0, $activeSlave.rivalryTarget = 0>>
+<</if>>
+
+<<for _i = 0; _i < $arcologies.length; _i++>>
+	<<if $subSlave.ID == $arcologies[_i].leaderID>>
+		<<set $activeArcology = $arcologies[_i]>>
+	<</if>>
+<</for>>
+
+Working in $activeArcology.name's penthouse office, $subSlave.slaveName gets a video call from you. Naturally, her personal assistant program has been instructed to give these the highest priority, and your face appears in front of her immediately. She greets you properly, and asks you what she can do to serve you. You tell her you're planning to send one of your slaves over to her arcology to assist her. Exchanges of this kind are neither unusual nor particularly interesting, so a slight look of perplexity clouds $subSlave.slaveName's face as she wonders why this merits a personal call. Normally, <<if $HeadGirl != 0>>$HeadGirl.slaveName<<else>>$assistantName<</if>> would handle it with her directly.
+
+<br><br>
+
+Her question is answered when you bring $activeSlave.slaveName in close, putting her in $subSlave.slaveName's view. $subSlave.slaveName's $subSlave.eyeColor eyes fly open with pleased surprise, but before she can speak, $activeSlave.slaveName goes first.
+<<if canTalk($activeSlave) == false>>
+  Unable to speak herself, she simply makes a heart shape with her hands in view of the video call, and blows her <<if $activeSlave.relationship == 4>>lover<<else>>wife<</if>> a kiss.
+<<else>>
+  <<Enunciate $activeSlave>>
+  "Hi <<if $activeSlave.relationship == 4>>lover<<else>><<s>>weetheart<</if>>," she <<say>>s in a syrupy tone. "Mi<<ss>> me?"
+<</if>>
+
+<br><br>
+
+$subSlave.slaveName smiles back at her, glowing with pleasure, and responds with exaggerated arousal.
+
+<<Enunciate $subSlave>>
+
+<<switch $subSlave.fetish>>
+<<case "submissive">>
+	"Looking forward to <<s>>leeping in your arm<<s>>, babe," the submissive
+<<case "cumslut">>
+	"Can't wait to ki<<ss>> you, babe," the orally fixated
+<<case "humiliation">>
+	"Can't wait to take you right in the middle of the pla<<z>>a here," the exhibitionist
+<<case "buttslut">>
+	"I can't wait to fuck you in your hot little a<<ss>>," the anally fixated
+<<case "boobs">>
+	"Looking forward to feeling your brea<<s>>t<<s>> again," the boob-loving
+<<case "pregnancy">>
+	"Can't wait to share all the pregnant girl<<s>> here with you," the impregnation fetishist
+<<case "dom">>
+	"Looking forward to <<s>>hoving you fa<<c>>edown, bitch," the dominant
+<<case "sadist">>
+	"Looking forward to making you bite the pillow again, bitch," the sadistic
+<<case "masochist">>
+	"Can't wait to feel you hurt me again, babe," the masochistic
+<<default>>
+	"Babe, I can't wait to give you a hug and tell you about $activeArcology.name," the loving
+<</switch>>
+leader of an entire arcology <<say>>s.
+

@@ -1,0 +1,27 @@
+:: Markets [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+This is an area of the concourse occupied by large stores and markets, many of which sell slaves. You control this part of the arcology and all these merchants pay you rent.
+<<SectorSell>>
+<br>
+
+<<set _buildingCost = Math.trunc(10000*$upgradeMultiplierArcology)>>
+
+<<if $arcade == 0>>
+	<br>
+	[[Construct a sex arcade to present slaves' holes for public use|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $arcade = 5, $sectors[$AS].type = "Arcade"]]
+	//Costs ¤<<print _buildingCost>> and will incur upkeep costs//
+<</if>>
+
+<<if $pit == 0>>
+	<br>
+	[[Build a pit to host proper slave fights|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $pit = 1, $sectors[$AS].type = "Pit"]]
+	//Costs ¤<<print _buildingCost>>//
+<</if>>
+
+<<if $corpMarket == 0 && $corpIncorporated == 1>>
+	<br>
+	[[Create a flagship slave market for your corporation here|Main][$corpCash -= _buildingCost, $corpMarket = 1, $sectors[$AS].type = "CorporateMarket"]]
+	//Costs ¤<<print _buildingCost>> of the corporation's money//
+<</if>>

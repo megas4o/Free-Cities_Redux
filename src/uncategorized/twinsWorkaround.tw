@@ -1,0 +1,20 @@
+:: Twins Workaround
+
+Your new pair of slaves look frightened and uncertain, but seem encouraged by each other's presence.
+
+<<AddSlave $activeSlave>>
+
+<<set _secondSlave = clone($activeSlave)>>
+<<unset $activeSlave>>
+<<if _secondSlave.slaveSurname>><<set _familyName = _secondSlave.slaveSurname>><</if>>
+<<set _familyBirthSurname = _secondSlave.birthSurname>>
+<<NationalityToName _secondSlave>>
+<<if _familyName>><<set _secondSlave.slaveSurname = _familyName>><</if>>
+<<set _secondSlave.birthSurname = _familyBirthSurname>>
+<<NationalityToAccent _secondSlave>>
+
+<<set _secondSlave.ID = _secondSlave.ID + 1000>>
+<<set _secondSlave.relation = "twin">>
+<<set _secondSlave.relationTarget = _secondSlave.ID - 1000>>
+
+<<AddSlave _secondSlave>>

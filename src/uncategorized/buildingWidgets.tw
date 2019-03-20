@@ -1,0 +1,436 @@
+:: building widgets [nobr widget]
+
+/%
+Call as <<DisplayBuilding>>
+Displays the arcology as a table.
+Yes, I am aware this is horrible. If anyone can figure out how to get widgets to play nice with tables, or otherwise unfuck this, tell me and I'll implement it.
+%/
+<<widget "DisplayBuilding">>
+
+<<set _Pass = passage()>>
+
+<style>
+	table.arcology {
+		table-layout: fixed;
+		text-align: center;
+		border-collapse: separate;
+		border-spacing: 5px;
+		border-style: hidden;
+		empty-cells: hide;
+		width: 75%;
+	}
+	th, td {
+		border: 0px;
+		width: 8%;
+	}
+    td#Empty {
+        border: 5px solid LightGray;
+    }
+    td#Private {
+        border: 5px solid Red;
+    }
+    td#Shops {
+        border: 5px solid Thistle;
+    }
+    td#FSShops {
+        border: 5px solid MediumPurple;
+    }
+    td#Brothel {
+        border: 5px solid Violet;
+    }
+    td#Club {
+        border: 5px solid Orchid;
+    }
+    td#Apartments {
+        border: 5px solid LimeGreen;
+    }
+    td#DenseApartments {
+        border: 5px solid SeaGreen;
+    }
+    td#LuxuryApartments {
+        border: 5px solid PaleGreen;
+    }
+    td#Markets {
+        border: 5px solid MediumOrchid;
+    }
+    td#CorporateMarket {
+        border: 5px solid Purple;
+    }
+    td#Arcade {
+        border: 5px solid DeepPink;
+    }
+    td#Pens {
+        border: 5px solid GoldenRod;
+    }
+    td#Pit {
+        border: 5px solid OrangeRed;
+    }
+    td#Manufacturing {
+        border: 5px solid SlateGray;
+    }
+    td#Sweatshops {
+        border: 5px solid Gray;
+    }
+    td#Barracks {
+        border: 5px solid OliveDrab;
+    }
+    td#Penthouse {
+        border: 5px solid Teal;
+    }
+    td#Dairy {
+        border: 5px solid White;
+    }
+</style>
+
+<center>
+<table class="arcology" border="1">
+	<tr>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr> /* Level 9, penthouse, sector 0 */
+		<td></td>
+		<td></td>
+		<td></td>
+		<td id="Penthouse" colspan="4">
+			<<link "Penthouse">><<set $nextButton = "Back", $nextLink = _Pass>><<goto "Manage Penthouse">><</link>> @@.cyan;[P]@@
+			<<if $masterSuite||$servantsQuarters||$spa||$clinic||$schoolroom||$cellblock||$HGSuite.built=="true">>
+				<br>
+				<<if $masterSuite>>[[Suite|Master Suite]] ($masterSuiteSlaves/$masterSuite<<if $Concubine>>, C<</if>>)<</if>>
+				<<if $servantsQuarters>>[[Quarters|Servants' Quarters]] ($servantsQuartersSlaves/$servantsQuarters<<if $Stewardess>>, L<</if>>)<</if>>
+				<<if $spa>>[[Spa]] ($spaSlaves/$spa<<if $Attendant>>, L<</if>>)<</if>>
+				<<if $clinic>>[[Clinic]] ($clinicSlaves/$clinic<<if $Nurse>>, L<</if>>)<</if>>
+				<<if $schoolroom>>[[Schoolroom]] ($schoolroomSlaves/$schoolroom<<if $Schoolteacher>>, L<</if>>)<</if>>
+				<<if $cellblock>>[[Cellblock]] ($cellblockSlaves/$cellblock<<if $Wardeness>>, L<</if>>)<</if>>
+				<<if $HGSuite>>[[HG Suite|Head Girl Suite]] ($HGSuiteSlaves)<</if>>
+			<</if>>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<<if $arcologyUpgrade.spire == 1>>
+		<tr> /* Level 8, spire, sectors 1-2 */
+			<td></td>
+			<td></td>
+			<td></td>
+			<<for _i = 1; _i <= 2; _i++>>
+				<<switch $sectors[_i].type>>
+				<<case "Apartments">>
+					<<if $sectors[_i].ownership == 1>>
+						<td colspan="2" id="Apartments"><<print "[[Apartments][$AS="+_i+"]]">></td>
+					<<else>>
+						<td colspan="2" id="Private"><<print "[[Apartments|Private][$AS="+_i+"]]">></td>
+					<</if>>
+				<<case "DenseApartments">>
+					<<if $sectors[_i].ownership == 1>>
+						<td colspan="2" id="DenseApartments"><<print "[[Dense Apartments|Apartments][$AS="+_i+"]]">></td>
+					<<else>>
+						<td colspan="2" id="Private"><<print "[[Dense Apartments|Private][$AS="+_i+"]]">></td>
+					<</if>>
+				<<case "LuxuryApartments">>
+					<<if $sectors[_i].ownership == 1>>
+						<td colspan="2" id="LuxuryApartments"><<print "[[Luxury Apartments|Apartments][$AS="+_i+"]]">></td>
+					<<else>>
+						<td colspan="2" id="Private"><<print "[[Luxury Apartments|Private][$AS="+_i+"]]">></td>
+					<</if>>
+				<<default>>
+					<<set $sectors[_i].type = "LuxuryApartments", $sectors[_i].ownership = 0>>
+					<td colspan="2" id="Private"><<print "[[Luxury Apartments|Private][$AS="+_i+"]]">></td>
+				<</switch>>
+			<</for>>
+		</tr>
+		<tr> /* Level 7, spire, sectors 3-4 */
+			<td></td>
+			<td></td>
+			<td></td>
+			<<for _i = 3; _i <= 4; _i++>>
+				<<switch $sectors[_i].type>>
+				<<case "Apartments">>
+					<<if $sectors[_i].ownership == 1>>
+						<td colspan="2" id="Apartments"><<print "[[Apartments][$AS="+_i+"]]">></td>
+					<<else>>
+						<td colspan="2" id="Private"><<print "[[Apartments|Private][$AS="+_i+"]]">></td>
+					<</if>>
+				<<case "DenseApartments">>
+					<<if $sectors[_i].ownership == 1>>
+						<td colspan="2" id="DenseApartments"><<print "[[Dense Apartments|Apartments][$AS="+_i+"]]">></td>
+					<<else>>
+						<td colspan="2" id="Private"><<print "[[Dense Apartments|Private][$AS="+_i+"]]">></td>
+					<</if>>
+				<<case "LuxuryApartments">>
+					<<if $sectors[_i].ownership == 1>>
+						<td colspan="2" id="LuxuryApartments"><<print "[[Luxury Apartments|Apartments][$AS="+_i+"]]">></td>
+					<<else>>
+						<td colspan="2" id="Private"><<print "[[Luxury Apartments|Private][$AS="+_i+"]]">></td>
+					<</if>>
+				<<default>>
+					<<set $sectors[_i].type = "LuxuryApartments", $sectors[_i].ownership = 0>>
+					<td colspan="2" id="Private"><<print "[[Luxury Apartments|Private][$AS="+_i+"]]">></td>
+				<</switch>>
+			<</for>>
+		</tr>
+	<</if>>
+	<tr> /* Level 6, promenade, sectors 5-7 */
+		<td></td>
+		<td></td>
+		<<for _i = 5; _i <= 7; _i++>>
+			<<switch $sectors[_i].type>>
+			<<case "Club">>
+				<td colspan="2" id="Club"><<print "[[Club][$AS="+_i+"]]">> ($clubSlaves/<<print $club>><<if $DJ>>, L<</if>>)</td>
+			<<case "Brothel">>
+				<td colspan="2" id="Brothel"><<print "[[Brothel][$AS="+_i+"]]">> ($brothelSlaves/<<print $brothel>><<if $Madam>>,L<</if>>)</td>
+			<<case "Shops">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Shops"><<print "[[Shops][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Shops|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "Subjugationist">>
+				<td colspan="2" id="FSShops"><<print "[[Subjugationist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Supremacist">>
+				<td colspan="2" id="FSShops"><<print "[[Supremacist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Gender Radicalist">>
+				<td colspan="2" id="FSShops"><<print "[[Gender Radicalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Gender Fundamentalist">>
+				<td colspan="2" id="FSShops"><<print "[[Gender Fundamentalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Paternalist">>
+				<td colspan="2" id="FSShops"><<print "[[Paternalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Degradationist">>
+				<td colspan="2" id="FSShops"><<print "[[Degradationist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Body Purist">>
+				<td colspan="2" id="FSShops"><<print "[[Body Purist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Transformation Fetishist">>
+				<td colspan="2" id="FSShops"><<print "[[Transformation Fetishist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Youth Preferentialist">>
+				<td colspan="2" id="FSShops"><<print "[[Youth Preferentialist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Maturity Preferentialist">>
+				<td colspan="2" id="FSShops"><<print "[[Maturity Preferentialist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Slimness Enthusiast">>
+				<td colspan="2" id="FSShops"><<print "[[Slimness Enthusiast Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Asset Expansionist">>
+				<td colspan="2" id="FSShops"><<print "[[Asset Expansionist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Pastoralist">>
+				<td colspan="2" id="FSShops"><<print "[[Pastoralist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Physical Idealist">>
+				<td colspan="2" id="FSShops"><<print "[[Physical Idealist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Chattel Religionist">>
+				<td colspan="2" id="FSShops"><<print "[[Chattel Religionist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Roman Revivalist">>
+				<td colspan="2" id="FSShops"><<print "[[Roman Revivalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Egyptian Revivalist">>
+				<td colspan="2" id="FSShops"><<print "[[Egyptian Revivalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Edo Revivalist">>
+				<td colspan="2" id="FSShops"><<print "[[Edo Revivalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Arabian Revivalist">>
+				<td colspan="2" id="FSShops"><<print "[[Arabian Revivalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<case "Chinese Revivalist">>
+				<td colspan="2" id="FSShops"><<print "[[Chinese Revivalist Shops|Shops][$AS="+_i+"]]">></td>
+			<<default>><td></td>
+			<</switch>>
+		<</for>>
+	</tr>
+	<tr> /* Level 5, apartments, sectors 8-11 */
+		<td></td>
+		<<for _i = 8; _i <= 11; _i++>>
+			<<switch $sectors[_i].type>>
+			<<case "Apartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Apartments"><<print "[[Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "DenseApartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="DenseApartments"><<print "[[Dense Apartments|Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Dense Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "LuxuryApartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="LuxuryApartments"><<print "[[Luxury Apartments|Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Luxury Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<default>><td></td>
+			<</switch>>
+		<</for>>
+	</tr>
+	<tr> /* Level 4, apartments, sectors 12-15 */
+		<td></td>
+		<<for _i = 12; _i <= 15; _i++>>
+			<<switch $sectors[_i].type>>
+			<<case "Apartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Apartments"><<print "[[Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "DenseApartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="DenseApartments"><<print "[[Dense Apartments|Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Dense Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "LuxuryApartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="LuxuryApartments"><<print "[[Luxury Apartments|Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Luxury Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<default>><td></td>
+			<</switch>>
+		<</for>>
+	</tr>
+	<tr> /* Level 3, apartments, sectors 16-19 */
+		<td></td>
+		<<for _i = 16; _i <= 19; _i++>>
+			<<switch $sectors[_i].type>>
+			<<case "Apartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Apartments"><<print "[[Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "DenseApartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="DenseApartments"><<print "[[Dense Apartments|Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Dense Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "LuxuryApartments">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="LuxuryApartments"><<print "[[Luxury Apartments|Apartments][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Luxury Apartments|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<default>><td></td>
+			<</switch>>
+		<</for>>
+	</tr>
+	<tr> /* Level 2, concourse, sectors 20-24 */
+		<<for _i = 20; _i <= 24; _i++>>
+			<<switch $sectors[_i].type>>
+			<<case "Markets">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Markets"><<print "[[Markets][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Markets|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "CorporateMarket">>
+				<td colspan="2" id="CorporateMarket"><<print "[[Corporate Market][$AS="+_i+"]]">></td>
+			<<case "Pit">>
+				<td colspan="2" id="Pit"><<print "[[Pit][$AS="+_i+"]]">> ($fighterIDs.length)</td>
+			<<case "Arcade">>
+				<td colspan="2" id="Arcade"><<print "[[Arcade][$AS="+_i+"]]">> ($arcadeSlaves/<<print $arcade>>)</td>
+			<<default>><td></td>
+			<</switch>>
+		<</for>>
+	</tr>
+	<tr> /* Level 1, service area, sectors 25-29 */
+		<<for _i = 25; _i <= 29; _i++>>
+			<<switch $sectors[_i].type>>
+			<<case "Manufacturing">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Manufacturing"><<print "[[Manufacturing][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Manufacturing|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "Sweatshops">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Sweatshops"><<print "[[Sweatshops|Manufacturing][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Sweatshops|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "Pens">>
+				<<if $sectors[_i].ownership == 1>>
+					<td colspan="2" id="Pens"><<print "[[Pens][$AS="+_i+"]]">></td>
+				<<else>>
+					<td colspan="2" id="Private"><<print "[[Pens|Private][$AS="+_i+"]]">></td>
+				<</if>>
+			<<case "Barracks">>
+				<td colspan="2" id="Barracks"><<print "[[Barracks][$AS="+_i+"]]">></td>
+			<<case "Dairy">>
+				<<set _SCapT9 = $bioreactorsXY+$bioreactorsXX+$bioreactorsHerm+$bioreactorsBarren>>
+				<td colspan="2" id="Dairy"><<print "[[Dairy][$AS="+_i+"]]">> ($dairySlaves<<if _SCapT9>>+_SCapT9<</if>>/<<print $dairy>><<if $Milkmaid>>,L<</if>>)</td>
+			<<default>><td></td>
+			<</switch>>
+		<</for>>
+	</tr>
+</table>
+</center>
+
+<</widget>>
+
+<<widget "SectorSell">>
+
+<<set $price = 1000*Math.trunc($arcologies[0].prosperity*(1+($arcologies[0].demandFactor/100)))>>
+Selling this sector would relenquish a 4% interest in $arcologies[0].name. Such an interest is worth ¤$price.
+<<if $arcologies[0].ownership >= 4>>
+	[[Sell|Main][$cash += $price, $lastWeeksFinances.expensesArcologyImprovement += $price, $arcologies[0].ownership -= 4, $arcologies[0].demandFactor -= 20, $sectors[$AS].ownership = 0]]
+<</if>>
+
+<</widget>>
+
+/%
+ Call as <<SectorCounts>>
+ Updates $ACitizenLimit, $ASlaveLimit, $AProsperityCap, $Sweatshops.
+%/
+<<widget "SectorCounts">>
+
+<<if $arcologyUpgrade.drones != 1>>
+	<<set $AProsperityCap = 0>>
+<<elseif $arcologyUpgrade.hydro != 1>>
+	<<set $AProsperityCap = 10>>
+<<elseif $arcologyUpgrade.apron != 1>>
+	<<set $AProsperityCap = 30>>
+<<elseif $arcologyUpgrade.grid != 1>>
+	<<set $AProsperityCap = 60>>
+<<else>>
+	<<set $AProsperityCap = 100>>
+<</if>>
+<<set $ACitizenLimit = 0, $ASlaveLimit = 0, $Sweatshops = 0>>
+<<for _i = 8; _i <= 19; _i++>>
+	<<if $sectors[_i].type == "DenseApartments">>
+		<<set $ACitizenLimit += 600, $ASlaveLimit += 1000, $AProsperityCap += 10>>
+	<<elseif $sectors[_i].type == "LuxuryApartments">>
+		<<set $ACitizenLimit += 400, $ASlaveLimit += 2000, $AProsperityCap += 15>>
+	<<else>>
+		<<set $ACitizenLimit += 400, $ASlaveLimit += 1000, $AProsperityCap += 10>>
+	<</if>>
+<</for>>
+<<for _i = 25; _i <= 29; _i++>>
+	<<if $sectors[_i].type == "Sweatshops">>
+		<<set $Sweatshops++>>
+	<</if>>
+<</for>>
+
+<</widget>>
+
+/%
+ Call as <<UpdateOwnership>>
+ Updates $arcologies[0].ownership.
+%/
+<<widget "UpdateOwnership">>
+
+<<set $arcologies[0].ownership = 0>>
+<<if $arcologyUpgrade.spire == 1>>
+	<<for _i = 1; _i <= 29; _i++>>
+		<<if $sectors[_i].ownership == 1>><<set $arcologies[0].ownership += 3.45>><</if>>
+	<</for>>
+	<<set $arcologies[0].ownership = Math.trunc($arcologies[0].ownership)>>
+<<else>>
+	<<for _i = 5; _i <= 29; _i++>>
+		<<if $sectors[_i].ownership == 1>><<set $arcologies[0].ownership += 4>><</if>>
+	<</for>>
+<</if>>
+
+<</widget>>

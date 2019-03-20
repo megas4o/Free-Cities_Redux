@@ -1,0 +1,232 @@
+:: SA guard you [nobr]
+
+carries arms in your defense.
+
+<<Deadliness $slaves[$i]>>
+
+<<if $slaves[$i].combatSkill > 0>>
+	Her combat skills greatly increase her deadliness.
+<</if>>
+
+<<if setup.bodyguardCareers.includes($Bodyguard.career)>>
+	She has experience in personal defense from before she was a slave.
+<</if>>
+
+<<if ($slaves[$i].muscles > 30) && ($slaves[$i].muscles <= 95)>>
+	She is strong and powerful yet quick and flexible.
+<<elseif $slaves[$i].muscles > 95>>
+	Her huge muscles are an intimidating sight, but are so big that they actually detract from her combat effectiveness.
+<<elseif $slaves[$i].muscles > 5>>
+	She is reasonably fit, but not enough to significantly affect her combat effectiveness.
+<</if>>
+
+<<if $slaves[$i].amp == -4>>
+	Her tough combat limbs make her an intimidating sight to behold.
+<<elseif $slaves[$i].amp == -5>>
+	The artificial muscles of her cybernetic limbs increase her strength and flexibility to enhance her combat abilities and give her the intimidating appearance of a super-soldier.
+<</if>>
+
+<<if $slaves[$i].height >= 170>>
+	Her height gives her a reach advantage with her sword.
+<</if>>
+
+<<if $slaves[$i].health > 50>>
+	Her shining health makes her a better combatant.
+<</if>>
+
+<<if $slaves[$i].boobs > 4000>>
+	Her titanic tits are a terrible hindrance in actual fighting.
+<<elseif $slaves[$i].boobs > 2000>>
+	Her big breasts get in her way and reduce her efficiency.
+<</if>>
+
+<<if $slaves[$i].butt > 6>>
+	Her massive ass slows her down and limits her range of motion.
+<</if>>
+
+<<if $slaves[$i].weight > 10>>
+	Her heavy weight is an impediment as a bodyguard.
+<</if>>
+
+<<if $slaves[$i].weight < -10>>
+	Her light weight is an impediment as a bodyguard.
+<</if>>
+
+<<if $slaves[$i].health < -50>>
+	Her poor health makes her a weaker combatant.
+<</if>>
+
+<<if $slaves[$i].preg > 10>>
+	Her advanced pregnancy makes her less effective.
+<</if>>
+
+<<if $slaves[$i].teeth == "pointy">>
+	Her sharp teeth add nothing to her actual effectiveness, but they're certainly intimidating.
+<</if>>
+
+<<if ($slaves[$i].combatSkill < 1) && (random(1,100) < 50+($slaves[$i].intelligence*20))>>
+	After some experience guarding you, and diligent practice in the armory, @@.green;her combat skills increase.@@
+	<<set $slaves[$i].combatSkill += 1>>
+<<elseif $slaves[$i].combatSkill >= 1>>
+	She maintains her combat skill with practice in the armory.
+<<else>>
+	Though she practices diligently her basic combat skills do not improve this week.
+<</if>>
+
+Her constant presence is
+<<if $deadliness > 6>>
+	extremely intimidating, @@.green;adding much to your reputation.@@
+	<<if $slaves[$i].career == "an arcology owner">>
+	You've made a onetime rival arcology owner into a deadly and loyal protector, a feat of slaveownership that's @@.green;internationally famous.@@
+	<<set $repGain += $deadliness*10>>
+	<</if>>
+<<elseif $deadliness > 3>>
+	intimidating, @@.green;adding to your reputation.@@
+<<else>>
+	hardly intimidating, @@.yellow;barely adding to your reputation.@@
+<</if>>
+
+<<set $repGain += $deadliness*10>>
+
+Being continually trusted with your life @@.hotpink;increases her devotion to you@@ and encourages her to @@.mediumaquamarine;trust you in turn.@@
+	<<set $slaves[$i].devotion += 2>>
+	<<set $slaves[$i].trust += 4>>
+
+<<if $dojo > 1>>
+	She @@.hotpink;appreciates@@ how special it is that she has a nice room off the armory to rest in.
+	<<set $slaves[$i].devotion += 1>>
+<</if>>
+
+<<if $bodyguardTrains == 1>>
+<<if $slaves[$i].devotion > 95>>
+<<if $slaves[$i].trust > 50>>
+<<if $slaves[$i].combatSkill > 0>>
+<<if $slaves[$i].intelligence > 0>>
+	She's confident in her martial skills, but smart enough to know that she isn't immortal, and devoted enough to worry about who will protect you should she die.
+	<<set $seed = 0>>
+	<<for $j = 0; $j < $slaves.length; $j++>>
+	<<if $slaves[$j].assignmentVisible == 1>>
+	<<if $slaves[$j].combatSkill > 0>>
+	<<if canWalk($slaves[$j])>>
+	<<if $slaves[$j].fetish != "mindbroken">>
+	<<if $slaves[$j].devotion > 50>>
+	<<if $slaves[$j].boobs < 8000>>
+	<<if $slaves[$j].preg < 20>>
+		<<set $seed += 1>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</for>>
+	<<if $seed < 2>>
+	<<set $subSlave = 0>>
+	<<if $slaves[$i].relationship > 1>>
+		<<for $j = 0; $j < $slaves.length; $j++>>
+		<<if $slaves[$j].ID == $slaves[$i].relationshipTarget>>
+		<<if $slaves[$j].combatSkill == 0>>
+		<<if canWalk($slaves[$j])>>
+		<<if $slaves[$j].fetish != "mindbroken">>
+		<<if $slaves[$j].devotion > 50>>
+		<<if $slaves[$j].boobs < 8000>>
+		<<if $slaves[$j].preg < 20>>
+			She does her best to train $slaves[$j].slaveName whenever she can, hoping that her
+			<<if $slaves[$i].relationship > 4>>
+			wife
+			<<elseif $slaves[$i].relationship == 4>>
+			lover
+			<<elseif $slaves[$i].relationship == 3>>
+			girlfriend
+			<<else>>
+			best friend
+			<</if>>
+			can be made capable of stepping into her place.
+			<<set $subSlave = $slaves[$j]>>
+			<<set $seed = 1>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</for>>
+	<</if>>
+	<<if $seed == 0>>
+		<<if $Concubine != 0>>
+		<<if $Concubine.combatSkill == 0>>
+		<<if canWalk($Concubine)>>
+		<<if $Concubine.fetish != "mindbroken">>
+		<<if $Concubine.devotion > 50>>
+		<<if $Concubine.boobs < 8000>>
+		<<if $Concubine.preg < 20>>
+			She does her best to train $Concubine.slaveName whenever she can, hoping that your Concubine can be made capable of stepping into her place.
+			<<set $subSlave = $Concubine>>
+			<<set $seed = 1>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+	<</if>>
+	<<if $seed == 0>>
+		<<if $HeadGirl != 0>>
+		<<if $HeadGirl.combatSkill == 0>>
+		<<if canWalk($HeadGirl)>>
+		<<if $HeadGirl.fetish != "mindbroken">>
+		<<if $HeadGirl.devotion > 50>>
+		<<if $HeadGirl.boobs < 8000>>
+		<<if $HeadGirl.preg < 20>>
+			She does her best to train $HeadGirl.slaveName whenever she can, hoping that your Head Girl can be made capable of stepping into her place.
+			<<set $subSlave = $HeadGirl>>
+			<<set $seed = 1>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+	<</if>>
+	<<if $seed == 0>>
+		<<if $Wardeness != 0>>
+		<<if $Wardeness.combatSkill == 0>>
+		<<if canWalk($Wardeness)>>
+		<<if $Wardeness.fetish != "mindbroken">>
+		<<if $Wardeness.devotion > 50>>
+		<<if $Wardeness.boobs < 8000>>
+		<<if $Wardeness.preg < 20>>
+			She does her best to train $Wardeness.slaveName whenever she can, hoping that your Wardeness can be made capable of stepping into her place.
+			<<set $subSlave = $Wardeness>>
+			<<set $seed = 1>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+	<</if>>
+	<<if $subSlave != 0>>
+	<<if ($slaves[$i].intelligence + $slaves[$i].intelligenceImplant) > random(1,10)>>
+		By the end of the week, she is satisfied that $subSlave.slaveName @@.green;has the combat skill@@ to contribute to your defense.
+		<<for $j = 0; $j < $slaves.length; $j++>>
+		<<if $slaves[$j].ID == $subSlave.ID>>
+			<<set $slaves[$j].combatSkill = 1>>
+			<<break>>
+		<</if>>
+		<</for>>
+	<</if>>
+	<</if>>
+	<<else>>
+	She takes care to look after the skills of your other defensively capable slaves, satisfied that there are enough of them living in your penthouse.
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>

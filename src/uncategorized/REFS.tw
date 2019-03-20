@@ -1,0 +1,420 @@
+:: REFS [nobr]
+
+/* This is one of several files that contains and organizes many different events.	*/
+/*  genericPlotEvents.tw															*/
+/*  PESS.tw: Player Event, Single Slave												*/
+/*  PETS.tw: Player Event, Two Slaves												*/
+/*  RECI.tw: Random Event, Check In													*/
+/*  REFI.tw: Random Event, Fetish Interest											*/
+/*  REFS.tw: Random Event, Future Societies											*/
+/*  RESS.tw: Random Event, Single Slave												*/
+/*  RESSTR.tw: Random Event, Single Slave (Test Realm, for debugging events)		*/
+/*  RETS.tw: Random Event, Two Slaves												*/
+/*  																				*/
+/* Events can also be in a dedicated *.tw file, formatted as follows:				*/
+/*  jeXXXXX.tw:	Justice Event														*/
+/*  pXXXXXX.tw:	Player event														*/
+/*  peXXXXX.tw:	Player Event focused on a slave										*/
+/*  reXXXXX.tw:	Random Event														*/
+/*  resXXXX.tw:	Random Event, School												*/
+/*  seXXXXX.tw:	Slave Event, focuses on slaves coming or going						*/
+/*																					*/
+/* Some scenes are also stored in useGuard.tw, walkPast.tw, and toychest.tw			*/
+
+<<if Array.isArray($REFSevent)>>
+  <<if $cheatMode == 1>>
+	<<set $nextButton = "Back", $nextLink = "Nonrandom Event", $returnTo = "Nonrandom Event">> /* if user just clicks spacebar */
+	''A random future societies event would have been selected from the following:''
+	<br>
+	<<for _i = 0; _i < $REFSevent.length; _i++>>
+		<<print "[[$REFSevent[_i]|REFS][$REFSevent = $REFSevent[" + _i + "]]]">>
+		<br>
+	<</for>>
+	<br><br>[[Go Back to Random Nonindividual Event|Random Nonindividual Event][$activeSlave = 0]]
+  <<else>>
+	<<set $REFSevent = $REFSevent.random()>>
+	<<goto "REFS">>
+  <</if>>
+<<else>>
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check">>
+
+<<SlaveTitle $activeSlave>>
+<<Enunciate $activeSlave>>
+
+<<switch $REFSevent>>
+
+<<case "paternalist encounter">>
+
+As a result of $arcologies[0].name's adoption of paternalism there has been a remarkable effect on relationships between slaves and owners, with the flourishing of mutual respect between the two forming the basis for social life in the arcology. However, not all citizens are so keen as to internalize the tenants of paternalism, whether out of prejudice, old habits or adherence to a more brutal style of slaveholding.
+<br><br>
+On one particular outing, you come across an elderly male citizen giving his young slave quite a thrashing in the street outside of a prominent apartment complex. From the skinned state of the poor girl's knees and the cruel spiked collar about her neck, it is clear that her owner has been dragging her about the arcology as if she were a dog. To say nothing of this degrading treatment, beating of a slave in public is a fineable offense.
+
+<<case "degradationist encounter">>
+
+As a result of $arcologies[0].name's adoption of degradationism there has been a remarkable effect on the social status of slaves, with the continued reduction of slave rights taking center stage. However, not all citizens are so keen as to internalize the tenants of degredationism, whether out of misplaced compassion, old habits or adherence to the Old World style of relationships.
+<br><br>
+On one particular outing, you come across an elderly male citizen holding the hand of his young slave, seemingly on a date at one of the arcology's prominent promenades. From the ring on the girl's finger and the modest neckline on her clothing, it is clear that her owner is treating her as if she is his wife. His obscene treatment of his slave has already drawn a large crowd of shocked onlookers.
+
+<<case "physical idealist encounter">>
+
+The notion of the physical ideal has taken $arcologies[0].name by storm and a number of enterprising citizens have been quick to respond by providing new services and businesses in response. One such innovation is the open air gym, a now common sight along $arcologies[0].name's many streets. Many citizens utilize such facilities to squeeze in an extra work-out on their daily commute, or in lieu of personal fitness facilities in their own homes.
+<br><br>
+While navigating your arcology on an outing, you find yourself coming across one of the arcology's finest open-air gyms, clearly marketed towards the wealthy citizen on the move. As impressive as the gold plated fitness equipment is, in amongst the power racks, dip bars and bench press stations is perhaps one of the most spectacular athletic specimens in the entire arcology. This female citizen has clearly embraced everything that $arcologies[0].name's physical idealism represents, molding herself into a rippling blend of broad shoulders, powerful muscles and a ripped stomach that would shame even the most well-built old world athlete.
+
+<<case "pastoralist encounter">>
+
+Pastoralism has taken $arcologies[0].name by storm and a number of enterprising citizens have been quick to respond by providing new services and businesses in response. One such innovation is a number of experimental new restaurants that incorporate human milk into their recipes, much to the delight of the citizenry. Such establishments have become a fashionable part of $arcologies[0].name's taste palate and new takes on the simple premise are common.
+<br><br>
+While navigating your arcology on an outing, you find yourself coming across one of the arcology's newest restaurants, a milkshake parlor that prides itself on deriving all of its dairy from human sources.
+
+<<case "transformation fetishism encounter">>
+
+As a result of $arcologies[0].name's adoption of transformation fetishism, a number of plastic surgery clinics, cosmetic surgeries and other transformative businesses have begun to crop up around the arcology's various promenades and shopping districts. The citizens of $arcologies[0].name have taken to the idea of altering their bodies with a gusto - though not all are so quick to adopt the trend just because it's in vogue.
+<br><br>
+On one particular outing, you come across a female citizen outside a surgery clinic staring pensively up at a poster advertising the variety of cosmetic procedures on offer in the institution. The citizen's expression is wistful, if somewhat grave, and at odds with the display above her lit up with silicone breasts, plump bee-stung lips and fake asses. From her unaltered appearance and simple garments, it is likely that she is not one of the arcology's wealthier denizens and thus is unable to shape her body to her heart's desire.
+
+<<case "body purism encounter">>
+
+As a result of $arcologies[0].name's adoption of body purism, a number of restorative spas, implant removal clinics and other cleansing businesses have begun to crop up around the arcology's various promenades and shopping districts. The citizens of $arcologies[0].name have taken to the idea of treating their bodies with sanctity - though not all are so quick to adopt the trend just because it's in vogue.
+<br><br>
+On one particular outing, you come across a female citizen outside a famous health spa staring pensively up at a poster advertising the variety of purification procedures on offer in the institution. The citizen's expression is wistful, if somewhat grave, and at odds with the display above her lit up with pure unadulterated bodies, expensive health treatments and a plethora of natural cosmetic procedures. The citizen's clothes are ragged and sheer, revealing a number of implant scars around her bust and rear, likely from a costly attempt to render herself fashionable by having her prior implants removed. With such visible scarring, it is unlikely that she is one of the arcology's wealthier denizens, having paid the price to return her body to its natural, unimplanted state.
+
+<<case "youth preferentialist encounter">>
+
+Your excursions out of your penthouse and into the arcology as a whole often put you in close proximity with citizens from all levels of the social strata. After all, they themselves have their own lives to live within the walls of $arcologies[0].name.
+<br><br>
+On this particular outing you happen to cross paths with a nubile young woman, accompanied by her father. From her plain clothes and rudimentary makeup, it is readily apparent that she is not one of the arcology's well-to-do inhabitants. She recognizes you quickly and dips her head in deference to your high status, <<if ($PC.age == 3)>>her cheeks flushed in embarrassment and delight at an aged arcology owner's interest in a young girl like her.<<else>>her expression awestruck by the presence of an arcology owner before her.<</if>>
+
+<<case "maturity preferentialist encounter">>
+
+Your excursions out of your penthouse and into the arcology as a whole often put you in close proximity with citizens from all levels of the social strata. After all, they themselves have their own lives to live within the walls of $arcologies[0].name.
+<br><br>
+On this particular outing you happen to cross paths with a comely female citizen and her two adult sons. From her plain clothes and conspicuous lack of makeup, it is readily apparent that she is not one of the arcology's well-to-do inhabitants. She recognizes you quickly and dips her head in deference to your high status, <<if ($PC.age == 1)>>her cheeks flushed in embarrassment and confusion at a young arcology owner's interest in an old lady like her.<<else>>her expression awestruck by the presence of an arcology owner before her.<</if>>
+
+<<default>>
+	<br>ERROR: bad REFS event $REFSevent
+<</switch>>
+
+
+<br><br>
+
+
+<<switch $REFSevent>>
+
+<<case "paternalist encounter">>
+
+<span id="result">
+<<link "Alert your drones and keep walking">>
+	<<replace "#result">>
+	You inform $assistantName that you have a slave beater in need of detainment by your security drones, then continue on your way confident in your knowledge that the citizen will soon be in custody.
+	<</replace>>
+<</link>>
+<<if $cash >= 2000>>
+<br><<link "Take the poor slave girl into your custody">>
+	<<replace "#result">>
+	Confronting the citizen is simplicity in itself; he would not dare defy you under threat of arrest by your security drones and is unlikely to garner any sympathy from the public for his degradationist behaviors. As such, you are able to take civil ownership over the poor slave girl and take her into your care with only minimal compensation to the citizen. As you stride away from her former owner with the girl in your arms, she leans over to plant a chaste kiss of thanks on your cheek.
+  <<set $cash -= 2000>>
+		<<include "Generate New Slave">>
+		<<set $activeSlave.origin = "She was taken into your custody from an abusive owner.">>
+		<<set $activeSlave.devotion = random(-25,0)>>
+		<<set $activeSlave.trust = random(-25,0)>>
+		<<set $activeSlave.age = random(18,22)>>
+		<<set $activeSlave.boobs = random(300,450)>>
+		<<set $activeSlave.hips = random(-2,-1)>>
+		<<set $activeSlave.butt = random(0,2)>>
+		<<set $activeSlave.health = random(10,20)>>
+    <<set $activeSlave.slaveCost = 2000>>
+		<<include "New Slave Intro">>
+		<<set $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check">>
+	<</replace>>
+<</link>> // Taking custody of the girl will cost ¤2000. //
+<</if>>
+<br><<link "Publicly confront the citizen">>
+	<<replace "#result">>
+	Your walk up to the citizen is not accompanied by shaking ground or tumultuous fanfare, yet the citizen looks as if death itself has come before him. You don't hurt him physically, instead chastising him publicly in front of his fellow peers who begin to cheer their agreement. You end your tirade of verbal abuse with a reminder that although the man is a citizen of your arcology, that does not give him the impunity to shirk the law. To make it clear his next offense will be his last, a brace of your security drones hover behind you threateningly. The crowd that gathered @@.green;approve of your rebuke of the citizen@@.
+	<<set $rep += 500>>
+	<</replace>>
+<</link>>
+</span>
+
+<<case "degradationist encounter">>
+
+<span id="result">
+<<link "Alert your drones and keep walking">>
+	<<replace "#result">>
+	You inform $assistantName that you have a slave lover in need of harassment by your security drones, then continue on your way. You did not instruct your drones to attack the obscene pair, as the scrutiny and public shame of a drone escort around the arcology are a more fitting punishment for a citizen and will perhaps encourage him to think twice before treating his slave as an equal.
+	<</replace>>
+<</link>>
+<<if $cash >= 2000>>
+<br><<link "Take the pampered slave girl into your custody">>
+	<<replace "#result">>
+	Confronting the citizen is simplicity in itself; he would not dare defy you directly under threat of arrest by your security drones and is unlikely to garner any sympathy from the public for his disturbing actions. As such, you are able to take civil ownership over the slave girl and claim her for yourself with only token compensation to the citizen. As you stride away from her former owner with the girl in your arms, she clings to you with obvious naiveté for how you will treat her. It's time she learnt how slaves are treated in $arcologies[0].name.
+  <<set $cash -= 2000>>
+		<<include "Generate New Slave">>
+		<<set $activeSlave.origin = "She was taken into your custody from an owner who treated her as an equal.">>
+		<<set $activeSlave.devotion = random(-25,0)>>
+		<<set $activeSlave.trust = random(-25,0)>>
+		<<set $activeSlave.age = random(18,22)>>
+		<<set $activeSlave.boobs = random(300,450)>>
+		<<set $activeSlave.hips = random(-2,-1)>>
+		<<set $activeSlave.butt = random(0,2)>>
+		<<set $activeSlave.health = random(70,80)>>
+    <<set $activeSlave.slaveCost = 2000>>
+		<<include "New Slave Intro">>
+		<<set $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check">>
+	<</replace>>
+<</link>> // Taking custody of the girl will cost ¤2000. //
+<</if>>
+<br><<link "Publicly confront the citizen">>
+	<<replace "#result">>
+	Your walk up to the citizen is not accompanied by shaking ground or tumultuous fanfare, yet the citizen looks as if death itself has come before him. You don't hurt him physically, instead chastising him publicly in front of his fellow peers who begin to cheer their agreement. You end your tirade of verbal abuse with a reminder that although the man is a citizen of your arcology, that does not give him the impunity to parade a slave around the arcology as if she were his wife. To make it clear that you will not be so forgiving of his next transgression, a brace of your security drones hover behind you threateningly. The crowd that gathered @@.green;approve of your rebuke of the citizen@@.
+	<<set $rep += 500>>
+	<</replace>>
+<</link>>
+</span>
+
+<<case "physical idealist encounter">>
+
+<span id="result">
+<<link "Keep walking">>
+	<<replace "#result">>
+	The citizen is undoubtedly a uniquely athletic specimen, so you linger for a moment to appreciate the strength and vigor of her punishing physical routine. When you've had your fill, you move on towards your next appointment.
+	<</replace>>
+<</link>>
+<<if $cash >= 1000>>
+<br><<link "Offer to sponsor her for a promotional video">>
+	<<replace "#result">>
+	Despite her hulking, muscular exterior, the citizen proves to be a shrewd and capable advertisement executive as well. The two of you sit beside a hefty dumbbell rack for some time and together craft a simple promotional ad campaign featuring the herculean physical form of the citizen. Shooting the video is simple, footage of the citizen going about her various fitness routines is inspiring enough, and soon her every muscle and sinew is being broadcast across the world to laud the physical achievements of $arcologies[0].name. Your citizens are @@.green;filled with pride@@, knowing the rest of the world was just awed by their pursuit of bodily perfection.
+	<<set $rep += 1000, $cash -= 1000>>
+	<</replace>>
+<</link>> // This will cost ¤1000. //
+<</if>>
+<br><<link "Spend some time working out with her">>
+	<<replace "#result">>
+	The attendant of the gym is almost too stunned to charge you for entry, and indeed many citizens inside and outside the gym stop to watch you begin a work-out routine. The muscular citizen does not halt her own regime, of course, so you soon find yourself pumping iron and straining your muscles to the limit beside her.
+	<br><br>
+	Your eyes lock somewhere in the midst of a particularly strenuous exercise, and what follows may be remembered in the annals of $arcologies[0].name history as the most erotic display of physical might ever recorded. Matching each other rep for rep, the gym is soon echoing with the grunts of both your exertions while your bodies grow slick with glistening sweat. When the last dumbbell is racked, the citizen merely nods her respect at you for matching her pursuit of the physical ideal, to the @@.green;delight of the watching citizenry@@.
+	<<set $rep += 300>>
+	<</replace>>
+<</link>>
+</span>
+
+<<case "pastoralist encounter">>
+
+<span id="result">
+<<link "Keep walking">>
+	<<replace "#result">>
+	The establishment is not the first of its kind in the arcology, but the idea seems to be popular enough with the citizenry to accommodate competition. When you've sated your curiosity perusing the courtesy menu by the door, you move on towards your next appointment.
+	<</replace>>
+<</link>>
+<<if $cash >= 1000>>
+<br><<link "Offer to sponsor the restaurant with an advertisement">>
+	<<replace "#result">>
+	You soon discover that the owner of the establishment is a matronly woman who sources her dairy from other mothers in the arcology, having found that new or expectant mothers are often in need of a revenue stream. The two of you sit at the counter for some time, though the owner often excuses herself for a milking in the back room, and together craft a simple promotional ad campaign featuring a simple slogan. Posters bearing the words "Got MILF?" soon grace the walls of $arcologies[0].name, and your citizens take to the idea of motherly milkshakes and admire your @@.green;marketing acumen@@.
+	<<set $rep += 1000, $cash -= 1000>>
+	<</replace>>
+<</link>> // This will cost ¤1000. //
+<</if>>
+<br><<link "Have a shake">>
+	<<replace "#result">>
+	The owner of the parlor is so flattered by your patronage of her humble store that she not only provides your drink free of charge but even milks herself at the counter to personally provide the dairy for your shake. The shake's taste is rich, even creamy, with an overall sweet palate mixed with a slight nuttiness.
+	<br><br>
+	Though you depart without officially sponsoring the milkshake parlor, your presence is endorsement enough to many citizens while others simply @@.green;appreciate you drinking amongst them@@.
+	<<set $rep += 300>>
+	<</replace>>
+<</link>>
+</span>
+
+<<case "transformation fetishism encounter">>
+
+<span id="result">
+<<link "Keep walking">>
+	<<replace "#result">>
+	It's unfortunate that this citizen is unable to realize her dreams, but that's the way of the Free Cities. There are winners, and there are losers.
+	<</replace>>
+<</link>>
+<<if $cash >= 1000>>
+<br><<link "Pay for her treatment">>
+	<<replace "#result">>
+	It takes a moment for you to convince the woman that you aren't playing some cruel joke on her, but once you do she practically squeals with joy as you take her through the doors of the clinic and announce your intent to pay to give your loyal citizen the absolute transformative works. When you next see her it's on a gurney as she's wheeled out of the surgery, her patient's gown jutting out from her chest due to the size of her new rack. Through swollen lips she gushes to you about how great she feels to finally be a veritable bimbo, and how she's going to tell every citizen she fucks in $arcologies[0].name @@.green;that they have you to thank for her new body@@.
+	<<set $rep += 1000, $cash -= 1000>>
+	<</replace>>
+<</link>> // The treatment will cost ¤1000. //
+<</if>>
+<br><<link "Offer to enhance her in your remote surgery in exchange for a fuck">>
+	<<replace "#result">>
+	You make your presence known to citizen, and once the usual shock and disbelief have worn off the citizen rapidly agrees to your proposal. She follows you back to the penthouse where you inform $assistantName that the citizen is to be given the works in the remote surgery. As the citizen passes through the doors to the surgery, she turns and blows you a kiss of gratitude.
+	<br><br>
+	When the citizen is later delivered to your private suite to uphold her end of the bargain, she does so as the veritable image of a perfect bimbo slut. In her rush to come thank you for transforming her from her plain and plebian appearance she has evidently neglected to clothe herself, so you can admire her new firm tits, plump ass and bee-stung lips from the moment she enters the room. Despite being fresh from surgery, she's an exquisite fuck and an enthusiastic partner - citizens like her often are, given that penetration from a slave would be a social suicide.
+	<<if $cash >= 10000>>
+		<br><br>
+		<span id="result2">
+		<<link "Enslave her afterwards">>
+			<<replace "#result2">>
+			As your new playmate lies slumbering in bed, you consult with $assistantName as to the cost of the surgery conducted today. With some creative accounting, you settle the citizen's other outstanding debts and then arrange for her to be charged a sum in excess of her financial means for the surgery conducted on her today. Of course, that was not what you agreed, but it was her mistake for undergoing an expensive procedure without a formal contract. When she awakens, though she will retain her new bimbo body, she will be just another slave in your penthouse.
+			<<include "Generate XX Slave">>
+			<<set $activeSlave.origin = "She was enslaved by you when you overcharged her for surgery.">>
+			<<set $activeSlave.devotion = random(-70,-55)>>
+			<<set $activeSlave.trust = random(-45,-25)>>
+			<<set $activeSlave.age = random(18,22)>>
+			<<set $activeSlave.health = random(10,20)>>
+			<<set $activeSlave.boobs += 600>>
+			<<set $activeSlave.boobsImplant = 600>>
+			<<set $activeSlave.butt += 1>>
+			<<set $activeSlave.buttImplant = 1>>
+			<<set $activeSlave.lips += 10>>
+			<<set $activeSlave.lipsImplant = 10>>
+      <<set $activeSlave.slaveCost = 10000>>
+			<<AddSlave $activeSlave>> /* skip New Slave Intro */
+			<<set $cash -= 10000>>
+			<<set $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check">>
+			<</replace>>
+		<</link>> // Purchasing her outstanding debts will cost ¤10000. //
+		</span>
+	<</if>>
+	<</replace>>
+<</link>>
+</span>
+
+<<case "body purism encounter">>
+
+<span id="result">
+<<link "Keep walking">>
+	<<replace "#result">>
+	It's unfortunate that this citizen is unable to realize her dreams, but that's the way of the Free Cities. There are winners, and there are losers.
+	<</replace>>
+<</link>>
+<<if $cash >= 1000>>
+<br><<link "Pay for a day of treatment for her">>
+	<<replace "#result">>
+	It takes a moment for you to convince the woman that you aren't playing some cruel joke on her, but once you do she practically squeals with joy as you take her through the doors of the spa and announce your intent to pay for a day of cleansing, pampering and luxury. When you next see her it's on a wallscreen television at your penthouse praising you profusely. The rejuvenated young woman has clearly spread word of your generosity @@.green;across $arcologies[0].name@@.
+	<<set $rep += 1000, $cash -= 1000>>
+	<</replace>>
+<</link>> // The treatment will cost ¤1000. //
+<</if>>
+<<if ($Attendant != 0)>>
+<br><<link "Give her a day of pampering with your attendant at your spa">>
+	<<replace "#result">>
+	You make your presence known to the citizen, and once the usual shock and disbelief have worn off it takes a moment to convince her that your offer of a cleansing experience in your spa is neither a cruel joke nor an underhanded attempt to enslave her. She follows you back to the penthouse where you inform your attendant that the citizen is to be sequestered in the spa for a day of pampering, cleansing and rejuvenation. As the citizen passes through the doors to the spa, she turns and blows you a kiss of gratitude.
+	<br><br>
+	When you stop by the spa later in the day, you spot the citizen luxuriating in a hot bath with a number of colorful health products spread across every visible surface of her nude skin. From where you stand it is clear her eyes are closed in immense contentment, while her body floats relaxed and carefree in the bubbling water. When the citizen finally departs at the end of the a long day of purification in the spa, she thanks you profusely and promises to tell everyone she can of your @@.green;generosity@@.
+	<<set $rep += 300>>
+	<</replace>>
+<</link>>
+<</if>>
+</span>
+
+<<case "youth preferentialist encounter">>
+
+<span id="result">
+<<link "Let them pass">>
+	<<replace "#result">>
+	You step aside gracefully and bow your head, while signifying to the girl that you intend to allow her to pass you. She seems taken aback by your geniality, especially given the gulf in social standing between the two of you, and has to be chaperoned from your presence by her father. Nonetheless, she is struck by her chance encounter with you and cannot stop recounting the story to all her friends, soon @@.green;the anecdote has seized the imaginations of $arcologies[0].name's youthful, female citizens@@.
+	<<set $rep += 100>>
+	<</replace>>
+<</link>>
+<<if $cash >= 500>>
+<br><<link "Fuck her over dinner">>
+	<<replace "#result">>
+	It takes a moment for you to convince the young girl and her father that you aren't playing some cruel joke on them, but once you do she enthusiastically agrees to be your companion for the evening. With a pretty young thing on your arm for the rest of the night, and her father trailing behind the two of you at a respectful distance, you take $arcologies[0].name by storm amidst a flurry of speculative whispers and contemplative rumors. Later that night, you conclude your date with a pleasant meal at one of $arcologies[0].name's choicest restaurants with fine dining and even finer conversation. To the credit of her father, he politely continues eating his dinner without batting an eye when you <<if $PC.dick == 0>>don a strap-on and <</if>>take his daughter over the dinner table. When you part ways, the young girl is clearly smitten with you - so it's no wonder that by the next day the story of your encounter has @@.green;spread across $arcologies[0].name like wildfire@@.
+	<<set $rep += 500, $cash -= 500>>
+	<</replace>>
+<</link>> // This will cost ¤500. //
+<</if>>
+<br><<link "Manipulate her into having sex with you">>
+	<<replace "#result">>
+	It only takes a moment for $assistantName to uncover the father's financial records and the copious debt therein, and only another moment for you to browbeat the terrified father into allowing his daughter to sleep with you under threat of purchasing all their debt and summarily enslaving her.
+	<br><br>
+	Once you both retire to your private suite, you peel the girl's clothes off as easily as one might shed a gift of its wrapping. In the nude her body is tastefully youthful, with narrow hips, firm breasts, and a delicate blush across her shamefaced, rosy cheeks. Despite the circumstances of your sexual conquest of her, she seems to enjoy the fuck well enough by the sounds of her frenzied moans - citizens like her often do since sexual submission to a slave would be a crippling scandal to a prominent citizen, let alone one of her diminished social stature.
+	<<if $cash >= 10000>>
+		<br><br>
+		<span id="result2">
+		<<link "Enslave her afterwards">>
+			<<replace "#result2">>
+			After she regains her bearings from your sexual encounter, the girl slips on her simple clothes and attempts to slink away from your private suite unobtrusively. She makes it out the door before being confronted by a glowing array of wallscreen monitors, each displaying a visual representation of your purchase of her father's considerable debt and subsequent enslavement of her on the basis of that debt. Tears begin to stream down her cheeks as she sinks to her knees, her hopes of a long life without enslavement now dashed.
+			<br><br>
+			<<set $cash -= 10000>>
+			<<include "Generate XX Slave">>
+			<<set $activeSlave.origin = "She was enslaved by you when you purchased her debt.">>
+			<<set $activeSlave.devotion = random(-55,0)>>
+			<<set $activeSlave.trust = random(-45,0)>>
+			<<set $activeSlave.age = random(18,22)>>
+			/* Girlish */
+			<<if $activeSlave.boobs > 450>>
+			<<set $activeSlave.boobs = random(300,450)>>
+			<</if>>
+			<<set $activeSlave.hips = random(-2,-1)>>
+			<<set $activeSlave.butt = random(0,2)>>
+			<<set $activeSlave.weight = Math.min($activeSlave.weight, 10)>>
+			<<set $activeSlave.muscles = Math.min($activeSlave.muscles, 30)>>
+      <<set $activeSlave.slaveCost = 10000>>
+			<<include "New Slave Intro">>
+			<<set $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check">>
+			<</replace>>
+		<</link>> // Purchasing her outstanding debts will cost ¤10000. //
+		</span>
+	<</if>>
+	<</replace>>
+<</link>>
+</span>
+
+<<case "maturity preferentialist encounter">>
+
+<span id="result">
+<<link "Let them pass">>
+	<<replace "#result">>
+	You step aside gracefully and bow your head, while signifying to the older woman that you intend to allow her to pass you. She seems taken aback by your geniality, especially given the gulf in social standing between the two of you, and seems disproportionately flustered by your small show of civility. Nonetheless, she is struck by her chance encounter with you and cannot stop recounting the story to all her friends, and soon @@.green;the anecdote has seized the imaginations of $arcologies[0].name's mature, female citizens@@.
+	<<set $rep += 100>>
+	<</replace>>
+<</link>>
+<<if $cash >= 500>>
+<br><<link "Fuck her over dinner">>
+	<<replace "#result">>
+	It takes a moment for you to convince the older woman and her sons that you aren't playing some cruel joke on them, but once you do she enthusiastically agrees to be your companion for the evening. With a mature lady on your arm for the rest of the night, and her sons trailing behind the two of you at a respectful distance, you take $arcologies[0].name by storm amidst a flurry of speculative whispers and contemplative rumors. Later that night, you conclude your date with a pleasant meal at one of $arcologies[0].name's choicest restaurants with fine dining and even finer conversation. To the credit of her sons, they politely continue eating their dinner without batting an eye when you <<if $PC.dick == 0>>don a strap-on and <</if>>take their mother over the dinner table. When you part ways, the older woman is clearly smitten with you - so it's no wonder that by the next day the story of your encounter has @@.green;spread across $arcologies[0].name like wildfire@@.
+	<<set $rep += 500, $cash -= 500>>
+	<</replace>>
+<</link>> // This will cost ¤500. //
+<</if>>
+<br><<link "Manipulate her into having sex with you">>
+	<<replace "#result">>
+	It only takes a moment for $assistantName to uncover the citizen's financial records and the copious debt therein, and only another moment for you to browbeat the terrified older women into sleeping with you under threat of purchasing all her debt and summarily enslaving her. Her sons, frightened into obedience by the possibility of losing their dear mother, take their cue to make themselves scarce during the encounter.
+	<br><br>
+	Once you both retire to your private suite, you peel the mature citizen's clothes off as easily as one might shed a gift of its wrapping. In the nude her body is tastefully plush, with wide hips, firm motherly breasts, and a delicate blush across her shamefaced, plump cheeks. Despite the circumstances of your sexual conquest of her, she seems to enjoy the fuck well enough by the sounds of her frenzied moans - citizens like her often do since sexual submission to a slave would be a crippling scandal to a prominent citizen, let alone one of her diminished social stature.
+	<<if $cash >= 10000>>
+		<br><br>
+		<span id="result2">
+		<<link "Enslave her afterwards">>
+			<<replace "#result2">>
+			After she regains her bearings from your sexual encounter, the older woman slips on her simple clothes and attempts to slink away from your private suite unobtrusively. She makes it out the door before being confronted by a glowing array of wallscreen monitors, each displaying a visual representation of your purchase of her considerable debt and subsequent enslavement of her on the basis of that debt. Tears begin to stream down her weathered cheeks as she sinks to her knees, her hopes of making it through the breadth of her long life without enslavement now dashed.
+			<br><br>
+			<<set $cash -= 10000>>
+			<<include "Generate XX Slave">>
+			<<set $activeSlave.origin = "She was enslaved by you when you purchased her debt.">>
+			<<set $activeSlave.devotion = random(-90,-75)>>
+			<<set $activeSlave.trust = random(-45,-25)>>
+			<<set $activeSlave.age = random(36,42)>>
+			<<set $activeSlave.health = random(10,20)>>
+			<<set $activeSlave.births = 2>>
+			/* Plush */
+			<<set $activeSlave.boobs = random(700,1100)>>
+			<<set $activeSlave.hips = random(1,2)>>
+			<<set $activeSlave.butt = $activeSlave.hips + 2>>
+			<<set $activeSlave.weight = random(10,40)>>
+			<<set $activeSlave.muscles = Math.min($activeSlave.muscles, 30)>>
+      <<set $activeSlave.slaveCost = 10000>>
+			<<include "New Slave Intro">>
+			<<set $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check">>
+			<</replace>>
+		<</link>> // Purchasing her outstanding debts will cost ¤10000. //
+		</span>
+	<</if>>
+	<</replace>>
+<</link>>
+</span>
+
+<<default>>
+	<br>ERROR: bad REFS event $REFSevent
+<</switch>>
+
+<</if>> /* CLOSES EVENT SELECTION */

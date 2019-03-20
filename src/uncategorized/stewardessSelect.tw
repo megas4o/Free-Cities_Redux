@@ -1,0 +1,14 @@
+:: Stewardess Select [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Servants' Quarters", $showEncyclopedia = 1, $encyclopedia = "Stewardesses">>
+
+<<if ($Stewardess != 0)>>
+	''__@@.pink;$slaves[_i].slaveName@@__'' is serving as your Stewardess.<br><br>She will manage the Servants' Quarters.
+<<else>>
+	You have not selected a Stewardess.
+<</if>>
+
+<br><br>''Appoint a Stewardess from your devoted slaves:''
+<<include "Slave Summary">>
+
+<br><br>[[None|Stewardess Workaround][$i = -1]]

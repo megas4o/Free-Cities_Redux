@@ -1,0 +1,261 @@
+:: Art_Vector_Set_Colour_Skin_
+
+/* BEWARE: _outfitBaseColour is set by Art_Vector_Set_Colour_Outfit_ */
+
+<<set _areolaStyle to "fill:#d76b93;" >> /* this is the default and can be customized later */
+<<set _labiaStyle to _areolaStyle >> /* this is the default and can be customized later */
+/* todo: introduce one "flesh" CSS class */
+
+<<unset _headSkinStyle>>
+<<unset _torsoSkinStyle >>
+<<unset _boobSkinStyle>>
+<<unset _penisSkinStyle>>
+<<unset _scrotumSkinStyle>>
+
+<<switch _artSlave.skin>>
+<<case "light" "white" "fair" "lightened" >>
+  <<set _skinColour to "#F6E0E8">>
+  <<set _areolaStyle to "fill:#FBA8C4;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "extremely pale">>
+  <<set _skinColour to "#f4eaf0">>
+  <<set _areolaStyle to "fill:#FCCADB;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "pale">>
+  <<set _skinColour to "#f9ebf0">>
+  <<set _areolaStyle to "fill:#FBB9CF;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "tanned" "natural">>
+  <<set _skinColour to "#F4C7A5">>
+  <<set _areolaStyle to "fill:#F977A3;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "olive">>
+  <<set _skinColour to "#a07c48">>
+  <<set _areolaStyle to "fill:#C69691;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "light brown" "dark">>
+  <<set _skinColour to "#C97631">>
+  <<set _areolaStyle to "fill:#A2744E;" >>
+  <<set _labiaStyle to "fill:#763818;" >>
+<<case "brown" >>
+  <<set _skinColour to "#763818">>
+  <<set _areolaStyle to "fill:#4C240F;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "black">>
+  <<set _skinColour to "#3f3b3a">>
+  <<set _areolaStyle to "fill:#524E4D;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "camouflage patterned">>
+  <<set _skinColour to "#78875a">>
+  <<set _areolaStyle to "fill:#939F7A;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "red dyed" "dyed red">>
+  <<set _skinColour to "#bc4949">>
+  <<set _areolaStyle to "fill:#C96D6D;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "green dyed" "dyed green">>
+  <<set _skinColour to "#A6C373">>
+  <<set _areolaStyle to "fill:#B7CF8F;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "blue dyed" "dyed blue">>
+  <<set _skinColour to "#5b8eb7">>
+  <<set _areolaStyle to "fill:#7BA4C5;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<case "tiger striped">>
+  <<set _skinColour to "#e2d75d">>
+  <<set _areolaStyle to "fill:#E7DF7D;" >>
+  <<set _labiaStyle to "fill:#F977A3;" >>
+<<default>>
+  <<set _skinColour to _artSlave.skin>>
+<</switch>> 
+
+/* BEGIN SKIN COLOUR OVERRIDES FOR LATEX CLOTHING EMULATION */
+
+<<if _artSlave.fuckdoll != 0>>
+  /* slave is a fuckdoll - display all skin as if it was black rubber */
+  <<set _skinColour to _outfitBaseColour>>
+  <<set _areolaStyle to "fill:rgba(0,0,0,0.3);">>
+  <<set _labiaStyle to _areolaStyle >>
+<</if>>
+
+/* slave wears restrictive latex - display most skin as if it was rubber */
+<<if _artSlave.clothes == "restrictive latex">>
+  /* nice latex does not cover any privates. */
+  <<set _boobSkinStyle to "fill:"+_skinColour+";">>
+  <<set _penisSkinStyle to "fill:"+_skinColour+";">>
+  <<set _scrotumSkinStyle to "fill:"+_skinColour+";">>
+  /* rest of body is covered in latex */
+  <<set _skinColour to _outfitBaseColour>>
+<</if>>
+
+<<if _artSlave.clothes == "a latex catsuit">>
+  /* nice latex does not cover head. */
+  <<set _headSkinStyle to "fill:"+_skinColour+";">>
+  /* rest of body is covered in latex */
+  <<set _skinColour to _outfitBaseColour>>
+  /* catsuit covers areolae and crotch, too */
+  <<set _areolaStyle to "fill:rgba(51,53,51,0.3);">> /* areolae are represented by a darker area */ 
+  /* todo: gain control over piercings to do the same with them ^^ */
+  <<set _labiaStyle to _areolaStyle >>
+<</if>>
+
+<<if _artSlave.clothes == "faceless cybersuit">>
+  /* rest of body is covered in latex */
+  <<set _skinColour to _outfitBaseColour>>
+  /* catsuit covers areolae and crotch, too */
+  <<set _areolaStyle to "fill:rgba(51,53,51,0.3);">> /* areolae are represented by a darker area */ 
+  /* todo: gain control over piercings to do the same with them ^^ */
+  <<set _labiaStyle to _areolaStyle >>
+<</if>>
+
+<<if _artSlave.clothes == "half-face cybersuit">>
+  /* rest of body is covered in latex */
+  <<set _skinColour to _outfitBaseColour>>
+  /* catsuit covers areolae and crotch, too */
+  <<set _areolaStyle to "fill:rgba(51,53,51,0.3);">> /* areolae are represented by a darker area */ 
+  /* todo: gain control over piercings to do the same with them ^^ */
+  <<set _labiaStyle to _areolaStyle >>
+<</if>>
+
+<<if _artSlave.clothes == "a comfortable bodysuit">>
+  /* nice bodysuit does not cover head. */
+  <<set _headSkinStyle to "fill:"+_skinColour+";">>
+  /* rest of body is covered in bodysuit */
+  <<set _skinColour to _outfitBaseColour>>
+  /* bodysuit covers areolae and crotch, too */
+<<set _areolaStyle to "fill:rgba(175,67,107,0.3);">>
+  /* todo: gain control over piercings to do the same with them ^^ */
+  <<set _labiaStyle to _areolaStyle >>
+<</if>>
+
+/* outfit dick coloring to match outfit rgba in svg */
+<<if _artSlave.clothes == "a cheerleader outfit">>
+  <<set _penisSkinStyle to "fill:rgba(250,186,0,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(250,186,0,1);">>
+<</if>>
+<<if _artSlave.clothes == "clubslut netting">>
+  <<set _penisSkinStyle to "fill:rgba(244,115,217,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(244,115,217,1);">>
+<</if>>
+<<if _artSlave.clothes == "cutoffs and a t-shirt">>
+  <<set _penisSkinStyle to "fill:rgba(81,124,211,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(81,124,211,1);">>
+<</if>>
+<<if _artSlave.clothes == "a halter top dress">>
+  <<set _penisSkinStyle to "fill:rgba(94,51,124,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(94,51,124,1);">>
+<</if>>
+<<if _artSlave.clothes == "a hijab and abaya">>
+  <<set _penisSkinStyle to "fill:rgba(51,51,51,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(51,51,51,1);">>
+<</if>>
+<<if _artSlave.clothes == "a nice maid outfit">>
+  <<set _penisSkinStyle to "fill:rgba(225,225,225,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(225,225,225,1);">>
+<</if>>
+<<if _artSlave.clothes == "a slutty maid outfit">>
+  <<set _penisSkinStyle to "fill:rgba(225,225,225,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(225,225,225,1);">>
+<</if>>
+<<if _artSlave.clothes == "a leotard">>
+  <<set _penisSkinStyle to "fill:rgba(120,15,55,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(120,15,55,1);">>
+<</if>>
+<<if _artSlave.clothes == "a military uniform">>
+  <<set _penisSkinStyle to "fill:rgba(34,42,18,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(34,42,18,1);">>
+<</if>>
+<<if _artSlave.clothes == "a mini dress">>
+  <<set _penisSkinStyle to "fill:rgba(39,174,96,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(39,174,96,1);">>
+<</if>>
+<<if _artSlave.clothes == "a nice nurse outfit">>
+  <<set _penisSkinStyle to "fill:rgba(0,128,128,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(0,128,128,1);">>
+<</if>>
+<<if _artSlave.clothes == "a slutty nurse outfit">>
+  <<set _penisSkinStyle to "fill:rgba(200,200,200,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(200,200,200,1);">>
+<</if>>
+<<if _artSlave.clothes == "a scalemail bikini">>
+  <<set _penisSkinStyle to "fill:rgba(133,146,158,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(133,146,158,1);">>
+<</if>>
+<<if _artSlave.clothes == "a schoolgirl outfit">>
+  <<set _penisSkinStyle to "fill:rgba(28,31,36,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(28,31,36,1);">>
+<</if>>
+<<if _artSlave.clothes == "a ball gown">>
+  <<set _penisSkinStyle to "fill:rgba(128,0,0,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(128,0,0,1);">>
+<</if>>
+<<if _artSlave.clothes == "battledress">>
+  <<set _penisSkinStyle to "fill:rgba(34,42,18,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(34,42,18,1);">>
+<</if>>
+<<if _artSlave.clothes == "a slave gown">>
+  <<set _penisSkinStyle to "fill:rgba(200,200,200,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(200,200,200,1);">>
+<</if>>
+<<if _artSlave.clothes == "a slutty outfit">>
+  <<set _penisSkinStyle to "fill:rgba(63,81,181,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(63,81,181,1);">>
+<</if>>
+<<if _artSlave.clothes == "spats and a tank top">>
+  <<set _penisSkinStyle to "fill:rgba(51,51,51,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(51,51,51,1);">>
+<</if>>
+<<if _artSlave.clothes == "a succubus outfit">>
+  <<set _penisSkinStyle to "fill:rgba(128,0,0,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(128,0,0,1);">>
+<</if>>
+<<if _artSlave.clothes == "nice business attire">>
+  <<set _penisSkinStyle to "fill:rgba(51,51,51,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(51,51,51,1);">>
+<</if>>
+<<if _artSlave.clothes == "slutty business attire">>
+  <<set _penisSkinStyle to "fill:rgba(51,51,51,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(51,51,51,1);">>
+<</if>>
+<<if _artSlave.clothes == "attractive lingerie for a pregnant woman">>
+  <<set _penisSkinStyle to "fill:rgba(153,153,153,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(153,153,153,1);">>
+<</if>>
+<<if _artSlave.clothes == "a bunny outfit">>
+  <<set _penisSkinStyle to "fill:rgba(51,51,51,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(51,51,51,1);">>
+<</if>>
+<<if _artSlave.clothes == "conservative clothing">>
+  <<set _penisSkinStyle to "fill:rgba(51,51,51,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(51,51,51,1);">>
+<</if>>
+<<if _artSlave.clothes == "harem gauze">>
+  <<set _penisSkinStyle to "fill:rgba(0,128,0,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(0,128,0,1);">>
+<</if>>
+<<if _artSlave.clothes == "a huipil">>
+  <<set _penisSkinStyle to "fill:rgba(200,200,200,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(200,200,200,1);">>
+<</if>>
+<<if _artSlave.clothes == "a kimono">>
+  <<set _penisSkinStyle to "fill:rgba(55,55,200,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(55,55,200,1);">>
+<</if>>
+<<if _artSlave.clothes == "a maternity dress">>
+  <<set _penisSkinStyle to "fill:rgba(48,54,72,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(48,54,72,1);">>
+<</if>>
+<<if _artSlave.clothes == "a slutty qipao">>
+  <<set _penisSkinStyle to "fill:rgba(204,177,68,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(204,177,68,1);">>
+<</if>>  
+<<if _artSlave.clothes == "stretch pants and a crop-top">>
+  <<set _penisSkinStyle to "fill:rgba(51,51,51,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(51,51,51,1);">>
+<</if>>
+<<if _artSlave.clothes == "a toga">>
+  <<set _penisSkinStyle to "fill:rgba(200,200,200,1);">>
+  <<set _scrotumSkinStyle to "fill:rgba(200,200,200,1);">>
+<</if>> 
+  
+/* END SKIN COLOUR OVERRIDES FOR LATEX CLOTHING EMULATION */

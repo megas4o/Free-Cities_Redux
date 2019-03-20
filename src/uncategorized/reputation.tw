@@ -1,0 +1,366 @@
+:: Reputation [nobr]
+
+__Reputation__
+<br>
+
+<<PCTitle>>
+
+On formal occasions, you are announced as $PCTitle.
+
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+<<if $arcologies[0].FSChattelReligionistCreed == 1>>
+	$arcologies[0].name keeps the creed of the $nicaeaName. The faithful
+	<<if $nicaeaAchievement == "slaves">>
+		<<if $slaves.length > 50>>
+			@@.green;strongly approve@@ of the large
+			<<FSChange "ChattelReligionist" 5>>
+		<<elseif $slaves.length > 20>>
+			@@.green;approve@@ of the good
+			<<FSChange "ChattelReligionist" 2>>
+		<<else>>
+			are not impressed by the
+		<</if>>
+		number of people you're giving the honor of sexual servitude.
+	<<elseif $nicaeaAchievement == "devotion">>
+		<<if $averageDevotion > 80>>
+			@@.green;strongly approve@@ of the worshipfulness
+			<<FSChange "ChattelReligionist" 5>>
+		<<elseif $averageDevotion > 50>>
+			@@.green;approve@@ of the devotion
+			<<FSChange "ChattelReligionist" 2>>
+		<<else>>
+			are not impressed by the devotion
+		<</if>>
+		of your slaves.
+	<<else>>
+		<<if $averageTrust > 50>>
+			@@.green;strongly approve@@ of the great trust your slaves place in you.
+			<<FSChange "ChattelReligionist" 5>>
+		<<elseif $averageTrust > 20>>
+			@@.green;approve@@ of the trust your slaves place in you.
+			<<FSChange "ChattelReligionist" 2>>
+		<<else>>
+			are not impressed by the fear many of your slaves feel towards you.
+		<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<set $repDecay = 0.2>>
+<<if $arcologies[0].FSChattelReligionistLaw == 1>>
+	<<set $repLoss = 0>>
+	Since you are the Prophet, your reputation no longer degrades at all.
+<<elseif $rep > $enduringRep>>
+	<<if $arcologies[0].FSMaturityPreferentialistLaw == 1>>
+	<<if $PC.age == 3>>
+		Since you're well into middle age and have an impressive list of accomplishments, and $arcologies[0].name's society respects age, your reputation degrades quite slowly.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay-0.025))>>
+	<<elseif $PC.age == 1>>
+		Since you're unusually young for an arcology owner, and $arcologies[0].name's society respects age, your reputation degrades quite quickly.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay+0.025))>>
+	<<else>>
+		Since you're only entering middle age, and $arcologies[0].name's society respects age, your reputation degrades fairly quickly.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay))>>
+	<</if>>
+	<<elseif $arcologies[0].FSYouthPreferentialistLaw == 1>>
+	<<if $PC.age == 3>>
+		You're well into middle age and have an impressive list of accomplishments, but $arcologies[0].name's society is coming to prefer youth to experience, so your reputation degrades fairly quickly.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay+0.025))>>
+	<<elseif $PC.age == 1>>
+		You're unusually young for an arcology owner, but $arcologies[0].name's society doesn't mind.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay))>>
+	<<else>>
+		Since you're entering middle age, and $arcologies[0].name's society respects youth, your reputation degrades fairly quickly.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay+0.025))>>
+	<</if>>
+	<<else>>
+	<<if $PC.age == 3>>
+		Since you're well into middle age and have an impressive list of accomplishments, your reputation degrades fairly slowly.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay-0.025))>>
+	<<elseif $PC.age == 1>>
+		Since you're unusually young for an arcology owner, your reputation degrades fairly quickly.
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay+0.025))>>
+	<<else>>
+		<<set $repLoss = Math.trunc(($rep-$enduringRep)*($repDecay))>>
+	<</if>>
+	<</if>>
+	<<if $enduringRep > 8000>>
+	However, you have been a figure of renown for so long that much of your reputation has become permanent.
+	<<elseif $enduringRep > 5000>>
+	However, you have been a figure of repute for enough time that part of your reputation has become permanent.
+	<<elseif $enduringRep > 2000>>
+	However, you have been a figure of regard for long enough that some of your reputation has become permanent.
+	<</if>>
+	<<set $enduringRep += Math.trunc($repLoss*0.025)>>
+<<else>>
+	<<set $repLoss = 0>>
+	<<if $enduringRep > 8000>>
+	You have been a figure of renown for so long that your reputation does not decay past its present level.
+	<<elseif $enduringRep > 5000>>
+	You have been a figure of repute for enough time that your reputation does not decay past its present level.
+	<<elseif $enduringRep > 2000>>
+	You have been a figure of regard for long enough that your reputation does not decay past its present level.
+	<</if>>
+<</if>>
+
+<<if ($weatherAwareness == 0) && ($weatherCladding == 1)>>
+	The public @@.red;disapproves@@ of the ugly weather hardening you have applied to the arcology's exterior, not understanding what you're worried about.
+	<<set $rep -= 100>>
+<</if>>
+
+<<if ($PC.dick == 0) && ($PC.boobs == 1)>>
+	<<if $rep > 18000>>
+		Your reputation is so well-established that society has accepted your notoriously feminine appearance despite how unusual it is for a prominent slaveowner to look like you do.
+		<<if $arcologies[0].FSGenderRadicalist > 30>>
+			Indeed, society sees you as entirely male, since you are powerful, and @@.green;strongly approves@@ of your nonconformity; this advances the redefinition of gender around power.
+			<<FSChange "GenderRadicalist" 5>>
+		<<elseif $arcologies[0].FSGenderFundamentalist > 30>>
+			Indeed, society has been reconciled to female leadership, preferring to see you as a mother figure.
+		<</if>>
+	<<elseif $arcologies[0].FSGenderRadicalist > 40>>
+		Society accepts you as an arcology owner, since it has become open-minded about power and gender.
+		<<if $arcologies[0].FSGenderRadicalist > 50>>
+			Indeed, society sees you as fundamentally male, since you are powerful, and @@.green;strongly approves@@ of your audacity; this advances the redefinition of gender around power.
+			<<FSChange "GenderRadicalist" 5>>
+		<</if>>
+	<<else>>
+		Most prominent slaveowners are male, and your obviously feminine appearance makes it @@.red;harder for you to maintain your reputation.@@
+		<<set $repLoss += Math.trunc($rep*0.05)>>
+		<<if $arcologies[0].FSGenderFundamentalist > 10>>
+			Society @@.red;strongly resents@@ your being an arcology owner; this damages the idea that women should not be in positions of responsibility.
+			<<FSChange "GenderFundamentalist" -5>>
+		<</if>>
+	<</if>>
+<<elseif ($PC.boobs == 1)>>
+	<<if $rep > 15000>>
+		Your reputation is so strong that society has accepted your feminine appearance despite how unusual it is for a prominent slaveowner to look like you do.
+		<<if $arcologies[0].FSGenderRadicalist > 30>>
+			Indeed, society sees you as entirely male, since you are powerful, and @@.green;strongly approves@@ of your nonconformity; this advances the redefinition of gender around power.
+			<<FSChange "GenderRadicalist" 5>>
+		<<elseif $arcologies[0].FSGenderFundamentalist > 30>>
+			Indeed, society has been reconciled to your feminine appearance, seeing you as a person apart.
+		<</if>>
+	<<elseif $arcologies[0].FSGenderRadicalist > 20>>
+		Society accepts you as an arcology owner, since it has become open-minded anyone who has a cock and fucks.
+		<<if $arcologies[0].FSGenderRadicalist > 30>>
+			Indeed, society sees you as dominant, since you fuck bitches, and @@.green;strongly approves@@ of your nonconformity; this advances the redefinition of gender around power.
+			<<FSChange "GenderRadicalist" 5>>
+		<</if>>
+	<<else>>
+		Most prominent slaveowners are very masculine, and your feminine appearance makes it @@.red;harder for you to maintain your reputation.@@
+		<<set $repLoss += Math.trunc($rep*0.03)>>
+		<<if $arcologies[0].FSGenderFundamentalist > 30>>
+			Society @@.red;strongly resents@@ your being an arcology owner; this damages the idea that feminine people should not be in positions of responsibility.
+			<<FSChange "GenderFundamentalist" -5>>
+		<</if>>
+	<</if>>
+<<elseif ($PC.dick == 0) || ($PC.vagina == 1)>>
+	<<if $rep > 15000>>
+		Your reputation is so strong that society has accepted your unorthodox arrangement downstairs, for an arcology owner.
+		<<if $arcologies[0].FSGenderRadicalist > 30>>
+			Indeed, society sees you as entirely male, since you are powerful, and @@.green;strongly approves@@ of your nonconformity; this advances the redefinition of gender around power.
+			<<FSChange "GenderRadicalist" 5>>
+		<<elseif $arcologies[0].FSGenderFundamentalist > 30>>
+			Indeed, society has been reconciled to your strangeness, seeing you as a person apart.
+		<</if>>
+	<<elseif $arcologies[0].FSGenderRadicalist > 20>>
+		Society accepts you as an arcology owner, since it has become open-minded about the exact genital layout of powerful people.
+		<<if $arcologies[0].FSGenderRadicalist > 30>>
+			Indeed, society sees you as dominant, since you are powerful, and @@.green;strongly approves@@ of your nonconformity; this advances the redefinition of gender around power.
+			<<FSChange "GenderRadicalist" 5>>
+		<</if>>
+	<<else>>
+		Most prominent slaveowners are very masculine, and though your unorthodox arrangement downstairs isn't obvious when you're clothed, the rumors are unavoidable and it's @@.red;harder for you to maintain your reputation.@@
+		<<set $repLoss += Math.trunc($rep*0.03)>>
+		<<if $arcologies[0].FSGenderFundamentalist > 30>>
+			Society @@.red;strongly resents@@ your being an arcology owner; this damages the idea that people who are not men should not be in positions of responsibility.
+			<<FSChange "GenderFundamentalist" -5>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<if $mercenaries > 0>>
+		Society @@.green;approves@@ of how you are providing for the defense of the state, as should all citizens of the new Rome.
+		<<FSChange "RomanRevivalist" $mercenaries>>
+	<</if>>
+		<<if ($slaves.length > 20) && ($cash > 50000)>>
+		Society @@.green;strongly approves@@ of your wealth and prosperity, fit goals for the <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title == 1>>new Roman man<<else>>rising Roman lady<</if>>.
+		<<FSChange "RomanRevivalist" 5>>
+	<</if>>
+	<<if $language != "Latin">>
+		Continuing to use $language as the lingua franca of $arcologies[0].name rather than the storied Latin @@.red;disappoints@@ society and causes doubt about your revivalist project.
+		<<FSChange "RomanRevivalist" -2>>
+	<</if>>
+<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	<<if $PC.age >= 2>>
+		Society @@.green;approves@@ of your advancing age, which advances the ancient Aztec ideal of an experienced leader of the people.
+		<<FSChange "AztecRevivalist" 1>>
+	<</if>>
+	<<if $HeadGirl == 0>>
+		Society @@.red;disapproves@@ of you not having a Head Girl as an advisor and assistant.
+		<<FSChange "AztecRevivalist" -2>>
+	<<else>>
+		Society @@.green;approves@@ of your reliance on a Head Girl as an advisor and assistant.
+		<<FSChange "AztecRevivalist" 2>>
+	<</if>>
+	<<if $PC.warfare < 50>>
+		Society @@.red;disapproves@@ of you not being properly trained in the arts of war.
+		<<FSChange "AztecRevivalist" -2>>
+	<<else>>
+		Society @@.green;approves@@ of having a leader that is trained in the arts of war.
+		<<FSChange "AztecRevivalist" 2>>
+	<</if>>
+	<<if $language != "Nahuatl">>
+		Continuing to use $language as the lingua franca of $arcologies[0].name rather than the revived Nahuatl @@.red;disappoints@@ society and causes doubt about your revivalist project.
+		<<FSChange "AztecRevivalist" -3>>
+	<</if>>
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<if $racialVarieties.length > 4>>
+		Society @@.green;strongly approves@@ of how you own a cornucopia of different races, which advances the ancient Egyptian ideal of cosmopolitan sex slavery.
+		<<FSChange "EgyptianRevivalist" 5>>
+	<</if>>
+	<<if $language != "Ancient Egyptian">>
+		Continuing to use $language as the lingua franca of $arcologies[0].name rather than revived Ancient Egyptian @@.red;disappoints@@ society and causes doubt about your revivalist project.
+		<<FSChange "EgyptianRevivalist" -2>>
+	<</if>>
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<<set _threshold = Math.trunc($rep/5000)>>
+	<<if $publicServants <= _threshold>>
+		Society @@.red;disapproves@@ of your failure to provide for cultural development by offering public servants or club slaves in a number that befits your reputation.
+		<<FSChange "EdoRevivalist" -2>>
+	<<else>>
+		Society @@.green;approves@@ of your provision for cultural development by offering public servants and club slaves in a number that befits your reputation.
+		<<set _EdoPS = 2*_threshold>>
+		<<FSChange "EdoRevivalist" _EdoPS>>
+	<</if>>
+	<<if $language != "Japanese">>
+		Continuing to use $language as the lingua franca of $arcologies[0].name rather than pure Japanese @@.red;disappoints@@ society and causes doubt about your revivalist project.
+		<<FSChange "EdoRevivalist" -2>>
+	<</if>>
+<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	<<if $fuckSlaves < $rep/3500>>
+		Society @@.red;disapproves@@ of the small size of your harem, feeling that you do not have enough fucktoys or slaves in your master suite for your reputation.
+		<<FSChange "ArabianRevivalist" -2>>
+	<<else>>
+		Society @@.green;approves@@ of the size of your harem, feeling that you have a good number of fucktoys and slaves in your master suite for your reputation.
+		<<FSChange "ArabianRevivalist" 2>>
+	<</if>>
+	<<if $language != "Arabic">>
+		Continuing to use $language as the lingua franca of $arcologies[0].name rather than the Arabic in which the word of God was passed to Muhammad @@.red;disappoints@@ society and causes doubt about your revivalist project.
+		<<FSChange "ArabianRevivalist" -2>>
+	<</if>>
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<<if $HeadGirl == 0>>
+		Society @@.red;disapproves@@ of your failure to rely on a Head Girl, as proper imperial administration requires,
+		<<FSChange "ChineseRevivalist" -2>>
+	<<else>>
+		Society @@.green;approves@@ of your reliance on a Head Girl, as proper imperial administration requires,
+		<<FSChange "ChineseRevivalist" 2>>
+	<</if>>
+	<<if $Recruiter == 0>>
+		@@.red;disapproves@@ of your failure to maintain a Recruiter to expand the Middle Kingdom,
+		<<FSChange "ChineseRevivalist" -2>>
+	<<else>>
+		@@.green;approves@@ of your maintaining a Recruiter to expand the Middle Kingdom,
+		<<FSChange "ChineseRevivalist" 2>>
+	<</if>>
+	<<if $Bodyguard == 0>>
+		and @@.red;disapproves@@ of your failure to keep a Bodyguard as befits a proper imperial palace.
+		<<FSChange "ChineseRevivalist" -2>>
+	<<else>>
+		and @@.green;approves@@ of your keeping a Bodyguard, as befits a proper imperial palace.
+		<<FSChange "ChineseRevivalist" 2>>
+	<</if>>
+	<<if $language != "Chinese">>
+		Continuing to use $language as the lingua franca of $arcologies[0].name rather than the Chinese of the Middle Kingdom @@.red;disappoints@@ society and causes doubt about your revivalist project.
+		<<FSChange "ChineseRevivalist" -2>>
+	<</if>>
+<</if>>
+
+<<if $shelterAbuse > 5>>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		You are on the Slave Shelter's public list of abusive slaveowners. Society @@.red;disapproves@@ of your falling foul of such a well regarded charity.
+		<<FSChange "Paternalist" -2>>
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		You are on the Slave Shelter's public list of abusive slaveowners. Your citizens find this hilarious, and @@.green;approve@@ of your taking advantage of a pack of idiots.
+		<<FSChange "Degradationist" 2>>
+	<</if>>
+<</if>>
+
+<<if $MixedMarriage == 1>>
+	Your citizens
+	<<if $arcologies[0].FSPaternalist >= 80>>
+		are so paternalistic that they @@.green;approve@@ of
+		<<FSChange "Paternalist" 2>>
+	<<elseif $arcologies[0].FSPaternalist >= 40>>
+		are paternalistic enough to tolerate
+	<<else>>
+		@@.red;disapprove@@ of
+		<<set $rep -= 50>>
+	<</if>>
+	your support for marriage between citizens and slaves.
+<</if>>
+
+<<if $citizenOrphanageTotal > 0>>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		The public @@.green;approves@@ of the way you're providing for $citizenOrphanageTotal of your slaves' children to be raised as citizens.
+		<<FSChange "Paternalist" $citizenOrphanageTotal>>
+		<<if $privateOrphanageTotal > 0>>
+			Raising $privateOrphanageTotal of your slaves' children privately is considered even more @@.green;impressive.@@
+			<<FSChange "Paternalist" $privateOrphanageTotal>>
+		<</if>>
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		The public @@.red;disapproves@@ of the way you're providing for $citizenOrphanageTotal of your slaves' children to be raised as citizens.
+		<<FSChange "Degradationist" -$citizenOrphanageTotal>>
+		<<if $privateOrphanageTotal > 0>>Fortunately your raising slaves' children privately is not publicly known.<</if>>
+	<</if>>
+<<elseif $privateOrphanageTotal > 0>>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		Raising $privateOrphanageTotal of your slaves' children privately is considered extremely @@.green;impressive.@@
+		<<FSChange "Paternalist" $privateOrphanageTotal>>
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		Fortunately your raising slaves' children privately is not publicly known.
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSNull != "unset">>
+	Your cultural openness @@.green;helps your reputation,@@ since few citizens have disputes with your permissive approach.
+	<<set $rep += 50*$FSSingleSlaveRep*($arcologies[0].FSNull/$FSLockinLevel)>>
+<</if>>
+
+<<set $rep -= $repLoss>>
+<<set $rep += $repGain>>
+
+<<if $repGain > $repLoss>>
+	@@.green;Your reputation increased this week.@@
+<<elseif $repGain < $repLoss>>
+	@@.red;Your reputation decreased this week.@@
+<</if>>
+
+<<if $rep > 19000>>
+	Your reputation is capped.
+	<<set $rep = 20000>>
+<<elseif $rep-$enduringRep > 7500>>
+	Your base rate of reputation decay is very high.
+<<elseif $rep-$enduringRep > 5000>>
+	Your base rate of reputation decay is high.
+<<elseif $rep-$enduringRep > 2500>>
+	Your base rate of reputation decay is moderate.
+<<elseif $rep-$enduringRep > 0>>
+	Your base rate of reputation decay is low.
+<</if>>
+<<if $enduringRep >= 10000>>
+	Your legend is perfected, reducing reputation decay to its lowest possible level.
+	<<set $enduringRep = 10000>>
+<</if>>
+
+<<if $alwaysSubsidizeRep == 1>>
+<<if $rep <= 19900>>
+	<<set $rep += 100>>
+	Reputation subsidized as planned.
+<<else>>
+	<<set $cash += 1000>>
+	Reputation subsidy reclaimed this week since your reputation is capped.
+<</if>>
+<</if>>

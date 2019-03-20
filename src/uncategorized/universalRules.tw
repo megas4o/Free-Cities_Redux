@@ -1,0 +1,137 @@
+:: Universal Rules [nobr]
+
+__Universal rules__
+
+<<set $nextButton = "Back">>
+<<set $nextLink = "Main">>
+
+<br><br>
+
+<<if $universalRulesRest == 0>>
+	Slaves will ''remain on assignment'' when unhealthy. [[Allow automatic rest when unhealthy|Universal Rules][$universalRulesRest = 1]]
+<<else>>
+	Slaves will ''automatically rest'' at $assistantName's discretion when unhealthy. [[Require all slaves to stay on assignment|Universal Rules][$universalRulesRest = 0]]
+<</if>>
+
+<br><br>
+
+<<if $universalRulesConsent == 0>>
+	Slaves are ''not required'' to get consent before fucking other slaves. [[Restrain slave on slave molestation|Universal Rules][$universalRulesConsent = 1]]
+<<else>>
+	Slaves are ''generally required'' to get consent before fucking other slaves. [[Encourage slave on slave molestation|Universal Rules][$universalRulesConsent = 0]]
+<</if>>
+
+<br><br>
+
+Slave nicknames are
+<<if ($nicknamesAllowed == 0)>>
+@@.red;FORBIDDEN@@. [[Allow|Universal Rules][$nicknamesAllowed = 1]]
+<<else>>
+@@.cyan;ALLOWED@@. [[Forbid|Universal Rules][$nicknamesAllowed = 0]]
+<</if>>
+
+<br>
+
+Slave requests for body mods are
+<<if ($modRequestsAllowed == 0)>>
+@@.red;FORBIDDEN@@. [[Allow|Universal Rules][$modRequestsAllowed = 1]]
+<<else>>
+@@.cyan;ALLOWED@@. [[Forbid|Universal Rules][$modRequestsAllowed = 0]]
+<</if>>
+
+<br>
+
+Slave requests for growth hormones are
+<<if ($expansionRequestsAllowed == 0)>>
+@@.red;FORBIDDEN@@. [[Allow|Universal Rules][$expansionRequestsAllowed = 1]]
+<<else>>
+@@.cyan;ALLOWED@@. [[Forbid|Universal Rules][$expansionRequestsAllowed = 0]]
+<</if>>
+
+<<if $FSAnnounced > 0>>
+<br><br>
+<<if ($useFSNames == 0)>>
+Future society names for new slaves are currently @@.red;NOT APPLIED@@. [[Apply|Universal Rules][$useFSNames = 1]]
+<<else>>
+Future society names for new slaves are currently @@.cyan;APPLIED@@. [[Stop applying|Universal Rules][$useFSNames = 0]]
+<</if>>
+<</if>>
+
+<<if $brothel+$club+$dairy+$servantsQuarters+$arcade+$schoolroom+$spa+$clinic+$masterSuite+$cellblock > 0>>
+<br><br>
+<<if $universalRulesFacilityWork == 0>>
+	Slaves ''will not'' cooperate with staffed facilities to improve their performance. [[Allow cooperation|Universal Rules][$universalRulesFacilityWork = 1]]
+<<else>>
+	Slaves ''will'' cooperate with staffed facilities to improve their performance. [[Stop cooperation|Universal Rules][$universalRulesFacilityWork = 0]]
+<</if>>
+<</if>>
+
+<<if $brothel+$club+$dairy+$servantsQuarters+$arcade+$schoolroom+$spa+$clinic+$masterSuite+$cellblock > 0>>
+<br><br>
+<<if $universalRulesAssignsSelfFacility == 1>>
+	Slaves ''are'' permitted to assign themselves to facilities when choosing their assignment. [[Deny self assignment to facilities|Universal Rules][$universalRulesAssignsSelfFacility = 0]]
+<<else>>
+	Slaves ''are not'' permitted to assign themselves to facilities when choosing their assignment. [[Permit self assignment to facilities|Universal Rules][$universalRulesAssignsSelfFacility = 1]]
+<</if>>
+<</if>>
+
+<br><br>
+
+<<if $universalRulesNewSlavesRA == 0>>
+	The Rules Assistant ''will not apply'' automatically to newly acquired slaves. [[Apply to new slaves|Universal Rules][$universalRulesNewSlavesRA = 1]]
+<<else>>
+	The Rules Assistant ''will apply'' automatically to newly acquired slaves [[Stop applying to new slaves|Universal Rules][$universalRulesNewSlavesRA = 0]]
+<</if>>
+
+<<if $seeDicks != 100>>
+
+<br><br>
+<<if $universalRulesImpregnation == "HG">>
+	Fertile slaves will be ''systematically impregnated by your Head Girl,'' if she is able to do so. [[Cancel insemination regime|Universal Rules][($universalRulesImpregnation = "none"),($universalHGImpregnateMasterSuiteToggle = 0)]]<<if $PC.dick > 0>> | [[Inseminate them yourself|Universal Rules][($universalRulesImpregnation = "PC"),($universalHGImpregnateMasterSuiteToggle = 0)]]<</if>> <br>
+	<<if $universalHGImpregnateMasterSuiteToggle == 1>>
+		Your head girl, if able, ''is not'' inseminating slaves in the Master Suite. [[Allow her to inseminate Master Suite slaves|Universal Rules][$universalHGImpregnateMasterSuiteToggle = 0]]
+	<<else>>
+		Your head girl, if able, ''is'' inseminating slaves in the Master Suite. [[Forbid her from inseminating Master Suite slaves|Universal Rules][$universalHGImpregnateMasterSuiteToggle = 1]]
+	<</if>>
+<<elseif $universalRulesImpregnation == "PC">>
+	Fertile slaves will be ''systematically impregnated by you.'' [[Cancel insemination regime|Universal Rules][$universalRulesImpregnation = "none"]]<<if $seeDicks != 0>> | [[Delegate insemination to your Head Girl|Universal Rules][$universalRulesImpregnation = "HG"]]<</if>>
+<<else>>
+	Fertile slaves will ''not be systematically impregnated.'' <<if $PC.dick > 0>>[[Inseminate them yourself|Universal Rules][$universalRulesImpregnation = "PC"]]<</if>><<if ($PC.dick > 0) && ($seeDicks != 0)>> | <</if>><<if $seeDicks != 0>>[[Delegate insemination to your Head Girl|Universal Rules][$universalRulesImpregnation = "HG"]]<</if>>
+<</if>>
+
+<br><br>
+<<if $universalRulesBirthing == 1>>
+	Heavily pregnant slaves will be ''scanned daily'' for signs of labor and moved to a birthing area immediately if any are detected.
+	[[Stop scanning|Universal Rules][$universalRulesBirthing = 0]]
+<<else>>
+	Heavily pregnant slaves will be ''required to work'' right up until they feel contractions.
+	[[Apply daily scanning|Universal Rules][$universalRulesBirthing = 1]]
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	//This will increase upkeep costs for these slaves//
+<</if>>
+
+<<if $universalRulesBirthing == 1>>
+<br><br>
+<<if $universalRulesCSec == 1>>
+	Pregnant slaves will be ''given Caesarean sections'' rather than allowed to give birth naturally in order to minimize health issues and to preserve their vaginas.
+	[[Only perform c-sections when necessary|Universal Rules][$universalRulesCSec = 0]]
+<<else>>
+	Pregnant slaves will ''give birth naturally'' unless health issues pose a threat.
+	[[Always perform c-sections|Universal Rules][$universalRulesCSec = 1]]
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	//Will lessen medical costs, at the expense of scarring//
+<</if>>
+<</if>>
+
+<</if>>
+
+<br>
+
+<<if $dojo > 0>>
+<br><br>
+<<if $bodyguardTrains == 0>>
+	Your Bodyguard ''is not allowed'' to train potential successors. [[Allow training|Universal Rules][$bodyguardTrains = 1]]
+<<else>>
+	Your Bodyguard ''is allowed'' to train potential successors. [[Stop training|Universal Rules][$bodyguardTrains = 0]]
+<</if>>
+<</if>>

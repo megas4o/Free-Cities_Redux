@@ -1,0 +1,33 @@
+:: RE busy arcade workaround [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check">>
+
+Slaves in your arcade are not immured in the facility permanently, since holding them in one position at all times would negatively impact their health. They are released to exercise, eat, bathe, and sleep, though for nothing else. You occasionally inspect them when they do so, to see that their harsh lives are not inappropriately difficult for them. One day when you are doing so, <<EventNameLink $activeSlave>> flings herself on the ground in front of you the instant she sees you.
+
+<br><br>
+
+Facing the ground, <<if !canTalk($activeSlave)>>she gestures with shaking hands that she cannot take any more. She begs you abjectly to let her out of the arcade and promises to be a perfect sex slave if you do.<<elseif SlaveStatsChecker.checkForLisp($activeSlave)>>she lisps through tears, <<else>>she sobs, <</if>>"<<Master>>, plea<<s>>e. I can't take any more of thi<<s>>. Plea<<s>>e let me out. I'll do anything, <<Master>>. I'll love you forever, <<Master>> - ju<<s>>t don't make me go back in<<s>>ide that wall."
+
+<br><br>
+
+<span id="result">
+<<link "Accept her pledge">>
+	<<replace "#name">>
+	$activeSlave.name
+	<</replace>>
+	<<replace "#result">>
+	When you accept, $activeSlave.slaveName looks up at you in incomprehension, expecting you to correct yourself or reveal that this is a cruel trick. When you do neither, she scrabbles spastically to your feet, kisses them as she cries, and then clings to your knees, sobbing. She is so relieved by this reprieve that she is now on the cusp of @@.hotpink;devotion to you,@@ and will obey out of near-paralytic fear of being sent back to the arcade.
+	<<set $activeSlave.devotion = 45>>
+	<<removeJob $activeSlave "be confined in the arcade">>
+	<</replace>>
+<</link>>
+<br><<link "Refuse">>
+	<<replace "#name">>
+	$activeSlave.name
+	<</replace>>
+	<<replace "#result">>
+	She did not really expect mercy, but her sobs take on a distinctly dark tone of hopelessness at your refusal. As you personally immure her in the arcade for another day of endless dick, you wonder whether she'll damage her throat with all the commotion she's making. Several of the other arcade slaves glance dully over at the noise. Then, they look away.
+	<</replace>>
+<</link>>
+</span>
+

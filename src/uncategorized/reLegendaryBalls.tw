@@ -1,0 +1,88 @@
+:: RE legendary balls [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check", $activeSlave = ($legendaryFacility == 1) ? $slaves.find(function(s) { return s.ID == $legendaryBallsID; }) : $eventSlave>>
+
+<<if (ndef $activeSlave)>> /* not found - reset variable and stop event */
+	<<set $legendaryBallsID = 0>>
+	<<goto "RIE Eligibility Check">>
+<<else>>
+
+<<set $activeSlave.devotion += 4>>
+
+<<EventNameLink $activeSlave>> is an incredible producer of cum. She's producing in volumes that would have been unthinkable in the days when it was illegal to restrain a slave so that she could have every drop of her ejaculate milked out by a machine. A nascent slave stock organization will be holding a public livestock show tomorrow, and since they're aware you're experimenting with cockmilking, they've sent you an invitation to enter an especially productive slave to be judged.
+
+<br><br>
+
+This is a rare opportunity. The idea of cockmilking is new and understandably fascinating to many, so the livestock show is likely to draw some serious press. Were $activeSlave.slaveName to win, she would probably be remembered for a long time as a special slave.
+
+<br><br>
+
+<span id="result">
+<<link "Fairly enter her in the livestock show">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<if random(1,100) > 90>>
+		<<replace "#result">>
+		$activeSlave.slaveName is shown in public, closely inspected by the judging committee, and then publicly cockmilked. It's likely there was some bribery behind the scenes, but her massive junk wins the day. Against all odds she is named best in show, and will be @@.green;remembered@@ as cock stock of the highest pedigree. As her owner, your reputation has @@.green;also increased.@@
+		<<set $rep += 100>>
+		<<set $activeSlave.prestige = Math.min(3, $activeSlave.prestige + 1)>>
+		<<set $activeSlave.prestigeDesc = "She is remembered for winning best in show as a cockmilker.">>
+		<<set $desc = "a best in show ribbon awarded to " + $activeSlave.slaveName + " for her balls">>
+		<<set $trinkets.push($desc)>>
+		<</replace>>
+	<<else>>
+		<<replace "#result">>
+		$activeSlave.slaveName is shown in public, closely inspected by the judging committee, and then publicly cockmilked. It's likely there was some bribery behind the scenes, and it is fatal to her chances of winning. Though her junk is easily the most impressive on display, another stock owner who was more open-handed with the judges took best in show. The public is impressed with $activeSlave.slaveName's nuts anyway; as you are her owner, your reputation has @@.green;increased@@ a little.
+		<<set $rep += 100>>
+		<</replace>>
+	<</if>>
+<</link>>
+<br><<link "Spend ¤5000 bribing the judges">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<if random(1,100) > 50>>
+		<<replace "#result">>
+		$activeSlave.slaveName is shown in public, closely inspected by the judging committee, and then publicly cockmilked. Several of the judges cannot resist giving you a wink as they look her over. $activeSlave.slaveName is unsurprisingly named best in show, and will be @@.green;remembered@@ as cock stock of the highest pedigree. As her owner, your reputation has @@.green;also increased.@@
+		<<set $cash -= 5000>>
+		<<set $rep += 100>>
+		<<set $activeSlave.prestige = Math.min(3, $activeSlave.prestige + 1)>>
+		<<set $activeSlave.prestigeDesc = "She is remembered for winning best in show as a cockmilker.">>
+		<<set $desc = "a best in show ribbon awarded to " + $activeSlave.slaveName + " for her balls">>
+		<<set $trinkets.push($desc)>>
+		<</replace>>
+	<<else>>
+		<<replace "#result">>
+		$activeSlave.slaveName is shown in public, closely inspected by the judging committee, and then publicly cockmilked. Several of the judges cannot resist giving you a wink as they look her over, but others look disapprovingly at them; it seems some of your competitors also forwarded money to the committee. After furious wrangling, $activeSlave.slaveName loses to another milker. The public is impressed with $activeSlave.slaveName's balls anyway; as you are her owner, your reputation has @@.green;increased@@ a little.
+		<<set $cash -= 5000>>
+		<<set $rep += 100>>
+		<</replace>>
+	<</if>>
+<</link>>
+<br><<link "Spend ¤10000 bribing the judges and sabotaging the competition">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<if random(1,100) > 10>>
+		<<replace "#result">>
+		$activeSlave.slaveName is shown in public, closely inspected by the judging committee, and then publicly cockmilked. After she's put through her paces, the most unfortunate series of accidents somehow befalls her fellow cows. One is taken ill, another seems drugged, and someone seems to have slipped a finger of raw ginger up another's urethra, making her whine and squeal when cockmilked. $activeSlave.slaveName is unsurprisingly named best in show, and will be @@.green;remembered@@ as cock stock of the highest pedigree. As her owner, your reputation has @@.green;also increased.@@
+		<<set $cash -= 10000>>
+		<<set $rep += 100>>
+		<<set $activeSlave.prestige = Math.min(3, $activeSlave.prestige + 1)>>
+		<<set $activeSlave.prestigeDesc = "She is remembered for winning best in show as a cockmilker.">>
+		<<set $desc = "a best in show ribbon awarded to " + $activeSlave.slaveName + " for her balls">>
+		<<set $trinkets.push($desc)>>
+		<</replace>>
+	<<else>>
+		<<replace "#result">>
+		$activeSlave.slaveName is shown in public, closely inspected by the judging committee, and then publicly cockmilked. You are surprised to see that the judging committee has been changed at the last minute. They choose another cow as best in show. There are persistent @@.red;rumors@@ after the show that there was an absolute massacre of firings at the stock organization headquarters the night before the show after it was discovered that someone, widely thought to be you, had been corrupting the judges.
+		<<set $cash -= 10000>>
+		<<set $rep -= 100>>
+		<</replace>>
+	<</if>>
+<</link>>
+</span>
+
+<</if>> /* closes validity check */
+

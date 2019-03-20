@@ -1,0 +1,18 @@
+:: family panic [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+<<set $slaves.forEach(function(s) { s.sisters = 0; s.daughters = 0; })>>
+
+<<for _fp = 0; _fp < $slaves.length; _fp++>>
+	<<for _fpt = 0; _fpt < $slaves.length; _fpt++>>
+		<<if ($slaves[_fpt].mother == $slaves[_fp].ID) || ($slaves[_fpt].father == $slaves[_fp].ID)>>
+			<<set $slaves[_fp].daughters++>>
+		<</if>>
+		<<if areSisters($slaves[_fpt], $slaves[_fp]) > 0>>
+			<<set $slaves[_fp].sisters++>>
+		<</if>>
+	<</for>>
+<</for>>
+
+//Family relations flushed and rebuilt.//

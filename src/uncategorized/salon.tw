@@ -1,0 +1,477 @@
+:: Salon [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Slave Interact">>
+
+<<set $showEncyclopedia = 1>><<set $encyclopedia = "The Auto Salon">>
+
+<h1>The Auto Salon</h1>
+
+//$activeSlave.slaveName is seated in the auto salon. $pronounCap is awaiting your artistic pleasure.//
+
+
+<h2>Eyes</h2>
+
+<<if $activeSlave.eyes > -2>> /* Begin eye check */
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+<<if $imageChoice == 1>>
+    <div class="imageRef lrgVector"><<SlaveArt $activeSlave 2 0>></div>
+<<else>>
+    <div class="imageRef lrgRender"><<SlaveArt $activeSlave 2 0>></div>
+<</if>>
+<</if>>
+/* 000-250-006 */
+
+//
+<<eyeDescription>>
+<<upperFaceDescription>>
+//
+<<if $activeSlave.eyewear != "none">>
+	[[Remove|Salon][$activeSlave.eyewear = "none"]]
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<if $activeSlave.origEye == "implant">>
+	Give her: [[Cosmetic glasses|Salon][$activeSlave.eyewear = "glasses",$cash -= $modCost]]
+	//Blurring options are annoying and impede performance on some assignments.//
+<<elseif $activeSlave.eyes == -1>>
+	Give her: [[Cosmetic glasses|Salon][$activeSlave.eyewear = "glasses",$cash -= $modCost]]
+	| [[Corrective glasses|Salon][$activeSlave.eyewear = "corrective glasses",$cash -= $modCost]]
+	| [[Corrective contacts|Salon][$activeSlave.eyewear = "corrective contacts",$cash -= $modCost]]
+	//Nearsightedness will impede performance on some assignments.//
+<<else>>
+	Give her: [[Cosmetic glasses|Salon][$activeSlave.eyewear = "glasses",$cash -= $modCost]]
+	| [[Blurring glasses|Salon][$activeSlave.eyewear = "blurring glasses",$cash -= $modCost]]
+	| [[Blurring contacts|Salon][$activeSlave.eyewear = "blurring contacts",$cash -= $modCost]]
+	//Blurring options are annoying and impede performance on some assignments.//
+<</if>>
+
+<<if $activeSlave.origEye != "implant">>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Custom cosmetic lenses:
+	<<if $activeSlave.origEye != "none">>
+		<<if $activeSlave.origEye != $activeSlave.eyeColor>>
+			[[Remove lenses|Salon][$activeSlave.eyeColor = $activeSlave.origEye]] or //choose new ones://
+		<<else>>
+			//Choose $possessive cosmetic lenses:
+		<</if>>
+	<<else>>
+		<<if $activeSlave.eyeColor == "empty">>
+			$possessiveCap has no eyes.  //Choose what kind of eyes you want $possessive to have://
+		<<else>>
+			$possessiveCap glass eyes are $activeSlave.eyeColor.  [[Remove eyes|Salon][$activeSlave.eyeColor = "empty"]] or //choose new ones://
+		<</if>>
+	<</if>>
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	Color:
+	[[Blue|Salon][$artificialEyeColor = "blue"]]
+	| [[Black|Salon][$artificialEyeColor = "black"]]
+	| [[Brown|Salon][$artificialEyeColor = "brown"]]
+	| [[Green|Salon][$artificialEyeColor = "green"]]
+	| [[Turquoise|Salon][$artificialEyeColor = "turquoise"]]
+	| [[Sky-blue|Salon][$artificialEyeColor = "sky-blue"]]
+	| [[Hazel|Salon][$artificialEyeColor = "hazel"]]
+	| [[Pale-grey|Salon][$artificialEyeColor = "pale-grey"]]
+	| [[White|Salon][$artificialEyeColor = "white"]]
+	| [[Pink|Salon][$artificialEyeColor = "pink"]]
+	| [[Amber|Salon][$artificialEyeColor = "amber"]]
+	| [[Red|Salon][$artificialEyeColor = "red"]]
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	Shape:
+	[[Catlike|Salon][$artificialEyeShape = "catlike"]]
+	| [[Serpent-like|Salon][$artificialEyeShape = "serpent-like"]]
+	| [[Devilish|Salon][$artificialEyeShape = "devilish"]]
+	| [[Demonic|Salon][$artificialEyeShape = "demonic"]]
+	| [[Hypnotic|Salon][$artificialEyeShape = "hypnotic"]]
+	| [[Heart-shaped|Salon][$artificialEyeShape = "heart-shaped"]]
+	| [[Wide-eyed|Salon][$artificialEyeShape = "wide-eyed"]]
+	| [[Almond-shaped|Salon][$artificialEyeShape = "almond-shaped"]]
+	| [[Bright|Salon][$artificialEyeShape = "bright"]]
+	| [[Teary|Salon][$artificialEyeShape = "teary"]]
+	| [[Vacant|Salon][$artificialEyeShape = "vacant"]]
+
+	<<if $artificialEyeColor == "" && $artificialEyeShape != "">>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		[[Give|Salon][$activeSlave.eyeColor = ($artificialEyeShape),$cash -= $modCost, $artificialEyeColor = "", $artificialEyeShape = ""]] her $artificialEyeShape $artificialEyeColor <<if $activeSlave.origEye == "none">>glass eyes<<else>>lenses<</if>>? //This will be applied in addition to eyewear choices.//
+	<<elseif $artificialEyeColor != "" || $artificialEyeShape != "">>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		[[Give|Salon][$activeSlave.eyeColor = ($artificialEyeShape + " " + $artificialEyeColor),$cash -= $modCost, $artificialEyeColor = "", $artificialEyeShape = ""]] her $artificialEyeShape $artificialEyeColor <<if $activeSlave.origEye == "none">> glass eyes<<else>>lenses<</if>>? //This will be applied in addition to eyewear choices.//
+	<</if>>
+<<else>>
+	$possessiveCap eyes are artificial and can't be set here.
+<</if>>
+<</if>> /*End eye check */
+
+
+<h2>Hair</h2>
+
+//<<HairDescription>>//
+
+<<if $activeSlave.origHColor != "bald">>
+	<<if $activeSlave.origHColor != $activeSlave.hColor>>
+		[[Restore natural color|Salon][$activeSlave.hColor = $activeSlave.origHColor]] or //choose a new one://
+	<<else>>
+		//Choose a dye color before dyeing her hair://
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Colors:
+		[[Blonde|Salon][$primaryHairColor = "blonde"]]
+		| [[Golden|Salon][$primaryHairColor = "golden"]]
+		| [[Platinum Blonde|Salon][$primaryHairColor = "platinum blonde"]]
+		| [[Strawberry-blonde|Salon][$primaryHairColor = "strawberry-blonde"]]
+		| [[Copper|Salon][$primaryHairColor = "copper"]]
+		| [[Ginger|Salon][$primaryHairColor = "ginger"]]
+		| [[Dark Brown|Salon][$primaryHairColor = "dark brown"]]
+		| [[Brown|Salon][$primaryHairColor = "brown"]]
+		| [[Auburn|Salon][$primaryHairColor = "auburn"]]
+		| [[Burgundy|Salon][$primaryHairColor = "burgundy"]]
+		| [[Chocolate|Salon][$primaryHairColor = "chocolate brown"]]
+		| [[Chestnut|Salon][$primaryHairColor = "chestnut"]]
+		| [[Hazel|Salon][$primaryHairColor = "hazel"]]
+		| [[Black|Salon][$primaryHairColor = "black"]]
+		| [[Grey|Salon][$primaryHairColor = "grey"]]
+		| [[Silver|Salon][$primaryHairColor = "silver"]]
+		| [[White|Salon][$primaryHairColor = "white"]]
+		| [[Blazing red|Salon][$primaryHairColor = "blazing red"]]
+		| [[Neon green|Salon][$primaryHairColor = "neon green"]]
+		| [[Neon blue|Salon][$primaryHairColor = "neon blue"]]
+		| [[Neon pink|Salon][$primaryHairColor = "neon pink"]]
+
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+	Highlights:
+		[[None|Salon][$secondaryHairColor = ""]]
+		| [[Blonde|Salon][$secondaryHairColor = " with blonde highlights"]]
+		| [[Black|Salon][$secondaryHairColor = " with black highlights"]]
+		| [[Grey|Salon][$secondaryHairColor = " with grey highlights"]]
+		| [[Silver|Salon][$secondaryHairColor = " with silver highlights"]]
+		| [[White|Salon][$secondaryHairColor = " with white highlights"]]
+		| [[Blazing red|Salon][$secondaryHairColor = " with blazing red highlights"]]
+		| [[Neon green|Salon][$secondaryHairColor = " with neon green highlights"]]
+		| [[Neon blue|Salon][$secondaryHairColor = " with neon blue highlights"]]
+		| [[Neon pink|Salon][$secondaryHairColor = " with neon pink highlights"]]
+		| [[Rainbow|Salon][$secondaryHairColor = " with rainbow highlights"]]
+
+	<<if $primaryHairColor != 0>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		[[Dye her hair|Salon][$activeSlave.hColor = ($primaryHairColor + $secondaryHairColor),$cash -= $modCost, $primaryHairColor = 0, $secondaryHairColor = ""]] $primaryHairColor $secondaryHairColor now?
+	<</if>>
+
+
+	<br><br>
+	//Her hair <<HairClothingDescription>>
+	It's $activeSlave.hLength cm long.//
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+	<<if $activeSlave.hLength > 1>>
+		Style $possessive hair:
+		[[Neat|Salon][$activeSlave.hStyle = "neat",$cash -= $modCost]]
+		 | [[Up|Salon][$activeSlave.hStyle = "up",$cash -= $modCost]]
+		 | [[In a ponytail|Salon][$activeSlave.hStyle = "ponytail",$cash -= $modCost]]
+		 | [[In a bun|Salon][$activeSlave.hStyle = "bun",$cash -= $modCost]]
+		 | [[Curled|Salon][$activeSlave.hStyle = "curled",$cash -= $modCost]]
+		 | [[Permed|Salon][$activeSlave.hStyle = "permed",$cash -= $modCost]]
+		 | [[Luxurious|Salon][$activeSlave.hStyle = "luxurious",$cash -= $modCost]]
+		 | [[Dreadlocks|Salon][$activeSlave.hStyle = "dreadlocks",$cash -= $modCost]]
+		 | [[Cornrows|Salon][$activeSlave.hStyle = "cornrows",$cash -= $modCost]]
+		 | [[Braided|Salon][$activeSlave.hStyle = "braided",$cash -= $modCost]]
+		 | [[In tails|Salon][$activeSlave.hStyle = "tails",$cash -= $modCost]]
+		 | [[Afro|Salon][$activeSlave.hStyle = "afro",$cash -= $modCost]]
+		 | [[Shaved sides|Salon][$activeSlave.hStyle = "strip",$cash -= $modCost]]
+	<<else>>
+		//$possessiveCap hair is too short to style meaningfully//
+	<</if>>
+
+	<<if $activeSlave.hLength > 1>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		Cut and style $possessive hair:
+		 [[Shaved|Salon][$activeSlave.hStyle = "shaved",$activeSlave.hLength = 0,$cash -= $modCost]]
+		 | [[Trimmed short|Salon][$activeSlave.hStyle = "trimmed",$activeSlave.hLength = 10,$cash -= $modCost]]
+		 | [[Buzzcut|Salon][$activeSlave.hStyle = "buzzcut",$activeSlave.hLength = 1,$cash -= $modCost]]
+	<</if>>
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Cut or lengthen $possessive hair:
+	<<if $activeSlave.hLength > 5>>
+		[[Very short|Salon][$activeSlave.hLength = 5,$cash -= $modCost]]
+	<</if>>
+	<<if $activeSlave.hLength > 10>>
+		| [[Short|Salon][$activeSlave.hLength = 10,$cash -= $modCost]]
+	<</if>>
+	<<if $activeSlave.hLength > 30>>
+		| [[Shoulder length|Salon][$activeSlave.hLength = 30,$cash -= $modCost]]
+	<</if>>
+	<<if $activeSlave.hLength > 60>>
+		| [[Long|Salon][$activeSlave.hLength = 60,$cash -= $modCost]]
+	<</if>>
+	<<if $activeSlave.hLength > 100>>
+		| [[Very long|Salon][$activeSlave.hLength = 100,$cash -= $modCost]]
+	<</if>>
+	<<if $activeSlave.hLength == 1>>
+		| [[Apply hair growth stimulating treatment|Salon][$activeSlave.hLength = 1,$cash -= $modCost]]
+	<<elseif $activeSlave.hLength < 150>>
+		| [[Apply extensions|Salon][$activeSlave.hLength += 10,$cash -= $modCost]]
+	<</if>>
+<<elseif $activeSlave.origHColor == "bald">>
+	<<if $activeSlave.hStyle == "bald">>
+		$pronounCap is completely bald.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<else>>
+		$possessiveCap current wig is $activeSlave.hColor.
+		<<if $activeSlave.origHColor == "bald" && $activeSlave.hStyle != "bald">>
+			[[Remove wig|Salon][$activeSlave.hStyle = "bald",$activeSlave.hLength = 0,$cash -= $modCost]] or //choose a new one://
+		<<else>>
+			//Choose a wig color://
+		<</if>>
+
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		Colors:
+		[[Blonde|Salon][$primaryHairColor = "blonde"]]
+		| [[Golden|Salon][$primaryHairColor = "golden"]]
+		| [[Platinum Blonde|Salon][$primaryHairColor = "platinum blonde"]]
+		| [[Strawberry-blonde|Salon][$primaryHairColor = "strawberry-blonde"]]
+		| [[Copper|Salon][$primaryHairColor = "copper"]]
+		| [[Ginger|Salon][$primaryHairColor = "ginger"]]
+		| [[Dark Brown|Salon][$primaryHairColor = "dark brown"]]
+		| [[Brown|Salon][$primaryHairColor = "brown"]]
+		| [[Auburn|Salon][$primaryHairColor = "auburn"]]
+		| [[Burgundy|Salon][$primaryHairColor = "burgundy"]]
+		| [[Chocolate|Salon][$primaryHairColor = "chocolate brown"]]
+		| [[Chestnut|Salon][$primaryHairColor = "chestnut"]]
+		| [[Hazel|Salon][$primaryHairColor = "hazel"]]
+		| [[Black|Salon][$primaryHairColor = "black"]]
+		| [[Grey|Salon][$primaryHairColor = "grey"]]
+		| [[Silver|Salon][$primaryHairColor = "silver"]]
+		| [[White|Salon][$primaryHairColor = "white"]]
+		| [[Blazing red|Salon][$primaryHairColor = "blazing red"]]
+		| [[Neon green|Salon][$primaryHairColor = "neon green"]]
+		| [[Neon blue|Salon][$primaryHairColor = "neon blue"]]
+		| [[Neon pink|Salon][$primaryHairColor = "neon pink"]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+		Highlights:
+		[[None|Salon][$secondaryHairColor = ""]]
+		| [[Blonde|Salon][$secondaryHairColor = " with blonde highlights"]]
+		| [[Black|Salon][$secondaryHairColor = " with black highlights"]]
+		| [[Grey|Salon][$secondaryHairColor = " with grey highlights"]]
+		| [[Silver|Salon][$secondaryHairColor = " with silver highlights"]]
+		| [[White|Salon][$secondaryHairColor = " with white highlights"]]
+		| [[Blazing red|Salon][$secondaryHairColor = " with blazing red highlights"]]
+		| [[Neon green|Salon][$secondaryHairColor = " with neon green highlights"]]
+		| [[Neon blue|Salon][$secondaryHairColor = " with neon blue highlights"]]
+		| [[Neon pink|Salon][$secondaryHairColor = " with neon pink highlights"]]
+		| [[Rainbow|Salon][$secondaryHairColor = " with rainbow highlights"]]
+
+		<<if $primaryHairColor != 0>>
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;
+			[[Change|Salon][$activeSlave.hColor = ($primaryHairColor + $secondaryHairColor),$cash -= $modCost, $primaryHairColor = 0, $secondaryHairColor = ""]] $possessive wig color to $primaryHairColor $secondaryHairColor
+		<</if>>
+	<</if>>
+
+	<<if $activeSlave.hStyle != "bald">>
+		<br><br>
+		$possessiveCap $activeSlave.hStyle wig is $activeSlave.hLength cm long.
+
+		//General hairstyles will conform to hair length and clothing choices.//
+
+		<<if $activeSlave.hLength == 0>><<set $activeSlave.hLength = 10>><</if>>
+
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		Set wig length to:
+		<<if $activeSlave.hLength != 10>>[[10cm|Salon][$activeSlave.hLength = 10,$cash -= $modCost]]<</if>>
+		<<if $activeSlave.hLength != 30>>[[30cm|Salon][$activeSlave.hLength = 30,$cash -= $modCost]]<</if>>
+		<<if $activeSlave.hLength != 60>>[[60cm|Salon][$activeSlave.hLength = 60,$cash -= $modCost]]<</if>>
+		<<if $activeSlave.hLength != 90>>[[90cm|Salon][$activeSlave.hLength = 90,$cash -= $modCost]]<</if>>
+		<<if $activeSlave.hLength != 120>>[[120cm|Salon][$activeSlave.hLength = 120,$cash -= $modCost]]<</if>>
+		<<if $activeSlave.hLength != 150>>[[150cm|Salon][$activeSlave.hLength = 150,$cash -= $modCost]]<</if>>
+	<<else>>
+		$pronounCap is not wearing a wig.
+	<</if>>
+	<br><br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<if $activeSlave.hStyle != "bald">>
+		Set wig style:
+	<<else>>
+		Give her a wig:
+	<</if>>
+	 [[Ponytail|Salon][$activeSlave.hStyle = "ponytail",$cash -= $modCost]]
+	 | [[Bun|Salon][$activeSlave.hStyle = "bun",$cash -= $modCost]]
+	 | [[Curled|Salon][$activeSlave.hStyle = "curled",$cash -= $modCost]]
+	 | [[Permed|Salon][$activeSlave.hStyle = "permed",$cash -= $modCost]]
+	 | [[Luxurious|Salon][$activeSlave.hStyle = "luxurious",$cash -= $modCost]]
+	 | [[Dreadlocks|Salon][$activeSlave.hStyle = "dreadlocks",$cash -= $modCost]]
+	 | [[Cornrows|Salon][$activeSlave.hStyle = "cornrows",$cash -= $modCost]]
+	 | [[Braided|Salon][$activeSlave.hStyle = "braided",$cash -= $modCost]]
+	 | [[Tails|Salon][$activeSlave.hStyle = "tails",$cash -= $modCost]]
+	 | [[Afro|Salon][$activeSlave.hStyle = "afro",$cash -= $modCost]]
+<</if>>
+
+
+<h2>Makeup</h2>
+//
+<<makeupDescription>>
+//
+<<if $activeSlave.makeup > 0>>
+	[[  Remove|Salon][$activeSlave.makeup = 0,$cash -= $modCost]]
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+Apply makeup:
+[[Nice|Salon][$activeSlave.makeup = 1,$cash -= $modCost]]
+| [[Gorgeous|Salon][$activeSlave.makeup = 2,$cash -= $modCost]]
+| [[Slutty|Salon][$activeSlave.makeup = 4,$cash -= $modCost]]
+| [[Color-coordinate with hair|Salon][$activeSlave.makeup = 3,$cash -= $modCost]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[[Neon|Salon][$activeSlave.makeup = 5,$cash -= $modCost]]
+| [[Neon, color-coordinate with hair|Salon][$activeSlave.makeup = 6,$cash -= $modCost]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[[Metallic|Salon][$activeSlave.makeup = 7,$cash -= $modCost]]
+| [[Metallic, color-coordinate with hair|Salon][$activeSlave.makeup = 8,$cash -= $modCost]]
+
+
+<h2>Nails</h2>
+
+//<<nailsDescription>>//
+
+<<if $activeSlave.amp != 1>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+Treat nails:
+[[Clip|Salon][$activeSlave.nails = 0,$cash -= $modCost]]
+| [[Extend|Salon][$activeSlave.nails = 1,$cash -= $modCost]]
+| [[Sharp, claw-like|Salon][$activeSlave.nails = 3,$cash -= $modCost]]
+| [[Bright, glittery|Salon][$activeSlave.nails = 4,$cash -= $modCost]]
+| [[Streetwalker-style|Salon][$activeSlave.nails = 5,$cash -= $modCost]]
+| [[Color-coordinate with hair|Salon][$activeSlave.nails = 2,$cash -= $modCost]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[[Neon|Salon][$activeSlave.nails = 6,$cash -= $modCost]]
+| [[Neon, color-coordinate with hair|Salon][$activeSlave.nails = 7,$cash -= $modCost]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[[Metallic|Salon][$activeSlave.nails = 8,$cash -= $modCost]]
+| [[Metallic, color-coordinate with hair|Salon][$activeSlave.nails = 9,$cash -= $modCost]]
+<</if>>
+
+
+<h2>Skin</h2>
+
+<<set $tannableSkin = ["natural", "lightened", "white", "fair", "pale", "light", "extremely pale"]>>
+<<set $lightenableSkin = ["natural", "dark", "olive", "black", "brown", "light brown", "tanned"]>>
+<<set $bleachableSkin = ["natural", "lightened", "white", "fair", "light"]>>
+<<set $darkenableSkin = ["natural", "lightened", "white", "fair", "pale", "light", "extremely pale", "olive", "tanned", "light brown", "brown"]>>
+<<set $dyedSkin = ["red dyed", "green dyed", "blue dyed", "tiger striped", "camouflage patterned"]>>
+
+
+//<<skinDescription>>//
+
+<<if ($dyedSkin.indexOf($activeSlave.skin) != -1)>>
+	[[Remove coloring|Salon][$activeSlave.skin = "natural",$cash -= $modCost]]
+<</if>>
+
+<<if ($dyedSkin.indexOf($activeSlave.skin) == -1)>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Change skin tone:
+	<<set _needsSpacers = 0>>
+	<<if ($bleachableSkin.indexOf($activeSlave.skin) != -1)>>
+		<<if  _needsSpacers == 1>> | <</if>>
+		[[Bleach|Salon][$activeSlave.skin = "pale",$cash -= $modCost]]
+		<<set _needsSpacers = 1>>
+	<</if>>
+	<<if ($lightenableSkin.indexOf($activeSlave.skin) != -1)>>
+		<<if  _needsSpacers == 1>> | <</if>>
+		[[Lighten|Salon][$activeSlave.skin = "lightened",$cash -= $modCost]]
+		<<set _needsSpacers = 1>>
+	<</if>>
+	<<if ($tannableSkin.indexOf($activeSlave.skin) != -1)>>
+		<<if  _needsSpacers == 1>> | <</if>>
+		[[Tan|Salon][$activeSlave.skin = "tanned",$cash -= $modCost]]
+		<<set _needsSpacers = 1>>
+	<</if>>
+	<<if ($darkenableSkin.indexOf($activeSlave.skin) != -1)>>
+		<<if  _needsSpacers == 1>> | <</if>>
+		[[Darken|Salon][$activeSlave.skin = "dark",$cash -= $modCost]]
+		<<set _needsSpacers = 1>>
+	<</if>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+Dye or paint:
+[[Red|Salon][$activeSlave.skin = "red dyed",$cash -= $modCost]]
+| [[Green|Salon][$activeSlave.skin = "green dyed",$cash -= $modCost]]
+| [[Blue|Salon][$activeSlave.skin = "blue dyed",$cash -= $modCost]]
+| [[Tiger stripes|Salon][$activeSlave.skin = "tiger striped",$cash -= $modCost]]
+| [[Camouflage|Salon][$activeSlave.skin = "camouflage patterned",$cash -= $modCost]]
+
+/* MARKS */
+
+<<if ($activeSlave.markings == "beauty mark")>>
+	<br><br>
+	$pronounCap has a prominent mole on $possessive face, which
+	<<if $activeSlave.face > 40>>
+	qualifies as a beauty mark and enhances $possessive attractiveness due to $possessive facial beauty.
+	<<elseif $activeSlave.face < -10>>
+	makes $possessive even less attractive.
+	<<else>>
+	qualifies as a beauty mark since $pronoun's pretty, having no significant impact on $possessive beauty.
+	<</if>>
+	[[Remove it|Salon][$activeSlave.markings = "none",$cash -= $modCost]]
+<</if>>
+<<if ($activeSlave.markings == "birthmark")>>
+	<br><br>
+	$pronounCap has a large birthmark, which
+	<<if $activeSlave.prestige > 0>>
+	enhances $possessive attractiveness due to $possessive prestige.
+	<<else>>
+	detracts from $possessive attractiveness.
+	<</if>>
+	[[Bleach it|Salon][$activeSlave.markings = "none",$cash -= $modCost]]
+<</if>>
+
+
+<h2>Pubic Hair</h2>
+
+<<if $activeSlave.pubicHStyle != "bald">>
+	//$possessiveCap $activeSlave.pubicHStyle pubic hair//
+	<<if $activeSlave.pubicHStyle == "waxed">>
+		would be $activeSlave.pubicHColor if present.
+	<<else>>
+		is $activeSlave.pubicHColor.
+	<</if>>
+	<<if $activeSlave.pubicHColor != $activeSlave.hColor>>
+		[[Match the curtains?|Salon][$activeSlave.pubicHColor = $activeSlave.hColor,$cash -= $modCost]]
+	<</if>>
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Dye $possessive pubic hair:
+		[[Blonde|Salon][$activeSlave.pubicHColor = "blonde",$cash -= $modCost]]
+		| [[Golden|Salon][$activeSlave.pubicHColor = "golden",$cash -= $modCost]]
+		| [[Platinum blonde|Salon][$activeSlave.pubicHColor = " platinum blonde",$cash -= $modCost]]
+		| [[Strawberry-blonde|Salon][$activeSlave.pubicHColor = "strawberry-blonde",$cash -= $modCost]]
+		| [[Copper|Salon][$activeSlave.pubicHColor = "copper",$cash -= $modCost]]
+		| [[Ginger|Salon][$activeSlave.pubicHColor = "ginger",$cash -= $modCost]]
+		| [[Dark Brown|Salon][$activeSlave.pubicHColor = "dark brown",$cash -= $modCost]]
+		| [[Brown|Salon][$activeSlave.pubicHColor = "brown",$cash -= $modCost]]
+		| [[Auburn|Salon][$activeSlave.pubicHColor = "auburn",$cash -= $modCost]]
+		| [[Burgundy|Salon][$activeSlave.pubicHColor = "burgundy",$cash -= $modCost]]
+		| [[Chocolate|Salon][$activeSlave.pubicHColor = "chocolate brown",$cash -= $modCost]]
+		| [[Chestnut|Salon][$activeSlave.pubicHColor = "chestnut",$cash -= $modCost]]
+		| [[Hazel|Salon][$activeSlave.pubicHColor = "hazel",$cash -= $modCost]]
+		| [[Black|Salon][$activeSlave.pubicHColor = "black",$cash -= $modCost]]
+		| [[Grey|Salon][$activeSlave.pubicHColor = "grey",$cash -= $modCost]]
+		| [[Silver|Salon][$activeSlave.pubicHColor = "silver",$cash -= $modCost]]
+		| [[White|Salon][$activeSlave.pubicHColor = "white",$cash -= $modCost]]
+		| [[Blazing red|Salon][$activeSlave.pubicHColor = "red",$cash -= $modCost]]
+		| [[Neon green|Salon][$activeSlave.pubicHColor = "green",$cash -= $modCost]]
+		| [[Neon blue|Salon][$activeSlave.pubicHColor = "blue",$cash -= $modCost]]
+		| [[Neon pink|Salon][$activeSlave.pubicHColor = "pink",$cash -= $modCost]]
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Style $possessive pubic hair:
+		[[Waxed|Salon][$activeSlave.pubicHStyle = "waxed",$cash -= $modCost]]
+		 | [[Landing strip|Salon][$activeSlave.pubicHStyle = "in a strip",$cash -= $modCost]]
+		 | [[Neat|Salon][$activeSlave.pubicHStyle = "neat",$cash -= $modCost]]
+		 | [[Bushy|Salon][$activeSlave.pubicHStyle = "bushy",$cash -= $modCost]]
+
+<<else>>
+	$possessiveCap body is completely hairless.
+<</if>>

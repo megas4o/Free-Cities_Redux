@@ -1,0 +1,29 @@
+:: random event select [nobr]
+
+<<set $nextButton = "Refresh", $nextLink = "random event select">>
+
+<<if $events.length == 0>>
+	<<set $events.push("RE no event")>>
+<</if>>
+
+<<if $eventSlave != 0>>
+	$eventSlave.slaveName has been randomly selected for an event this week.
+	<br><br>
+<</if>>
+
+''A random event would have been selected from the following:''
+<<set $RESSeventIndex = 0>>
+<<for $i = 0; $i < $events.length; $i++>>
+	<br>[[$events[$i]]]
+	<<if $events[$i] == "RESS">>
+	&ndash; $RESSevent[$RESSeventIndex]
+	<<set $RESSeventIndex += 1>>
+	<</if>>
+<</for>>
+<br><br>
+//RESS is an amalgamated Random Event, Single Slave that combines existing single slave random events//
+<br><br>
+DEBUG:
+<br>
+[[RE no event]] | <<print "[[Go back to previous passage: '" + previous() + "'|previous()][$activeSlave = 0, $eventSlave = 0]] | [[Go all the way back to Scheduled Event|Scheduled Event][$activeSlave = 0, $eventSlave = 0]]">>
+

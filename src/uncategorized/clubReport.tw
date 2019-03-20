@@ -1,0 +1,282 @@
+:: Club Report [nobr]
+
+<<SlaveSort $ClubiIDs>>
+<<set _DL = $ClubiIDs.length, $clubSlaves = _DL, _SL = $slaves.length, $clubBonuses = 0, $DJRepBonus = 0, $implanted = 0, $legendaryEntertainerID = 0, $modded = 0, $old = 0, $pure = 0, $slim = 0, $stacked = 0, $unmodded = 0, $XX = 0, $XY = 0, $young = 0, _FLsFetish = 0, _clubRepGain = 0>>
+
+<<if $DJ != 0>>
+	<<set _FLs = $slaves.findIndex(function(s) { return s.ID == $DJ.ID; })>>
+
+	<<if ($slaves[_FLs].health < -80)>>
+		<<set $slaves[_FLs].health += 20>>
+	<<elseif $slaves[_FLs].health < -40>>
+		<<set $slaves[_FLs].health += 15>>
+	<<elseif $slaves[_FLs].health < 0>>
+		<<set $slaves[_FLs].health += 10>>
+	<<elseif $slaves[_FLs].health < 90>>
+		<<set $slaves[_FLs].health += 7>>
+	<</if>>
+	<<if $slaves[_FLs].devotion <= 60>>
+		<<set $slaves[_FLs].devotion += 5>>
+	<</if>>
+	<<if $slaves[_FLs].trust < 60>>
+		<<set $slaves[_FLs].trust += 3>>
+	<</if>>
+	<<if $slaves[_FLs].fetishStrength <= 95>>
+		<<if $slaves[_FLs].fetish != "humiliation">>
+			<<fetishChangeChance $slaves[_FLs]>>
+			<<if $fetishChangeChance > random(0,100)>>
+				<<set _FLsFetish = 1, $slaves[_FLs].fetishKnown = 1, $slaves[_FLs].fetish = "humiliation">>
+			<</if>>
+		<<elseif $slaves[_FLs].fetishKnown == 0>>
+			<<set _FLsFetish = 1, $slaves[_FLs].fetishKnown = 1>>
+		<<else>>
+			<<set _FLsFetish = 2, $slaves[_FLs].fetishStrength += 4>>
+		<</if>>
+	<</if>>
+	<<set $DJ = $slaves[_FLs]>>
+	&nbsp;&nbsp;&nbsp;&nbsp;$DJ.slaveName is performing as the DJ.
+	<<if $DJ.relationship == -3>>
+		She tries her best to be your energetic, cheerful wife.
+		<<set $DJRepBonus += 0.1>>
+	<</if>>
+	<<if (_FLsFetish == 1)>>
+		She's expected to be the innovative, beautiful DJ spinning beats one minute, and come out of her booth to grind on the floor the next; she enjoys the interplay, and finds greater @@.lightcoral;pleasure in exhibitionism.@@
+	<<elseif (_FLsFetish == 2)>>
+		Every day she gets to enjoy hundreds of stares on her skin, and @@.lightsalmon;becomes more of an exhibitionist.@@
+	<</if>>
+	<<if ($DJ.eyes == -2)>>
+		Her lack of eyesight doesn't slow her down; rather, it strengthens her other senses. Her tracks have a distinct sound, since she experiences noise as her sight.
+		<<set $DJRepBonus += 0.15>>
+	<</if>>
+	<<if ($DJ.entertainSkill <= 10)>>
+		Though $DJ.slaveName does her best to lead on the club, with her lack of skill she can do little.
+	<<elseif ($DJ.entertainSkill <= 30)>>
+		$DJ.slaveName's basic skills marginally @@.green;improve@@ the atmosphere on $clubName.
+		<<set $DJRepBonus += 0.05>>
+	<<elseif ($DJ.entertainSkill <= 60)>>
+		$DJ.slaveName's skills @@.green;improve@@ the atmosphere on $clubName.
+		<<set $DJRepBonus += 0.1>>
+	<<elseif ($DJ.entertainSkill < 100)>>
+		$DJ.slaveName's skills greatly @@.green;improve@@ the atmosphere on $clubName.
+		<<set $DJRepBonus += 0.15>>
+	<<elseif ($DJ.entertainSkill >= 100)>>
+		$DJ.slaveName's mastery immensely @@.green;improves@@ the atmosphere on $clubName.
+		<<set $DJRepBonus += 0.20>>
+	<</if>>
+	<<if ($DJ.muscles > 5) && ($DJ.muscles <= 95)>>
+		Her toned body helps her lead her fellow club girls by letting her dance all night.
+		<<set $DJRepBonus += 0.05>>
+	<</if>>
+	<<if ($DJ.intelligence > 0)>>
+		She's smart enough to make an actual contribution to the music, greatly enhancing the entire experience.
+		<<set $DJRepBonus += 0.05*$DJ.intelligence>>
+	<</if>>
+	<<if ($DJ.face > 95)>>
+		Her great beauty is a further draw, even when she's in her DJ booth, but especially when she comes out to dance.
+		<<set $DJRepBonus += 0.05>>
+	<</if>>
+	<<if setup.DJCareers.includes($DJ.career)>>
+		She has musical experience from her life before she was a slave, a grounding that gives her tracks actual depth.
+		<<set $DJRepBonus += 0.05>>
+	<</if>>
+	<<if (_DL < 5)>>
+		<<set $slavesGettingHelp = 0>>
+		<<if $universalRulesFacilityWork == 1>>
+			<<for $i = 0; $i < _SL; $i++>>
+				<<if ($slaves[$i].assignment == "serve the public")>>
+					<<set $slavesGettingHelp++>>
+				<</if>>
+			<</for>>
+		<</if>>
+		<<if (_DL+$slavesGettingHelp < 5)>>
+			<<set $i = _FLs>> /* apply following SA passages to facility leader */
+			<<if ($legendaryEntertainerID == 0) && ($slaves[_FLs].prestige == 0) && ($slaves[_FLs].entertainSkill >= 100) && ($slaves[_FLs].devotion > 50)>>
+				<<set $legendaryEntertainerID = $slaves[_FLs].ID>>
+			<</if>>
+			<<if $showEWD != 0>>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;She <<include "SA serve the public">>
+			<<else>>
+				<<silently>><<include "SA serve the public">><</silently>>
+			<</if>>
+			<<set _clubRepGain += Math.trunc(($beauty*$FResult)*(1+(0.003*$slaves[_FLs].entertainSkill))*0.1*0.5)>>
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;Since she doesn't have enough sluts in $clubName to make it worthwhile for her to be on stage 24/7, she spends her extra time slutting it up herself. She has sex with $beauty citizens, @@.green;pleasing them immensely,@@ since it's more appealing to fuck the DJ than some club slut.
+		<</if>>
+	<</if>>
+	<<if (_DL > 0)>><br><br><</if>>
+<</if>>
+
+<<if (_DL > 0)>>
+	<<set _possibleBonuses = 0>>
+	&nbsp;&nbsp;&nbsp;&nbsp;<<if (_DL != 1)>>''The _DL slaves pleasing citizens in $clubName''<<else>>''The one slave pleasing citizens in $clubName''<</if>> worked hard to @@.green;increase your reputation@@ this week.
+<</if>>
+
+<<if ($DJ != 0)>>
+	<<set $i = _FLs>> /* apply following SA passages to facility leader */
+	<<if $showEWD != 0>>
+		<br><br>
+		/* 000-250-006 */
+		<<if $seeImages == 1 && $imageChoice == 0>>
+		<div class="imageRef tinyImg">
+			<<SlaveArt $slaves[_FLs] 0 0>>
+		</div>
+		<</if>>
+		/* 000-250-006 */
+		''__@@.pink;$slaves[_FLs].slaveName@@__'' is performing as the DJ in $clubName.
+		<br>&nbsp;&nbsp;&nbsp;
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<br><<include "SA devotion">>
+	<<else>>
+		<<silently>>
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<<include "SA devotion">>
+		<</silently>>
+	<</if>>
+	<<set $DJ = $slaves[_FLs]>>
+<</if>>
+
+<<if (_DL > 0)>>
+	<<for _dI = 0; _dI < _DL; _dI++>>
+		<<set $i = $slaveIndices[$ClubiIDs[_dI]]>>
+		<<if ($legendaryEntertainerID == 0) && ($slaves[$i].prestige == 0) && ($slaves[$i].entertainSkill >= 100) && ($slaves[$i].devotion > 50)>>
+			<<set $legendaryEntertainerID = $slaves[$i].ID>>
+		<</if>>
+		<<if ($slaves[$i].devotion <= 20) && ($slaves[$i].trust > -20)>>
+			<<set $slaves[$i].devotion -= 5, $slaves[$i].trust -= 5>>
+		<<elseif ($slaves[$i].devotion < 45)>>
+			<<set $slaves[$i].devotion += 4>>
+		<<elseif ($slaves[$i].devotion >= 50)>>
+			<<set $slaves[$i].devotion -= 4>>
+		<</if>>
+
+		<<if ($slaves[$i].trust < 30)>>
+			<<set $slaves[$i].trust += 5>>
+		<</if>>
+
+		<<if ($slaves[$i].health < -80)>>
+			<<set $slaves[$i].health += 20>>
+		<<elseif ($slaves[$i].health < -40)>>
+			<<set $slaves[$i].health += 15>>
+		<<elseif ($slaves[$i].health < 0)>>
+			<<set $slaves[$i].health += 10>>
+		<<elseif ($slaves[$i].health < 90)>>
+			<<set $slaves[$i].health += 7>>
+		<</if>>
+
+		<<if $showEWD != 0>>
+			<br><br>
+			/* 000-250-006 */
+			<<if $seeImages == 1 && $imageChoice == 0>>
+			<div class="imageRef tinyImg">
+				<<SlaveArt $slaves[$i] 0 0>>
+			</div>
+			<</if>>
+			/* 000-250-006 */
+			''__@@.pink;$slaves[$i].slaveName@@__''
+			<<if $slaves[$i].choosesOwnAssignment == 2>>
+				<<include "SA chooses own job">>
+			<<else>>
+				is serving in $clubName.
+			<</if>>
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;She <<include "SA serve the public">>
+			<br>&nbsp;&nbsp;&nbsp;
+			<<include "SA chooses own clothes">>
+			<<include "SA diet">>
+			<<include "SA long term effects">>
+			<<include "SA drugs">>
+			<<include "SA relationships">>
+			<<include "SA rivalries">>
+			<br><<include "SA devotion">>
+		<<else>>
+			<<silently>>
+			<<include "SA chooses own job">>
+			<<include "SA serve the public">>
+			<<include "SA chooses own clothes">>
+			<<include "SA diet">>
+			<<include "SA long term effects">>
+			<<include "SA drugs">>
+			<<include "SA relationships">>
+			<<include "SA rivalries">>
+			<<include "SA devotion">>
+			<</silently>>
+		<</if>>
+	<</for>>
+
+	<br><br>&nbsp;&nbsp;&nbsp;
+	<<if $clubAdsSpending != 0>>
+		An ad campaign is getting citizens into the club every night, and sluts that match it gratify patrons.
+	<</if>>
+
+	<<if ($arcologies[0].FSAssetExpansionist == "unset") && ($arcologies[0].FSSlimnessEnthusiast == "unset")>>
+	<<if ($clubAdsSpending == 0) || ($clubAdsStacked == 0)>>
+		<<set _possibleBonuses++>>
+		<<if ($slim > 0) && ($stacked > 0) && (Math.abs($slim-$stacked) <= (_DL/3))>>
+		<<set _clubRepGain += _DL*random(5,10), $clubBonuses++>>
+		There is a @@.green;wide@@ variety of slim and stacked slaves working the club.
+		<</if>>
+	<</if>>
+	<</if>>
+	<<if ($arcologies[0].FSDegradationist == "unset") && ($arcologies[0].FSBodyPurist == "unset")>>
+	<<if ($clubAdsSpending == 0) || ($clubAdsModded == 0)>>
+		<<set _possibleBonuses++>>
+		<<if ($modded > 0) && ($unmodded > 0) && (Math.abs($modded-$unmodded) <= (_DL/3))>>
+		<<set _clubRepGain += _DL*random(5,10), $clubBonuses++>>
+		There are @@.green;both@@ heavily pierced and tattooed slaves and slaves with more natural bodies filling the club.
+		<</if>>
+	<</if>>
+	<</if>>
+	<<if ($arcologies[0].FSTransformationFetishist == "unset") && ($arcologies[0].FSBodyPurist == "unset")>>
+	<<if ($clubAdsSpending == 0) || ($clubAdsImplanted == 0)>>
+		<<set _possibleBonuses++>>
+		<<if ($implanted > 0) && ($pure > 0) && (Math.abs($implanted-$pure) <= (_DL/3))>>
+		<<set _clubRepGain += _DL*random(5,10), $clubBonuses++>>
+		Citizens in $clubName can easily find @@.yellowgreen;both@@ all-natural girls, and slaves whose beauty has been improved by surgical means.
+		<</if>>
+	<</if>>
+	<</if>>
+	<<if ($seeDicks != 0)>>
+	<<if ($clubAdsSpending == 0) || ($clubAdsXX == 0)>>
+		<<set _possibleBonuses++>>
+		<<if ($XX > 0) && ($XY > 0) && (Math.abs($XX-$XY) <= (_DL/3))>>
+		<<set _clubRepGain += _DL*random(5,10), $clubBonuses++>>
+		The club offers a @@.green;mix@@ of sluts that can appeal to varied tastes in genitalia.
+		<</if>>
+	<</if>>
+	<</if>>
+	<<if ($arcologies[0].FSMaturityPreferentialist == "unset") && ($arcologies[0].FSYouthPreferentialist == "unset")>>
+	<<if ($clubAdsSpending == 0) || ($clubAdsOld == 0)>>
+		<<set _possibleBonuses++>>
+		<<if ($young > 0) && ($old > 0) && (Math.abs($young-$old) <= (_DL/3))>>
+		<<set _clubRepGain += _DL*random(5,10), $clubBonuses++>>
+		There are girls @@.green;both@@ young and mature in $clubName.
+		<</if>>
+	<</if>>
+	<</if>>
+
+	<<if (_possibleBonuses > 0) && ($clubBonuses >= _possibleBonuses)>>
+		<<set _clubRepGain += _DL*random(10,15)>>
+		There is a ''@@.green;perfect variety@@'' of slaves serving the public from $clubName.
+	<<else>>
+		$clubNameCaps does not offer enough variety to satisfy all visitors.
+	<</if>>
+	<<if $clubDecoration != "standard">>
+		$clubNameCaps's customers enjoy @@.green;having sex in $clubDecoration surroundings.@@
+	<</if>>
+
+<</if>>
+
+<<set $repGain += _clubRepGain>>
+<<set $lastWeeksFinances.incomeClub = _clubRepGain>>
+
+<<if _DL > 0 || $DJ != 0>>
+	<br><br>
+<</if>>

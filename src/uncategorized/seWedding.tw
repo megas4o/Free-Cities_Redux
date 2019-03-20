@@ -1,0 +1,174 @@
+:: SE wedding [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "AS Dump">>
+<<set $returnTo = "Scheduled Event">>
+
+<<set $activeSlave.relationship = -3>>
+
+<<if $weddingPlanned == 3>>
+	<<if !isFertile($activeSlave)>>
+	$activeSlave.slaveName can no longer be impregnated as planned for the ceremony, so it has been hurriedly recast as a normal slave wedding.
+	<<set $weddingPlanned = 1>>
+	<br><br>
+	<</if>>
+<</if>>
+
+<<if $weddingPlanned == 3>>
+	The ceremony to bind $activeSlave.slaveName to you as your slave wife, and her womb to you as your private breeding ground, is a polite affair which you host in the lower floor of your penthouse. All the arcology's most prominent citizens are there, most with a favored slave or two and some even with their slave wives. Many of your other slaves, that is your slaves who are not being married and fucked pregnant tonight, are present to serve your guests, but are dressed more conservatively than usual. When assignations between citizen and slave develop, guests are politely encouraged to perform them in side rooms rather than out in view of the main gathering.
+	<br><br>
+	$activeSlave.slaveName appears after everyone has had a chance to socialize,<<if ($activeSlave.amp == 1)>> carried by another slave since she's a quadruple amputee and she cannot walk,<</if>> wearing beautiful bridal lingerie in
+	<<if ($activeSlave.vagina == 0)>>
+		white, since she's a virgin.
+	<<elseif ($activeSlave.dick > 0)>>
+		hot pink, since she's a futa slave.
+	<<else>>
+		light pink, since she's an experienced sex slave.
+	<</if>>
+	A filmy veil covers her head and shoulders.
+	<<if ($activeSlave.boobs > 4000)>>
+		Her lacy bridal bra is a marvel of engineering, discreetly reinforced to support her gigantic udders.
+	<<elseif ($activeSlave.boobs > 1200)>>
+		Her lacy bridal bra just barely restrains her huge boobs, leaving the tops of her areolae visible.
+	<<elseif ($activeSlave.boobs > 400)>>
+		Her lacy bridal bra flatters her pretty breasts.
+	<<else>>
+		Her lacy bridal bra flatters her pretty chest.
+	<</if>>
+	<<if ($activeSlave.dick > 0) && canAchieveErection($activeSlave)>>
+		<<if $activeSlave.dick > 4>>
+		She's hugely erect, with her lacy g-string only serving to hold her dick upright along her belly.
+		<<else>>
+		Her erection tents the front of her lacy g-string.
+		<</if>>
+	<<elseif ($activeSlave.dick > 0)>>
+		<<if $activeSlave.dick > 4>>
+		Her big soft cock forms a lewd mass, stuffed into her lacy g-string.
+		<<else>>
+		Her lacy g-string perfectly conceals her soft dick.
+		<</if>>
+	<<else>>
+		<<if $activeSlave.clit > 1>>
+		Her huge clit is quite hard, making her shift uncomfortably as her lacy g-string stimulates it.
+		<<else>>
+		Her lacy g-string covers her womanhood demurely.
+		<</if>>
+	<</if>>
+	There is no aisle for her to <<if $activeSlave.amp == 1>>be carried<<else>>walk<</if>> down, just a small space at the head of the room where you're standing alone, and there's no one to <<if $activeSlave.amp == 1>>walk alongside the slave carrying<<else>>walk<</if>> her there; this symbolizes her submission to you of her own choice, and she does so willingly.
+	<br><br>
+	When she's in front of you, <<if $activeSlave.amp == 1>>the slave carrying her limbless torso sets her down on the floor in front of you and props her up so her head is level with your crotch<<else>>she gets down on her knees so her head is level with your crotch<</if>>. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> reads the short recitation for her, and you place a simple steel ring <<if $activeSlave.amp == 1>>on a cord around her neck, since she lacks fingers to wear it on<<else>>on her finger<</if>>. There is no ring for you, since this marriage does not bind you.
+	<br><br>
+	Then, you <<if $activeSlave.amp == 1>>gather her up and hold her in front of you, pulling her panties off as you do. Showing considerable dexterity, you maneuver your dick inside her while holding her against your <<if $PC.boobs == 1>>breasts<<else>>chest<</if>><<else>>take her hand and pull her to her feet while she shimmies out of her panties. She cocks her hips for you and you slide your cock inside her before taking her knees and drawing them up to hold her in midair, impaled on you<</if>>. She is left to face your guests, watching raptly as you fuck her fertile cunt. Though her face is towards the crowd, her mind is concentrated on your hard cock, pumping in and out of her at an angle; to her, it's @@.mediumaquamarine;concrete proof that she's special to you.@@ She gasps when your seed flows into her, orgasming herself to @@.green;applause from your guests.@@ You'll fuck her repeatedly over the next few days, ensuring impregnation.
+	<<set $activeSlave.preg = 1, $activeSlave.pregSource = -1>>
+	<<SetPregType $activeSlave>>
+	<<if ($activeSlave.vagina == 0)>>
+		Naturally, the ceremony @@.lime;took her virginity,@@ @@.hotpink;pleasing her.@@
+		<<set $activeSlave.vagina = 1>>
+		<<set $activeSlave.devotion += 5>>
+	<</if>>
+	<<if ($activeSlave.fetish == "pregnancy")>>
+	<<if ($activeSlave.fetishStrength > 60)>>
+		As a pregnancy fetishist, @@.hotpink;she confidently believes this wedding will be the high point of her life.@@
+		<<set $activeSlave.devotion += 20>>
+	<</if>>
+	<</if>>
+	<<set $activeSlave.vaginalCount += 1>>
+	<<set $vaginalTotal += 1>>
+	<<set $rep += 750>>
+	<<set $desc = "a framed shot of you impregnating " + $activeSlave.slaveName + " at your wedding">>
+	<<set $trinkets.push($desc)>>
+<<elseif $weddingPlanned == 2>>
+	The ceremony to bind $activeSlave.slaveName to you as your slave wife is an all-day affair. She spent the day before resting and preparing herself, and this was a necessary precaution. She spends most of the daylong party at the center of a nonstop gangbang. The theory is that she'll be bound to you as your slave wife from this day onward, so she must get the promiscuity that is a sex slave's responsibility out of the way now. Whatever their opinions on the idea, @@.green;your guests take part with enthusiasm,@@ many having brought their own slaves to participate, too. $activeSlave.slaveName spends hours with numerous cocks inside her, with attending slaves using their mouths on any erogenous zones they can reach. When the moment of the ceremony nears, she's extracted and taken off to be bathed.
+	<br><br>
+	She returns shortly, looking exhausted but rather proud of herself for getting through all that. She's naked still, her skin clean and $activeSlave.skin, and comes confidently to stand by you for the ceremony. The only evident signs that she's had sex with more than a hundred people today is her ass, which looks rather well-traveled, and her tiredness. She does her best to conceal how ready to sleep she is, but she leans against you a little. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> reads the short recitation for her, and you place a simple steel ring <<if $activeSlave.amp == 1>>on a cord around her neck, since she lacks fingers to wear it on<<else>>on her finger<</if>>. There is no ring for you, since this marriage does not bind you.
+	<br><br>
+	Once the ceremony is complete, you scoop up your new slave wife to carry her back into the master bedroom. She rests her head against <<if $PC.boobs == 1>>your breasts<<else>>your strong chest<</if>> as you cradle her in your arms, and by the time she's home, she's fast asleep. You set her gently down on the bed and curl up behind her, feeling the animal warmth of her body as the exhausted slave's chest rises and falls with her breathing.
+
+	<<if ndef $activeSlave.publicCount>>
+		<<set $activeSlave.publicCount = 0>>
+	<</if>>
+	<<if $activeSlave.vagina > 0>>
+		<<set $activeSlave.vaginalCount += 50>>
+		<<set $vaginalTotal += 50>>
+		<<set $activeSlave.publicCount += 50>>
+	<</if>>
+	<<if $activeSlave.anus < 3>>
+		<<set $activeSlave.anus += 1>>
+		You can feel her ass, still somewhat gaped from its ordeal. It's been @@.lime;loosened@@ by her wedding party.
+	<</if>>
+	<<set $activeSlave.oralCount += 50>>
+	<<set $oralTotal += 50>>
+	<<set $activeSlave.analCount += 50>>
+	<<set $analTotal += 50>>
+	<<set $activeSlave.publicCount += 100>>
+	<<set $rep += 1000>>
+	<<set $desc = "a framed shot of " + $activeSlave.slaveName + " getting gangbanged at your wedding">>
+	<<set $trinkets.push($desc)>>
+<<else>>
+	The ceremony to bind $activeSlave.slaveName to you as your slave wife is a polite affair which you host in the lower floor of your penthouse. All the arcology's most prominent citizens are there, most with a favored slave or two and some even with their slave wives. Many of your other slaves, that is your slaves who are not being married tonight, are present to serve your guests, but are dressed more conservatively than usual. When assignations between citizen and slave develop, guests are politely encouraged to perform them in side rooms rather than out in view of the main gathering.
+	<br><br>
+	$activeSlave.slaveName appears after everyone has had a chance to socialize,<<if ($activeSlave.amp == 1)>> carried by another slave since she's a quadruple amputee and she cannot walk,<</if>> wearing beautiful bridal lingerie in
+	<<if ($activeSlave.vagina == 0)>>
+		white, since she's a virgin.
+	<<elseif ($activeSlave.preg > 0)>>
+		light pink, since she's pregnant.
+	<<elseif ($activeSlave.vagina < 0) && ($activeSlave.anus == 0)>>
+		white, since she's an anal virgin.
+	<<elseif ($activeSlave.vagina < 0) && ($activeSlave.boobs > 500)>>
+		electric blue, since she's a shemale.
+	<<elseif ($activeSlave.vagina < 0)>>
+		pale blue, since she's a sissy slave.
+	<<elseif ($activeSlave.dick > 0)>>
+		hot pink, since she's a futa slave.
+	<<else>>
+		light pink, since she's an experienced sex slave.
+	<</if>>
+	A filmy veil covers her head and shoulders.
+	<<if ($activeSlave.boobs > 4000)>>
+		Her lacy bridal bra is a marvel of engineering, discreetly reinforced to support her gigantic udders.
+	<<elseif ($activeSlave.boobs > 1200)>>
+		Her lacy bridal bra just barely restrains her huge boobs, leaving the tops of her areolae visible.
+	<<elseif ($activeSlave.boobs > 400)>>
+		Her lacy bridal bra flatters her pretty breasts.
+	<<else>>
+		Her lacy bridal bra flatters her pretty chest.
+	<</if>>
+	<<if ($activeSlave.preg > 10)>>
+		Her pregnant belly protrudes out the front of her bridal wear.
+	<</if>>
+	<<if $activeSlave.dickAccessory == ("chastity")>>
+		Her slave dick is hidden by its chastity cage.
+	<<elseif ($activeSlave.dick > 0) && ($activeSlave.balls > 0) && ($activeSlave.hormones < 1)>>
+		<<if ($activeSlave.dick > 4) && ($activeSlave.preg > 10)>>
+		She's hugely erect, with her lacy g-string only serving to hold her dick agonizingly pressed against the bottom of her pregnant belly.
+		<<elseif $activeSlave.dick > 4>>
+		She's hugely erect, with her lacy g-string only serving to hold her dick upright along her belly.
+		<<else>>
+		Her erection tents the front of her lacy g-string.
+		<</if>>
+	<<elseif ($activeSlave.dick > 0)>>
+		<<if $activeSlave.dick > 4>>
+		Her big soft cock forms a lewd mass, stuffed into her lacy g-string.
+		<<else>>
+		Her lacy g-string perfectly conceals her soft dick.
+		<</if>>
+	<<else>>
+		<<if $activeSlave.clit > 1>>
+		Her huge clit is quite hard, making her shift uncomfortably as her lacy g-string stimulates it.
+		<<else>>
+		Her lacy g-string covers her womanhood demurely.
+		<</if>>
+	<</if>>
+	There is no aisle for her to <<if $activeSlave.amp == 1>>be carried<<else>>walk<</if>> down, just a small space at the head of the room where you're standing alone, and there's no one to <<if $activeSlave.amp == 1>>walk alongside the slave carrying<<else>>walk<</if>> her there; this symbolizes her submission to you of her own choice, and she does so willingly.
+	<br><br>
+	When she's in front of you, <<if $activeSlave.amp == 1>>the slave carrying her limbless torso sets her down on the floor in front of you and props her up so her head is level with your crotch<<else>>she gets down on her knees so her head is level with your crotch<</if>>. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> reads the short recitation for her, and you place a simple steel ring <<if $activeSlave.amp == 1>>on a cord around her neck, since she lacks fingers to wear it on<<else>>on her finger<</if>>. There is no ring for you, since this marriage does not bind you.
+	<br><br>
+	Then, you flip her veil over her head so she can <<if $PC.dick == 1>>suck your dick<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>eat you out<</if>> in front of your guests, as the ceremony requires. She approaches her task <<if ($activeSlave.fetish == "cumslut")>>enthusiastically<<else>>with a will<</if>>, and you climax promptly, <<if $PC.dick == 1>>shooting your cum down her throat<<else>>covering her face in girlcum<</if>>. Your guests and their attendant slaves @@.green;applaud at the consummation,@@ or rather, at the first stage of the consummation. The balance will take place privately, however, and you scoop up your new slave wife to carry her back into the master bedroom. She rests her head against <<if $PC.boobs == 1>>your breasts<<else>>your strong chest<</if>> as you cradle her in your arms, staring up at you.
+	<<set $activeSlave.oralCount += 1>>
+	<<set $oralTotal += 1>>
+	<<set $rep += 750>>
+	<<set $desc = "a framed shot of your romantic wedding to " + $activeSlave.slaveName>>
+	<<set $trinkets.push($desc)>>
+<</if>>
+
+<<set $weddingPlanned = 0>>

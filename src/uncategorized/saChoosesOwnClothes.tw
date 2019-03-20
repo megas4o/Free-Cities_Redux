@@ -1,0 +1,310 @@
+:: SA chooses own clothes [nobr]
+
+<<if $slaves[$i].choosesOwnClothes == 1>>
+
+<<SlavePronouns $slaves[$i]>>
+
+<<set $bellyAccessory = $slaves[$i].bellyAccessory>>
+
+<<if $slaves[$i].fetish == "mindbroken">>
+	$pronounCap is fundamentally broken, but still follows some faint memories of standing within the wardrobe.
+	<<if $slaves[$i].amp != 1 && $slaves[$i].heels == 1>>
+		$pronounCap finds $pronoun can inexplicably walk if $pronoun wears heels; a daily lesson for $object, as $pronoun forgets shortly after leaving.
+		<<set $slaves[$i].shoes = either("heels", "extreme heels", "boots")>>
+	<</if>>
+	Faced with so many choices and no thought on the matter;
+	<<if ($arcologies[0].FSChattelReligionist > 0)>>
+		$pronoun commonly sees others wearing chattel habits and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = "a chattel habit">>
+	<<elseif ($arcologies[0].FSEgyptianRevivalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing nothing but jewelry and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = "slutty jewelry">>
+	<<elseif ($arcologies[0].FSRomanRevivalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing togas and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = "a toga">>
+	<<elseif ($arcologies[0].FSAztecRevivalist > 0) && (random(1,3) == 1)>>
+		$pronoun wears a very revealing huipil that accentuates $possessive body.
+		<<set $slaves[$i].clothes = "a huipil">>
+	<<elseif ($arcologies[0].FSEdoRevivalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing kimonos and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = "a kimono">>
+	<<elseif ($arcologies[0].FSArabianRevivalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing silk and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = "harem gauze">>
+	<<elseif ($arcologies[0].FSChineseRevivalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing qipaos and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = "a slutty qipao">>
+	<<elseif ($arcologies[0].FSGenderFundamentalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees cheerleaders around and instinctually follows along.
+		<<set $slaves[$i].clothes = either("a cheerleader outfit", "a schoolgirl outfit")>>
+	<<elseif ($arcologies[0].FSGenderFundamentalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees bunnies around and instinctually follows along.
+		<<set $slaves[$i].clothes = "a bunny outfit">>
+	<<elseif ($arcologies[0].FSPaternalist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing clothing and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = "conservative clothing">>
+	<<elseif ($arcologies[0].FSMaturityPreferentialist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing suits and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = either("slutty business attire", "a nice maid outfit", "a military uniform", "nice business attire")>>
+	<<elseif ($arcologies[0].FSYouthPreferentialist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees schoolgirls around and instinctually follows along.
+		<<set $slaves[$i].clothes = either("a schoolgirl outfit", "a cheerleader outfit")>>
+	<<elseif ($arcologies[0].FSDegradationist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing chains and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = either("chains", "uncomfortable straps", "shibari ropes")>>
+	<<elseif ($arcologies[0].FSPhysicalIdealist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees naked girls around and seldom realizes they are coated in oil.
+		<<set $slaves[$i].clothes = either("body oil", "no clothing", "no clothing")>>
+	<<elseif ($arcologies[0].FSPastoralist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees cowgirls around and instinctually follows along.
+		<<set $slaves[$i].clothes = "Western clothing">>
+	<<elseif ($arcologies[0].FSBodyPurist > 0) && (random(1,3) == 1)>>
+		$pronoun commonly sees others wearing tight, form-fitting clothes and is drawn to doing so <<print $object>>self.
+		<<set $slaves[$i].clothes = either("a leotard", "a string bikini", "a slave gown", "a comfortable bodysuit", "restrictive latex", "clubslut netting", "a leotard", "a halter top dress")>>
+	<<else>>
+		$pronoun chooses to put on underwear, the reasons lost to $possessive, and moves on.
+		<<set $slaves[$i].clothes = "attractive lingerie">>
+	<</if>>
+<<else>>
+
+<<if ($slaves[$i].devotion <= 20)>>
+	$pronounCap uses the ability to select outfits to cover up with comfortable cut-offs and a t-shirt,
+	<<set $slaves[$i].clothes = "cutoffs and a t-shirt">>
+	<<if ($slaves[$i].amp != 1)>>
+	<<if ($slaves[$i].heels == 0)>>
+	and wears comfortable flats,
+	<<set $slaves[$i].shoes = "flats">>
+	<<else>>
+	and angrily wears the heels $pronoun needs to walk,
+	<<set $slaves[$i].shoes = "heels">>
+	<</if>>
+	<</if>>
+	@@.mediumorchid;increasing $possessive independence.@@
+	<<set $slaves[$i].devotion -= 5>>
+
+<<else>>
+	$pronounCap @@.hotpink;loves@@ being able to dress <<print $object>>self,
+	<<set $slaves[$i].devotion += 1>>
+
+<<if ($arcologies[0].FSEgyptianRevivalist > 0)>>
+	dons a wesekh to support your ancient Egyptian pretensions,
+	<<set $slaves[$i].collar = "ancient Egyptian">>
+<</if>>
+
+<<if ($slaves[$i].preg <= 10) && ($slaves[$i].fetish == "pregnancy") && ($clothesBoughtBelly == 1 || $cheatMode == 1) && ($slaves[$i].sexualFlaw != "breeder")>>
+	<<if ($slaves[$i].fetishStrength <= 60)>>
+	  <<set _bellySeed = random(1,3)>>
+	  <<if _bellySeed == 1>>
+		straps on a 1st trimester belly to satisfy $possessive curiosity,
+		<<set $slaves[$i].bellyAccessory = "a small empathy belly">>
+	  <<elseif _bellySeed == 2>>
+		straps on a 2nd trimester belly to satisfy $possessive curiosity,
+		<<set $slaves[$i].bellyAccessory = "a medium empathy belly">>
+	  <<else>>
+		straps on a 3rd trimester belly to satisfy $possessive curiosity,
+		<<set $slaves[$i].bellyAccessory = "a large empathy belly">>
+	  <</if>>
+	<<elseif ($slaves[$i].fetishStrength > 60)>>
+	  straps on a 3rd trimester belly to satisfy $possessive pregnancy fetish,
+	  <<set $slaves[$i].bellyAccessory = "a large empathy belly">>
+	  straps on the largest belly $pronoun can find to satisfy $possessive pregnancy fetish,
+	  <<set $slaves[$i].bellyAccessory = "a huge empathy belly">>
+	<</if>>
+<<elseif (setup.fakeBellies.includes($bellyAccessory)) && ($slaves[$i].fetish != "pregnancy")>>
+	removes $possessive fake belly, since $pronoun dislikes it,
+	<<set $slaves[$i].bellyAccessory to "none">>
+<<elseif (setup.fakeBellies.includes($bellyAccessory)) && ($slaves[$i].sexualFlaw == "breeder")>>
+	pulls $possessive fake belly off, disgusted by it,
+	<<set $slaves[$i].bellyAccessory = "none">>
+<</if>>
+
+<<if ($arcologies[0].FSChattelReligionist > 0)>>
+	and wears a chattel habit to conform to your arcology's culture.
+	<<set $slaves[$i].clothes = "a chattel habit">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist > 0) && (random(1,3) == 1)>>
+	and complements it with golden bangles, since no clothing is necessary for a sex slave in your warm and sunny arcology.
+	<<set $slaves[$i].clothes = "slutty jewelry">>
+<<elseif ($arcologies[0].FSRomanRevivalist > 0) && (random(1,3) == 1)>>
+	and wears a toga to take part in your Roman revivalism.
+	<<set $slaves[$i].clothes = "a toga">>
+<<elseif ($arcologies[0].FSEdoRevivalist > 0) && (random(1,3) == 1)>>
+	and wears a kimono, overjoyed that such lovely clothing is now appropriate.
+	<<set $slaves[$i].clothes = "a kimono">>
+<<elseif ($arcologies[0].FSArabianRevivalist > 0) && (random(1,3) == 1)>>
+	and wears a harem outfit to look like a slave girl fit for a Sultan.
+	<<set $slaves[$i].clothes = "harem gauze">>
+<<elseif ($arcologies[0].FSChineseRevivalist > 0) && (random(1,3) == 1)>>
+	and wears a brief qipao to show off and look Chinese at the same time.
+	<<set $slaves[$i].clothes = "a slutty qipao">>
+<<elseif ($arcologies[0].FSGenderFundamentalist > 0) && (random(1,3) == 1)>>
+	and wears a cheerleader outfit to look like a hot slut.
+	<<set $slaves[$i].clothes = "a cheerleader outfit">>
+<<elseif ($arcologies[0].FSGenderFundamentalist > 0) && (random(1,3) == 1)>>
+	and wears a bunny outfit to look like a slut from the glory days.
+	<<set $slaves[$i].clothes = "a bunny outfit">>
+<<elseif ($arcologies[0].FSPaternalist > 0) && (random(1,3) == 1)>>
+	and wears conservative clothing, as permitted by your paternalism.
+	<<set $slaves[$i].clothes = "conservative clothing">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist > 0) && (random(1,3) == 1) && ($slaves[$i].age >= 30)>>
+	and wears a slutty suit to look like the ideal horny older woman.
+	<<set $slaves[$i].clothes = "slutty business attire">>
+<<elseif ($arcologies[0].FSYouthPreferentialist > 0) && (random(1,3) == 1)>>
+	and wears a schoolgirl outfit to look younger.
+	<<set $slaves[$i].clothes = "a schoolgirl outfit">>
+<<elseif ($arcologies[0].FSDegradationist > 0) && (random(1,3) == 1)>>
+	and wears chains, to degrade <<print $object>>self as required by your societal goals.
+	<<set $slaves[$i].clothes = "chains">>
+<<elseif ($arcologies[0].FSPhysicalIdealist > 0) && (random(1,3) == 1)>>
+	and coats <<print $object>>self in body oil to show off how $pronoun's part of your physical idealism.
+	<<set $slaves[$i].clothes = "body oil">>
+<<elseif ($arcologies[0].FSPastoralist > 0) && (random(1,3) == 1)>>
+	and wears Western clothing, since $pronoun thinks it fits with pastoralism.
+	<<set $slaves[$i].clothes = "Western clothing">>
+<<elseif ($arcologies[0].FSBodyPurist > 0) && (random(1,3) == 1)>>
+	and wears a leotard to show off the purity of $possessive body.
+	<<set $slaves[$i].clothes = "a leotard">>
+<<elseif ($slaves[$i].behavioralQuirk == "sinful") && (random(1,3) == 1)>>
+	and dresses up like a succubus because it makes $object feel naughty.
+	<<set $slaves[$i].clothes = "a succubus outfit">>
+<<elseif ($slaves[$i].assignment == "guard you")>>
+	<<if random(1,2) == 1>>
+	and wears a bodysuit to show off $possessive curves without hindering $possessive deadliness.
+	<<set $slaves[$i].clothes = "a comfortable bodysuit">>
+	<<else>>
+	and wears a military uniform to look the part of the honor guard.
+	<<set $slaves[$i].clothes = "a military uniform">>
+	<</if>>
+<<elseif ($slaves[$i].assignment == "be the Nurse")>>
+	and wears a nice nurse outfit to look professional before $possessive patients.
+	<<set $slaves[$i].clothes = "a nice nurse outfit">>
+<<elseif ($slaves[$i].assignment == "be your Recruiter")>>
+	and wears a flattering mini dress to appear sexy and carefree before those desperately seeking a better life.
+	<<set $slaves[$i].clothes = "a mini dress">>
+<<elseif ($slaves[$i].assignment == "be the Madam")>>
+	and wears a slutty suit to entice and arouse while still looking managerial.
+	<<set $slaves[$i].clothes = "slutty business attire">>
+<<elseif ($slaves[$i].assignment == "be the DJ")>>
+	and wears clubslut netting to look like the perfect easy club girl.
+	<<set $slaves[$i].clothes = "clubslut netting">>
+<<elseif ($slaves[$i].assignment == "be the Milkmaid")>>
+	and wears a sturdy maid outfit, since anything else might be damaged by $possessive hard work with the cows.
+	<<set $slaves[$i].clothes = "a nice maid outfit">>
+<<elseif ($slaves[$i].assignment == "be the Milkmaid") && canPenetrate($slaves[$i]) && $cumSlaves > 2>>
+	and wears a slutty nurse outfit to help keep $possessive charges hard.
+	<<set $slaves[$i].clothes = "a slutty nurse outfit">>
+<<elseif ($slaves[$i].assignment == "be your Head Girl")>>
+	and wears a handsome suit to give $object that extra touch of authority.
+	<<set $slaves[$i].clothes = "nice business attire">>
+<<elseif ($slaves[$i].assignment == "be the Schoolteacher")>>
+	and wears a schoolgirl outfit to help keep $possessive charges on task.
+	<<set $slaves[$i].clothes = "a schoolgirl outfit">>
+<<elseif ($slaves[$i].assignment == "be the Attendant")>>
+	and wears a string bikini, since it's all $pronoun can wear that won't be ruined by all the moisture in the spa.
+	<<set $slaves[$i].clothes = "a string bikini">>
+<<elseif ($slaves[$i].assignment == "be the Wardeness")>>
+	and dons battledress, the better to intimidate the prisoners.
+	<<set $slaves[$i].clothes = "battledress">>
+<<elseif ($slaves[$i].assignment == "be your concubine")>>
+	and goes naked, since it's $possessive honored role to be the chief object of your desire.
+	<<set $slaves[$i].clothes = "no clothing">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "submissive")>>
+	<<if random(1,2) == 1>>
+	and wears restrictive latex to encourage others to dominate $object.
+	<<set $slaves[$i].clothes = "restrictive latex">>
+	<<else>>
+	and wears shibari ropes to encourage others to dominate $object.
+	<<set $slaves[$i].clothes = "shibari ropes">>
+	<</if>>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "dom")>>
+	<<if random(1,2) == 1>>
+	and wears a handsome suit, since $pronoun likes other slaves to look up to $object.
+	<<set $slaves[$i].clothes = "nice business attire">>
+	<<else>>
+	and wears a full body latex catsuit to look the part of the whip cracking domme.
+	<<set $slaves[$i].clothes = "a latex catsuit">>
+	<</if>>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "masochist")>>
+	and wears painfully restrictive bondage gear, since $pronoun likes the torment.
+	<<set $slaves[$i].clothes = "uncomfortable straps">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "sadist")>>
+	and wears an elegant gown, since $pronoun thinks it makes $object look the part of the femme fatale.
+	<<set $slaves[$i].clothes = "a slave gown">>
+<<elseif ($slaves[$i].attrKnown == 1) && ($slaves[$i].attrXY > 85)>>
+	and wears a schoolgirl outfit to show off a some T&A to attract boys.
+	<<set $slaves[$i].clothes = "a schoolgirl outfit">>
+<<elseif ($slaves[$i].attrKnown == 1) && ($slaves[$i].attrXX > 85)>>
+	and wears a fashionable gown, since girls appreciate nice clothes.
+	<<set $slaves[$i].clothes = "a slave gown">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "cumslut")>>
+	and wears cut-offs and a t-shirt, because the fun yet relatively conservative outfit seems to encourage others to ask $object for blowjobs.
+	<<set $slaves[$i].clothes = "cutoffs and a t-shirt">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "humiliation")>>
+	and wears leather straps with rings over $possessive private parts because $pronoun enjoys the embarrassment such a humiliating outfit causes $object.
+	<<set $slaves[$i].clothes = "uncomfortable straps">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "buttslut")>>
+	and wears nothing other than slutty bangles, because $pronoun likes to catch the eye without putting anything between cocks and $possessive rear end.
+	<<set $slaves[$i].clothes = "slutty jewelry">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "mindbroken")>>
+	or would, if $pronoun were competent or sane.
+	<<set $slaves[$i].clothes = "no clothing">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "pregnancy")>>
+	and wears a short maid dress, because $pronoun wants to look motherly and fuckable at the same time.
+	<<set $slaves[$i].clothes = "a slutty maid outfit">>
+<<elseif ($slaves[$i].energy > 95)>>
+	but goes nude, since as a nympho $pronoun gets plenty of attention anyway, and considers clothes an unnecessary hindrance.
+	<<set $slaves[$i].clothes = "no clothing">>
+<<elseif ($slaves[$i].assignment == "rest")>>
+	and wears a comfortable t-shirt and cutoffs to relax.
+	<<set $slaves[$i].clothes = "cutoffs and a t-shirt">>
+<<elseif ($slaves[$i].assignment == "be a subordinate slave")>>
+	but gives up and goes naked after the other slaves constantly tear whatever $pronoun's wearing off $object.
+	<<set $slaves[$i].clothes = "no clothing">>
+<<elseif ($slaves[$i].assignment == "work a glory hole")>>
+	but doesn't bother wearing anything, since no one can see $possessive clothing when $pronoun's immured inside a glory hole.
+	<<set $slaves[$i].clothes = "no clothing">>
+<<elseif ($slaves[$i].assignment == "take classes") || ($slaves[$i].assignment == "learn in the schoolroom")>>
+	and wears a schoolgirl outfit, since it seems most appropriate.
+	<<set $slaves[$i].clothes = "a schoolgirl outfit">>
+<<elseif ($slaves[$i].assignment == "whore") || ($slaves[$i].assignment == "work in the brothel")>>
+	and wears pretty lingerie to show off $possessive merchandise and still look a little classy.
+	<<set $slaves[$i].clothes = "attractive lingerie">>
+<<elseif ($slaves[$i].assignment == "serve the public") || ($slaves[$i].assignment == "serve in the club")>>
+	and wears string lingerie to look fun and fuckable.
+	<<set $slaves[$i].clothes = "a string bikini">>
+<<elseif ($slaves[$i].assignment == "get milked") || ($slaves[$i].assignment == "work in the dairy")>>
+	and wears sturdy lingerie to offer the best support to $possessive sore, milk-filled udders.
+	<<set $slaves[$i].clothes = "attractive lingerie">>
+<<elseif ($slaves[$i].assignment == "be a servant") || ($slaves[$i].assignment == "work as a servant")>>
+	and wears a sturdy maid outfit, since anything else might be damaged by $possessive hard work around the penthouse.
+	<<set $slaves[$i].clothes = "a nice maid outfit">>
+<<else>>
+	and wears string lingerie to show off $possessive body.
+	<<set $slaves[$i].clothes = "a string bikini">>
+<</if>>
+
+
+<<if ($slaves[$i].amp != 1)>>
+<<if ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "dom")>>
+	$pronounCap wears boots to look like a proper dominant.
+	<<set $slaves[$i].shoes = "boots">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "sadist")>>
+	$pronounCap wears boots, since $pronoun thinks they make $possessive look dangerous.
+	<<set $slaves[$i].shoes = "boots">>
+<<elseif ($slaves[$i].heels == 1)>>
+	$pronounCap wears the heels $pronoun needs to walk.
+	<<set $slaves[$i].shoes = "heels">>
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "none")>>
+	$pronounCap wears comfortable flats, since $pronoun doesn't have a fetish to show off.
+	<<set $slaves[$i].shoes = "flats">>
+<<else>>
+	$pronounCap wears heels to strut $possessive stuff.
+	<<set $slaves[$i].shoes = "heels">>
+<</if>>
+<</if>>
+
+<</if>> /* closes devotion > 20 */
+
+<</if>> /* closes MB check */
+
+<</if>> /* closes choosesOwnClothes check */
+

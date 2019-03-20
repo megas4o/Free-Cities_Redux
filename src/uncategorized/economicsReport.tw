@@ -1,0 +1,54 @@
+:: Economics [nobr]
+
+<h1> <<print $arcologies[0].name + " Weekly Financial Report - Week " + $week>></h1>
+
+<<set $nextButton = "Continue", $nextLink = "Scheduled Event">>
+
+<<if $cash > -10000>>
+	<<set $debtWarned = 0>>
+<</if>>
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+<<if $slaves[$i].health <= -100>>
+	<<set $activeSlave = $slaves[$i]>>
+	<<include "Remove activeSlave">>
+	<<set $i -= 1>>
+<</if>>
+<</for>>
+
+<<SectorCounts>>
+<<UpdateOwnership>>
+
+<<include "Markets Report">>
+
+<br><br>
+
+<<include "Neighbors Development">>
+
+<br><br>
+
+<<include "Personal Business">>
+
+<br><br>
+
+<<if $corpAnnounced == 1>>
+	<br>
+	<<if $corpIncorporated == 0>>
+	<span id="incorporate">
+	You have not yet committed funds to create a publicly traded slave trading corporation. <<link "Lay the groundwork for incorporation">><<set $corpIncorporated = 1>><<set $sharePrice = 20>><<set $oldSharePrice = $sharePrice>><<set $personalShares = 2000>><<set $cash -= 30000>><<set $lastWeeksFinances.expensesStocks += 30000>><<set $publicShares = 1000>><<set $corpCash = 20000>><<set $generalAssets = 500>><<set $slaveAssets = 1000>><<set $entrapmentAssets = 500>><<set $captureAssets = 500>><<set $trainingAssets = 500>><<set $surgicalAssets = 500>><<set $drugAssets = 500>><<replace "#incorporate">><<print "The groundwork has been laid for the incorporation of a publicly traded slave trading concern. The IPO will involve 1000 shares at ¤20/share.">><</replace>><</link>> //Costs ¤30000//
+	</span>
+	<<else>>
+	<<include "Corporation Developments">>
+	<</if>>
+	<br><br>
+<</if>>
+<<include "Reputation">>
+
+<br><br>
+
+<<include "Arcology Management">>
+
+<<if $FSAnnounced > 0>>
+	<br><br>
+	<<include "FS Developments">>
+<</if>>

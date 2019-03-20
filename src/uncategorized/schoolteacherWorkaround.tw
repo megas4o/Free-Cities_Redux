@@ -1,0 +1,13 @@
+:: Schoolteacher Workaround [silently]
+
+<<if $Schoolteacher != 0>>
+	<<removeJob $Schoolteacher "be the Schoolteacher">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the Schoolteacher">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Schoolteacher = $slaves[$i]>>
+<</if>>
+
+<<goto "Schoolroom">>
+

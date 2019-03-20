@@ -1,0 +1,1593 @@
+:: birth widgets [widget nobr]
+
+<<widget "Birth">>
+<br>
+<<if $birthDamage > 5 or $universalRulesCSec == 1>>
+	<<if $universalRulesCSec == 1>>
+		<<set $csec = 1>>
+		<<set $slaves[$i].cSec = 1>>
+		<<if $clinic != 0>>
+			$slaves[$i].slaveName is taken to $clinicName, since she is scheduled for a cesarean section. She is helped from her clothes and into a comfortable hospital bed to relax until the surgery suite is prepped. After several minutes, she is transferred to the surgery wing. Following her c-section, she is returned to the recovery wing to rest. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is left under observation to make sure she recovers.
+		<<else>>
+			$slaves[$i].slaveName is taken to the auto-surgeon, since she is scheduled for a cesarean section. She is stripped from her clothes and set up on the operating table. She is quickly sedated, and subjected to a c-section in order to avoid potential problems and preserve her vagina. The surgery is quick, and she is moved to a bed to recover. When she awakes, her child<<if $slaves[$i].pregType > 1>>ren have<<else>> has<</if>> already been taken away.
+		<</if>>
+	<<else>>
+		<<if $clinic != 0>>
+			She is lead to $clinicName, since she is likely to face complications with childbirth. She is helped from her clothes and into a comfortable hospital bed to relax until she is ready. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helpers. <<if $birthDamage > 10>><<set $csec = 1>><<set $slaves[$i].cSec = 1>>After several hours of intense labor, she is transferred to the surgery wing. Following an emergency c-section, she is returned to the recovery wing to rest.<<else>>After several hours, and a touch of morphine, she has successfully given birth<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is left under observation to make sure she recovers.
+		<<else>>
+			<<set $csec = 1>><<set $slaves[$i].cSec = 1>>
+			She is lead to the auto-surgeon, since she is likely to face complications with childbirth. She is stripped from her clothes and set up on the operating table. She is quickly sedated, and subjected to a c-section in order to avoid potential problems.  The surgery is quick, and she is moved to a bed to recover. When she awakes, her child<<if $slaves[$i].pregType > 1>>ren have<<else>> has<</if>> already been taken away.
+		<</if>>
+	<</if>>
+<<else>>
+
+<<switch $slaves[$i].assignment>>
+
+<<case "rest">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is helped back to her bed and stripped before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is encouraged to keep resting.
+	<<else>>
+		She is helped back to her bed and stripped before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is encouraged to keep resting.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She returns to her bed and strips before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is encouraged to keep resting.
+	<<else>>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is encouraged to keep resting.
+	<</if>>
+	<</if>>
+
+<<case "be a subordinate slave">>
+	<<for $k = 0; $k < $slaves.length; $k++>>
+		<<if $slaves[$i].subTarget == $slaves[$k].ID>>
+			<<set $tempSub = $slaves[$k]>>
+		<</if>>
+	<</for>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $slaves[$i].subTarget == 0>>
+			She returns to her bed and strips before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests for a short while before returned to your waiting slaves.
+		<<else>>
+			She lead by $tempSub.slaveName to a private room so that she may watch. Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and $tempSub.slaveName eagerly descends upon her defenseless body.
+		<</if>>
+	<<else>>
+		<<if $slaves[$i].subTarget == 0>>
+			She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests for a short while before returned to your waiting slaves.
+		<<else>>
+			She taken by $tempSub.slaveName to a private room so that she may watch. Reluctantly, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of $tempSub.slaveName's <<if $tempSub.fetish == "pregnancy">>hungry gaze<<else>>amused gaze<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and $tempSub.slaveName eagerly descends upon her exhausted body.
+		<<set $humiliation = 1>>
+		<</if>>
+	<</if>>
+
+<<case "whore">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is helped back to her bed and stripped before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to whoring.
+	<<else>>
+		She is helped back to her bed and stripped before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to whoring.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She returns to her bed and strips before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to whoring.
+	<<else>>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to whoring.
+	<</if>>
+	<</if>>
+
+<<case "serve the public">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is helped back to her bed and stripped before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to slutting.
+	<<else>>
+		She is helped back to her bed and stripped before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to slutting.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She returns to her bed and strips before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to slutting.
+	<<else>>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to slutting.
+	<</if>>
+	<</if>>
+
+<<case "work a glory hole">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Since she is unable to leave her box, she doesn't have far to go. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> quickly extracted from the box. She never notices, focused entirely on the fresh cock poking through the glory hole.
+	<<else>>
+		 Since she is unable to leave her box, she doesn't have far to go. She quickly finishes the waiting dick before shifting herself into a slightly, though not by much, more comfortable position.  She begins laboring on her child<<if $slaves[$i].pregType > 1>>ren<</if>>. As she finishes, the box is opened and her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> gathered and taken away before she is ordered back to sucking.
+	<</if>>
+
+<<case "get milked">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $dairyPregSetting > 0>>
+		Since the dairy is designed for pregnant cows, she stays hooked up to the milkers. She shows little interest in her coming birth, instead focusing on her milky breasts. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. She shows no interest in her child<<if $slaves[$i].pregType > 1>>ren<</if>> being removed from the milking stall, nor when she is hosed off.
+	<<else>>
+		<<if !canWalk($slaves[$i])>>She is helped back to her bed and stripped before slipping into it<<else>>She returns to her bed and strips before slipping into it<</if>>. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to the milkers to lighten her swelling breasts.
+	<</if>>
+	<<else>>
+		<<if $dairyPregSetting > 0>>
+		Since the dairy is designed for pregnant cows, she stays hooked up to the milkers. She meekly protests her situation, but ultimately accepts it. She begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, and catches a glimpse of her child<<if $slaves[$i].pregType > 1>>ren<</if>> being removed from the milking stall, but quickly forgets when she is hosed off.
+		<<set $humiliation = 1>>
+	<<else>>
+		<<if !canWalk($slaves[$i])>>She is helped back to her bed and stripped before slipping into it<<else>>She returns to her bed and strips before slipping into it<</if>>. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to the milkers to lighten her swelling breasts.
+	<</if>>
+	<</if>>
+
+<<case "please you">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		You strip her and help her onto your couch . Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she falls into a contented nap. You enjoy her exhausted body until a servant comes to help clean her up.
+	<<else>>
+		<<if $slaves[$i].devotion > 20>>She moans lewdly at you and wiggles her hips. As she teases, she begins pushing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> out. As she crowns, you pull her into your arms and hold her close. You hold her in a comforting embrace until she finishes<<elseif $slaves[$i].devotion >= -20>>She releases a lewd moan and begins attempting to remove her clothes. You approach her, clearing her vagina and helping her onto the couch, where you take a seat next to her to fondle her vulnerable body. Once she finishes, you give her some time to catch her breath<<else>>She begins desperately begging to be taken back to her bed; instead you pull her towards the couch and take a seat with her in your lap, back against your front. Blushing thoroughly, she gives a meek protest before focusing on the coming birth, rather than your wandering hands<<set $humiliation = 1>><</if>>. She begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and a fresh change of clothes, she is helped back to your office<<if $slaves[$i].devotion < -20>> where you are waiting to enjoy her exhausted body<</if>>.
+	<</if>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		You strip her and help her onto your couch . Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she falls into a contented nap. You enjoy her exhausted body until a servant comes to help clean her up.
+	<<else>>
+		<<if $slaves[$i].devotion > 20>>She moans lewdly at you and wiggles her hips. As she teases, she begins pushing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> out. As she crowns, you pull her into your arms and hold her close. You hold her in a comforting embrace until she finishes<<elseif $slaves[$i].devotion >= -20>>She releases a lewd moan and begins attempting to remove her clothes. You approach her, clearing her vagina and helping her onto the couch, where you take a seat next to her to fondle her vulnerable body. Once she finishes, you give her some time to catch her breath<<else>>She begins desperately begging to be taken back to her bed; instead you pull her towards the couch and take a seat with her in your lap, back against your front. Blushing thoroughly, she gives a meek protest before focusing on the coming birth, rather than your wandering hands<<set $humiliation = 1>><</if>>. She begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and a fresh change of clothes, she is helped back to your office<<if $slaves[$i].devotion < -20>> where you are waiting to enjoy her exhausted body<</if>>.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She returns to her bed and strips before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she falls into a contented nap. That is until you wake her up, inquiring where she waddled off to without your permission.
+	<<else>>
+		<<if $slaves[$i].devotion > 20>>She seeks you out and begins slowly stripping. As she teases, she begins pushing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> out. As she crowns, she throws herself into your waiting arms and holds herself to you. You hold her in a comforting embrace until she finishes<<elseif $slaves[$i].devotion >= -20>>She approaches you and begins a very uncertain striptease. As she lowers herself to the floor to begin pushing, you overtake her and fondle her vulnerable body. Once she finishes, you help her to the couch to catch her breath<<else>>She attempts to leave your office and return to her bed, but you catch her arm before she slips out of reach. You order her to strip and give you a show. Blushing thoroughly, she gives a meek performance before falling to the floor<<set $humiliation = 1>><</if>>. She begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and a fresh change of clothes, she returns to your office<<if $slaves[$i].devotion < -20>> where you are waiting to enjoy her exhausted body<</if>>.
+	<</if>>
+	<</if>>
+
+<<case "stay confined">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+	 Since she is locked in a cell, she doesn't have far to go.  Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is returned to isolation.
+	<<else>>
+	 Since she is locked in a cell, she doesn't have far to go.  Reluctantly, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is returned to isolation.
+	 <<set $humiliation = 1>>
+	<</if>>
+
+<<case "work as a servant" "be a servant">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She returns to her bed and strips before slipping into it. Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to service your penthouse.
+	<<else>>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to service your penthouse.
+	<</if>>
+
+<<case "serve in the master suite">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $masterSuiteUpgradePregnancy == 1>>
+			She is helping into the birthing chamber, stripped, and aided into the specialized chair. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she is returned to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+		<<else>>
+			After struggling to strip and tipping into one of the various seats around the room, she prepares to give birth. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her may be watching her. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she is helped back to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>> her usual spot<</if>>.
+		<</if>>
+	<<else>>
+		<<if $masterSuiteUpgradePregnancy == 1>>
+			She is helping into the birthing chamber, stripped, and aided into the specialized chair. Finding it quite comfortable, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she is returned to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+		<<else>>
+			After struggling to strip and tipping into one of the various seats around the room, she prepares to give birth. She gets comfortable and begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she is returned to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>> her preferred spot spot<</if>>.
+		<</if>>
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $masterSuiteUpgradePregnancy == 1>>
+			She enters the birthing chamber, strips, and seats herself in the specialized chair. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she returns to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+		<<else>>
+			She strips and settles into one of the various seats around the room. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her may be watching her. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she returns to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>> her usual spot<</if>>.
+		<</if>>
+	<<else>>
+		<<if $masterSuiteUpgradePregnancy == 1>>
+			She enters the birthing chamber, strips, and seats herself in the specialized chair. Finding it quite comfortable, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she returns to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+		<<else>>
+			She strips and settles into one of the various seats around the room. She gets comfortable and begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a shower and fresh change of clothes, she returns to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>> her preferred spot spot<</if>>.
+	<</if>>
+	<</if>>
+	<</if>>
+
+<<case "serve in the club">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is helped into a private room in the back of the club by a group of eager patrons. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience has their way with her.
+	<<else>>
+		She is helped to a private room in the back of the club by several patrons who just can't keep their hands off her. She settles herself onto a patron's lap and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, basking in the attention of her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she beckons the audience to enjoy her.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She heads to a private room in the back of the club filled with eager patrons. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience is allowed to have their way with her.
+	<<else>>
+		She heads to a private room in the back of the club accompanied by several patrons who just can't keep their hands off her. She settles herself onto a patron's lap and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, basking in the attention of her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she beckons the audience to enjoy her.
+	<</if>>
+	<</if>>
+
+<<case "choose her own job">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is helped back to her bed and stripped before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after a short rest, she waits for someone to help her to her next job, having forgotten she was choosing it.
+	<<else>>
+		She is helped back to her bed and stripped before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after a short rest, she returns to pondering her preferred assignment.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She returns to her bed and strips before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after a short rest, she returns to wandering the penthouse.
+	<<else>>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after a short rest, she returns to pondering her preferred assignment.
+	<</if>>
+	<</if>>
+
+<<case "rest in the spa">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $Attendant != 0>>$Attendant.slaveName leads her to a special pool designed to give birth in. Once she is safely in the water alongside $Attendant.slaveName,<<else>>She is lead to a special pool designed to give birth in. Once she is safely in the water alongside her assistant,<</if>> she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, she is taken back to the spa.
+	<<else>>
+		<<if $Attendant != 0>>$Attendant.slaveName escorts her to a special pool designed to give birth in. Once she is safely in the water alongside $Attendant.slaveName,<<else>>She is escorted to a special pool designed to give birth in. Once she is safely in the water alongside her assistant,<</if>> she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, aided by her helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, she is taken back to the spa.
+	<</if>>
+
+<<case "learn in the schoolroom">>
+	<<if !canWalk($slaves[$i])>>
+		Having been notified in the weeks leading up to her birth, she is helped to the front of the class and stripped. She is being used as a learning aid in this lesson. Blushing strongly, she begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of the rapt attention of the other students. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is helped back to her seat. She can't help but notice some of the detailed notes the class took on her genitals.
+	<<set $humiliation = 1>>
+	<<else>>
+		Having been notified in the weeks leading up to her birth, she heads to the front of the class and strips. She is being used as a learning aid in this lesson. Blushing strongly, she begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of the rapt attention of the other students. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she returns to her seat. She can't help but notice some of the detailed notes the class took on her genitals.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "take classes">>
+	 Or she would have, had <<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>> allowed it. Since she can't leave the lesson, she tries her best to hold back the upcoming birth, not without your assistant noticing. As punishment for poor planning, her birth will be turned into a live broadcast. Blushing strongly, she begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, trying her best to hide her shame. Exhausted from the birth, she is permitted a short break as her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> collected to clean herself up before the lesson is continued.
+	<<set $humiliation = 1>>
+
+<<case "work in the brothel">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is helped to a private room in the back of the brothel by a group of eager patrons. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience is allowed to have their way with her.
+	<<else>>
+		She is helped to a private room in the back of the brothel by several patrons who paid quite a handsome price to enjoy this moment. She settles herself onto a patron's lap and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, basking in the attention of her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she beckons the audience to enjoy her.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She heads to a private room in the back of the brothel filled with eager patrons. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience is allowed to have their way with her.
+	<<else>>
+		She heads to a private room in the back of the brothel accompanied by several patrons who paid quite a handsome price to enjoy this moment. She settles herself onto a patron's lap and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, basking in the attention of her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she beckons the audience to enjoy her.
+	<</if>>
+	<</if>>
+
+<<case "be the Schoolteacher">>
+	<<if !canWalk($slaves[$i])>>
+		The class has been wondering why she was sitting strangely, nude at the front of the class the last several weeks, today they learn why. She has been planning this lesson for several months now. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching students. She demonstrates the proper ways to labor and how to deliver a baby. She explains the infant's future as her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> taken and excuses the class for a short break in order to freshen up.
+	<<set $humiliation = 1>>
+	<<else>>
+		While stripping, she makes her way to the front of the classroom and settles herself in a way her entire class can see. She has been planning this lesson for several months now. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching students. She demonstrates the proper ways to labor and how to deliver a baby. She explains the infant's future as her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> taken and excuses the class for a short break in order to freshen up.
+	<<set $humiliation = 1>>
+	<</if>>
+
+
+<<case "be your Concubine">>
+	<<if $slaves[$i].pregSource == -1 && $slaves[$i].relationship == -3>>
+		You make sure to find time in your busy schedule to be at your concubine wife's side as she gives birth to your child<<if $slaves[$i].pregType > 1>>ren<</if>>. You gently caress $slaves[$i].slaveName's body as she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. You help her upright and hold your child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breasts. The two of you cuddle as you watch your newborn<<if $slaves[$i].pregType > 1>>s<</if>> suckle from their mother. Since she is quite special to you, you allow her the time to pick out names before her child<<if $slaves[$i].pregType > 1>>ren<</if>> have to be taken away. When the time comes to pick up the newborn<<if $slaves[$i].pregType > 1>>s<</if>>, the slave servant is surprised to find <<if $slaves[$i].pregType == 1>>a <</if>>name-card<<if $slaves[$i].pregType > 1>>s<</if>> affixed to their blanket<<if $slaves[$i].pregType > 1>>s<</if>>.<<if $slaves[$i].fetish != "mindbroken">> She can't help but feel more devoted to her master after seeing such a touching act. Before you leave, $slaves[$i].slaveName expresses how cute she found your child and that she'd love to bear more for you.<</if>>
+	<<else>>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is assisted in reaching your side. You call her over and strip her as she instinctively begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to your wandering hands. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with you, she is helped back to your master suite.
+	<<else>>
+		She is assisted in reaching your side. You beckon her over and strip her as she dutifully begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, enjoying your wandering hands and attention. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with you, she is helped back to your master suite. As she leaves your office, she throws you a wink, hoping to see you again soon.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She wanders the penthouse until she finds you. You call her over and strip her as she instinctively begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to your wandering hands. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with you, she returns to your master suite.
+	<<else>>
+		She wanders the penthouse until she finds you. You beckon her over and strip her as she dutifully begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, enjoying your wandering hands and attention. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with you, she returns to your master suite. As she leaves your office, she throws you a wink, hoping to see you again soon.
+	<</if>>
+	<</if>>
+	<</if>>
+
+<<case "live with your Head Girl">>
+	<<if $slaves[$i].pregSource == $HeadGirl.ID>>
+		$HeadGirl.slaveName makes sure that the mother of her child is happy and comfortable for the upcoming birth, even if they won't be spending much time with their offspring. She carefully undresses $slaves[$i].slaveName, all the while whispering sweet nothings in her ear. She begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, and her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> carefully collected by their sire. Once they are out of the way, $HeadGirl.slaveName moves in to fondle $slaves[$i].slaveName's tired body.
+	<<else>>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is aided in finding $HeadGirl.slaveName, who undresses her as she instinctively begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her wandering hands. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with your head girl, she is taken back to $HeadGirl.slaveName' room.
+	<<else>>
+		She is aided in seeking out $HeadGirl.slaveName, who undresses her as she dutifully begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, enjoying her wandering hands and attention. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with your head girl, she is helped back to $HeadGirl.slaveName's room.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She wanders until she finds $HeadGirl.slaveName, who undresses her as she instinctively begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her wandering hands. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with your head girl, she is lead back to $HeadGirl.slaveName' room.
+	<<else>>
+		She seeks out $HeadGirl.slaveName, who undresses her as she dutifully begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, enjoying her wandering hands and attention. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with your head girl, she returns to $HeadGirl.slaveName's room.
+	<</if>>
+	<</if>>
+	<</if>>
+
+<<case "be confined in the arcade">>
+	Or she would have been, if she weren't locked in an arcade cabinet. A gush of liquid pours from the $slaves[$i].slaveName's cunt, followed by the attendant in charge of the arcade hanging an "out of order" sign on her exposed rear. While her mouth is filled with a customer's dick, her body instinctively births her child<<if $slaves[$i].pregType > 1>>ren<</if>> into the waiting basket.  As they are carried away, her rear is cleaned up and the sign removed.
+
+<<case "get treatment in the clinic">>
+	<<if !canWalk($slaves[$i])>>
+	She is helped to the clinic's maternity ward. <<if $Nurse != 0>>$Nurse.slaveName<<else>>A freelance nurse<</if>> delivers her child<<if $slaves[$i].pregType > 1>>ren<</if>> before taking <<if $slaves[$i].pregType > 1>>them<<else>> it<</if>> away. Before long she is returned to her recovery room to rest.
+	<<else>>
+	She is guided to the clinic's maternity ward. <<if $Nurse != 0>>$Nurse.slaveName<<else>>A freelance nurse<</if>> delivers her child<<if $slaves[$i].pregType > 1>>ren<</if>> before taking <<if $slaves[$i].pregType > 1>>them<<else>> it<</if>> away. Before long she is returned to her recovery room to rest.
+	<</if>>
+
+<<case "be confined in the cellblock">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+	 She is forced into a specially designed cell to give birth in.  Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is moved back into a standard cell.
+	<<else>>
+	 She is forced into a specially designed cell to give birth in. Reluctantly, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is moved back into a standard cell.
+	<</if>>
+
+<<case "be the DJ">>
+		She heads to a private room in the back of the club accompanied by a influential patron. She settles herself onto his lap and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, basking in his attention. Placing her child<<if $slaves[$i].pregType > 1>>ren<</if>> outside the room, she returns to pleasure her tease.
+
+<<case "be the Attendant">>
+		$Attendant.slaveName waddles to a special pool designed to give birth in. Once she is safely in the water, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, something she has been trained for. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, she heads back to the main pool.
+
+<<case "be the Madam">>
+		She heads to a private room in the back of the club accompanied by a influential patron. She settles herself onto his lap and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, basking in his attention as he strips her. Placing her child<<if $slaves[$i].pregType > 1>>ren<</if>> outside the room, she returns to get more intimate with her catch.
+
+<<case "be the Stewardess">>
+		She strips and settles herself into her favorite chair, while calling several servants to her aid. She begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> into the arms of her waiting charges. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she reclines while her servants clean and dress her. Once she has had enough, she orders them back to work on the penthouse.
+
+<<case "be the Milkmaid">>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. She is quite experienced in delivering her cows' children, but she finds it much more difficult to apply her knowledge to herself.  Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after a short rest, she returns to caring for your cows.
+
+<<case "be the Wardeness">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She enters an empty cell, strips, and seats herself on the cot. She instinctively begins birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she returns to mindlessly breaking the confined slaves.
+	<<else>>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to the cellblock.
+	<</if>>
+
+<<case "be the Nurse">>
+		She waddles to her maternity ward and strips before laying on an open bed. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> as her assistants watch. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is helped to the recovery ward until she recovers enough to take over $clinicName again.
+
+<<case "be your Head Girl">>
+		She returns to <<if $HGSuite == 1>>her room's bed<<else>>her bed<</if>> and strips before slipping into it. She makes herself comfortable <<if $HGSuiteSlaves != 0>>,as her slave rushes to her side,<</if>> and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken<<if $HGSuiteSlaves != 0>> by her roommate<</if>> and she rests awhile before returning to managing your slaves.
+
+<<case "guard you">>
+		Or she would have, if she'd stop refusing to leave your side. You lead her someplace private and help her undress. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. You call for a servant to quickly gather her child<<if $slaves[$i].pregType > 1>>ren<</if>> as you help her into the shower, making sure to wait outside for your loyal guardian to finish.
+
+<<case "recruit girls">>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to finding new slaves for you.
+
+<<default>>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is helped back to her bed and stripped before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to her task.
+	<<else>>
+		She is helped back to her bed and stripped before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to her task.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She returns to her bed and strips before slipping into it. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to her task.
+	<<else>>
+		She returns to her bed and strips before slipping into it. She makes herself comfortable and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she rests awhile before returning to her task.
+	<</if>>
+	<</if>>
+
+<</switch>>
+
+<</if>>
+
+<</widget>>
+
+
+
+<<widget "AmpBirth">>
+
+<br>
+<<if $birthDamage > 5>>
+<<set $csec = 1>>
+<<if $clinic != 0>>
+She is carried to $clinicName, since she is likely to face complications with childbirth. She is stripped from her clothes and set up in a comfortable hospital bed to relax until she is ready. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helpers. <<if $birthDamage > 10>><<set $csec = 1>><<set $slaves[$i].cSec = 1>>After several hours of intense labor, she is transferred to the surgery wing. Following an emergency c-section, she is returned to the recovery wing to rest.<<else>>After several hours, and a touch of morphine, she has successfully given birth<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is left under observation to make sure she recovers.
+<<else>>
+<<set $csec = 1>>
+<<set $slaves[$i].cSec = 1>>
+She is carried to the auto-surgeon, since she is likely to face complications with childbirth. She is stripped from her clothes and set up on the operating table. She is quickly sedated, and subjected to a c-section in order to avoid potential problems.  The surgery is quick, and she is moved to a bed to recover. When she awakes, her child<<if $slaves[$i].pregType > 1>>ren have<<else>> has<</if>> already been taking away.
+<</if>>
+
+<<else>>
+
+<<switch $slaves[$i].assignment>>
+
+<<case "rest">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed on her bed and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is encouraged to keep resting.
+	<<else>>
+		She is placed on her bed and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is encouraged to keep resting.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "be a subordinate slave">>
+	<<for $k = 0; $k < $slaves.length; $k++>>
+		<<if $slaves[$i].subTarget == $slaves[$k].ID>>
+			<<set $tempSub = $slaves[$k]>>
+		<</if>>
+	<</for>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $slaves[$i].subTarget == 0>>
+			She is placed on her bed and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is returned to your waiting slaves.
+	<<else>>
+			She is placed with $tempSub.slaveName so that she may watch. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is tipped into $tempSub.slaveName's eager lap.
+	<</if>>
+	<<else>>
+		<<if $slaves[$i].subTarget == 0>>
+			She is placed on her bed and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is returned to your waiting slaves.
+		<<set $humiliation = 1>>
+	<<else>>
+			She is placed with $tempSub.slaveName so that she may watch. With an intense blush, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of $tempSub.slaveName's <<if $tempSub.fetish == "pregnancy">>hungry gaze<<else>>amused gaze<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and she is tipped into $tempSub.slaveName's eager lap.
+	<</if>>
+	<</if>>
+
+<<case "whore">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed on her bed and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<else>>
+		She is placed on her bed and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "serve the public">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed on her bed and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<else>>
+		She is placed on her bed and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "work a glory hole">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is locked, nude, in a glory hole box and ordered to suck. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> quickly extracted from the box. She never notices, focused entirely on the fresh cock poking through the glory hole.
+	<<else>>
+		 She is locked, nude, in a glory hole box and ordered to suck. She quickly finishes the dick off before wiggling herself into a slightly, though not by much, more comfortable position.  She begins laboring on her child<<if $slaves[$i].pregType > 1>>ren<</if>>. As she finishes, the box is opened and her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> gathered and taken away before she is forcefully repositioned with her mouth over the glory hole.
+	<</if>>
+
+<<case "get milked">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $dairyPregSetting > 0>>
+		She is hooked up to a milking machine and allowed to continue her assignment. She shows little interest in her coming birth, instead focusing on her milky breasts. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. She shows no interest in her child<<if $slaves[$i].pregType > 1>>ren<</if>> being removed from the milking stall, nor when she is hosed off.
+	<<else>>
+		She is placed on her bed and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, she is carried back to the milkers.
+	<</if>>
+	<<else>>
+		<<if $dairyPregSetting > 0>>
+		She is hooked up to a milking machine and allowed to continue her assignment. She meekly protests her situation, but ultimately excepts it. She begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, and catches a glimpse of her child<<if $slaves[$i].pregType > 1>>ren<</if>> being removed from the milking stall, but quickly forgets when she is hosed off.
+		<<set $humiliation = 1>>
+	<<else>>
+		She is placed on her bed and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, she is carried back to the milkers.
+	<<set $humiliation = 1>>
+	<</if>>
+	<</if>>
+
+<<case "please you">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is stripped and placed into your waiting arms upon your couch. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> as you tease her beasts and belly, indifferent to you and her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and a fresh change of clothes, she is returned to your office.
+	<<else>>
+		She is stripped and placed into your waiting arms upon your couch. <<if $slaves[$i].devotion > 50>>Feeling safe and secure, she<<elseif $slaves[$i].devotion > 20>>She squirms uncomfortably as she<<else>>begins to panic as she<<set $humiliation = 1>><</if>> begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> as you tease her beasts and belly. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and a fresh change of clothes, she is returned to your office.
+	<</if>>
+
+<<case "stay confined">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+	 She is placed in a specially designed cell to give birth in.  Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is moved back into a standard cell.
+	<<else>>
+	 She is placed in a specially designed cell to give birth in.  Reluctantly, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is moved back into a standard cell.
+	<</if>>
+
+<<case "work as a servant" "be a servant">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed on her cot and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<else>>
+		She is placed on her cot and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "serve in the master suite">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $masterSuiteUpgradePregnancy == 1>>
+			She is carried to the birthing chamber and comfortably positioned. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+		<<else>>
+			She is placed on a soft cushion and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+		<</if>>
+	<<else>>
+		<<if $masterSuiteUpgradePregnancy == 1>>
+			She is carried to the birthing chamber and comfortably positioned. Sinking into the luxury, she begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+		<<else>>
+			She is placed on a soft cushion and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to <<if $masterSuiteUpgradeLuxury == 1>>your big bed<<elseif $masterSuiteUpgradeLuxury == 2>>the fuckpit<<else>>the main room of the master suite<</if>>.
+	<</if>>
+	<</if>>
+
+<<case "serve in the club">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed in a private room in the back of the club before an audience of eager patrons. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience is allowed to have their way with her.
+	<<else>>
+		She is placed in a private room in the back of the club before an audience of eager patrons. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her captive audience and blushing strongly. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience is allowed to have their way with her.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "choose her own job">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed on her bed and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<else>>
+		She is placed on her bed and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "rest in the spa">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed in a special flotation device and placed in a birthing pool. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, she is taken back to the spa.
+	<<else>>
+		She is placed in a special flotation device and placed in a birthing pool. Giving birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> is easy under such relaxing circumstances. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, she is carried back to the spa.
+	<</if>>
+
+<<case "learn in the schoolroom">>
+		She is placed on special seat at the front of the class and stripped. She is being used as a learning aid in this lesson. Blushing strongly, she begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of the rapt attention of the other students. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her seat. She can't help but notice some of the detailed notes the class took on her genitals.
+	<<set $humiliation = 1>>
+
+<<case "take classes">>
+	 Or she would have been, had <<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>> allowed it. Since she can't leave the lesson, she tries her best to hold back the upcoming birth, not without your assistant noticing. As punishment for poor planning, she is forbidden from leaving. Additionally, her birth will be turned into a live broadcast.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Exhausted from the birth, she is permitted a short break as her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> to be cleaned up before the lesson is continued.
+
+<<case "work in the brothel">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed in a private room in the back of the brothel before an audience of eager patrons. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her audience. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience is allowed to have their way with her.
+	<<else>>
+		She is placed in a private room in the back of the brothel before an audience of eager patrons. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her captive audience and blushing strongly. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, the audience is allowed to have their way with her.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<<case "be the Schoolteacher">>
+		She is stripped and placed on a specially designed seat before her class. She has been planning this lesson for several months now. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching students. She demonstrates the proper ways to labor and, with the assistance of a helper, how to deliver a baby. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she resumes her previous lesson.
+	<<set $humiliation = 1>>
+
+
+<<case "be your Concubine">>
+	<<if $slaves[$i].pregSource == -1 && $slaves[$i].relationship == -3>>
+		You make sure to find time in your busy schedule to be at your concubine wife's side as she gives birth to your child<<if $slaves[$i].pregType > 1>>ren<</if>>. You gently caress $slaves[$i].slaveName's body as she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. You help her upright and hold your child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breasts. The two of you cuddle as you watch your newborn<<if $slaves[$i].pregType > 1>>s<</if>> suckle from their mother. Since she is quite special to you, you allow her the time to pick out names before her child<<if $slaves[$i].pregType > 1>>ren<</if>> have to be taken away. When the time comes to pick up the newborn<<if $slaves[$i].pregType > 1>>s<</if>>, the slave servant is surprised to find <<if $slaves[$i].pregType == 1>>a <</if>>name-card<<if $slaves[$i].pregType > 1>>s<</if>> affixed to their blanket<<if $slaves[$i].pregType > 1>>s<</if>>.<<if $slaves[$i].fetish != "mindbroken">> She can't help but feel more devoted to her master after seeing such a touching act. Before you leave, $slaves[$i].slaveName expresses how cute she found your child and that she'd love to bear more for you.<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed by your side. You strip her as she instinctively begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to your wandering hands. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with you, she is carried back to your master suite.
+	<<else>>
+		She is placed by your side. You strip her as she dutifully begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, enjoying your wandering hands and attention. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with you, she is carried back to your master suite. As she leaves your office, she throws you a wink, hoping to see you again soon.
+	<</if>>
+	<</if>>
+
+<<case "live with your Head Girl">>
+	<<if $slaves[$i].pregSource == $HeadGirl.ID>>
+		$HeadGirl.slaveName makes sure that the mother of her child is happy and comfortable for the upcoming birth, even if they won't be spending much time with their offspring. She carefully undresses $slaves[$i].slaveName, all the while whispering sweet nothings in her ear. She begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, and her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> carefully collected by their sire. Once they are out of the way, $HeadGirl.slaveName moves in to fondle $slaves[$i].slaveName's tired body.
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed with $HeadGirl.slaveName. She unwraps her as she instinctively begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her wandering hands. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with your head girl, she is carried back to $HeadGirl.slaveName' room.
+	<<else>>
+		She is placed with $HeadGirl.slaveName. She unwraps her as she dutifully begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, enjoying her wandering hands and attention. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning, a fresh change of clothes, and some private time with your head girl, she is carried back to $HeadGirl.slaveName' room.
+	<</if>>
+	<</if>>
+
+<<case "be confined in the arcade">>
+	Or she would have been, if she weren't locked in an arcade cabinet. A gush of liquid pours from the $slaves[$i].slaveName's cunt, followed by the attendant in charge of the arcade hanging an "out of order" sign on her exposed rear. While her mouth is filled with a customer's dick, her body instinctively births her child<<if $slaves[$i].pregType > 1>>ren<</if>> into the waiting basket.  As they are carried away, her rear is cleaned up and the sign removed.
+
+<<case "get treatment in the clinic">>
+	She is taken to the clinic's maternity ward. <<if $Nurse != 0>>$Nurse.slaveName<<else>>A freelance nurse<</if>> delivers her child<<if $slaves[$i].pregType > 1>>ren<</if>> before taking them away. Before long she is returned to her recovery room to rest.
+
+<<case "be confined in the cellblock">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+	 She is placed in a specially designed cell to give birth in.  Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is moved back into a standard cell.
+	<<else>>
+	 She is placed in a specially designed cell to give birth in.  Reluctantly, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, after her and the cell are hosed down, she is moved back into a standard cell.
+	<</if>>
+
+<<default>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She is placed on her bed and stripped. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<else>>
+		She is placed on her bed and stripped. She wiggles herself into a comfortable spot and begins working on birthing her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, fully aware of her watching helper. Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> promptly taken and, following a cleaning and fresh change of clothes, she is carried back to her station.
+	<<set $humiliation = 1>>
+	<</if>>
+
+<</switch>>
+
+<</if>>
+
+<</widget>>
+
+<<widget "SuddenBirth">>
+
+<<for $j = 0; $j < $slaves.length; $j++>>
+	<<if $slaves[$i].pregSource == $slaves[$j].ID>>
+		<<set $tempRival = $slaves[$j].slaveName>>
+		<<break>>
+	<</if>>
+<</for>>
+
+<<if random(1,2) == 1 && canWalk($slaves[$i])>> /* at assignment else in halls/etc, only if able to move */
+
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While wandering the penthouse absentmindedly, $slaves[$i].slaveName's water breaks. She carries on until the contractions drag her to the floor.
+		<<ClothingBirth>>
+		She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes wandering aimlessly until a servant collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and sends her someplace useful.
+	<<elseif $slaves[$i].fetish == "humiliation">>
+		While waddling through the penthouse between assignments, $slaves[$i].slaveName's water breaks. Sensing an opportunity, she waddles to the nearest balcony overlooking the city. She calls out, making sure all eyes are on her for what happens next.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		She gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> and recovers her strength before finding a servant to give her child<<if $slaves[$i].pregType > 1>>ren<</if>> to. She resumes her previous task, feeling much lighter.
+	<<else>>
+		 <<if $seed < 40>>
+			While walking through the penthouse on the way to her next assignment, $slaves[$i].slaveName's water breaks. Unable to reach the prepared birthing room in time, she finds a secluded nook to give birth in.
+		<<ClothingBirth>>
+		She gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> and recovers her strength before finding a servant to give her child<<if $slaves[$i].pregType > 1>>ren<</if>> to before hurrying to her assignment.
+		 <<elseif $seed > 66 && $slaves[$i].rivalry == 3 && canWalk($tempRival)>>
+			While hustling through the penthouse on her way to give birth, $slaves[$i].slaveName finds her path blocked by $tempRival.slaveName. Seeing her distress brings a grin to her face. She quickly rushes the laboring $slaves[$i].slaveName, circling around behind her and hooking her under the arms. She forces the poor girl into the cafeteria and holds her in place, leaving her with no other option than to begin giving birth in front of her audience.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		$tempRival.slaveName releases her and she moves to gather her child<<if $slaves[$i].pregType > 1>>ren<</if>>. With a shove from her rival, she rushes out of the jeering crowd's sight. Finding a servant to give her child<<if $slaves[$i].pregType > 1>>ren<</if>> to, she hastily heads back to her bed to hide herself from the mockery.
+		<<else>>
+			While waddling through the penthouse on her way to the cafeteria, $slaves[$i].slaveName's water breaks. Unable to reach the prepared birthing room in time, she finds herself stranded in the middle of all the dining slaves.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		She gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> and recovers her strength before rushing out of sight of the jeering crowd. Finding a servant to give her child<<if $slaves[$i].pregType > 1>>ren<</if>> to, she hastily heads back to her bed to hide herself from the mockery.
+		<</if>>
+	<</if>>
+
+<<else>>
+
+<<switch $slaves[$i].assignment>>
+
+<<case "rest">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is awoken from her rest by a strong contraction.  She rolls over and begins to fall back to sleep as another contraction wracks her body.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes resting.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her rest by a moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and places them in the cradle readied for her. She is helped to the shower as your servants clean up and remove her child<<if $slaves[$i].pregType > 1>>ren<</if>>.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is awoken from her rest by a strong contraction.  She rolls over and begins to fall back to sleep as another contraction wracks her body.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes resting.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her rest by a moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and places them in the cradle readied for her. She leaves to take a shower as your servants clean up and remove her child<<if $slaves[$i].pregType > 1>>ren<</if>>.
+	<</if>>
+	<</if>>
+
+<<case "be a subordinate slave">>
+	<<for $k = 0; $k < $slaves.length; $k++>>
+		<<if $slaves[$i].subTarget == $slaves[$k].ID>>
+			<<set $tempSub = $slaves[$k]>>
+		<</if>>
+	<</for>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $slaves[$i].subTarget == 0>>
+		While servicing your other slaves, $slaves[$i].slaveName's water breaks, though it does nothing to deter her from her task.
+		<<ClothingBirth>>
+		No sooner than her baby is born, a cock is shoved into her gaping pussy as she draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>>.
+	<<else>>
+		While servicing $tempSub.slaveName, $slaves[$i].slaveName's water breaks, though it does nothing to deter her from her task.
+		<<ClothingBirth>>
+		No sooner than her baby is born does she go back to pleasuring her dom.
+	<</if>>
+	<<else>>
+		<<if $slaves[$i].subTarget == 0>>
+		While servicing your other slaves, $slaves[$i].slaveName's water breaks, causing her to immediately try to break off.  However, a hand quickly hooks her gravid bulk and she is pulled back into another slave's crotch.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		She is allowed a moment to prepare her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off before returning to pleasuring your other slaves.
+	<<else>>
+		While servicing $tempSub.slaveName, $slaves[$i].slaveName's water breaks, causing her to immediately try to break off.  Her dom eagerly watches her pregnant sub's ordeal.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		$tempSub.slaveName collects the newborn child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off before returning and planting her crotch directly onto her exhausted sub's face.
+	<</if>>
+	<</if>>
+
+<<case "whore">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While attempting to attract customers with her gravid body, $slaves[$i].slaveName's water breaks.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> as she resumes whoring, oblivious to the free show she just gave her customers.
+	<<else>>
+		While attempting to attract customers with her gravid body, $slaves[$i].slaveName's water breaks, soaking her.  She attempts to get someplace safe to give birth but finds it impossible.
+	<<set $humiliation = 1>>
+	<<ClothingBirth>>
+	She lies on the ground, exhausted and covered in sperm from the circle of men watching her, until she recovers enough to collect her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While attempting to attract customers with her gravid body, $slaves[$i].slaveName's water breaks.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> as she resumes whoring, oblivious to the free show she just gave her customers.
+	<<else>>
+		While attempting to attract customers with her gravid body, $slaves[$i].slaveName's water breaks, soaking her.  She attempts to get someplace safe to give birth but finds her path blocked by rowdy johns.
+	<<set $humiliation = 1>>
+	<<ClothingBirth>>
+	She lies on the ground, exhausted and covered in sperm from the circle of men watching her, until she recovers enough to collect her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+	<</if>>
+	<</if>>
+
+<<case "serve the public">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if ($seed > 80)>>
+		While riding a citizen's dick, $slaves[$i].slaveName's water breaks on him. Showing no signs of stopping, he shoves her bulk off of him. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch. She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> before seeking out the next citizen's cock.
+		<<elseif ($seed > 60)>>
+		While sucking a citizen's dick, $slaves[$i].slaveName's water breaks. She shows no signs of slowing down, so he allows her to reposition and continue.
+		<<ClothingBirth>>
+		He cums down her throat before she begins drawing her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and seeking out the next citizen's cock.
+		<<elseif ($seed > 40)>>
+		While licking a citizen's cunt, $slaves[$i].slaveName's water breaks. She shows no signs of slowing down, so she allows her to reposition and continue.
+		<<ClothingBirth>>
+		The citizen splashes across her face before she begins drawing her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and seeking out the next citizen's cunt.
+		<<else>>
+		While taking a citizen's dick in her ass, $slaves[$i].slaveName's water breaks. She shows no signs of slowing down, so he allows her to reposition and continue. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch. He came strongly thanks to her and gives her a slap on the ass as she begins drawing her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and seeking out the next citizen's cock.
+		<</if>>
+	<<else>>
+		<<if ($seed > 80)>>
+		While riding a citizen's dick, $slaves[$i].slaveName's water breaks on him. She desperately tries to disengage but he grabs her hips and slams her back down. He thoroughly enjoys her contracting cunt before pushing her off and standing over her, jacking off. Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>. He cums over her exhausted body and moves on leaving her to recover and collect her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+	<<set $humiliation = 1>>
+		<<elseif ($seed > 60)>>
+		While sucking a citizen's dick, $slaves[$i].slaveName's water breaks. She desperately tries to disengage but he grabs her head and slams her back into his crotch.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		He cums down her throat before letting her collapse to the ground and leaving.  When she recovers, she quickly gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+		<<elseif ($seed > 40)>>
+		While licking a citizen's cunt, $slaves[$i].slaveName's water breaks. She desperately tries to disengage but she grabs her head and slams her back into her crotch.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		She cums across her face before helping her to the ground and leaving.  When she recovers, she quickly gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+		<<else>>
+		While taking a citizen's dick in her ass, $slaves[$i].slaveName's water breaks. She desperately tries to disengage but he grabs her hips and slams into her hard. Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>. He came strongly thanks to her and gives her a slap on the ass as she collapses to the ground. She quickly gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+	<<set $humiliation = 1>>
+		<</if>>
+	<</if>>
+
+<<case "work a glory hole">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While sucking a dick through the hole of her confining box, $slaves[$i].slaveName's water breaks. She makes no effort to stop sucking the dicks presented to her.
+	<<ClothingBirth>>
+	Her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> quickly extracted from the box. She never notices, focused entirely on the fresh cock poking through the glory hole.
+	<<else>>
+		While sucking a dick through the hole of her confining box, $slaves[$i].slaveName's water breaks. She quickly finishes the dick off before seating herself in the back of the box.
+	<<ClothingBirth>>
+	As she finishes, she could have sworn she saw an eye peeping through the glory hole, watching the show. The box is opened and her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> gathered and taken away as she turns to suck the fresh cock poking through the hole.
+	<</if>>
+
+<<case "get milked">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While getting milked, $slaves[$i].slaveName's water breaks. She show little interest and continues kneading her breasts.
+	<<ClothingBirth>>
+	She shows no interest in her child<<if $slaves[$i].pregType > 1>>ren<</if>> being removed from the milking stall, instead focusing entirely on draining her breasts.
+	<<else>>
+		While getting milked, $slaves[$i].slaveName's water breaks. She shifts into a comfortable position to give birth while the milker works her breasts.
+	<<ClothingBirth>>
+	She takes a break from milking to collect her child<<if $slaves[$i].pregType > 1>>ren<</if>> for removal and to catch her breath before reattaching the milkers and coaxing her milk to begin flowing anew.
+	<</if>>
+
+<<case "please you">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While sitting absentmindedly nearby, $slaves[$i].slaveName's water breaks soaking the floor under her. She pays no heed to it and continues waiting for you to use her.
+		<<ClothingBirth>>
+		You certainly enjoyed the show as you call for a servant to take away her child<<if $slaves[$i].pregType > 1>>ren<</if>> and to clean up the spill.
+	<<else>>
+		While sitting nearby, $slaves[$i].slaveName's water breaks, startling her. She looks to you for guidance and you shake your head "no".  Without permission to leave she <<if $slaves[$i].devotion > 50>>decides to give you a show<<elseif $slaves[$i].devotion > 20>>reluctantly decides giving birth in front of you isn't so bad<<else>>begins to panic as her contractions come sooner and sooner<<set $humiliation = 1>><</if>>.
+		<<ClothingBirth>>
+		As thanks for the show, you help her exhausted onto the couch so she can recover before returning to her duties. You call for a servant to take away her child<<if $slaves[$i].pregType > 1>>ren<</if>> and to clean up your floor and your toy.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While standing absentmindedly nearby, $slaves[$i].slaveName's water breaks soaking the floor under her. She pays no heed to it and continues waiting for you to use her.
+		<<ClothingBirth>>
+		You certainly enjoyed the show as you call for a servant to take away her child<<if $slaves[$i].pregType > 1>>ren<</if>> and to clean up the spill.
+	<<else>>
+		While standing nearby, $slaves[$i].slaveName's water breaks, startling her. She looks to you for guidance and you shake your head "no".  Without permission to leave she <<if $slaves[$i].devotion > 50>>decides to give you a show<<elseif $slaves[$i].devotion > 20>>reluctantly decides giving birth in front of you isn't so bad<<else>>begins to panic as her contractions come sooner and sooner<<set $humiliation = 1>><</if>>.
+		<<ClothingBirth>>
+		As thanks for the show, you help her exhausted onto the couch so she can recover before returning to her duties. You call for a servant to take away her child<<if $slaves[$i].pregType > 1>>ren<</if>> and to clean up your floor and your toy.
+	<</if>>
+	<</if>>
+
+<<case "guard you">>
+		Refusing to leave your side even when on the verge of giving birth, $slaves[$i].slaveName continues to serve as your bodyguard despite her condition. A splashing sound and a loud groan emit from behind you. Your bodyguard has gone into labor. You quickly help her to the ground and prepare for the coming birth.
+		<<ClothingBirth>>
+		You sit by your loyal guard holding her child<<if $slaves[$i].pregType > 1>>ren<</if>> until a servant comes by to take them away. Once she is thoroughly rested, you help her up and lead her back to the penthouse to shower and change.
+
+<<case "stay confined">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While waiting in confinement, $slaves[$i].slaveName's water breaks.  She assumes a birthing position.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes waiting.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her stupor by moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and holds them close knowing someone will soon come to take them away from her.
+	<</if>>
+
+<<case "recruit girls">>
+		While on a video call with a potential recruit, $slaves[$i].slaveName's water breaks. She attempts to play it cool and act like nothing is happening but the worsening contractions finally get to her.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+	<<if $seed > 50>>
+		Exhausted from the birth and clutching her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>>, she returns to find that she never ended the call. The prospective slave is blushing furiously and seems to have begun touching herself to the show. Apologizing for the interruption, while red with embarrassment, $slaves[$i].slaveName resumes chatting with the somewhat more pliant girl.
+	<<else>>
+		Exhausted from the birth and clutching her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>>, she returns to find that she never ended the call. The prospective slave is grinning widely and states she has been recording the show. She signs off, but not before saying she'll be seeing more of $slaves[$i].slaveName around the internet. <<if $slaves[$i].fetish == "humiliation">>Your recruiter can't help but become aroused at the prospect<<else>>Your recruiter is terrified that her birth video is out there for everyone to see, partly due to her own shame and to the potential damage it will do to her reputation<</if>>.
+	<</if>>
+
+<<case "be your Head Girl">>
+		While overseeing your other slaves, $slaves[$i].slaveName's water breaks. She attempts to hold back the coming birth until she can catch a break in her duties but ultimately fails.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Upon finishing, she quickly collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and orders the mess to be cleaned promptly without breaking her dominant appearance.
+
+<<case "work as a servant" "be a servant">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $seed > 50>>
+		While giving a slave oral service, $slaves[$i].slaveName's water breaks. She disregards this development and continues working.
+		<<ClothingBirth>>
+		The slave gets off quite strongly to the show and shoves her out of the way, leaving her to clean up her mess. Instead, she draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> until <<if $Stewardess != 0>>$Stewardess.slaveName shouts at her to move her useless ass<<elseif $HeadGirl != 0>>$HeadGirl.slaveName shouts at her to move her useless ass<<else>><<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>>shouts at her to move her useless ass<</if>>.
+		<<else>>
+		While scrubbing the penthouse floor, $slaves[$i].slaveName's water breaks. She turns to clean this new spill, disregarding what it means.
+		<<ClothingBirth>>
+		Instead of cleaning the fresh mess she made, she draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> until <<if $Stewardess != 0>>$Stewardess.slaveName shouts at her to move her useless ass<<elseif $HeadGirl != 0>>$HeadGirl.slaveName shouts at her to move her useless ass<<else>><<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>>shouts at her to move her useless ass<</if>>.
+		<</if>>
+	<<else>>
+		 <<if $seed > 50>>
+		While giving a slave oral service, $slaves[$i].slaveName's water breaks. She desperately tries to pull away but they grab her head and force her back to their crotch.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		The slave gets off quite strongly to the show and shoves her out of the way, leaving her to clean up her mess. She hurriedly tries to mop up the mess and collect her child<<if $slaves[$i].pregType > 1>>ren<</if>> before <<if $Stewardess != 0>>$Stewardess.slaveName shouts at her<<elseif $HeadGirl != 0>>$HeadGirl.slaveName shouts at her <<else>><<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>>shouts at her<</if>>.
+		<<else>>
+		While scrubbing the penthouse floor, $slaves[$i].slaveName's water breaks. She panics at the thought of not cleaning up her spill but her worsening contractions force her to find a secluded place to give birth.
+		<<ClothingBirth>>
+		Collecting her child<<if $slaves[$i].pregType > 1>>ren<</if>>, she exits her hiding place before coming under the eye of <<if $Stewardess != 0>>the glaring $Stewardess.slaveName. Her child<<if $slaves[$i].pregType > 1>>ren<</if>> are promptly taken following a lecture about priorities and time management.<<elseif $HeadGirl != 0>>the glaring $HeadGirl.slaveName. Her child<<if $slaves[$i].pregType > 1>>ren<</if>> are promptly taken following a lecture about priorities and time management.<<else>><<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>>. Her child<<if $slaves[$i].pregType > 1>>ren<</if>> are promptly taken by other servants following a lecture about priorities and time management.<</if>>
+		<</if>>
+	<</if>>
+
+<<case "serve in the master suite">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $masterSuiteUpgradeLuxury == 1>>
+			While awaiting your return on the big bed in the master suite, $slaves[$i].slaveName's water breaks thoroughly soaking the sheets. Ignoring the mess, she shifts into a more comfortable position.
+			<<ClothingBirth>>
+			Resting in your bed, she draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes waiting for you. <<if $Concubine != 0>>Concubine.slaveName furiously orders her child<<if $slaves[$i].pregType > 1>>ren<</if>> removed, and her forcefully ejected from the bed so it can be cleaned before your return.<</if>>
+		<<elseif $masterSuiteUpgradeLuxury == 2>>
+		 While being the bottom of the master suite's fuckpit, $slaves[$i].slaveName's water breaks. While she doesn't stop having sex, the fucktoys using her do and drag her from the pit to give birth. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch. Without a second thought about her child<<if $slaves[$i].pregType > 1>>ren<</if>>, she slips back into the fuckpit.
+		<<else>>
+			While awaiting your return in the master suite, $slaves[$i].slaveName's water breaks. She pays it no heed and continues blankly waiting.
+			<<ClothingBirth>>
+			Resting on the floor, she draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes waiting for you. <<if $Concubine != 0>>Concubine.slaveName furiously orders her child<<if $slaves[$i].pregType > 1>>ren<</if>> removed, and her thoroughly cleaned before your return.<</if>>
+		<</if>>
+	<<else>>
+		<<if $masterSuiteUpgradeLuxury == 1>>
+			While awaiting your return on the big bed in the master suite, $slaves[$i].slaveName's water breaks thoroughly soaking the sheets. She quickly shifts herself off the bed and calls for a servant before dropping to the floor.
+			<<ClothingBirth>>
+			Once her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> removed, she's cleaned up, and the sheets are changed, she is helped back into bed to recover for your return.
+		<<elseif $masterSuiteUpgradeLuxury == 2>>
+		 While participating in the fuckpit orgy, $slaves[$i].slaveName's water breaks. She begs to be let out of the pit but the other fucktoys pull her  in and position themselves for her to pleasure them while giving birth.
+		 <<set $humiliation = 1>>
+		 <<ClothingBirth>>
+		 Once the fucktoys are done tormenting the exhausted new mother, they hand her child<<if $slaves[$i].pregType > 1>>ren<</if>> off to the help and pull her into an embrace to allow her to regain her strength.
+		<<else>>
+			While awaiting your return in the master suite, $slaves[$i].slaveName's water breaks. She tries to get to the prepared area but fails to untangle herself from the toys she was playing with. She calls for a servant to hurry as she begins laboring.
+			<<ClothingBirth>>
+			The servant collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and helps her onto a cushion to recover for your return. With a little effort, she pushes the vibrating dildo out of her ass before settling down for a nap.
+		<</if>>
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if $masterSuiteUpgradeLuxury == 1>>
+			While awaiting your return on the big bed in the master suite, $slaves[$i].slaveName's water breaks thoroughly soaking the sheets. Ignoring the mess, she shifts into a more comfortable position.
+			<<ClothingBirth>>
+			Resting in your bed, she draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes waiting for you. <<if $Concubine != 0>>Concubine.slaveName furiously orders her child<<if $slaves[$i].pregType > 1>>ren<</if>> removed, and her forcefully ejected from the bed so it can be cleaned before your return.<</if>>
+		<<elseif $masterSuiteUpgradeLuxury == 2>>
+		 While being the bottom of the master suite's fuckpit, $slaves[$i].slaveName's water breaks. While she doesn't stop having sex, the fucktoys using her do and drag her from the pit to give birth. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch. Without a second thought about her child<<if $slaves[$i].pregType > 1>>ren<</if>>, she slips back into the fuckpit.
+		<<else>>
+			While awaiting your return in the master suite, $slaves[$i].slaveName's water breaks. She pays it no heed and continues blankly waiting.
+			<<ClothingBirth>>
+			Resting on the floor, she draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes waiting for you. <<if $Concubine != 0>>Concubine.slaveName furiously orders her child<<if $slaves[$i].pregType > 1>>ren<</if>> removed, and her thoroughly cleaned before your return.<</if>>
+		<</if>>
+	<<else>>
+		<<if $masterSuiteUpgradeLuxury == 1>>
+			While awaiting your return on the big bed in the master suite, $slaves[$i].slaveName's water breaks thoroughly soaking the sheets. She quickly moves herself off the bed and calls for a servant before dropping to the floor.
+			<<ClothingBirth>>
+			Once her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> removed, she's cleaned up, and the sheets are changed, she crawls back into bed to recover for your return.
+		<<elseif $masterSuiteUpgradeLuxury == 2>>
+		 While participating in the fuckpit orgy, $slaves[$i].slaveName's water breaks. She tries to crawl out of the pit but the other fucktoys pull her back in and position themselves for her to pleasure them while giving birth.
+		 <<set $humiliation = 1>>
+		 <<ClothingBirth>>
+		 Once the fucktoys are done tormenting the exhausted new mother, they hand her child<<if $slaves[$i].pregType > 1>>ren<</if>> off to the help and pull her into an embrace to allow her to regain her strength.
+		<<else>>
+			While awaiting your return in the master suite, $slaves[$i].slaveName's water breaks. She tries to get to the prepared area but fails to untangle herself from the toys she was playing with. She calls for a servant to hurry as she begins laboring.
+			<<ClothingBirth>>
+			The servant collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and helps her onto a cushion to recover for your return. With a little effort, she pushes the vibrating dildo out of her ass before settling down for a nap.
+		<</if>>
+	<</if>>
+	<</if>>
+
+<<case "serve in the club">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is showing off her gravid body and trying to attract citizens as well as she can. During one of her teases, her water breaks, soaking the floor. She keeps on teasing, despite her condition, until her contractions drag her to the floor.
+		<<ClothingBirth>>
+		Multiple citizens drag her into a booth so that they may tease her exhausted body while the floor is dried and her child<<if $slaves[$i].pregType > 1>>ren<</if>> carried off.
+	<<elseif $slaves[$i].fetish == "humiliation">>
+		$slaves[$i].slaveName is showing off her gravid body and trying to attract citizens by "dancing" as well as she can, all the while being a huge tease. During one of her "dances", her water breaks, soaking the  floor. She calls out to the crowd, hyping them up for her new show.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		As her child<<if $slaves[$i].pregType > 1>>ren<</if>> are removed, she is helped into one of the back rooms by several of her aroused onlookers.
+	<<else>>
+		$slaves[$i].slaveName is showing off her gravid body and trying to attract citizens by "dancing" as well as her body will let her. During one of her dances, her water breaks, soaking the floor. She hastily tries to find help to leave, but only finds hands groping her body. She is quickly pulled into one of the side rooms by a group of men looking forward to the show she's about to perform for them.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Only once the last of her clients cums over her body is she allowed to gather her child<<if $slaves[$i].pregType > 1>>ren<</if>> and take a seat. She enjoys a moment with her newborn<<if $slaves[$i].pregType > 1>>s<</if>> before the servant comes to collect them.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is showing off her gravid body and trying to attract citizens by dancing as well as she can. During one of her dances, her water breaks, soaking the dance floor. She keeps on dancing, despite her condition, until her contractions drag her to the floor.
+		<<ClothingBirth>>
+		Multiple citizens drag her into a booth so that they may tease her exhausted body while the dance floor is dried and her child<<if $slaves[$i].pregType > 1>>ren<</if>> carried off.
+	<<elseif $slaves[$i].fetish == "humiliation">>
+		$slaves[$i].slaveName is showing off her gravid body and trying to attract citizens by dancing as well as she can, all the while flashing glimpses of her crotch and nipples. During one of her dances, her water breaks, soaking the dance floor. She calls out to the crowd, hyping them up for her new show.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		As her child<<if $slaves[$i].pregType > 1>>ren<</if>> are removed from the dance floor, she is helped into one of the back rooms by several of her aroused onlookers.
+	<<else>>
+		$slaves[$i].slaveName is showing off her gravid body and trying to attract citizens by dancing as well as she can. During one of her dances, her water breaks, soaking the dance floor. She hastily tries to leave the dance floor only to find hands groping her body. She is quickly pulled into one of the side rooms by a group of men looking forward to the show she's about to perform for them.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Only once the last of her clients cums over her body is she allowed to gather her child<<if $slaves[$i].pregType > 1>>ren<</if>> and take a seat. She enjoys a moment with her newborn<<if $slaves[$i].pregType > 1>>s<</if>> before the servant comes to collect them.
+	<</if>>
+	<</if>>
+
+<<case "choose her own job">>
+	<<if !canWalk($slaves[$i])>>
+		While deciding on her post, $slaves[$i].slaveName's water breaks. Unable to reach the prepared birthing room in time, she pulls herself into a secluded nook to give birth in.
+		<<ClothingBirth>>
+		She gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> and recovers her strength before a servant finds her and collects her child<<if $slaves[$i].pregType > 1>>ren<</if>>. She decides to rest for the rest of the day before returning to choosing her next task.
+	<<else>>
+	<<if $slaves[$i].fetish == "humiliation">>
+		While wandering the penthouse deciding on her post, $slaves[$i].slaveName's water breaks. Sensing an opportunity, she waddles to the nearest balcony overlooking the city. She calls out, making sure all eyes are on her for what happens next.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		She gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> and recovers her strength before finding a servant to give her child<<if $slaves[$i].pregType > 1>>ren<</if>> to.  She decides to rest for the rest of the day before returning to choosing her next task.
+	<<else>>
+		While wandering the penthouse deciding on her post, $slaves[$i].slaveName's water breaks. Unable to reach the prepared birthing room in time, she finds a secluded nook to give birth in.
+		<<ClothingBirth>>
+		She gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> and recovers her strength before finding a servant to give her child<<if $slaves[$i].pregType > 1>>ren<</if>> to.  She decides to rest for the rest of the day before returning to choosing her next task.
+	<</if>>
+	<</if>>
+
+<<case "rest in the spa">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While soaking in the spa's pool, $slaves[$i].slaveName's water breaks. As she begins to ready herself for birth, <<if $Attendant != 0>>$Attendant.slaveName pulls her out of the pool and glares at her<<else>>the other bathers watch curiously<</if>>.
+		<<ClothingBirth>>
+		She and her child<<if $slaves[$i].pregType > 1>>ren<</if>> are quickly dried off as she begins nursing them. A servant soon arrives to take her children away.
+	<<else>>
+		While changing in the changing room before a nice soak,$slaves[$i].slaveName's water breaks. She hurries to find someone to help her but only finds curious onlookers. Without any choice left, she assumes a birthing position.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Several of other slaves present help her with her child<<if $slaves[$i].pregType > 1>>ren<</if>> while the rest finish pleasuring themselves from the show. <<if $Attendant != 0>>$Attendant.slaveName, lured in by the commotion, shoos the other slaves out and helps the new mother to a private relaxation room to unwind<<else>>Soon a servant arrives to take her child<<if $slaves[$i].pregType > 1>>ren<</if>> away, and she is helped into the bath to clean up and relax<</if>>.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While soaking in the spa's pool, $slaves[$i].slaveName's water breaks. As she begins to ready herself for birth, <<if $Attendant != 0>>$Attendant.slaveName pulls her out of the pool and glares at her<<else>>the other bathers watch curiously<</if>>.
+		<<ClothingBirth>>
+		She and her child<<if $slaves[$i].pregType > 1>>ren<</if>> are quickly dried off as she begins nursing them. A servant soon arrives to take her children away.
+	<<else>>
+		While heading for the changing room before a nice soak,$slaves[$i].slaveName's water breaks. She hurries into the changing room only to find it unusually crowded. Without any choice left, she assumes a birthing position.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Several of other slaves present help her with her child<<if $slaves[$i].pregType > 1>>ren<</if>> while the rest finish pleasuring themselves from the show. <<if $Attendant != 0>>$Attendant.slaveName, lured in by the commotion, shoos the other slaves out and helps the new mother to a private relaxation room to unwind<<else>>Soon a servant arrives to take her child<<if $slaves[$i].pregType > 1>>ren<</if>> away, and she is ushered into the bath to clean up and relax<</if>>.
+	<</if>>
+	<</if>>
+
+<<case "learn in the schoolroom">>
+	<<if !canWalk($slaves[$i])>>
+		During a lesson in $schoolroomName, $slaves[$i].slaveName's water breaks. Since she can't leave the lesson, she tries her best to hold back the upcoming birth. She fails to manage and a particularly strong contraction elicits a moan noticeable enough to draw all the students' attention.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		<<if $Schoolteacher != 0>>$Schoolteacher.slaveName, furious that her lesson was interrupted, drags her from the class along with her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>><<else>>She gathers her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>> up and is quickly helped from the class<</if>>. She can feel all the eyes watching her leave.
+	<<else>>
+		During a lesson in $schoolroomName, $slaves[$i].slaveName's water breaks. Since she can't leave the lesson, she tries her best to hold back the upcoming birth. She fails to manage and a particularly strong contraction elicits a moan noticeable enough to draw all the students' attention.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		<<if $Schoolteacher != 0>>$Schoolteacher.slaveName, furious that her lesson was interrupted, dismisses her from the class along with her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>><<else>>She gathers her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>> up and quickly excuses herself from the class<</if>>. She can feel all the eyes watching her leave.
+	<</if>>
+
+<<case "take classes">>
+	<<if !canWalk($slaves[$i])>>
+		During a lesson under <<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>>, $slaves[$i].slaveName's water breaks. Since she can't leave the lesson, she tries her best to hold back the upcoming birth, not without your assistant noticing. As punishment for poor planning, she is forbidden from leaving. Additionally, her birth will be turned into a live broadcast.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Exhausted from the birth, she is permitted a short break as her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> gathered to be cleaned up before the lesson is continued.
+	<<else>>
+		During a lesson under <<if $assistantName == "your personal assistant">>your personal assistant<<else>>$assistantName<</if>>, $slaves[$i].slaveName's water breaks. Since she can't leave the lesson, she tries her best to hold back the upcoming birth, not without your assistant noticing. As punishment for poor planning, she is forbidden from leaving. Additionally, her birth will be turned into a live broadcast.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Exhausted from the birth, she is permitted a short break as her child<<if $slaves[$i].pregType > 1>>ren are<<else>> is<</if>> gathered to clean herself up before the lesson is continued.
+	<</if>>
+
+<<case "work in the brothel">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<if ($seed > 80)>>
+		While riding a customer's dick, $slaves[$i].slaveName's water breaks on him. Showing no signs of stopping, he shoves her gravid bulk off of him. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch. She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> before seeking out the next customer's cock.
+		<<elseif ($seed > 60)>>
+		While sucking a customer's dick, $slaves[$i].slaveName's water breaks. She shows no signs of slowing down, so he allows her to reposition and continue.
+		<<ClothingBirth>>
+		He cums down her throat before she begins drawing her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and seeking out the next customer's cock.
+		<<elseif ($seed > 40)>>
+		While licking a customer's cunt, $slaves[$i].slaveName's water breaks. She shows no signs of slowing down, so she allows her to reposition and continue.
+		<<ClothingBirth>>
+		The customer splashes across her face before she begins drawing her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and seeking out the next customer's cunt.
+		<<else>>
+		While taking a customer's dick in her ass, $slaves[$i].slaveName's water breaks. She shows no signs of slowing down, so he allows her to reposition and continue. Instinctively, she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch. He came strongly thanks to her and gives her a slap on the ass as she begins drawing her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and seeking out the next customer's cock.
+		<</if>>
+	<<else>>
+		<<if ($seed > 80)>>
+		While riding a customer's dick, $slaves[$i].slaveName's water breaks on him. She desperately tries to disengage but he grabs her hips and slams her back down. He thoroughly enjoys her contracting cunt before pushing her off and standing over her, jacking off. Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>. He cums over her exhausted body and moves on leaving her to recover and collect her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+		<<set $humiliation = 1>>
+		<<elseif ($seed > 60)>>
+		While sucking a customer's dick, $slaves[$i].slaveName's water breaks. She desperately tries to disengage but he grabs her head and slams her back into his crotch.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		He cums down her throat before letting her collapse to the ground and leaving.  When she recovers, she quickly gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+		<<elseif ($seed > 40)>>
+		While licking a customer's cunt, $slaves[$i].slaveName's water breaks. She desperately tries to disengage but she grabs her head and slams her back into her crotch.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		She cums across her face before helping her to the ground and leaving.  When she recovers, she quickly gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+		<<else>>
+		While taking a customer's dick in her ass, $slaves[$i].slaveName's water breaks. She desperately tries to disengage but he grabs her hips and slams into her hard. Quickly, she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>. He came strongly thanks to her and gives her a slap on the ass as she collapses to the ground. She quickly gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be sent off.
+		<<set $humiliation = 1>>
+		<</if>>
+	<</if>>
+
+<<case "be the DJ">>
+		While DJing $clubName, $slaves[$i].slaveName's water breaks. She can't stop her setlist without drawing attention so she tries her best to ride out the contractions. As soon as the opportunity arises, she attempts to sneak off stage. However, a number of fans block her progress keeping her on stage. Before long the contractions are too much to bear and she drops to the ground.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Exhausted, she sits up and smiles to the crowd. Her show definitely drew attention to her club. With a burst of energy she leaps to her feet, bows to the crowd, and gathers her child<<if $slaves[$i].pregType > 1>>ren<</if>>, before making her way off stage. As she leaves the public's gaze, she shouts out with a wink "the next showing ought to be in about nine months".
+
+
+<<case "be the Attendant">>
+		While tending to the girls in the spa, $slaves[$i].slaveName's water breaks.  The girls quickly come to her aid as the contractions get closer and closer together. Their hands are all over her laboring body, unsure of what they should be doing.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		She thanks her charges for their, less than helpful, efforts and collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> for removal. Upon returning, she strips down and enters the pool, desperate for a break.
+
+
+<<case "be the Madam">>
+		While managing $brothelName, $slaves[$i].slaveName's water breaks. Knowing she lacks the time to leave, she sets up a sign reading "birthshow ¤100 a viewer" and takes a seat.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Upon completing her show, she reclines with her $slaves[$i].pregType child<<if $slaves[$i].pregType > 1>>ren<</if>> and begins counting the credits she bought in. In total she made ¤100*$seed, and feels that business will be up in the brothel as patrons line up hoping another showing.
+		<<set _quickProfit = (100*$seed)>>
+		<<slavePaid $slaves[$i] _quickProfit>>
+
+<<case "be the Schoolteacher">>
+	<<if !canWalk($slaves[$i])>>
+		While teaching a lesson, $slaves[$i].slaveName's water breaks. Sensing she wouldn't be able to make it to the birthing area, she instead chooses to act on the opportunity. Today's lesson will be on childbirth.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Once she recovers enough, she gathers her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>> and instructs the class to take notes on the lesson she just demonstrated before being escorted out of the classroom.
+	<<else>>
+		While teaching a lesson, $slaves[$i].slaveName's water breaks. Sensing she wouldn't be able to make it to the birthing area, she instead chooses to act on the opportunity. Today's lesson will be on childbirth.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Once she recovers enough, she gathers her newborn child<<if $slaves[$i].pregType > 1>>ren<</if>> and instructs the class to take notes on the lesson she just demonstrated before leaving to drop off her child<<if $slaves[$i].pregType > 1>>ren<</if>> for removal.
+	<</if>>
+
+<<case "be the Stewardess">>
+		While overseeing the house servants, $slaves[$i].slaveName's water breaks. She has no time to strip down so she takes a seat and readies herself. Commandingly, she snaps her fingers and orders her charges to clean up the floor, assist her with her clothes, and be ready to take her child<<if $slaves[$i].pregType > 1>>ren<</if>> away.
+		<<set $humiliation = 1>>
+		<<ClothingBirth>>
+		Once she catches her breath, she rises and takes the fresh change of clothing provided by her servants before ordering them back to work.
+
+<<case "be the Milkmaid">>
+		While tending to her stock, $slaves[$i].slaveName's water breaks. She hastily pulls herself into a vacant stall and seats herself in its corner.
+		<<ClothingBirth>>
+		Quickly, she collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> for removal before returning to $dairyName.  The cows around her stall all have a knowing look on their faces<<if $dairyPregSetting > 0>> but with their own swollen bellies hanging heavily from them, they know that they soon will follow her lead.<<else>>.<</if>>
+
+<<case "be the Wardeness">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While punishing a slave, $slaves[$i].slaveName's water breaks, soaking her. Indifferent, she resumes beating her until the contractions are to much to bear. Settling to the floor, she begins giving birth.
+		<<ClothingBirth>>
+		As soon as she regains her strength, she resumes beating the confused slave. Her child<<if $slaves[$i].pregType > 1>>ren<</if>> are collected by a servant, who carefully hints that $slaves[$i].slaveName should take a break before returning to her task.
+	<<else>>
+		While punishing a rebellious slave, $slaves[$i].slaveName's water breaks, soaking her. Noticing the slave's smirk, she resumes beating her until the contractions are too much to bear. Relocking the cell, she waddles into the nearest empty cell and drops her weight onto the cot.
+		<<ClothingBirth>>
+		Quickly, she collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> for removal before returning to $cellblockName. On her way past the cells, she takes note of any slaves whispering or gesturing about what transpired for future punishment.
+	<</if>>
+
+<<case "be the Nurse">>
+		While tending to your unwell slaves, $slaves[$i].slaveName's water breaks. Counting the time between contractions, she knows she has no time to get to her prepared birthing chamber. She waddles into the nearest empty room and hoists her gravid body into the examination chair, placing her feet in the stirrups.
+		<<ClothingBirth>>
+		Quickly, she collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> for removal before retiring to the recovery ward. Within an hour of rest, she is back on her feet tending to her charges.
+
+<<case "be your Concubine">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName cradles her swollen belly, waiting for your return, when her water breaks. Saddened that you aren't there for the show, she begins waddling off to find you. By the time she reaches your office, she is barely holding back her child<<if $slaves[$i].pregType > 1>>ren<</if>>. You rise to meet her and help her onto the couch, just before it's too late.
+		<<ClothingBirth>>
+		Cradling your child<<if $slaves[$i].pregType > 1>>ren<</if>>, the two of you rest for a spell before sending them off and spending some more intimate time together.
+	<<else>>
+		$slaves[$i].slaveName cradles her swollen belly, waiting for your return, when her water breaks. Saddened that you aren't there for the show, she begins waddling off to find you. By the time she reaches your office, she is barely holding back her child<<if $slaves[$i].pregType > 1>>ren<</if>>. You rise to meet her and help her onto the couch, just before it's too late.
+		<<ClothingBirth>>
+		Cradling your child<<if $slaves[$i].pregType > 1>>ren<</if>>, the two of you rest for a spell before sending them off and spending some more intimate time together.
+	<</if>>
+
+<<case "live with your Head Girl">>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is awoken from her rest by a strong contraction.  She rolls over and begins to fall back to sleep as another contraction wracks her body.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes resting before $HeadGirl.slaveName returns from her duties.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her rest by a moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and places them in the cradle readied for her. She is helped to the shower as your servants clean up and remove her child<<if $slaves[$i].pregType > 1>>ren<</if>>. Freshened up, she returns to resting knowing full well that $HeadGirl.slaveName will be eager to play with her body upon returning.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is awoken from her rest by a strong contraction.  She rolls over and begins to fall back to sleep as another contraction wracks her body.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes resting before $HeadGirl.slaveName returns from her duties.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her rest by a moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and places them in the cradle readied for her. She leaves to take a shower as your servants clean up and remove her child<<if $slaves[$i].pregType > 1>>ren<</if>>. Freshened up, she returns to resting knowing full well that $HeadGirl.slaveName will be eager to play with her body upon returning.
+	<</if>>
+	<</if>>
+
+<<case "be confined in the arcade">>
+	A gush of liquid pours from the $slaves[$i].slaveName's cunt, followed by the attendant in charge of the arcade hanging an "out of order" sign on her exposed rear. While her mouth is filled with a customer's dick, her body instinctively births her child<<if $slaves[$i].pregType > 1>>ren<</if>> into the waiting basket.  As they are carried away, her rear is cleaned up and the sign removed.
+
+<<case "get treatment in the clinic">>
+	$slaves[$i].slaveName is in the perfect place to give birth when her water breaks. <<if $Nurse != 0>>$Nurse.slaveName<<else>>A freelance nurse<</if>> delivers her child<<if $slaves[$i].pregType > 1>>ren<</if>> before taking them away. Before long she returns to attend to her patient's post-birth health.
+
+<<case "be confined in the cellblock">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		While waiting in a cell in $cellblockName, $slaves[$i].slaveName's water breaks.  She assumes a birthing position,
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes waiting.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her stupor by moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and holds them close knowing someone will soon come to take them away from her.
+	<</if>>
+
+<<default>>
+	<<if !canWalk($slaves[$i])>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is awoken from her rest by a strong contraction.  She rolls over and begins to fall back to sleep as another contraction wracks her body.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes resting.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her rest by a moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and places them in the cradle readied for her. She is helped to the shower as your servants clean up and remove her child<<if $slaves[$i].pregType > 1>>ren<</if>>.
+	<</if>>
+	<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		$slaves[$i].slaveName is awoken from her rest by a strong contraction.  She rolls over and begins to fall back to sleep as another contraction wracks her body.
+	<<ClothingBirth>>
+	She draws her child<<if $slaves[$i].pregType > 1>>ren<</if>> to her breast<<if $slaves[$i].pregType > 1>>s<</if>> and resumes resting.
+	<<else>>
+		$slaves[$i].slaveName is awoken from her rest by a moist sensation followed by a contraction. She rolls over and clutches her gravid belly as another contraction wracks her body.
+	<<ClothingBirth>>
+	She collects her child<<if $slaves[$i].pregType > 1>>ren<</if>> and places them in the cradle readied for her. She heads to the shower as your servants clean up and remove her child<<if $slaves[$i].pregType > 1>>ren<</if>>.
+	<</if>>
+	<</if>>
+
+	<</switch>>
+
+<</if>>
+
+<</widget>>
+
+
+<<widget "DeadlyBirth">>
+
+<br>
+<<set $slaveDead = 1>>
+
+Feeling childbirth approaching, $slaves[$i].slaveName is helped to her prepared birthing area.
+
+<<switch $slaves[$i].assignment>>
+
+<<case "work a glory hole">>
+	 Since she is unable to leave her box, she doesn't have far to go. She quickly finishes the waiting dick before shifting herself into a slightly, though not by much, more comfortable position.  She begins laboring on her child<<if $slaves[$i].pregType > 1>>ren<</if>>. However, she soon finds that she is incapable of actually giving birth to her child<<if $slaves[$i].pregType > 1>>ren<</if>>. As blood begins to seep from her nethers, she desperately tries to get anyone's attention.
+<br><br>
+Only after several complaints of a non-functional glory hole is she checked up on. Her gravid corpse, vagina agape, is all that remains of the unfortunate $slaves[$i].slaveName.
+
+<<case "stay confined">>
+	 Since she is locked in a cell, she doesn't have far to go.  Reluctantly, she begins laboring on her child<<if $slaves[$i].pregType > 1>>ren<</if>>. However, she soon finds that she is incapable of actually giving birth to her child<<if $slaves[$i].pregType > 1>>ren<</if>>. As blood begins to seep from her nethers, she desperately tries to get anyone's attention.
+<br><br>
+Once meal time comes around and food shoved into her cell does anyone think something is amiss. When the food isn't desperately snatched away, her cell is opened and she checked up on. Her gravid corpse, propped up in the corner, vagina agape, is all that remains of the unfortunate $slaves[$i].slaveName.
+
+
+<<case "be confined in the arcade">>
+	Or she would have been, if she weren't locked in an arcade cabinet. A gush of liquid pours from the $slaves[$i].slaveName's cunt, followed by the attendant in charge of the arcade hanging an "out of order" sign on her exposed rear. While her mouth is filled with a customer's dick, her body instinctively attempts laboring on her child<<if $slaves[$i].pregType > 1>>ren<</if>>. However, she soon finds that she is incapable of actually giving birth to her child<<if $slaves[$i].pregType > 1>>ren<</if>>. As blood begins to seep from her nethers, she desperately tries to get anyone's attention. The attendant rushes to her aid, but fails to get the cabinet open in time to save $slaves[$i].slaveName. Her and her child<<if $slaves[$i].pregType > 1>>ren<</if>> were an unfortunate loss.
+
+<<case "be confined in the cellblock">>
+	 Since she is locked in a cell, she doesn't have far to go.  Reluctantly, she begins laboring on her child<<if $slaves[$i].pregType > 1>>ren<</if>>. However, she soon finds that she is incapable of actually giving birth to her child<<if $slaves[$i].pregType > 1>>ren<</if>>. As blood begins to seep from her nethers, she desperately tries to get anyone's attention.
+<br><br>
+Once meal time comes around and food shoved into her cell does anyone think something is amiss. When the food isn't desperately snatched away, her cell is opened and she checked up on. Her gravid corpse, propped up in the corner, vagina agape, is all that remains of the unfortunate $slaves[$i].slaveName.
+
+<<default>>
+	As she is helped back to her bed and to give birth, her water breaks and she slumps to the ground. As her helper rushes off to find her, she begins laboring on her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. However, she soon finds that she is incapable of actually giving birth to her child<<if $slaves[$i].pregType > 1>>ren<</if>>. As blood begins to seep from her nethers, she desperately tries to get anyone's attention.
+<br><br>
+Her helper arrives with aid far too late. She screams when she sees $slaves[$i].slaveName's gravid corpse, vagina agape. An unfortunate loss.
+
+<</switch>>
+
+<</widget>>
+
+
+
+<<widget "ClothingBirth">>
+
+<<set $clothesSeed = random(1,100)>>
+<<set $undressed = 0>>
+
+
+<<if $slaves[$i].fetish == "mindbroken">>
+	<<set $clothesSeed += 20>>
+<</if>>
+
+<<switch $slaves[$i].clothes>>
+
+<<case "slutty jewelry" "harem gauze" "slutty business attire" "a slutty maid outfit" "a slutty nurse outfit" "a schoolgirl outfit" "a cheerleader outfit" "clubslut netting" "Western clothing" "a slutty qipao" "a chattel habit" "a toga" "a huipil" "a fallen nun's habit" "a succubus outfit" "a mini dress" "a military uniform">> /* easy or pointless to remove */
+	<<if $clothesSeed < 90>>
+		<<set $undressed = 1>>
+	<</if>>
+
+<<case "attractive lingerie" "a string bikini" "a kimono">> /*easy to remove */
+	<<if $clothesSeed < 80>>
+		<<set $undressed = 1>>
+	<</if>>
+
+<<case "a slave gown" "a hijab and abaya" "a halter top dress" "a ball gown">> /* dresses and etc */
+	<<if $clothesSeed < 60>>
+		<<set $undressed = 1>>
+	<</if>>
+
+<<case "cutoffs and a t-shirt" "a slutty outfit" "nice business attire" "battledress" "a nice maid outfit" "a leotard" "a comfortable bodysuit" "a bunny outfit" "conservative clothing" "a nice nurse outfit" "a latex catsuit">> /* getting hard to get out of quickly */
+	<<if $clothesSeed < 40>>
+		<<set $undressed = 1>>
+	<</if>>
+
+<<case "uncomfortable straps" "restrictive latex" "a very tight corset" "chains" "shibari ropes">> /* very hard to get out of quickly */
+	<<if $clothesSeed < 20>>
+		<<set $undressed = 1>>
+	<</if>>
+
+<</switch>>
+
+
+
+<<if $undressed == 0 && $slaves[$i].clothes != "no clothing" && $slaves[$i].clothes != "body oil">>
+
+<<switch $slaves[$i].clothes>>
+
+<<case "attractive lingerie">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her g-string stretches as her baby crowns into it before finally snapping and clearing the way for her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<<else>>
+		Quickly she spreads her legs apart and shifts her g-string aside before beginning to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.
+	<</if>>
+
+<<case "a succubus outfit" "slutty jewelry" "a fallen nuns habit" "harem gauze" "slutty business attire" "a slutty maid outfit" "a slutty nurse outfit" "a schoolgirl outfit" "restrictive latex" "a cheerleader outfit" "clubslut netting" "Western clothing" "a slutty qipao" "a huipil" "a chattel habit">>
+  <<if $slaves[$i].fetish == "mindbroken">>
+	Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch.
+  <<else>>
+  	Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.
+  <</if>>
+
+<<case "a slave gown" "a halter top dress">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her dress hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "a string bikini">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her bikini bottom stretches as her baby crowns into it before finally snapping and clearing the way for her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<<else>>
+		Quickly she spreads her legs apart and shifts her bikini bottom aside before beginning to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.
+	<</if>>
+
+<<case "cutoffs and a t-shirt">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her jean cutoffs bulge as her baby crowns into them as she continues her tasks oblivious to the wetness and her child's dilemma.  Seeing her in this state, someone manages to remove her pants to allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to unfasten her jean cutoffs but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into her jeans, she can't hide the wetness and bulge between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her clothes and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "a slutty outfit">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her ripped jean shorts bulge as her baby crowns into them as she continues her tasks oblivious to the wetness and her child's dilemma.  Seeing her in this state, someone manages to remove her pants to allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to unfasten her ripped jean shorts but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into her jeans, she can't hide the wetness and bulge between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her clothes and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "uncomfortable straps">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her straps are pushed taut as her baby crowns into the steel ring covering her vagina.  She continues her tasks, oblivious to her child's dilemma, until someone manages to cut her straps and allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to undo her straps but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into the steel ring covering her vagina, she can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her bindings and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "a penitent nuns habit">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>'s comfort.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her habit hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.  She tries to keep her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> from being chaffed by her habit.
+	<</if>>
+
+<<case "nice business attire">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her business suit hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "a comfortable bodysuit">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her crotch.  She finishes giving birth and begins anew on her assigned task, ignoring the squirming bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> distending the crotch of her bodysuit, until someone helps them from their nylon prison.
+	<<else>>
+		Quickly she attempts to remove her bodysuit but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  The tight material stretches as her child is born into it and with a little help her child<<if $slaves[$i].pregType > 1>>ren are <<else>> is <</if>>freed from the taut nylon.
+	<</if>>
+
+<<case "a kimono">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her kimono hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "a hijab and abaya">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her abaya hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "battledress">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her fatigues bulge as her baby crowns into them as she continues her tasks oblivious to the wetness and her child's dilemma.  Seeing her in this state, someone manages to remove her pants to allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to unfasten her fatigues but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into her pants, she can't hide the wetness and bulge between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her clothes and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "a nice maid outfit">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her maid outfit hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "conservative clothing">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her pants bulge as her baby crowns into them as she continues her tasks oblivious to the wetness and her child's dilemma.  Seeing her in this state, someone manages to remove her pants to allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to unfasten her pants but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into her pants, she can't hide the wetness and bulge between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her clothes and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "chains">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her chains stretch as her baby crowns into it before finally slipping to the side clearing the way for her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<<else>>
+		Quickly she spreads her legs apart and shifts her chains aside before beginning to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.
+	<</if>>
+
+<<case "shibari ropes">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her ropes are pulled taut as her baby crowns into the rope covering her vagina.  She continues her tasks, oblivious to her child's dilemma, until someone manages to cut her ropes and allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to undo her ropes but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into the rope covering her vagina, she can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her bindings and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "a toga">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her toga hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "a huipil">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	 <<else>>
+	 	Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>. She can't hide what's going on with how skimpy the huipil is<<if $slaves[$i].fetish == "humiliation">> but that only makes it more exciting<<else>> so she bears with it<</if>>.
+	 <</if>>
+
+<<case "a bunny outfit">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her teddy bulges as her baby crowns into it as she continues her tasks oblivious to the wetness and her child's dilemma.  Seeing her in this state, someone manages to tear her outfit open to allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to remove her teddy but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into her outfit, she can't hide the wetness and bulge between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her bunny suit and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "a leotard">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her crotch.  She finishes giving birth and begins anew on her assigned task, ignoring the squirming bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> distending the crotch of her leotard, until someone helps them from their nylon prison.
+	<<else>>
+		Quickly she attempts to remove her leotard but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  The tight material stretches as her child is born into it and with a little help her child<<if $slaves[$i].pregType > 1>>ren are <<else>> is <</if>>freed from the taut nylon.
+	<</if>>
+
+<<case "a ball gown">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her gown hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "a latex catsuit">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent the closed zipper covering her pussy. As her child bulges the latex around her crotch, someone rushes to try and undo the zipper. They succeed in clearing her birth canal, allowing her to carry on with childbirth.
+	<<else>>
+		Quickly she attempts to undo her zipper but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  The latex of her crotch bulges as her child is born into it, making it even harder to unzip. As she struggles between the newborn stuck in her vagina and the equally stuck zipper, someone comes to her aid allowing her child<<if $slaves[$i].pregType > 1>>ren<</if>> to be born.
+	<</if>>
+
+<<case "a military uniform">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is disappointed that her skirt hides what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<case "a nice nurse outfit">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+			Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching.  Her trousers bulge as her baby crowns into them as she continues her tasks oblivious to the wetness and her child's dilemma.  Seeing her in this state, someone manages to remove her pants to allow her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>> to be born.
+	<<else>>
+		Quickly she attempts to unfasten her trousers but fails to do so before having to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  As she crowns into her pants, she can't hide the wetness and bulge between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.  With a little help, she manages to escape her clothes and give birth to her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.
+	<</if>>
+
+<<case "a mini dress">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to the obvious wetness forming over her crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.<<if $slaves[$i].fetish == "humiliation">>  She is thrilled that her short dress reveals what's happening between her legs<<else>>  She does her best to hide what's happening between her legs<</if>>.
+	<</if>>
+
+<<default>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.
+	<</if>>
+
+
+<</switch>>
+
+<<elseif $slaves[$i].clothes == "no clothing" || $slaves[$i].clothes == "body oil">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		Instinctively she begins to push out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>, indifferent to who may be watching her naked crotch.
+	<<else>>
+		Quickly she spreads her legs apart and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.
+	<</if>>
+<<else>>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		She removes her
+		<<switch $slaves[$i].clothes>>
+		<<case "slutty jewelry" "harem gauze" "slutty business attire" "clubslut netting" "Western clothing" "attractive lingerie" "battledress" "restrictive latex" "chains" "shibari ropes" "conservative clothing" "uncomfortable straps" "nice business attire">>
+		$slaves[$i].clothes
+		<<case "a slutty maid outfit">>
+		slutty maid outfit
+		<<case "a slutty nurse outfit">>
+		slutty nurse outfit
+		<<case "a schoolgirl outfit">>
+		schoolgirl outfit
+		<<case "a cheerleader outfit">>
+		cheerleader outfit
+		<<case "a slutty qipao">>
+		slutty qipao
+		<<case "a chattel habit">>
+		chattel habit
+		<<case "a toga">>
+		toga
+		<<case "a huipil">>
+		huipil
+		<<case "a fallen nun's habit">>
+		fallen nun's habit
+		<<case "a succubus outfit">>
+		succubus outfit
+		<<case "cutoffs and a t-shirt">>
+		cutoffs and t-shirt
+		<<case "a mini dress">>
+		mini dress
+		<<case "a military uniform">>
+		military uniform
+		<<case "a string bikini">>
+		string bikini
+		<<case "a kimono">>
+		kimono
+		<<case "a slave gown">>
+		slave gown
+		<<case "a hijab and abaya">>
+		hijab and abaya
+		<<case "a halter top dress">>
+		halter top dress
+		<<case "a ball gown">>
+		ball gown
+		<<case "a slutty outfit">>
+		slutty outfit
+		<<case "a nice maid outfit">>
+		nice maid outfit
+		<<case "a leotard">>
+		leotard
+		<<case "a comfortable bodysuit">>
+		comfortable bodysuit
+		<<case "a bunny outfit">>
+		bunny outfit
+		<<case "a nice nurse outfit">>
+		nice nurse outfit
+		<<case "a latex catsuit">>
+		latex catsuit
+		<<case "a leotard">>
+		leotard
+		<</switch>>
+		as instinct takes hold compelling her to begin pushing. She pays no mind to who may be watching her naked crotch as her <<if $slaves[$i].pregType > 1>>first<</if>> baby begins to crown.
+	<<else>>
+		She hastily removes her
+		<<switch $slaves[$i].clothes>>
+		<<case "slutty jewelry" "harem gauze" "slutty business attire" "clubslut netting" "Western clothing" "attractive lingerie" "battledress" "restrictive latex" "chains" "shibari ropes" "conservative clothing" "uncomfortable straps" "nice business attire">>
+		$slaves[$i].clothes
+		<<case "a slutty maid outfit">>
+		slutty maid outfit
+		<<case "a slutty nurse outfit">>
+		slutty nurse outfit
+		<<case "a schoolgirl outfit">>
+		schoolgirl outfit
+		<<case "a cheerleader outfit">>
+		cheerleader outfit
+		<<case "a slutty qipao">>
+		slutty qipao
+		<<case "a chattel habit">>
+		chattel habit
+		<<case "a toga">>
+		toga
+		<<case "a huipil">>
+		huipil
+		<<case "a fallen nun's habit">>
+		fallen nun's habit
+		<<case "a succubus outfit">>
+		succubus outfit
+		<<case "cutoffs and a t-shirt">>
+		cutoffs and t-shirt
+		<<case "a mini dress">>
+		mini dress
+		<<case "a military uniform">>
+		military uniform
+		<<case "a string bikini">>
+		string bikini
+		<<case "a kimono">>
+		kimono
+		<<case "a slave gown">>
+		slave gown
+		<<case "a hijab and abaya">>
+		hijab and abaya
+		<<case "a halter top dress">>
+		halter top dress
+		<<case "a ball gown">>
+		ball gown
+		<<case "a slutty outfit">>
+		slutty outfit
+		<<case "a nice maid outfit">>
+		nice maid outfit
+		<<case "a leotard">>
+		leotard
+		<<case "a comfortable bodysuit">>
+		comfortable bodysuit
+		<<case "a bunny outfit">>
+		bunny outfit
+		<<case "a nice nurse outfit">>
+		nice nurse outfit
+		<<case "a latex catsuit">>
+		latex catsuit
+		<<case "a leotard">>
+		leotard
+		<</switch>>
+		and tosses it aside. Quickly she spreads her legs and begins pushing out her bab<<if $slaves[$i].pregType > 1>>ies<<else>>y<</if>>.  She can't hide what's happening between her legs, <<if $slaves[$i].fetish == "humiliation">>but that only makes it more exciting<<else>>so she bears with it<</if>>.
+	<</if>>
+<</if>>
+
+<</widget>>

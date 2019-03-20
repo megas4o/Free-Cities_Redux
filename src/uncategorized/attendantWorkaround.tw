@@ -1,0 +1,13 @@
+:: Attendant Workaround [silently]
+
+<<if $Attendant != 0>>
+	<<removeJob $Attendant "be the Attendant">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the Attendant">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Attendant = $slaves[$i]>>
+<</if>>
+
+<<goto "Spa">>
+

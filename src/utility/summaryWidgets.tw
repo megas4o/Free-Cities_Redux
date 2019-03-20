@@ -1,0 +1,2977 @@
+﻿:: Summary Widgets [widget nobr]
+
+/%
+ Call as <<SlaveStatClamp $slave>>
+%/
+<<widget "SlaveStatClamp">>
+<<set $args[0].energy = Math.clamp($args[0].energy, 0, 100)>>
+
+<<if $args[0].devotion > 100>>
+	<<if $args[0].trust < -95>>
+		<<set $args[0].trust = -100>>
+	<<elseif ($args[0].trust < 100) && ($args[0].trust >= -20)>>
+		<<set $args[0].trust += Math.trunc($args[0].devotion-100)>>
+	<<else>>
+		<<set $rep += 10*($args[0].devotion-100)>>
+	<</if>>
+	<<set $args[0].devotion = 100>>
+<<elseif $args[0].devotion < -95>>
+	<<set $args[0].devotion = -100>>
+<</if>>
+<<if $args[0].trust > 100>>
+	<<if $args[0].devotion < -95>>
+		<<set $args[0].devotion = -100>>
+	<<elseif $args[0].devotion < 100>>
+		<<set $args[0].devotion += Math.trunc($args[0].trust-100)>>
+	<<else>>
+		<<set $rep += 10*($args[0].trust-100)>>
+	<</if>>
+	<<set $args[0].trust = 100>>
+<<elseif $args[0].trust < -95>>
+	<<set $args[0].trust = -100>>
+<</if>>
+<<if $args[0].trust < -100>><<set $args[0].trust = -100>><</if>>
+<<if $args[0].devotion < -100>><<set $args[0].devotion = -100>><</if>>
+<</widget>>
+
+/%
+ Call as <<SlaveSummary $slave>>
+	Calling this widget will create a summary for the passed slave if needed.
+	It should be preceeded by the slave selection link, as it starts "will (assignment)".
+	Includes the general population simple links
+%/
+<<widget "SlaveSummary">>
+
+/*
+<<set _slaveName = $args[0].slaveName>>
+<<if $args[0].slaveSurname>><<set _slaveName += " " + $args[0].slaveSurname>><</if>>
+
+<br style="clear:both" /><<if $lineSeparations == 0>><br><<else>><hr style="margin:0"><</if>><<if ($seeImages == 1) && ($seeSummaryImages == 1)>><div class="imageRef smlImg"><<SlaveArt $args[0] 1>></div><</if>>
+		<<print "[[_slaveName|Slave Interact][$activeSlave = $args[0] ]]">>
+/**/
+will
+<<if ($args[0].assignment == "rest") && ($args[0].health >= -20)>>
+	''__@@.lawngreen;rest.@@__''
+<<elseif ($args[0].assignment == "stay confined") && (($args[0].devotion > 20) || (($args[0].trust < -20) && ($args[0].devotion >= -20)) || (($args[0].trust < -50) && ($args[0].devotion >= -50)))>>
+	''__@@.lawngreen;stay confined.@@__''<<if $args[0].sentence > 0>> ($args[0].sentence weeks)<</if>>
+<<else>>
+	<<if $args[0].choosesOwnAssignment == 1>>choose her own job<<else>>$args[0].assignment<<if $args[0].sentence > 0>> ($args[0].sentence weeks)<</if>><</if>>.
+<</if>>
+
+/**/
+<<if $args[0].currentSummary != 1>>
+	<<GenerateSlaveSummary $args[0]>>
+	<<set $args[0].currentSummary = 1>>
+<</if>>
+/**/
+
+<<print $args[0].summary>>
+
+/**/
+<<if $abbreviateOrigins == 2 && $args[0].origin != 0>>
+	<br>
+	<<if $seeImages != 1 || $seeSummaryImages != 1 || $imageChoice == 1>>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	<</if>>
+	@@.gray;$args[0].origin@@
+<</if>>
+<</widget>>
+
+/%
+ Call as <<GenerateSlaveSummary $slave>>
+   WIP to speed up SlaveSummary.tw and the places that call it.
+%/
+<<widget "GenerateSlaveSummary">>
+<<set _break = "<br>&nbsp;">>
+<<if $seeImages != 1 || $seeSummaryImages != 1 || $imageChoice == 1>>
+	<<set _break += "&nbsp;&nbsp;&nbsp;&nbsp;">>
+<</if>>
+
+/* - Line 1 - ******************************************************/
+<<set $args[0].summary = _break>>
+
+<<if $args[0].fetish == "mindbroken">>
+	<<if $abbreviateDevotion == 1>>
+		<<set $args[0].summary += "@@.red;MB@@ ">>
+	<<elseif $abbreviateDevotion == 2>>
+		<<set $args[0].summary += "@@.red;Mindbroken@@ ">>
+	<</if>>
+<<elseif $abbreviateDevotion == 1>>
+	<<if $args[0].devotion < -95>>
+		<<set $args[0].summary += "@@.darkviolet;VHate">>
+	<<elseif $args[0].devotion < -50>>
+		<<set $args[0].summary += "@@.darkviolet;Hate">>
+	<<elseif $args[0].devotion < -20>>
+		<<set $args[0].summary += "@@.mediumorchid;Res">>
+	<<elseif $args[0].devotion <= 20>>
+		<<set $args[0].summary += "@@.yellow;Ambiv">>
+	<<elseif $args[0].devotion <= 50>>
+		<<set $args[0].summary += "@@.hotpink;Accept">>
+	<<elseif $args[0].devotion <= 95>>
+		<<set $args[0].summary += "@@.deeppink;Devo">>
+	<<else>>
+		<<set $args[0].summary += "@@.magenta;Wor">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += "["+$args[0].devotion+"]@@ ">>
+	<<else>>
+		<<set $args[0].summary += "@@ ">>
+	<</if>>
+	<<if $args[0].trust < -95>>
+		<<set $args[0].summary += "@@.darkgoldenrod;ETerr">>
+	<<elseif $args[0].trust < -50>>
+		<<set $args[0].summary += "@@.goldenrod;Terr">>
+	<<elseif $args[0].trust < -20>>
+		<<set $args[0].summary += "@@.gold;Fright">>
+	<<elseif $args[0].trust <= 20>>
+		<<set $args[0].summary += "@@.yellow;Fear">>
+	<<elseif $args[0].trust <= 50>>
+		<<set $args[0].summary += "@@.mediumaquamarine;Caref">>
+	<<elseif $args[0].trust < 95>>
+		<<set $args[0].summary += "@@.mediumseagreen;Trust">>
+	<<else>>
+		<<set $args[0].summary += "@@.seagreen;VTrust">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += "["+$args[0].trust+"]@@ ">>
+	<<else>>
+		<<set $args[0].summary += "@@ ">>
+	<</if>>
+<<elseif $abbreviateDevotion == 2>>
+	<<if $args[0].devotion < -95>>
+		<<set $args[0].summary += "@@.darkviolet;Very hateful">>
+	<<elseif $args[0].devotion < -50>>
+		<<set $args[0].summary += "@@.darkviolet;Hateful">>
+	<<elseif $args[0].devotion < -20>>
+		<<set $args[0].summary += "@@.mediumorchid;Resistant">>
+	<<elseif $args[0].devotion <= 20>>
+		<<set $args[0].summary += "@@.yellow;Ambivalent">>
+	<<elseif $args[0].devotion <= 50>>
+		<<set $args[0].summary += "@@.hotpink;Accepting">>
+	<<elseif $args[0].devotion <= 95>>
+		<<set $args[0].summary += "@@.deeppink;Devoted">>
+	<<else>>
+		<<set $args[0].summary += "@@.magenta;Worshipful">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+$args[0].devotion+"].@@ ">>
+	<<else>>
+		<<set $args[0].summary += ".@@ ">>
+	<</if>>
+	<<if $args[0].trust < -95>>
+		<<set $args[0].summary += "@@.darkgoldenrod;Extremely terrified">>
+	<<elseif $args[0].trust < -50>>
+		<<set $args[0].summary += "@@.goldenrod;Terrified">>
+	<<elseif $args[0].trust < -20>>
+		<<set $args[0].summary += "@@.gold;Frightened">>
+	<<elseif $args[0].trust <= 20>>
+		<<set $args[0].summary += "@@.yellow;Fearful">>
+	<<elseif $args[0].trust <= 50>>
+		<<set $args[0].summary += "@@.mediumaquamarine;Careful">>
+	<<elseif $args[0].trust < 95>>
+		<<set $args[0].summary += "@@.mediumseagreen;Trusting">>
+	<<else>>
+		<<set $args[0].summary += "@@.seagreen;Profoundly trusting">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+$args[0].trust+"].@@ ">>
+	<<else>>
+		<<set $args[0].summary += ".@@ ">>
+	<</if>>
+<</if>>
+
+<<if $args[0].fuckdoll == 0>>
+<<if $abbreviateRules == 1>>
+<<switch $args[0].livingRules>>
+<<case "luxurious">>
+	<<set $args[0].summary += "''LS:Lux'' ">>
+<<case "normal">>
+	<<set $args[0].summary += "''LS:Nor'' ">>
+<<default>>
+	<<set $args[0].summary += "''LS:Spa'' ">>
+<</switch>>
+<<if canTalk($args[0])>>
+<<switch $args[0].speechRules>>
+<<case "permissive">>
+	<<set $args[0].summary += "''SpR:P'' ">>
+<<case "accent elimination">>
+	<<set $args[0].summary += "''SpR:NoAcc'' ">>
+<<default>>
+	<<set $args[0].summary += "''SpR:R'' ">>
+<</switch>>
+<</if>>
+<<switch $args[0].relationshipRules>>
+<<case "permissive">>
+	<<set $args[0].summary += "''ReR:P'' ">>
+<<case "just friends">>
+	<<set $args[0].summary += "''ReR:Fr'' ">>
+<<default>>
+	<<set $args[0].summary += "''ReR:R'' ">>
+<</switch>>
+<<switch $args[0].standardPunishment>>
+<<case "confinement">>
+	<<set $args[0].summary += "''Pun:Conf'' ">>
+<<case "whipping">>
+	<<set $args[0].summary += "''Pun:Whip'' ">>
+<<case "chastity">>
+	<<set $args[0].summary += "''Pun:Chas'' ">>
+<<default>>
+	<<set $args[0].summary += "''Pun:Situ'' ">>
+<</switch>>
+<<switch $args[0].standardReward>>
+<<case "relaxation">>
+	<<set $args[0].summary += "''Rew:Relx'' ">>
+<<case "drugs">>
+	<<set $args[0].summary += "''Rew:Drug'' ">>
+<<case "orgasm">>
+	<<set $args[0].summary += "''Rew:Orga'' ">>
+<<default>>
+	<<set $args[0].summary += "''Rew:Situ'' ">>
+<</switch>>
+<<switch $args[0].releaseRules>>
+<<case "permissive">>
+	<<set $args[0].summary += "''MaR:P'' ">>
+<<case "sapphic">>
+	<<set $args[0].summary += "''MaR:S'' ">>
+<<default>>
+	<<set $args[0].summary += "''MaR:R'' ">>
+<</switch>>
+<<elseif $abbreviateRules == 2>>
+	<<set $args[0].summary += "Living standard: "+$args[0].livingRules+". ">>
+	<<if canTalk($args[0])>>
+		<<set $args[0].summary += "Speech rules: "+$args[0].speechRules+". ">>
+	<</if>>
+	<<set $args[0].summary += "Relationship rules: "+$args[0].relationshipRules+". ">>
+	<<set $args[0].summary += "Typical punishment: "+$args[0].standardPunishment+". ">>
+	<<set $args[0].summary += "Typical reward: "+$args[0].standardReward+". ">>
+	<<set $args[0].summary += "Release rules: "+$args[0].releaseRules+". ">>
+<</if>>
+<</if>>
+
+<<if $args[0].tired != 0>><<set $args[0].summary += "Tired. ">><</if>>
+
+<<set _color = 0>>
+<<if $abbreviateDiet == 1>>
+	<<if $args[0].weight < -95>>
+		<<set _color = 1>>
+		<<set $args[0].summary += "''@@.red;W---">>
+	<<elseif $args[0].weight < -30>>
+		<<if $args[0].hips < -1>>
+			<<set $args[0].summary += "''W--">>
+		<<else>>
+			<<set _color = 1>>
+			<<set $args[0].summary += "''@@.red;W--">>
+		<</if>>
+	<<elseif $args[0].weight < -10>>
+		<<set $args[0].summary += "''W-">>
+	<<elseif $args[0].weight <= 10 >>
+		<<set $args[0].summary += "''W">>
+	<<elseif $args[0].weight <= 30>>
+		<<set $args[0].summary += "''W+">>
+	<<elseif $args[0].weight <= 95>>
+		<<if $args[0].hips > 1>>
+			<<set $args[0].summary += "''W++">>
+		<<else>>
+			<<set _color = 1>>
+			<<set $args[0].summary += "''@@.red;W++">>
+		<</if>>
+	<<else>>
+		<<set _color = 1>>
+		<<set $args[0].summary += "''@@.red;W+++">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += "["+$args[0].weight+"]">>
+	<</if>>
+	<<if _color == 1>>
+		<<set $args[0].summary += "@@'' ">>
+	<<else>>
+		<<set $args[0].summary += "'' ">>
+	<</if>>
+
+<<elseif $abbreviateDiet == 2>>
+	<<set _color = 0>>
+	<<if $args[0].weight < -95>>
+		<<set _color = 1>>
+		<<set $args[0].summary += "@@.red;Emaciated">>
+	<<elseif $args[0].weight < -30>>
+		<<if $args[0].hips < -1>>
+			<<set $args[0].summary += "Model-thin">>
+		<<else>>
+			<<set _color = 1>>
+			<<set $args[0].summary += "@@.red;Very thin">>
+		<</if>>
+	<<elseif $args[0].weight < -10>>
+		<<set $args[0].summary += "Thin">>
+	<<elseif $args[0].weight <= 10 >>
+		<<set $args[0].summary += "Trim">>
+	<<elseif $args[0].weight <= 30>>
+		<<set $args[0].summary += "Plush">>
+	<<elseif $args[0].weight <= 95>>
+		<<if $args[0].hips > 1>>
+			<<set $args[0].summary += "Nicely chubby">>
+		<<else>>
+			<<set _color = 1>>
+			<<set $args[0].summary += "@@.red;Overweight">>
+		<</if>>
+	<<else>>
+		<<set _color = 1>>
+		<<set $args[0].summary += "@@.red;Fat">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+$args[0].weight+"].">>
+	<</if>>
+	<<if _color == 1>>
+		<<set $args[0].summary += "@@ ">>
+	<<else>>
+		<<set $args[0].summary += " ">>
+	<</if>>
+
+<</if>>
+
+<<if $abbreviateDiet == 1>>
+	<<switch $args[0].diet>>
+	<<case "restricted">>
+		<<set $args[0].summary += "''Di:W-'' ">>
+	<<case "fattening">>
+		<<set $args[0].summary += "''Di:W+'' ">>
+	<<case "muscle building">>
+		<<set $args[0].summary += "''Di:M+'' ">>
+	<<case "slimming">>
+		<<set $args[0].summary += "''Di:M-'' ">>
+	<</switch>>
+	<<if $args[0].dietCum == 2>>
+		<<set $args[0].summary += "''Cum++'' ">>
+	<<elseif (($args[0].dietCum == 1) && ($args[0].dietMilk == 0))>>
+		<<set $args[0].summary += "''Cum+'' ">>
+	<<elseif (($args[0].dietCum == 1) && ($args[0].dietMilk == 1))>>
+		<<set $args[0].summary += "''Cum+ Milk+'' ">>
+	<<elseif (($args[0].dietCum == 0) && ($args[0].dietMilk == 1))>>
+		<<set $args[0].summary += "''Milk+'' ">>
+	<<elseif ($args[0].dietMilk == 2)>>
+		<<set $args[0].summary += "''Milk++'' ">>
+	<</if>>
+<<elseif $abbreviateDiet == 2>>
+	<<switch $args[0].diet>>
+	<<case "restricted">>
+		<<set $args[0].summary += "Dieting. ">>
+	<<case "fattening">>
+		<<set $args[0].summary += "Gaining weight. ">>
+	<<case "muscle building">>
+		<<set $args[0].summary += "Pumping iron. ">>
+	<<case "slimming">>
+		<<set $args[0].summary += "Slimming down. ">>
+	<</switch>>
+	<<if $args[0].dietCum == 2>>
+		<<set $args[0].summary += "Diet Base: @@.cyan;Cum Based.@@ ">>
+	<<elseif (($args[0].dietCum == 1) && ($args[0].dietMilk == 0))>>
+		<<set $args[0].summary += "Diet Base: Cum Added. ">>
+	<<elseif (($args[0].dietCum == 1) && ($args[0].dietMilk == 1))>>
+		<<set $args[0].summary += "Diet Base: Milk & Cum Added. ">>
+	<<elseif (($args[0].dietCum == 0) && ($args[0].dietMilk == 1))>>
+		<<set $args[0].summary += "Diet Base: Milk Added. ">>
+	<<elseif ($args[0].dietMilk == 2)>>
+		<<set $args[0].summary += "Diet Base: @@.cyan;Milk Based.@@ ">>
+	<</if>>
+<</if>>
+
+<<if $abbreviateHealth == 1>>
+	<<if $args[0].health < -20>>
+		<<set $args[0].summary += "''@@.red;H">>
+	<<elseif $args[0].health <= 20>>
+		<<set $args[0].summary += "''@@.yellow;H">>
+	<<elseif $args[0].health > 20>>
+		<<set $args[0].summary += "''@@.green;H">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+$args[0].health+"]@@'' ">>
+	<<else>>
+		<<set $args[0].summary += "@@'' ">>
+	<</if>>
+<<elseif $abbreviateHealth == 2>>
+	<<if $args[0].health < -90>>
+		<<set $args[0].summary += "@@.red;On the edge of death">>
+	<<elseif $args[0].health < -50>>
+		<<set $args[0].summary += "@@.red;Extremely unhealthy">>
+	<<elseif $args[0].health < -20>>
+		<<set $args[0].summary += "@@.red;Unhealthy">>
+	<<elseif $args[0].health <= 20>>
+		<<set $args[0].summary += "@@.yellow;Healthy">>
+	<<elseif $args[0].health <= 50>>
+		<<set $args[0].summary += "@@.green;Very healthy">>
+	<<elseif $args[0].health <= 90>>
+		<<set $args[0].summary += "@@.green;Extremely healthy">>
+	<<else>>
+		<<set $args[0].summary += "@@.green;Unnaturally healthy">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+$args[0].health+"].@@ ">>
+	<<else>>
+		<<set $args[0].summary += "@@ ">>
+	<</if>>
+<</if>>
+
+<<if $abbreviateDrugs == 1>>
+	<<switch $args[0].drugs>>
+	<<case "breast injections">>
+		<<set $args[0].summary += "''Dr:Boobs+'' ">>
+	<<case "intensive breast injections">>
+		<<set $args[0].summary += "''Dr:Boobs++'' ">>
+	<<case "butt injections">>
+		<<set $args[0].summary += "''Dr:Butt+'' ">>
+	<<case "intensive butt injections">>
+		<<set $args[0].summary += "''Dr:Butt++'' ">>
+	<<case "lip injections">>
+		<<set $args[0].summary += "''Dr:Lip+'' ">>
+	<<case "fertility drugs">>
+		<<set $args[0].summary += "''Dr:Fert+'' ">>
+	<<case "penis enhancement">>
+		<<set $args[0].summary += "''Dr:Dick+'' ">>
+	<<case "intensive penis enhancement">>
+		<<set $args[0].summary += "''Dr:Dick++'' ">>
+	<<case "testicle enhancement">>
+		<<set $args[0].summary += "''Dr:Balls+'' ">>
+	<<case "intensive testicle enhancement">>
+		<<set $args[0].summary += "''Dr:Balls++'' ">>
+	<<case "psychosuppressants">>
+		<<set $args[0].summary += "''Dr:Psych'' ">>
+	<<case "steroids">>
+		<<set $args[0].summary += "''Dr:Ster'' ">>
+	<<case "hormone enhancers">>
+		<<set $args[0].summary += "''Dr:Horm+'' ">>
+	<</switch>>
+	<<if $args[0].curatives == 2>>
+		<<set $args[0].summary += "''Cura'' ">>
+	<<elseif $args[0].curatives == 1>>
+		<<set $args[0].summary += "''Prev'' ">>
+	<</if>>
+	<<if $args[0].addict != 0>>
+		<<switch $args[0].aphrodisiacs>>
+		<<case 0>>
+			<<set $args[0].summary += "@@.cyan;Add@@ ">>
+		<<case 1>>
+			<<set $args[0].summary += "@@.cyan;Aph@@ ">>
+		<<case 2>>
+			<<set $args[0].summary += "@@.cyan;Aph++@@ ">>
+		<</switch>>
+	<<else>>
+		<<switch $args[0].aphrodisiacs>>
+		<<case 1>>
+			<<set $args[0].summary += "Aph ">>
+		<<case 2>>
+			<<set $args[0].summary += "Aph++ ">>
+		<</switch>>
+	<</if>>
+	<<if $args[0].hormones > 1>>
+		<<set $args[0].summary += "''Ho:F+'' ">>
+	<<elseif $args[0].hormones > 0>>
+		<<set $args[0].summary += "''Ho:F'' ">>
+	<<elseif $args[0].hormones < -1>>
+		<<set $args[0].summary += "''Ho:M+'' ">>
+	<<elseif $args[0].hormones < 0>>
+		<<set $args[0].summary += "''Ho:M'' ">>
+	<</if>>
+	<<if (($args[0].preg == -2) || ($args[0].ovaries == 0)) && ($args[0].vagina != -1)>>
+		<<set $args[0].summary += "''Barr'' ">>
+	<<elseif $args[0].preg == -1>>
+		<<set $args[0].summary += "''CC'' ">>
+	<<elseif $args[0].preg == 0>>
+		<<set $args[0].summary += "''Fert+'' ">>
+	<<elseif ($args[0].preg < 4) && ($args[0].preg > 0)>>
+		<<set $args[0].summary += "''Preg?'' ">>
+	<<elseif $args[0].preg >= 4>>
+		<<set $args[0].summary += "''"+$args[0].preg+" wks preg'' ">>
+	<</if>>
+
+<<elseif $abbreviateDrugs == 2>>
+	<<if ($args[0].drugs != "no drugs") && ($args[0].drugs != "none")>>
+		<<set $args[0].summary += "On "+$args[0].drugs+". ">>
+	<</if>>
+	<<if $args[0].curatives == 2>>
+		<<set $args[0].summary += "On curatives. ">>
+	<<elseif $args[0].curatives == 1>>
+		<<set $args[0].summary += "On preventatives. ">>
+	<</if>>
+	<<if $args[0].aphrodisiacs > 1>>
+		<<set $args[0].summary += "On extreme aphrodisiacs. ">>
+	<<elseif $args[0].aphrodisiacs > 0>>
+		<<set $args[0].summary += "On aphrodisiacs. ">>
+	<</if>>
+	<<if $args[0].addict != 0>>
+		<<set $args[0].summary += "@@.cyan;Addict.@@">>
+	<</if>>
+	<<if $args[0].hormones > 1>>
+		<<set $args[0].summary += "''Heavy female hormones.'' ">>
+	<<elseif $args[0].hormones > 0>>
+		<<set $args[0].summary += "''Female hormones.'' ">>
+	<<elseif $args[0].hormones < -1>>
+		<<set $args[0].summary += "''Heavy male hormones.'' ">>
+	<<elseif $args[0].hormones < 0>>
+		<<set $args[0].summary += "''Male hormones.'' ">>
+	<</if>>
+	<<if (($args[0].preg == -2) || ($args[0].ovaries == 0)) && ($args[0].vagina != -1)>>
+		<<set $args[0].summary += "Barren. ">>
+	<<elseif $args[0].preg == -1>>
+		<<set $args[0].summary += "On contraceptives. ">>
+	<<elseif $args[0].preg == 0>>
+		<<set $args[0].summary += "Fertile. ">>
+	<<elseif ($args[0].preg < 4) && ($args[0].preg > 0)>>
+		<<set $args[0].summary += "May be pregnant. ">>
+	<<elseif $args[0].preg >= 4>>
+		<<if $args[0].pregType < 2>>
+			<<set $args[0].summary += ""+$args[0].preg+" weeks pregnant. ">>
+		<<else>>
+			<<set $args[0].summary += ""+$args[0].preg+" weeks pregnant with ">>
+			<<if $args[0].pregType > 4>>
+				<<set $args[0].summary += "quintuplets. ">>
+			<<elseif $args[0].pregType == 4>>
+				<<set $args[0].summary += "quadruplets. ">>
+			<<elseif $args[0].pregType == 3>>
+				<<set $args[0].summary += "triplets. ">>
+			<<else>>
+				<<set $args[0].summary += "twins. ">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+/* - Line 2 - ******************************************************/
+<<if $abbreviateNationality+$abbreviateGenitalia+$abbreviatePhysicals+$abbreviateSkills+$abbreviateMental != 0>>
+	<<set $args[0].summary += _break>>
+<</if>>
+
+<<SlaveTitle $args[0]>>
+<<set $seed = $desc.substring(0,1)>>
+<<set $seed = $seed.toUpperCase()>>
+<<set $desc = $seed + $desc.substring(1)>>
+<<set $args[0].summary += "''@@.coral;"+$desc>>
+
+<<if $abbreviatePhysicals == 2>>
+	<<set $args[0].summary += ".">>
+<</if>>
+<<set $args[0].summary += "@@'' ">>
+
+<<if $seeRace == 1>>
+	<<set $args[0].summary += "@@.tan;">>
+	<<if $abbreviateRace == 1>>
+		<<switch $args[0].race>>
+		<<case "white">>
+			<<set $args[0].summary += "C">>
+		<<case "asian">>
+			<<set $args[0].summary += "A">>
+		<<case "indo-aryan">>
+			<<set $args[0].summary += "I">>
+		<<case "latina">>
+			<<set $args[0].summary += "L">>
+		<<case "middle eastern">>
+			<<set $args[0].summary += "ME">>
+		<<case "black">>
+			<<set $args[0].summary += "B">>
+		<<case "pacific islander">>
+			<<set $args[0].summary += "PI">>
+		<<case "malay">>
+			<<set $args[0].summary += "M">>
+		<<case "amerindian">>
+			<<set $args[0].summary += "AI">>
+		<<case "semitic">>
+			<<set $args[0].summary += "S">>
+		<<case "southern european">>
+			<<set $args[0].summary += "SE">>
+		<<case "mixed race">>
+			<<set $args[0].summary += "MR">>
+		<<default>>
+			<<set $args[0].summary += $args[0].race.charAt(0).toUpperCase() + $args[0].race.charAt(1) + $args[0].race.charAt(2)>>
+		<</switch>>
+
+	<<elseif $abbreviateRace == 2>>
+		<<switch $args[0].race>>
+		<<case "white">>
+			<<set $args[0].summary += "Caucasian.">>
+		<<case "asian">>
+			<<set $args[0].summary += "Asian.">>
+		<<case "indo-aryan">>
+			<<set $args[0].summary += "Indo-aryan.">>
+		<<case "latina">>
+			<<set $args[0].summary += "Latina.">>
+		<<case "middle eastern">>
+			<<set $args[0].summary += "Middle Eastern.">>
+		<<case "black">>
+			<<set $args[0].summary += "Black.">>
+		<<case "pacific islander">>
+			<<set $args[0].summary += "Pacific Islander.">>
+		<<case "malay">>
+			<<set $args[0].summary += "Malay.">>
+		<<case "amerindian">>
+			<<set $args[0].summary += "Amerindian.">>
+		<<case "semitic">>
+			<<set $args[0].summary += "Semitic.">>
+		<<case "southern european">>
+			<<set $args[0].summary += "Southern European.">>
+		<<case "mixed race">>
+			<<set $args[0].summary += "Mixed race.">>
+		<<default>>
+			<<set $args[0].summary += $args[0].race.charAt(0).toUpperCase() + $args[0].race.slice(1)+".">>
+		<</switch>>
+	<</if>>
+	<<set $args[0].summary += "@@ ">>
+<</if>>
+
+<<if $abbreviateNationality == 1>>
+	<<set $args[0].summary += "@@.tan;">>
+	<<switch $args[0].nationality>>
+	<<case "American">>
+		<<set $args[0].summary += "US">>
+	<<case "Canadian">>
+		<<set $args[0].summary += "Can">>
+	<<case "Puerto Rican">>
+		<<set $args[0].summary += "PR">>
+	<<case "Cuban">>
+		<<set $args[0].summary += "Cub">>
+	<<case "Haitian">>
+		<<set $args[0].summary += "Hai">>
+	<<case "Jamaican">>
+		<<set $args[0].summary += "Jam">>
+	<<case "Mexican">>
+		<<set $args[0].summary += "Mex">>
+	<<case "Peruvian">>
+		<<set $args[0].summary += "Per">>
+	<<case "Venezuelan">>
+		<<set $args[0].summary += "Ven">>
+	<<case "Bolivian">>
+		<<set $args[0].summary += "Bol">>
+	<<case "Guatemalan">>
+		<<set $args[0].summary += "Gtm">>
+	<<case "Brazilian">>
+		<<set $args[0].summary += "Bra">>
+	<<case "Argentinian">>
+		<<set $args[0].summary += "Arg">>
+	<<case "Chilean">>
+		<<set $args[0].summary += "Chl">>
+	<<case "Colombian">>
+		<<set $args[0].summary += "Col">>
+	<<case "Egyptian">>
+		<<set $args[0].summary += "Egy">>
+	<<case "Turkish">>
+		<<set $args[0].summary += "Tur">>
+	<<case "Iranian">>
+		<<set $args[0].summary += "Irn">>
+	<<case "Armenian">>
+		<<set $args[0].summary += "Arm">>
+	<<case "Israeli">>
+		<<set $args[0].summary += "Isr">>
+	<<case "Saudi">>
+		<<set $args[0].summary += "Sau">>
+	<<case "Moroccan">>
+		<<set $args[0].summary += "Mor">>
+	<<case "Nigerian">>
+		<<set $args[0].summary += "Nga">>
+	<<case "Kenyan">>
+		<<set $args[0].summary += "Ken">>
+	<<case "Zimbabwean">>
+		<<set $args[0].summary += "Zwe">>
+	<<case "Ugandan">>
+		<<set $args[0].summary += "Uga">>
+	<<case "Tanzanian">>
+		<<set $args[0].summary += "Tza">>
+	<<case "Ghanan">>
+		<<set $args[0].summary += "Gha">>
+	<<case "Congolese">>
+		<<set $args[0].summary += "RC">>
+	<<case "Ethiopian">>
+		<<set $args[0].summary += "Eth">>
+	<<case "South African">>
+		<<set $args[0].summary += "RSA">>
+	<<case "Chinese">>
+		<<set $args[0].summary += "Chi">>
+	<<case "Korean">>
+		<<set $args[0].summary += "Kor">>
+	<<case "Japanese">>
+		<<set $args[0].summary += "Jpn">>
+	<<case "Thai">>
+		<<set $args[0].summary += "Tha">>
+	<<case "Vietnamese">>
+		<<set $args[0].summary += "Vnm">>
+	<<case "Indonesian">>
+		<<set $args[0].summary += "Idn">>
+	<<case "Filipina">>
+		<<set $args[0].summary += "Phl">>
+	<<case "Burmese">>
+		<<set $args[0].summary += "Bur">>
+	<<case "Nepalese">>
+		<<set $args[0].summary += "Npl">>
+	<<case "Uzbek">>
+		<<set $args[0].summary += "Uzb">>
+	<<case "Afghan">>
+		<<set $args[0].summary += "Afg">>
+	<<case "Algerian">>
+		<<set $args[0].summary += "Alg">>
+	<<case "Libyan">>
+		<<set $args[0].summary += "Lby">>
+	<<case "Tunisian">>
+		<<set $args[0].summary += "Tun">>
+	<<case "Lebanese">>
+		<<set $args[0].summary += "Lbn">>
+	<<case "Jordanian">>
+		<<set $args[0].summary += "Jor">>
+	<<case "Emirati">>
+		<<set $args[0].summary += "AE">>
+	<<case "Omani">>
+		<<set $args[0].summary += "Omn">>
+	<<case "Malian">>
+		<<set $args[0].summary += "Mal">>
+	<<case "Sudanese">>
+		<<set $args[0].summary += "Sud">>
+	<<case "Yemeni">>
+		<<set $args[0].summary += "Yem">>
+	<<case "Iraqi">>
+		<<set $args[0].summary += "Irq">>
+	<<case "Indian">>
+		<<set $args[0].summary += "Ind">>
+	<<case "Malaysian">>
+		<<set $args[0].summary += "Mys">>
+	<<case "Kazakh">>
+		<<set $args[0].summary += "Kaz">>
+	<<case "Pakistani">>
+		<<set $args[0].summary += "Pak">>
+	<<case "Bangladeshi">>
+		<<set $args[0].summary += "Bgd">>
+	<<case "Russian">>
+		<<set $args[0].summary += "Rus">>
+	<<case "Ukrainian">>
+		<<set $args[0].summary += "Ukr">>
+	<<case "Irish">>
+		<<set $args[0].summary += "Irl">>
+	<<case "Icelandic">>
+		<<set $args[0].summary += "Isl">>
+	<<case "Finnish">>
+		<<set $args[0].summary += "Fin">>
+	<<case "Swiss">>
+		<<set $args[0].summary += "Swi">>
+	<<case "Danish">>
+		<<set $args[0].summary += "Dan">>
+	<<case "Norwegian">>
+		<<set $args[0].summary += "Nor">>
+	<<case "Austrian">>
+		<<set $args[0].summary += "Aut">>
+	<<case "Slovak">>
+		<<set $args[0].summary += "Svk">>
+	<<case "Dutch">>
+		<<set $args[0].summary += "Nld">>
+	<<case "Belgian">>
+		<<set $args[0].summary += "Bel">>
+	<<case "Czech">>
+		<<set $args[0].summary += "Cze">>
+	<<case "Serbian">>
+		<<set $args[0].summary += "Srb">>
+	<<case "Portuguese">>
+		<<set $args[0].summary += "Por">>
+	<<case "Hungarian">>
+		<<set $args[0].summary += "Hun">>
+	<<case "Estonian">>
+		<<set $args[0].summary += "Est">>
+	<<case "Polish">>
+		<<set $args[0].summary += "Pol">>
+	<<case "Lithuanian">>
+		<<set $args[0].summary += "Lit">>
+	<<case "Romanian">>
+		<<set $args[0].summary += "Rom">>
+	<<case "German">>
+		<<set $args[0].summary += "Ger">>
+	<<case "Swedish">>
+		<<set $args[0].summary += "Swe">>
+	<<case "French">>
+		<<set $args[0].summary += "Fra">>
+	<<case "Italian">>
+		<<set $args[0].summary += "Ita">>
+	<<case "Greek">>
+		<<set $args[0].summary += "Gre">>
+	<<case "Spanish">>
+		<<set $args[0].summary += "Spa">>
+	<<case "British">>
+		<<set $args[0].summary += "UK">>
+	<<case "Australian">>
+		<<set $args[0].summary += "Aus">>
+	<<case "a New Zealander">>
+		<<set $args[0].summary += "NZ">>
+	<<case "Sammarinese">>
+		<<set $args[0].summary += "SM">>
+	<<case "Marshallese">>
+		<<set $args[0].summary += "MI">>
+	<<case "Syrian">>
+		<<set $args[0].summary += "Syr">>
+	<<case "Bermudian">>
+		<<set $args[0].summary += "Ber">>
+	<<case "Uruguayan">>
+		<<set $args[0].summary += "Uru">>
+	<<case "Monégasque">>
+		<<set $args[0].summary += "Mnc">>
+	<<case "Montenegrin">>
+		<<set $args[0].summary += "Mng">>
+	<<case "Cambodian">>
+		<<set $args[0].summary += "Kam">>
+	<<case "Cameroonian">>
+		<<set $args[0].summary += "Cam">>
+	<<case "Gabonese">>
+		<<set $args[0].summary += "Gab">>
+	<<case "Djiboutian">>
+		<<set $args[0].summary += "Dji">>
+	<<case "Greenlandic">>
+		<<set $args[0].summary += "Grn">>
+	<<case "Tuvaluan">>
+		<<set $args[0].summary += "Tuv">>
+	<<case "Zambian">>
+		<<set $args[0].summary += "Zam">>
+	<<case "Albanian">>
+		<<set $args[0].summary += "Alb">>
+	<<case "Bruneian">>
+		<<set $args[0].summary += "Bru">>
+	<<case "Singaporean">>
+		<<set $args[0].summary += "Sng">>
+	<<case "Laotian">>
+		<<set $args[0].summary += "Lao">>
+	<<case "Mongolian">>
+		<<set $args[0].summary += "Mon">>
+	<<case "Taiwanese">>
+		<<set $args[0].summary += "Tai">>
+	<<case "Belizean">>
+		<<set $args[0].summary += "Blz">>
+	<<case "Grenadian">>
+		<<set $args[0].summary += "Gda">>
+	<<case "I-Kiribati">>
+		<<set $args[0].summary += "Kir">>
+	<<case "Malagasy">>
+		<<set $args[0].summary += "Mad">>
+	<<case "Maldivian">>
+		<<set $args[0].summary += "Mdv">>
+	<<case "Bosnian">>
+		<<set $args[0].summary += "BH">>
+	<<case "Croatian">>
+		<<set $args[0].summary += "Cro">>
+	<<case "Kosovan">>
+		<<set $args[0].summary += "Kos">>
+	<<case "Macedonian">>
+		<<set $args[0].summary += "Mac">>
+	<<case "Honduran">>
+		<<set $args[0].summary += "Hon">>
+	<<case "Maltese">>
+		<<set $args[0].summary += "Mlt">>
+	<<case "Nauruan">>
+		<<set $args[0].summary += "Nau">>
+	<<case "Micronesian">>
+		<<set $args[0].summary += "FSM">>
+	<<case "Costa Rican">>
+		<<set $args[0].summary += "CR">>
+	<<case "Salvadoran">>
+		<<set $args[0].summary += "ES">>
+	<<case "Nicaraguan">>
+		<<set $args[0].summary += "Nic">>
+	<<case "Panamanian">>
+		<<set $args[0].summary += "Pan">>
+	<<case "Nigerien">>
+		<<set $args[0].summary += "Ngr">>
+	<<case "Andorran">>
+		<<set $args[0].summary += "And">>
+	<<case "Bulgarian">>
+		<<set $args[0].summary += "Bul">>
+	<<case "Luxembourgian">>
+		<<set $args[0].summary += "Lux">>
+	<<case "Moldovan">>
+		<<set $args[0].summary += "Mol">>
+	<<case "Bahamian">>
+		<<set $args[0].summary += "Bah">>
+	<<case "Barbadian">>
+		<<set $args[0].summary += "Bar">>
+	<<case "Dominiquais">>
+		<<set $args[0].summary += "Dom">>
+	<<case "Trinidadian">>
+		<<set $args[0].summary += "TT">>
+	<<case "Palauan">>
+		<<set $args[0].summary += "Plu">>
+	<<case "Papua New Guinean">>
+		<<set $args[0].summary += "PNG">>
+	<<case "Kittitian">>
+		<<set $args[0].summary += "SKN">>
+	<<case "Ecuadorian">>
+		<<set $args[0].summary += "Ecu">>
+	<<case "French Guianan">>
+		<<set $args[0].summary += "FG">>
+	<<case "Guyanese">>
+		<<set $args[0].summary += "Guy">>
+	<<case "Paraguayan">>
+		<<set $args[0].summary += "Par">>
+	<<case "Surinamese">>
+		<<set $args[0].summary += "Sur">>
+	<<case "Bhutanese">>
+		<<set $args[0].summary += "Bhu">>
+	<<case "East Timorese">>
+		<<set $args[0].summary += "ET">>
+	<<case "Kyrgyz">>
+		<<set $args[0].summary += "Kyr">>
+	<<case "Sri Lankan">>
+		<<set $args[0].summary += "Sri">>
+	<<case "a Liechtensteiner">>
+		<<set $args[0].summary += "Lie">>
+	<<case "Scottish">>
+		<<set $args[0].summary += "Sct">>
+	<<case "Vatican">>
+		<<set $args[0].summary += "VC">>
+	<<case "Belarusian">>
+		<<set $args[0].summary += "Blr">>
+	<<case "Burundian">>
+		<<set $args[0].summary += "Bnd">>
+	<<case "Latvian">>
+		<<set $args[0].summary += "Lat">>
+	<<case "Seychellois">>
+		<<set $args[0].summary += "Sey">>
+	<<case "Slovene">>
+		<<set $args[0].summary += "Svn">>
+	<<case "Antiguan">>
+		<<set $args[0].summary += "AB">>
+	<<case "Dominican">>
+		<<set $args[0].summary += "DR">>
+	<<case "Saint Lucian">>
+		<<set $args[0].summary += "SL">>
+	<<case "Aruban">>
+		<<set $args[0].summary += "Aru">>
+	<<case "Azerbaijani">>
+		<<set $args[0].summary += "Aze">>
+	<<case "Bahraini">>
+		<<set $args[0].summary += "Bah">>
+	<<case "Cypriot">>
+		<<set $args[0].summary += "Cyp">>
+	<<case "Georgian">>
+		<<set $args[0].summary += "Geo">>
+	<<case "Kuwaiti">>
+		<<set $args[0].summary += "Kuw">>
+	<<case "Qatari">>
+		<<set $args[0].summary += "Qat">>
+	<<case "Tajik">>
+		<<set $args[0].summary += "Taj">>
+	<<case "Turkmen">>
+		<<set $args[0].summary += "Tkm">>
+	<<case "Vincentian">>
+		<<set $args[0].summary += "SVG">>
+	<<case "a Cook Islander">>
+		<<set $args[0].summary += "CI">>
+	<<case "Fijian">>
+		<<set $args[0].summary += "Fij">>
+	<<case "Ni-Vanuatu">>
+		<<set $args[0].summary += "Van">>
+	<<case "Niuean">>
+		<<set $args[0].summary += "Niu">>
+	<<case "Palestinian">>
+		<<set $args[0].summary += "Pal">>
+	<<case "Samoan">>
+		<<set $args[0].summary += "Sam">>
+	<<case "a Solomon Islander">>
+		<<set $args[0].summary += "SI">>
+	<<case "Tongan">>
+		<<set $args[0].summary += "Ton">>
+  <<case "Catalan">>
+    <<set $args[0].summary += "Cat">>
+  <<case "Equatoguinean">>
+    <<set $args[0].summary += "EG">>
+  <<case "French Polynesian">>
+    <<set $args[0].summary += "FP">>
+  <<case "Kurdish">>
+    <<set $args[0].summary += "Kur">>
+  <<case "Tibetan">>
+  	<<set $args[0].summary += "Tib">>
+  <<case "Bissau-Guinean">>
+  	<<set $args[0].summary += "GB">>
+	<<case "Chadian">>
+  	<<set $args[0].summary += "Cha">>
+	<<case "Comorian">>
+  	<<set $args[0].summary += "Com">>
+	<<case "Ivorian">>
+  	<<set $args[0].summary += "IC">>
+	<<case "Mauritanian">>
+  	<<set $args[0].summary += "Mta">>
+	<<case "Mauritian">>
+  	<<set $args[0].summary += "Mts">>
+	<<case "Mosotho">>
+		<<set $args[0].summary += "Les">>
+  <<case "Sierra Leonean">>
+    <<set $args[0].summary += "Sie">>
+	<<case "Swazi">>
+    <<set $args[0].summary += "Swa">>
+  <<case "Angolan">>
+    <<set $args[0].summary += "Ang">>
+  <<case "Sahrawi">>
+    <<set $args[0].summary += "Sah">>
+  <<case "Burkinabé">>
+  	<<set $args[0].summary += "BF">>
+  <<case "Cape Verdean">>
+    <<set $args[0].summary += "CV">>
+  <<case "Motswana">>
+    <<set $args[0].summary += "Bot">>
+  <<case "Somali">>
+    <<set $args[0].summary += "Som">>
+  <<case "Rwandan">>
+    <<set $args[0].summary += "Rwa">>
+  <<case "São Toméan">>
+    <<set $args[0].summary += "STP">>
+  <<case "Beninese">>
+    <<set $args[0].summary += "Ben">>
+  <<case "Central African">>
+    <<set $args[0].summary += "CAR">>
+	<<case "Gambian">>
+  	<<set $args[0].summary += "Gam">>
+	<<case "Senegalese">>
+    <<set $args[0].summary += "Sen">>
+  <<case "Togolese">>
+    <<set $args[0].summary += "Tog">>
+  <<case "Eritrean">>
+    <<set $args[0].summary += "Eri">>
+  <<case "Guinean">>
+  	<<set $args[0].summary += "Gui">>
+  <<case "Malawian">>
+  	<<set $args[0].summary += "Mwi">>
+  <<case "Zairian">>
+    <<set $args[0].summary += "DRC">>
+  <<case "Liberian">>
+    <<set $args[0].summary += "Lib">>
+  <<case "Mozambican">>
+  	<<set $args[0].summary += "Moz">>
+  <<case "Namibian">>
+    <<set $args[0].summary += "Nam">>
+  <<case "South Sudanese">>
+    <<set $args[0].summary += "SS">>
+  <<case "Ancient Egyptian Revivalist">>
+		<<set $args[0].summary += "Egy Rev">>
+	<<case "Ancient Chinese Revivalist">>
+		<<set $args[0].summary += "Chi Rev">>
+	<<case "Edo Revivalist">>
+		<<set $args[0].summary += "Edo Rev">>
+	<<case "Roman Revivalist">>
+		<<set $args[0].summary += "Rom Rev">>
+	<<case "Aztec Revivalist">>
+		<<set $args[0].summary += "Azt Rev">>
+	<<case "Arabian Revivalist">>
+		<<set $args[0].summary += "Ara Rev">>
+	<<case "slave" "none" "">>
+		<<set $args[0].summary += "None">>
+	<<default>>
+		<<set $args[0].summary += $args[0].nationality.charAt(0) + $args[0].nationality.charAt(1) + $args[0].nationality.charAt(2)>>
+	<</switch>>
+	<<set $args[0].summary += "@@ ">>
+<<elseif $abbreviateNationality == 2>>
+	<<set $args[0].summary += "@@.tan;">>
+	<<switch $args[0].nationality>>
+	<<case "slave" "none" "">>
+		<<set $args[0].summary += "Stateless.">>
+	<<default>>
+		<<set $args[0].summary += $args[0].nationality+".">>
+	<</switch>>
+	<<set $args[0].summary += "@@ ">>
+<</if>>
+
+<<set $args[0].summary += "@@.pink;">>
+<<if $abbreviatePhysicals == 1>>
+	<<switch $args[0].skin>>
+	<<case "light brown">>
+		<<set $args[0].summary += "L. Br">>
+	<<case "extremely pale">>
+		<<set $args[0].summary += "Ex. Pa">>
+	<<case "tanned">>
+		<<set $args[0].summary += "Tan">>
+	<<case "dark" "fair" "pale">>
+		<<set $args[0].summary += $args[0].skin.charAt(0).toUpperCase() + $args[0].skin.slice(1)>>
+	<<default>>
+		<<set $args[0].summary += $args[0].skin.charAt(0).toUpperCase() + $args[0].skin.charAt(1) + $args[0].skin.charAt(2)>>
+	<</switch>>
+	<<set $args[0].summary += " ">>
+<<else>>
+	<<set $args[0].summary += $args[0].skin.charAt(0).toUpperCase() + $args[0].skin.slice(1) +" skin. ">>
+<</if>>
+
+<<if $abbreviateGenitalia == 1>>
+	<<if $args[0].dick > 0>>
+		<<if $args[0].balls == 0>>
+			<<set $args[0].summary += "Geld ">>
+		<</if>>
+		<<if ($args[0].dick > 8) && ($args[0].balls > 8)>>
+			<<set $args[0].summary += "Junk+++ ">>
+		<<elseif ($args[0].dick > 5) && ($args[0].balls > 5)>>
+			<<set $args[0].summary += "Junk++ ">>
+		<<elseif ($args[0].dick > 4) && ($args[0].balls > 4)>>
+			<<set $args[0].summary += "Junk+ ">>
+		<<elseif ($args[0].dick > 3) && ($args[0].balls > 3)>>
+			<<set $args[0].summary += "Junk ">>
+		<<elseif $args[0].dick > 8>>
+			<<set $args[0].summary += "Dick+++ ">>
+		<<elseif $args[0].dick > 5>>
+			<<set $args[0].summary += "Dick++ ">>
+		<<elseif $args[0].dick > 4>>
+			<<set $args[0].summary += "Dick+ ">>
+		<<elseif $args[0].dick > 3>>
+			<<set $args[0].summary += "Dick ">>
+		<<elseif $args[0].balls > 8>>
+			<<set $args[0].summary += "Balls+++ ">>
+		<<elseif $args[0].balls > 5>>
+			<<set $args[0].summary += "Balls++ ">>
+		<<elseif $args[0].balls > 4>>
+			<<set $args[0].summary += "Balls+ ">>
+		<<elseif $args[0].balls > 3>>
+			<<set $args[0].summary += "Balls ">>
+		<</if>>
+	<</if>>
+	<<if $args[0].vagina == 0>>
+		<<set $args[0].summary += "@@ @@.lime;VV@@ @@.pink;">>
+	<<elseif ($args[0].preg > 0) && canWalk($args[0]) && ($args[0].clothes == "no clothing") && ($args[0].shoes == "none")>>
+		<<set $args[0].summary += "NBP ">>
+	<</if>>
+	<<if $args[0].anus == 0>>
+		<<set $args[0].summary += "@@ @@.lime;AV@@ @@.pink;">>
+	<</if>>
+
+	<<if ($args[0].vagina > 3) && ($args[0].anus > 3)>>
+		<<set $args[0].summary += "V++A++ ">>
+	<<elseif ($args[0].vagina > 2) && ($args[0].anus > 2)>>
+		<<set $args[0].summary += "V+A+ ">>
+	<<elseif $args[0].vagina > 3>>
+		<<set $args[0].summary += "V++ ">>
+	<<elseif $args[0].vagina > 2>>
+		<<set $args[0].summary += "V+ ">>
+	<<elseif $args[0].anus > 3>>
+		<<set $args[0].summary += "A++ ">>
+	<<elseif $args[0].anus > 2>>
+		<<set $args[0].summary += "A+ ">>
+	<</if>>
+
+<<elseif $abbreviateGenitalia == 2>>
+	<<if $args[0].dick > 0>>
+		<<if $args[0].balls == 0>>
+			<<set $args[0].summary += "Gelded.">>
+		<</if>>
+		<<if ($args[0].dick > 8) && ($args[0].balls > 8)>>
+			<<set $args[0].summary += "Hyper dick & balls.">>
+		<<elseif ($args[0].dick > 5) && ($args[0].balls > 5)>>
+			<<set $args[0].summary += "Monster dick & balls.">>
+		<<elseif ($args[0].dick > 4) && ($args[0].balls > 4)>>
+			<<set $args[0].summary += "Huge dick & balls.">>
+		<<elseif ($args[0].dick > 3) && ($args[0].balls > 3)>>
+			<<set $args[0].summary += "Big dick & balls.">>
+		<<elseif $args[0].dick > 8>>
+			<<set $args[0].summary += "Hyper dong.">>
+		<<elseif $args[0].dick > 5>>
+			<<set $args[0].summary += "Monster dong.">>
+		<<elseif $args[0].dick > 4>>
+			<<set $args[0].summary += "Huge dick.">>
+		<<elseif $args[0].dick > 3>>
+			<<set $args[0].summary += "Big dick.">>
+		<<elseif $args[0].balls > 8>>
+			<<set $args[0].summary += "Hyper balls.">>
+		<<elseif $args[0].balls > 5>>
+			<<set $args[0].summary += "Monstrous balls.">>
+		<<elseif $args[0].balls > 4>>
+			<<set $args[0].summary += "Huge balls.">>
+		<<elseif $args[0].balls > 3>>
+			<<set $args[0].summary += "Big balls.">>
+		<</if>>
+	<</if>>
+
+	<<if $args[0].vagina == 0>>
+		<<set $args[0].summary += "@@ @@.lime;Virgin.@@ @@.pink;">>
+	<<elseif ($args[0].preg > 0) && canWalk($args[0]) && ($args[0].clothes == "no clothing") && ($args[0].shoes == "none")>>
+		<<set $args[0].summary += "Naked, barefoot, and pregnant. ">>
+	<</if>>
+	<<if $args[0].anus == 0>>
+		<<set $args[0].summary += "@@ @@.lime;Anal virgin.@@ @@.pink;">>
+	<</if>>
+
+	<<if ($args[0].vagina > 3) && ($args[0].anus > 3)>>
+		<<set $args[0].summary += "Blown out holes.">>
+	<<elseif ($args[0].vagina > 2) && ($args[0].anus > 2)>>
+		<<set $args[0].summary += "High mileage.">>
+	<<elseif $args[0].vagina > 3>>
+		<<set $args[0].summary += "Cavernous pussy.">>
+	<<elseif $args[0].vagina > 2>>
+		<<set $args[0].summary += "Loose pussy.">>
+	<<elseif $args[0].anus > 3>>
+		<<set $args[0].summary += "Permagaped anus.">>
+	<<elseif $args[0].anus > 2>>
+		<<set $args[0].summary += "Gaping anus.">>
+	<</if>>
+
+<</if>>
+/**/
+<<if $abbreviatePhysicals == 1>>
+
+<<if $showAgeDetail == 1>>
+	<<set $args[0].summary += ""+$args[0].age +" ">>
+<<elseif $args[0].age >= 40>>
+	<<set $args[0].summary += "40s ">>
+<<elseif $args[0].age >= 35>>
+	<<set $args[0].summary += "Lt30s ">>
+<<elseif $args[0].age >= 30>>
+	<<set $args[0].summary += "Ea30s ">>
+<<elseif $args[0].age >= 25>>
+	<<set $args[0].summary += "Lt20s ">>
+<<elseif $args[0].age >= 20>>
+	<<set $args[0].summary += "Ea20s ">>
+<<elseif $args[0].age >= 18>>
+	<<set $args[0].summary += ""+$args[0].age + " ">>
+<</if>>
+<<if $args[0].ageImplant == 1>>
+	<<set $args[0].summary += "Age-">>
+<</if>>
+
+<<set _color = 1>>
+<<if $args[0].face < -95>>
+	<<set $args[0].summary += "@@ @@.red;Face---">>
+<<elseif $args[0].face < -40>>
+	<<set $args[0].summary += "@@ @@.red;Face--">>
+<<elseif $args[0].face < -10>>
+	<<set $args[0].summary += "@@ @@.red;Face-">>
+<<elseif $args[0].face <= 10>>
+	<<set $args[0].summary += "Face">>
+<<elseif $args[0].face <= 40>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Face+">>
+<<elseif $args[0].face <= 95>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Face++">>
+<<else>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Face+++">>
+<</if>>
+<<if $summaryStats>>
+	<<set $args[0].summary += "["+$args[0].face+"] ">>
+<</if>>
+<<if _color>>
+	<<set $args[0].summary += "@@ @@.pink;">>
+<<else>>
+	<<set $args[0].summary += " ">>
+<</if>>
+<<if $args[0].eyes == -2>>
+	<<set $args[0].summary += "@@ @@.red;Blind@@ @@.pink;">>
+<<elseif $args[0].eyes == -1 && ($args[0].eyewear != "corrective glasses") && ($args[0].eyewear != "corrective contacts")>>
+	<<set $args[0].summary += "@@ @@.yellow;Sight-@@ @@.pink;">>
+<</if>>
+
+<<if $args[0].markings != "none">>
+	<<set $args[0].summary += "Markings ">>
+<</if>>
+
+<<if $args[0].lips > 95>>
+	<<set $args[0].summary += "Facepussy ">>
+<<else>>
+	<<set _color = 0>>
+	<<if $args[0].lips > 70>>
+		<<set $args[0].summary += "Lips+++">>
+	<<elseif $args[0].lips > 40>>
+		<<set $args[0].summary += "Lips++">>
+	<<elseif $args[0].lips > 20>>
+		<<set $args[0].summary += "Lips+">>
+	<<elseif $args[0].lips > 10>>
+		<<set $args[0].summary += "Lips">>
+	<<else>>
+		<<set _color = 1>>
+		<<set $args[0].summary += "@@ @@.red;Lips-">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += "["+$args[0].lips+"]">>
+	<</if>>
+	<<if _color>>
+		<<set $args[0].summary += "@@ @@.pink;">>
+	<<else>>
+		<<set $args[0].summary += " ">>
+	<</if>>
+<</if>>
+<<if $args[0].teeth == "crooked">>
+	<<set $args[0].summary += "@@ @@.yellow;Cr Teeth@@ @@.pink;">>
+<<elseif $args[0].teeth == "cosmetic braces">>
+	<<set $args[0].summary += "Cos Braces ">>
+<<elseif $args[0].teeth == "straightening braces">>
+	<<set $args[0].summary += "Braces ">>
+<<elseif $args[0].teeth == "removable">>
+	<<set $args[0].summary += "Rem Teeth ">>
+<<elseif $args[0].teeth == "pointy">>
+	<<set $args[0].summary += "Fangs ">>
+<</if>>
+<<if $args[0].muscles > 95>>
+	<<set $args[0].summary += "Musc++">>
+<<elseif $args[0].muscles > 30>>
+	<<set $args[0].summary += "Musc+">>
+<<elseif $args[0].muscles > 5>>
+	<<set $args[0].summary += "Toned">>
+<<else>>
+	<<set $args[0].summary += "Musc-">>
+<</if>>
+<<if $summaryStats>>
+	<<set $args[0].summary += "["+$args[0].muscles+"] ">>
+<<else>>
+	<<set $args[0].summary += " ">>
+<</if>>
+<<if $args[0].amp != 0>>
+<<if $args[0].amp == -1>>
+	<<set $args[0].summary += "P-Limbs ">>
+<<elseif $args[0].amp == -2>>
+	<<set $args[0].summary += "Sex P-Limbs ">>
+<<elseif $args[0].amp == -3>>
+	<<set $args[0].summary += "Beauty P-Limbs ">>
+<<elseif $args[0].amp == -4>>
+	<<set $args[0].summary += "Combat P-Limbs ">>
+<<elseif $args[0].amp == -5>>
+	<<set $args[0].summary += "Cyber P-Limbs ">>
+<<else>>
+	<<set $args[0].summary += "Amp ">>
+<</if>>
+<</if>>
+<<if !canWalk($args[0])>>
+	<<set $args[0].summary += "Immob ">>
+<</if>>
+<<if $args[0].heels == 1>>
+	<<set $args[0].summary += "Heel ">>
+<</if>>
+
+<<if $args[0].voice == 0>>
+	<<set $args[0].summary += "Mute">>
+<<else>>
+	<<if $args[0].accent == 3>>
+		<<set $args[0].summary += "@@ @@.red;Acc--@@ @@.pink;">>
+	<<elseif $args[0].accent == 2>>
+		<<set $args[0].summary += "@@ Acc- @@.pink;">>
+	<<elseif $args[0].accent == 1>>
+		<<set $args[0].summary += "Acc ">>
+	<</if>>
+<</if>>
+
+<<if ($args[0].boobs > 12000) && ($args[0].butt > 9)>>
+	<<set $args[0].summary += "T&A+++ ">>
+<<elseif ($args[0].boobs > 4000) && ($args[0].butt > 8)>>
+	<<set $args[0].summary += "T&A++ ">>
+<<elseif ($args[0].boobs > 2000) && ($args[0].butt > 6)>>
+	<<set $args[0].summary += "T&A+ ">>
+<<elseif ($args[0].boobs > 800) && ($args[0].butt > 4)>>
+	<<set $args[0].summary += "T&A ">>
+<<elseif ($args[0].boobs < 500) && ($args[0].butt < 3) && ($args[0].weight <= 10) && ($args[0].muscles <= 30)>>
+	<<set $args[0].summary += "Girlish ">>
+<<elseif $args[0].boobs > 12000>>
+	<<set $args[0].summary += "Boobs+++ ">>
+<<elseif $args[0].boobs > 4000>>
+	<<set $args[0].summary += "Boobs++ ">>
+<<elseif $args[0].boobs > 2000>>
+	<<set $args[0].summary += "Boobs+ ">>
+<<elseif $args[0].boobs > 800>>
+	<<set $args[0].summary += "Boobs ">>
+<<elseif $args[0].butt > 9>>
+	<<set $args[0].summary += "Ass+++ ">>
+<<elseif $args[0].butt > 8>>
+	<<set $args[0].summary += "Ass++ ">>
+<<elseif $args[0].butt > 6>>
+	<<set $args[0].summary += "Ass+ ">>
+<<elseif $args[0].butt > 4>>
+	<<set $args[0].summary += "Ass ">>
+<</if>>
+
+<<if $args[0].hips < -1>>
+<<if $args[0].butt > 2 && $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disp@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].hips < 0>>
+<<if $args[0].butt > 4 && $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disp@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].hips > 1>>
+<<if $args[0].butt <= 3>>
+	<<set $args[0].summary += "@@ @@.red;Disp@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].hips > 0>>
+<<if $args[0].butt > 8>>
+<<if $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disp@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].butt <= 2>>
+	<<set $args[0].summary += "@@ @@.red;Disp@@ @@.pink;">>
+<</if>>
+<<else>>
+<<if $args[0].butt > 6>>
+<<if $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disp@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].butt <= 1>>
+	<<set $args[0].summary += "@@ @@.red;Disp@@ @@.pink;">>
+<</if>>
+<</if>>
+
+<<set _color = 1>>
+<<if $args[0].waist > 95>>
+	<<set $args[0].summary += "@@ @@.red;Wst---">>
+<<elseif $args[0].waist > 40>>
+	<<set $args[0].summary += "@@ @@.red;Wst--">>
+<<elseif $args[0].waist > 10>>
+	<<set $args[0].summary += "@@ @@.red;Wst-">>
+<<elseif $args[0].waist >= -10>>
+	<<set $args[0].summary += "@@ @@.white;Wst">>
+<<elseif $args[0].waist >= -40>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Wst+">>
+<<elseif $args[0].waist >= -95>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Wst++">>
+<<else>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Wst+++">>
+<</if>>
+<<if $summaryStats>>
+	<<set $args[0].summary += "["+$args[0].waist+"]">>
+<</if>>
+<<if _color>>
+	<<set $args[0].summary += "@@ @@.pink;">>
+<<else>>
+	<<set $args[0].summary += " ">>
+<</if>>
+
+<<if ($args[0].boobsImplant == 0) && ($args[0].buttImplant == 0) && ($args[0].waist >= -95) && ($args[0].lipsImplant == 0) && ($args[0].faceImplant < 2)>>
+	<<set $args[0].summary += "Natr ">>
+<<else>>
+	<<set $args[0].summary += "Impl ">>
+<</if>>
+<<if $args[0].lactation == 1>>
+	<<set $args[0].summary += "Lact ">>
+<<elseif $args[0].lactation == 2>>
+	<<set $args[0].summary += "Lact++ ">>
+<</if>>
+<<modScore $args[0]>>
+<<if $args[0].corsetPiercing == 0 && $piercingScore < 3 && $tatScore < 2>>
+<<elseif $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+	<<set $args[0].summary += "Mods++ ">>
+<<elseif $modScore > 7>>
+	<<set $args[0].summary += "Mods+ ">>
+<<else>>
+	<<set $args[0].summary += "Mods ">>
+<</if>>
+<<if $args[0].brand != 0>>
+	<<set $args[0].summary += "Br ">>
+<</if>>
+<<set $args[0].summary += "@@ ">>
+
+<<elseif $abbreviatePhysicals == 2>>
+
+<<if $showAgeDetail == 1>>
+	<<set $args[0].summary += "Age "+$args[0].age+". ">>
+<<elseif $args[0].age >= 40>>
+	<<set $args[0].summary += "Forties. ">>
+<<elseif $args[0].age >= 35>>
+	<<set $args[0].summary += "Late thirties. ">>
+<<elseif $args[0].age >= 30>>
+	<<set $args[0].summary += "Early thirties. ">>
+<<elseif $args[0].age >= 25>>
+	<<set $args[0].summary += "Late twenties. ">>
+<<elseif $args[0].age >= 20>>
+	<<set $args[0].summary += "Early twenties. ">>
+<<elseif $args[0].age >= 19>>
+	<<set $args[0].summary += "Nineteen. ">>
+<<else>>
+	<<set $args[0].summary += "Eighteen. ">>
+<</if>>
+<<if $args[0].ageImplant == 1>>
+	<<set $args[0].summary += "Looks younger. ">>
+<</if>>
+
+<<set _color = 1>>
+<<if $args[0].face < -95>>
+	<<set $args[0].summary += "@@ @@.red;Very ugly">>
+<<elseif $args[0].face < -40>>
+	<<set $args[0].summary += "@@ @@.red;Ugly">>
+<<elseif $args[0].face < -10>>
+	<<set $args[0].summary += "@@ @@.red;Unattractive">>
+<<elseif $args[0].face <= 10>>
+	<<set $args[0].summary += "@@ @@.white;Average">>
+<<elseif $args[0].face <= 40>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Attractive">>
+<<elseif $args[0].face <= 95>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Beautiful">>
+<<else>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Very beautiful">>
+<</if>>
+<<if $summaryStats>>
+	<<set $args[0].summary += " ["+$args[0].face+"] ">>
+<</if>>
+<<if _color>>
+	<<set $args[0].summary += "@@ @@.pink;">>
+<<else>>
+	<<set $args[0].summary += " ">>
+<</if>>
+<<set $args[0].summary += ""+$args[0].faceShape+" face. ">>
+<<if $args[0].eyes <= -2>>
+	<<set $args[0].summary += "@@ @@.red;Blind.@@ @@.pink;">>
+<<elseif $args[0].eyes <= -1>>
+	<<set $args[0].summary += "@@ @@.yellow;Nearsighted.@@ @@.pink;">>
+<</if>>
+
+<<if $args[0].lips > 95>>
+	<<set $args[0].summary += "Facepussy">>
+<<elseif $args[0].lips > 70>>
+	<<set $args[0].summary += "Huge lips">>
+<<elseif $args[0].lips > 40>>
+	<<set $args[0].summary += "Big lips">>
+<<elseif $args[0].lips > 20>>
+	<<set $args[0].summary += "Pretty lips">>
+<<elseif $args[0].lips > 10>>
+	<<set $args[0].summary += "Normal lips">>
+<<else>>
+	<<set $args[0].summary += "@@ @@.red;Thin lips@@ @@.pink;">>
+<</if>>
+<<if $summaryStats>>
+	<<set $args[0].summary += " ["+$args[0].lips+"]. ">>
+<<else>>
+	<<set $args[0].summary += ". ">>
+<</if>>
+
+<<if $args[0].teeth == "crooked">>
+	<<set $args[0].summary += "@@ @@.yellow;Crooked teeth.@@ @@.pink;">>
+<<elseif $args[0].teeth == "cosmetic braces">>
+	<<set $args[0].summary += "Cosmetic braces. ">>
+<<elseif $args[0].teeth == "straightening braces">>
+	<<set $args[0].summary += "Braces. ">>
+<<elseif $args[0].teeth == "removable">>
+	<<set $args[0].summary += "Removable teeth. ">>
+<<elseif $args[0].teeth == "pointy">>
+	<<set $args[0].summary += "Sharp fangs. ">>
+<</if>>
+<<if $args[0].muscles > 95>>
+	<<set $args[0].summary += "Hugely muscular">>
+<<elseif $args[0].muscles > 30>>
+	<<set $args[0].summary += "Muscular">>
+<<elseif $args[0].muscles > 5>>
+	<<set $args[0].summary += "Toned">>
+<<else>>
+	<<set $args[0].summary += "Soft">>
+<</if>>
+<<if $summaryStats>>
+	<<set $args[0].summary += " ["+$args[0].muscles+"]. ">>
+<<else>>
+	<<set $args[0].summary += ". ">>
+<</if>>
+<<if $args[0].amp != 0>>
+	<<if $args[0].amp == -1>>
+	<<set $args[0].summary += "Prosthetic limbs. ">>
+	<<elseif $args[0].amp == -2>>
+	<<set $args[0].summary += "Sexy prosthetic limbs. ">>
+	<<elseif $args[0].amp == -3>>
+	<<set $args[0].summary += "Beautiful prosthetic limbs. ">>
+	<<elseif $args[0].amp == -4>>
+	<<set $args[0].summary += "Deadly prosthetic limbs. ">>
+	<<elseif $args[0].amp == -5>>
+	<<set $args[0].summary += "Cyber prosthetic limbs. ">>
+	<<else>>
+	<<set $args[0].summary += "Amputee. ">>
+	<</if>>
+<</if>>
+<<if !canWalk($args[0])>>
+	<<set $args[0].summary += "Immobile. ">>
+<</if>>
+<<if $args[0].heels == 1>>
+	<<set $args[0].summary += "Heeled. ">>
+<</if>>
+
+<<if $args[0].voice == 0>>
+	<<set $args[0].summary += "Mute. ">>
+<<else>>
+	<<if $args[0].accent == 3>>
+		<<set $args[0].summary += "@@ @@.red;Bad accent.@@ @@.pink;">>
+	<<elseif $args[0].accent == 2>>
+		<<set $args[0].summary += "@@ @@.white;Accent.@@ @@.pink;">>
+	<<elseif $args[0].accent == 1>>
+		<<set $args[0].summary += "Cute accent. ">>
+	<</if>>
+<</if>>
+
+<<if ($args[0].boobs > 12000) && ($args[0].butt > 9)>>
+	<<set $args[0].summary += "Hyper T&A. ">>
+<<elseif ($args[0].boobs > 4000) && ($args[0].butt > 8)>>
+	<<set $args[0].summary += "Enormous T&A. ">>
+<<elseif ($args[0].boobs > 2000) && ($args[0].butt > 6)>>
+	<<set $args[0].summary += "Huge T&A. ">>
+<<elseif ($args[0].boobs > 800) && ($args[0].butt > 4)>>
+	<<set $args[0].summary += "Big T&A. ">>
+<<elseif ($args[0].boobs < 500) && ($args[0].butt < 3) && ($args[0].weight <= 10) && ($args[0].muscles <= 30)>>
+	<<set $args[0].summary += "Girlish figure. ">>
+<<elseif $args[0].boobs > 12000>>
+	<<set $args[0].summary += "Immobilizing tits. ">>
+<<elseif $args[0].boobs > 4000>>
+	<<set $args[0].summary += "Monstrous tits. ">>
+<<elseif $args[0].boobs > 2000>>
+	<<set $args[0].summary += "Huge tits. ">>
+<<elseif $args[0].boobs > 800>>
+	<<set $args[0].summary += "Big tits. ">>
+<<elseif $args[0].butt > 9>>
+	<<set $args[0].summary += "Hyper ass. ">>
+<<elseif $args[0].butt > 8>>
+	<<set $args[0].summary += "Titanic ass. ">>
+<<elseif $args[0].butt > 6>>
+	<<set $args[0].summary += "Huge ass. ">>
+<<elseif $args[0].butt > 4>>
+	<<set $args[0].summary += "Big ass. ">>
+<</if>>
+
+<<if $args[0].hips < -1>>
+<<if $args[0].butt > 2 && $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disproportionately big butt.@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].hips < 0>>
+<<if $args[0].butt > 4 && $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disproportionately big butt.@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].hips > 1>>
+<<if $args[0].butt <= 3>>
+	<<set $args[0].summary += "@@ @@.red;Disproportionately small butt.@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].hips > 0>>
+<<if $args[0].butt > 8>>
+<<if $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disproportionately big butt.@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].butt <= 2>>
+	<<set $args[0].summary += "@@ @@.red;Disproportionately small butt.@@ @@.pink;">>
+<</if>>
+<<else>>
+<<if $args[0].butt > 6>>
+<<if $arcologies[0].FSTransformationFetishist < 20>>
+	<<set $args[0].summary += "@@ @@.red;Disproportionately big butt.@@ @@.pink;">>
+<</if>>
+<<elseif $args[0].butt <= 1>>
+	<<set $args[0].summary += "@@ @@.red;Disproportionately small butt.@@ @@.pink;">>
+<</if>>
+<</if>>
+
+<<set _color = 1>>
+<<if $args[0].waist > 95>>
+	<<set $args[0].summary += "@@ @@.red;Masculine waist">>
+<<elseif $args[0].waist > 40>>
+	<<set $args[0].summary += "@@ @@.red;Ugly waist">>
+<<elseif $args[0].waist > 10>>
+	<<set $args[0].summary += "@@ @@.red;Unattractive waist">>
+<<elseif $args[0].waist >= -10>>
+	<<set $args[0].summary += "@@ @@.white; Average waist">>
+<<elseif $args[0].waist >= -40>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Feminine waist">>
+<<elseif $args[0].waist >= -95>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Hourglass waist">>
+<<else>>
+	<<set _color = 0>>
+	<<set $args[0].summary += "Absurdly narrow waist">>
+<</if>>
+<<if $summaryStats>>
+	<<set $args[0].summary += " ["+$args[0].waist+"].">>
+<<else>>
+	<<set $args[0].summary += ".">>
+<</if>>
+<<if _color>>
+	<<set $args[0].summary += "@@ @@.pink;">>
+<<else>>
+	<<set $args[0].summary += " ">>
+<</if>>
+
+<<if ($args[0].boobsImplant != 0) || ($args[0].buttImplant != 0) || ($args[0].lipsImplant != 0)>>
+	<<set $args[0].summary += "Implants. ">>
+<<elseif $args[0].faceImplant >= 30 || $args[0].waist < -95>>
+	<<set $args[0].summary += "Surgery enhanced. ">>
+<<else>>
+	<<set $args[0].summary += "All natural. ">>
+<</if>>
+<<if $args[0].lactation == 1>>
+	<<set $args[0].summary += "Lactating naturally. ">>
+<<elseif $args[0].lactation == 2>>
+	<<set $args[0].summary += "Heavy lactation. ">>
+<</if>>
+<<modScore $args[0]>>
+<<if $args[0].corsetPiercing == 0 && $piercingScore < 3 && $tatScore < 2>>
+<<elseif $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+	<<set $args[0].summary += "Extensive body mods. ">>
+<<elseif $modScore > 7>>
+	<<set $args[0].summary += "Noticeable body mods. ">>
+<<else>>
+	<<set $args[0].summary += "Light body mods. ">>
+<</if>>
+<<if $args[0].brand != 0>>
+	<<set $args[0].summary += "Branded. ">>
+<</if>>
+<<set $args[0].summary += "@@ ">>
+<</if>>
+
+/* - Line 3 - ******************************************************/
+<<set $args[0].summary += _break>>
+
+<<if $abbreviateSkills == 1>>
+<<if $args[0].fetish == "mindbroken">>
+<<elseif $args[0].intelligenceImplant == 1>>
+<<switch $args[0].intelligence>>
+<<case 3>>
+	<<set $args[0].summary += "@@.deepskyblue;I+++(e)@@ ">>
+<<case 2>>
+	<<set $args[0].summary += "@@.deepskyblue;I++(e)@@ ">>
+<<case 1>>
+	<<set $args[0].summary += "@@.deepskyblue;I+(e)@@ ">>
+<<case -1>>
+	<<set $args[0].summary += "@@.orangered;I-(e)@@ ">>
+<<case -2>>
+	<<set $args[0].summary += "@@.orangered;I--(e)@@ ">>
+<<case -3>>
+	<<set $args[0].summary += "@@.orangered;I---(e)@@ ">>
+<<default>>
+	<<set $args[0].summary += "I(e) ">>
+<</switch>>
+<<else>>
+<<switch $args[0].intelligence>>
+<<case 3>>
+	<<set $args[0].summary += "@@.deepskyblue;I+++@@ ">>
+<<case 2>>
+	<<set $args[0].summary += "@@.deepskyblue;I++@@ ">>
+<<case 1>>
+	<<set $args[0].summary += "@@.deepskyblue;I+@@ ">>
+<<case -1>>
+	<<set $args[0].summary += "@@.orangered;I-@@ ">>
+<<case -2>>
+	<<set $args[0].summary += "@@.orangered;I--@@ ">>
+<<case -3>>
+	<<set $args[0].summary += "@@.orangered;I---@@ ">>
+<<default>>
+	<<set $args[0].summary += "I ">>
+<</switch>>
+<</if>>
+
+<<set _SSkills = $args[0].analSkill+$args[0].oralSkill>>
+<<set $args[0].summary += "@@.aquamarine; ">>
+<<if ((_SSkills+$args[0].whoreSkill+$args[0].entertainSkill) >= 400) && (($args[0].vagina < 0) || ($args[0].vaginalSkill >= 100))>>
+	<<set $args[0].summary += "MSS ">>
+<<else>>
+	<<set _SSkills += $args[0].vaginalSkill>>
+	<<set _SSkills = Math.trunc(_SSkills)>>
+	<<if _SSkills > 180>>
+		<<set $args[0].summary += "S++">>
+	<<elseif (_SSkills > 120) && ($args[0].vagina < 0)>>
+		<<set $args[0].summary += "Sh++">>
+	<<elseif _SSkills > 90>>
+		<<set $args[0].summary += "S+">>
+	<<elseif _SSkills > 30>>
+		<<set $args[0].summary += "S">>
+	<<else>>
+		<<set $args[0].summary += "S-">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += "["+_SSkills+"] ">>
+	<</if>>
+	<<if $args[0].whoreSkill >= 100>>
+		<<set $args[0].summary += "W+++">>
+	<<elseif $args[0].whoreSkill > 60>>
+		<<set $args[0].summary += "W++">>
+	<<elseif $args[0].whoreSkill > 30>>
+		<<set $args[0].summary += "W+">>
+	<<elseif $args[0].whoreSkill > 10>>
+		<<set $args[0].summary += "W">>
+	<</if>>
+	<<if $args[0].whoreSkill > 10>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += "["+$args[0].whoreSkill+"] ">>
+	<</if>>
+	<</if>>
+	<<if $args[0].entertainSkill >= 100>>
+		<<set $args[0].summary += "E+++">>
+	<<elseif $args[0].entertainSkill > 60>>
+		<<set $args[0].summary += "E++">>
+	<<elseif $args[0].entertainSkill > 30>>
+		<<set $args[0].summary += "E+">>
+	<<elseif $args[0].entertainSkill > 10>>
+		<<set $args[0].summary += "E">>
+	<</if>>
+	<<if $args[0].entertainSkill > 10>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += "["+$args[0].entertainSkill+"] ">>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $args[0].combatSkill > 0>>
+	<<set $args[0].summary += "C ">>
+<</if>>
+<<set $args[0].summary += "@@ ">>
+
+<<if $args[0].prestige > 0>>
+<<set $args[0].summary += "@@.green;">>
+<<if $args[0].prestige > 2>>
+	<<set $args[0].summary += "Prest++">>
+<<elseif $args[0].prestige == 2>>
+	<<set $args[0].summary += "Prest+">>
+<<elseif $args[0].prestige == 1>>
+	<<set $args[0].summary += "Prest">>
+<</if>>
+<<set $args[0].summary += "@@ ">>
+<</if>>
+
+<<elseif $abbreviateSkills == 2>>
+<<if $args[0].fetish == "mindbroken">>
+<<elseif $args[0].intelligenceImplant == 1>>
+<<switch $args[0].intelligence>>
+<<case 3>>
+	<<set $args[0].summary += "@@.deepskyblue;Brilliant, educated.@@ ">>
+<<case 2>>
+	<<set $args[0].summary += "@@.deepskyblue;Very smart, educated.@@ ">>
+<<case 1>>
+	<<set $args[0].summary += "@@.deepskyblue;Smart, educated.@@ ">>
+<<case -1>>
+	<<set $args[0].summary += "@@.orangered;Slow, educated.@@ ">>
+<<case -2>>
+	<<set $args[0].summary += "@@.orangered;Very slow, educated.@@ ">>
+<<case -3>>
+	<<set $args[0].summary += "@@.orangered;Moronic, educated.@@ ">>
+<<default>>
+	<<set $args[0].summary += "Average intelligence, educated. ">>
+<</switch>>
+<<else>>
+<<switch $args[0].intelligence>>
+<<case 3>>
+	<<set $args[0].summary += "@@.deepskyblue;Brilliant.@@ ">>
+<<case 2>>
+	<<set $args[0].summary += "@@.deepskyblue;Very smart.@@ ">>
+<<case 1>>
+	<<set $args[0].summary += "@@.deepskyblue;Smart.@@ ">>
+<<case -1>>
+	<<set $args[0].summary += "@@.orangered;Slow.@@ ">>
+<<case -2>>
+	<<set $args[0].summary += "@@.orangered;Very slow.@@ ">>
+<<case -3>>
+	<<set $args[0].summary += "@@.orangered;Moronic.@@ ">>
+<<default>>
+	<<set $args[0].summary += "Average intelligence. ">>
+<</switch>>
+<</if>>
+
+<<set _SSkills = ($args[0].analSkill+$args[0].oralSkill)>>
+<<set $args[0].summary += "@@.aquamarine;">>
+<<if ((_SSkills+$args[0].whoreSkill+$args[0].entertainSkill) >= 400) && (($args[0].vagina < 0) || ($args[0].vaginalSkill >= 100))>>
+	<<set $args[0].summary += "Masterful Sex Slave. ">>
+<<else>>
+	<<set _SSkills += $args[0].vaginalSkill>>
+	<<set _SSkills = Math.trunc(_SSkills)>>
+	<<if _SSkills > 180>>
+		<<set $args[0].summary += "Sex master">>
+	<<elseif (_SSkills > 120) && ($args[0].vagina < 0)>>
+		<<set $args[0].summary += "Masterful shemale">>
+	<<elseif _SSkills > 90>>
+		<<set $args[0].summary += "Sexual expert">>
+	<<elseif _SSkills > 30>>
+		<<set $args[0].summary += "Sexually skilled">>
+	<<else>>
+		<<set $args[0].summary += "Sexually unskilled">>
+	<</if>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+_SSkills+"]. ">>
+	<<else>>
+		<<set $args[0].summary += ". ">>
+	<</if>>
+	<<if $args[0].whoreSkill >= 100>>
+		<<set $args[0].summary += "Masterful whore">>
+	<<elseif $args[0].whoreSkill >= 60>>
+		<<set $args[0].summary += "Expert whore">>
+	<<elseif $args[0].whoreSkill >= 30>>
+		<<set $args[0].summary += "Skilled whore">>
+	<<elseif $args[0].whoreSkill >= 10>>
+		<<set $args[0].summary += "Basic whore">>
+	<</if>>
+	<<if $args[0].whoreSkill >= 10>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+$args[0].whoreSkill+"]. ">>
+	<<else>>
+		<<set $args[0].summary += ". ">>
+	<</if>>
+	<</if>>
+	<<if $args[0].entertainSkill >= 100>>
+		<<set $args[0].summary += "Masterful entertainer">>
+	<<elseif $args[0].entertainSkill >= 60>>
+		<<set $args[0].summary += "Expert entertainer">>
+	<<elseif $args[0].entertainSkill >= 30>>
+		<<set $args[0].summary += "Skilled entertainer">>
+	<<elseif $args[0].entertainSkill >= 10>>
+		<<set $args[0].summary += "Basic entertainer">>
+	<</if>>
+	<<if $args[0].entertainSkill >= 10>>
+	<<if $summaryStats>>
+		<<set $args[0].summary += " ["+$args[0].entertainSkill+"]. ">>
+	<<else>>
+		<<set $args[0].summary += ". ">>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $args[0].combatSkill > 0>>
+	<<set $args[0].summary += "Trained fighter. ">>
+<</if>>
+<<set $args[0].summary += "@@ ">>
+
+<<if $args[0].prestige > 0>>
+<<set $args[0].summary += "@@.green;">>
+<<if $args[0].prestige > 2>>
+	<<set $args[0].summary += "Extremely prestigious.">>
+<<elseif $args[0].prestige == 2>>
+	<<set $args[0].summary += "Very prestigious.">>
+<<elseif $args[0].prestige == 1>>
+	<<set $args[0].summary += "Prestigious.">>
+<</if>>
+<<set $args[0].summary += "@@ ">>
+<</if>>
+<</if>>
+
+<<if $abbreviateMental == 1>>
+	<<if ($args[0].fetishKnown && $args[0].fetish != "mindbroken")>>
+		<<set $args[0].summary += "@@.lightcoral;">>
+		<<switch $args[0].fetish>>
+		<<case "submissive">>
+			<<set $args[0].summary += "Sub">>
+		<<case "cumslut">>
+			<<set $args[0].summary += "Oral">>
+		<<case "humiliation">>
+			<<set $args[0].summary += "Humil">>
+		<<case "buttslut">>
+			<<set $args[0].summary += "Anal">>
+		<<case "boobs">>
+			<<set $args[0].summary += "Boobs">>
+		<<case "sadist">>
+			<<set $args[0].summary += "Sadist">>
+		<<case "masochist">>
+			<<set $args[0].summary += "Pain">>
+		<<case "dom">>
+			<<set $args[0].summary += "Dom">>
+		<<case "pregnancy">>
+			<<set $args[0].summary += "Preg">>
+		<<default>>
+			<<set $args[0].summary += "Vanilla">>
+		<</switch>>
+		<<if ($args[0].fetishStrength > 95)>>
+			<<set $args[0].summary += "++">>
+		<<elseif ($args[0].fetishStrength > 60)>>
+			<<set $args[0].summary += "+">>
+		<</if>>
+
+		<<if $summaryStats>>
+			<<set $args[0].summary += "["+$args[0].fetishStrength+"]">>
+		<</if>>
+		<<set $args[0].summary += "@@ ">>
+	<</if>>
+
+	<<if $args[0].attrKnown>>
+		<<set _omnisexual = ($args[0].attrXY > 95 && $args[0].attrXX > 95)>>
+		<<set _nymphomaniac = ($args[0].energy > 95)>>
+		<<if _omnisexual>>
+			<<if _nymphomaniac>>
+				<<set $args[0].summary += "@@.green;Omni+Nympho!!@@ ">>
+			<<else>>
+				<<set $args[0].summary += "@@.green;Omni!@@ ">>
+			<</if>>
+		<</if>>
+
+		<<if $args[0].attrXY <= 5>>
+			<<set $args[0].summary += "@@.red;XY---">>
+		<<elseif $args[0].attrXY <= 15>>
+			<<set $args[0].summary += "@@.red;XY--">>
+		<<elseif $args[0].attrXY <= 35>>
+			<<set $args[0].summary += "@@.red;XY-">>
+		<<elseif $args[0].attrXY <= 65>>
+			<<set $args[0].summary += "@@.white;XY">>
+		<<elseif $args[0].attrXY <= 85>>
+			<<set $args[0].summary += "@@.green;XY+">>
+		<<elseif $args[0].attrXY <= 95>>
+			<<set $args[0].summary += "@@.green;XY++">>
+		<<elseif !_omnisexual>>
+			<<set $args[0].summary += "@@.green;XY+++">>
+		<</if>>
+
+		<<if !_omnisexual>>
+			<<if $summaryStats>>
+				<<set $args[0].summary += "["+$args[0].attrXY+"]">>
+			<</if>>
+			<<set $args[0].summary += "@@ ">>
+		<</if>>
+
+		<<if $args[0].attrXX <= 5>>
+			<<set $args[0].summary += "@@.red;XX---">>
+		<<elseif $args[0].attrXX <= 15>>
+			<<set $args[0].summary += "@@.red;XX--">>
+		<<elseif $args[0].attrXX <= 35>>
+			<<set $args[0].summary += "@@.red;XX-">>
+		<<elseif $args[0].attrXX <= 65>>
+			<<set $args[0].summary += "@@.white;XX">>
+		<<elseif $args[0].attrXX <= 85>>
+			<<set $args[0].summary += "@@.green;XX+">>
+		<<elseif $args[0].attrXX <= 95>>
+			<<set $args[0].summary += "@@.green;XX++">>
+		<<elseif !_omnisexual>>
+			<<set $args[0].summary += "@@.green;XX+++">>
+		<</if>>
+
+		<<if !_omnisexual>>
+			<<if $summaryStats>>
+				<<set $args[0].summary += "["+$args[0].attrXX+"]">>
+			<</if>>
+			<<set $args[0].summary += "@@ ">>
+		<</if>>
+
+		<<if $args[0].energy <= 20>>
+			<<set $args[0].summary += "@@.red;SD--">>
+		<<elseif $args[0].energy <= 40>>
+			<<set $args[0].summary += "@@.red;SD-">>
+		<<elseif $args[0].energy <= 60>>
+			<<set $args[0].summary += "@@.yellow;SD ">>
+		<<elseif $args[0].energy <= 80>>
+			<<set $args[0].summary += "@@.green;SD+">>
+		<<elseif $args[0].energy <= 95>>
+			<<set $args[0].summary += "@@.green;SD++">>
+		<<elseif !_omnisexual>>
+			<<set $args[0].summary += "@@.green;Nympho!@@ ">>
+		<</if>>
+
+		<<if !_nymphomaniac>>
+			<<if $summaryStats>>
+				<<set $args[0].summary += "["+$args[0].energy+"]">>
+			<</if>>
+			<<set $args[0].summary += "@@ ">>
+		<</if>>
+	<</if>>
+
+	<<if $args[0].clitPiercing == 3>>
+	<<if $args[0].fetishKnown == 1>>
+	<<if $args[0].clitSetting == "off">>
+		<<set $args[0].summary += "SP- ">>
+	<<elseif (($args[0].fetish != "submissive") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "submissive")>>
+		<<set $args[0].summary += "SP:sub ">>
+	<<elseif (($args[0].fetish != "cumslut") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "oral")>>
+		<<set $args[0].summary += "SP:oral ">>
+	<<elseif (($args[0].fetish != "humiliation") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "humiliation")>>
+		<<set $args[0].summary += "SP:humil ">>
+	<<elseif (($args[0].fetish != "buttslut") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "anal")>>
+		<<set $args[0].summary += "SP:anal ">>
+	<<elseif (($args[0].fetish != "boobs") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "boobs")>>
+		<<set $args[0].summary += "SP:boobs ">>
+	<<elseif (($args[0].fetish != "sadist") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "sadist")>>
+		<<set $args[0].summary += "SP:sade ">>
+	<<elseif (($args[0].fetish != "masochist") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "masochist")>>
+		<<set $args[0].summary += "SP:pain ">>
+	<<elseif (($args[0].fetish != "dom") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "dom")>>
+		<<set $args[0].summary += "SP:dom ">>
+	<<elseif (($args[0].fetish != "pregnancy") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "pregnancy")>>
+		<<set $args[0].summary += "SP:preg ">>
+	<<elseif (($args[0].fetish != "none") && ($args[0].clitSetting == "vanilla"))>>
+		<<set $args[0].summary += "SP:vanilla ">>
+	<<elseif ($args[0].energy <= 95) && ($args[0].clitSetting == "all")>>
+		<<set $args[0].summary += "SP:all ">>
+	<<elseif ($args[0].energy > 5) && ($args[0].clitSetting == "none")>>
+		<<set $args[0].summary += "SP:none ">>
+	<</if>>
+	<<else>>
+	<<switch $args[0].clitSetting>>
+	<<case "off">>
+		<<set $args[0].summary += "SP- ">>
+	<<case "submissive">>
+		<<set $args[0].summary += "SP:sub ">>
+	<<case "lesbian">>
+		<<set $args[0].summary += "SP:les ">>
+	<<case "oral">>
+		<<set $args[0].summary += "SP:oral ">>
+	<<case "humiliation">>
+		<<set $args[0].summary += "SP:humil ">>
+	<<case "anal">>
+		<<set $args[0].summary += "SP:anal ">>
+	<<case "boobs">>
+		<<set $args[0].summary += "SP:boobs ">>
+	<<case "sadist">>
+		<<set $args[0].summary += "SP:sade ">>
+	<<case "masochist">>
+		<<set $args[0].summary += "SP:pain ">>
+	<<case "dom">>
+		<<set $args[0].summary += "SP:dom ">>
+	<<case "pregnancy">>
+		<<set $args[0].summary += "SP:pregnancy ">>
+	<<case "vanilla">>
+		<<set $args[0].summary += "SP:vanilla ">>
+	<<case "all">>
+		<<set $args[0].summary += "SP:all ">>
+	<<case "none">>
+		<<set $args[0].summary += "SP:none ">>
+	<</switch>>
+	<</if>>
+
+	<<if $args[0].attrKnown == 1>>
+		<<if $args[0].clitSetting == "women">>
+			<<if $args[0].attrXX < 95>><<set $args[0].summary += "SP:women ">><</if>>
+		<<elseif $args[0].clitSetting == "men">>
+			<<if $args[0].attrXY < 95>><<set $args[0].summary += "SP:men ">><</if>>
+		<<elseif $args[0].clitSetting == "anti-women">>
+			<<if $args[0].attrXX > 0>><<set $args[0].summary += "SP:anti-women ">><</if>>
+		<<elseif $args[0].clitSetting == "anti-men">>
+			<<if $args[0].attrXY > 0>><<set $args[0].summary += "SP:anti-men ">><</if>>
+		<</if>>
+	<<else>>
+		<<if $args[0].clitSetting == "women">>
+			<<set $args[0].summary += "SP:women ">>
+		<<elseif $args[0].clitSetting == "men">>
+			<<set $args[0].summary += "SP:men ">>
+		<<elseif $args[0].clitSetting == "anti-women">>
+			<<set $args[0].summary += "SP:anti-women ">>
+		<<elseif $args[0].clitSetting == "anti-men">>
+			<<set $args[0].summary += "SP:anti-men ">>
+		<</if>>
+	<</if>>
+	<</if>>
+	<<set $args[0].summary += "@@.red;">>
+	<<switch $args[0].behavioralFlaw>>
+	<<case "arrogant">>
+		<<set $args[0].summary += "Arrog">>
+	<<case "bitchy">>
+		<<set $args[0].summary += "Bitchy">>
+	<<case "odd">>
+		<<set $args[0].summary += "Odd">>
+	<<case "hates men">>
+		<<set $args[0].summary += "Men-">>
+	<<case "hates women">>
+		<<set $args[0].summary += "Women-">>
+	<<case "gluttonous">>
+		<<set $args[0].summary += "Glut">>
+	<<case "anorexic">>
+		<<set $args[0].summary += "Ano">>
+	<<case "devout">>
+		<<set $args[0].summary += "Dev">>
+	<<case "liberated">>
+		<<set $args[0].summary += "Lib">>
+	<<default>>
+		<<set $args[0].behavioralFlaw = "none">>
+	<</switch>>
+	<<set $args[0].summary += "@@ ">>
+	<<switch $args[0].sexualFlaw>>
+	<<case "hates oral">>
+		<<set $args[0].summary += "@@.red;Oral-@@ ">>
+	<<case "hates anal">>
+		<<set $args[0].summary += "@@.red;Anal-@@ ">>
+	<<case "hates penetration">>
+		<<set $args[0].summary += "@@.red;Fuck-@@ ">>
+	<<case "shamefast">>
+		<<set $args[0].summary += "@@.red;Shame@@ ">>
+	<<case "idealistic">>
+		<<set $args[0].summary += "@@.red;Ideal@@ ">>
+	<<case "repressed">>
+		<<set $args[0].summary += "@@.red;Repre@@ ">>
+	<<case "apathetic">>
+		<<set $args[0].summary += "@@.red;Apath@@ ">>
+	<<case "crude">>
+		<<set $args[0].summary += "@@.red;Crude@@ ">>
+	<<case "judgemental">>
+		<<set $args[0].summary += "@@.red;Judge@@ ">>
+	<<case "cum addict">>
+		<<set $args[0].summary += "@@.yellow;CumAdd@@ ">>
+	<<case "anal addict">>
+		<<set $args[0].summary += "@@.yellow;AnalAdd@@ ">>
+	<<case "attention whore">>
+		<<set $args[0].summary += "@@.yellow;Attention@@ ">>
+	<<case "breast growth">>
+		<<set $args[0].summary += "@@.yellow;BoobObsess@@ ">>
+	<<case "abusive">>
+		<<set $args[0].summary += "@@.yellow;Abusive@@ ">>
+	<<case "malicious">>
+		<<set $args[0].summary += "@@.yellow;Malice@@ ">>
+	<<case "self hating">>
+		<<set $args[0].summary += "@@.yellow;SelfHatr@@ ">>
+	<<case "neglectful">>
+		<<set $args[0].summary += "@@.yellow;SelfNeglect@@ ">>
+	<<case "breeder">>
+		<<set $args[0].summary += "@@.yellow;BreedObsess@@ ">>
+	<<default>>
+		<<set $args[0].sexualFlaw = "none">>
+	<</switch>>
+	<<set $args[0].summary += "@@.green;">>
+	<<switch $args[0].behavioralQuirk>>
+	<<case "confident">>
+		<<set $args[0].summary += "Confid ">>
+	<<case "cutting">>
+		<<set $args[0].summary += "Cutting ">>
+	<<case "funny">>
+		<<set $args[0].summary += "Funny ">>
+	<<case "fitness">>
+		<<set $args[0].summary += "Fit ">>
+	<<case "adores women">>
+		<<set $args[0].summary += "Women+ ">>
+	<<case "adores men">>
+		<<set $args[0].summary += "Men+ ">>
+	<<case "insecure">>
+		<<set $args[0].summary += "Insec ">>
+	<<case "sinful">>
+		<<set $args[0].summary += "Sinf ">>
+	<<case "advocate">>
+		<<set $args[0].summary += "Advoc ">>
+	<<default>>
+		<<set $args[0].behavioralQuirk = "none">>
+	<</switch>>
+	<<switch $args[0].sexualQuirk>>
+	<<case "gagfuck queen">>
+		<<set $args[0].summary += "Gagfuck">>
+	<<case "painal queen">>
+		<<set $args[0].summary += "Painal">>
+	<<case "strugglefuck queen">>
+		<<set $args[0].summary += "Struggle">>
+	<<case "tease">>
+		<<set $args[0].summary += "Tease">>
+	<<case "romantic">>
+		<<set $args[0].summary += "Romantic">>
+	<<case "perverted">>
+		<<set $args[0].summary += "Perverted">>
+	<<case "caring">>
+		<<set $args[0].summary += "Caring">>
+	<<case "unflinching">>
+		<<set $args[0].summary += "Unflinch">>
+	<<case "size queen">>
+		<<set $args[0].summary += "SizeQ">>
+	<<default>>
+		<<set $args[0].sexualQuirk = "none">>
+	<</switch>>
+	<<set $args[0].summary += "@@ ">>
+
+<<elseif $abbreviateMental == 2>>
+	<<if ($args[0].fetishKnown && $args[0].fetish != "mindbroken")>>
+		<<set $args[0].summary += "@@.lightcoral;">>
+		<<switch $args[0].fetish>>
+		<<case "submissive">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Complete submissive">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Submissive">>
+			<<else>>
+				<<set $args[0].summary += "Submissive tendencies">>
+			<</if>>
+		<<case "cumslut">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Cumslut">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Oral fixation">>
+			<<else>>
+				<<set $args[0].summary += "Prefers oral">>
+			<</if>>
+		<<case "humiliation">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Humiliation slut">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Exhibitionist">>
+			<<else>>
+				<<set $args[0].summary += "Interest in humiliation">>
+			<</if>>
+		<<case "buttslut">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Buttslut">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Anal fixation">>
+			<<else>>
+				<<set $args[0].summary += "Prefers anal">>
+			<</if>>
+		<<case "boobs">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Boobslut">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Breast fixation">>
+			<<else>>
+				<<set $args[0].summary += "Loves boobs">>
+			<</if>>
+		<<case "sadist">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Complete sadist">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Sadist">>
+			<<else>>
+				<<set $args[0].summary += "Sadistic tendencies">>
+			<</if>>
+		<<case "masochist">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Complete masochist">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Masochist">>
+			<<else>>
+				<<set $args[0].summary += "Masochistic tendencies">>
+			<</if>>
+		<<case "dom">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Complete dom">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Dominant">>
+			<<else>>
+				<<set $args[0].summary += "Dominant tendencies">>
+			<</if>>
+		<<case "pregnancy">>
+			<<if $args[0].fetishStrength > 95>>
+				<<set $args[0].summary += "Pregnancy fetish">>
+			<<elseif $args[0].fetishStrength > 60>>
+				<<set $args[0].summary += "Pregnancy kink">>
+			<<else>>
+				<<set $args[0].summary += "Interest in impregnation">>
+			<</if>>
+		<<default>>
+			<<set $args[0].summary += "Sexually vanilla">>
+		<</switch>>
+
+		<<if $summaryStats>>
+			<<set $args[0].summary += " ["+$args[0].fetishStrength+"]">>
+		<</if>>
+		<<set $args[0].summary += ".@@ ">>
+
+	<</if>>
+
+	<<if $args[0].attrKnown == 1>>
+		<<set _omnisexual = ($args[0].attrXY > 95 && $args[0].attrXX > 95)>>
+		<<set _nymphomaniac = ($args[0].energy > 95)>>
+		<<if _omnisexual>>
+			<<if _nymphomaniac>>
+				<<set $args[0].summary += "@@.green;Omnisexual nymphomaniac!@@ ">>
+			<<else>>
+				<<set $args[0].summary += "@@.green;Omnisexual!@@ ">>
+			<</if>>
+		<</if>>
+
+		<<if $args[0].attrXY <= 5>>
+			<<set $args[0].summary += "@@.red;Disgusted by men">>
+		<<elseif $args[0].attrXY <= 15>>
+			<<set $args[0].summary += "@@.red;Turned off by men">>
+		<<elseif $args[0].attrXY <= 35>>
+			<<set $args[0].summary += "@@.red;Not attracted to men">>
+		<<elseif $args[0].attrXY <= 65>>
+			<<set $args[0].summary += "@@.white;Indifferent to men">>
+		<<elseif $args[0].attrXY <= 85>>
+			<<set $args[0].summary += "@@.green;Attracted to men">>
+		<<elseif $args[0].attrXY <= 95>>
+			<<set $args[0].summary += "@@.green;Aroused by men">>
+		<<elseif !_omnisexual>>
+			<<set $args[0].summary += "@@.green;Passionate about men">>
+		<</if>>
+
+		<<if !_omnisexual>>
+			<<if $summaryStats>>
+				<<set $args[0].summary += " ["+$args[0].attrXY+"]">>
+			<</if>>
+			<<set $args[0].summary += ",@@ ">>
+		<</if>>
+
+		<<if $args[0].attrXX <= 5>>
+			<<set $args[0].summary += "@@.red;disgusted by women">>
+		<<elseif $args[0].attrXX <= 15>>
+			<<set $args[0].summary += "@@.red;turned off by women">>
+		<<elseif $args[0].attrXX <= 35>>
+			<<set $args[0].summary += "@@.red;not attracted to women">>
+		<<elseif $args[0].attrXX <= 65>>
+			<<set $args[0].summary += "@@.white;indifferent to women">>
+		<<elseif $args[0].attrXX <= 85>>
+			<<set $args[0].summary += "@@.green;attracted to women">>
+		<<elseif $args[0].attrXX <= 95>>
+			<<set $args[0].summary += "@@.green;aroused by women">>
+		<<elseif !_omnisexual>>
+			<<set $args[0].summary += "@@.green;passionate about women">>
+		<</if>>
+
+		<<if !_omnisexual>>
+			<<if $summaryStats>>
+				<<set $args[0].summary += " ["+$args[0].attrXX+"]">>
+			<</if>>
+			<<set $args[0].summary += ".@@ ">>
+		<</if>>
+
+		<<if $args[0].energy <= 20>>
+			<<set $args[0].summary += "@@.red;No sex drive">>
+		<<elseif $args[0].energy <= 40>>
+			<<set $args[0].summary += "@@.red;Poor sex drive">>
+		<<elseif $args[0].energy <= 60>>
+			<<set $args[0].summary += "@@.yellow;Average sex drive">>
+		<<elseif $args[0].energy <= 80>>
+			<<set $args[0].summary += "@@.green;Good sex drive">>
+		<<elseif $args[0].energy <= 95>>
+			<<set $args[0].summary += "@@.green;Powerful sex drive">>
+		<<elseif !_omnisexual>>
+			<<set $args[0].summary += "@@.green;Nymphomaniac!@@ ">>
+		<</if>>
+
+		<<if !_nymphomaniac>>
+			<<if $summaryStats>>
+				<<set $args[0].summary += " ["+$args[0].energy+"]">>
+			<</if>>
+			<<set $args[0].summary += ".@@ ">>
+		<</if>>
+	<</if>>
+
+	<<if $args[0].clitPiercing == 3>>
+		<<if $args[0].fetishKnown == 1>>
+			<<if $args[0].clitSetting == "off">>
+				<<set $args[0].summary += "SP off. ">>
+			<<elseif (($args[0].fetish != "submissive") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "submissive")>>
+				<<set $args[0].summary += "SP: submissive. ">>
+			<<elseif (($args[0].fetish != "cumslut") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "oral")>>
+				<<set $args[0].summary += "SP: oral. ">>
+			<<elseif (($args[0].fetish != "humiliation") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "humiliation")>>
+				<<set $args[0].summary += "SP: humiliation. ">>
+			<<elseif (($args[0].fetish != "buttslut") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "anal")>>
+				<<set $args[0].summary += "SP: anal. ">>
+			<<elseif (($args[0].fetish != "boobs") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "boobs")>>
+				<<set $args[0].summary += "SP: breasts. ">>
+			<<elseif (($args[0].fetish != "sadist") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "sadist")>>
+				<<set $args[0].summary += "SP: sadism. ">>
+			<<elseif (($args[0].fetish != "masochist") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "masochist")>>
+				<<set $args[0].summary += "SP: masochism. ">>
+			<<elseif (($args[0].fetish != "dom") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "dom")>>
+				<<set $args[0].summary += "SP: dominance. ">>
+			<<elseif (($args[0].fetish != "pregnancy") || ($args[0].fetishStrength <= 95)) && ($args[0].clitSetting == "pregnancy")>>
+				<<set $args[0].summary += "SP: pregnancy. ">>
+			<<elseif ($args[0].fetish != "none") && ($args[0].clitSetting == "vanilla")>>
+				<<set $args[0].summary += "SP: vanilla. ">>
+			<<elseif ($args[0].energy <= 95) && ($args[0].clitSetting == "all")>>
+				<<set $args[0].summary += "SP: all. ">>
+			<<elseif ($args[0].energy > 5) && ($args[0].clitSetting == "none")>>
+				<<set $args[0].summary += "SP: none. ">>
+			<</if>>
+		<<else>>
+			<<switch $args[0].clitSetting>>
+			<<case "off">>
+				<<set $args[0].summary += "SP off. ">>
+			<<case "submissive">>
+				<<set $args[0].summary += "SP: submissive. ">>
+			<<case "oral">>
+				<<set $args[0].summary += "SP: oral. ">>
+			<<case "humiliation">>
+				<<set $args[0].summary += "SP: humiliation. ">>
+			<<case "anal">>
+				<<set $args[0].summary += "SP: anal. ">>
+			<<case "boobs">>
+				<<set $args[0].summary += "SP: breasts. ">>
+			<<case "sadist">>
+				<<set $args[0].summary += "SP: sadism. ">>
+			<<case "masochist">>
+				<<set $args[0].summary += "SP: masochism. ">>
+			<<case "dom">>
+				<<set $args[0].summary += "SP: dominance. ">>
+			<<case "pregnancy">>
+				<<set $args[0].summary += "SP: pregnancy. ">>
+			<<case "vanilla">>
+				<<set $args[0].summary += "SP: vanilla. ">>
+			<<case "all">>
+				<<set $args[0].summary += "SP: all. ">>
+			<<case "none">>
+				<<set $args[0].summary += "SP: none. ">>
+			<</switch>>
+		<</if>>
+		<<if $args[0].attrKnown == 1>>
+			<<if ($args[0].attrXX < 100) && ($args[0].clitSetting == "women")>>
+				<<set $args[0].summary += "SP: women. ">>
+			<<elseif ($args[0].attrXY < 100) && ($args[0].clitSetting == "men")>>
+				<<set $args[0].summary += "SP: men. ">>
+			<</if>>
+		<<else>>
+			<<if $args[0].clitSetting == "women">>
+				<<set $args[0].summary += "SP: women. ">>
+			<<elseif $args[0].clitSetting == "men">>
+				<<set $args[0].summary += "SP: men. ">>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<set $args[0].summary += "@@.red;">>
+	<<switch $args[0].behavioralFlaw>>
+	<<case "arrogant">>
+		<<set $args[0].summary += "Arrogant.">>
+	<<case "bitchy">>
+		<<set $args[0].summary += "Bitchy.">>
+	<<case "odd">>
+		<<set $args[0].summary += "Odd.">>
+	<<case "hates men">>
+		<<set $args[0].summary += "Hates men.">>
+	<<case "hates women">>
+		<<set $args[0].summary += "Hates women.">>
+	<<case "gluttonous">>
+		<<set $args[0].summary += "Stress eater.">>
+	<<case "anorexic">>
+		<<set $args[0].summary += "Anorexic.">>
+	<<case "devout">>
+		<<set $args[0].summary += "Devoutly religious.">>
+	<<case "liberated">>
+		<<set $args[0].summary += "Mentally liberated.">>
+	<<default>>
+		<<set $args[0].behavioralFlaw = "none">>
+	<</switch>>
+	<<set $args[0].summary += "@@ ">>
+	<<switch $args[0].sexualFlaw>>
+	<<case "hates oral">>
+		<<set $args[0].summary += "@@.red;Hates oral.@@ ">>
+	<<case "hates anal">>
+		<<set $args[0].summary += "@@.red;Hates anal.@@ ">>
+	<<case "hates penetration">>
+		<<set $args[0].summary += "@@.red;Hates penetration.@@ ">>
+	<<case "shamefast">>
+		<<set $args[0].summary += "@@.red;Shamefast.@@ ">>
+	<<case "idealistic">>
+		<<set $args[0].summary += "@@.red;Sexually idealistic.@@ ">>
+	<<case "repressed">>
+		<<set $args[0].summary += "@@.red;Sexually repressed.@@ ">>
+	<<case "apathetic">>
+		<<set $args[0].summary += "@@.red;Sexually apathetic.@@ ">>
+	<<case "crude">>
+		<<set $args[0].summary += "@@.red;Sexually crude.@@ ">>
+	<<case "judgemental">>
+		<<set $args[0].summary += "@@.red;Sexually judgemental.@@ ">>
+	<<case "cum addict">>
+		<<set $args[0].summary += "@@.yellow;Cum addict.@@ ">>
+	<<case "anal addict">>
+		<<set $args[0].summary += "@@.yellow;Anal addict.@@ ">>
+	<<case "attention whore">>
+		<<set $args[0].summary += "@@.yellow;Attention whore.@@ ">>
+	<<case "breast growth">>
+		<<set $args[0].summary += "@@.yellow;Breast obsession.@@ ">>
+	<<case "abusive">>
+		<<set $args[0].summary += "@@.yellow;Sexually abusive.@@ ">>
+	<<case "malicious">>
+		<<set $args[0].summary += "@@.yellow;Sexually malicious.@@ ">>
+	<<case "self hating">>
+		<<set $args[0].summary += "@@.yellow;Self hatred.@@ ">>
+	<<case "neglectful">>
+		<<set $args[0].summary += "@@.yellow;Self neglectful.@@ ">>
+	<<case "breeder">>
+		<<set $args[0].summary += "@@.yellow;Breeding obsession.@@ ">>
+	<<default>>
+		<<set $args[0].sexualFlaw = "none">>
+	<</switch>>
+	<<set $args[0].summary += "@@.green;">>
+	<<switch $args[0].behavioralQuirk>>
+	<<case "confident">>
+		<<set $args[0].summary += "Confident. ">>
+	<<case "cutting">>
+		<<set $args[0].summary += "Cutting. ">>
+	<<case "funny">>
+		<<set $args[0].summary += "Funny. ">>
+	<<case "fitness">>
+		<<set $args[0].summary += "Fitness. ">>
+	<<case "adores women">>
+		<<set $args[0].summary += "Adores women. ">>
+	<<case "adores men">>
+		<<set $args[0].summary += "Adores men. ">>
+	<<case "insecure">>
+		<<set $args[0].summary += "Insecure. ">>
+	<<case "sinful">>
+		<<set $args[0].summary += "Sinful. ">>
+	<<case "advocate">>
+		<<set $args[0].summary += "Advocate. ">>
+	<<default>>
+		<<set $args[0].behavioralQuirk = "none">>
+	<</switch>>
+	<<switch $args[0].sexualQuirk>>
+	<<case "gagfuck queen">>
+		<<set $args[0].summary += "Gagfuck queen.">>
+	<<case "painal queen">>
+		<<set $args[0].summary += "Painal queen.">>
+	<<case "strugglefuck queen">>
+		<<set $args[0].summary += "Strugglefuck queen.">>
+	<<case "tease">>
+		<<set $args[0].summary += "Tease.">>
+	<<case "romantic">>
+		<<set $args[0].summary += "Romantic.">>
+	<<case "perverted">>
+		<<set $args[0].summary += "Perverted.">>
+	<<case "caring">>
+		<<set $args[0].summary += "Caring.">>
+	<<case "unflinching">>
+		<<set $args[0].summary += "Unflinching.">>
+	<<case "size queen">>
+		<<set $args[0].summary += "Size queen.">>
+	<<default>>
+		<<set $args[0].sexualQuirk = "none">>
+	<</switch>>
+	<<set $args[0].summary += "@@ ">>
+<</if>>
+
+<<if $args[0].customLabel != "">><<set $args[0].summary += "''@@.yellow;$args[0].customLabel@@'' ">><</if>>
+
+/* - Line 4 - ******************************************************/
+<<if ($args[0].relationship != 0) || ($args[0].relation != 0) || ($abbreviateClothes == 2) || ($abbreviateRulesets == 2)>>
+	<<set $args[0].summary += _break>>
+<</if>>
+<<if $abbreviateMental == 1>>
+
+<<set $args[0].summary += "@@.lightgreen;">>
+
+<<if $args[0].relation != 0>>
+<<for _ssj = 0; _ssj < _SL; _ssj++>>
+	<<if $args[0].relationTarget == $slaves[_ssj].ID>>
+		<<set $args[0].summary += ""+$slaves[_ssj].slaveName>>
+		<<if $slaves[_ssj].slaveSurname>>
+			<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+		<</if>>
+		<<set $args[0].summary += "'s "+$args[0].relation>>
+		<<if $args[0].relationship <= 0>>
+			<<set $args[0].summary += "&nbsp;&nbsp;&nbsp;&nbsp;">>
+		<</if>>
+		<<break>>
+	<</if>>
+<</for>>
+<</if>>
+
+<<if $args[0].relationship > 0>>
+<<for _ssj = 0; _ssj < _SL; _ssj++>>
+	<<if $args[0].relationshipTarget == $slaves[_ssj].ID>>
+		<<if $args[0].relationshipTarget != $args[0].relationTarget>>
+			<<set $args[0].summary += $slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+			<<set $args[0].summary += "'s">>
+		<<else>>
+			<<set $args[0].summary += " &">>
+		<</if>>
+		<<switch $args[0].relationship>>
+		<<case 1>>
+			<<set $args[0].summary += " friend">>
+		<<case 2>>
+			<<set $args[0].summary += " BFF">>
+		<<case 3>>
+			<<set $args[0].summary += " FWB">>
+		<<case 4>>
+			<<set $args[0].summary += " lover">>
+		<<case 5>>
+			<<set $args[0].summary += " wife">>
+		<</switch>>
+		<<set $args[0].summary += "&nbsp;&nbsp;&nbsp;&nbsp;">>
+		<<break>>
+	<</if>>
+<</for>>
+
+<<elseif $args[0].relationship == -3>>
+	<<set $args[0].summary += "Your wife&nbsp;&nbsp;&nbsp;&nbsp;">>
+<<elseif $args[0].relationship == -2>>
+	<<set $args[0].summary += "E Bonded&nbsp;&nbsp;&nbsp;&nbsp;">>
+<<elseif $args[0].relationship == -1>>
+	<<set $args[0].summary += "E Slut&nbsp;&nbsp;&nbsp;&nbsp;">>
+<</if>>
+
+<<set $args[0].summary += "@@ ">>
+
+<<if $args[0].rivalry != 0>>
+<<for _ssj = 0; _ssj < _SL; _ssj++>>
+	<<if $args[0].rivalryTarget == $slaves[_ssj].ID>>
+		<<set $args[0].summary += "@@.lightsalmon;">>
+		<<if $args[0].rivalry <= 1>>
+			<<set $args[0].summary += "Disl "+$slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+		<<elseif $args[0].rivalry <= 2>>
+			<<set $args[0].summary += ""+$slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+			<<set $args[0].summary += "'s rival">>
+		<<else>>
+			<<set $args[0].summary += "Hates "+$slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+		<</if>>
+		<<set $args[0].summary += "&nbsp;&nbsp;&nbsp;&nbsp;@@ ">>
+		<<break>>
+	<</if>>
+<</for>>
+<</if>>
+
+<<elseif $abbreviateMental == 2>>
+
+<<if $args[0].relation != 0>>
+<<for _ssj = 0; _ssj < _SL; _ssj++>>
+	<<if $args[0].relationTarget == $slaves[_ssj].ID>>
+		<<set $args[0].summary += $slaves[_ssj].slaveName>>
+		<<if $slaves[_ssj].slaveSurname>>
+			<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+		<</if>>
+		<<set $args[0].summary += "'s ">>
+		<<if $args[0].relationshipTarget != $args[0].relationTarget>>
+			<<set $args[0].summary += "@@.lightgreen;"+$args[0].relation+"@@. ">>
+		<<else>>
+			<<set $args[0].summary += "@@.lightgreen;"+$args[0].relation+"@@ ">>
+		<</if>>
+		<<if $args[0].relationship <= 0>>
+			<<set $args[0].summary += "&nbsp;&nbsp;&nbsp;&nbsp;">>
+		<</if>>
+		<<break>>
+	<</if>>
+<</for>>
+<</if>>
+
+<<if $args[0].relationship > 0>>
+<<for _ssj = 0; _ssj < _SL; _ssj++>>
+	<<if $args[0].relationshipTarget == $slaves[_ssj].ID>>
+		<<if $args[0].relationshipTarget != $args[0].relationTarget>>
+			<<set $args[0].summary += $slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+			<<set $args[0].summary += "'s ">>
+		<<else>>
+			<<set $args[0].summary += " and ">>
+		<</if>>
+
+		<<switch $args[0].relationship>>
+		<<case 1>>
+			<<set $args[0].summary += "@@.lightgreen;friend.@@ ">>
+		<<case 2>>
+			<<set $args[0].summary += "@@.lightgreen;best friend.@@ ">>
+		<<case 3>>
+			<<set $args[0].summary += "@@.lightgreen;FWB.@@ ">>
+		<<case 4>>
+			<<set $args[0].summary += "@@.lightgreen;lover.@@ ">>
+		<<case 5>>
+			<<set $args[0].summary += "@@.lightgreen;slave wife.@@ ">>
+		<</switch>>
+		<<set $args[0].summary += "&nbsp;&nbsp;&nbsp;&nbsp;">>
+		<<break>>
+	<</if>>
+<</for>>
+
+<<elseif $args[0].relationship == -3>>
+	<<set $args[0].summary += "@@.lightgreen;Your wife.@@&nbsp;&nbsp;&nbsp;&nbsp;">>
+<<elseif $args[0].relationship == -2>>
+	<<set $args[0].summary += "@@.lightgreen;Emotionally bonded to you.@@&nbsp;&nbsp;&nbsp;&nbsp;">>
+<<elseif $args[0].relationship == -1>>
+	<<set $args[0].summary += "@@.lightgreen;Emotional slut.@@&nbsp;&nbsp;&nbsp;&nbsp;">>
+<</if>>
+
+<<if $args[0].rivalry != 0>>
+<<for _ssj = 0; _ssj < _SL; _ssj++>>
+	<<if $args[0].rivalryTarget == $slaves[_ssj].ID>>
+		<<if $args[0].rivalry <= 1>>
+			<<set $args[0].summary += "@@.lightsalmon;Dislikes@@ "+$slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+			<<set $args[0].summary += ".&nbsp;&nbsp;&nbsp;&nbsp;">>
+		<<elseif $args[0].rivalry <= 2>>
+			<<set $args[0].summary += $slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+			<<set $args[0].summary += "'s @@.lightsalmon;rival.@@&nbsp;&nbsp;&nbsp;&nbsp;">>
+		<<else>>
+			<<set $args[0].summary += "@@.lightsalmon;Hates@@ "+$slaves[_ssj].slaveName>>
+			<<if $slaves[_ssj].slaveSurname>>
+				<<set $args[0].summary += " "+$slaves[_ssj].slaveSurname>>
+			<</if>>
+			<<set $args[0].summary += ".&nbsp;&nbsp;&nbsp;&nbsp;">>
+		<</if>>
+		<<break>>
+	<</if>>
+<</for>>
+<</if>>
+
+<</if>>
+
+<<if $args[0].fuckdoll == 0>>
+<<if $abbreviateClothes == 2>>
+<<if $args[0].choosesOwnClothes == 1>>
+	<<set $args[0].summary += "Dressing herself. ">>
+<</if>>
+<<switch $args[0].clothes>>
+<<case "attractive lingerie">>
+	<<set $args[0].summary += "Lingerie. ">>
+<<case "a succubus outfit">>
+	<<set $args[0].summary += "Succubus outfit. ">>
+<<case "a string bikini">>
+	<<set $args[0].summary += "String bikini. ">>
+<<case "cutoffs and a t-shirt">>
+	<<set $args[0].summary += "Cutoffs, t-shirt. ">>
+<<case "a slutty outfit">>
+	<<set $args[0].summary += "Slutty outfit. ">>
+<<case "uncomfortable straps">>
+	<<set $args[0].summary += "Leather straps. ">>
+<<case "a fallen nuns habit">>
+	<<set $args[0].summary += "Slutty habit. ">>
+<<case "a chattel habit">>
+	<<set $args[0].summary += "Chattel habit. ">>
+<<case "a penitent nuns habit">>
+	<<set $args[0].summary += "Cilice. ">>
+<<case "slutty jewelry">>
+	<<set $args[0].summary += "Bangles. ">>
+<<case "harem gauze">>
+	<<set $args[0].summary += "Harem outfit. ">>
+<<case "a slave gown">>
+	<<set $args[0].summary += "Gown. ">>
+<<case "a halter top dress">>
+	<<set $args[0].summary += "Halter top dress. ">>
+<<case "a mini dress">>
+	<<set $args[0].summary += "Mini dress. ">>
+<<case "a ball gown">>
+	<<set $args[0].summary += "Ball gown. ">>
+<<case "slutty business attire">>
+	<<set $args[0].summary += "Slutty suit. ">>
+<<case "nice business attire">>
+	<<set $args[0].summary += "Nice suit. ">>
+<<case "a comfortable bodysuit">>
+	<<set $args[0].summary += "Bodysuit. ">>
+<<case "a military uniform">>
+	<<set $args[0].summary += "Military uniform. ">>
+<<case "a leotard">>
+	<<set $args[0].summary += "Leotard. ">>
+<<case "a bunny outfit">>
+	<<set $args[0].summary += "Bunny outfit. ">>
+<<case "a slutty maid outfit">>
+	<<set $args[0].summary += "Slutty maid. ">>
+<<case "a nice maid outfit">>
+	<<set $args[0].summary += "Nice maid. ">>
+<<case "a slutty nurse outfit">>
+	<<set $args[0].summary += "Slutty nurse. ">>
+<<case "a nice nurse outfit">>
+	<<set $args[0].summary += "Nice nurse. ">>
+<<case "a schoolgirl outfit">>
+	<<set $args[0].summary += "Schoolgirl outfit. ">>
+<<case "a kimono">>
+	<<set $args[0].summary += "Kimono. ">>
+<<case "a hijab and abaya">>
+	<<set $args[0].summary += "Hijab and abaya. ">>
+<<case "battledress">>
+	<<set $args[0].summary += "Battledress. ">>
+<<case "a latex catsuit">>
+	<<set $args[0].summary += "Nice latex. ">>
+<<case "restrictive latex">>
+	<<set $args[0].summary += "Bondage latex. ">>
+<<case "conservative clothing">>
+	<<set $args[0].summary += "Conservative clothing. ">>
+<<case "chains">>
+	<<set $args[0].summary += "Chains. ">>
+<<case "a cheerleader outfit">>
+	<<set $args[0].summary += "Cheerleader. ">>
+<<case "clubslut netting">>
+	<<set $args[0].summary += "Netting. ">>
+<<case "shibari ropes">>
+	<<set $args[0].summary += "Shibari. ">>
+<<case "Western clothing">>
+	<<set $args[0].summary += "Chaps. ">>
+<<case "body oil">>
+	<<set $args[0].summary += "Body oil. ">>
+<<case "a toga">>
+	<<set $args[0].summary += "Toga. ">>
+<<case "a huipil">>
+	<<set $args[0].summary += "Huipil. ">>
+<<case "a slutty qipao">>
+	<<set $args[0].summary += "Qipao. ">>
+<<default>>
+	<<set $args[0].summary += "Naked. ">>
+<</switch>>
+
+<<switch $args[0].collar>>
+<<case "uncomfortable leather">>
+	<<set $args[0].summary += "Leather collar. ">>
+<<case "tight steel">>
+	<<set $args[0].summary += "Steel collar. ">>
+<<case "cruel retirement counter">>
+	<<set $args[0].summary += "Cruel counter collar. ">>
+<<case "shock punishment">>
+	<<set $args[0].summary += "Shock collar. ">>
+<<case "dildo gag">>
+	<<set $args[0].summary += "Dildo gag. ">>
+<<case "neck corset">>
+	<<set $args[0].summary += "Neck corset. ">>
+<<case "stylish leather">>
+	<<set $args[0].summary += "Stylish leather collar. ">>
+<<case "satin choker">>
+	<<set $args[0].summary += "Satin choker. ">>
+<<case "heavy gold">>
+	<<set $args[0].summary += "Gold collar. ">>
+<<case "bowtie">>
+	<<set $args[0].summary += "Bowtie collar. ">>
+<<case "pretty jewelry">>
+	<<set $args[0].summary += "Pretty collar. ">>
+<<case "nice retirement counter">>
+	<<set $args[0].summary += "Nice counter collar. ">>
+<<case "leather with cowbell">>
+	<<set $args[0].summary += "Cowbell collar. ">>
+<<case "ancient Egyptian">>
+	<<set $args[0].summary += "Wesekh. ">>
+<<case "ball gag">>
+	<<set $args[0].summary += "Ball gag. ">>
+<<case "bit gag">>
+	<<set $args[0].summary += "Bit gag. ">>
+<</switch>>
+
+<<switch $args[0].bellyAccessory>>
+<<case "shapewear">>
+	<<set $args[0].summary += "Shapewear. ">>
+<<case "a small empathy belly">>
+	<<set $args[0].summary += "Small fake belly. ">>
+<<case "a medium empathy belly">>
+	<<set $args[0].summary += "Medium fake belly. ">>
+<<case "a large empathy belly">>
+	<<set $args[0].summary += "Large fake belly. ">>
+<<case "a huge empathy belly">>
+	<<set $args[0].summary += "Huge fake belly. ">>
+<<case "a corset">>
+	<<set $args[0].summary += "Corset. ">>
+<<case "an extreme corset">>
+	<<set $args[0].summary += "Extreme corsetage. ">>
+<</switch>>
+
+<<if canWalk($args[0])>>
+<<if $args[0].shoes == "heels">>
+	<<set $args[0].summary += "Heels. ">>
+<<elseif $args[0].shoes == "extreme heels">>
+	<<set $args[0].summary += "Extreme heels. ">>
+<<elseif $args[0].shoes == "boots">>
+	<<set $args[0].summary += "Boots. ">>
+<<elseif $args[0].heels == 1>>
+	<<set $args[0].summary += "@@.yellow;Crawling.@@ ">>
+<<elseif $args[0].shoes == "flats">>
+	<<set $args[0].summary += "Flats. ">>
+<</if>>
+<</if>>
+
+<<switch $args[0].vaginalAccessory>>
+<<case "chastity belt">>
+	<<set $args[0].summary += "Vaginal chastity. ">>
+<<case "combined chastity">>
+	<<set $args[0].summary += "Combined chastity. ">>
+<<case "anal chastity">>
+	<<set $args[0].summary += "Anal chastity. ">>
+<<case "dildo">>
+	<<set $args[0].summary += "Vaginal dildo. ">>
+<<case "large dildo">>
+	<<set $args[0].summary += "Large vaginal dildo. ">>
+<<case "huge dildo">>
+	<<set $args[0].summary += "Huge vaginal dildo. ">>
+<</switch>>
+<<if $args[0].dickAccessory == "chastity">>
+	<<set $args[0].summary += "Chastity cage. ">>
+<<elseif $args[0].dickAccessory == "combined chastity">>
+	<<set $args[0].summary += "Combined chastity. ">>
+<<elseif $args[0].dickAccessory == "anal chastity">>
+	<<set $args[0].summary += "Anal chastity. ">>
+<</if>>
+<<switch $args[0].buttplug>>
+<<case "plug">>
+	<<set $args[0].summary += "Buttplug. ">>
+<<case "large plug">>
+	<<set $args[0].summary += "Large buttplug. ">>
+<<case "huge plug">>
+	<<set $args[0].summary += "Huge buttplug. ">>
+<<case "long plug">>
+	<<set $args[0].summary += "Long buttplug. ">>
+<<case "long, large plug">>
+	<<set $args[0].summary += "Large, long buttplug. ">>
+<<case "long, huge plug">>
+	<<set $args[0].summary += "Enormous buttplug. ">>
+<</switch>>
+<<switch $args[0].buttplugAttachment>>
+<<case "tail">>
+	<<set $args[0].summary += "Attached tail. ">>
+<</switch>>
+<</if>>
+<</if>>
+
+<<set $args[0].summary += "&nbsp;&nbsp;&nbsp;&nbsp;">>
+<<if $args[0].useRulesAssistant == 0>>
+	<<set $args[0].summary += "@@.lightgreen;RA-Exempt@@ ">>
+<<elseif $abbreviateRulesets == 2 && (def $args[0].currentRules) && ($args[0].currentRules.length > 0)>>
+	<<for _s = 0; _s < $defaultRules.length; _s++>>
+		<<set _currentRule = $defaultRules[_s], _num = (_s+1)>>
+		<<if ruleApplied($args[0], _currentRule.ID)>>
+			<<set $args[0].summary += "Rule "+_num+" ("+_currentRule.name+"). ">>
+		<</if>>
+	<</for>>
+<</if>>
+
+<</widget>>

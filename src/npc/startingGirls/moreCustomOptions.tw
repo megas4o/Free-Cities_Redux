@@ -1,0 +1,60 @@
+:: More customization options [nobr]
+
+<<set $activeSlave.pubicHColor = $activeSlave.hColor>>
+<<set $activeSlave.origHColor = $activeSlave.hColor>>
+<<set $activeSlave.origEye = $activeSlave.eyeColor>>
+
+''Birth name:'' <<textbox "$activeSlave.birthName" $activeSlave.birthName "More customization options">>
+| ''Slave name:'' <<textbox "$activeSlave.slaveName" $activeSlave.slaveName "More customization options">>
+<br>''Birth surname:'' <<textbox "$activeSlave.birthSurname" $activeSlave.birthSurname "More customization options">>
+| ''Slave surname:'' <<textbox "$activeSlave.slaveSurname" $activeSlave.slaveSurname "More customization options">>
+<br>''Career:'' <<textbox "$activeSlave.career" $activeSlave.career "More customization options">>
+<br>''Nationality:'' <<textbox "$activeSlave.nationality" $activeSlave.nationality "More customization options">> //This will not alter name or race.//
+<br>''Ethnicity:'' <<textbox "$activeSlave.race" $activeSlave.race "More customization options">> //This will not apply phenotypes.//
+<br>''Hair color:'' <<textbox "$activeSlave.hColor" $activeSlave.hColor "More customization options">> //This will also set pubic and underarm hair color.//
+<br>''Eye color:'' <<textbox "$activeSlave.eyeColor" $activeSlave.eyeColor "More customization options">>
+<br>Custom tattoo: <<textbox "$activeSlave.customTat" $activeSlave.customTat "More customization options">>  //Use complete, capitalized and punctuated sentences.//
+<br>Custom origin story: <<textbox "$activeSlave.origin" $activeSlave.origin "More customization options">> //Use complete, capitalized and punctuated sentences.//
+<<if $activeSlave.prestige>>
+	<br>Reason for prestigiousness: <<textbox "$activeSlave.prestigeDesc" $activeSlave.prestigeDesc>> //Use complete, capitalized and punctuated sentences.//
+<</if>>
+<br>Custom description: <<textbox "$activeSlave.customDesc" $activeSlave.customDesc "More customization options">> //Use complete, capitalized and punctuated sentences.//
+<br>Custom label: <<textbox "$activeSlave.customLabel" $activeSlave.customLabel "More customization options">> //Use a short phrase.//
+
+<br><br>
+
+''Natural skin distinctiveness:'' $activeSlave.markings.
+[[None|More customization options][$activeSlave.markings = "none"]]
+| [[Freckles|More customization options][$activeSlave.markings = "freckles"]]
+| [[Heavily freckled|More customization options][$activeSlave.markings = "heavily freckled"]]
+| [[Beauty mark|More customization options][$activeSlave.markings = "beauty mark"]]
+| [[Birthmark|More customization options][$activeSlave.markings = "birthmark"]]
+
+<<if $activeSlave.anus > 0>>
+<br><br>
+''External appearance of anus:''
+<<if $activeSlave.analArea <= $activeSlave.anus>>
+	Recently stretched to current size.
+<<elseif $activeSlave.analArea - $activeSlave.anus == 1>>
+	Used to current size.
+<<else>>
+	Very broad.
+<</if>>
+[[Recently stretched|More customization options][$activeSlave.analArea = $activeSlave.anus]]
+| [[Used to current size|More customization options][$activeSlave.analArea = $activeSlave.anus+1]]
+| [[Very broad|More customization options][$activeSlave.analArea = $activeSlave.anus+2]]
+<</if>>
+
+<br><br>
+
+''Natural breast shape:'' $activeSlave.boobShape.
+[[Normal|More customization options][$activeSlave.boobShape = "normal"]]
+| [[Perky|More customization options][$activeSlave.boobShape = "perky"]]
+| [[Torpedo-shaped|More customization options][$activeSlave.boobShape = "torpedo-shaped"]]
+| [[Wide-set|More customization options][$activeSlave.boobShape = "wide-set"]]
+| [[Downward-facing|More customization options][$activeSlave.boobShape = "downward-facing"]]
+| [[Saggy|More customization options][$activeSlave.boobShape = "saggy"]]
+
+<br><br>
+
+[[Continue|Starting Girls]]

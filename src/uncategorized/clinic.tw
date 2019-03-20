@@ -1,0 +1,88 @@
+:: Clinic [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Clinic", $showEncyclopedia = 1, $encyclopedia = "Clinic", $clinicSlaves = $CliniciIDs.length>>
+
+<<if $clinicName != "the Clinic">>
+	<<set $clinicNameCaps = $clinicName.replace("the ", "The ")>>
+<</if>>
+
+<<clinicDescriptionFS>>
+
+<<if $clinicSlaves > 2>>
+	$clinicNameCaps is busy. Patients occupy many of the beds; most are alert, but a few are dozing under medication designed to promote healing through deep rest.
+<<elseif $clinicSlaves > 0>>
+	$clinicNameCaps is sparsely populated. Patients occupy a few of the beds; most are alert, but a few are dozing under medication designed to promote healing through deep rest.
+<<elseif $Nurse != 0>>
+	$Nurse.slaveName is alone in the clinic, and has nothing to do but keep the place spotlessly clean and ready for its next patients.
+<<else>>
+	$clinicNameCaps is empty and quiet. [[Decommission the Clinic|Main][$clinic = 0, $clinicDecoration = "standard", $clinicUpgradeScanner = 0, $clinicUpgradeFilters = 0]]
+<</if>>
+
+<<set _Tmult0 = Math.trunc($clinic*1000*$upgradeMultiplierArcology)>>
+<br>$clinicNameCaps has room to support $clinic slaves while they receive treatment.
+[[Expand the clinic|Clinic][$cash -= _Tmult0, $clinic += 5]] //Costs ¤_Tmult0//
+
+<br>
+<<if $clinicUpgradeScanner == 1>>
+	$clinicNameCaps's scanners have been upgraded with a sampling system that can estimate carcinogenic damage to a slave's genome.
+<<else>>
+	<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+	It mounts powerful medical scanning technology. [[Upgrade the scanners to help detect genomic damage|Clinic][$cash -= _Tmult1, $clinicUpgradeScanner = 1]] //Costs ¤_Tmult1//
+<</if>>
+
+<br>
+<<if $clinicUpgradeFilters == 1>>
+	The entire floor beneath $clinicName is occupied by a huge filtration plant that constantly cycles out the patients' blood to remove impurities.
+	<<if $Nurse == 0>>
+		<br>However, without a nurse in attendance, the blood treatment equipment remains idle.
+	<</if>>
+<<else>>
+	<<set _Tmult2 = Math.trunc(50000*$upgradeMultiplierArcology)>>
+	It includes standard dialysis equipment. [[Install advanced blood treatment equipment to help address drug side effects|Clinic][$cash -= _Tmult2, $clinicUpgradeFilters = 1]] //Costs ¤_Tmult2//
+<</if>>
+
+<br><br>
+<<if $Nurse != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<<else>>
+	You do not have a slave serving as a clinical Nurse. [[Appoint one|Nurse Select]]
+<</if>>
+
+<br><br>
+<<if ($clinic <= $clinicSlaves)>>
+	''$clinicNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $clinicSlaves)>>
+	<<link "''Send a slave to get treatment in $clinicName''">>
+		<<set $leaveClinic = 0>>
+		<<replace #clinicComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+<<if $clinicSlaves > 0>>
+	| <<link "''Take a slave out of the clinic''">>
+		<<set $leaveClinic = 1>>
+		<<replace #clinicComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//The clinic is empty for the moment.<br>//
+<</if>>
+
+<span id="clinicComingGoing">
+<<if $leaveClinic == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<<unset $Flag>>
+
+<br><br>Rename $clinicName: <<textbox "$clinicName" $clinicName "Clinic">> //Use a noun or similar short phrase//

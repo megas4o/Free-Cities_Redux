@@ -1,0 +1,286 @@
+:: Arcology Opinion [nobr]
+
+<<if ndef $activeArcology.FSNull>><<set $activeArcology.FSNull = "unset">><</if>>
+<<if ndef $targetArcology.FSNull>><<set $targetArcology.FSNull = "unset">><</if>>
+
+<<set $opinion = 0>>
+
+<<if $activeArcology.FSSubjugationist != "unset">>
+	<<if $targetArcology.FSSubjugationist != "unset">>
+	<<if $targetArcology.FSSubjugationistRace == $activeArcology.FSSubjugationistRace>>
+		<<set $opinion += $activeArcology.FSSubjugationist>>
+		<<set $opinion += $targetArcology.FSSubjugationist>>
+	<<else>>
+		<<set $opinion -= $activeArcology.FSSubjugationist>>
+		<<set $opinion -= $targetArcology.FSSubjugationist>>
+	<</if>>
+	<<elseif $targetArcology.FSSupremacist != "unset">>
+	<<if $targetArcology.FSSupremacistRace == $activeArcology.FSSubjugationistRace>>
+		<<set $opinion -= $activeArcology.FSSubjugationist>>
+		<<set $opinion -= $targetArcology.FSSupremacist>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSSupremacist != "unset">>
+	<<if $targetArcology.FSSupremacist != "unset">>
+	<<if $targetArcology.FSSupremacistRace == $activeArcology.FSSupremacistRace>>
+		<<set $opinion += $activeArcology.FSSupremacist>>
+		<<set $opinion += $targetArcology.FSSupremacist>>
+	<<else>>
+		<<set $opinion -= $activeArcology.FSSupremacist>>
+		<<set $opinion -= $targetArcology.FSSupremacist>>
+	<</if>>
+	<<elseif $targetArcology.FSSubjugationist != "unset">>
+	<<if $targetArcology.FSSubjugationistRace == $activeArcology.FSSupremacistRace>>
+		<<set $opinion -= $activeArcology.FSSupremacist>>
+		<<set $opinion -= $targetArcology.FSSubjugationist>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSGenderRadicalist != "unset">>
+	<<if $targetArcology.FSGenderRadicalist != "unset">>
+	<<set $opinion += $activeArcology.FSGenderRadicalist>>
+	<<set $opinion += $targetArcology.FSGenderRadicalist>>
+	<<elseif $targetArcology.FSGenderFundamentalist != "unset">>
+	<<set $opinion -= $activeArcology.FSGenderRadicalist>>
+	<<set $opinion -= $targetArcology.FSGenderFundamentalist>>
+	<</if>>
+<<elseif $activeArcology.FSGenderFundamentalist != "unset">>
+	<<if $targetArcology.FSGenderFundamentalist != "unset">>
+	<<set $opinion += $activeArcology.FSGenderFundamentalist>>
+	<<set $opinion += $targetArcology.FSGenderFundamentalist>>
+	<<elseif $targetArcology.FSGenderRadicalist != "unset">>
+	<<set $opinion -= $activeArcology.FSGenderFundamentalist>>
+	<<set $opinion -= $targetArcology.FSGenderRadicalist>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSPaternalist != "unset">>
+	<<if $targetArcology.FSPaternalist != "unset">>
+	<<set $opinion += $activeArcology.FSPaternalist>>
+	<<set $opinion += $targetArcology.FSPaternalist>>
+	<<elseif $targetArcology.FSDegradationist != "unset">>
+	<<set $opinion -= $activeArcology.FSPaternalist>>
+	<<set $opinion -= $targetArcology.FSDegradationist>>
+	<</if>>
+<<elseif $activeArcology.FSDegradationist != "unset">>
+	<<if $targetArcology.FSDegradationist != "unset">>
+	<<set $opinion += $activeArcology.FSDegradationist>>
+	<<set $opinion += $targetArcology.FSDegradationist>>
+	<<elseif $targetArcology.FSPaternalist != "unset">>
+	<<set $opinion -= $activeArcology.FSDegradationist>>
+	<<set $opinion -= $targetArcology.FSPaternalist>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSBodyPurist != "unset">>
+	<<if $targetArcology.FSBodyPurist != "unset">>
+	<<set $opinion += $activeArcology.FSBodyPurist>>
+	<<set $opinion += $targetArcology.FSBodyPurist>>
+	<<elseif $targetArcology.FSTransformationFetishist != "unset">>
+	<<set $opinion -= $activeArcology.FSBodyPurist>>
+	<<set $opinion -= $targetArcology.FSTransformationFetishist>>
+	<</if>>
+<<elseif $activeArcology.FSTransformationFetishist != "unset">>
+	<<if $targetArcology.FSTransformationFetishist != "unset">>
+	<<set $opinion += $activeArcology.FSTransformationFetishist>>
+	<<set $opinion += $targetArcology.FSTransformationFetishist>>
+	<<elseif $targetArcology.FSBodyPurist != "unset">>
+	<<set $opinion -= $activeArcology.FSTransformationFetishist>>
+	<<set $opinion -= $targetArcology.FSBodyPurist>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSYouthPreferentialist != "unset">>
+	<<if $targetArcology.FSYouthPreferentialist != "unset">>
+	<<set $opinion += $activeArcology.FSYouthPreferentialist>>
+	<<set $opinion += $targetArcology.FSYouthPreferentialist>>
+	<<elseif $targetArcology.FSMaturityPreferentialist != "unset">>
+	<<set $opinion -= $activeArcology.FSYouthPreferentialist>>
+	<<set $opinion -= $targetArcology.FSMaturityPreferentialist>>
+	<</if>>
+<<elseif $activeArcology.FSMaturityPreferentialist != "unset">>
+	<<if $targetArcology.FSMaturityPreferentialist != "unset">>
+	<<set $opinion += $activeArcology.FSMaturityPreferentialist>>
+	<<set $opinion += $targetArcology.FSMaturityPreferentialist>>
+	<<elseif $targetArcology.FSYouthPreferentialist != "unset">>
+	<<set $opinion -= $activeArcology.FSMaturityPreferentialist>>
+	<<set $opinion -= $targetArcology.FSYouthPreferentialist>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSSlimnessEnthusiast != "unset">>
+	<<if $targetArcology.FSSlimnessEnthusiast != "unset">>
+	<<set $opinion += $activeArcology.FSSlimnessEnthusiast>>
+	<<set $opinion += $targetArcology.FSSlimnessEnthusiast>>
+	<<elseif $targetArcology.FSAssetExpansionist != "unset">>
+	<<set $opinion -= $activeArcology.FSSlimnessEnthusiast>>
+	<<set $opinion -= $targetArcology.FSAssetExpansionist>>
+	<</if>>
+<<elseif $activeArcology.FSAssetExpansionist != "unset">>
+	<<if $targetArcology.FSAssetExpansionist != "unset">>
+	<<set $opinion += $activeArcology.FSAssetExpansionist>>
+	<<set $opinion += $targetArcology.FSAssetExpansionist>>
+	<<elseif $targetArcology.FSSlimnessEnthusiast != "unset">>
+	<<set $opinion -= $activeArcology.FSAssetExpansionist>>
+	<<set $opinion -= $targetArcology.FSSlimnessEnthusiast>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSPastoralist != "unset">>
+	<<if $targetArcology.FSPastoralist != "unset">>
+	<<set $opinion += $activeArcology.FSPastoralist>>
+	<<set $opinion += $targetArcology.FSPastoralist>>
+	<<elseif $targetArcology.FSPhysicalIdealist != "unset">>
+	<<set $opinion -= $activeArcology.FSPastoralist>>
+	<<set $opinion -= $targetArcology.FSPhysicalIdealist>>
+	<</if>>
+<<elseif $activeArcology.FSPhysicalIdealist != "unset">>
+	<<if $targetArcology.FSPhysicalIdealist != "unset">>
+	<<set $opinion += $activeArcology.FSPhysicalIdealist>>
+	<<set $opinion += $targetArcology.FSPhysicalIdealist>>
+	<<elseif $targetArcology.FSPastoralist != "unset">>
+	<<set $opinion -= $activeArcology.FSPhysicalIdealist>>
+	<<set $opinion -= $targetArcology.FSPastoralist>>
+	<</if>>
+<</if>>
+<<if $activeArcology.FSChattelReligionist != "unset">>
+	<<if $targetArcology.FSChattelReligionist != "unset">>
+	<<set $opinion += $activeArcology.FSChattelReligionist>>
+	<<set $opinion += $targetArcology.FSChattelReligionist>>
+	<<elseif $targetArcology.FSNull != "unset">>
+	<<set $opinion -= $activeArcology.FSChattelReligionist>>
+	<<set $opinion -= $targetArcology.FSNull>>
+	<</if>>
+<<elseif $activeArcology.FSNull != "unset">>
+  <<if $targetArcology.FSNull != "unset">>
+	<<set $opinion += $activeArcology.FSNull>>
+	<<set $opinion += $targetArcology.FSNull>>
+  <<elseif $targetArcology.FSChattelReligionist != "unset">>
+	<<set $opinion -= $activeArcology.FSNull>>
+	<<set $opinion -= $targetArcology.FSChattelReligionist>>
+  <<else>>
+	<<set $opinion += $activeArcology.FSNull>>
+  <</if>>
+<<elseif $targetArcology.FSNull != "unset">>
+  <<set $opinion += $targetArcology.FSNull>>
+<</if>>
+<<if $activeArcology.FSRomanRevivalist != "unset">>
+	<<if $targetArcology.FSRomanRevivalist != "unset">>
+	<<set $opinion += $activeArcology.FSRomanRevivalist>>
+	<<set $opinion += $targetArcology.FSRomanRevivalist>>
+	<<elseif $targetArcology.FSAztecRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSRomanRevivalist>>
+	<<set $opinion -= $targetArcology.FSAztecRevivalist>>
+	<<elseif $targetArcology.FSEgyptianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSRomanRevivalist>>
+	<<set $opinion -= $targetArcology.FSEgyptianRevivalist>>
+	<<elseif $targetArcology.FSEdoRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSRomanRevivalist>>
+	<<set $opinion -= $targetArcology.FSEdoRevivalist>>
+	<<elseif $targetArcology.FSArabianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSRomanRevivalist>>
+	<<set $opinion -= $targetArcology.FSArabianRevivalist>>
+	<<elseif $targetArcology.FSChineseRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSRomanRevivalist>>
+	<<set $opinion -= $targetArcology.FSChineseRevivalist>>
+	<</if>>
+<<elseif $activeArcology.FSAztecRevivalist != "unset">>
+	<<if $targetArcology.FSAztecRevivalist != "unset">>
+	<<set $opinion += $activeArcology.FSAztecRevivalist>>
+	<<set $opinion += $targetArcology.FSAztecRevivalist>>
+	<<elseif $targetArcology.FSRomanRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSAztecRevivalist>>
+	<<set $opinion -= $targetArcology.FSRomanRevivalist>>
+	<<elseif $targetArcology.FSEgyptianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSAztecRevivalist>>
+	<<set $opinion -= $targetArcology.FSEgyptianRevivalist>>
+	<<elseif $targetArcology.FSEdoRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSAztecRevivalist>>
+	<<set $opinion -= $targetArcology.FSEdoRevivalist>>
+	<<elseif $targetArcology.FSArabianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSAztecRevivalist>>
+	<<set $opinion -= $targetArcology.FSArabianRevivalist>>
+	<<elseif $targetArcology.FSChineseRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSAztecRevivalist>>
+	<<set $opinion -= $targetArcology.FSChineseRevivalist>>
+	<</if>>
+<<elseif $activeArcology.FSEgyptianRevivalist != "unset">>
+	<<if $targetArcology.FSEgyptianRevivalist != "unset">>
+	<<set $opinion += $activeArcology.FSEgyptianRevivalist>>
+	<<set $opinion += $targetArcology.FSEgyptianRevivalist>>
+	<<elseif $targetArcology.FSRomanRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEgyptianRevivalist>>
+	<<set $opinion -= $targetArcology.FSRomanRevivalist>>
+	<<elseif $targetArcology.FSAztecRevivalist != "unset">>
+  <<set $opinion -= $activeArcology.FSEgyptianRevivalist>>
+  <<set $opinion -= $targetArcology.FSAztecRevivalist>>
+	<<elseif $targetArcology.FSEdoRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEgyptianRevivalist>>
+	<<set $opinion -= $targetArcology.FSEdoRevivalist>>
+	<<elseif $targetArcology.FSArabianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEgyptianRevivalist>>
+	<<set $opinion -= $targetArcology.FSArabianRevivalist>>
+	<<elseif $targetArcology.FSChineseRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEgyptianRevivalist>>
+	<<set $opinion -= $targetArcology.FSChineseRevivalist>>
+	<</if>>
+<<elseif $activeArcology.FSEdoRevivalist != "unset">>
+	<<if $targetArcology.FSEdoRevivalist != "unset">>
+	<<set $opinion += $activeArcology.FSEdoRevivalist>>
+	<<set $opinion += $targetArcology.FSEdoRevivalist>>
+	<<elseif $targetArcology.FSEgyptianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEdoRevivalist>>
+	<<set $opinion -= $targetArcology.FSEgyptianRevivalist>>
+	<<elseif $targetArcology.FSRomanRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEdoRevivalist>>
+	<<set $opinion -= $targetArcology.FSRomanRevivalist>>
+	<<elseif $targetArcology.FSAztecRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEdoRevivalist>>
+	<<set $opinion -= $targetArcology.FSAztecRevivalist>>
+	<<elseif $targetArcology.FSArabianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEdoRevivalist>>
+	<<set $opinion -= $targetArcology.FSArabianRevivalist>>
+	<<elseif $targetArcology.FSChineseRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSEdoRevivalist>>
+	<<set $opinion -= $targetArcology.FSChineseRevivalist>>
+	<</if>>
+<<elseif $activeArcology.FSArabianRevivalist != "unset">>
+	<<if $targetArcology.FSArabianRevivalist != "unset">>
+	<<set $opinion += $activeArcology.FSArabianRevivalist>>
+	<<set $opinion += $targetArcology.FSArabianRevivalist>>
+	<<elseif $targetArcology.FSEgyptianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSArabianRevivalist>>
+	<<set $opinion -= $targetArcology.FSEgyptianRevivalist>>
+	<<elseif $targetArcology.FSEdoRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSArabianRevivalist>>
+	<<set $opinion -= $targetArcology.FSEdoRevivalist>>
+	<<elseif $targetArcology.FSRomanRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSArabianRevivalist>>
+	<<set $opinion -= $targetArcology.FSRomanRevivalist>>
+	<<elseif $targetArcology.FSAztecRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSArabianRevivalist>>
+	<<set $opinion -= $targetArcology.FSAztecRevivalist>>
+	<<elseif $targetArcology.FSChineseRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSArabianRevivalist>>
+	<<set $opinion -= $targetArcology.FSChineseRevivalist>>
+	<</if>>
+<<elseif $activeArcology.FSChineseRevivalist != "unset">>
+	<<if $targetArcology.FSChineseRevivalist != "unset">>
+	<<set $opinion += $activeArcology.FSChineseRevivalist>>
+	<<set $opinion += $targetArcology.FSChineseRevivalist>>
+	<<elseif $targetArcology.FSEgyptianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSChineseRevivalist>>
+	<<set $opinion -= $targetArcology.FSEgyptianRevivalist>>
+	<<elseif $targetArcology.FSEdoRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSChineseRevivalist>>
+	<<set $opinion -= $targetArcology.FSEdoRevivalist>>
+	<<elseif $targetArcology.FSArabianRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSChineseRevivalist>>
+	<<set $opinion -= $targetArcology.FSArabianRevivalist>>
+	<<elseif $targetArcology.FSRomanRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSChineseRevivalist>>
+	<<set $opinion -= $targetArcology.FSRomanRevivalist>>
+	<<elseif $targetArcology.FSAztecRevivalist != "unset">>
+	<<set $opinion -= $activeArcology.FSChineseRevivalist>>
+	<<set $opinion -= $targetArcology.FSAztecRevivalist>>
+	<</if>>
+<</if>>
+
+<<set $activeArcology = 0>>
+<<set $targetArcology = 0>>

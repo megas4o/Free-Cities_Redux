@@ -1,0 +1,61 @@
+:: Art_Vector_Arm_ [nobr]
+
+/* Arms position switch courtesy of Nov-X */
+
+<<if $args[0].amp != 1>>
+	<<if $args[0].devotion > 50>>
+		<<set _leftArmType = "High">>
+		<<set _rightArmType = "High">>
+	<<elseif $args[0].trust >= -20>>
+		<<if $args[0].devotion < -20>>
+			<<set _leftArmType = "Rebel">>
+			<<set _rightArmType = "Low">>
+		<<elseif $args[0].devotion <= 20>>
+			<<set _leftArmType = "Low">>
+			<<set _rightArmType = "Low">>
+		<<else>>
+			<<set _leftArmType = "Mid">>
+			<<set _rightArmType = "High">>
+		<</if>>
+	<<else>>
+		<<set _leftArmType = "Mid">>
+		<<set _rightArmType = "Mid">>
+	<</if>>
+	
+	<<set _art = "Art_Vector_Arm_Right_"+_rightArmType >>
+	<<include _art>>
+	<<set _art = "Art_Vector_Arm_Left_"+_leftArmType >>
+	<<include _art>>
+	
+	/* shiny clothings */
+	<<if $seeVectorArtHighlights == 1>>
+		<<if _artSlave.fuckdoll != 0 || _artSlave.clothes == "restrictive latex" || _artSlave.clothes == "a latex catsuit" || _artSlave.clothes == "body oil">>
+			/* only some arm positions have art (feel free to add more) */
+			<<switch _leftArmType>>
+			<<case "High">>
+				<<include Art_Vector_Arm_Outfit_Shine_Left_High>>
+			<<case "Mid">>
+			<<include Art_Vector_Arm_Outfit_Shine_Left_Mid>>
+			<<case "Low">>
+				<<include Art_Vector_Arm_Outfit_Shine_Left_Low>>
+			<<default>>
+				/* no art for this arm position */
+			<</switch>>
+		<</if>>
+	<</if>>
+<</if>>
+<<if $seeVectorArtHighlights == 1>>
+	<<if _artSlave.fuckdoll != 0 || _artSlave.clothes == "a slave gown">>
+		/* only some arm positions have art (feel free to add more) */
+		<<switch _leftArmType>>
+		<<case "High">>
+			<<include Art_Vector_Arm_Outfit_Slavegown_Left_High>>
+		<<case "Mid">>
+		<<include Art_Vector_Arm_Outfit_Slavegown_Left_Mid>>
+		<<case "Low">>
+			<<include Art_Vector_Arm_Outfit_Slavegown_Left_Low>>
+		<<default>>
+			/* no art for this arm position */
+		<</switch>>
+	<</if>>
+<</if>>

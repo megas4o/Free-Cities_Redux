@@ -1,0 +1,21 @@
+:: Art_Vector_Set_Colour_Outfit_
+
+/* BEWARE: _outfitBaseColour is used by Art_Vector_Set_Colour_Skin_ */
+/* BEWARE: _outfitBaseColour is read by Wardrobe Use */
+
+<<unset _outfitBaseColour>>
+
+<<if _artSlave.fuckdoll != 0 || _artSlave.clothes == "restrictive latex" ||  _artSlave.clothes == "a latex catsuit">>
+  <<set _outfitBaseColour = "#515351" >> /* standard "black rubber" latex colour */
+  <<if def _artSlave.clothingBaseColor>>
+    <<set _outfitBaseColour = _artSlave.clothingBaseColor >> /* latex colour selected by user */
+    /* TODO: rewrite all textual descriptions not to explicitly mention the latex being of black colour. */
+	<</if>>
+<</if>>
+<<if _artSlave.fuckdoll != 0 || _artSlave.clothes == "a comfortable bodysuit">>
+  <<set _outfitBaseColour = "#464646" >> /* bodysuit */
+  <<if def _artSlave.clothingBaseColor>>
+    <<set _outfitBaseColour = _artSlave.clothingBaseColor >> /* bodysuit colour selected by user */
+	<</if>>
+<</if>>
+

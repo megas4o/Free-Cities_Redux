@@ -1,0 +1,235 @@
+:: SA work a glory hole [nobr]
+
+<<if $arcologies[0].FSDegradationist != "unset">>
+	<<set $beauty = random(80,100)+(20*(4-$slaves[$i].anus))+(10*(4-$slaves[$i].vagina))+Math.trunc($arcologies[0].FSDegradationist/2)>>
+<<else>>
+	<<set $beauty = random(80,100)+(20*(4-$slaves[$i].anus))+(10*(4-$slaves[$i].vagina))>>
+<</if>>
+<<if $arcologies[0].FSDegradationistLaw == 1>>
+	<<set $beauty = Math.trunc($beauty*1.5)>>
+<<elseif $ACitizens > $ASlaves*2>>
+	<<set $beauty = Math.trunc($beauty*1.1)>>
+<<elseif $ACitizens > $ASlaves>>
+	<<set $beauty = Math.trunc($beauty*1)>>
+<<elseif $ACitizens > $ASlaves*0.5>>
+	<<set $beauty = Math.trunc($beauty*0.95)>>
+<<elseif $ACitizens > $ASlaves*0.25>>
+	<<set $beauty = Math.trunc($beauty*0.9)>>
+<<else>>
+	<<set $beauty = Math.trunc($beauty*0.85)>>
+<</if>>
+<<if $beauty < 10>>
+	<<set $beauty = 10>>
+<</if>>
+<<if $ACitizens > $ASlaves*0.5>>
+	<<set $FResult = 3>>
+<<elseif $ACitizens > $ASlaves*0.25>>
+	<<set $FResult = 2>>
+<<else>>
+	<<set $FResult = 1>>
+<</if>>
+
+<<if ($slaves[$i].assignment == "be confined in the arcade") && ($arcadeUpgradeInjectors == 1)>>
+	<<set $FResult += 1>>
+<</if>>
+
+is <<if $slaves[$i].fuckdoll == 0>>restrained in a glory hole<<else>>set out for use<</if>>. $beauty customers (<<print Math.trunc($beauty/7)>> a day) paid ¤$FResult to use $possessive holes.
+
+<<if ($arcologies[0].FSDegradationist > 0)>>
+	Demand for $possessive holes is strong due to the appetite for degradation rampant in $arcologies[0].name.
+<</if>>
+
+<<if ($slaves[$i].assignment == "be confined in the arcade") && ($arcadeUpgradeCollectors > 0)>>
+	The steady stream of drugs from the upgraded arcade protects $possessive health from the stress of being used as a sexual appliance.
+<<elseif ($slaves[$i].curatives > 0)>>
+	The drugs $pronoun's on protect $possessive health from the stress of being used as a sexual appliance.
+<<elseif ($slaves[$i].health < -50)>>
+	The stress of being used while very ill @@.red;damaged $possessive health.@@
+	<<set $slaves[$i].health -= 10>>
+<<elseif ($slaves[$i].health < -10)>>
+	<<if (random(1,100) > 10)>>
+		The stress of being used while weak has @@.red;damaged $possessive health.@@
+		<<set $slaves[$i].health -= 10>>
+	<</if>>
+<<elseif ($slaves[$i].vagina == -1)>>
+	<<if (random(1,100) > 70)>>
+		The stress of being used in only two holes has @@.red;damaged $possessive health.@@
+		<<set $slaves[$i].health -= 10>>
+	<</if>>
+<<elseif (random(1,100) > 25)>>
+	The stress of being used has @@.red;damaged $possessive health.@@
+	<<set $slaves[$i].health -= 10>>
+<</if>>
+
+<<if ($slaves[$i].vagina == 0) && canDoVaginal($slaves[$i])>>
+	A <<if $slaves[$i].fuckdoll == 0>>glory hole <</if>>user takes $possessive virginity. He does not notice or care. @@.lime;$possessiveCap pussy has been broken in@@ in a @@.gold;painful@@ and @@.mediumorchid;degrading@@ way.
+	<<set $slaves[$i].devotion -= 10, $slaves[$i].trust -= 10, $slaves[$i].vagina = 1>>
+<<elseif ($slaves[$i].vagina < 3) && (canDoVaginal($slaves[$i])) && (random(1,100) > ((170-$beauty)+($slaves[$i].vagina*10)))>>
+	@@.lime;$possessiveCap pussy gets stretched out by the use.@@
+	<<set $slaves[$i].vagina += 1>>
+<</if>>
+
+<<if ($slaves[$i].anus == 0) && canDoAnal($slaves[$i])>>
+	$possessiveCap anal virginity goes to a <<if $slaves[$i].fuckdoll == 0>>glory hole <</if>>user, who doesn't understand why this particular run at <<if $slaves[$i].fuckdoll == 0>>the glory hole<<else>>a Fuckdoll<</if>> is so great. @@.lime;$possessiveCap ass has been broken in@@ in a @@.gold;painful@@ and @@.mediumorchid;degrading@@ way.
+	<<set $slaves[$i].devotion -= 5, $slaves[$i].trust -= 5, $slaves[$i].anus = 1>>
+<<elseif ($slaves[$i].anus < 3) && canDoAnal($slaves[$i]) && (random(1,100) > ((150-$beauty)+($slaves[$i].anus*10)))>>
+	@@.lime;$possessiveCap asshole sees constant use and loosens.@@
+	<<set $slaves[$i].anus += 1>>
+<</if>>
+
+<<if ($slaves[$i].fetish == "mindbroken")>>
+	$pronounCap serves $possessive role as a mindless set of holes to perfection.
+<<else>>
+	<<set $skillIncrease = 5>>
+	<<if ($slaves[$i].oralSkill <= 10)>>
+		With $possessive throat being brutally used, $possessive gag reflex is suppressed and $possessive oral skills improve.
+		<<OralSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].vaginalSkill <= 10) && (canDoVaginal($slaves[$i]))>>
+		With $possessive pussy being harshly used, $possessive vaginal skills improve.
+		<<VaginalSkillIncrease $slaves[$i]>>
+	<<elseif ($slaves[$i].analSkill <= 10) && (canDoAnal($slaves[$i]))>>
+		With $possessive butt being mercilessly fucked, $possessive anal skills improve.
+		<<AnalSkillIncrease $slaves[$i]>>
+	<</if>>
+	<<if $slaves[$i].sexualFlaw == "self hating">>
+		$possessiveCap self hatred is so deep that $pronoun believes $pronoun deserves to serve in a glory hole, and even gets off on the degradation.
+	<<elseif ($slaves[$i].sentence > 0)>>
+		<<if ($slaves[$i].behavioralFlaw != "odd") && (random(1,100) > (100+($slaves[$i].devotion/5)))>>
+			Constant confinement coupled with brutal use has left $object with involuntary nervous tics.
+			<<set $slaves[$i].behavioralFlaw = "odd">>
+		<</if>>
+		<<set $slaves[$i].devotion -= 5, $slaves[$i].trust -= 5>>
+		<<if ($slaves[$i].devotion > 50)>>
+			$pronounCap does $possessive best to tolerate $possessive sentence to the glory hole, but @@.mediumorchid;$possessive devotion is hurt@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<elseif ($slaves[$i].devotion > 20)>>
+			$pronounCap does not understand why $possessive obedience has earned $object a sentence to this torture. @@.mediumorchid;$possessiveCap obedience is hurt@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<elseif ($slaves[$i].devotion >= -20)>>
+			$possessiveCap fear of you turns to desperation during $possessive sentence. @@.mediumorchid;$possessiveCap obedience is reduced@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<elseif ($slaves[$i].devotion >= -50)>>
+			Though $pronoun is only temporarily sentenced to suffer, @@.mediumorchid;$possessive resistance is increased@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<else>>
+			$pronounCap has hope $pronoun'll be released after $possessive sentence, but @@.mediumorchid;$possessive hatred of you is increased@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<</if>>
+	<<else>>
+		<<if ($slaves[$i].behavioralFlaw != "odd") && (random(1,100) > (70+($slaves[$i].devotion/5)))>>
+			Constant confinement coupled with brutal use has left $object with involuntary nervous tics.
+			<<set $slaves[$i].behavioralFlaw = "odd">>
+		<</if>>
+		<<set $slaves[$i].devotion -= 10, $slaves[$i].trust -= 10>>
+		<<if ($slaves[$i].devotion > 50)>>
+			$pronounCap feels starved of personal contact. @@.mediumorchid;$possessiveCap devotion is hurt@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<elseif ($slaves[$i].devotion > 20)>>
+			$pronounCap does not understand why $possessive obedience has earned $object this immurement. @@.mediumorchid;$possessiveCap obedience is hurt@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<elseif ($slaves[$i].devotion >= -20)>>
+			$possessiveCap fear of you has increased into something like a pathology. @@.mediumorchid;$possessiveCap obedience is reduced@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<elseif ($slaves[$i].devotion >= -50)>>
+			$possessiveCap resistance is deepening into hatred. @@.mediumorchid;$possessiveCap resistance is increased@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<<else>>
+			@@.mediumorchid;$possessiveCap helpless hatred of you is increased@@ and $pronoun is @@.gold;filled with fear@@ $pronoun won't be let out.
+		<</if>>
+	<</if>>
+<</if>>
+
+$possessiveCap feelings, skills, and appearance do not matter. $pronounCap is condemned to a world that consists of a tiny cell, featureless except for the never-ending dicks $pronoun is required to service. You were paid @@.yellowgreen;¤<<print ($beauty*$FResult)>>@@ for the use of $slaves[$i].slaveName's holes this week.
+
+/* FACILITY DECORATION IMPACTS */
+
+<<if ($slaves[$i].assignment == "be confined in the arcade") && ($arcadeDecoration != "standard")>>
+<<set _seed = 0.0001*$FSSingleSlaveRep*$beauty>>
+<<switch $arcadeDecoration>>
+<<case "Roman Revivalist">>
+	<<set $arcologies[0].FSRomanRevivalist += _seed>>
+<<case "Aztec Revivalist">>
+	<<set $arcologies[0].FSAztecRevivalist += _seed>>
+<<case "Egyptian Revivalist">>
+	<<set $arcologies[0].FSEgyptianRevivalist += _seed>>
+<<case "Edo Revivalist">>
+	<<set $arcologies[0].FSEdoRevivalist += _seed>>
+<<case "Arabian Revivalist">>
+	<<set $arcologies[0].FSArabianRevivalist += _seed>>
+<<case "Chinese Revivalist">>
+	<<set $arcologies[0].FSChineseRevivalist += _seed>>
+<<case "Chattel Religionist">>
+	<<set $arcologies[0].FSChattelReligionist += _seed>>
+<<case "Degradationist">>
+	<<set $arcologies[0].FSDegradationist += _seed>>
+<<case "Asset Expansionist">>
+	<<set $arcologies[0].FSAssetExpansionist += _seed>>
+<<case "Transformation Fetishist">>
+	<<set $arcologies[0].FSTransformationFetishist += _seed>>
+<<case "Gender Radicalist">>
+	<<set $arcologies[0].FSGenderRadicalist += _seed>>
+<<case "Gender Fundamentalist">>
+	<<set $arcologies[0].FSGenderFundamentalist += _seed>>
+<<case "Physical Idealist">>
+	<<set $arcologies[0].FSPhysicalIdealist += _seed>>
+<<case "Supremacist">>
+	<<set $arcologies[0].FSSupremacist += _seed>>
+<<case "Subjugationist">>
+	<<set $arcologies[0].FSSubjugationist += _seed>>
+<<case "Paternalist">>
+	<<set $arcologies[0].FSPaternalist += _seed>>
+<<case "Pastoralist">>
+	<<set $arcologies[0].FSPastoralist += _seed>>
+<<case "Maturity Preferentialist">>
+	<<set $arcologies[0].FSMaturityPreferentialist += _seed>>
+<<case "Youth Preferentialist">>
+	<<set $arcologies[0].FSYouthPreferentialist += _seed>>
+<<case "Body Purist">>
+	<<set $arcologies[0].FSBodyPurist += _seed>>
+<<case "Slimness Enthusiast">>
+	<<set $arcologies[0].FSSlimnessEnthusiast += _seed>>
+<</switch>>
+<</if>>
+
+/* SEX ACT COUNTS AND SEXUAL SATISFACTION */
+
+<<set _oralUse = $oralUseWeight+$slaves[$i].lips>>
+<<set _analUse = 0>>
+<<if canDoAnal($slaves[$i])>><<set _analUse =  $analUseWeight-$slaves[$i].anus>><</if>>
+<<set _vaginalUse = 0>>
+<<if canDoVaginal($slaves[$i])>><<set _analUse =  $vaginalUseWeight-$slaves[$i].vagina>><</if>>
+
+<<set _demand = _oralUse+_analUse+_vaginalUse>>
+<<set _oralUse = Math.trunc((_oralUse/_demand)*$beauty)>>
+<<set _analUse = Math.trunc((_analUse/_demand)*$beauty)>>
+<<set _vaginalUse = Math.trunc((_vaginalUse/_demand)*$beauty)>>
+
+<<set $slaves[$i].oralCount += _oralUse, $slaves[$i].publicCount += _oralUse, $oralTotal += _oralUse>>
+<<set $slaves[$i].analCount += _analUse, $slaves[$i].publicCount += _analUse, $analTotal += _analUse>>
+<<set $slaves[$i].vaginalCount += _vaginalUse, $slaves[$i].publicCount += _vaginalUse, $vaginalTotal += _vaginalUse>>
+
+<<if $slaves[$i].need>>
+<<if $slaves[$i].fetishKnown>>
+<<switch $slaves[$i].fetish>>
+<<case "submissive" "masochist">>
+	<<if _analUse+_vaginalUse > 0>>
+		She enjoys being used, and got sexual satisfaction from the <<print _analUse+_vaginalUse>> dicks stuck inside her this week.
+		<<set $slaves[$i].need -= _analUse+_vaginalUse>>
+	<</if>>
+<<case "dom" "sadist">>
+<<case "cumslut">>
+	<<if _oralUse > 0>>
+		She enjoys being facefucked, and got sexual satisfaction from the _oralUse dicks shoved inside her throat this week.
+		<<set $slaves[$i].need -= _oralUse>>
+	<</if>>
+<<case "buttslut">>
+	<<if _analUse > 0>>
+		She enjoys getting buttfucked, and got sexual satisfaction from the _analUse times she was sodomized this week.
+		<<set $slaves[$i].need -= _analUse>>
+	<</if>>
+<<case "pregnancy">>
+	<<if _vaginalUse > 0>>
+		She enjoys having her pussy fucked, and got sexual satisfaction from the _vaginalUse times she got pounded this week.
+		<<set $slaves[$i].need -= _vaginalUse>>
+	<</if>>
+<<case "humiliation">>
+	She enjoys the humiliation of having her most intimate parts presented for public use, and got a bit of sexual satisfaction from every sex act she performed this week.
+	<<set $slaves[$i].need -= $beauty>>
+<</switch>>
+<</if>>
+<</if>>
+
+<<set _quickProfit = ($beauty*$FResult)>>
+<<slavePaid $slaves[$i] _quickProfit>>
+<<set _profits += _quickProfit>>

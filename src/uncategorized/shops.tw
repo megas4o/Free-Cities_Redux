@@ -1,0 +1,221 @@
+:: Shops [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+This is a section of the promenade
+<<switch $sectors[$AS].type>>
+<<case "Shops">>
+	filled with a variety of small, higher-end shops, salons, brothels, and clubs. You control this part of the arcology and all these businesses pay you rent.
+<<case "Subjugationist">>
+	dedicated to $arcologies[0].FSSubjugationistRace subjugationism. There are genteel dining establishments with $arcologies[0].FSSubjugationistRace wait staff. Shops offer traditional slaving implements, including fine bespoke leather whips. To go by the shrieking, one of these is being tried on a shop's complimentary whipping targets.
+	<span id="result"><<link "Shop there">><<replace "#result">>Interested, you head in to see how the latest styles feel in hand. The fearful slave salesgirls offer you complimentary tries at the targets, of course. They barely manage to avoid bursting into tears, knowing that if they make the slightest mistake representing the shop to the arcology owner, they'll be chained up for whip trials, too. The rich handmade leather is supple and handy, and readily extracts throat rending screams from the slaves you're encouraged to try it on.<</replace>><</link>></span>
+<<case "Supremacist">>
+	dedicated to $arcologies[0].FSSupremacistRace supremacism. There are some select social establishments here which don't actually use any slaves at all, offering a surprisingly egalitarian atmosphere in which citizens of the master race can relax in each others' company without any subhuman filth present.
+	<span id="result"><<link "Put in an appearance">><<replace "#result">>You decide to stop in at one of these establishments, and of course your money's no good. You're welcomed with considerable bonhomie, and much less formality than you usually receive at social events in your arcology. Everyone's $arcologies[0].FSSupremacistRace here, and in that you're all equal, and all good friends. Everyone wants to have at least a quick word, and you stay longer than you originally meant to.<</replace>><</link>></span>
+<<case "Gender Radicalist">>
+	dedicated to Gender Radicalism. The shops here offer a bewildering cornucopia of sex toys. Citizens can kit themselves and their slaves out for anything, regardless of bodily layout. A female citizen is looking over the latest strap-ons, while a male peer is considering versions designed to enable double penetration by one person.
+	<span id="result"><<link "Try one">><<replace "#result">>You decide to try one of the latest models. Naturally, the store is eager to have you seen considering their products. The harness is very comfortable, and it <<if $PC.dick == 1>>equips you with a second phallus. The slave salesgirl lacks a vagina, but encourages you to try the setup on her anyway, promising that her backpussy can accept double penetration. It can.<<else>>provides you with an extremely large phallus, which cums from an internal reservior. The slave salesgirl encourages you to try the setup on her, promising that her holes can accommodate it. They can.<</if>><</replace>><</link>></span>
+<<case "Gender Fundamentalist">>
+	dedicated to Gender Fundamentalism. The establishments here are mostly focused on citizen reproduction with slaves. There are shops offering all kinds of treatments, drugs, clothes, and furniture to facilitate impregnating one's chattel, and keeping them comfortable and healthy through pregnancy.
+	<span id="result"><<link "Get a massage">><<replace "#result">>You decide to patronize a tenant business, and buy one of the latest models. The harness is very comfortable, and it <<if $PC.dick == 1>>equips you with a second phallus. The slave salesgirl lacks a vagina, but encourages you to try the setup on her anyway, promising that her backpussy can accept double penetration. It can.<<else>>provides you with an extremely large phallus, which cums from an internal reservior. The slave salesgirl encourages you to try the setup on her, promising that her holes can accommodate it. They can.<</if>><</replace>><</link>></span>
+<<case "Paternalist">>
+	dedicated to Paternalism. Many of the establishments here cater to slaves, some even to slaves exclusively. They offer luxurious and relaxing treatment for good girls whose owners send them here as rewards. Trusted slaves enter and exit these without any visible restraint or accompaniment, looking for all the world like pretty girls on a day out.
+	<span id="result"><<link "Tour the area">><<replace "#result">>You decide to put in an appearance at these establishments, and tour their front lobbies, listening politely to the educated slave receptionists' polished descriptions of the services offered. You stay out of the back areas, of course; those are for relaxing slaves, and owners typically leave them be while they're there. Most of the slaves moving through the area know who you are, and many of them are confident enough to give you respectful smiles.<</replace>><</link>></span>
+<<case "Degradationist">>
+	dedicated to Degradationism. The stores for slaveowners sell all sorts of inventive restraints and punishments. There are also a few of a uniquely Degradiationist establishment: torture parlors, where any citizen can send a slave for punishment by paying customers, within bounds defined by the owner.
+	<span id="result"><<link "Try a round">><<replace "#result">>You decide to put in an appearance at a tenant business and show off your skills, and the torture parlors are very eager to have you accept a complimentary round. You select a pretty girl sent to a torture parlor for some unknown failing by her owner, and use a switch to flog her calves, inner thighs, and breasts until she loses control of her bladder. <<if $PC.slaving >= 100>>You're skilled at this. The trick is to stop just short of blows that will break the skin, applying all possible pain without any inconvenient blood.<<else>>There's a bit of blood, but her owner will expect that.<</if>><</replace>><</link>></span>
+<<case "Body Purist">>
+	dedicated to Body Purism. There are high end clinics for citizens, with medical specialists skilled in the latest longevity treatments. Shops offer beauty treatments, anti-aging products, and personal massage services. The slave masseuses are naturally beautiful, and their bodies are obviously part of the services offered.
+	<span id="result"><<link "Get a massage">><<replace "#result">>You decide to put in an appearance at a tenant business, and the massage parlors are of course very eager to offer you complimentary services. The masseuse is very well-trained, and not at all a sex toy with poor massage skills as a veneer for handjob services. She releases the muscle soreness from your latest workout, and uses her delicate touch to bring you to an enjoyable orgasm; she <<if $PC.dick == 1>>catches your cum in her mouth and swallows it<<else>>swallows your femcum<</if>> with every appearance of appetite.<</replace>><</link>></span>
+<<case "Transformation Fetishist">>
+	dedicated to Transformation Fetishism. Autosurgeries are expensive, and require a lot of infrastructure, so almost all of your citizens have to send their slaves to clinics for surgical transformation. These establishments attempt to differentiate themselves by specializing in different surgeries, and advertising what they're best at.
+	<span id="result"><<link "Shop around">><<replace "#result">>You decide to shop around the best surgery clinics, to put in an appearance and check out the latest developments available to citizens less exalted than yourself. The slave salesgirls are all heavily modified silicone bimbos, with an emphasis on whatever their owner's surgical specialty is. The lip specialists' salesgirls have facepussies so huge they can't talk at all, so they wear touchscreens around their necks that do the talking for them.<</replace>><</link>></span>
+<<case "Youth Preferentialist">>
+	dedicated to Youth Preferentialism. The shops here are quite varied. Some, like the tailors, only betray their focus on young slaves by their selections of schoolgirl outfits, girlish leotards, and the like. There are several high-end slave trainers who specialize in maximizing slaves' <<if $seeDicks < 100>>vaginal and <</if>>anal skills while they're still virgins, with instruction only.
+	<span id="result"><<link "Look in on the classes">><<replace "#result">>You decide to put in an appearance and look into the training sessions. Of course, the trainers are very eager to share all the details with the arcology owner, and have you seen displaying an interest in their work. You're shown a classroom of obedient young slaves, right at sale age, paying rapt attention to a male trainer and a slave at the head of the classroom. He's reviewing how to relax during one's first time before 'deflowering' the teacher's assistant, whose <<if $seeDicks > 25>>asshole is allowed to rest and return to virgin tightness<<else>>hymen is surgically restored<</if>> between sessions.<</replace>><</link>></span>
+<<case "Maturity Preferentialist">>
+	dedicated to Maturity Preferentialism. It's not immediately apparent, though the stores here offer fashions that are obviously designed to flatter mature women, and anti-aging products of all kinds are prominently displayed. What there are, though, are quite a number of pretty, scantily clad female citizens here, obviously retired from sexual slavery and looking to slake their still trained libidoes with any handsome fellow citizen interested.
+	<span id="result"><<link "Hook up with a MILF">><<replace "#result">>Many of them recognize you, and it's immediately apparent that you have your choice of pretty much every retired slave present. You select the prettiest and make out with her for a while, among many admirers, until you feel like bringing her over to a nearby bench and doing her. <<if $PC.dick == 0>>She's as eager as a teenager to have a lesbian experience in public, and can't stop giggling as you fuck.<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>Like many recently retired slaves in your arcology, she's gotten pregnant as a free woman, and it's supercharged her sex drive. No matter what you do to her, she just wants more.<<elseif $arcologies[0].FSGenderRadicalist != "unset">>She's got a big dick, and clearly has close friends among the other recently retired girls, but is very willing to be your bottom, especially in public.<<else>>She was horny to begin with, but the foreplay and the naughtiness of doing it out in public has her as eager as a teenager, and she goes wild.<</if>><</replace>><</link>></span>
+<<case "Slimness Enthusiast">>
+	dedicated to Slimness Enthusiasm. The shops here are quite varied. Some, like the tailors, only betray their focus on slim slaves by their selections of lingerie for petite breasts and trim hips. There are a large number of contract slave exercisers and slave dieticians, since many citizens who can afford a slave need assistance there.
+	<span id="result"><<link "Tour the trainers">><<replace "#result">>You decide to put in an appearance and look around the trainers. They're very eager to show you around, of course, and have you seen looking around; your expertise in keeping slaves slender is well known. The most inspiring sight you're shown is a long row of slaves on treadmills, running as fast as their individual fitness can support. They do this nude, since none of them have boobs big enough to require support, offering the sight of a long row of cute butts covered in a sheen of feminine sweat.<</replace>><</link>></span>
+<<case "Asset Expansionist">>
+	dedicated to Asset Expansionism. The sector's focus is unmissable, even in the clothes stores. Many of the bras on offer look like a cross between an engineering marvel and a bad joke, and there are dresses that look like parachutes when they aren't on a mannequin or worn by a slave salesgirl. Then there's the crane store.
+	<span id="result"><<link "Shop there">><<replace "#result">>You decide to look in on the crane showroom, to see how citizens who don't own enough slaves to do the lifting and carrying are served. The huge-boobed slave salesgirls show you a variety of wheeled cranes that can help support a slave's breasts if they get too big for her to walk, and she needs to go somewhere. You have other slaves to help with that, and mechanical assistance built into your penthouse, but not everyone does. The salesgirls work in pairs, so one of them can unbutton her tentlike blouse and demonstrate the merchandise with her monstrous udders.<</replace>><</link>></span>
+<<case "Pastoralist">>
+	dedicated to Pastoralism. Milking is mostly done elsewhere, so the establishments here are a curious mix of farm supply stores and eateries. You can sample all kinds of ice cream, shakes, smoothies, cheeses, butter, and other dairy products here, all made from creamy human milk drawn from a busty slavegirl's breasts. <<if $seeDicks > 0>>There are also all kinds of slave beauty products and foods made from 'the other slavegirl milk,' cum.<</if>>
+	<span id="result"><<link "Tour the kitchens">><<replace "#result">>The eateries are very eager to have you seen inspecting their equipment and methods, and roll out the red carpet for you as they show you around. All kinds of old world culinary skill is on display here: artisan cheesemaking, butter hand-churned by muscular slaves, sweet custards and delicate flans that could compete in any dessert contest in the world. It's all so very refined and normal that it's quite easy to forget completely that the milk that is the basis of all this food comes from slaves.<</replace>><</link>></span>
+<<case "Physical Idealist">>
+	dedicated to Physical Idealism. There are supplement shops and workout equipment stores here, but they're small and packed into the spaces between all the gyms. These are some of the best patronized gyms in the world, because not only do physical idealists work out, there's a strong inclination to work out in public.
+	<span id="result"><<link "Leg day">><<replace "#result">>It's all very positive, and the one unspoken rule is not to disparage others, but there's definitely competition. So when you step forward and get a complimentary day pass from one of the bubbly, permed slavegirl receptionists, you have an audience. What kind of definition you've got in your quads is going to be a subject of conversation today, but you've got confidence. You lift, and receive respectful complements and bro-fists. Then you take your turn spotting others, an honor your citizens greatly appreciate.<</replace>><</link>></span>
+<<case "Chattel Religionist">>
+	dedicated to Chattel Religionism. The stores offer all the items useful to a slaveowner who holds the new faith: proper slave restraints and penitent slave garments, of course, but also fine oils and incense, candles, tapers, and other devotional necessities. There are also correctional convents for the assistance of citizens with wayward slaves.
+	<span id="result"><<link "Visit the convents">><<replace "#result">>As a leader of the new faith, your visitation rights on these convents are unquestioned, and their owners are indeed eager to have you look around and offer your revered advice. The average citizen with only a slave or two often needs help keeping girls within the faith. The convents are severe houses of correction, and the sounds of prayer and penitence are omnipresent. In one nave, a slave prostrates herself before a religious icon, praying in a loud, desperate tone while <<if $seeDicks < 100>>a futanari in nun's attire<<else>>a man in monk's attire<</if>> fucks her mercilessly from behind.<</replace>><</link>></span>
+<<case "Roman Revivalist">>
+	dedicated to Roman Revivalism. Since the forums are out on the arcology's plazas, there are fewer stores here. There are eateries, from which the sharp smell of //garum// is distinctly identifiable, but most of the space is occupied by hypocaust baths, which are free to enter but include various concession stands run by slaves.
+	<span id="result"><<link "Clean yourself">><<replace "#result">>A good Roman trip to the baths serves to cleanse, but it's a social experience, too. After being oiled down by a skilled slave, you work out in the proper nude, and then have the oil and any dirt scraped off your skin with by another slave. Then you make your way across the heated floor through a set of baths of varying temperatures, ending in a large and egalitarian space where many naked citizens of the new Rome are sharing the news of the day. You're welcomed with surprise, but also with comradeship, and made to feel welcome.<</replace>><</link>></span>
+<<case "Egyptian Revivalist">>
+	dedicated to Egyptian Revivalism. There are a bewildering multiplicity of shops here; ancient Egypt is wonderfully fertile of linen fashion, fine jewelry, perfumes, incense, and other luxury goods. Beautiful warm-skinned slavegirls of all races have wares in hand to offer citizens who pass by, and they seem well-treated.
+	<span id="result"><<link "Shop around">><<replace "#result">>You decide to tour the shops; with so much fine merchandise on offer, it's possible that someone's selling something that even you haven't heard of, and it's always good to see and be seen. The slave salesgirls are welcoming, and most are so well-trained that despite knowing who you are, they treat you with the same friendly courtesy that they offer everyone. They all offer you the peculiar straight-down curtsey that allows them to keep their necks straight, since they're all wearing gradually melting perfume cakes atop their hair, making them glisten with beguiling scent.<</replace>><</link>></span>
+<<case "Edo Revivalist">>
+	dedicated to Edo Revivalism. There are strict restrictions on the establishments' decor here, so //tatami// mats and paper partitions are ubiquitous. There are handsome //sake// shops and tea rooms offering the traditional ceremony, and //kabuki// theaters offering the traditional performance, with modern plots and themes.
+	<span id="result"><<link "See a show">><<replace "#result">>As soon as you enter a theater, the play stops, and refined slave attendants usher you forward to the place of honor. None of the citizens present resent the interruption; having you here is a great addition to the performance. The actors bow deeply to you and resume. The classical dance drama is almost impenetrable to outsiders, and the modernity of the characters and events would not be at all decipherable. Once you catch the thread, though, the richness of the allegory towards Free Cities personages and events is quite enjoyable.<</replace>><</link>></span>
+<<case "Arabian Revivalist">>
+	dedicated to Arabian Revivalism. The thriving mercantilism isn't limited to the slave markets, so many floors below; there are a bewildering variety of shops and stalls here, in no discernible order. Particolored cloth awnings, stacked goods, and bustling menial slaves constantly obscure your view, as pretty slavegirls hawking luxurious goods do their best to catch your eye.
+	<span id="result"><<link "Visit a coffee house">><<replace "#result">>But you disappoint them, even though some of them artfully manage to fall out of their slinky silk garments as you pass. You look into a little coffeehouse, densely packed with citizens drinking the strong, hot beverage out of tiny china and discussing the news of the day. Coffeehouses are democratic sorts of places and you're welcomed with comradely warmth; prosperous citizens shuffle and pack a little closer to make you a space, and a steaming cup full of almost midnight black coffee appears before you, as if from nowhere.<</replace>><</link>></span>
+<<case "Chinese Revivalist">>
+	dedicated to Chinese Revivalism. The longest continuous cultural history humanity has provides so much material that no two establishments here fill quite the same niche. There are calligraphy schools and Confucian academies to teach ignorant citizens how to fit in. There are shops selling traditional cures and the latest pharmacological wonders side by side. There are even martial arts schools.
+	<span id="result"><<link "Exercise yourself">><<replace "#result">>You look into one of these. The students are exercising, moving through a series of forms in unison. The teacher recognizes you, <<if $PC.warfare >= 100>>and eagerly beckons you to join. Your martial skill is well known, and he's not disappointed. You're familiar with the forms, and join them seamlessly. Much later, when the exercise is done, the students are extremely pleased to discover exactly who their skillful temporary classmate was.<<else>>and gives you a doubtful, questioning glance, politely asking whether you can join with credit to yourself, all without words. You nod and pick up the forms, having a basic familiarity with them. They're difficult, but you're able to get through the enjoyable exercise with credit.<</if>><</replace>><</link>></span>
+<<default>>ERROR: bad sector type
+<</switch>>
+<<if $sectors[$AS].type == "Shops">><<SectorSell>><</if>>
+<br>
+
+<<set _buildingCost = Math.trunc(10000*$upgradeMultiplierArcology)>>
+
+<<if $brothel == 0>>
+	<br>
+	[[Convert this sector of the promenade into a brothel|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $brothel = 5, $sectors[$AS].type = "Brothel"]]
+	//Costs ¤<<print (_buildingCost)>> and will incur upkeep costs//
+<</if>>
+
+<<if $club == 0>>
+	<br>
+	[[Build a club to serve as a focal point for public sluts|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $club = 5, $sectors[$AS].type = "Club"]]
+	//Costs ¤<<print (_buildingCost)>> and will incur upkeep costs//
+<</if>>
+
+<<if $sectors[$AS].type == "Shops">>
+<<if $FSAnnounced>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<if $FSPromenade.Subjugationist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Subjugationist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Subjugationist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<if $FSPromenade.Supremacist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Supremacist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Supremacist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<if $FSPromenade.GenderRadicalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Gender Radicalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Gender Radicalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<if $FSPromenade.GenderFundamentalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Gender Fundamentalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Gender Fundamentalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<if $FSPromenade.Paternalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Paternalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Paternalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	<<if $FSPromenade.Degradationist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Degradationist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Degradationist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<if $FSPromenade.BodyPurist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Body Purist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Body Purist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	<<if $FSPromenade.TransformationFetishist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Transformation Fetishist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Transformation Fetishist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<if $FSPromenade.YouthPreferentialist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Youth Preferentialist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Youth Preferentialist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<if $FSPromenade.MaturityPreferentialist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Maturity Preferentialist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Maturity Preferentialist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<if $FSPromenade.SlimnessEnthusiast == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Slimness Enthusiast establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Slimness Enthusiast"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	<<if $FSPromenade.AssetExpansionist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Asset Expansionist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Asset Expansionist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<if $FSPromenade.Pastoralist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Pastoralist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Pastoralist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<if $FSPromenade.PhysicalIdealist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Physical Idealist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Physical Idealist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<if $FSPromenade.ChattelReligionist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Chattel Religionist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Chattel Religionist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<if $FSPromenade.RomanRevivalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Roman Revivalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Roman Revivalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<if $FSPromenade.EgyptianRevivalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Egyptian Revivalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Egyptian Revivalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<<if $FSPromenade.EdoRevivalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Edo Revivalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Edo Revivalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	<<if $FSPromenade.ArabianRevivalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Arabian Revivalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Arabian Revivalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<<if $FSPromenade.ChineseRevivalist == 0>>
+		<br>
+		[[Upgrade this sector to appeal to Chinese Revivalist establishments|Main][$cash -= (_buildingCost), $lastWeeksFinances.expensesArcologyImprovement +=  (_buildingCost), $FSPromenade.FSSubjugationist = 1, $sectors[$AS].type = "Chinese Revivalist"]]
+		//Costs ¤<<print (_buildingCost)>>//
+	<</if>>
+<</if>>
+<</if>>
+<</if>>

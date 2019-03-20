@@ -1,0 +1,35 @@
+:: Security Force Proposal
+
+<<nobr>>
+<<set $nextLink = "Next Week">>
+<<set $nextButton = "Continue">>
+
+<</nobr>>\
+\
+The Free Cities were founded on the principles of unrestrained anarcho-capitalism. To those with such beliefs, the very idea of possessing an armed force, a key tool of government control, or weapons at all, was anathema.
+
+In the period since, however, your citizens have seen the value in weaponry. They watched on their news-feed as some Free Cities were sacked by the armies and mobs of the Old World, driven by their hatred of the citizens' luxurious lifestyles. They've seen other Cities toppled from within, by slave conspiracies or infighting among citizen groupings with differing beliefs. They've witnessed the distressingly rapid rise of fanatical anti-slavery organizations, who would like nothing more than to see them slowly bled by their own chattel. They are learned people, and they know what happens to slaveowners who lose their power.
+
+They've also seen the results of your policies. Your actions towards the arming of both yourself and the arcology proved critical, and ensured their safety when the Old World came for them. And your victory over the Daughters of Liberty, who the citizens know would have executed every single one of them, has created an opportunity. If you insisted upon the creation of a standing 'security' force for the arcology, many would support you and, more importantly, nobody of note would object.
+
+Such a force would solve many problems. More soldiers would mean more control, which is very good for you. More soldiers would mean more security for the arcology and the approaches to it, which is very good for business. More soldiers would mean more obedience from rebellious slaves who can see how powerless they truly are, which is very good for everybody. The force would be tiny compared to the Old World militaries that still exist, but money and technology can, of course, overcome massive numerical inferiority. This being the Free Cities, they would have other uses besides security. Perhaps, in time, you could exert some manner of influence on the Old World itself.
+
+''This is a unique and very important opportunity'', and is possible only because of your recent victory over the Daughters. If you do not seize it, the memories and fears of your citizens will fade, and you will not be able to raise the matter again.
+--------------------
+<<set $securityForceEventSeen = 1>>
+<span id="result">
+<<link "Prepare for an announcement">>
+	<<replace "#result">>
+	You instruct $assistantName to announce to the arcology's citizenry that you will be making an important announcement in the near future regarding the security situation. Given the damage still present from the Daughters' attack, everyone will be turning in. You also instruct your assistant to begin quietly investigating potential leadership figures for the force itself.
+	<<set $securityForceCreate = 1>>
+	<<set $cash -= 20000>>
+	<<set $nextButton = "Continue">>
+	<</replace>>
+<</link>> //Initial costs are ¤20000, and upon establishment force will have significant support costs until it is self-sufficient.//
+<<link "The mercenaries are enough">>
+	<<replace "#result">>
+	On second thought, such a force is not needed. Your methods have served well so far - why should there be any change going forward?
+	<<set $nextButton = "Continue">>
+	<</replace>>
+<</link>>
+</span>

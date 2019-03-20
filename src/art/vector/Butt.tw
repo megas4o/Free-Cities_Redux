@@ -1,0 +1,17 @@
+:: Art_Vector_Butt_ [nobr]
+
+/* BEWARE: _buttSize is also used in Art_Vector_Leg_ */
+
+<<if _artSlave.amp != 1>>
+  <<if _artSlave.butt > 6>>
+    <<set _buttSize = 3>>
+  <<elseif _artSlave.butt > 4>>
+    <<set _buttSize = 2>>
+  <<elseif _artSlave.butt > 2>>
+    <<set _buttSize = 1>>
+  <<else>>
+    <<set _buttSize = 0>>
+  <</if>>
+  <<set _art = "Art_Vector_Butt_"+_buttSize >>
+  <<include _art >>
+<</if>>

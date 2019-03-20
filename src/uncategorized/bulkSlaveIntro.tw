@@ -1,0 +1,106 @@
+:: Bulk Slave Intro [nobr]
+
+<<if ndef $introType>>
+	<<set $introType = "">>
+<</if>>
+<<if $newSlaves.length == 0>>
+	<<set $introType = "">>
+<</if>>
+
+<<switch $introType>>
+<<case "">>
+	/* No message to give */
+<<case "multi">>
+	<<if $newSlaves.length > 1>>
+		Your selection of $newSlaves.length slaves arrives from <<MarketNamePeriod $slaveMarket $numArcology>>
+	<<else>>
+		Your new slave from <<MarketName $slaveMarket $numArcology>> has arrived.
+	<</if>>
+
+<<case "bulk">>
+	Your delivery of $newSlaves.length slaves arrives from <<MarketNamePeriod $slaveMarket $numArcology>>  
+	<<if $newSlaves.length != $numSlaves>>
+		You were going to order $numSlaves, but $assistantName lowered it on financial grounds.
+	<</if>>
+	<<set _seed = Math.ceil($slavesSeen - $slaveMarketLimit)>>
+	<<if _seed > $newSlaves.length>>
+		You have cast such a wide net for slaves this week that all are more expensive than normal.
+	<<elseif _seed > 0>>
+		You have cast such a wide net for slaves this week that some (_seed) are more expensive than normal.
+	<</if>>
+	<<if $slaveMarket == "TFS">>
+		/* Put line about The Futanari Sisters discount & pricing */
+	<<elseif $discount == 475>>
+		Your bulk delivery came with a @@.yellowgreen;5%@@ discount.
+	<<else>>
+		With all your discounts factored in you got a @@.yellowgreen;<<print (500-$discount)/5>>%@@ discount;
+	<</if>>
+	You spent @@.yellowgreen;¤$spent@@ on your new slaves.<br><br>
+
+<<case "inStock">>
+	You clear out <<MarketName $slaveMarket $numArcology>> of its stock of $newSlaves.length slaves. 
+	<<if $slaveMarket == "TFS">>
+		/* Put line about The Futanari Sisters discount & pricing */
+	<<elseif $discount == 475>>
+		Your bulk delivery came with a @@.yellowgreen;5%@@ discount.
+	<<else>>
+		With all your discounts factored in you got a @@.yellowgreen;<<print (500-$discount)/5>>%@@ discount;
+	<</if>>
+	You spent @@.yellowgreen;¤$spent@@ on your new slaves.<br><br>
+	
+<<case "event">>
+	This is placeholder event info.
+	
+<</switch>>
+/* remove the below line to make the intro blurb show up for every slave, not just the first */
+<<set $introType = "">> 
+
+<<if ($newSlaveIndex >= $newSlaves.length) || ($newSlavesDone == 1)>>
+	<<if $newSlaves.length > 0>>
+		/* Push the induction changes for the final slave to the newSlave array */
+		<<AddSlave $activeSlave>>
+
+		/* Variable Clean-up */
+		<<set $newSlaves = []>>
+		<<set $newSlavesDone = 0>>
+		<<set $introType = "">>
+	<</if>>
+	<<goto $returnTo>>
+<<else>>
+	/* If looking at 2nd slave, push the induction changes for the prior slave to the newSlave array */
+	<<if $newSlaveIndex > 0>>
+		<<AddSlave $activeSlave>>
+	<</if>>
+	<<if $newSlaves.length > 1>>
+		Showing new slave <<print $newSlaveIndex+1>> of <<print $newSlaves.length>>:
+	<</if>>
+	<br><br>
+	
+	/* Set activeSlave to the desired newSlave so that existing code can be used */
+	<<set $activeSlave = $newSlaves[$newSlaveIndex]>>
+
+	/* Due to possible gingering, the Long Slave Description must be displayed before the New Slave Intro */
+	<<set $saleDescription = 1>> /* policies were applied earlier, if needed */
+	<<include "Long Slave Description">>
+	
+	<br>
+	
+	/* Use existing New Slave Intro */
+	<<include "New Slave Intro">> /* calls <<RemoveGingering>> if needed */
+	
+	/* Override nextButton setting from New Slave Intro */
+	<<set $nextButton = "Continue">>
+	<<set $nextLink = "Bulk Slave Intro">>
+	
+	/* Add an option = goto the next slave below the New Slave Intro section */
+	<br><br>
+	<<if $newSlaveIndex < ($newSlaves.length - 1)>>
+		[[Next Slave|Bulk Slave Intro]]
+	<<else>>
+		[[Finish introducing slaves|Bulk Slave Intro][$newSlavesDone = 1]]
+	<</if>>	
+
+<</if>> /* Closes no new Slaves check */
+
+<<set $newSlaveIndex++>>
+

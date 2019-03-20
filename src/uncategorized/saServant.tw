@@ -1,0 +1,70 @@
+:: SA servant [nobr]
+
+<<SlavePronouns $slaves[$i]>>
+
+works as a servant. $pronounCap performs the lowest jobs in your penthouse, cleaning up after your other slaves, bathing them, helping them dress, and giving them sexual relief.
+
+<<if $servantsQuarters > 0>>
+	<<if (($universalRulesFacilityWork == 1) && ($slaves[$i].assignment == "be a servant") && ($servantsQuartersSpots > 0)) || ($slaves[$i].assignment == "work as a servant")>>
+	<<if ($slaves[$i].assignment == "be a servant")>>
+		Since there's extra space in the servants' quarters, $assistantName attaches $object to the cadre of maids there.
+		<<set $servantsQuartersSpots -= 1>>
+	<</if>>
+	<<if ($Stewardess != 0)>>
+		This brings $object under $Stewardess.slaveName's supervision. The Stewardess <<if $slaves[$i].devotion < -20>>subjects $object to corrective rape when $possessive service is imperfect, or when the Stewardess feels like raping $object, forcing the poor slave to @@.yellowgreen;find refuge in work.@@<<elseif $slaves[$i].devotion <= 20>>molests $object, encouraging the poor slave to keep $possessive head down and @@.yellowgreen;work harder.@@<<else>>uses sex as a reward, getting $object off when $pronoun @@.yellowgreen;works harder.@@<</if>>
+		<<set $cash += $stewardessBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].trust < -20)>>
+	$pronounCap is frightened of punishment and works very hard, @@.yellowgreen;reducing the upkeep@@ of your slaves.
+<<elseif ($slaves[$i].devotion < -20)>>
+	$pronounCap is reluctant, requiring your other slaves to force $possessive services, and does not @@.yellowgreen;reduce upkeep@@ of your slaves much.
+<<elseif ($slaves[$i].devotion <= 20)>>
+	$pronounCap is hesitant, requiring your other slaves to demand $possessive services, and only slightly @@.yellowgreen;reduces upkeep@@ of your slaves.
+<<elseif ($slaves[$i].devotion <= 50)>>
+	$pronounCap is obedient, offering your other slaves to $possessive services, and moderately @@.yellowgreen;reduces the upkeep@@ of your slaves.
+<<elseif ($slaves[$i].devotion <= 95)>>
+	$pronounCap is devoted, happily giving your other slaves $possessive services, and @@.yellowgreen;reduces the upkeep@@ of your slaves.
+<<else>>
+	$pronounCap is so happy to serve your other slaves that $pronoun often sees to their needs before they know they have them, and greatly @@.yellowgreen;reduces the upkeep@@ of your slaves.
+<</if>>
+
+<<set _oral = random(5,10)>>
+<<set $slaves[$i].oralCount += _oral>>
+<<set $oralTotal += _oral>>
+
+<<if ($slaves[$i].relationship == -2)>>
+	$pronounCap does $possessive best to perfect your domesticity due to $possessive emotional bond to you.
+<<elseif ($slaves[$i].relationship == -3)>>
+	$pronounCap does $possessive very best to be the perfect housewife, making $possessive an outstanding servant.
+<</if>>
+
+<<if ($slaves[$i].fetishStrength > 60)>>
+<<if ($slaves[$i].fetish == "submissive") && ($slaves[$i].fetishKnown == 1)>>
+	$possessiveCap natural affinity for submission increases $possessive effectiveness.
+<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetish == "dom")>>
+	$possessiveCap sexual appetite for domination reduces $possessive effectiveness.
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].energy < 20)>>
+	$possessiveCap frigidity allows $object to ignore the intercourse all around $object, making $object very efficient.
+<<elseif ($slaves[$i].energy < 40)>>
+	$possessiveCap low sex drive keeps $object from becoming too distracted by the intercourse all around $object, making $object more efficient.
+<</if>>
+
+<<if (($slaves[$i].eyes <= -1) && ($slaves[$i].eyewear != "corrective glasses") && ($slaves[$i].eyewear != "corrective contacts")) || ($slaves[$i].eyewear == "blurring glasses") || ($slaves[$i].eyewear == "blurring contacts")>>
+	$possessiveCap bad vision makes $object a worse servant.
+<</if>>
+
+<<if ($slaves[$i].lactation > 0)>>
+	Since $pronoun is
+	<<if ($slaves[$i].devotion > 20) || ($slaves[$i].trust < -20)>>
+	lactating, $pronoun serves
+	<<else>>
+	lactating, and disobedient, $pronoun is restrained to serve
+	<</if>>
+	as a drink dispenser at mealtimes, and makes a meaningful contribution to $possessive fellow slaves' nutrition in concert with the feeding systems.
+<</if>>

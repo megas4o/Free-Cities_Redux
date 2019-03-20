@@ -1,0 +1,209 @@
+:: Master Suite [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Master Suite", $showEncyclopedia = 1, $encyclopedia = "Master Suite">>
+
+<<SlaveSort $MastSiIDs>>
+<<set _DL = $MastSiIDs.length, $masterSuiteSlaves = _DL>>
+
+<<if $masterSuiteName != "the Master Suite">>
+	<<set $masterSuiteNameCaps = $masterSuiteName.replace("the ", "The ")>>
+<</if>>
+
+<<set $masterSuiteAverageEnergy = 0, _masterSuiteAverageCum = 0, _masterSuiteAverageDick = 0, _masterSuiteAverageDom = 0, _masterSuiteAverageMilk = 0, _masterSuiteAveragePreg = 0, _masterSuiteAverageSadism = 0, _masterSuitePregnantSlaves = 0, _masterSuitePregnantSlavesMultiple = 0>>
+
+<<if ($Concubine != 0 && $Concubine.preg >= 4)>>
+	<<set _masterSuitePregnantSlaves++>>
+	<<if $Concubine.pregType > 1>>
+		<<set _masterSuitePregnantSlavesMultiple++>>
+	<</if>>
+<</if>>
+
+<<if $masterSuiteSlaves > 0>>
+<<for _dI = 0; _dI < _DL; _dI++>>
+	<<set _i = $slaveIndices[$MastSiIDs[_dI]]>>
+	<<set _Slave = $slaves[_i]>>
+
+	<<if $masterSuiteUpgradeLuxury == 2>>
+	<<if canAchieveErection(_Slave)>>
+		<<set _masterSuiteAverageCum += _Slave.balls, _masterSuiteAverageDick += _Slave.dick>>
+	<</if>>
+	<<set _masterSuiteAverageMilk += _Slave.lactation*(_Slave.boobs-_Slave.boobsImplant), $masterSuiteAverageEnergy += _Slave.energy, _masterSuiteAveragePreg += _Slave.preg>>
+	<<if _Slave.fetish == "dom">>
+		<<set _masterSuiteAverageDom += _Slave.fetishStrength>>
+	<<elseif _Slave.fetish == "submissive">>
+		<<set _masterSuiteAverageDom -= _Slave.fetishStrength>>
+	<<elseif _Slave.fetish == "sadist">>
+		<<set _masterSuiteAverageSadism += _Slave.fetishStrength>>
+	<<elseif _Slave.fetish == "masochist">>
+		<<set _masterSuiteAverageSadism -= _Slave.fetishStrength>>
+	<</if>>
+	<</if>>
+	<<if (_Slave.preg >= 4)>>
+		<<set _masterSuitePregnantSlaves++>>
+		<<if _Slave.pregType > 1>>
+			<<set _masterSuitePregnantSlavesMultiple++>>
+		<</if>>
+	<</if>>
+<</for>>
+	<<set $masterSuiteAverageEnergy = $masterSuiteAverageEnergy/$masterSuiteSlaves>>
+	<<set _masterSuiteAverageMilk = _masterSuiteAverageMilk/$masterSuiteSlaves>>
+	<<set _masterSuiteAverageCum = _masterSuiteAverageCum/$masterSuiteSlaves>>
+	<<set _masterSuiteAverageDick = _masterSuiteAverageDick/$masterSuiteSlaves>>
+	<<set _masterSuiteAveragePreg = _masterSuiteAveragePreg/$masterSuiteSlaves>>
+	<<set _masterSuiteAverageDom = _masterSuiteAverageDom/$masterSuiteSlaves>>
+	<<set _masterSuiteAverageSadism = _masterSuiteAverageSadism/$masterSuiteSlaves>>
+<</if>>
+
+<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+<<set _Tmult2 = Math.trunc(25000*$upgradeMultiplierArcology)>>
+<<set _Tmult3 = Math.trunc(15000*$upgradeMultiplierArcology)>>
+
+<<masterSuiteDescriptionFS>>
+
+<<if $masterSuiteUpgradeLuxury == 1>>
+
+It is full of luxuries of all kinds. The slaves here live free of want or worry, and have everything except their freedom. Their only duties are to please you and look after the suite and one another.
+<<if $masterSuiteSlaves > 2>>
+	It's busy with slaves, so many that they are able to rotate through keeping themselves perfect and ready for your pleasure. The slaves not on call at the moment are beautifying themselves, cleaning, or serving others.
+	<<if (_masterSuitePregnantSlaves > 2) && (_masterSuitePregnantSlavesMultiple < 2)>>
+	Many of the slaves are pregnant, and they walk around proudly displaying their bellies and the new slaves growing inside them.<br>
+	<<elseif (_masterSuitePregnantSlaves > 2) && (_masterSuitePregnantSlavesMultiple > 2)>>
+	Many of the slaves are pregnant with multiple children, and they walk around proudly displaying their distended bellies and the next generation of slaves growing within them.<br>
+	<</if>>
+<<elseif $masterSuiteSlaves > 0>>
+	It's sparsely populated, so that the few slaves here have to work hard and quickly to ensure that an assortment of sex slaves are perfect and ready for your pleasure at any given moment.
+<<else>>
+	None of your slaves are serving here.
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Remodel the suite around a luxurious pit for group sex|Master Suite][$cash -= _Tmult1, $masterSuiteUpgradeLuxury = 2]] //Costs _Tmult1; will encourage fucktoys to fuck each other//
+
+<<elseif $masterSuiteUpgradeLuxury == 2>>
+
+The true focus of the suite is, however, the fuckpit. This stepped depression in the middle of the floor
+<<if $masterSuiteSlaves > 3>>
+	is filled by cushions and every slave in the suite who isn't sleeping, eating, or bathing.
+	<<if $masterSuiteAverageEnergy > 90>>
+	They're having energetic group sex; most of them are fucking and being fucked at the same time.
+	<<elseif $masterSuiteAverageEnergy > 60>>
+	They're having group sex; most of them are in active sexual contact with more than one partner.
+	<<else>>
+	They're having languid group sex; more than one girl is dozing while another plays with her body.
+	<</if>>
+	<<if $masterSuiteAverageEnergy > 90>>
+	The pit features automated cleaning systems, which are quite necessary.
+	<<if _masterSuiteAverageDick > 4>>
+		With so many huge cocks in the fuckpit, every hole available is frequently fucked vigorously.
+	<</if>>
+	<<if _masterSuiteAverageCum > 4>>
+		The slaves' bodies grow more coated with cum, and more of the white stuff drips from their holes, until they take a break for a shower.
+	<</if>>
+	<<if _masterSuiteAverageMilk > 4000>>
+		Most of them cannot tear themselves away (or cannot escape) for a normal machine milking, so their tender, overfull breasts squirt milk whenever anyone touches them. The lowest level of the fuckpit is a pool of milk.
+	<</if>>
+	<</if>>
+	<<if (_masterSuitePregnantSlaves > 2) && (_masterSuitePregnantSlavesMultiple < 2)>>
+	Many of the slaves are pregnant, and more than one has her face buried in the cunt directly below a gravid belly while she lovingly massages her own.<br>
+	<<elseif (_masterSuitePregnantSlaves > 2) && (_masterSuitePregnantSlavesMultiple > 2)>>
+	Many of the slaves are pregnant with multiple children, and more than one has her face buried in the cunt directly below a grossly swollen belly while she lovingly massages her own distended stomach.<br>
+	<</if>>
+<<elseif $masterSuiteSlaves > 0>>
+	has a few lonely-looking fucktoys in it, badly outnumbered by the cushions.
+<<else>>
+	is desolate and unpopulated.
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Refit the suite to the height of traditional opulence|Master Suite][$cash -= _Tmult1, $masterSuiteUpgradeLuxury = 1]] //Costs _Tmult1; will focus the suite on you//
+
+<<else>>
+
+<<if $masterSuiteSlaves > 2>>
+	It's busy with slaves, so many that they are able to rotate through keeping themselves perfect and ready for your pleasure. The slaves not on call at the moment are beautifying themselves, cleaning, or serving others.
+	<<if (_masterSuitePregnantSlaves > 2) && (_masterSuitePregnantSlavesMultiple < 2)>>
+	Many of the slaves are pregnant, and they walk around proudly displaying their bellies and the new slaves growing inside them.<br>
+	<<elseif (_masterSuitePregnantSlaves > 2) && (_masterSuitePregnantSlavesMultiple > 2)>>
+	Many of the slaves are pregnant with multiple children, and they walk around proudly displaying their distended bellies and the next generation of slaves growing within them.<br>
+	<</if>>
+<<elseif $masterSuiteSlaves > 0>>
+	It's sparsely populated, so that the few slaves here have to work hard and quickly to ensure that an assortment of sex slaves is perfect and ready for your pleasure at any given moment.
+<<else>>
+	None of your slaves are serving here.
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Refit the suite to the height of traditional opulence|Master Suite][$cash -= _Tmult2, $masterSuiteUpgradeLuxury = 1]] //Costs ¤_Tmult2 and will focus the suite on you//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Remodel the suite around a luxurious pit for group sex|Master Suite][$cash -= _Tmult2, $masterSuiteUpgradeLuxury = 2]] //Costs ¤_Tmult2; will encourage fucktoys to fuck each other//
+
+<</if>>
+
+<br>$masterSuiteNameCaps has room for $masterSuite slaves to live comfortably<<if $masterSuiteUpgradeLuxury == 2>> in the moments when they're not in the fuckpit<<elseif $masterSuiteUpgradeLuxury == 1>> on its huge bed<</if>>.
+<<set _Tmult0 = Math.trunc($masterSuite*1000*$upgradeMultiplierArcology)>>
+[[Expand the Master Suite|Master Suite][$cash -= _Tmult0, $masterSuite += 5]] //Costs ¤_Tmult0//
+
+<br>
+<<if $masterSuiteUpgradePregnancy == 1>>
+	The master suite has been further upgraded to support fertile slaves and encourage slave pregnancy, providing additional rest areas, better access to amenities, and a dedicated birthing chamber.
+	<<if $masterSuitePregnancySlaveLuxuries == 1>>
+		Pregnant slaves are being ''given some luxuries'' to reduce stress. [[End the special treatment of pregnant slaves|Master Suite][$masterSuitePregnancySlaveLuxuries = 0]]<br>
+	<<else>>
+		Pregnant slaves ''have no extra luxuries'' to reduce stress. [[Give pregnant slaves lighter duties|Master Suite][$masterSuitePregnancySlaveLuxuries = 1]]  //Costs ¤500/week//<br>
+	<</if>>
+	<<if $masterSuitePregnancyFertilityDrugs == 1>>
+		Fertile slaves ''are being given'' fertility drugs, encouraging impregnation and multiple pregnancy. [[End the drug regime|Master Suite][$masterSuitePregnancyFertilityDrugs = 0, $masterSuitePregnancyFertilitySupplements = 0]]<br>
+	<<else>>
+		Fertile slaves ''are not being given'' fertility drugs. [[Give fertility drugs to all fertile slaves|Master Suite][$masterSuitePregnancyFertilityDrugs = 1]]<br>
+	<</if>>
+	<<if $masterSuitePregnancyFertilityDrugs == 0>>
+		//Fertile slaves ''must be on fertility drugs'' to be given fertility supplements// <br>
+	<<elseif $masterSuitePregnancyFertilitySupplements == 0 && $masterSuitePregnancyFertilityDrugs == 1>>
+		Fertile slaves ''are not being given'' fertility drug supplements. [[Give supplements to slaves on fertility drugs|Master Suite][$masterSuitePregnancyFertilitySupplements = 1]] //Costs ¤1000/week//<br>
+	<</if>>
+	<<if $masterSuitePregnancyFertilitySupplements == 1 && $masterSuitePregnancyFertilityDrugs == 1>>
+		Fertile slaves ''are being given'' supplements to their fertility drugs, further enhancing the chances of multiple pregnancy. [[End the supplement regime|Master Suite][$masterSuitePregnancyFertilitySupplements = 0]]<br>
+	<</if>>
+<<else>>
+	The master suite does not currently have special customizations to support slave pregnancy. [[Refit the suite to support and encourage slave pregnancy|Master Suite][$cash -= _Tmult3, $masterSuiteUpgradePregnancy = 1]] //Costs ¤_Tmult3//
+<</if>>
+
+<br><br>
+<<if $Concubine != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<<else>>
+	You do not have a slave serving as your Concubine. [[Appoint one|Concubine Select]]
+<</if>>
+
+<br><br>
+<<if ($masterSuite <= $masterSuiteSlaves)>>
+	''$masterSuiteNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $masterSuiteSlaves)>>
+	<<link "''Send a slave to serve in $masterSuiteName''">>
+		<<set $leaveMasterSuite = 0>>
+		<<replace #masterSuiteComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $masterSuiteSlaves > 0>>
+	| <<link "''Bring a slave out of the master suite''">>
+		<<set $leaveMasterSuite = 1>>
+		<<replace #masterSuiteComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//$masterSuiteNameCaps is empty for the moment//
+<</if>>
+
+<span id="masterSuiteComingGoing">
+<<if $leaveMasterSuite == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<br><br>Rename $masterSuiteName: <<textbox "$masterSuiteName" $masterSuiteName "Master Suite">> //Use a noun or similar short phrase//

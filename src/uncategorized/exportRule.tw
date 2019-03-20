@@ -1,0 +1,33 @@
+:: Export Rule [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Rules Assistant">>
+
+//Copy the following block for importing later. This is generated from a hand-maintained variable list and is not a complete export (at minimum, it omits auto-surgery rule settings).//
+<br><br>
+name: "$currentRule.name",
+condition: "<<print unparseExpr($currentRule.condition)>>",
+releaseRules: "$currentRule.releaseRules", clitSetting: "$currentRule.clitSetting", clitSettingXY: "$currentRule.clitSettingXY", clitSettingXX: "$currentRule.clitSettingXX", clitSettingEnergy: "$currentRule.clitSettingEnergy", speechRules: "$currentRule.speechRules", clothes: "$currentRule.clothes", collar: "$currentRule.collar", shoes: "$currentRule.shoes", virginAccessory: "$currentRule.virginAccessory", aVirginAccessory: "$currentRule.aVirginAccessory", vaginalAccessory: "$currentRule.vaginalAccessory", dickAccessory: "$currentRule.dickAccessory", aVirginDickAccessory: "$currentRule.aVirginDickAccessory", bellyAccessory: "$currentRule.bellyAccessory", aVirginButtplug: "$currentRule.aVirginButtplug", buttplug: "$currentRule.buttplug", eyeColor: "$currentRule.eyeColor", makeup: "$currentRule.makeup", nails: "$currentRule.nails", hColor: "$currentRule.hColor", hLength: "$currentRule.hLength", hStyle: "$currentRule.hStyle", pubicHColor: "$currentRule.pubicHColor", pubicHStyle: "$currentRule.pubicHStyle", nipplesPiercing: "$currentRule.nipplesPiercing", areolaePiercing: "$currentRule.areolaePiercing", clitPiercing: "$currentRule.clitPiercing", vaginaLube: "$currentRule.vaginaLube", vaginaPiercing: "$currentRule.vaginaPiercing", dickPiercing: "$currentRule.dickPiercing", anusPiercing: "$currentRule.anusPiercing", lipsPiercing: "$currentRule.lipsPiercing", tonguePiercing: "$currentRule.tonguePiercing", earPiercing: "$currentRule.earPiercing", nosePiercing: "$currentRule.nosePiercing", eyebrowPiercing: "$currentRule.eyebrowPiercing", navelPiercing: "$currentRule.navelPiercing", corsetPiercing: "$currentRule.corsetPiercing", boobsTat: "$currentRule.boobsTat", buttTat: "$currentRule.buttTat", vaginaTat: "$currentRule.vaginaTat", dickTat: "$currentRule.dickTat", lipsTat: "$currentRule.lipsTat", anusTat: "$currentRule.anusTat", shouldersTat: "$currentRule.shouldersTat", armsTat: "$currentRule.armsTat", legsTat: "$currentRule.legsTat", backTat: "backTat", stampTat: "$currentRule.stampTat", curatives: "$currentRule.curatives", livingRules: "$currentRule.livingRules", relationshipRules: "$currentRule.relationshipRules", standardPunishment: "situational", standardReward: "situational", diet: "$currentRule.diet", dietCum: "$currentRule.dietCum", dietMilk: "$currentRule.dietMilk", muscles: "$currentRule.muscles", XY: "$currentRule.XY", XX: "$currentRule.XX", gelding: "$currentRule.gelding", preg: "$currentRule.preg", growth: "$currentRule.growth", aphrodisiacs: "$currentRule.aphrodisiacs", autoSurgery: $currentRule.autoSurgery, autoBrand: $currentRule.autoBrand, pornFameSpending: "$currentRule.pornFameSpending", dietGrowthSupport: $currentRule.dietGrowthSupport, eyewear: "$currentRule.eyewear",
+assignment: <<if ndef $currentRule.assignment || $currentRule.assignment.length < 1>>[],<<else>>$currentRule.assignment,<</if>>
+excludeAssignment:<<if ndef $currentRule.excludeAssignment || $currentRule.excludeAssignment.length < 1>>[],<<else>>
+	[<<for _i = 0; _i < $currentRule.excludeAssignment.length; _i++>>
+		<<if _i > 0>>,<</if>>"$currentRule.excludeAssignment[_i]"
+	<</for>>],
+<</if>>
+setAssignment: "$currentRule.setAssignment",
+facility: <<if ndef $currentRule.facility || $currentRule.facility.length < 1>>[],<<else>>$currentRule.facility,<</if>>
+excludeFacility:<<if ndef $currentRule.excludeFacility || $currentRule.excludeFacility.length < 1>>[],<<else>>
+	[<<for _i = 0; _i < $currentRule.excludeFacility.length; _i++>>
+		<<if _i > 0>>,<</if>>"$currentRule.excludeFacility[_i]"
+	<</for>>],
+<</if>>
+assignFacility: "$currentRule.assignFacility", excludeSpecialSlaves: $currentRule.excludeSpecialSlaves, facilityRemove: $currentRule.facilityRemove, removalAssignment: "$currentRule.removalAssignment",
+selectedSlaves: <<if ndef $currentRule.selectedSlaves || $currentRule.selectedSlaves.length < 1>>[],<<else>>
+	[<<for _i = 0; _i < $currentRule.selectedSlaves.length; _i++>>
+		<<if _i > 0>>,<</if>>$currentRule.selectedSlaves[_i]
+	<</for>>],
+<</if>>
+excludedSlaves: <<if ndef $currentRule.excludedSlaves || $currentRule.excludedSlaves.length < 1>>[]<<else>>
+	[<<for _i = 0; _i < $currentRule.excludedSlaves.length; _i++>>
+		<<if _i > 0>>,<</if>>$currentRule.excludedSlaves[_i]
+	<</for>>]
+<</if>>

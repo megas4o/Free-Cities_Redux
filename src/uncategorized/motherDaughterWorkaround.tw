@@ -1,0 +1,52 @@
+:: Mother Daughter Workaround
+
+Your new pair of slaves look frightened and uncertain, but seem encouraged by each other's presence.
+
+<<AddSlave $activeSlave>>
+
+<<set _secondSlave = clone($activeSlave)>>
+<<unset $activeSlave>>
+<<if _secondSlave.slaveSurname>><<set _familyName = _secondSlave.slaveSurname>><</if>>
+<<set _familyBirthSurname = _secondSlave.birthSurname>>
+<<NationalityToName _secondSlave>>
+<<if _familyName>><<set _secondSlave.slaveSurname = _familyName>><</if>>
+<<set _secondSlave.birthSurname = _familyBirthSurname>>
+<<NationalityToAccent _secondSlave>>
+
+<<set _secondSlave.ID = _secondSlave.ID + 1000>>
+<<set _secondSlave.devotion -= random(1,3)>>
+<<set _secondSlave.oldDevotion = _secondSlave.devotion>>
+<<set _secondSlave.trust -= random(1,3)>>
+<<set _secondSlave.oldTrust = _secondSlave.trust>>
+<<set _secondSlave.health += 30>>
+<<set _secondSlave.boobs -= 100>>
+<<set _secondSlave.butt -= 1>>
+<<if _secondSlave.vagina > -1>><<set _secondSlave.vagina -= 1>><</if>>
+<<set _secondSlave.age = random(18,22)>>
+
+<<set _secondSlave.attrXX += random(-20,20)>>
+<<set _secondSlave.attrXX = Math.clamp(_secondSlave.attrXX, 0, 100)>>
+<<set _secondSlave.attrXY += random(-20,20)>>
+<<set _secondSlave.attrXY = Math.clamp(_secondSlave.attrXY, 0, 100)>>
+<<set _secondSlave.energy += random(-20,20)>>
+<<set _secondSlave.fetishStrength = random(0,90)>>
+<<set _secondSlave.fetish = either("none", "none", "none", "none", "none", "none", "submissive", "cumslut", "humiliation", "buttslut", "pregnancy", "sadist", "dom", "masochist")>>
+<<set _secondSlave.behavioralFlaw = either("none", "none", "none", "arrogant", "bitchy", "odd", "hates men", "hates women", "hates women", "anorexic", "masochist", "gluttonous", "devout", "liberated")>>
+<<if (_secondSlave.behavioralFlaw == "devout")>>
+	<<set _secondSlave.sexualFlaw = either("none", "repressed",  "shamefast", "apathetic")>>
+<<else>>
+	<<set _secondSlave.sexualFlaw = either("none", "none", "none", "none", "hates oral", "hates anal", "hates penetration", "repressed", "idealistic", "shamefast", "apathetic", "crude", "judgemental")>>
+<</if>>
+
+<<set _secondSlave.relation = "daughter">>
+<<set _secondSlave.relationTarget = _secondSlave.ID - 1000>>
+
+<<if _secondSlave.boobs > 200>>
+	<<set _secondSlave.boobs += random(-1, 1)*100>>
+<</if>>
+
+<<if _secondSlave.butt > 1>>
+	<<set _secondSlave.butt += random(-1, 1)>>
+<</if>>
+
+<<AddSlave _secondSlave>>

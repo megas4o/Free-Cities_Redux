@@ -1,0 +1,65 @@
+:: Lab Report [nobr]
+
+''Lab Report''<hr style="margin:0">
+<br>
+<<if ($researchLab.hired + $researchLab.menials) != 0>>
+	<<if $researchLab.research == "none" && $researchLab.manufacture == "none">>
+		Since the lab is currently not working on any projects it takes contract work and earns you @@.yellowgreen;¤<<print (($researchLab.hired * 3 + $researchLab.menials) * $researchLab.aiModule * 20)>>.@@
+		<<set $cash += (($researchLab.hired * 3 + $researchLab.menials) * $researchLab.aiModule * 20)>>
+	<<elseif $researchLab.research != "none">>
+		<<set $researchLab.productionTime -= (($researchLab.hired * 3) + ($researchLab.menials) * ($researchLab.aiModule))>>
+		<<if $researchLab.productionTime <= 0>>
+			Your lab staff have @@.green;completed@@ their project.
+			<<if $researchLab.research == "Basic prosthetics interface">>
+				<<set $researchLab.basicPLimbInterface = 1>>
+			<<elseif $researchLab.research == "Advanced prosthetics interface">>
+				<<set $researchLab.advPLimbInterface = 1>>
+			<<elseif $researchLab.research == "Basic prosthetic limbs">>
+				<<set $researchLab.basicPLimb = 1>>
+			<<elseif $researchLab.research == "Advanced sex limbs">>
+				<<set $researchLab.advSexPLimb = 1>>
+			<<elseif $researchLab.research == "Advanced beauty limbs">>
+				<<set $researchLab.advGracePLimb = 1>>
+			<<elseif $researchLab.research == "Advanced combat limbs">>
+				<<set $researchLab.advCombatPLimb = 1>>
+			<<elseif $researchLab.research == "Cybernetic limbs">>
+				<<set $researchLab.cyberneticPLimb = 1>>
+			<<elseif $researchLab.research == "Ocular implants">>
+				<<set $researchLab.ocularImplant = 1>>
+			/*<<elseif $researchLab.research == "Erectile implant">>
+				<<set $researchLab.erectileImplant = 1>>*/
+			<</if>>
+			<<set $researchLab.productionTime to 0, $researchLab.research to "none">>
+		<<else>>
+			Your lab staff are currently researching @@.yellow;$researchLab.research@@.
+		<</if>>
+	<<elseif $researchLab.manufacture != "none">>
+		<<set $researchLab.productionTime -= (($researchLab.hired * 3) + ($researchLab.menials) * ($researchLab.aiModule))>>
+		<<if $researchLab.productionTime <= 0>>
+			Your lab staff have @@.green;completed@@ their project.
+			<<if $researchLab.manufacture == "Basic prosthetics interface">>
+				<<set $stockpile.basicPLimbInterface += 1>>
+			<<elseif $researchLab.manufacture == "Advanced prosthetics interface">>
+				<<set $stockpile.advPLimbInterface += 1>>
+			<<elseif $researchLab.manufacture == "Basic prosthetic limbs">>
+				<<set $stockpile.basicPLimb += 1>>
+			<<elseif $researchLab.manufacture == "Advanced sex limbs">>
+				<<set $stockpile.advSexPLimb += 1>>
+			<<elseif $researchLab.manufacture == "Advanced beauty limbs">>
+				<<set $stockpile.advGracePLimb += 1>>
+			<<elseif $researchLab.manufacture == "Advanced combat limbs">>
+				<<set $stockpile.advCombatPLimb += 1>>
+			<<elseif $researchLab.manufacture == "Cybernetic limbs">>
+				<<set $stockpile.cyberneticPLimb += 1>>
+			<<elseif $researchLab.manufacture == "Ocular implants">>
+				<<set $stockpile.ocularImplant += 1>>
+			/*<<elseif $researchLab.manufacture == "Erectile implant">>
+				<<set $stockpile.erectileImplant += 1>>*/
+			<</if>>
+			<<set $researchLab.productionTime = 0, $researchLab.manufacture = "none">>
+		<<else>>
+			Your lab staff are currently working on @@.yellow;$researchLab.manufacture@@.
+		<</if>>
+	<</if>>
+<</if>>
+

@@ -1,0 +1,79 @@
+:: REM merger [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+
+<<set $slaveCompany = either("slaves", "capture", "entrapment")>>
+<<set $trainingCompany = either("training", "drug", "surgical")>>
+
+<<if $marketAssistantAnnounced>>Your market assistant<<elseif $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> constantly combs business records, tax receipts and the media for leads on opportunities for your corporation to take advantage of. Small businesses go under all the time, and with a large amount of cash on hand, your corporation can afford to step in and acquire them. This week, there are not one but two troubled organizations you could easily fold into your corporation.
+<br><br>
+
+<<if $slaveCompany == "slaves">>
+	The first is a minor slave holding company. A major deal with a troubled government just fell through, and they had depended on it going through to an unwise degree. They need to merge with a larger slaving concern immediately, but there's nothing at all wrong with their significant inventory of slaves.
+<<elseif $slaveCompany == "entrapment">>
+	The first is an old world telemarketing firm. In an attempt to survive in the changing economy, it turned its focus towards convincing desperate, ignorant or stupid people from the old world to accept voluntary enslavement, through a variety of entrapment procedures. It failed to make the transition successfully, but you could certainly continue its operations under your aegis.
+<<else>>
+	The first is a troubled mercenary company. After a spate of failed operations, the rank and file deposed their management and are now looking to merge with a better-run organization. The old leadership did not engage in enslavement activities, but the mercenaries have decided to turn their talents towards slaving for profit in conflict zones.
+<</if>>
+<br><br>
+
+<<if $trainingCompany == "training">>
+	The second is a small slave training firm. Slave training is a notoriously difficult business, since the maturation times on the merchandise can be extremely long, and the improvement in price can be marginal if the training does not prove highly successful. There's nothing inherently wrong with the business, they've simply hit a cash flow bottleneck and need to merge with a cash-rich organization like yours.
+<<elseif $trainingCompany == "drug">>
+	The second is a minor drug manufacturing concern. Their lab is highly mobile so as to be able to rapidly move across old world borders, one step ahead of drug control agencies. Their owner is looking to get out of the business after a profitable year, and is willing to sell his equipment and stock at very competitive prices.
+<<else>>
+	Medical malpractice continues to be a major source of trouble for surgeons in the old world. A plastic surgeon has just suffered defeat in a major legal case over implant ruptures. He's looking to make the transition to a more enlightened area, along with his inventory and staff.
+<</if>>
+<br><br>
+
+<span id="result">
+<<link "Absorb the first, slave-focused business">>
+	<<replace "#result">>
+	<<if $slaveCompany == "slaves">>
+		You immediately acquire the slave holding firm, cash out its hapless staff, and absorb its stock into your corporation. Most of the bewildered merchandise doesn't even understand that they have a new owner. Your corporation gained a small amount of general assets and quite a few slaves.
+		<<set $generalAssets += 1000>>
+		<<set $slaveAssets += 5000>>
+		<<set $corpPeopleEnslaved += 10>>
+	<<elseif $slaveCompany == "entrapment">>
+		You immediately acquire the telemarketing firm and clean out the deadwood, getting the business in Free Cities shape. Your corporation gained a small amount of general assets, a few slaves, and a large quantity of slave entrapment assets.
+		<<set $generalAssets += 1000>>
+		<<set $slaveAssets += 1000>>
+		<<set $corpPeopleEnslaved += 2>>
+		<<set $entrapmentAssets += 4000>>
+	<<else>>
+		You immediately acquire the mercenary company and ease their transition to conflict zone slaving. Your corporation gained a small quantity of general assets, a few slaves, and some powerful slave capture assets.
+		<<set $generalAssets += 1000>>
+		<<set $slaveAssets += 1000>>
+		<<set $corpPeopleEnslaved += 2>>
+		<<set $captureAssets += 4000>>
+	<</if>>
+	<<set $corpCash -= 50000>>
+	<</replace>>
+<</link>>
+<br>
+<<link "Absorb the second, improvement-focused business">>
+	<<replace "#result">>
+	<<if $trainingCompany == "training">>
+		The owners of the slave training firm are happy to hear that they'll be able to continue operations under the aegis of a better-run, richer corporation. Your corporation gained a small amount of general assets, a few slaves, and a large quantity of slave training assets.
+		<<set $generalAssets += 1000>>
+		<<set $slaveAssets += 1000>>
+		<<set $corpPeopleEnslaved += 2>>
+		<<set $trainingAssets += 4000>>
+	<<elseif $trainingCompany == "drug">>
+		The advanced mobile labs are across and into the Free Cities before anyone is the wiser, and not long after that they're turning out curatives and growth hormones. Your corporation gained a small amount of general assets, a few slaves, and a large quantity of drug-associated assets.
+		<<set $generalAssets += 1000>>
+		<<set $slaveAssets += 1000>>
+		<<set $corpPeopleEnslaved += 2>>
+		<<set $drugAssets += 4000>>
+	<<else>>
+		The surgeon decides to retire on the proceeds of the sale, wishing your corporation well. It was a smart decision; he can retire to the Free Cities on that sum of money, and remote surgery is killing surgeons' wages. Your corporation gained a small amount of general assets, a few slaves, and a large quantity of surgical assets.
+		<<set $generalAssets += 1000>>
+		<<set $slaveAssets += 1000>>
+		<<set $corpPeopleEnslaved += 2>>
+		<<set $surgicalAssets += 4000>>
+	<</if>>
+	<<set $corpCash -= 50000>>
+	<</replace>>
+<</link>>
+</span>

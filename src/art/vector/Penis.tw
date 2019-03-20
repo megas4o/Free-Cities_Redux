@@ -1,0 +1,45 @@
+:: Art_Vector_Penis_ [nobr]
+
+/* BEWARE: _art_have_boobs and _art_scale_factor interfere with Art_Vector_Boob_ */
+
+<<if _artSlave.dick >= 8>>
+  <<set _penisSize = 6>>
+<<elseif _artSlave.dick >= 7>>
+  <<set _penisSize = 5>>
+<<elseif _artSlave.dick >= 6>>
+  <<set _penisSize = 4>>
+<<elseif _artSlave.dick >= 5>>
+  <<set _penisSize = 3>>
+<<elseif _artSlave.dick >= 4>>
+  <<set _penisSize = 2>>
+<<elseif _artSlave.dick >= 2>>
+  <<set _penisSize = 1>>
+<<elseif _artSlave.dick >= 1>>
+  <<set _penisSize = 0>>
+<<else>>
+  <<set _penisSize = -1>>
+<</if>>
+
+<<if _penisSize >= 0>>
+  <<if canAchieveErection(_artSlave) && (_artSlave.dickAccessory != "chastity") && (_artSlave.dickAccessory != "combined chastity") >>
+    <<if (def _art_have_boobs) && (_art_scale_factor < 2.6)>>
+      /* only draw erect penis over boobs if boobs do not hide the penis' base */
+      <<set _art = "Art_Vector_Penis_"+_penisSize>>
+      <<include _art>>
+    <</if>>
+  <<else>>
+    <<if ndef _art_have_boobs >>
+      /* flaccid penises are always drawn behind the boobs */
+      <<set _art = "Art_Vector_Flaccid_"+_penisSize>>
+      <<include _art>>
+      <<if (_artSlave.dickAccessory == "chastity") || (_artSlave.dickAccessory == "combined chastity") >>
+        /* this draws chastity OVER latex catsuit. prndev finds this alright. */
+        <<set _art = "Art_Vector_Chastity_Cage_"+_penisSize>>
+        <<include _art>>
+      <</if>>
+    <</if>>
+  <</if>>
+<</if>>
+ 
+/* unset the variable for the next display */
+<<unset _art_have_boobs >>

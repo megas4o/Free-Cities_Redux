@@ -1,0 +1,520 @@
+:: MOD_Edit FS Cheat
+
+<<nobr>>
+	<<set $nextButton = "Continue">>
+	<<set $nextLink = "MOD_Edit FS Cheat Datatype Cleanup">>
+
+''Cheating Edit Future Society''
+	<br>
+	<<if $arcologies[0].FSSupremacist != "unset" && $arcologies[0].FSSupremacistRace != 0>>
+		<br>You are ''pursuing'' $arcologies[0].FSSupremacistRace Superiority.
+	<<else>>
+		<br>You are ''not pursuing'' Racial Supremacy.
+	<</if>>
+	<br>Supremacy (0-100 or unset): <<textbox "$arcologies[0].FSSupremacist" $arcologies[0].FSSupremacist>>
+	<br>Decoration: $arcologies[0].FSSupremacistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSSupremacistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSSupremacistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSSupremacistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSSupremacistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSSupremacistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Universal Enslavement: $arcologies[0].FSSupremacistLawME |
+	<<radiobutton "$arcologies[0].FSSupremacistLawME" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSSupremacistLawME" 1>> 1 (Passed.)
+
+	<br>Supremacist Race:
+	<<radiobutton "$arcologies[0].FSSupremacistRace" white>> White |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" asian>> Asian |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" latina>> Latina |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" middle eastern>> Middle Eastern |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" black>> Black |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" indo-aryan>> Indo-Aryan |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" amerindian>> Amerindian |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" pacific islander>> Pacific Islander |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" southern european>> Southern European |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" semitic>> Semitic |
+	<<radiobutton "$arcologies[0].FSSupremacistRace" mixed race>> Mixed Race
+
+	<br>[[Apply and reset Racial Subjugationism|MOD_Edit FS Cheat][$arcologies[0].FSSubjugationist = "unset", $arcologies[0].FSSubjugationistRace = 0, $arcologies[0].FSSubjugationistDecoration = 20, $arcologies[0].FSSubjugationistLawME = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSSubjugationist != "unset" && $arcologies[0].FSSubjugationistRace != 0>>
+		<br>''You are pursuing'' $arcologies[0].FSSubjugationistRace Inferiority.
+	<<else>>
+		<br>''You are not pursuing'' Racial Subjugationism.
+	<</if>>
+
+	<br>Subjugationism (0-100 or unset): <<textbox "$arcologies[0].FSSubjugationist" $arcologies[0].FSSubjugationist>>
+	<br>Decoration: $arcologies[0].FSSubjugationistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSSubjugationistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSSubjugationistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSSubjugationistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSSubjugationistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSSubjugationistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Universal Enslavement: $arcologies[0].FSSubjugationistLawME |
+	<<radiobutton "$arcologies[0].FSSubjugationistLawME" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSSubjugationistLawME" 1>> 1 (Passed.)
+
+	<br>Subjugationist Race:
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" white>> White |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" asian>> Asian |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" latina>> Latina |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" middle eastern>> Middle Eastern |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" black>> Black |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" indo-aryan>> Indo-Aryan |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" amerindian>> Amerindian |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" pacific islander>> Pacific Islander |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" southern european>> Southern European |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" semitic>> Semitic |
+	<<radiobutton "$arcologies[0].FSSubjugationistRace" mixed race>> Mixed Race
+
+	<br>[[Apply and reset Racial Supremacy|MOD_Edit FS Cheat][$arcologies[0].FSSupremacist = "unset",$arcologies[0].FSSupremacistRace = 0, $arcologies[0].FSSupremacistDecoration = 20, $arcologies[0].FSSupremacistLawME = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">>
+		<br>You are ''pursuing'' Gender Radicalism.
+	<<else>>
+		<br>''You are not pursuing'' Gender Radicalism.
+	<</if>>
+
+	<br>GenderRadicalism (0-100 or unset): <<textbox "$arcologies[0].FSGenderRadicalist" $arcologies[0].FSGenderRadicalist>>
+	<br>Decoration: $arcologies[0].FSGenderRadicalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSGenderRadicalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSGenderRadicalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSGenderRadicalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSGenderRadicalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSGenderRadicalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSGenderRadicalistLaw |
+	<<radiobutton "$arcologies[0].FSGenderRadicalistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSGenderRadicalistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Gender Traditionalism|MOD_Edit FS Cheat][$arcologies[0].FSGenderFundamentalist = "unset",$arcologies[0].FSGenderFundamentalistDecoration = 20,$arcologies[0].FSGenderFundamentalistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+		<br>You are ''pursuing'' Gender Traditionalism.
+	<<else>>
+		<br>''You are not pursuing'' Gender Traditionalism.
+	<</if>>
+
+	<br>Gender Traditionalism (0-100 or unset): <<textbox "$arcologies[0].FSGenderFundamentalist" $arcologies[0].FSGenderFundamentalist>>
+	<br>Decoration: $arcologies[0].FSGenderFundamentalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSGenderFundamentalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSGenderFundamentalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSGenderFundamentalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSGenderFundamentalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSGenderFundamentalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSGenderFundamentalistSMR |
+	<<radiobutton "$arcologies[0].FSGenderFundamentalistSMR" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSGenderFundamentalistSMR" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Gender Radicalism|MOD_Edit FS Cheat][$arcologies[0].FSGenderRadicalist = "unset",$arcologies[0].FSGenderRadicalistDecoration = 20,$arcologies[0].FSGenderRadicalistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		<br>You are ''pursuing'' Paternalism.
+	<<else>>
+		<br>''You are not pursuing'' Paternalism.
+	<</if>>
+
+	<br>Paternalism (0-100 or unset): <<textbox "$arcologies[0].FSPaternalist" $arcologies[0].FSPaternalist>>
+	<br>Decoration: $arcologies[0].FSPaternalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSPaternalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSPaternalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSPaternalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSPaternalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSPaternalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSPaternalistLaw |
+	<<radiobutton "$arcologies[0].FSPaternalistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSPaternalistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Degradationism|MOD_Edit FS Cheat][$arcologies[0].FSDegradationist = "unset",$arcologies[0].FSDegradationistDecoration = 20,$arcologies[0].FSDegradationistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSDegradationist != "unset">>
+		<br>You are ''pursuing'' Degradationism.
+	<<else>>
+		<br>''You are not pursuing'' Degradationism.
+	<</if>>
+
+	<br>Degradationism (0-100 or unset): <<textbox "$arcologies[0].FSDegradationist" $arcologies[0].FSDegradationist>>
+	<br>Decoration: $arcologies[0].FSDegradationistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSDegradationistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSDegradationistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSDegradationistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSDegradationistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSDegradationistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSDegradationistLaw |
+	<<radiobutton "$arcologies[0].FSDegradationistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSDegradationistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Paternalism|MOD_Edit FS Cheat][$arcologies[0].FSPaternalist = "unset",$arcologies[0].FSPaternalistDecoration = 20,$arcologies[0].FSPaternalistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSBodyPurist != "unset">>
+		<br>You are ''pursuing'' Body Purism.
+	<<else>>
+		<br>You are ''not pursuing'' Body Purism.
+	<</if>>
+
+	<br>Body Purism (0-100 or unset): <<textbox "$arcologies[0].FSBodyPurist" $arcologies[0].FSBodyPurist>>
+	<br>Decoration: $arcologies[0].FSBodyPuristDecoration
+
+	<br><<radiobutton "$arcologies[0].FSBodyPuristDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSBodyPuristDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSBodyPuristDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSBodyPuristDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSBodyPuristDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSBodyPuristLaw |
+	<<radiobutton "$arcologies[0].FSBodyPuristLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSBodyPuristLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Body Transformationism|MOD_Edit FS Cheat][$arcologies[0].FSTransformationFetishist = "unset",$arcologies[0].FSTransformationFetishistDecoration = 20,$arcologies[0].FSTransformationFetishistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">>
+		<br>You are ''pursuing'' Body Transformationism.
+	<<else>>
+		<br>You are ''not pursuing'' Body Transformationism.
+	<</if>>
+
+	<br>Body Transformationism (0-100 or unset): <<textbox "$arcologies[0].FSTransformationFetishist" $arcologies[0].FSTransformationFetishist>>
+	<br>Decoration: $arcologies[0].FSTransformationFetishistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSTransformationFetishistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSTransformationFetishistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSTransformationFetishistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSTransformationFetishistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSTransformationFetishistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSTransformationFetishistLaw |
+	<<radiobutton "$arcologies[0].FSTransformationFetishistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSTransformationFetishistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Body Purism|MOD_Edit FS Cheat][$arcologies[0].FSBodyPurist = "unset",$arcologies[0].FSBodyPuristDecoration = 20,$arcologies[0].FSBodyPuristLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+		<br>You are ''pursuing'' Youth Preferentialism.
+	<<else>>
+		<br>You are ''not pursuing'' Youth Preferentialism.
+	<</if>>
+
+	<br>(Setting resets Maturity Preferentialism)
+	<br>Youth Preferentialism (0-100 or unset): <<textbox "$arcologies[0].FSYouthPreferentialist" $arcologies[0].FSYouthPreferentialist>>
+	<br>Decoration: $arcologies[0].FSYouthPreferentialistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSYouthPreferentialistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSYouthPreferentialistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSYouthPreferentialistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSYouthPreferentialistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSYouthPreferentialistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSYouthPreferentialistLaw |
+	<<radiobutton "$arcologies[0].FSYouthPreferentialistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSYouthPreferentialistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Maturity Preferentialism|MOD_Edit FS Cheat][$arcologies[0].FSMaturityPreferentialist = "unset",$arcologies[0].FSMaturityPreferentialistDecoration = 20,$arcologies[0].FSMaturityPreferentialistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+		<br>You are ''pursuing'' Maturity Preferentialism.
+	<<else>>
+		<br>You are ''not pursuing'' Maturity Preferentialism.
+	<</if>>
+
+	<br>(Setting resets Youth Preferentialism)
+	<br>Maturity Preferentialism (0-100 or unset): <<textbox "$arcologies[0].FSMaturityPreferentialist" $arcologies[0].FSMaturityPreferentialist>>
+	<br>Decoration: $arcologies[0].FSMaturityPreferentialistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSMaturityPreferentialistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSMaturityPreferentialistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSMaturityPreferentialistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSMaturityPreferentialistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSMaturityPreferentialistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSMaturityPreferentialistLaw |
+	<<radiobutton "$arcologies[0].FSMaturityPreferentialistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSMaturityPreferentialistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Youth Preferentialism|MOD_Edit FS Cheat][$arcologies[0].FSYouthPreferentialist = "unset",$arcologies[0].FSYouthPreferentialistDecoration = 20,$arcologies[0].FSYouthPreferentialistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		<br>You are ''supporting'' Slimness Enthusiasm.
+	<<else>>
+		<br>You are ''not pursuing'' Slimness Enthusiasm.
+	<</if>>
+
+	<br>Slimness Enthusiasm (0-100 or unset): <<textbox "$arcologies[0].FSSlimnessEnthusiast" $arcologies[0].FSSlimnessEnthusiast>>
+	<br>Decoration: $arcologies[0].FSSlimnessEnthusiastDecoration
+
+	<br><<radiobutton "$arcologies[0].FSSlimnessEnthusiastDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSSlimnessEnthusiastDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSSlimnessEnthusiastDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSSlimnessEnthusiastDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSSlimnessEnthusiastDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Market Regulations: $arcologies[0].FSSlimnessEnthusiastSMR |
+	<<radiobutton "$arcologies[0].FSSlimnessEnthusiastSMR" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSSlimnessEnthusiastSMR" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Asset Expansionism|MOD_Edit FS Cheat][$arcologies[0].FSAssetExpansionist = "unset",$arcologies[0].FSAssetExpansionistDecoration = 20,$arcologies[0].FSAssetExpansionistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">>
+		<br>You are ''pursuing'' Asset Expansionism.
+	<<else>>
+		<br>You are ''not pursuing'' Asset Expansionism.
+	<</if>>
+
+	<br>(Setting resets Slimness Enthusiasm)
+	<br>Asset Expansionism (0-100 or unset): <<textbox "$arcologies[0].FSAssetExpansionist" $arcologies[0].FSAssetExpansionist>>
+	<br>Decoration: $arcologies[0].FSAssetExpansionistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSAssetExpansionistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSAssetExpansionistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSAssetExpansionistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSAssetExpansionistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSAssetExpansionistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Market Regulations: $arcologies[0].FSAssetExpansionistSMR |
+	<<radiobutton "$arcologies[0].FSAssetExpansionistSMR" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSAssetExpansionistSMR" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset Slimness Enthusiasm|MOD_Edit FS Cheat][$arcologies[0].FSSlimnessEnthusiast = "unset",$arcologies[0].FSSlimnessEnthusiastDecoration = 20,$arcologies[0].FSSlimnessEnthusiastLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSPastoralist != "unset">>
+		<br>You are ''pursuing'' Pastoralism.
+	<<else>>
+		<br>You are ''not pursuing'' Pastoralism.
+	<</if>>
+
+	<br>Pastoralism (0-100 or unset): <<textbox "$arcologies[0].FSPastoralist" $arcologies[0].FSPastoralist>>
+	<br>Decoration: $arcologies[0].FSPastoralistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSPastoralistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSPastoralistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSPastoralistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSPastoralistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSPastoralistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSPastoralistLaw |
+	<<radiobutton "$arcologies[0].FSPastoralistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSPastoralistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply|MOD_Edit FS Cheat]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+		<br>You are ''pursuing'' Physical Idealism.
+	<<else>>
+		<br>You are ''not pursuing'' Physical Idealism.
+	<</if>>
+
+	<br>Physical Idealism (0-100 or unset): <<textbox "$arcologies[0].FSPhysicalIdealist" $arcologies[0].FSPhysicalIdealist>>
+	<br>Decoration: $arcologies[0].FSPhysicalIdealistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSPhysicalIdealistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSPhysicalIdealistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSPhysicalIdealistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSPhysicalIdealistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSPhysicalIdealistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Market Regulations: $arcologies[0].FSPhysicalIdealistSMR |
+	<<radiobutton "$arcologies[0].FSPhysicalIdealistSMR" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSPhysicalIdealistSMR" 1>> 1 (Passed.)
+
+	<br>[[Apply|MOD_Edit FS Cheat]]
+<</nobr>>
+
+<<nobr>>
+
+	<<if $arcologies[0].FSChattelReligionist != "unset">>
+		<br>You are ''pursuing'' Chattel Religionism.
+	<<else>>
+		<br>You are ''not pursuing'' Chattel Religionism.
+	<</if>>
+
+	<br>Chattel Religionism (0-100 or unset): <<textbox "$arcologies[0].FSChattelReligionist" $arcologies[0].FSChattelReligionist>>
+	<br>Decoration: $arcologies[0].FSChattelReligionistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSChattelReligionistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSChattelReligionistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSChattelReligionistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSChattelReligionistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSChattelReligionistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSChattelReligionistLaw |
+	<<radiobutton "$arcologies[0].FSChattelReligionistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSChattelReligionistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply|MOD_Edit FS Cheat]]
+<</nobr>>
+
+<<nobr>>
+
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		<br>You are ''pursuing'' Roman Revivalism.
+	<<else>>
+		<br>You are ''not pursuing'' Roman Revivalism.
+	<</if>>
+
+	<br>Roman Revivalism (0-100 or unset): <<textbox "$arcologies[0].FSRomanRevivalist" $arcologies[0].FSRomanRevivalist>>
+	<br>Decoration: $arcologies[0].FSRomanRevivalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSRomanRevivalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSRomanRevivalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSRomanRevivalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSRomanRevivalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSRomanRevivalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSRomanRevivalistLaw |
+	<<radiobutton "$arcologies[0].FSRomanRevivalistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSRomanRevivalistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset other Revivalisms|MOD_Edit FS Cheat][$arcologies[0].FSAztecRevivalist = "unset",$arcologies[0].FSAztecRevivalistDecoration = 20,$arcologies[0].FSAztecRevivalistLaw = 0,$arcologies[0].FSEgyptianRevivalist = "unset",$arcologies[0].FSEgyptianRevivalistDecoration = 20,$arcologies[0].FSEgyptianRevivalistLaw = 0,$arcologies[0].FSEdoRevivalistDecoration = 20,$arcologies[0].FSEdoRevivalistLaw = 0,$arcologies[0].FSArabianRevivalist = "unset",$arcologies[0].FSArabianRevivalistDecoration = 20,$arcologies[0].FSArabianRevivalistLaw = 0,$arcologies[0].FSChineseRevivalist = "unset",$arcologies[0].FSChineseRevivalistDecoration = 20,$arcologies[0].FSChineseRevivalistLaw = 0]]
+	<</nobr>>
+	+
+	+<<nobr>>
+	+
+	+	<<if $arcologies[0].FSAztecRevivalist != "unset">>
+	+		<br>You are ''pursuing'' Aztec Revivalism.
+	+	<<else>>
+	+		<br>You are ''not pursuing'' Aztec Revivalism.
+	+	<</if>>
+	+
+	+	<br>Aztec Revivalism (0-100 or unset): <<textbox "$arcologies[0].FSAztecRevivalist" $arcologies[0].FSAztecRevivalist>>
+	+	<br>Decoration: $arcologies[0].FSAztecRevivalistDecoration
+	+
+	+	<br><<radiobutton "$arcologies[0].FSAztecRevivalistDecoration" 20>> 20 (Minimum)
+	+	<br><<radiobutton "$arcologies[0].FSAztecRevivalistDecoration" 40>> 40 (Media support.)
+	+	<br><<radiobutton "$arcologies[0].FSAztecRevivalistDecoration" 60>> 60 (Decorated public spaces.)
+	+	<br><<radiobutton "$arcologies[0].FSAztecRevivalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	+	<br><<radiobutton "$arcologies[0].FSAztecRevivalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+	+
+	+	<br>Law: $arcologies[0].FSAztecRevivalistLaw |
+	+	<<radiobutton "$arcologies[0].FSAztecRevivalistLaw" 0>> 0 (Not passed.)
+	+	| <<radiobutton "$arcologies[0].FSAztecRevivalistLaw" 1>> 1 (Passed.)
+	+
+	+	<br>[[Apply and reset other Revivalisms|MOD_Edit FS Cheat][$arcologies[0].FSRomanRevivalist = "unset",$arcologies[0].FSRomanRevivalistDecoration = 20,$arcologies[0].FSRomanRevivalistLaw = 0,$arcologies[0].FSEgyptianRevivalist = "unset",$arcologies[0].FSEgyptianRevivalistDecoration = 20,$arcologies[0].FSEgyptianRevivalistLaw = 0,$arcologies[0].FSEdoRevivalistDecoration = 20,$arcologies[0].FSEdoRevivalistLaw = 0,$arcologies[0].FSArabianRevivalist = "unset",$arcologies[0].FSArabianRevivalistDecoration = 20,$arcologies[0].FSArabianRevivalistLaw = 0,$arcologies[0].FSChineseRevivalist = "unset",$arcologies[0].FSChineseRevivalistDecoration = 20,$arcologies[0].FSChineseRevivalistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+		<br>You are ''pursuing'' Egyptian Revivalism.
+	<<else>>
+		<br>You are ''not pursuing'' Egyptian Revivalism.
+	<</if>>
+
+	<br>Egyptian Revivalism (0-100 or unset): <<textbox "$arcologies[0].FSEgyptianRevivalist" $arcologies[0].FSEgyptianRevivalist>>
+	<br>Decoration: $arcologies[0].FSEgyptianRevivalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSEgyptianRevivalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSEgyptianRevivalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSEgyptianRevivalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSEgyptianRevivalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSEgyptianRevivalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSEgyptianRevivalistLaw |
+	<<radiobutton "$arcologies[0].FSEgyptianRevivalistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSEgyptianRevivalistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset other Revivalisms|MOD_Edit FS Cheat][$arcologies[0].FSRomanRevivalist = "unset",$arcologies[0].FSRomanRevivalistDecoration = 20,$arcologies[0].FSRomanRevivalistLaw = 0,$arcologies[0].FSAztecRevivalist = "unset",$arcologies[0].FSAztecRevivalistDecoration = 20,$arcologies[0].FSAztecRevivalistLaw = 0,$arcologies[0].FSEdoRevivalistDecoration = 20,$arcologies[0].FSEdoRevivalistLaw = 0,$arcologies[0].FSArabianRevivalist = "unset",$arcologies[0].FSArabianRevivalistDecoration = 20,$arcologies[0].FSArabianRevivalistLaw = 0,$arcologies[0].FSChineseRevivalist = "unset",$arcologies[0].FSChineseRevivalistDecoration = 20,$arcologies[0].FSChineseRevivalistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSEdoRevivalist != "unset">>
+		<br>You are ''pursuing'' Edo Revivalism.
+	<<else>>
+		<br>You are ''not pursuing'' Edo Revivalism.
+	<</if>>
+
+	<br>Edo Revivalism (0-100 or unset): <<textbox "$arcologies[0].FSEdoRevivalist" $arcologies[0].FSEdoRevivalist>>
+	<br>Decoration: $arcologies[0].FSEdoRevivalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSEdoRevivalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSEdoRevivalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSEdoRevivalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSEdoRevivalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSEdoRevivalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSEdoRevivalistLaw |
+	<<radiobutton "$arcologies[0].FSEdoRevivalistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSEdoRevivalistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset other Revivalisms|MOD_Edit FS Cheat][$arcologies[0].FSRomanRevivalist = "unset",$arcologies[0].FSRomanRevivalistDecoration = 20,$arcologies[0].FSRomanRevivalistLaw = 0,$arcologies[0].FSAztecRevivalist = "unset",$arcologies[0].FSAztecRevivalistDecoration = 20,$arcologies[0].FSAztecRevivalistLaw = 0,$arcologies[0].FSEgyptianRevivalistDecoration = 20,$arcologies[0].FSEgyptianRevivalistLaw = 0,$arcologies[0].FSArabianRevivalist = "unset",$arcologies[0].FSArabianRevivalistDecoration = 20,$arcologies[0].FSArabianRevivalistLaw = 0,$arcologies[0].FSChineseRevivalist = "unset",$arcologies[0].FSChineseRevivalistDecoration = 20,$arcologies[0].FSChineseRevivalistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSArabianRevivalist != "unset">>
+		<br>You are ''pursuing'' Arabian Revivalism.
+	<<else>>
+		<br>You are ''not pursuing'' Arabian Revivalism.
+	<</if>>
+
+	<br>Arabian Revivalism (0-100 or unset): <<textbox "$arcologies[0].FSArabianRevivalist" $arcologies[0].FSArabianRevivalist>>
+	<br>Decoration: $arcologies[0].FSArabianRevivalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSArabianRevivalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSArabianRevivalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSArabianRevivalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSArabianRevivalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSArabianRevivalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSArabianRevivalistLaw |
+	<<radiobutton "$arcologies[0].FSArabianRevivalistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSArabianRevivalistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset other Revivalisms|MOD_Edit FS Cheat][$arcologies[0].FSRomanRevivalist = "unset",$arcologies[0].FSRomanRevivalistDecoration = 20,$arcologies[0].FSRomanRevivalistLaw = 0,$arcologies[0].FSAztecRevivalist = "unset",$arcologies[0].FSAztecRevivalistDecoration = 20,$arcologies[0].FSAztecRevivalistLaw = 0,$arcologies[0].FSEgyptianRevivalistDecoration = 20,$arcologies[0].FSEgyptianRevivalistLaw = 0,$arcologies[0].FSEdoRevivalist = "unset",$arcologies[0].FSEdoRevivalistDecoration = 20,$arcologies[0].FSEdoRevivalistLaw = 0,$arcologies[0].FSChineseRevivalist = "unset",$arcologies[0].FSChineseRevivalistDecoration = 20,$arcologies[0].FSChineseRevivalistLaw = 0]]
+<</nobr>>
+
+<<nobr>>
+	<<if $arcologies[0].FSChineseRevivalist != "unset">>
+		<br>You are ''pursuing'' Chinese Revivalism.
+	<<else>>
+		<br>You are ''not pursuing'' Chinese Revivalism.
+	<</if>>
+
+	<br>Chinese Revivalism (0-100 or unset): <<textbox "$arcologies[0].FSChineseRevivalist" $arcologies[0].FSChineseRevivalist>>
+	<br>Decoration: $arcologies[0].FSChineseRevivalistDecoration
+
+	<br><<radiobutton "$arcologies[0].FSChineseRevivalistDecoration" 20>> 20 (Minimum)
+	<br><<radiobutton "$arcologies[0].FSChineseRevivalistDecoration" 40>> 40 (Media support.)
+	<br><<radiobutton "$arcologies[0].FSChineseRevivalistDecoration" 60>> 60 (Decorated public spaces.)
+	<br><<radiobutton "$arcologies[0].FSChineseRevivalistDecoration" 80>> 80 (Slaves stationed in public spaces.)
+	<br><<radiobutton "$arcologies[0].FSChineseRevivalistDecoration" 100>> 100 (Remodeled exterior; Fully customized.)
+
+	<br>Law: $arcologies[0].FSChineseRevivalistLaw |
+	<<radiobutton "$arcologies[0].FSChineseRevivalistLaw" 0>> 0 (Not passed.)
+	| <<radiobutton "$arcologies[0].FSChineseRevivalistLaw" 1>> 1 (Passed.)
+
+	<br>[[Apply and reset other Revivalisms|MOD_Edit FS Cheat][$arcologies[0].FSRomanRevivalist = "unset",$arcologies[0].FSRomanRevivalistDecoration = 20,$arcologies[0].FSRomanRevivalistLaw = 0,$arcologies[0].FSAztecRevivalist = "unset",$arcologies[0].FSAztecRevivalistDecoration = 20,$arcologies[0].FSAztecRevivalistLaw = 0,$arcologies[0].FSEgyptianRevivalistDecoration = 20,$arcologies[0].FSEgyptianRevivalistLaw = 0,$arcologies[0].FSEdoRevivalist = "unset",$arcologies[0].FSEdoRevivalistDecoration = 20,$arcologies[0].FSEdoRevivalistLaw = 0,$arcologies[0].FSArabianRevivalist = "unset",$arcologies[0].FSArabianRevivalistDecoration = 20,$arcologies[0].FSArabianRevivalistLaw = 0]]
+<</nobr>>\

@@ -1,0 +1,57 @@
+:: Terrain Intro [nobr]
+
+<<if $targetArcology.type != "New">>
+	<<set $terrain = $targetArcology.terrain, $continent = $targetArcology.continent>>
+	<<switch $targetArcology.type>>
+	<<case "RomanRevivalist">><<set $language = "Latin">>
+	<<case "AztecRevivalist">><<set $language = "Nahuatl">>
+	<<case "EgyptianRevivalist">><<set $language = "Ancient Egyptian">>
+	<<case "EdoRevivalist">><<set $language = "Japanese">>
+	<<case "ArabianRevivalist">><<set $language = "Arabic">>
+	<<case "ChineseRevivalist">><<set $language = "Chinese">>
+	<<default>>
+		<<switch $terrain>>
+		<<case "oceanic" "North America" "Australia">><<set $language = "English">>
+		<<case "South America">><<set $language = "Spanish">>
+		<<case "the Middle East" "Africa">><<set $language = "Arabic">>
+		<<case "Asia">><<set $language = "Chinese">>
+		<<case "Europe">><<set $language = "German">>
+		<</switch>>
+	<</switch>>
+	<<goto "Intro Summary">>
+<<else>>
+
+The Free Cities are located wherever the rule of law is weak enough or permissive enough to allow a small area to secede, and where founders can afford to buy an area on which to build.
+<br><br>
+Many Free Cities are therefore located in marginal, rural terrain. Founding a Free City in such an area is easy, and can usually be accomplished with the indifference or even connivance of the old country from which it secedes. After all, the potential commercial benefits are great, and the loss of underused land is only significant in the moral sense.
+<br><br>
+Some Free Cities are located on water. Though some areas of shallow sea over the continental shelves hide valuable resources, others are neglected. Arcologies are such massive structures that it is very possible to design them to float anchored to the seabed.
+<br><br>
+Finally, a few Free Cities have been carved out from old world cities. Urban decay has left the hearts of many cities ripe for this. Many old world countries resist this kind of secession, but this rarest, smallest, and densest kind of Free City can offer its surrounding nation a great deal of economic advantage.
+<br><br>
+@@.orange;Which kind of Free City hosts your arcology?@@
+<br>
+
+<br>[[Urban|Location Intro][$terrain = "urban"]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.yellow;Low@@ minimum slave value and initial @@.yellow;bear market@@ for slaves.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.green;High@@ ease of commerce with the old world.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.green;High@@ access to refugees and other desperate people.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.red;Low@@ cultural independence.
+<br>[[Rural|Location Intro][$terrain = "rural"]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.yellow;High@@ minimum slave value and initial @@.yellow;bull market@@ for slaves.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Moderate ease of commerce with the old world.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Moderate access to refugees and other desperate people.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Moderate cultural independence.
+<br>[[Marine|Location Intro][$terrain = "marine"]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Moderate minimum slave value and initially balanced market for slaves.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Moderate ease of commerce with the old world.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.red;Low@@ access to refugees and other desperate people.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.green;High@@ cultural independence.
+<br>[[Oceanic|Intro Summary][$terrain = "oceanic"]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.yellow;High@@ minimum slave value and initial @@.yellow;bull market@@ for slaves.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Moderate ease of commerce with the old world.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.red;Very low@@ access to refugees and other desperate people.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;@@.green;Very high@@ cultural independence.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Ensures access to slaves from all over the world and will not associate the arcology with a continent.
+
+<</if>>

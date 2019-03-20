@@ -1,0 +1,346 @@
+:: SE independence day
+
+<<nobr>>
+
+<<set $nextLink = "Scheduled Event">>
+<<set $nextButton = "Continue">>
+<<set $independenceDay = 0>>
+
+Independence Day is this week.
+<br><br>
+In the Free Cities, Independence Day falls on the day when the Free City achieved its de facto freedom from the laws of the old world. In most of the Free Cities, including yours, this was an unspectacular event that involved a lot of signing of contracts and not much storming of bastions. Nevertheless, this is the anniversary of the day that this tiny patch of earth became truly free, and its inhabitants became free to exercise their dominion over the freedom of others. It will pass unnoticed and uncelebrated unless you take action to make it special.
+
+<</nobr>>\
+
+<span id="result">
+<<link "Give a speech">>
+	<<replace "#result">>
+	<<nobr>>
+	You broadcast a speech to mark the occasion, using the arcology's media systems to reach a wide audience. It is unnecessary to make an effort to ensure attention;
+	<<if $arcologies[0].FSChattelReligionistLaw == 1>>
+		the Prophet's word always receives complete attention on the rare occasions that it is publicly given.
+	<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.9>>
+		the Keeper of the Blade and Chalice can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.9>>
+		the First Consul can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.9>>
+		the Head <<if $PC.title == 1>>Priest<<else>>Priestess<</if>> may demand unwavering faith and sacrifice for the honor of the gods.
+	<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.9>>
+		<<if $PC.title == 1>>
+		the Living God can command complete attention from his arcology the moment he wishes.
+		<<else>>
+		the Living Goddess can command complete attention from her arcology the moment she wishes.
+		<</if>>
+	<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.9>>
+		<<if $PC.title == 1>>
+		the Emperor and Descendant of Amaterasu can command complete attention from his arcology the moment he wishes.
+		<<else>>
+		the Amaterasu Reborn can command complete attention from her arcology the moment she wishes.
+		<</if>>
+	<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.9>>
+		<<if $PC.title == 1>>
+		the Caliph can command complete attention from his arcology the moment he wishes.
+		<<else>>
+		the Handmaiden of Allah can command complete attention from her arcology the moment she wishes.
+		<</if>>x
+	<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.9>>
+		<<if $PC.title == 1>>
+		the Emperor and Holder of the Mandate of Heaven can command complete attention from his arcology the moment he wishes.
+		<<else>>
+		the Empress and Holder of the Mandate of Heaven can command complete attention from her arcology the moment she wishes.
+		<</if>>
+	<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.9>>
+		the Grand Champion of the Blood can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.9>>
+		the Grand Overseer of the Inferior Race can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.9>>
+		the Buttfucker of All Slaves can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.9>>
+		<<if $PC.title == 1>>
+		the Father to the City can command complete attention from his arcology the moment he wishes.
+		<<else>>
+		the Mother to the City can command complete attention from her arcology the moment she wishes.
+		<</if>>
+	<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.9>>
+		<<if $PC.title == 1>>
+		the Protector to All Slaves can command complete attention from his arcology the moment he wishes.
+		<<else>>
+		the Protectrix to All Slaves can command complete attention from her arcology the moment she wishes.
+		<</if>>
+	<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.9>>
+		the Holder of the Rod and the Lash can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.9>>
+		the Purifier of the Breasts can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.9>>
+		the Expander of the Breasts can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.9>>
+		<<if $PC.title == 1>>
+		the Master of Stock can command complete attention from his arcology the moment he wishes.
+		<<else>>
+		the Mistress of Stock can command complete attention from her arcology the moment she wishes.
+		<</if>>
+	<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.9>>
+		the beloved of Brodin can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.9>>
+		the Grand Preserver of MILFS can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.9>>
+		the Keeper of the Magnificent Young Harem can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.6>>
+		as the Champion of the Faith can command complete attention from <<if $PC.title == 1>>his arcology the moment he<<else>>her arcology the moment she<</if>> wishes.
+	<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.6>>
+		as the Aedile, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.6>>
+		as the Tlatcani, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.6>>
+		as the Pharaoh, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.6>>
+		as the Shogun, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.6>>
+		<<if $PC.title == 1>>
+		as the Sultan, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<<else>>
+		as the Sultana, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<</if>>
+	<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.6>>
+		<<if $PC.title == 1>>
+		as the Emperor, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<<else>>
+		as the Empress, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<</if>>
+	<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.6>>
+		as the Champion of the Blood, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.6>>
+		as the Overseer of the Inferior Race, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.6>>
+		as the Sodomizer of the Traps, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.6>>
+		as the Defender of Women, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.6>>
+		<<if $PC.title == 1>>
+		as the Benefactor of Slaves, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<<else>>
+		as the Benefactrix of Slaves, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<</if>>
+	<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.6>>
+		as the Subduer of Slaves, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.6>>
+		as the Discerning, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.6>>
+		as the Expander, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.6>>
+		as the Rancher, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.6>>
+		<<if $PC.title == 1>>
+		as he of the godlike Body, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<<else>>
+		as she of the godlike Body, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+		<</if>>
+	<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.6>>
+		as the Fucker of MILFS, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.6>>
+		as the Keeper of Virgins, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<<else>>
+		as the owner of the arcology, you command enough respect that your citizens will listen to you so long as you do not abuse the privilege.
+	<</if>>
+	After you are announced, you greet the citizens of your arcology and begin by reviewing the state of things. You commend those most responsible for the arcology's current prosperity, and express confidence that it will continue to improve.
+	<<if $daughtersVictory >= 1>>
+		You offer brief remembrance of those lost during the Daughters' attack on the arcology, and pledge that all enemies, foreign and domestic, will be similarly defeated.
+	<<elseif $invasionVictory >= 1>>
+		You remind your citizens of the ongoing threat from the degenerating old world, and pledge to defeat all attacks as you helped defeat the recent invasion.
+	<<elseif $nationHate > 1>>
+		You express resolution in the face of threats to the arcology, and pledge that they will be dealt with efficiently.
+	<</if>>
+	<<if ($mercenaries >= 5)>>
+		You mention the mercenaries that have become an integral part of arcology society, and compliment their efficiency.
+	<<elseif ($mercenaries >= 3)>>
+		You mention the mercenaries that have a major place in the security of the arcology, and add that you hope they will become an even more integral part of its society.
+	<</if>>
+	<br><br>
+	Of course, you do not neglect the opportunity to improve your own position.
+	<<if $PC.career == "wealth">>
+		You recall your own wealthy background, cleverly drawing parallels between yourself and your richest citizens.
+	<<elseif $PC.career == "capitalist">>
+		You briefly remind your listeners of your background as a successful capitalist.
+	<<elseif $PC.career == "mercenary">>
+		You share an impressive anecdote from your background as a mercenary; the moral of the story is that you know how to keep your head.
+	<<elseif $PC.career == "slaver">>
+		You share a cruelly amusing anecdote from your background as a slaver; the moral of the story is that you're not one to spare the lash when it's necessary.
+	<<elseif $PC.career == "engineer">>
+		You reference your background as an arcology engineer, cleverly making it obvious that you know this huge building down to its very bones.
+	<<elseif $PC.career == "medicine">>
+		You share an impressive anecdote from your background as a surgeon; the moral of the story is that you can be trusted with a delicate operation.
+	<<elseif $PC.career == "celebrity">>
+		You share a hilarious anecdote from your background as a celebrity, one which the old world tabloids never did learn about, until now.
+	<<else>>
+		You cast yourself as one of the leading citizens of the Free Cities, from the beginning.
+	<</if>>
+	Transitioning to the future, you supply fresh fuel for rumors about how you managed to acquire the arcology by expressing confidence that
+	<<if $PC.rumor == "wealth">>
+		sufficient wealth
+	<<elseif $PC.rumor == "diligence">>
+		hard work and diligence
+	<<elseif $PC.rumor == "force">>
+		a good supply of ammunition
+	<<elseif $PC.rumor == "social engineering">>
+		cultural development
+	<<else>>
+		positivity
+	<</if>>
+	will remain the answer to any new crises that may confront the arcology.
+	<br><br>
+	With this bridge, you move to arcology culture.
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		<<if $arcologies[0].FSRomanRevivalist >= 90>>
+		You speak warmly of the state of New Rome, and express a hope that Roman honor and justice shall once again last a thousand years.
+		<<elseif $arcologies[0].FSRomanRevivalist >= 40>>
+		You ask that your citizens will support Roman values.
+		<</if>>
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		<<if $arcologies[0].FSAztecRevivalist >= 90>>
+		You speak warmly of the state of the new golden City of the Gods, and express a hope that this time, the empire will stand forever.
+		<<elseif $arcologies[0].FSAztecRevivalist >= 40>>
+		You ask that your citizens strengthen their belief in the Aztec Gods.
+		<</if>>
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		<<if $arcologies[0].FSEgyptianRevivalist >= 90>>
+		You speak warmly of the state of the new land of the Nile, and express a hope that that most enduring of cultures shall endure again.
+		<<elseif $arcologies[0].FSEgyptianRevivalist >= 40>>
+		You ask that your citizens will support the beauty of ancient Egypt.
+		<</if>>
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		<<if $arcologies[0].FSEdoRevivalist >= 90>>
+		You speak warmly of the state of the new land of Amaterasu, and express a hope that honor and virtue shall never cease their advance towards perfection.
+		<<elseif $arcologies[0].FSEdoRevivalist >= 40>>
+		You ask that your citizens will support the honor and beauty of Edo culture.
+		<</if>>
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		<<if $arcologies[0].FSArabianRevivalist >= 90>>
+		You speak warmly of the state of the new Caliphate, and express a hope that its prosperity shall continue to encompass more people each day.
+		<<elseif $arcologies[0].FSArabianRevivalist >= 40>>
+		You ask that your citizens will continue to enjoy the good works of the new Caliphate.
+		<</if>>
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		<<if $arcologies[0].FSChineseRevivalist >= 90>>
+		You speak warmly of the state of the Middle Kingdom, and express a hope that it will continue to be worthy of the Mandate of Heaven.
+		<<elseif $arcologies[0].FSChineseRevivalist >= 40>>
+		You ask that your citizens will continue to support your pursuit of the Mandate of Heaven.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSChattelReligionist != "unset">>
+		<<if $arcologies[0].FSChattelReligionist >= 90>>
+		You speak warmly of the spiritual state of the arcology, and express a hope that enjoyment of the pleasure of creation through the holy office of sexual slavery will be perpetual.
+		<<elseif $arcologies[0].FSChattelReligionist >= 40>>
+		You ask that your citizens will continue to support the new faith by regularly fucking their sex slaves.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSDegradationist != "unset">>
+		<<if $arcologies[0].FSDegradationist >= 90>>
+		You speak warmly of the degraded state of the arcology's slaves, and express a hope that your citizens will remain vigilant on this matter.
+		<<elseif $arcologies[0].FSDegradationist >= 40>>
+		You ask that your citizens will continue to be inventive in coming up with new ways to degrade sex slaves.
+		<</if>>
+	<<elseif $arcologies[0].FSPaternalist != "unset">>
+		<<if $arcologies[0].FSPaternalist >= 90>>
+		You speak warmly of the creditable state of the arcology's slaves, and express a hope that their improvement will never stop.
+		<<elseif $arcologies[0].FSPaternalist >= 40>>
+		You ask that your citizens will make an effort to leave at least one slave happier tonight than she was this morning.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+		<<if $arcologies[0].FSYouthPreferentialist >= 90>>
+		You almost lose track of time rhapsodizing about young girls, but it's not like your citizens ever tire of the subject.
+		<<elseif $arcologies[0].FSYouthPreferentialist >= 40>>
+		You rhapsodize about how wonderful sex with a tight young girl is, and encourage citizens who haven't done so to give it a try.
+		<</if>>
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		<<if $arcologies[0].FSMaturityPreferentialist >= 90>>
+		You almost lose track of time rhapsodizing about mature women, but it's not like your citizens ever tire of the subject.
+		<<elseif $arcologies[0].FSMaturityPreferentialist >= 40>>
+		You rhapsodize about how wonderful sex with a mature woman is, and encourage citizens who haven't done so to give it a try.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">>
+		<<if $arcologies[0].FSAssetExpansionist >= 90>>
+		You rhapsodize on the wonderful display of tits and ass you see daily, and affirm that despite this, no boob is ever big enough, and the expansion should never stop.
+		<<elseif $arcologies[0].FSAssetExpansionist >= 40>>
+		You request that your citizens continue to do their best to expand their slaves' breasts.
+		<</if>>
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		<<if $arcologies[0].FSSlimnessEnthusiast >= 90>>
+		You rhapsodize on the wonderfully girlish bodies you see daily, and affirm that the arcology will continue to make its own way in slave fashion.
+		<<elseif $arcologies[0].FSSlimnessEnthusiast >= 40>>
+		You request that your citizens continue to do their best to keep their slaves fit and slim.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">>
+		<<if $arcologies[0].FSTransformationFetishist >= 90>>
+		You note some of the most interesting transformations you've seen in the arcology, and hold them up as examples of surgical inventiveness.
+		<<elseif $arcologies[0].FSTransformationFetishist >= 40>>
+		You advocate for continued research and development into new ways to surgically transform slaves.
+		<</if>>
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+		<<if $arcologies[0].FSBodyPurist >= 90>>
+		You note your approval of the arcology's progress in achieving slave beauty without polluting slave bodies, and hope it will never stop.
+		<<elseif $arcologies[0].FSBodyPurist >= 40>>
+		You advocate for continued research and development into less invasive ways of altering slaves' bodies.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">>
+		<<if $arcologies[0].FSGenderRadicalist >= 90>>
+		You review your arcology's near-perfect eagerness to treat every slave like the girl she is with approval.
+		<<elseif $arcologies[0].FSGenderRadicalist >= 40>>
+		You argue for continued progress towards a society that is willing to accept anyone who sucks dick or takes a buttfuck as a girl.
+		<</if>>
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		<<if $arcologies[0].FSGenderFundamentalist >= 90>>
+		You review your arcology's refinement of old world gender mores into a future populated by beautiful slave women with approval.
+		<<elseif $arcologies[0].FSGenderFundamentalist >= 40>>
+		You argue for continued progress towards a society that maintains all the best parts of old world gender mores.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+		<<if $arcologies[0].FSPhysicalIdealist >= 90>>
+		You wax poetic on the physical achievements of your arcology, but caution your citizens that perfection in this area is impossible: one must always strive.
+		<<elseif $arcologies[0].FSPhysicalIdealist >= 40>>
+		You review some recent physical achievements by notable slaves, compliment their owners, and express a hope for continued physical development.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSSupremacist != "unset">>
+		<<if $arcologies[0].FSSupremacist >= 90>>
+		You express confidence in the state of the $arcologies[0].FSSupremacistRace race in your arcology, and express the hope that it will serve as a worldwide model.
+		<<elseif $arcologies[0].FSSupremacist >= 40>>
+		You compliment the $arcologies[0].FSSupremacistRace citizens who have done the most work to exalt their race over others.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSSubjugationist != "unset">>
+		<<if $arcologies[0].FSSubjugationist >= 90>>
+		You mention the state of the $arcologies[0].FSSubjugationistRace race here with approval, but ask your citizens to continue to support you here, since vigilance will never be unnecessary.
+		<<elseif $arcologies[0].FSSubjugationist >= 40>>
+		You commend your citizens for their attention to subjugation of the $arcologies[0].FSSubjugationistRace race, and exhort them to greater efforts there.
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSPastoralist != "unset">>
+		<<if $arcologies[0].FSPastoralist >= 90>>
+		You communicate your pride in the state of cow husbandry in your arcology, and hope that its global cachet for quality will continue to grow.
+		<<elseif $arcologies[0].FSPastoralist >= 40>>
+		You tell the touching story of the arcology's most loving cow, and offer some lessons to slaveowners from it.
+		<</if>>
+	<</if>>
+	You conclude by briefly recounting the story of the founding of the Free City, the building of the arcology, and what is publicly known of your accession to ownership, before a ringing close that reminds your citizens that they have the freedom to decide where their stories in the Free Cities go from there. Your speech is @@.green;very well received.@@
+	<<set $rep += 200>>
+	<</nobr>>
+	<</replace>>
+<</link>>
+</span>\
+\
+<span id="result2">
+<<link "Pay for a lavish fireworks display">>
+	<<replace "#result2">>
+	<<nobr>>
+	<<set $cash -= 10000>>
+	Once darkness falls outside the arcology, a traditional fireworks display erupts from mortars mounted on your penthouse balconies. The noise and light @@.green;delights@@ your citizens, terrifies the arcology's stupider slaves, and serves a useful ancillary purpose in defense preparedness. The arcology's radar and laser sensors track the display, using it as an opportunity to calibrate the point defense systems on real targets. There is general agreement that this sort of thing should be a yearly tradition here, just like it was in some parts of the old world: old ideas aren't all bad.
+	<<set $rep += 1000>>
+	<</nobr>>
+	<</replace>>
+<</link>> //Costs ¤10000//
+</span>\

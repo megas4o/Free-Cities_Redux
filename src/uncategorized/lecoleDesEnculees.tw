@@ -1,0 +1,42 @@
+:: L'école des Enculées [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Buy Slaves", $returnTo = "Buy Slaves", $showEncyclopedia = 1, $encyclopedia = "Slave Schools">>
+/* Multi-Purchase Support */
+<<if ndef $newSlaves>><<set $newSlaves = []>><</if>>
+<<if $newSlaves.length > 0>>
+	<<set $nextButton = "Continue", $nextLink = "Bulk Slave Intro", $slaveMarket = "LDE", $returnTo = "Main", $newSlaveIndex = 0>>
+<</if>>
+
+//L'école des Enculées is one of the oldest networks of slave schools, but because its training must be started early, it is only now beginning to produce and show a return on its investors' stakes. It aims to produce graduates more feminine than the average naturally born female, in spite of their having been born male. The school is a global leader in hormonal feminization, which allows it to produce curvier slaves than many schools that focus on natural females. It also retains its graduates for a year after their majority and their enslavement, so as to be able to legally subject them to intensive sexual conditioning that focuses on their prostates as their main remaining locus of arousal. <<if $LDE.schoolUpgrade != 0>><br><br>Since you have endowed <<if $LDE.schoolUpgrade == 1>>the regular application of drugs to induce extreme infatuation in its graduates towards the first dominant person they encounter, any graduate purchased here will now promptly fall in love with you.<<else>>research into narrowly targeted hormonal treatments, its graduates are now available with generous members despite their femininity.<</if>> As a major <<if $PC.title  == 0>>benefactrix<<else>>benefactor<</if>> of the institution, you also receive a discount on them.<</if>>//
+
+<br><br>L'école des Enculées offers a fresh graduate for inspection via video call. The interview takes place in the dormitory for the oldest class of girls. Absurdly sexual squeals repeatedly interrupt the call, making it very clear that someone close by the interviewee is experiencing a strong combination of anal pain and anal pleasure.
+
+<<GenerateMarketSlave "LDE">>
+<<slaveCost $activeSlave>>
+<<if $LDE.schoolSale != 0>>
+	<<set $slaveCost = Math.trunc($slaveCost*0.5)>>
+<<elseif $LDE.schoolUpgrade != 0>>
+	<<set $slaveCost = Math.trunc($slaveCost*0.8)>>
+<</if>>
+<<if $slavesSeen > $slaveMarketLimit>><<set $slaveCost += Math.trunc($slaveCost*(($slavesSeen-$slaveMarketLimit)*0.1))>><</if>>
+
+<br><br>The price is ¤<<print $slaveCost>>.<<if $slavesSeen > $slaveMarketLimit>> You have cast such a wide net for slaves this week that it is becoming more expensive to find more for sale. Your reputation helps determine your reach within the slave market.<</if>>
+
+<<if $cash >= $slaveCost>>
+	<br>[[Buy her and check out other slaves to order|L'école des Enculées][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $LDE.schoolSale = 0, $LDE.studentsBought += 1, $newSlaves.push($activeSlave), $introType = "multi", $slavesSeen+=1]]
+	<<if $newSlaves.length == 0>>
+		<br>[[Buy her slave contract|New Slave Intro][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $LDE.schoolSale = 0, $LDE.studentsBought += 1, $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Main"]]
+	<<else>>
+		<br>[[Buy her and Finish your order of slaves|Bulk Slave Intro][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $LDE.schoolSale = 0, $LDE.studentsBought += 1, $newSlaves.push($activeSlave)]]
+	<</if>>
+<<else>>
+	//You lack the necessary funds to buy this slave.//
+<</if>>
+<br>[[Decline to purchase her and check out another slave|L'école des Enculées][$slavesSeen += 1]]
+<<if $newSlaves.length > 0>>
+	<br>[[Finish your order of slaves|Bulk Slave Intro]]
+<</if>>
+
+<br><br>
+
+<<set $saleDescription = 1, $applyLaw = 1>><<include "Long Slave Description">>

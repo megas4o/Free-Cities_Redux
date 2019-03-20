@@ -1,0 +1,122 @@
+:: Art_Vector_Torso_Outfit_ [nobr]
+
+/* BEWARE: _torsoSize is set by Art_Vector_Torso_ */
+
+/* TODO: latex catsuit should cover vagina and its piercings, too */
+
+<<set _art = false >>
+
+<<switch _artSlave.clothes>>
+	<<case "restrictive latex">>
+		<<set _art = "Art_Vector_Torso_Outfit_Latex_" >>
+	<<case "uncomfortable straps">>
+		<<set _art = "Art_Vector_Torso_Outfit_Straps_" >>
+	<<case "shibari ropes">>
+		<<set _art = "Art_Vector_Torso_Outfit_Shibari_" >>
+	<<case "a comfortable bodysuit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Bodysuit_" >>
+	<<case "body oil">>
+		<<set _art = "Art_Vector_Torso_Outfit_Oil_" >>
+	<<case "a leotard">>
+		<<set _art = "Art_Vector_Torso_Outfit_Leotard_" >>
+	<<case "slutty jewelry">>
+		<<set _art = "Art_Vector_Torso_Outfit_Bangles_" >>
+	<<case "a mini dress">>
+		<<set _art = "Art_Vector_Torso_Outfit_Minidress_" >>
+	<<case "a halter top dress">>
+		<<set _art = "Art_Vector_Torso_Outfit_Haltertopdress_" >>
+	<<case "a cheerleader outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Cheerleader_" >>
+	<<case "clubslut netting">>
+		<<set _art = "Art_Vector_Torso_Outfit_Clubslut_" >>
+	<<case "cutoffs and a t-shirt">>
+		<<set _art = "Art_Vector_Torso_Outfit_Cutoffs_" >>
+	<<case "a string bikini">>
+		<<set _art = "Art_Vector_Torso_Outfit_Stringbikini_" >>
+	<<case "a scalemail bikini">>
+		<<set _art = "Art_Vector_Torso_Outfit_Scalebikini_" >>
+	<<case "a hijab and abaya">>
+		<<set _art = "Art_Vector_Torso_Outfit_Abaya_" >>
+	<<case "a nice maid outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Maidnice_" >>
+	<<case "a slutty maid outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Maidslut_" >>
+	<<case "a fallen nuns habit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Fallennun_" >>
+	<<case "a schoolgirl outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Schoolgirl_" >>
+	<<case "a military uniform">>
+		<<set _art = "Art_Vector_Torso_Outfit_Military_" >>
+	<<case "a nice nurse outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Nursenice_" >>
+	<<case "attractive lingerie">>
+		<<set _art = "Art_Vector_Torso_Outfit_Nicelingerie_" >>
+	<<case "a slutty nurse outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Nurseslut_" >>
+	<<case "a ball gown">>
+		<<set _art = "Art_Vector_Torso_Outfit_Ballgown_" >>
+	<<case "battledress">>
+		<<set _art = "Art_Vector_Torso_Outfit_Battledress_" >>
+	<<case "a slutty outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Sluttyoutfit_" >>
+	<<case "spats and a tank top">>
+		<<set _art = "Art_Vector_Torso_Outfit_Spats_" >>
+	<<case "a succubus outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Succubus_" >>
+	<<case "nice business attire">>
+		<<set _art = "Art_Vector_Torso_Outfit_Suitnice_" >>
+	<<case "slutty business attire">>
+		<<set _art = "Art_Vector_Torso_Outfit_Suitslutty_" >>
+	<<case "attractive lingerie for a pregnant woman">>
+		<<set _art = "Art_Vector_Torso_Outfit_Lingeriepreg_" >>
+	<<case "a bunny outfit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Bunny_" >>
+	<<case "a chattel habit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Chattelhabit_" >>
+	<<case "conservative clothing">>
+		<<set _art = "Art_Vector_Torso_Outfit_Conservative_" >>
+	<<case "harem gauze">>
+		<<set _art = "Art_Vector_Torso_Outfit_Harem_" >>
+	<<case "a huipil">>
+		<<set _art = "Art_Vector_Torso_Outfit_Huipil_" >>
+	<<case "a kimono">>
+		<<set _art = "Art_Vector_Torso_Outfit_Kimono_" >>
+	<<case "a slave gown">>
+		<<set _art = "Art_Vector_Torso_Outfit_Slavegown_" >>
+	<<case "stretch pants and a crop-top">>
+		<<set _art = "Art_Vector_Torso_Outfit_Croptop_" >>
+	<<case "a maternity dress">>
+		<<set _art = "Art_Vector_Torso_Outfit_Maternity_" >>
+	<<case "a slutty qipao">>
+		<<set _art = "Art_Vector_Torso_Outfit_Qipao_" >>
+	<<case "a toga">>
+		<<set _art = "Art_Vector_Torso_Outfit_Toga_" >>
+	<<case "Western clothing">>
+		<<set _art = "Art_Vector_Torso_Outfit_Western_" >>
+	<<case "faceless cybersuit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Latex_" >>
+	<<case "half-face cybersuit">>
+		<<set _art = "Art_Vector_Torso_Outfit_Latex_" >>
+	<<default>>
+		/* do nothing */
+<</switch>>
+
+<<if _art >>
+	<<set _art = _art+_torsoSize >>
+	<<include _art >>
+<</if>>
+
+/* shiny clothings */
+<<if $seeVectorArtHighlights == 1>>
+	<<if _artSlave.fuckdoll != 0 || _artSlave.clothes == "restrictive latex" || _artSlave.clothes == "a latex catsuit">>
+		<<if _artSlave.amp != 0>>
+			/* this shiny shoulder only looks sensible on amputees */
+			<<include Art_Vector_Torso_Outfit_Shine_Shoulder>>
+		<</if>>
+		<<if _artSlave.preg <= 0>>
+			/* the hip can be hidden by pregnant belly */
+			<<set _art = "Art_Vector_Torso_Outfit_Shine_"+_torsoSize >>
+			<<include _art >>
+		<</if>>
+	<</if>>
+<</if>>

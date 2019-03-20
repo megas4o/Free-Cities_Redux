@@ -1,0 +1,44 @@
+:: Pens [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+This is a space in the arcology's service areas, designed to house hundreds of slaves for paying owners. You control this part of the arcology. If you own menial slaves, they will be kept here; otherwise, unused space will be rented to other slave brokers.
+<<SectorSell>>
+<br>
+<<set _buildingCost = Math.trunc(10000*$upgradeMultiplierArcology)>>
+
+<<if $helots+$menialBioreactors+$fuckdolls > 0>>
+	<br><br>
+	You own
+	<<if $helots > 0>>
+		<<if $helots > 1>>$helots menial slaves<<if ($menialBioreactors > 0) && ($fuckdolls == 0)>> and<<else>>,<</if>><<else>>one menial slave<<if ($menialBioreactors > 0) && ($fuckdolls == 0)>> and<<else>>,<</if>><</if>>
+	<</if>>
+	<<if $menialBioreactors > 0>>
+		<<if $menialBioreactors > 1>>$menialBioreactors standard bioreactors,<<else>>one standard bioreactor,<</if>>
+		<<if $fuckdolls > 0>>and<</if>>
+	<</if>>
+	<<if $fuckdolls > 0>>
+		<<if $fuckdolls > 1>>$fuckdolls standard fuckdolls,<<else>>one fuckdoll,<</if>>
+	<</if>>
+	<<if $helots+$menialBioreactors+$fuckdolls > 0>>partially<</if>>
+	housed in this sector.
+	<<if $helots > 0>>
+	<<if $Sweatshops>>
+		The simple labor slaves toil in $arcologies[0].name's sweatshops, and only return here to sleep.
+	<</if>>
+	<</if>>
+	<<if $fuckdolls > 0>>
+	<<if $arcadeUpgradeMenials>>
+		The menial Fuckdolls are endlessly cycled through $arcadeName. They're restrained there and used by the public until their holes are no longer appealing, and then cycled back down here to rest until they've tightened up again.
+	<</if>>
+	<</if>>
+	<<if $menialBioreactors > 0>>
+	<<if $dairyUpgradeMenials>>
+		Whenever there's space in $dairyName, menial Bioreactors are taken out of storage here and restrained there, with $dairyName's powerful hookups draining them of their useful fluids and feeding them generously so they can produce more.
+	<</if>>
+	<</if>>
+<</if>>
+
+<br>
+[[Convert this sector into a manufacturing district|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $sectors[$AS].type = "Manufacturing"]]
+//Costs ¤<<print _buildingCost>>//

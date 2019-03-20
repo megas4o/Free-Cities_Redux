@@ -1,0 +1,64 @@
+:: MOD_Edit Slave Cheat Datatype Cleanup [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Slave Interact">>
+
+<<set $rep = Number($rep) || 0>>
+<<set $cash = Number($cash) || 0>>
+<<set $week = Number($week) || 1>>
+<<set $activeSlave.relationTarget = Number($activeSlave.relationTarget) || 0>>
+<<set $activeSlave.relationshipTarget = Number($activeSlave.relationshipTarget) || 0>>
+<<set $activeSlave.indenture = Number($activeSlave.indenture) || 0>>
+<<set $activeSlave.face = Number($activeSlave.face) || 0>>
+<<set $activeSlave.hLength = Number($activeSlave.hLength) || 0>>
+<<set $activeSlave.oralSkill = Number($activeSlave.oralSkill) || 0>>
+<<set $activeSlave.prestige = Number($activeSlave.prestige) || 0>>
+<<set $activeSlave.devotion = Number($activeSlave.devotion) || 0>>
+<<set $activeSlave.oldDevotion = Number($activeSlave.oldDevotion) || 0>>
+<<set $activeSlave.trust = Number($activeSlave.trust) || 0>>
+<<set $activeSlave.oldTrust = Number($activeSlave.oldTrust) || 0>>
+<<set $activeSlave.age = Number($activeSlave.age) || 18>>
+<<set $activeSlave.birthWeek = Number($activeSlave.birthWeek) || 0>>
+<<set $activeSlave.health = Number($activeSlave.health) || 0>>
+<<set $activeSlave.addict = Number($activeSlave.addict) || 0>>
+<<set $activeSlave.muscles = Number($activeSlave.muscles) || 0>>
+<<set $activeSlave.height = Number($activeSlave.height) || 0>>
+<<set $activeSlave.heightImplant = Number($activeSlave.heightImplant) || 0>>
+<<set $activeSlave.amp = Number($activeSlave.amp) || 0>>
+<<set $activeSlave.lips = Number($activeSlave.lips) || 0>>
+<<set $activeSlave.lipsImplant = Number($activeSlave.lipsImplant) || 0>>
+<<set $activeSlave.voice = Number($activeSlave.voice) || 0>>
+<<set $activeSlave.accent = Number($activeSlave.accent) || 0>>
+<<set $activeSlave.weight = Number($activeSlave.weight) || 0>>
+<<set $activeSlave.waist = Number($activeSlave.waist) || 0>>
+<<set $activeSlave.boobs = Number($activeSlave.boobs) || 200>>
+<<set $activeSlave.boobsImplant = Number($activeSlave.boobsImplant) || 0>>
+<<set $activeSlave.lactation = Number($activeSlave.lactation) || 0>>
+<<set $activeSlave.areolae = Number($activeSlave.areolae) || 0>>
+<<set $activeSlave.butt = Number($activeSlave.butt) || 0>>
+<<set $activeSlave.buttImplant = Number($activeSlave.buttImplant) || 0>>
+<<set $activeSlave.anus = Number($activeSlave.anus) || 0>>
+<<set $activeSlave.vagina = Number($activeSlave.vagina) || 0>>
+<<set $activeSlave.vaginaLube = Number($activeSlave.vaginaLube) || 0>>
+<<set $activeSlave.vaginalSkill = Number($activeSlave.vaginalSkill) || 0>>
+<<set $activeSlave.preg = Number($activeSlave.preg) || 0>>
+<<set $activeSlave.dick = Number($activeSlave.dick) || 0>>
+<<set $activeSlave.clit = Number($activeSlave.clit) || 0>>
+<<set $activeSlave.balls = Number($activeSlave.balls) || 0>>
+<<set $activeSlave.whoreSkill = Number($activeSlave.whoreSkill) || 0>>
+<<set $activeSlave.entertainSkill = Number($activeSlave.entertainSkill) || 0>>
+<<set $activeSlave.intelligence = Number($activeSlave.intelligence) || 0>>
+<<set $activeSlave.fetishStrength = Number($activeSlave.fetishStrength) || 0>>
+<<set $activeSlave.attrXY = Number($activeSlave.attrXY) || 0>>
+<<set $activeSlave.attrXX = Number($activeSlave.attrXX) || 0>>
+<<set $activeSlave.energy = Number($activeSlave.energy) || 0>>
+
+You perform the dark rituals, pray to the dark gods and sold your soul for the power to change and mold slaves to your will.
+
+<br><br>This slave has been changed forever and you have lost a bit of your soul, YOU CHEATER!
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $activeSlave.ID == $slaves[$i].ID>>
+	<<set $slaves[$i] = $activeSlave>>
+	<<break>>
+	<</if>>
+<</for>>

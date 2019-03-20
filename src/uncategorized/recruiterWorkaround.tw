@@ -1,0 +1,13 @@
+:: Recruiter Workaround [silently]
+
+<<if $Recruiter != 0>>
+	<<removeJob $Recruiter "recruit girls">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "recruit girls">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Recruiter = $slaves[$i]>>
+<</if>>
+
+<<goto "Main">>
+

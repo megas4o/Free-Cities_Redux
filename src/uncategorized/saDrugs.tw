@@ -1,0 +1,504 @@
+:: SA drugs [nobr]
+
+<<if $slaves[$i].drugs == "intensive breast injections" || $slaves[$i].drugs == "intensive butt injections" || $slaves[$i].drugs == "intensive penis enhancement" || $slaves[$i].drugs == "intensive testicle enhancement">>
+	<<set _intensive = 1>>
+<</if>>
+
+<<switch $slaves[$i].drugs>>
+
+<<case "hormone enhancers">>
+	$possessiveCap drug regime prepares $possessive body to accept hormonal effects.
+	<<include "SA hormone effects">>
+
+<<case "psychosuppressants">>
+	The psychosuppressants @@.hotpink;reduce $possessive ability to question $possessive role@@ or @@.mediumaquamarine;think independently.@@
+	<<set $slaves[$i].devotion += 4>>
+	<<set $slaves[$i].trust += 4>>
+	<<if ($slaves[$i].intelligence > -2)>>
+	They @@.orangered;negatively impact $possessive intelligence,@@ as well.
+	<<set $slaves[$i].intelligence -= 1>>
+	<</if>>
+	<<if $slaves[$i].fuckdoll == 0>>
+	<<if ($slaves[$i].intelligence < 0)>>
+	<<if ($slaves[$i].fetishStrength <= 60)>>
+	<<if ($slaves[$i].fetish != "submissive")>>
+	<<if $fetishChangeChance > random(0,100)>>
+		The willingness to @@.lightcoral;submit@@ created by the drugs invades $possessive sexuality, too.
+		<<set $slaves[$i].fetish = "submissive">>
+		<<set $slaves[$i].fetishKnown = 1>>
+		<<set $slaves[$i].fetishStrength = 10>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+
+<<case "breast injections" "intensive breast injections">>
+	<<set _growth = 1+$injectionUpgrade>>
+	$pronounCap receives @@.lime;
+	<<if _intensive>>
+		massive
+		<<set _growth*=2>>
+	<</if>>
+	injections of <<if ($injectionUpgrade != 0)>>advanced<</if>> growth hormones, right into $possessive breasts;@@
+	<<if ($slaves[$i].diet == "fattening")>>
+		all the food $pronoun's required to consume fuels growth, <<if $slaves[$i].health > -20>>and<<else>>but<</if>>
+		<<set _growth += 2>>
+	<<elseif ($slaves[$i].diet == "restricted")>>
+		$possessive restricted diet means $possessive body has few resources to grow on, <<if $slaves[$i].health > -20>>but<<else>>and<</if>>
+		<<set _growth -= 2>>
+	<<elseif ($slaves[$i].weight > 30)>>
+		the generous diet $pronoun eats to maintain $possessive fat body helps support growth, <<if $slaves[$i].health > -20>>and<<else>>but<</if>>
+		<<set _growth++>>
+	<<elseif ($slaves[$i].weight <= -30)>>
+		the diet $pronoun is required to maintain to keep slim impedes growth, <<if $slaves[$i].health > -20>>but<<else>>and<</if>>
+		<<set _growth-->>
+	<</if>>
+	<<if $slaves[$i].health > 80>>
+		$possessive perfect health supports growth extremely well, <<if $slaves[$i].boobs < 2000>>and<<else>>but<</if>>
+		<<set _growth++>>
+	<<elseif ($slaves[$i].health > -20)>>
+		$possessive health supports growth, <<if $slaves[$i].boobs < 2000>>and<<else>>but<</if>>
+	<<else>>
+		$possessive poor health does not support steady growth, <<if $slaves[$i].boobs < 2000>>but<<else>>and<</if>>
+		<<set _growth-->>
+	<</if>>
+	$possessive
+	<<if ($slaves[$i].boobs < 800)>>
+		modest chest tends to grow quickly.
+		<<set _growth += 3>>
+		<<if ($slaves[$i].boobShape != "torpedo-shaped") && ($slaves[$i].boobShape != "wide-set")>>
+			<<if random(1,10) == 1>>
+				<<if $slaves[$i].shoulders < 0>>
+					@@.lime;As $possessive boobs grow, they take on a torpedo shape within the frame of $possessive narrow shoulders,@@ projecting a long way from $possessive chest and swinging delightfully when $pronoun's naked.
+					<<set $slaves[$i].boobShape = "torpedo-shaped">>
+				<<else>>
+					@@.lime;As $possessive boobs grow, they become widely set across the broadness of $possessive chest,@@ spreading sideways even when $pronoun's not lying on $possessive back.
+					<<set $slaves[$i].boobShape = "wide-set">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<elseif ($slaves[$i].boobs < 2000)>>
+		big tits tend to grow readily.
+		<<set _growth += 2>>
+		<<if ($slaves[$i].boobShape == "saggy") || ($slaves[$i].boobShape == "downward-facing")>>
+			<<if random(1,10) == 1>>
+				@@.lime;As they grow, they lose their sag,@@ with the expanding tissue lifting $possessive nipples up to point forward.
+				<<set $slaves[$i].boobShape = "normal">>
+			<</if>>
+		<</if>>
+	<<elseif ($slaves[$i].boobs < 5000)>>
+		heavy boobs tend to grow slowly.
+		<<set _growth++>>
+		<<if ($slaves[$i].boobShape != "saggy")>>
+			<<if random(1,10) == 1>>
+				@@.lime;As they grow, they begin to sag@@ under their own monstrous weight, $possessive mass of breastflesh directing $possessive nipples downward.
+				<<set $slaves[$i].boobShape = "saggy">>
+			<</if>>
+		<</if>>
+	<<else>>
+		monstrous udders tend to grow very slowly.
+		<<if ($slaves[$i].boobShape != "normal")>>
+			<<if random(1,10) == 1>>
+				@@.lime;$possessiveCap breasts lose their unique shape@@ as they adapt to their monstrous, unnatural size. There's simply nowhere else for $possessive mass of boob to go, and its expansion fills $possessive breasts out and points $possessive nipples forward.
+				<<set $slaves[$i].boobShape = "normal">>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<set _growth = 25*Math.trunc(_growth*0.8)>>
+	<<set $slaves[$i].boobs += Math.clamp(_growth, 25, 200)>>
+	<<if $slaves[$i].areolae < 3>>
+	<<if _growth > $slaves[$i].areolae*25>>
+		The increase in breast size @@.lime;stretches and broadens $possessive areolae.@@
+		<<set $slaves[$i].areolae += 1>>
+	<</if>>
+	<</if>>
+	<<if $slaves[$i].nipples != "huge">>
+	<<if random(1,200) < _growth>>
+	<<if ($slaves[$i].nipples == "tiny")>>
+		The hormones also @@.lime;cause nipple growth.@@
+		<<set $slaves[$i].nipples = "cute">>
+	<<elseif ($slaves[$i].nipples == "cute")>>
+		<<if random(1,2) == 1>>
+		The hormones also @@.lime;cause $possessive cute nipples to become puffy.@@
+		<<set $slaves[$i].nipples = "puffy">>
+		<<else>>
+		The explosive breast growth also @@.lime;causes $possessive cute nipples to become partially inverted.@@
+		<<set $slaves[$i].nipples = "partially inverted">>
+		<</if>>
+	<<elseif ($slaves[$i].nipples == "puffy")>>
+		<<if random(1,2) == 1>>
+		The hormones also @@.lime;cause $possessive puffy nipples to become really enormous.@@
+		<<set $slaves[$i].nipples = "huge">>
+		<<else>>
+		The explosive breast growth also @@.lime;causes $possessive puffy nipples to become completely inverted.@@
+		<<set $slaves[$i].nipples = "inverted">>
+		<</if>>
+	<<elseif ($slaves[$i].nipples == "partially inverted")>>
+		The explosive breast growth also @@.lime;causes $possessive nipples to invert completely.@@
+		<<set $slaves[$i].nipples = "inverted">>
+	<</if>>
+	<</if>>
+	<</if>>
+
+<<case "butt injections" "intensive butt injections">>
+	<<set _growth = 1+$injectionUpgrade>>
+	$pronounCap receives @@.lime;
+	<<if _intensive>>
+		massive
+		<<set _growth*=2>>
+	<</if>>
+	injections of <<if ($injectionUpgrade != 0)>>advanced<</if>> growth hormones, right into $possessive buttocks;@@
+	<<if ($slaves[$i].diet == "fattening")>>
+		all the food $pronoun's required to consume fuels growth, <<if $slaves[$i].health > -20>>and<<else>>but<</if>>
+		<<set _growth += 2>>
+	<<elseif ($slaves[$i].diet == "restricted")>>
+		$possessive restricted diet means $possessive body has few resources to grow on, <<if $slaves[$i].health > -20>>but<<else>>and<</if>>
+		<<set _growth -= 2>>
+	<<elseif ($slaves[$i].weight > 30)>>
+		the generous diet $pronoun eats to maintain $possessive fat body helps support growth, <<if $slaves[$i].health > -20>>and<<else>>but<</if>>
+		<<set _growth++>>
+	<<elseif ($slaves[$i].weight <= -30)>>
+		the diet $pronoun is required to maintain to keep slim impedes growth, <<if $slaves[$i].health > -20>>but<<else>>and<</if>>
+		<<set _growth-->>
+	<</if>>
+	<<if $slaves[$i].health > 80>>
+		$possessive perfect health supports growth extremely well, <<if $slaves[$i].butt < 6>>and<<else>>but<</if>>
+		<<set _growth++>>
+	<<elseif ($slaves[$i].health > -20)>>
+		$possessive health supports growth, <<if $slaves[$i].butt < 6>>and<<else>>but<</if>>
+	<<else>>
+		$possessive poor health does not support steady growth, <<if $slaves[$i].butt < 6>>but<<else>>and<</if>>
+		<<set _growth-->>
+	<</if>>
+	$possessive
+	<<if $slaves[$i].butt < 2>>
+		modest rear tends to grow quickly.
+	<<elseif $slaves[$i].butt < 4>>
+		big behind tends to grow readily.
+		<<set _growth += 2>>
+	<<elseif $slaves[$i].butt < 6>>
+		massive ass tend to grow slowly.
+		<<set _growth++>>
+	<<else>>
+		monstrous cheeks tend to grow very slowly.
+	<</if>>
+	<<set _growth*=0.2>>
+	<<set $slaves[$i].butt += Math.clamp(_growth,0.2,1)>>
+	<<if _intensive>>
+		<<if $slaves[$i].anus > 1>>
+			The reckless drug therapy has the side effect of rejeuvenating her sphincter muscles, @@.lime;tightening up $possessive <<if $slaves[$i].anus > 4>>gaping<<elseif $slaves[$i].anus > 3>>loose<<else>>relaxed<</if>> anus.@@
+			<<set $slaves[$i].anus-->>
+		<</if>>
+	<<else>>
+		<<if $slaves[$i].anus > 2>>
+			The drugs nearby rejeuvenate her sphincter muscles, @@.lime;tightening up $possessive <<if $slaves[$i].anus > 4>>gaping<<else>>loose<</if>> anus.@@
+			<<set $slaves[$i].anus-->>
+		<</if>>
+	<</if>>
+
+<<case "lip injections">>
+	<<if ($slaves[$i].lips <= 95)>>
+		<<if ($slaves[$i].lips > 90)>>
+			@@.lime;$possessiveCap lips swell rapidly, becoming a facepussy useless for anything other than oral sex.@@
+		<<elseif ($slaves[$i].lips > 70) && ($slaves[$i].lips <= 75)>>
+			@@.lime;$possessiveCap lips swell rapidly, and are now so large that $pronoun can no longer enunciate properly.@@
+		<<else>>
+			@@.lime;$possessiveCap lips swell rapidly.@@
+		<</if>>
+		<<set $slaves[$i].lips += 5>>
+	<</if>>
+
+<<case "penis enhancement" "intensive penis enhancement">>
+	<<set _growth = 60+($injectionUpgrade*20)>>
+	<<if _intensive>><<set _growth += 20>><</if>>
+	<<if ($slaves[$i].dick > 0)>>
+		<<if (random(1,100) < _growth-($slaves[$i].dick*5))>>
+			@@.lime;$possessiveCap cock grows painfully,@@ becoming both longer and girthier.
+			<<set $slaves[$i].dick++>>
+		<<else>>
+			Despite being dosed with a spectrum of powerful growth promoters, $possessive dick does not grow.
+		<</if>>
+		<<if $slaves[$i].balls == 1>>
+		<<if $slaves[$i].scrotum > 0>>
+			As a side effect of the dick enhancement drugs, @@.lime;$possessive balls drop.@@
+			<<set $slaves[$i].balls += 1>>
+		<</if>>
+		<</if>>
+		<<if $slaves[$i].dick == 6>>
+		<<if $slaves[$i].balls > 0>>
+			@@.yellow;$possessiveCap dick is at the limit of what $possessive cardiovascular system could conceivably bring erect.@@ Further penis enhancement may limit $possessive ability to get hard.
+		<</if>>
+		<</if>>
+	<<else>>
+		<<if (random(1,100) < _growth-($slaves[$i].clit*10))>>
+			@@.lime;$possessiveCap clit grows painfully,@@ becoming both longer and girthier.
+			<<set $slaves[$i].clit++>>
+		<<else>>
+			Despite being dosed with a spectrum of powerful growth promoters, $possessive clit does not grow.
+		<</if>>
+	<</if>>
+
+<<case "testicle enhancement" "intensive testicle enhancement">>
+	<<set _growth = 60+($injectionUpgrade*20)>>
+	<<if _intensive>><<set _growth += 20>><</if>>
+	<<if (random(1,100) < _growth-($slaves[$i].balls*5))>>
+		@@.lime;$possessiveCap balls swell painfully.@@
+		<<set $slaves[$i].balls++>>
+	<<else>>
+		Despite being filled with testicle enhancers and painfully swollen with resultant cum overproduction, $possessive balls do not grow.
+	<</if>>
+	<<if $slaves[$i].dick == 1>>
+	<<if $slaves[$i].scrotum > 0>>
+		As a side effect of the testicle enhancement drugs, @@.lime;$possessive micropenis grows,@@ becoming merely tiny.
+		<<set $slaves[$i].dick++>>
+	<</if>>
+	<</if>>
+
+<<case "steroids">>
+	<<if ($slaves[$i].dick == 0) && (random(1,100) > 40+($slaves[$i].clit*10))>>
+	The gear $pronoun's on @@.lime;increases the size of $possessive clit.@@
+	<<set $slaves[$i].clit += 1>>
+	<<elseif ($slaves[$i].dick != 0) && ($slaves[$i].dick < 3) && (random(1,100) > 95)>>
+	The gear $pronoun's on @@.lime;increases the size of $possessive penis.@@
+	<<set $slaves[$i].dick += 1>>
+	<<elseif ($slaves[$i].faceShape != "masculine") && ($slaves[$i].faceShape != "androgynous") && (random(1,100) > 95)>>
+	The gear $pronoun's on @@.orange;hardens $possessive face into androgyny.@@
+	<<set $slaves[$i].faceShape = "androgynous">>
+	<<elseif ($slaves[$i].balls != 0) && ($slaves[$i].scrotum != 0) && ($slaves[$i].balls < 3) && (random(1,100) > 95)>>
+	The gear $pronoun's on @@.lime;increases the size of $possessive balls.@@
+	<<set $slaves[$i].balls += 1>>
+	<<elseif random(1,100) > 110-($slaves[$i].anus*10)>>
+	The steroids $pronoun's on have an effect on $possessive stretched anal muscles, giving $object a @@.orange;tighter butthole.@@
+	<<set $slaves[$i].anus -= 1>>
+	<<elseif random(1,100) > 110-($slaves[$i].vagina*10)>>
+	The steroids $pronoun's on have an effect on $possessive vaginal muscles, giving $object a @@.orange;tighter pussy.@@
+	<<set $slaves[$i].vagina -= 1>>
+	<<elseif ($slaves[$i].face-$slaves[$i].faceImplant > 10) && (random(1,100) > 90)>>
+	The gear $pronoun's on @@.orange;hardens $possessive pretty face a little.@@
+	<<set $slaves[$i].face -= 5>>
+	<</if>>
+
+<<case "fertility drugs">>
+	<<if ($slaves[$i].preg > 5)>>
+	$pronounCap's already pregnant, so the fertility drugs $pronoun's on do $object no good.
+	<<elseif ($slaves[$i].vagina == -1)>>
+	<<if ($slaves[$i].lactation == 0)>>
+		Unfortunately, it's impossible to fuck $possessive asshole pregnant, limiting the potential impact of the fertility drugs $pronoun's on to $possessive boobs.
+	<<else>>
+		The fertility drugs $pronoun's on are pointless, since $pronoun's already lactating and it's impossible to impregnate $possessive butthole. That's no reason not to try, of course.
+	<</if>>
+	<<elseif ($slaves[$i].preg < -1)>>
+	$pronounCap's sterile, so the fertility drugs $pronoun's on do $object no good.
+	<<elseif ($slaves[$i].ovaries == 0)>>
+	$pronounCap's barren, so the fertility drugs $pronoun's on do $object no good.
+	<<elseif ($slaves[$i].preg == -1)>>
+	$pronounCap's on contraceptives, so the fertility drugs $pronoun's on do $object no good.
+	<<else>>
+	$pronounCap's on fertility drugs, so $pronoun is more likely to conceive, and may experience multiple pregnancy.
+	<</if>>
+	<<if ($slaves[$i].lactation == 0)>>
+	<<if random(0,100) < $slaves[$i].health>>
+	The hormonal changes produced by the fertility drugs have the side effect of @@.lime;inducing lactation,@@ indistinguishable from natural lactation.
+	<<set $slaves[$i].lactation = 1>>
+	<</if>>
+	<</if>>
+<</switch>>
+
+<<if $slaves[$i].curatives > 1>>
+	<<if ($slaves[$i].health > 90)>>
+		$possessiveCap health is already outstanding and cannot be improved with further drug treatment. @@.yellow;$possessiveCap drug regimen has defaulted to preventatives.@@
+		<<set $slaves[$i].curatives = 1>>
+	<<elseif (($slaves[$i].assignment == "rest") || ($slaves[$i].assignment == "rest in the spa")) && ($slaves[$i].fetish != "mindbroken")>>
+		The curatives $pronoun's taking synergize with rest, keeping $object asleep most of the time. This is an @@.green;extremely effective health treatment.@@
+		<<set $slaves[$i].health += 4>>
+	<<elseif ($slaves[$i].health < -20)>>
+		@@.green;$possessiveCap poor health rapidly improves@@ under drug treatment.
+		<<set $slaves[$i].health += 2>>
+	<<else>>
+		@@.green;$possessiveCap health improves@@ under curative treatment.
+	<</if>>
+	<<if $slaves[$i].fuckdoll == 0>>
+	<<if $slaves[$i].fetish != "mindbroken">>
+		$pronounCap @@.mediumaquamarine;trusts you more@@ for giving $possessive access to expensive modern medicine.
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	<</if>>
+	<<set $slaves[$i].health += 6>>
+	<<set $slaves[$i].health += $curativeUpgrade*6>>
+	<<set $slaves[$i].chem += 1>>
+<</if>>
+
+<<if $slaves[$i].aphrodisiacs > 0>>
+<<if $slaves[$i].aphrodisiacs > 1>>
+	The aphrodisiacs $pronoun's on
+	<<if $slaves[$i].energy <= 95>>
+		@@.green;rapidly boost $possessive sex drive.@@
+		<<set $slaves[$i].energy += 5>>
+	<<else>>
+		can't improve her absurd sex drive.
+	<</if>>
+	<<if $slaves[$i].fuckdoll == 0>>
+	<<if $slaves[$i].fetish != "mindbroken">>
+		They @@.hotpink;increase $possessive acceptance@@ of sexual slavery.
+		<<set $slaves[$i].devotion += 5>>
+	<</if>>
+	<</if>>
+	<<if ($arcologies[0].FSBodyPuristLaw == 0) && ($healthyDrugsUpgrade == 0)>>
+		Such a high dosage @@.red;isn't healthy@@.
+		<<set $slaves[$i].health -= 5>>
+	<</if>>
+	<<set $slaves[$i].chem += 1>>
+<<else>>
+	The aphrodisiacs $pronoun's on
+	<<if $slaves[$i].energy <= 95>>
+		@@.green;boost $possessive sex drive.@@
+		<<set $slaves[$i].energy += 3>>
+	<<else>>
+		can't improve her absurd sex drive.
+	<</if>>
+	<<if $slaves[$i].fuckdoll == 0>>
+	<<if $slaves[$i].fetish != "mindbroken">>
+		They @@.hotpink;increase $possessive acceptance@@ of sexual slavery.
+		<<set $slaves[$i].devotion += 3>>
+	<</if>>
+	<</if>>
+	<<set $slaves[$i].chem += 0.5>>
+<</if>>
+<</if>>
+
+<<if $slaves[$i].drugs != "no drugs">>
+<<if $arcologies[0].FSBodyPuristLaw == 0>>
+<<if $healthyDrugsUpgrade == 0>>
+	<<set $slaves[$i].chem += 1.5>>
+	<<if _intensive>><<set $slaves[$i].chem += 1>><</if>>
+<</if>>
+<</if>>
+<</if>>
+<<set $slaves[$i].chem = Math.clamp($slaves[$i].chem-0.5, 0, 1000)>>
+
+<<if _intensive>>
+	Such reckless doping is dangerous and @@.red;unhealthy.@@
+	<<set $slaves[$i].health -= random(3,5)>>
+<</if>>
+
+<<if $slaves[$i].curatives < 2 && $slaves[$i].assignment != "get treatment in the clinic">>
+<<if $slaves[$i].health < -50>>
+	It's difficult being so ill, and $pronoun @@.mediumorchid;resents you@@ for not treating $possessive.
+	<<set $slaves[$i].devotion -= 2>>
+<<elseif ($slaves[$i].health > 50)>>
+	<<if $slaves[$i].fuckdoll == 0>>
+	<<if $slaves[$i].fetish != "mindbroken">>
+		$pronounCap understands that $pronoun owes $possessive near-perfect health to you and @@.hotpink;believes@@ that life with you is better than freedom in some ways.
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].addict > 0)>>
+	<<if $slaves[$i].aphrodisiacs > 0>>
+		<<set $slaves[$i].addict += $slaves[$i].aphrodisiacs>>
+	<<elseif ($slaves[$i].addict < 2)>>
+		$pronounCap has finally been @@.cyan;weaned off aphrodisiacs.@@
+		<<set $slaves[$i].addict = 0>>
+	<<elseif ($aphrodisiacUpgrade == 1)>>
+		Substitutes produced by your advanced pharmaceutical fabricator protect $object from the negative effects of aphrodisiac withdrawal and even hasten the flushing of $possessive system.
+		<<set $slaves[$i].addict -= 2>>
+	<<else>>
+		$pronounCap feels the effects of withdrawal from aphrodisiacs keenly, and $pronoun is @@.mediumorchid;bitterly resentful@@.
+		<<set $slaves[$i].addict -= 2>>
+		<<set $slaves[$i].devotion -= 10>>
+	<</if>>
+<<else>>
+	<<if $slaves[$i].aphrodisiacs > 0>>
+	<<if random(1,100) < 40+(20*$slaves[$i].aphrodisiacs)>>
+		@@.cyan;$pronounCap has become an aphrodisiac addict.@@
+		<<set $slaves[$i].addict = 1>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].fuckdoll == 0 && $slaves[$i].fetish != "mindbroken">>
+<<if $suppository == 1>>
+<<if ($slaves[$i].aphrodisiacs > 0) || ($slaves[$i].curatives > 0) || ($slaves[$i].drugs == "psychosuppressants") || ($slaves[$i].drugs == "hormone enhancers") || ($slaves[$i].hormones != 0)>>
+	<<if ($slaves[$i].sexualFlaw == "hates anal")>>
+	<<if random(1,100) > 80>>
+		Getting buttfucked morning and night by reciprocating dildos that ejaculate $possessive drug regime forces $object to @@.green;accept anal sex@@ as a fact of life.
+		<<set $slaves[$i].sexualFlaw = "none">>
+	<<else>>
+		Getting buttfucked morning and night by reciprocating dildos that ejaculate $possessive drug regime @@.mediumorchid;infuriates $object,@@ since $pronoun hates getting assraped.
+		<<set $slaves[$i].devotion -= 4>>
+	<</if>>
+	<<elseif ($slaves[$i].fetish == "buttslut")>>
+	<<if ($slaves[$i].fetishKnown == 0)>>
+		Getting buttfucked morning and night by reciprocating dildos that ejaculate $possessive drug regime has revealed something: @@.lightcoral;$pronoun likes it up the ass!@@
+		<<set $slaves[$i].fetishKnown = 1>>
+	<<elseif ($slaves[$i].fetishStrength <= 95) && ($slaves[$i].devotion > 4)>>
+		Getting buttfucked morning and night by reciprocating dildos that ejaculate $possessive drug regime has @@.lightcoral;deepened $possessive anal fixation.@@
+		<<set $slaves[$i].fetishStrength += 5>>
+	<</if>>
+	<<elseif ($slaves[$i].fetish != "buttslut")>>
+	<<if ($slaves[$i].devotion < -20)>>
+		Getting buttfucked morning and night by reciprocating dildos that ejaculate $possessive drug regime @@.mediumorchid;disgusts $object.@@
+		<<set $slaves[$i].devotion -= 2>>
+	<<elseif $fetishChangeChance > random(0,100)>>
+		$pronounCap starts to look forward to getting buttfucked morning and night by reciprocating dildos that ejaculate $possessive drug regime; $pronoun's @@.lightcoral;become anally fixated.@@
+		<<set $slaves[$i].fetish = "buttslut">>
+		<<set $slaves[$i].fetishKnown = 1>>
+		<<set $slaves[$i].fetishStrength = 10>>
+	<</if>>
+	<</if>>
+	<<if ($slaves[$i].sexualQuirk == "painal queen")>>
+	$pronounCap @@.hotpink;secretly enjoys@@ being assraped by a machine twice a day.
+	<<set $slaves[$i].devotion += 1>>
+	<</if>>
+	<<if ($slaves[$i].anus == 1)>>
+	<<if random(1,100) > 70>>
+		The regular machine anal @@.lime;stretches out $possessive tight asshole.@@
+		<<set $slaves[$i].anus += 1>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+/* DRUG EXPIRY */
+<<switch $slaves[$i].drugs>>
+<<case "breast injections" "intensive breast injections">>
+	<<if $slaves[$i].boobs >= 50000>>
+		$possessiveCap udders are now so huge that further A-HGH treatment will not increase their size. @@.yellow;$possessiveCap drug regimen has been ended.@@
+		<<set $slaves[$i].boobs = Math.clamp($slaves[$i].boobs,0,50000), $slaves[$i].drugs = "no drugs">>
+	<</if>>
+<<case "butt injections" "intensive butt injections">>
+	<<if ($slaves[$i].butt >= 10)>>
+		$possessiveCap ass is now so huge that further A-HGH treatment will not increase its size. @@.yellow;$possessiveCap drug regimen has been ended.@@
+		<<set $slaves[$i].butt = Math.clamp($slaves[$i].butt,0,10), $slaves[$i].drugs = "no drugs">>
+	<</if>>
+<<case "lip injections">>
+	<<if ($slaves[$i].lips > 95) || (($slaves[$i].lips > 85) && ($seeExtreme != 1))>>
+		$possessiveCap lips are now so huge that further A-HGH treatment will not increase their size. @@.yellow;$possessiveCap drug regimen has been ended.@@
+		<<set $slaves[$i].drugs = "no drugs">>
+	<</if>>
+<<case "penis enhancement" "intensive penis enhancement">>
+	<<if ($slaves[$i].dick >= 10)>>
+		$possessiveCap cock is now so huge that further drug enhancement will not increase its size. @@.yellow;$possessiveCap drug regimen has been ended.@@
+		<<set $slaves[$i].dick = Math.clamp($slaves[$i].dick,0,10), $slaves[$i].drugs = "no drugs">>
+	<<elseif $slaves[$i].clit >= 5 && $slaves[$i].dick == 0>>
+		$possessiveCap clit is now so huge that further drug enhancement will not increase its size. @@.yellow;$possessiveCap drug regimen has been ended.@@
+		<<set $slaves[$i].clit = Math.clamp($slaves[$i].dick,0,5), $slaves[$i].drugs = "no drugs">>
+	<</if>>
+<<case "testicle enhancement" "intensive testicle enhancement">>
+	<<if ($slaves[$i].balls >= 10)>>
+		$possessiveCap balls are now so huge that further drug enhancement will not increase their size. @@.yellow;$possessiveCap drug regimen has been ended.@@
+		<<set $slaves[$i].balls = Math.clamp($slaves[$i].balls,0,10), $slaves[$i].drugs = "no drugs">>
+	<<elseif ($slaves[$i].balls >= 2) && ($slaves[$i].scrotum == 0)>>
+		$possessiveCap balls are now functionally sized, and cannot sustainably grow larger hidden within $possessive abdomen. @@.yellow;$possessiveCap drug regimen has been ended.@@
+		<<set $slaves[$i].balls = Math.clamp($slaves[$i].balls,0,2), $slaves[$i].drugs = "no drugs">>
+	<</if>>
+<<case "psychosuppressants">>
+	<<if ($slaves[$i].intelligence <= -2)>>
+	$pronounCap is so moronic that drug treatment can't really make $possessive more willing to obey others than $pronoun already is. @@.yellow;$possessiveCap drug regimen has been ended.@@
+	<<set $slaves[$i].drugs = "no drugs">>
+	<</if>>
+<</switch>>

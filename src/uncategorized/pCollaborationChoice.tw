@@ -1,0 +1,26 @@
+:: P collaboration choice
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Random Nonindividual Event">>
+
+<</nobr>>\
+\
+Your next communication from the Daughters of Liberty is a request for a live video call. You accept and are surprised to be confronted by $traitor.slaveName's face. She looks very different, without visible modifications of any kind and dressed in utilitarian clothes, but it's her.
+
+"Hello, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>," she says simply. "It's happening soon. The Daughters asked me to call you to ask you for your help. All they need is the access codes to your security systems. They'll let you live, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>, they'll even let you take your money. But the arcology and the slaves, those will have to go free." She hesitates a little. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>, I like being free. But I don't want to see you killed. Please, please agree."
+\
+<span id="result">
+<<link "Transmit the codes">>
+	<<replace "#result">>
+	You transmit the access codes to your security systems. $traitor.slaveName smiles and thanks you. "You made the right decision, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. I love you."
+	<<set $collaboration = 1>>
+	<</replace>>
+<</link>>
+<<link "Refuse">>
+	<<replace "#result">>
+	You close the video call without a word. From your desk, you have access to thousands of video feeds from all across the arcology; they show men and women working, sleeping, eating, chatting, fucking. You wonder how many of them have plans, and what those plans are.
+	<</replace>>
+<</link>>
+</span>

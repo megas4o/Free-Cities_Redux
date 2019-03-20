@@ -1,0 +1,59 @@
+:: P slave medic [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event", $returnTo = "Random Nonindividual Event">>
+
+<<set $slaveMedic = 0>>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "She was captured while caring for those injured in a failed attack on the Free City.">>
+<<set $activeSlave.career = "a nurse">>
+<<set $activeSlave.customDesc = "She has a faint air of fatigue about her, and strength too: that of a survivor.">>
+<<set $activeSlave.sexualFlaw = "none">>
+<<set $activeSlave.behavioralFlaw = "none">>
+<<set $activeSlave.anusTat = "bleached">>
+<<set $activeSlave.devotion = random(30,40)>>
+<<set $activeSlave.trust = $activeSlave.devotion-20>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.height = random(165,190)>>
+<<set $activeSlave.muscles = either(20,50)>>
+<<set $activeSlave.ovaries = 1>>
+<<set $activeSlave.vaginalSkill = 35>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.analSkill = 15>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.entertainSkill = 15>>
+<<set $activeSlave.intelligence = 2>>
+<<set $activeSlave.intelligenceImplant = 1>>
+<<set $activeSlave.teeth = "normal">>
+<<set $activeSlave.anus = 2>>
+<<set $activeSlave.boobs += 400>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.hStyle = "neat">>
+<<set $activeSlave.hLength = 35>>
+<<set $activeSlave.stampTat = either("flowers", "tribal patterns")>>
+<<set $activeSlave.age = random(25,42)>>
+<<set $activeSlave.health = random(20,40)>>
+
+You make a habit of dropping in on your mercenaries whenever you get the chance. You have regular meetings with their grizzled captain, of course, but turning up unannounced to get to know them is simply a matter of self-preservation. The better they like you, the more likely they are to think of more than their pay when deciding how to hazard themselves on your behalf.
+
+When you enter the lounge of their <<if $barracks>>barracks<<else>>main living area<</if>>, you see $activeSlave.slaveName bending over a mercenary with most of his armor stripped off. She's the $activeSlave.nationality nurse they captured and enslaved, and she seems to be doing pretty well in her new life. She seems to be checking the sutures on a minor wound to the man's flank.
+
+"Don't squirm," she says quietly. "I'll get you off when I've checked this." He chuckles and holds still; she redresses the wound, stands up, and strips off her fatigue pants. She's no longer young, but her $activeSlave.skin legs are pretty enough. As she swings one leg across the seated mercenary, she continues, "Please sit still and let me do the work. You need to take it easy for a day or two or you'll pop those sutures." Using a hand, she guides herself down onto his stiff prick, eliciting a grunt. She's a strong girl, and rides him without letting any of her weight rest on his hips at all. When he climaxes, she kneels to clean him with her mouth and then heads off to wash.
+
+<span id="result">
+<br><<link "Offer ¤10000 for her">>
+	<<replace "#result">>
+		The mercenary laughs at your offered price. "No offense, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, but no. Even if I wanted to sell her on everyone's behalf for that price, my buddies would kill me for that. She's popular, that $activeSlave.slaveName."
+	<</replace>>
+<</link>>
+<br><<link "Offer a very generous ¤25000 for her">>
+	<<replace "#result">>
+	<<set $cash -= 25000>>
+		"Huh," says the mercenary. "She's popular, but for that we could probably buy two of her. Might be fun to train a couple of new nurses. Let me ask the boys and girls." He speaks into his helmet for a few minutes, and then turns back to you. "Sold. Enjoy, she's a good fuck."
+		<<set $activeSlave.slaveCost = 25000>>
+		<<include "New Slave Intro">>
+	<</replace>>
+<</link>>
+</span>

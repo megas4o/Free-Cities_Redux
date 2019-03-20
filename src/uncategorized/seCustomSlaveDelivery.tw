@@ -1,0 +1,103 @@
+:: SE custom slave delivery [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Scheduled Event", $returnTo = "Scheduled Event", $showEncyclopedia = 1, $encyclopedia = "Enslaving People">>
+
+<<set $customSlaveOrdered = 0>>
+
+<<set $activeSlave = $customSlave>>
+
+<<set $activeSlave.ID = $IDNumber>>
+<<set $IDNumber += 1>>
+
+<<set $activeSlave.weekAcquired = $week>>
+<<set $activeSlave.origin = "You purchased her by special order.">>
+
+<<RandomizeAttraction>>
+<<set $activeSlave.fetishStrength = random(0,90)>>
+<<set $activeSlave.fetish = either("none", "none", "none", "none", "none", "none", "submissive", "cumslut", "humiliation", "buttslut", "boobs","pregnancy")>>
+
+<<set $activeSlave.sexualFlaw = either("none")>>
+<<set $activeSlave.behavioralFlaw = either("none")>>
+
+<<set $activeSlave.devotion = random(-10,10)>>
+<<set $activeSlave.trust = random(-10,10)>>
+
+<<NationalityToName $activeSlave>>
+<<NationalityToAccent $activeSlave>>
+
+<<if $activeSlave.race == "black">>
+	<<if $activeSlave.skin == 0>><<set $activeSlave.skin = either("black", "brown", "light brown")>><</if>>
+	<<set $activeSlave.hColor = either("black", "black", "black", "brown")>>
+	<<set $activeSlave.hStyle = either("shoulder-length", "short", "very short", "shaved bald", "crinkled")>>
+<<elseif $activeSlave.race == "white">>
+	<<if $activeSlave.skin == 0>><<set $activeSlave.skin = either("pale", "tanned", "fair")>><</if>>
+	<<set $activeSlave.eyeColor = either("blue", "brown", "green")>>
+	<<set $activeSlave.hColor = either("black", "blonde", "red", "brown")>>
+	<<set $activeSlave.hStyle = either("ass-length", "long", "shoulder-length", "short", "very short", "shaved bald")>>
+<<elseif $activeSlave.race == "latina">>
+	<<if $activeSlave.skin == 0>><<set $activeSlave.skin = either("olive", "brown", "light brown", "tanned", "fair")>><</if>>
+	<<set $activeSlave.hColor = either("black", "black", "brown", "brown")>>
+	<<set $activeSlave.hStyle = either("ass-length", "long", "shoulder-length", "short", "very short", "shaved bald")>>
+<<elseif $activeSlave.race == "asian">>
+	<<if $activeSlave.skin == 0>><<set $activeSlave.skin = either("pale", "dark", "light")>><</if>>
+	<<set $activeSlave.hColor = either("black")>>
+	<<set $activeSlave.hStyle = either("ass-length", "long", "shoulder-length", "short", "very short", "shaved bald")>>
+<<elseif ($activeSlave.race == "indo-aryan") || ($activeSlave.race == "malay") || ($activeSlave.race == "pacific islander") || ($activeSlave.race == "amerindian")>>
+	<<if $activeSlave.skin == 0>><<set $activeSlave.skin = either("pale", "dark", "light")>><</if>>
+	<<set $activeSlave.hColor = either("black")>>
+	<<set $activeSlave.hStyle = either("ass-length", "long", "shoulder-length", "short", "very short", "shaved bald")>>
+<<elseif ($activeSlave.race == "middle eastern") || ($activeSlave.race == "semitic") || ($activeSlave.race == "southern european")>>
+	<<if $activeSlave.skin == 0>><<set $activeSlave.skin = either("pale", "dark", "light")>><</if>>
+	<<set $activeSlave.hColor = either("black")>>
+	<<set $activeSlave.hStyle = either("ass-length", "long", "shoulder-length", "short", "very short", "shaved bald")>>
+<</if>>
+
+<<set $activeSlave.slaveName = $activeSlave.birthName>>
+
+<<if $activeSlave.anus == 0>>
+	<<set $activeSlave.analSkill = 0>>
+<</if>>
+
+<<if $activeSlave.balls > 0>>
+	<<set $activeSlave.scrotum = $activeSlave.balls >>
+<</if>>
+
+<<if $activeSlave.vagina == -1>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.clit = 0>>
+	<<set $activeSlave.preg = -2>>
+	<<if $activeSlave.fetish == "pregnancy">><<set $activeSlave.fetish = "none">><</if>>
+<</if>>
+
+<<slaveCost $activeSlave>>
+<<set $slaveCost = $slaveCost*2>>
+
+A slave dealer has submitted a slave to satisfy the order you posted.
+
+<br><br>
+
+//As usual, the asking price is quite high, to cover the costs of finding a slave to order. In compensation, you can freely decline the slave and keep the order open, or even modify it later.//
+
+<br><br>
+
+<<set $saleDescription = 1, $applyLaw = 1>><<include "Long Slave Description">>
+
+<br><br>
+
+Her price is ¤<<print $slaveCost>>.
+
+<br><br>
+
+<span id="result">
+<<if $cash >= $slaveCost>>
+	<<link "Accept the offered slave">>
+		<<set $cash -= $slaveCost>>
+		<<replace "#result">>
+			She has been reasonably broken by the dealer that offered her to you. She has also picked up on the fact that she was specially selected, and is a little hopeful that this means she may be treated well. She is now awaiting your instructions.
+			<<include "New Slave Intro">>
+		<</replace>>
+	<</link>>
+<<else>>
+	//You lack the necessary funds to accept the offered slave.//
+<</if>>
+</span>

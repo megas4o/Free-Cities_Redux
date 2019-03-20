@@ -1,0 +1,41 @@
+:: SA stay confined [nobr]
+
+<<SlavePronouns $slaves[$i]>>
+
+<<if ($slaves[$i].devotion < -50)>>
+	is kept in solitary confinement whenever $pronoun is not being forced to do something else. $pronounCap still hates $possessive place in the world, but being forced to rely on slave life as $possessive only human contact @@.hotpink;grinds down $possessive resistance.@@
+	<<set $slaves[$i].devotion += 2>>
+<<elseif ($slaves[$i].devotion <= 20)>>
+	is kept in solitary confinement whenever $pronoun is not being forced to do something else. With nothing to do but look forward to the next time $pronoun's let out to serve, @@.hotpink;$pronoun begins to rely on servitude.@@
+	<<set $slaves[$i].devotion += 1>>
+<<elseif ($slaves[$i].devotion <= 50)>>
+	accepts solitary confinement whenever $pronoun is not being forced to do something else. Since $pronoun is obedient, the mental torture neither breaks $object further nor causes $object to hate you.
+<<else>>
+	accepts solitary confinement whenever $pronoun is not being forced to do something else. $pronounCap spends $possessive time wondering hopelessly how $pronoun has failed you, @@.mediumorchid;damaging $possessive devotion to you.@@
+	<<set $slaves[$i].devotion -= 2>>
+<</if>>
+
+<<if ($slaves[$i].trust < -50)>>
+	$pronounCap is so terrified of you that this confinement does not make $object fear you any more.
+<<elseif ($slaves[$i].trust < -20)>>
+	$pronounCap is already afraid of you, but this confinement makes $object @@.gold;fear you even more.@@
+	<<set $slaves[$i].trust -= 2>>
+<<elseif ($slaves[$i].trust <= 20)>>
+	This confinement makes $object @@.gold;fear your power@@ over $object.
+	<<set $slaves[$i].trust -= 4>>
+<<else>>
+	This confinement makes $object @@.gold;trust you less,@@ and fear you more.
+	<<set $slaves[$i].trust -= 5>>
+<</if>>
+
+The stress of confinement @@.red;damages $possessive health@@.
+<<set $slaves[$i].health -= 10>>
+
+<<if ($slaves[$i].sentence == 0) && (($slaves[$i].devotion > 20) || (($slaves[$i].devotion >= -20) && ($slaves[$i].trust < -20)) || (($slaves[$i].devotion >= -50) && ($slaves[$i].trust < -50)))>>
+	$pronounCap is now willing to @@.hotpink;do as $pronoun's told@@, so @@.yellow;$possessive assignment has defaulted to rest.@@
+	<<if $slaves[$i].assignment == "be confined in the cellblock">>
+		<<set _brokenSlaves++, _DL--, _dI-->>
+	<</if>>
+	<<removeJob $slaves[$i] $slaves[$i].assignment>>
+<</if>>
+

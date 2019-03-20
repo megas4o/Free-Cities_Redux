@@ -1,0 +1,1112 @@
+:: FS Developments [nobr]
+
+__Society__
+<br>
+
+<<if $FSCredits > 0>>
+	@@.yellow;$arcologies[0].name's society is ready to begin accepting a new societal direction.@@
+<</if>>
+
+<<if ($FSGotRepCreditOne != 1)>>
+<<if ($rep > 6000)>>
+	@@.yellow;Your reputation is so solid that $arcologies[0].name's society is ready to begin accepting a second societal direction.@@
+	<<set $FSGotRepCreditOne = 1, $FSCredits += 1>>
+<</if>>
+<</if>>
+<<if ($FSGotRepCreditTwo != 1)>>
+<<if ($rep > 9000)>>
+	@@.yellow;Your reputation is so solid that $arcologies[0].name's society is ready to begin accepting a third societal direction.@@
+	<<set $FSGotRepCreditTwo = 1, $FSCredits += 1>>
+<</if>>
+<</if>>
+<<if ($FSGotRepCreditThree != 1)>>
+<<if ($rep > 12000)>>
+	@@.yellow;Your reputation is so good that $arcologies[0].name's society is ready to begin accepting a fourth societal direction.@@
+	<<set $FSGotRepCreditThree = 1, $FSCredits += 1>>
+<</if>>
+<</if>>
+<<if ($FSGotRepCreditFour != 1)>>
+<<if ($rep > 15000)>>
+	@@.yellow;Your reputation is so unparalleled that $arcologies[0].name's society is ready to begin accepting a fifth and final societal direction.@@
+	<<set $FSGotRepCreditFour = 1, $FSCredits += 1>>
+<</if>>
+<</if>>
+
+/* Count adopted FS */
+<<set _societies = 0>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<set _societies++>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	<<set _societies++>>
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<<set _societies++>>
+<</if>>
+
+/* Spending, terrain, rep effects */
+<<set _broadProgress = 0>>
+<<if $FSSpending > 1>>
+	Your @@.yellowgreen;societal spending@@ helps forward your goals for the arcology's future.
+	<<set _broadProgress += Math.trunc($FSSpending/(1000-(500*$arcologies[0].FSEdoRevivalistLaw)-(250*$arcologies[0].FSArabianRevivalistLaw)))>>
+<</if>>
+<<if $terrain == "urban">>
+	The @@.yellow;urban location@@ of the arcology naturally promotes cultural interchange, holding back $arcologies[0].name's cultural independence.
+	<<set _broadProgress -= 3>>
+<<elseif $terrain == "rural">>
+	The @@.yellow;rural location@@ of the arcology naturally limits cultural interchange, allowing $arcologies[0].name to slowly develop its own culture.
+	<<set _broadProgress -= 2>>
+<<elseif $terrain == "marine">>
+	The @@.yellow;marine location@@ of the arcology strongly limits cultural interchange, allowing $arcologies[0].name to quickly develop its own culture.
+	<<set _broadProgress -= 1>>
+<<else>>
+	The @@.yellow;oceanic location@@ of the arcology almost eliminates cultural interchange, allowing $arcologies[0].name to independently develop its culture.
+<</if>>
+<<if $rep < 4000>>
+	@@.red;Your weak reputation@@ reflects badly on your social projects.
+	<<set _broadProgress -= 2>>
+<<elseif $rep < 8000>>
+	@@.red;Your mediocre reputation@@ engenders skepticism towards your social development.
+	<<set _broadProgress -= 1>>
+<<elseif $rep < 12000>>
+	@@.yellow;Your reputation@@ is neither weak enough or strong enough to affect social development.
+<<elseif $rep < 16000>>
+	@@.green;Your strong reputation@@ helps support social development.
+	<<set _broadProgress += 1>>
+<<elseif $rep < 20000>>
+	@@.green;Your very strong reputation@@ increases acceptance of your social development.
+	<<set _broadProgress += 2>>
+<<else>>
+	@@.green;Your incredible reputation@@ encourages automatic acceptance of your social development.
+	<<set _broadProgress += 4>>
+<</if>>
+<<set _broadProgress += 2 - _societies>>
+<<switch _societies>>
+<<case 1>>Maintaining a single societal goal allows @@.green;very focused social engineering.@@
+<<case 2>>Maintaining two societal goals allows @@.green;focused social engineering.@@
+<<case 3>>Maintaining three societal goals requires @@.yellow;broad social engineering.@@
+<<case 4>>Maintaining four societal goals requires @@.red;unfocused social engineering.@@
+<<default>>Maintaining five societal goals requires @@.red;very unfocused social engineering.@@
+<</switch>>
+<<if _broadProgress != 0>>
+	<<if $arcologies[0].FSSupremacist != "unset">>
+		<<set $arcologies[0].FSSupremacist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSSubjugationist != "unset">>
+		<<set $arcologies[0].FSSubjugationist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">>
+		<<set $arcologies[0].FSGenderRadicalist += _broadProgress>>
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		<<set $arcologies[0].FSGenderFundamentalist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		<<set $arcologies[0].FSPaternalist += _broadProgress>>
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		<<set $arcologies[0].FSDegradationist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSBodyPurist != "unset">>
+		<<set $arcologies[0].FSBodyPurist += _broadProgress>>
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		<<set $arcologies[0].FSTransformationFetishist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		<<set $arcologies[0].FSSlimnessEnthusiast += _broadProgress>>
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		<<set $arcologies[0].FSAssetExpansionist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSPastoralist != "unset">>
+		<<set $arcologies[0].FSPastoralist += _broadProgress>>
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		<<set $arcologies[0].FSPhysicalIdealist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+		<<set $arcologies[0].FSMaturityPreferentialist += _broadProgress>>
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		<<set $arcologies[0].FSYouthPreferentialist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSChattelReligionist != "unset">>
+		<<set $arcologies[0].FSChattelReligionist += _broadProgress>>
+	<</if>>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		<<set $arcologies[0].FSRomanRevivalist += _broadProgress>>
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		<<set $arcologies[0].FSAztecRevivalist += _broadProgress>>
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		<<set $arcologies[0].FSEgyptianRevivalist += _broadProgress>>
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		<<set $arcologies[0].FSEdoRevivalist += _broadProgress>>
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		<<set $arcologies[0].FSArabianRevivalist += _broadProgress>>
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		<<set $arcologies[0].FSChineseRevivalist += _broadProgress>>
+	<</if>>
+<</if>>
+
+/* Promenade effects */
+<<for _i = 5; _i <= 7; _i++>>
+<<if $sectors[_i].type != "Shops">>
+<<if $sectors[_i].type != "Brothel">>
+<<if $sectors[_i].type != "Club">>
+	The $sectors[_i].type establishments on the Promenade help develop society.
+	<<set _changed_fs = $sectors[_i].type.replace(" ","")>>
+	<<FSChange _changed_fs 4>>
+	<<continue>>
+<</if>>
+<</if>>
+<</if>>
+<</for>>
+
+/* PA FS bonuses */
+<br><br>
+<<if $PAPublic == 1 && $assistantAppearance != "normal">>
+<<set _seed1 = 0, _seed2 = 0>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "monstergirl")>>
+	 <<set $arcologies[0].FSSupremacist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "amazon")>>
+	 <<set $arcologies[0].FSSubjugationist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<if ($assistantAppearance == "monstergirl") || ($assistantAppearance == "shemale")>>
+	 <<set $arcologies[0].FSGenderRadicalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "gender radicalist")>>
+	 <<set $arcologies[0].FSGenderRadicalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "goddess")>>
+	 <<set $arcologies[0].FSGenderFundamentalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "gender fundamentalist")>>
+	 <<set $arcologies[0].FSGenderFundamentalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "goddess")>>
+	 <<set $arcologies[0].FSPaternalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "paternalist")>>
+	 <<set $arcologies[0].FSPaternalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSDegradationist != "unset">>
+	<<if ($assistantAppearance == "monstergirl") || ($assistantAppearance == "businesswoman")>>
+	 <<set $arcologies[0].FSDegradationist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "degradationist")>>
+	 <<set $arcologies[0].FSDegradationist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "goddess")>>
+	 <<set $arcologies[0].FSBodyPurist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "body purist")>>
+	 <<set $arcologies[0].FSBodyPurist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSTransformationFetishist != "unset">>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "shemale")>>
+	 <<set $arcologies[0].FSTransformationFetishist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "transformation fetishist")>>
+	 <<set $arcologies[0].FSTransformationFetishist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "goddess")>>
+	 <<set $arcologies[0].FSMaturityPreferentialist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "maturity preferentialist")>>
+	 <<set $arcologies[0].FSMaturityPreferentialist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "shemale")>>
+	 <<set $arcologies[0].FSYouthPreferentialist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "youth preferentialist")>>
+	 <<set $arcologies[0].FSYouthPreferentialist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "shemale")>>
+	 <<set $arcologies[0].FSSlimnessEnthusiast += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "slimness enthusiast")>>
+	 <<set $arcologies[0].FSSlimnessEnthusiast += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSAssetExpansionist != "unset">>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "shemale")>>
+	 <<set $arcologies[0].FSAssetExpansionist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "asset expansionist")>>
+	 <<set $arcologies[0].FSAssetExpansionist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<if ($assistantAppearance == "shemale") || ($assistantAppearance == "goddess")>>
+	 <<set $arcologies[0].FSPastoralist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "pastoralist")>>
+	 <<set $arcologies[0].FSPastoralist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "shemale")>>
+	 <<set $arcologies[0].FSPhysicalIdealist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "physical idealist")>>
+	 <<set $arcologies[0].FSPhysicalIdealist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<if ($assistantAppearance == "goddess") || ($assistantAppearance == "monstergirl")>>
+	 <<set $arcologies[0].FSChattelReligionist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "chattel religionist")>>
+	 <<set $arcologies[0].FSChattelReligionist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "businesswoman")>>
+	 <<set $arcologies[0].FSRomanRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "roman revivalist")>>
+	 <<set $arcologies[0].FSRomanRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSAztecRevivalist != "unset">>
+  <<if ($assistantAppearance == "amazon") || ($assistantAppearance == "businesswoman")>>
+	 <<set $arcologies[0].FSAztecRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "aztec revivalist")>>
+	 <<set $arcologies[0].FSAztecRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<if ($assistantAppearance == "goddess") || ($assistantAppearance == "monstergirl")>>
+	 <<set $arcologies[0].FSEgyptianRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "egyptian revivalist")>>
+	 <<set $arcologies[0].FSEgyptianRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "monstergirl")>>
+	 <<set $arcologies[0].FSEdoRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "edo revivalist")>>
+	 <<set $arcologies[0].FSEdoRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSArabianRevivalist != "unset">>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "schoolgirl")>>
+	 <<set $arcologies[0].FSArabianRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "arabian revivalist")>>
+	 <<set $arcologies[0].FSArabianRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSChineseRevivalist != "unset">>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "monstergirl")>>
+	 <<set $arcologies[0].FSChineseRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed1 = 1>>
+	<</if>>
+	<<if ($assistantFSAppearance == "chinese revivalist")>>
+	 <<set $arcologies[0].FSChineseRevivalist += 0.1*$FSSingleSlaveRep>>
+	 <<set _seed2 = 2>>
+	<</if>>
+<</if>>
+<<if _seed2 == 2>>
+With her $assistantFSAppearance $assistantAppearance appearance, $assistantName's public visibility meshes very well with society.
+<<elseif _seed1 == 1>>
+With her $assistantAppearance appearance, $assistantName's public visibility meshes well with society.
+<</if>>
+<</if>>
+
+/* Progress overflow into influence */
+<<if $arcologies[0].FSSupremacist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSSupremacist - $FSLockinLevel>>
+	<<set $arcologies[0].FSSupremacist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSSubjugationist - $FSLockinLevel>>
+	<<set $arcologies[0].FSSubjugationist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSGenderRadicalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSGenderRadicalist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSGenderFundamentalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSGenderFundamentalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSGenderFundamentalist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSPaternalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSPaternalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSPaternalist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSPaternalist != "unset">>
+<<set $arcologies[0].FSPaternalist += _broadProgress>>
+<<elseif $arcologies[0].FSDegradationist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSDegradationist - $FSLockinLevel>>
+	<<set $arcologies[0].FSDegradationist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSBodyPurist - $FSLockinLevel>>
+	<<set $arcologies[0].FSBodyPurist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSTransformationFetishist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSTransformationFetishist - $FSLockinLevel>>
+	<<set $arcologies[0].FSTransformationFetishist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSPastoralist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSPastoralist - $FSLockinLevel>>
+	<<set $arcologies[0].FSPastoralist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSPhysicalIdealist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSPhysicalIdealist - $FSLockinLevel>>
+	<<set $arcologies[0].FSPhysicalIdealist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSMaturityPreferentialist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSMaturityPreferentialist - $FSLockinLevel>>
+	<<set $arcologies[0].FSMaturityPreferentialist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSYouthPreferentialist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSYouthPreferentialist - $FSLockinLevel>>
+	<<set $arcologies[0].FSYouthPreferentialist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSSlimnessEnthusiast - $FSLockinLevel>>
+	<<set $arcologies[0].FSSlimnessEnthusiast = $FSLockinLevel>>
+<<elseif $arcologies[0].FSAssetExpansionist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSAssetExpansionist - $FSLockinLevel>>
+	<<set $arcologies[0].FSAssetExpansionist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSChattelReligionist - $FSLockinLevel>>
+	<<set $arcologies[0].FSChattelReligionist = $FSLockinLevel>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSRomanRevivalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSRomanRevivalist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSAztecRevivalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSAztecRevivalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSAztecRevivalist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSEgyptianRevivalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSEgyptianRevivalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSEgyptianRevivalist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSEdoRevivalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSEdoRevivalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSEdoRevivalist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSArabianRevivalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSArabianRevivalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSArabianRevivalist = $FSLockinLevel>>
+<<elseif $arcologies[0].FSChineseRevivalist > $FSLockinLevel>>
+	<<set $arcologies[0].influenceBonus += $arcologies[0].FSChineseRevivalist - $FSLockinLevel>>
+	<<set $arcologies[0].FSChineseRevivalist = $FSLockinLevel>>
+<</if>>
+
+<<if ($arcologies[0].FSSupremacistSMR + $arcologies[0].FSSubjugationistSMR + $arcologies[0].FSGenderRadicalistSMR + $arcologies[0].FSGenderFundamentalistSMR + $arcologies[0].FSPaternalistSMR + $arcologies[0].FSDegradationistSMR + $arcologies[0].FSBodyPuristSMR + $arcologies[0].FSTransformationFetishistSMR + $arcologies[0].FSYouthPreferentialistSMR + $arcologies[0].FSMaturityPreferentialistSMR + $arcologies[0].FSSlimnessEnthusiastSMR + $arcologies[0].FSAssetExpansionistSMR + $arcologies[0].FSPastoralistSMR + $arcologies[0].FSPhysicalIdealistSMR + $arcologies[0].FSChattelReligionistSMR + $arcologies[0].FSRomanRevivalistSMR + $arcologies[0].FSAztecRevivalistSMR + $arcologies[0].FSEgyptianRevivalistSMR + $arcologies[0].FSEdoRevivalistSMR + $arcologies[0].FSArabianRevivalistSMR + $arcologies[0].FSChineseRevivalistSMR) > 0>>
+	The slave market regulations help ensure the arcology's slaves fit within its society.
+<</if>>
+
+<<if $arcologies[0].FSSupremacist != "unset">>
+<<if $arcologies[0].FSSupremacist < 0>>
+	<<set $arcologies[0].FSSupremacist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSSupremacistLawME = 0, $arcologies[0].FSSupremacistSMR = 0>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSSupremacist > $arcologies[0].FSSupremacistDecoration>>
+	<<set $arcologies[0].FSSupremacist = $arcologies[0].FSSupremacistDecoration>>
+<</if>>
+<<if $arcologies[0].FSSupremacist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in $arcologies[0].FSSupremacistRace superiority.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with $arcologies[0].FSSupremacistRace superiority.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to $arcologies[0].FSSupremacistRace superiority.
+<<elseif $arcologies[0].FSSupremacist != "unset">>
+	$arcologies[0].name is unconvinced of $arcologies[0].FSSupremacistRace superiority.
+<</if>>
+<<if $arcologies[0].FSSupremacistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSSupremacist == $arcologies[0].FSSupremacistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSSupremacistSMR == 1>>
+	<<set $arcologies[0].FSSupremacist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSubjugationist != "unset">>
+<<if $arcologies[0].FSSubjugationist < 0>>
+	<<set $arcologies[0].FSSubjugationist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSSubjugationistLawME = 0, $arcologies[0].FSSubjugationistSMR = 0>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSSubjugationist > $arcologies[0].FSSubjugationistDecoration>>
+	<<set $arcologies[0].FSSubjugationist = $arcologies[0].FSSubjugationistDecoration>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the inferiority of $arcologies[0].FSSubjugationistRace people.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the inferiority of $arcologies[0].FSSubjugationistRace people.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the inferiority of $arcologies[0].FSSubjugationistRace people.
+<<elseif $arcologies[0].FSSubjugationist != "unset">>
+	$arcologies[0].name is unconvinced of the inferiority of $arcologies[0].FSSubjugationistRace people.
+<</if>>
+<<if $arcologies[0].FSSubjugationistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSSubjugationist == $arcologies[0].FSSubjugationistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSSubjugationistSMR == 1>>
+	<<set $arcologies[0].FSSubjugationist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+<<if $arcologies[0].FSGenderRadicalist < 0>>
+	<<set $arcologies[0].FSGenderRadicalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSGenderRadicalistSMR = 0, $arcologies[0].FSGenderRadicalistLawDicks = 0, $arcologies[0].FSGenderRadicalistLawFuta = 0, $arcologies[0].FSGenderRadicalistLawBeauty = 0>>
+	<<if $assistantFSAppearance == "gender radicalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSGenderRadicalist > $arcologies[0].FSGenderRadicalistDecoration>>
+	<<set $arcologies[0].FSGenderRadicalist = $arcologies[0].FSGenderRadicalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the need to redefine gender around power.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the need to redefine gender around power.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the need to redefine gender around power.
+<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+	$arcologies[0].name is unconvinced of the need to redefine gender around power.
+<</if>>
+<<if $arcologies[0].FSGenderRadicalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSGenderRadicalist == $arcologies[0].FSGenderRadicalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSGenderRadicalistSMR == 1>>
+	<<set $arcologies[0].FSGenderRadicalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+<<if $arcologies[0].FSGenderFundamentalist < 0>>
+	<<set $arcologies[0].FSGenderFundamentalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSGenderFundamentalistSMR = 0, $arcologies[0].FSGenderFundamentalistLawBimbo = 0>>
+	<<if $assistantFSAppearance == "gender fundamentalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSGenderFundamentalist > $arcologies[0].FSGenderFundamentalistDecoration>>
+	<<set $arcologies[0].FSGenderFundamentalist = $arcologies[0].FSGenderFundamentalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the need to preserve traditional gender roles.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the need to preserve traditional gender roles.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the need to preserve traditional gender roles.
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	$arcologies[0].name is unconvinced of the need to preserve traditional gender roles.
+<</if>>
+<<if $arcologies[0].FSGenderFundamentalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSGenderFundamentalist == $arcologies[0].FSGenderFundamentalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSGenderFundamentalistSMR == 1>>
+	<<set $arcologies[0].FSGenderFundamentalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPaternalist != "unset">>
+<<if $arcologies[0].FSPaternalist < 0>>
+	<<set $arcologies[0].FSPaternalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSPaternalistLaw = 0, $arcologies[0].FSPaternalistSMR = 0>>
+	<<if $assistantFSAppearance == "paternalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSPaternalist > $arcologies[0].FSPaternalistDecoration>>
+	<<set $arcologies[0].FSPaternalist = $arcologies[0].FSPaternalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSPaternalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the vision of a well-bred race of slaves.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the vision of a well-bred race of slaves.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the vision of a well-bred race of slaves.
+<<elseif $arcologies[0].FSPaternalist != "unset">>
+	$arcologies[0].name is unconvinced of the vision of a well-bred race of slaves.
+<</if>>
+<<if $arcologies[0].FSPaternalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSPaternalist == $arcologies[0].FSPaternalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSPaternalistSMR == 1>>
+	<<set $arcologies[0].FSPaternalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSDegradationist != "unset">>
+<<if $arcologies[0].FSDegradationist < 0>>
+	<<set $arcologies[0].FSDegradationist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSDegradationistLaw = 0, $arcologies[0].FSDegradationistSMR = 0>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSDegradationist > $arcologies[0].FSDegradationistDecoration>>
+	<<set $arcologies[0].FSDegradationist = $arcologies[0].FSDegradationistDecoration>>
+<</if>>
+<<if $arcologies[0].FSDegradationist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that slaves are not human and should be thoroughly degraded.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that slaves are not human and should be thoroughly degraded.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the proposition that slaves are not human and should be thoroughly degraded.
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	$arcologies[0].name is unconvinced that slaves are not human and should be thoroughly degraded.
+<</if>>
+<<if $arcologies[0].FSDegradationistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSDegradationist == $arcologies[0].FSDegradationistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSDegradationistSMR == 1>>
+	<<set $arcologies[0].FSDegradationist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSBodyPurist != "unset">>
+<<if $arcologies[0].FSBodyPurist < 0>>
+	<<set $arcologies[0].FSBodyPurist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSBodyPuristLaw = 0, $arcologies[0].FSBodyPuristSMR = 0>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSBodyPurist > $arcologies[0].FSBodyPuristDecoration>>
+	<<set $arcologies[0].FSBodyPurist = $arcologies[0].FSBodyPuristDecoration>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the unattractive nature of implants.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the unattractive nature of implants.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the unattractive nature of implants.
+<<elseif $arcologies[0].FSBodyPurist != "unset">>
+	$arcologies[0].name is unconvinced of the unattractive nature of implants.
+<</if>>
+<<if $arcologies[0].FSBodyPuristDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSBodyPurist == $arcologies[0].FSBodyPuristDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSBodyPuristSMR == 1>>
+	<<set $arcologies[0].FSBodyPurist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSTransformationFetishist != "unset">>
+<<if $arcologies[0].FSTransformationFetishist < 0>>
+	<<set $arcologies[0].FSTransformationFetishist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSTransformationFetishistLaw = 0, $arcologies[0].FSTransformationFetishistSMR = 0>>
+	<<if $assistantFSAppearance == "transformation fetishist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSTransformationFetishist > $arcologies[0].FSTransformationFetishistDecoration>>
+	<<set $arcologies[0].FSTransformationFetishist = $arcologies[0].FSTransformationFetishistDecoration>>
+<</if>>
+<<if $arcologies[0].FSTransformationFetishist >= $FSLockinLevel>>
+	$arcologies[0].name passionately fetishizes implants.
+<<elseif $arcologies[0].FSTransformationFetishist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name strongly fetishizes implants.
+<<elseif $arcologies[0].FSTransformationFetishist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name fetishizes implants.
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	$arcologies[0].name is beginning to fetishize implants.
+<</if>>
+<<if $arcologies[0].FSTransformationFetishistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSTransformationFetishist == $arcologies[0].FSTransformationFetishistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSTransformationFetishistSMR == 1>>
+	<<set $arcologies[0].FSTransformationFetishist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+<<if $arcologies[0].FSMaturityPreferentialist < 0>>
+	<<set $arcologies[0].FSMaturityPreferentialist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSYouthPreferentialistLaw = 0, $arcologies[0].FSYouthPreferentialistSMR = 0>>
+	<<if $assistantFSAppearance == "youth preferentialist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSMaturityPreferentialist > $arcologies[0].FSMaturityPreferentialistDecoration>>
+	<<set $arcologies[0].FSMaturityPreferentialist = $arcologies[0].FSMaturityPreferentialistDecoration>>
+<</if>>
+<<if $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel>>
+	$arcologies[0].name is passionately enthusiastic for older ladies.
+<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name is very enthusiastic for older ladies.
+<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is enthusiastic for older ladies.
+<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	$arcologies[0].name is beginning to be enthusiastic for older ladies.
+<</if>>
+<<if $arcologies[0].FSMaturityPreferentialistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSMaturityPreferentialist == $arcologies[0].FSMaturityPreferentialistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSMaturityPreferentialistSMR == 1>>
+	<<set $arcologies[0].FSMaturityPreferentialist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+<<if $arcologies[0].FSYouthPreferentialist < 0>>
+	<<set $arcologies[0].FSYouthPreferentialist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSMaturityPreferentialistLaw = 0, $arcologies[0].FSMaturityPreferentialistSMR = 0>>
+	<<if $assistantFSAppearance == "maturity preferentialist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSYouthPreferentialist > $arcologies[0].FSYouthPreferentialistDecoration>>
+	<<set $arcologies[0].FSYouthPreferentialist = $arcologies[0].FSYouthPreferentialistDecoration>>
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel>>
+	$arcologies[0].name is passionately enthusiastic for young women.
+<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name is very enthusiastic for young women.
+<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is enthusiastic for young women.
+<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+	$arcologies[0].name is beginning to be enthusiastic for young women.
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSYouthPreferentialist == $arcologies[0].FSYouthPreferentialistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSYouthPreferentialistSMR == 1>>
+	<<set $arcologies[0].FSYouthPreferentialist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+<<if $arcologies[0].FSSlimnessEnthusiast < 0>>
+	<<set $arcologies[0].FSSlimnessEnthusiast = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSSlimnessEnthusiastSMR = 0, $arcologies[0].FSSlimnessEnthusiastLaw = 0>>
+	<<if $assistantFSAppearance == "slimness enthusiast">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSSlimnessEnthusiast > $arcologies[0].FSSlimnessEnthusiastDecoration>>
+	<<set $arcologies[0].FSSlimnessEnthusiast = $arcologies[0].FSSlimnessEnthusiastDecoration>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast >= $FSLockinLevel>>
+	$arcologies[0].name is passionately enthusiastic about slim slaves with girlish figures.
+<<elseif $arcologies[0].FSSlimnessEnthusiast >= $FSLockinLevel*0.6>>
+	$arcologies[0].name is very enthusiastic about slim slaves with girlish figures.
+<<elseif $arcologies[0].FSSlimnessEnthusiast >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is enthusiastic about slim slaves with girlish figures.
+<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	$arcologies[0].name is beginning to be enthusiastic about slim slaves with girlish figures.
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiastDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSSlimnessEnthusiast == $arcologies[0].FSSlimnessEnthusiastDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSSlimnessEnthusiastSMR == 1>>
+	<<set $arcologies[0].FSSlimnessEnthusiast += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSAssetExpansionist != "unset">>
+<<if $arcologies[0].FSAssetExpansionist < 0>>
+	<<set $arcologies[0].FSAssetExpansionist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSAssetExpansionistSMR = 0, $arcologies[0].FSAssetExpansionistLaw = 0>>
+	<<if $assistantFSAppearance == "asset expansionist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSAssetExpansionist > $arcologies[0].FSAssetExpansionistDecoration>>
+	<<set $arcologies[0].FSAssetExpansionist = $arcologies[0].FSAssetExpansionistDecoration>>
+<</if>>
+<<if $arcologies[0].FSAssetExpansionist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that all tits and asses should be bigger.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that all tits and asses should be bigger.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the idea that all tits and asses should be bigger.
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	$arcologies[0].name is unconvinced that all tits and asses should be bigger.
+<</if>>
+<<if $arcologies[0].FSAssetExpansionistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSAssetExpansionist == $arcologies[0].FSAssetExpansionistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSAssetExpansionistSMR == 1>>
+	<<set $arcologies[0].FSAssetExpansionist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPastoralist != "unset">>
+<<if $arcologies[0].FSPastoralist < 0>>
+	<<set $arcologies[0].FSPastoralist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSPastoralistLaw = 0, $arcologies[0].FSPastoralistSMR = 0>>
+	<<if $assistantFSAppearance == "pastoralist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSPastoralist > $arcologies[0].FSPastoralistDecoration>>
+	<<set $arcologies[0].FSPastoralist = $arcologies[0].FSPastoralistDecoration>>
+<</if>>
+<<if $arcologies[0].FSPastoralist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that slaves should be milked.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that slaves should be milked.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the idea that slaves should be milked.
+<<elseif $arcologies[0].FSPastoralist != "unset">>
+	$arcologies[0].name is unconvinced that slaves should be milked.
+<</if>>
+<<if $arcologies[0].FSPastoralistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSPastoralist == $arcologies[0].FSPastoralistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSPastoralistSMR == 1>>
+	<<set $arcologies[0].FSPastoralist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+<<if $arcologies[0].FSPhysicalIdealist < 0>>
+	<<set $arcologies[0].FSPhysicalIdealist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSPhysicalIdealistSMR = 0, $arcologies[0].FSPhysicalIdealistLaw = 0>>
+	<<if $assistantFSAppearance == "physical idealist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSPhysicalIdealist > $arcologies[0].FSPhysicalIdealistDecoration>>
+	<<set $arcologies[0].FSPhysicalIdealist = $arcologies[0].FSPhysicalIdealistDecoration>>
+<</if>>
+<<if $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that all slaves should be tall and strong.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that all slaves should be tall and strong.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the idea that all slaves should be tall and strong.
+<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+	$arcologies[0].name is unconvinced that all slaves should be tall and strong.
+<</if>>
+<<if $arcologies[0].FSPhysicalIdealistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSPhysicalIdealist == $arcologies[0].FSPhysicalIdealistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSPhysicalIdealistSMR == 1>>
+	<<set $arcologies[0].FSPhysicalIdealist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+<<if $arcologies[0].FSChattelReligionist < 0>>
+	<<set $arcologies[0].FSChattelReligionist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSChattelReligionistLaw = 0, $arcologies[0].FSChattelReligionistSMR = 0, $arcologies[0].FSChattelReligionistCreed = 0>>
+	<<if $assistantFSAppearance == "chattel religionist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSChattelReligionist > $arcologies[0].FSChattelReligionistDecoration>>
+	<<set $arcologies[0].FSChattelReligionist = $arcologies[0].FSChattelReligionistDecoration>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in a version of religion that emphasizes slaveholding traditions.
+	<<set $independenceDay = 1, $nicaeaAnnounceable = 1>>
+<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with a version of religion that emphasizes slaveholding traditions.
+	<<set $independenceDay to 1>>
+<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to a version of religion that emphasizes slaveholding traditions.
+<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+	$arcologies[0].name is unconvinced of a version of religion that emphasizes slaveholding traditions.
+<</if>>
+<<if $arcologies[0].FSChattelReligionistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSChattelReligionist == $arcologies[0].FSChattelReligionistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSChattelReligionistSMR == 1>>
+	<<set $arcologies[0].FSChattelReligionist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+<<if $arcologies[0].FSRomanRevivalist < 0>>
+	<<set $arcologies[0].FSRomanRevivalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSRomanRevivalistLaw = 0, $arcologies[0].FSRomanRevivalistSMR = 0>>
+	<<if $assistantFSAppearance == "roman revivalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSRomanRevivalist > $arcologies[0].FSRomanRevivalistDecoration>>
+	<<set $arcologies[0].FSRomanRevivalist = $arcologies[0].FSRomanRevivalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the new Rome.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build the new Rome.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build the new Rome.
+<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build the new Rome.
+<</if>>
+<<if $arcologies[0].FSRomanRevivalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSRomanRevivalist == $arcologies[0].FSRomanRevivalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSRomanRevivalistSMR == 1>>
+	<<set $arcologies[0].FSRomanRevivalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSAztecRevivalist != "unset">>
+<<if $arcologies[0].FSAztecRevivalist < 0>>
+	<<set $arcologies[0].FSAztecRevivalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSAztecRevivalistSMR = 0, $arcologies[0].FSAztecRevivalistLaw = 0>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSAztecRevivalist > $arcologies[0].FSAztecRevivalistDecoration>>
+	<<set $arcologies[0].FSAztecRevivalist = $arcologies[0].FSAztecRevivalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSAztecRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the new Aztec Empire.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build the new Aztec Empire.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build the new Aztec Empire.
+<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build the new Aztec Empire.
+<</if>>
+<<if $arcologies[0].FSAztecRevivalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSAztecRevivalist == $arcologies[0].FSAztecRevivalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSAztecRevivalistSMR == 1>>
+	<<set $arcologies[0].FSAztecRevivalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+<<if $arcologies[0].FSEgyptianRevivalist < 0>>
+	<<set $arcologies[0].FSEgyptianRevivalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSEgyptianRevivalistLaw = 0, $arcologies[0].FSEgyptianRevivalistSMR = 0>>
+	<<if $assistantFSAppearance == "egyptian revivalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSEgyptianRevivalist > $arcologies[0].FSEgyptianRevivalistDecoration>>
+	<<set $arcologies[0].FSEgyptianRevivalist = $arcologies[0].FSEgyptianRevivalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the land of the Pharaohs, reborn.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build a new land of the Pharaohs.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build a new land of the Pharaohs.
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build a new land of the Pharaohs.
+<</if>>
+<<if $arcologies[0].FSEgyptianRevivalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSEgyptianRevivalist == $arcologies[0].FSEgyptianRevivalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSEgyptianRevivalistSMR == 1>>
+	<<set $arcologies[0].FSEgyptianRevivalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+<<if $arcologies[0].FSEdoRevivalist < 0>>
+	<<set $arcologies[0].FSEdoRevivalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSEdoRevivalistLaw = 0, $arcologies[0].FSEdoRevivalistSMR = 0>>
+	<<if $assistantFSAppearance == "edo revivalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSEdoRevivalist > $arcologies[0].FSEdoRevivalistDecoration>>
+	<<set $arcologies[0].FSEdoRevivalist = $arcologies[0].FSEdoRevivalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSEdoRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the land of the Shogun, reborn.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build an Edo Japan.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build a new Edo Japan.
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build a new Edo Japan.
+<</if>>
+<<if $arcologies[0].FSEdoRevivalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSEdoRevivalist == $arcologies[0].FSEdoRevivalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSEdoRevivalistSMR == 1>>
+	<<set $arcologies[0].FSEdoRevivalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSArabianRevivalist != "unset">>
+<<if $arcologies[0].FSArabianRevivalist < 0>>
+	<<set $arcologies[0].FSArabianRevivalist = "unset">><<set $FSCredits += 1>>
+	<<set $arcologies[0].FSArabianRevivalistLaw = 0, $arcologies[0].FSArabianRevivalistSMR = 0>>
+	<<if $assistantFSAppearance == "arabian revivalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSArabianRevivalist > $arcologies[0].FSArabianRevivalistDecoration>>
+	<<set $arcologies[0].FSArabianRevivalist = $arcologies[0].FSArabianRevivalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSArabianRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is ancient Baghdad reborn.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build a new Sultanate.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build a new Sultanate.
+<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build a new Sultanate.
+<</if>>
+<<if $arcologies[0].FSArabianRevivalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSArabianRevivalist == $arcologies[0].FSArabianRevivalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSArabianRevivalistSMR == 1>>
+	<<set $arcologies[0].FSArabianRevivalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSChineseRevivalist != "unset">>
+<<if $arcologies[0].FSChineseRevivalist < 0>>
+	<<set $arcologies[0].FSChineseRevivalist = "unset">><<set $FSCredits += 1>>
+	<<if $assistantFSAppearance == "chinese revivalist">><<set $assistantFSAppearance = "default">><</if>>
+	<<set $arcologies[0].FSChineseRevivalistLaw = 0, $arcologies[0].FSChineseRevivalistSMR = 0>>
+	<<ClearFacilityDecorations>>
+	@@.red;One of your future society projects has failed:@@ your citizens were repelled from your idea more than they were attracted to it. @@.yellow;You may select another option, or elect to try again.@@
+<<elseif $arcologies[0].FSChineseRevivalist > $arcologies[0].FSChineseRevivalistDecoration>>
+	<<set $arcologies[0].FSChineseRevivalist = $arcologies[0].FSChineseRevivalistDecoration>>
+<</if>>
+<<if $arcologies[0].FSChineseRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that you possess the Mandate of Heaven.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your pursuit of the Mandate of Heaven.
+	<<set $independenceDay = 1>>
+<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your pursuit of the Mandate of Heaven.
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your pursuit of the Mandate of Heaven.
+<</if>>
+<<if $arcologies[0].FSChineseRevivalistDecoration < $FSLockinLevel>>
+<<if $arcologies[0].FSChineseRevivalist == $arcologies[0].FSChineseRevivalistDecoration>>
+	@@.yellow;Your societal development in this direction is being limited by $arcologies[0].name's lack of customization to support it.@@
+<<elseif $arcologies[0].FSChineseRevivalistSMR == 1>>
+	<<set $arcologies[0].FSChineseRevivalist += 0.1*$FSSingleSlaveRep>>
+<</if>>
+<</if>>
+<</if>>

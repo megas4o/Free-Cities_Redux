@@ -1,0 +1,41 @@
+:: Penthouse Report [nobr]
+
+<<SlaveSort $HGSuiteiIDs>>
+<<set _SL = $slaves.length>>
+
+<<for $i = 0; $i < _SL; $i++>>
+	<<if $slaves[$i].assignmentVisible == 1>>
+		''__@@.pink;$slaves[$i].slaveName<<if $slaves[$i].slaveSurname>> $slaves[$i].slaveSurname<</if>>@@__''
+		<<if $slaves[$i].choosesOwnAssignment == 2>>
+			<<include "SA chooses own job">>
+			$pronounCap
+		<</if>>
+		<<include "Full Report">>
+		<br><br>
+
+		<<if ($slaves[$i].assignment == "be your Head Girl") && ($HGSuiteSlaves > 0)>>
+			/% We found the Head Girl, now let's find her slave %/
+			<<set _iTemp = $i>>
+			<<set _ID = $HGSuiteiIDs[0], $i = $slaveIndices[_ID]>>
+
+			<<if $slaves[$i].assignment != "live with your Head Girl">>
+				<br>@@.red;$slaves[$i].slaveName had been assigned to live with your Head Girl, but this week she was assigned to $slaves[$i].assignment. She has been released to your penthouse for reassignment.@@
+				<<removeJob $slaves[$i] "live with your Head Girl">>
+			<<else>>
+				''__@@.pink;$slaves[$i].slaveName@@__''
+				<<if $slaves[$i].choosesOwnAssignment == 2>>
+					<<include "SA chooses own job">>
+					$pronounCap
+				<</if>>
+				<<include "SA live with HG">>
+				<br><br>
+			<</if>>
+
+			<<set $i = _iTemp>>
+		<</if>>
+	<</if>>
+<</for>>
+
+/* count open spots in facilities after all assignments have been decided for the week */
+<<set $brothelSpots = $brothel - $brothelSlaves, $clubSpots = $club - $clubSlaves, $dairySpots = $dairy - $dairySlaves, $servantsQuartersSpots = $servantsQuarters - $servantsQuartersSlaves>>
+

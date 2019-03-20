@@ -1,0 +1,47 @@
+:: PT widgets [widget nobr]
+
+<<widget "InduceFlawAbuseEffects">>
+<<if $slaves[$i].devotion > 20>>
+	She's @@.mediumorchid;desperately confused@@ by this treatment, since the effect would be ruined if you explained it to her, and her @@.gold;trust in you is reduced.@@
+<<elseif $slaves[$i].devotion >= -20>>
+	She's @@.mediumorchid;confused, depressed@@ and @@.gold;frightened@@ by this treatment, since the effect would be ruined if you explained it to her.
+<<else>>
+	She's @@.mediumorchid;angry@@ and @@.gold;afraid@@ that you would treat her like this.
+<</if>>
+<<if $slaves[$i].energy > 10>>
+	Her @@.red;appetite for sex is also reduced.@@
+	<<set $slaves[$i].energy -= 2>>
+<</if>>
+<<set $slaves[$i].devotion -= 5>>
+<<set $slaves[$i].trust -= 5>>
+<</widget>>
+
+<<widget "InduceFlawLenityEffects">>
+<<if $slaves[$i].devotion <= 20>>
+	She doesn't understand what you intend by this strange treatment, but it does make her @@.mediumaquamarine;inappropriately trusting.@@
+	<<set $slaves[$i].trust += 5>>
+<</if>>
+<</widget>>
+
+<<widget "BasicTrainingDefaulter">>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<if ($activeSlave.devotion > 20) && ($activeSlave.behavioralFlaw != "none") && ($activeSlave.behavioralQuirk == "none") && ($activeSlave.behavioralQuirk != "cum addict") && ($activeSlave.behavioralQuirk != "anal addict") && ($activeSlave.behavioralQuirk != "attention whore") && ($activeSlave.behavioralQuirk != "breast growth") && ($activeSlave.behavioralQuirk != "abusive") && ($activeSlave.behavioralQuirk != "malicious") && ($activeSlave.behavioralQuirk != "self hating") && ($activeSlave.behavioralQuirk != "neglectful") && ($activeSlave.behavioralQuirk != "breeder")>>
+		Since she's obedient, @@.yellow;her training assignment has defaulted to softening her behavioral flaw.@@
+		<<set $trainingRegimen = "soften her behavioral flaw">>
+	<<elseif ($activeSlave.devotion > 20) && ($activeSlave.sexualFlaw != "none") && ($activeSlave.sexualQuirk == "none")>>
+		Since she's obedient, @@.yellow;her training assignment has defaulted to softening her sexual flaw.@@
+		<<set $trainingRegimen = "soften her sexual flaw">>
+	<<elseif ($activeSlave.devotion > 20) && ($activeSlave.behavioralFlaw != "none") && ($activeSlave.behavioralQuirk != "cum addict") && ($activeSlave.behavioralQuirk != "anal addict") && ($activeSlave.behavioralQuirk != "attention whore") && ($activeSlave.behavioralQuirk != "breast growth") && ($activeSlave.behavioralQuirk != "abusive") && ($activeSlave.behavioralQuirk != "malicious") && ($activeSlave.behavioralQuirk != "self hating") && ($activeSlave.behavioralQuirk != "neglectful") && ($activeSlave.behavioralQuirk != "breeder")>>
+		Since she's obedient and already has a behavioral quirk, @@.yellow;her training assignment has defaulted to removing her behavioral flaw.@@
+		<<set $trainingRegimen = "fix her behavioral flaw">>
+	<<elseif ($activeSlave.devotion > 20) && ($activeSlave.sexualFlaw != "none")>>
+		Since she's obedient and already has a sexual quirk, @@.yellow;her training assignment has defaulted to removing her sexual flaw.@@
+		<<set $trainingRegimen = "fix her sexual flaw">>
+	<<elseif ($slaves[$i].devotion <= 20) && ($slaves[$i].trust > -20)>>
+		@@.yellow;Her training assignment has defaulted to breaking her will.@@
+		<<set $trainingRegimen = "break her will">>
+	<<else>>
+		She is now fully broken; @@.yellow;her training assignment has defaulted to fostering devotion.@@
+		<<set $trainingRegimen = "build her devotion">>
+	<</if>>
+<</widget>>

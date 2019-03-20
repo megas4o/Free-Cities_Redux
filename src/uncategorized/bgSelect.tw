@@ -1,0 +1,14 @@
+:: BG Select [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $showEncyclopedia = 1, $encyclopedia = "Bodyguard">>
+
+<<if ($Bodyguard != 0)>>
+	''__@@.pink;$Bodyguard.slaveName@@__'' is serving as your bodyguard.<br><br>She will remain close to you at all times and guard your person.
+<<else>>
+	You have not selected a bodyguard.
+<</if>>
+
+<br><br>''Appoint a bodyguard from your devoted slaves:''
+<<include "Slave Summary">>
+
+<br><br>[[None|Bodyguard Workaround][$i = -1]]

@@ -1,0 +1,360 @@
+:: RE malefactor [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check", $returnTo = "RIE Eligibility Check", $showEncyclopedia = 1, $encyclopedia = "Free Cities Justice", $applyLaw = 0>>
+
+<<if $malefactor == "addict">>
+
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "You sentenced her to enslavement as a punishment for attempted burglary.">>
+<<set $activeSlave.career = "a criminal">>
+<<set $activeSlave.devotion = random(-75,-60)>>
+<<set $activeSlave.trust = random(-15,0)>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.health = random(-40,-20)>>
+<<set $activeSlave.addict = 30>>
+<<set $activeSlave.anus = 3>>
+<<if $activeSlave.dick == 0>>
+	<<set $activeSlave.balls = 0>>
+	<<set $activeSlave.vagina = 2>>
+	<<set $activeSlave.vaginalSkill = 15>>
+<<else>>
+	<<set $activeSlave.ovaries = 0>>
+	<<set $activeSlave.clit = 0>>
+	<<set $activeSlave.vaginalSkill = 0>>
+<</if>>
+<<set $activeSlave.oralSkill = 15>>
+<<set $activeSlave.analSkill = 35>>
+<<set $activeSlave.whoreSkill = 15>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 1>>
+<<set $activeSlave.clitPiercing = 1>>
+<<set $activeSlave.behavioralFlaw = "odd">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a criminal has been detected by your security systems and detained by the drones. Crime is extremely uncommon in your arcology, since nothing can escape the notice of the omnipresent monitoring systems. Criminals are usually either too angry, too ignorant, or too stupid to understand the impossibility of successful petty crime. This is the latter situation; a girl suffering severe aphrodisiac withdrawal has attempted to break into a store that sells the stuff. She's now lying in a pool of her own urine with a tazer round stuck in her ass; the drone responsible is hovering helpfully nearby, hitting her with another shock whenever she does more than twitch.
+
+<<elseif $malefactor == "escapee">>
+
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "You sentenced her to enslavement as a punishment for suspected escapism.">>
+<<set $activeSlave.devotion = random(-75,-60)>>
+<<set $activeSlave.trust = random(-15,0)>>
+<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.health = random(-80,-70)>>
+<<set $activeSlave.heels = 1>>
+<<set $activeSlave.boobs += 100*random(12,32)>>
+<<set $activeSlave.butt += random(2,4)>>
+<<set $activeSlave.anus = 1>>
+<<if $activeSlave.dick == 0>>
+	<<set $activeSlave.balls = 0>>
+	<<set $activeSlave.vagina = 2>>
+	<<set $activeSlave.vaginalSkill = 15>>
+<<else>>
+	<<set $activeSlave.dick = random(4,5)>>
+	<<set $activeSlave.balls = random(0,2)>>
+	<<set $activeSlave.ovaries = 0>>
+	<<set $activeSlave.clit = 0>>
+	<<set $activeSlave.vaginalSkill = 0>>
+<</if>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.sexualFlaw = "hates penetration">>
+<<set $activeSlave.behavioralFlaw = "odd">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a criminal has been detected by your security systems and detained by the drones. Crime is extremely uncommon in your arcology, since nothing can escape the notice of the omnipresent monitoring systems. This is a simple case of vagrancy; sleeping on the streets (due to penury rather than inebriation) breaks an implicit contract all visitors to the arcology sign by coming here. The criminal is anything but usual, however. She bears signs of extreme hormone manipulation over a long period, and has had her Achilles tendons clipped. Camera records show her crawling in with a cargo shipment. She's clad in rags, and you cannot find any record of her anywhere. The growing crowd is convinced she's an escaped slave, and is growing ugly.
+
+<<elseif $malefactor == "businesswoman">>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "You sentenced her to enslavement as a punishment for fraud and theft.">>
+<<set $activeSlave.career = "a criminal businesswoman">>
+<<set $activeSlave.devotion = random(-75,-60)>>
+<<set $activeSlave.trust = random(-15,0)>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.vagina = 2>>
+<<set $activeSlave.preg = -1>>
+<<set $activeSlave.vaginalSkill = 15>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.boobs += 400>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.butt += 2>>
+<<set $activeSlave.buttImplant = 2>>
+<<set $activeSlave.age = random(35,43)>>
+<<set $activeSlave.health = random(20,40)>>
+<<set $activeSlave.sexualFlaw = "hates oral">>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.hStyle = "fashionable for a Free Cities businesswoman, up in a tight bun">>
+<<set $activeSlave.customTat = "She has a pretty floral tattoo along her collarbone.">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a criminal has been detected by your security systems and detained by the drones. Crime is extremely uncommon in your arcology, since nothing can escape the notice of the omnipresent monitoring systems. Nevertheless, it seems one of your tenants, a hitherto well-respected businesswoman, has left the straight and narrow. It seems her business affairs took a decisive turn for the worse, so she attempted to drain her clients' funds and leave your arcology before anyone was the wiser. Unfortunately for her, your security drones, controlled by $assistantName, were very much the wiser. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> has with machine efficiency compiled the completest proofs of corporate malfeasance you have ever seen. Your wretched tenant signed a contract with you that included provisions forbidding theft. She is entirely at your mercy.
+
+<<elseif $malefactor == "whore">>
+
+<<include "Generate New Slave">>
+<<set $activeSlave.origin = "You sentenced her to enslavement as a punishment for theft and battery.">>
+<<set $activeSlave.career = "a prostitute">>
+<<set $activeSlave.devotion = random(-75,-60)>>
+<<set $activeSlave.trust = random(-15,0)>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.health = random(-40,-20)>>
+<<set $activeSlave.anus = 2>>
+<<if $activeSlave.dick == 0>>
+	<<set $activeSlave.balls = 0>>
+	<<set $activeSlave.vagina = 2>>
+	<<set $activeSlave.vaginalSkill = 35>>
+<</if>>
+<<set $activeSlave.oralSkill = 35>>
+<<set $activeSlave.analSkill = 35>>
+<<set $activeSlave.whoreSkill = 35>>
+<<set $activeSlave.boobs += 400>>
+<<set $activeSlave.boobsImplant = 400>>
+<<set $activeSlave.butt += 1>>
+<<set $activeSlave.buttImplant = 1>>
+<<set $activeSlave.lips += 10>>
+<<set $activeSlave.lipsImplant = 10>>
+<<set $activeSlave.lipsPiercing = 1>>
+<<set $activeSlave.tonguePiercing = 1>>
+<<set $activeSlave.earPiercing = 1>>
+<<set $activeSlave.nosePiercing = 1>>
+<<set $activeSlave.eyebrowPiercing = 1>>
+<<set $activeSlave.nipplesPiercing = 1>>
+<<set $activeSlave.clitPiercing = 1>>
+<<set $activeSlave.sexualFlaw = "hates penetration">>
+<<set $activeSlave.hStyle = "strip">>
+<<set $activeSlave.customTat = "She has a tear tattooed under each eye.">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a criminal has been detected by your security systems and detained by the drones. Crime is extremely uncommon in your arcology, since nothing can escape the notice of the omnipresent monitoring systems. Nevertheless, it seems one of your tenants, a free whore, has been systematically stealing from clients. She was furtive enough to get away with it for a time, but has now been caught red-handed. The john who caught her attempted to stop her, and she fought him: like many prostitutes she carried a weapon in her handbag, and the man is severely wounded. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> has with machine efficiency compiled a staggering dossier of video logs and personal testimony from previous customers who now understand where their personal belongings went, as well as appalling footage of today's victim's injuries. Your wretched tenant signed a contract with you that included provisions forbidding this kind of thing. She is entirely at your mercy.
+
+<<elseif $malefactor == "rapist">>
+
+<<include "Generate XY Slave">>
+<<set $activeSlave.origin = "You sentenced her to enslavement as a punishment for rape of a free woman.">>
+<<set $activeSlave.devotion = random(-75,-60)>>
+<<set $activeSlave.trust = random(-15,0)>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.health = random(0,20)>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.balls = random(2,4)>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.sexualFlaw = "hates men">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a criminal has been detected by your security systems and detained by the drones. Crime is extremely uncommon in your arcology, since nothing can escape the notice of the omnipresent monitoring systems. Nevertheless, it seems one of your tenants saw fit to rape a free woman. Within ten minutes, the inhuman efficiency of $assistantName has compiled video recordings, physical evidence, and even the victim's testimony, which is quite consistent with the first two. Your wretched tenant signed a contract with you that included provisions forbidding this kind of thing. He is entirely at your mercy.
+
+<<else>>
+
+<<include "Generate XX Slave">>
+<<set $activeSlave.origin = "You sentenced her to enslavement as a punishment for attempted theft of a slave.">>
+<<set $activeSlave.career = "an antislavery activist">>
+<<set $activeSlave.devotion = random(-75,-60)>>
+<<set $activeSlave.trust = random(-15,0)>>
+	<<set $activeSlave.oldDevotion = $activeSlave.devotion>>
+<<set $activeSlave.muscles = 50>>
+<<set $activeSlave.vaginalSkill = 0>>
+<<set $activeSlave.oralSkill = 0>>
+<<set $activeSlave.analSkill = 0>>
+<<set $activeSlave.whoreSkill = 0>>
+<<set $activeSlave.combatSkill = 1>>
+<<set $activeSlave.anus = 0>>
+<<set $activeSlave.age = random(28,43)>>
+<<set $activeSlave.health = random(60,80)>>
+<<set $activeSlave.behavioralFlaw = "arrogant">>
+<<set $activeSlave.sexualFlaw = "hates men">>
+<<set $activeSlave.hStyle = "shaved into a mohawk">>
+<<set $activeSlave.customTat = "She seems to have had slave tattoos at one time, but has had them cheaply removed.">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> alerts you that a criminal has been detected by your security systems and detained by the drones. Crime is extremely uncommon in your arcology, but this is a special case. A well-muscled, well-armed woman was caught attempting to smuggle a slave owned by one of your tenants out of the arcology. Though the slave surrendered immediately (and will be dealt with by her owner), the would-be liberatrix was caught by your security drones. She destroyed two of them and caused @@.red;other minor damage@@<<set $cash -= 1000>> that will require a small sum to repair, but was eventually subdued. The drones had to expend a great deal of nonlethal ordnance to bring her down and keep her down, but she is now entirely at your mercy.
+
+<</if>>
+
+<br><br>
+
+<<set $contractCost = 1000>>
+<<set $activeSlave.slaveCost = $contractCost>>
+<<slaveCost $activeSlave>>
+<<set $slaveCost -= 1000>>
+
+//Applying enslavement as punishment will cost ¤$contractCost. Doing so and then selling her immediately will bring in approximately ¤$slaveCost.//
+
+<br><br>
+
+<<set $saleDescription = 1>><<include "Long Slave Description">>
+
+<br><br>
+
+<span id="result">
+<<if $cash >= $contractCost>>
+	<<link "Enslave her">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		<<if $malefactor == "addict">>
+			You complete the legalities and biometric scanning quickly and without fuss. The condemned recovers enough by the end of the process to start masturbating weakly, even as she begins begging for a fix. Then it's off to the penthouse for basic slave induction.
+		<<elseif $malefactor == "escapee">>
+			You complete the legalities and biometric scanning quickly and without fuss. She remains limp throughout the process, only recovering enough to barely grasp the situation as she is enslaved.
+		<<elseif $malefactor == "businesswoman">>
+			You complete the legalities and biometric scanning quickly and without fuss. The condemned sobs and begs throughout the process until you grow tired of the whining and apply punishment. Then it's off to the penthouse for basic slave induction.
+		<<elseif $malefactor == "whore">>
+			You complete the legalities and biometric scanning quickly and without fuss. The condemned sobs and begs throughout the process until you grow tired of the whining and apply punishment. Then it's off to the penthouse for basic slave induction.
+		<<elseif $malefactor == "rapist">>
+			You complete the legalities and biometric scanning quickly and without fuss. The condemned sobs and begs throughout the process until you grow tired of the whining and apply punishment. Then it's off to the penthouse for basic slave induction.
+		<<else>>
+			You complete the legalities and biometric scanning quickly and cautiously. Though the would-be liberator is of course restrained, disarmed, and still sedated, she could awake at any time. Based on the drone logs, she is likely to be violent when she does.
+		<</if>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>>
+	<br><<link "Sentence her to a day in the stocks, then enslave her">>
+		<<set $activeSlave.health -= 10>>
+		<<set $activeSlave.behavioralFlaw = "odd">>
+		<<set $activeSlave.sexualFlaw = "hates penetration">>
+		<<set $activeSlave.anus = 2>>
+		<<if $activeSlave.vagina > -1>>
+			<<set $activeSlave.vagina = 2>>
+			<<if random(1,100) > 60 && isFertile($activeSlave)>>
+				<<set $activeSlave.preg = 1>>
+			<</if>>
+		<</if>>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		<<if $malefactor == "addict">>
+			You declare her holes fair game for the entire arcology, since she must somehow repay her debt to society. She spends a torturous day in the stocks before being hauled in for enslavement, somewhat @@.red;the worse for wear@@ and @@.red;acting oddly@@ due to her ordeal, bruises all over her body, cum leaking from her @@.lime;loosened@@ anus<<if $activeSlave.vagina > -1>> and @@.lime;fucked-out@@ pussy<</if>>. The public @@.green;enjoys the fun.@@
+		<<elseif $malefactor == "escapee">>
+			You declare her holes fair game for the entire arcology, so that all free citizens can own her for a moment, if they wish. She spends a torturous day in the stocks before being hauled in for enslavement, somewhat @@.red;the worse for wear@@ and @@.red;acting oddly@@ due to her ordeal, bruises all over her body, cum leaking from her @@.lime;loosened@@ anus<<if $activeSlave.vagina > -1>> and @@.lime;fucked-out@@ pussy<</if>>. The public @@.green;enjoys the fun.@@
+		<<elseif $malefactor == "businesswoman">>
+			You declare her holes fair game for the entire arcology, in payment for her crimes. She spends a torturous day in the stocks before being hauled in for enslavement, somewhat @@.red;the worse for wear@@ and @@.red;acting oddly@@ due to her ordeal, bruises all over her body, cum leaking from her @@.lime;loosened@@ anus<<if $activeSlave.vagina > -1>> and @@.lime;fucked-out@@ pussy<</if>>. The public @@.green;enjoys the fun.@@
+		<<elseif $malefactor == "whore">>
+			You declare her holes fair game for the entire arcology, to repay her thefts. She spends a torturous day in the stocks before being hauled in for enslavement, somewhat @@.red;the worse for wear@@ and @@.red;acting oddly@@ due to her ordeal, bruises all over her body, cum leaking from her @@.lime;loosened@@ anus<<if $activeSlave.vagina > -1>> and @@.lime;fucked-out@@ pussy<</if>>. The public @@.green;enjoys the fun.@@
+		<<elseif $malefactor == "rapist">>
+			You declare her holes fair game for the entire arcology. She spends a torturous day in the stocks before being hauled in for enslavement, somewhat @@.red;the worse for wear@@ and @@.red;acting oddly@@ due to her ordeal, bruises all over her body, cum leaking from her @@.lime;loosened@@ anus<<if $activeSlave.vagina > -1>> and @@.lime;fucked-out@@ pussy<</if>>. The public @@.green;enjoys the fun.@@
+		<<else>>
+			Slave ownership is the cornerstone of the society you're building in your arcology, and this woman attempted to undermine it. Her holes are thus fair game for the entire arcology. She spends a torturous day in the stocks before being hauled in for enslavement, somewhat @@.red;the worse for wear@@ and @@.red;acting oddly@@ due to her ordeal, bruises all over her body, cum leaking from her @@.lime;loosened@@ anus<<if $activeSlave.vagina > -1>> and @@.lime;fucked-out@@ pussy<</if>>. The public @@.green;enjoys the fun,@@ and small slaveholders are @@.green;encouraged to do business with your arcology@@ after word of the incident gets around.
+		<</if>>
+		<<set $rep += 100>>
+		<<set $arcologies[0].prosperity += 2>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>>
+	<<if $arcade > 0>>
+	<br><<link "Enslave her and sentence her to a month in the arcade">>
+		<<assignJob $activeSlave "be confined in the arcade">>
+		<<set $activeSlave.choosesOwnAssignment = 0>>
+		<<set $activeSlave.sentence = 4>>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		<<if $malefactor == "addict">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned recovers enough by the end of the process to start masturbating weakly, even as she begins begging for a fix. When she learns she's headed to the arcade, she actually relaxes a little, having heard the whores there get drugs. The public @@.green;looks forward@@ to seeing her there, especially the owner of the shop she attempted to burglarize.
+		<<elseif $malefactor == "escapee">>
+			You complete the legalities and biometric scanning quickly, and tell the crowd that her holes will be available at the arcade within the hour. The public @@.green;looks forward@@ to seeing her there, angrily suspecting her of being an escapee and glad that they'll be able to take part in her punishment.
+		<<elseif $malefactor == "businesswoman">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned sobs and begs throughout the process until you grow tired of the whining and sedate her for immurement in the arcade. The public @@.green;looks forward@@ to seeing her there.
+		<<elseif $malefactor == "whore">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned sobs and begs throughout the process until you grow tired of the whining and sedate her for immurement in the arcade. The public @@.green;looks forward@@ to seeing her there and getting some of their own back.
+		<<elseif $malefactor == "rapist">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned sobs and begs throughout the process until you grow tired of the whining and sedate her for immurement in the arcade. The public @@.green;looks forward@@ to seeing her there.
+		<<else>>
+			You complete the legalities and biometric scanning quickly and cautiously. Though the would-be liberator is of course restrained, disarmed, and still sedated, she could awake at any time. It would be best to have her restrained for public use in the arcade first. The public @@.green;looks forward@@ to seeing her there.
+		<</if>>
+		<<set $rep += 50>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+		<</replace>>
+	<</link>>
+	<</if>>
+	<<if $dairy > 0>>
+	<<if $dairyRestraintsSetting > 1>>
+	<br><<link "Enslave her and send her straight to the industrial dairy">>
+		<<assignJob $activeSlave "work in the dairy">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		<<if $malefactor == "addict">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned accepts a sedative, thinking it's aphrodisiacs, and her unconscious body is installed in $dairyName. The public @@.green;accepts@@ this as an appropriate punishment, especially when you release footage of the addict's <<if $dairyStimulatorsSetting > 1>>agony as her anus adapts to accommodate rectal dildo hydration<<elseif ($dairyPregSetting > 1) && ($activeSlave.vagina > 0)>>discomfort as her pussy adapts to industrial reproduction<<else>>breasts as they are roughly milked<</if>>, together with a lengthy report on the experimental detox process used to ensure that the milk she produces will be untainted.
+		<<elseif $malefactor == "escapee">>
+			You complete the legalities and biometric scanning quickly. The condemned is too far gone to resist as she is installed in $dairyName. The public @@.green;accepts@@ this as an appropriate punishment, especially when you release footage of the escapee's <<if $dairyStimulatorsSetting > 1>>agony as her anus adapts to accommodate rectal dildo hydration<<elseif ($dairyPregSetting > 1) && ($activeSlave.vagina > 0)>>discomfort as her pussy adapts to industrial reproduction<<else>>breasts as they are roughly milked<</if>>.
+		<<elseif $malefactor == "businesswoman">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned resists installation in $dairyName with energy born of desperation. The public @@.green;accepts@@ this as an appropriate punishment, especially when you release footage of the criminal's <<if ($dairyPregSetting > 1) && ($activeSlave.vagina > 0)>>discomfort as her pussy adapts to industrial reproduction, along with a prospectus detailing the scheduled sale of her first slave product in eighteen years and nine months<<elseif $dairyStimulatorsSetting > 1>>agony as her anus adapts to accommodate rectal dildo hydration<<else>>breasts as they are roughly milked<</if>>.
+		<<elseif $malefactor == "whore">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned resists installation in $dairyName with energy born of desperation. The public @@.green;accepts@@ this as an appropriate punishment, especially when you release footage of the criminal's <<if ($dairyPregSetting > 1) && ($activeSlave.vagina > 0)>>discomfort as her well-traveled pussy adapts to industrial reproduction<<elseif $dairyStimulatorsSetting > 1>>discomfort as her well-traveled anus adapts to accommodate rectal dildo hydration<<else>>breasts as they are roughly milked<</if>>.
+		<<elseif $malefactor == "rapist">>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned resists installation in $dairyName with energy born of desperation. The public @@.green;accepts@@ this as an appropriate punishment, especially when you release footage of the rapists's <<if $dairyStimulatorsSetting > 1>>agony as her anus adapts to accommodate rectal dildo hydration<<else>>newly growing breasts as they are roughly milked<</if>>.
+		<<else>>
+			You complete the legalities and biometric scanning quickly and cautiously. The condemned resists installation in $dairyName with energy born of desperation. The public @@.green;accepts@@ this as an appropriate punishment, especially when you release footage of the criminal's <<if ($dairyPregSetting > 1) && ($activeSlave.vagina > 0)>>discomfort as her pussy adapts to industrial reproduction<<elseif $dairyStimulatorsSetting > 1>>discomfort as her anus adapts to accommodate rectal dildo hydration<<else>>breasts as they are roughly milked<</if>>, together with a report on the likely productivity of such a fit body capable of withstanding the stress of high throughput.
+		<</if>>
+		<<set $rep += 50>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+		<</replace>>
+	<</link>>
+	<</if>>
+	<</if>> /* closes dairy > 0 */
+	<<if $seeExtreme > 0>>
+	<br><<link "Punitively amputate her limbs, and then enslave her">>
+		<<set $activeSlave.health -= 20>>
+		<<set $activeSlave.amp = 1>>
+		<<set $activeSlave.heels = 0>>
+		<<set $activeSlave.behavioralFlaw = "odd">>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		<<if $malefactor == "addict">>
+			An example must be made. Free people must understand that criminals who commit outrages against them will be severely punished. The protesting malefactor is stripped and stuffed into your remote surgery on public video feed. She begs for a fix until she realizes what's coming, at which point she switches to fighting vainly to escape. Of course, @@.red;her health is affected@@ and the horrible experience has left her @@.red;acting oddly.@@ Then it's off to the penthouse for basic slave induction. The public @@.green;approves of this harshness.@@
+		<<elseif $malefactor == "escapee">>
+			An example must be made. If she escaped once with her tendons clipped, she must be rather talented at it. It remains to be seen if she can manage to escape with nor arms and legs, so you announce her sentence to the crowd and send her unconscious form for reduction. Of course, @@.red;her health is affected.@@ The public @@.green;approves of this harshness,@@ believing that you have taken strong measures against escapees.
+		<<elseif $malefactor == "businesswoman">>
+			An example must be made. Free people must understand that criminals who commit outrages against them will be severely punished. The protesting malefactor is stripped and stuffed into your remote surgery on public video feed. She begs and pleads until she sees her doom in the form of the surgical machinery, at which point she switches to fighting vainly to escape. Of course, @@.red;her health is affected@@ and the horrible experience has left her @@.red;acting oddly.@@ Then it's off to the penthouse for basic slave induction. The public @@.green;approves of this harshness.@@
+		<<elseif $malefactor == "whore">>
+			An example must be made. Free people must understand that criminals who commit outrages against them will be severely punished. The protesting malefactor is stripped and stuffed into your remote surgery on public video feed. She begs and pleads until she sees her doom in the form of the surgical machinery, at which point she switches to fighting vainly to escape. Of course, @@.red;her health is affected@@ and the horrible experience has left her @@.red;acting oddly.@@ Then it's off to the penthouse for basic slave induction. The public @@.green;approves of this harshness,@@ since she can hardly attempt to steal anything without hands.
+		<<elseif $malefactor == "rapist">>
+			An example must be made. Rape is rare in your arcology, since citizens are so generously provided with means of sexual outlet. When the price of renting a slave it's impossible to rape is as low as it is, sexual assault of a free woman is doubly unforgivable. The protesting malefactor is stripped and stuffed into your remote surgery on public video feed. She begs and pleads until she sees her doom in the form of the surgical machinery, at which point she switches to fighting vainly to escape. Of course, @@.red;her health is affected@@ and the horrible experience has left her @@.red;acting oddly.@@ Then it's off to the penthouse for basic slave induction. The public @@.green;approves of this harshness,@@ since even if she cheers up and ever manages an erection again, she's not likely to rape anyone without arms or legs.
+		<<else>>
+			An example must be made. Slave ownership is the cornerstone of the society you're building in your arcology, and this woman attempted to undermine it. The protesting malefactor is stripped and stuffed into your remote surgery on public video feed. She begs and pleads until she sees her doom in the form of the surgical machinery, at which point she switches to fighting vainly to escape. Of course, @@.red;her health is affected@@ and the horrible experience has left her @@.red;acting oddly.@@ Then it's off to the penthouse for basic slave induction. The public @@.green;approves of this harshness,@@ since she will scarcely be able to liberate anyone without arms or legs.
+		<</if>>
+		<<set $rep += 100>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>>
+	<<if $malefactor == "rapist" && $activeSlave.balls > 0>>
+	<br><<link "Enslave the criminal and geld her">>
+		<<set $activeSlave.health -= 20>>
+		<<set $activeSlave.balls = 0>>
+		<<set $activeSlave.devotion -= 25>>
+		<<set $activeSlave.trust -= 25>>
+		<<set $cash -= $contractCost>>
+		<<replace "#result">>
+		Video feeds from your remote surgery are made public as the protesting criminal is strapped down and gelded. She is so utterly broken by this turn of events that you complete the legalities and biometric scanning without fuss. The condemned sobs weakly throughout the process until you grow tired of the whining and apply punishment. Then it's off to the penthouse for basic slave induction. The public @@.green;approves of this harshness,@@ which increases your arcology's prosperity by @@.green;giving it a reputation for swift and terrible justice.@@
+		<<set $rep += 100>>
+		<<set $arcologies[0].prosperity += 10>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>>
+	<</if>>
+	<</if>> /* closes seeExtreme */
+<<else>>
+	//You lack the necessary funds to enslave her.//
+<</if>>
+<br><<link "Publicly flog the criminal">>
+	<<replace "#result">>
+	<<if $malefactor == "addict">>
+		Naturally, the wretch will be thrown out of the arcology: but an example must first be made. Free people must understand that criminals who commit outrages against them will be severely punished. The twitching, begging malefactor is stripped and flogged on the promenade before being escorted bleeding, and still twitching from withdrawal, out of the arcology. The public @@.green;approves of this harshness.@@
+	<<elseif $malefactor == "escapee">>
+		Naturally, the wretch will be thrown out of the arcology: but an example must first be made. Free people must understand that criminals who commit outrages against them will be severely punished. The begging malefactor is flogged on the promenade before being escorted bleeding and half-dead out of the arcology. The public @@.green;approves of this harshness.@@
+	<<elseif $malefactor == "businesswoman">>
+		Naturally, the wretch will be thrown out of the arcology: but an example must first be made. Free people must understand that criminals who commit outrages against them will be severely punished. The protesting bitch is stripped and flogged on the promenade before being escorted bleeding from the arcology. The public @@.green;approves of this harshness.@@
+	<<elseif $malefactor == "whore">>
+		Naturally, the wretch will be thrown out of the arcology: but an example must first be made. Free people must understand that criminals who commit outrages against them will be severely punished. The protesting malefactor is stripped and flogged on the promenade before being escorted bleeding from the arcology. The public @@.green;approves of this harshness.@@
+	<<elseif $malefactor == "rapist">>
+		Naturally, the wretch will be thrown out of the arcology: but an example must first be made. Free people must understand that criminals who commit outrages against them will be severely punished. The protesting malefactor is stripped and flogged on the promenade before being escorted bleeding from the arcology. The public @@.green;approves of this harshness.@@
+	<<else>>
+		An example must be made. Slave ownership is the cornerstone of the society you're building in your arcology, and this woman attempted to undermine it. The protesting bitch is stripped and flogged on the promenade before being escorted bleeding from the arcology. The public @@.green;approves of this harshness.@@
+	<</if>>
+	<<set $rep += 100>>
+	<</replace>>
+<</link>>
+<<if $malefactor == "liberator">>
+<br><<link "Permit the slaveowner she tried to steal from to flog her">>
+	<<replace "#result">>
+	An example must be made. Slave ownership is the cornerstone of the society you're building in your arcology, and this woman attempted to undermine it. She is stripped and the slaveowner whose property she tried to free is handed the leathern instrument. It seems the escapee was a favorite he does not wish to mangle, so he flogs the criminal mercilessly instead. She is flung out of the arcology, nearly dead. The public @@.green;approves of this harshness,@@ and small slaveholders are @@.green;encouraged to do business with your arcology@@ after word of the incident gets around.
+	<<set $rep += 100>>
+	<<set $arcologies[0].prosperity += 10>>
+	<</replace>>
+<</link>>
+<</if>>
+</span>

@@ -1,0 +1,35 @@
+:: Import Slave [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Slave Interact">>
+
+//Paste the code into the text box and click Apply//
+
+<br><br>
+
+<span id = "import">
+</span>
+<<set $tempSlave = "">>
+<<textbox "$tempSlave" $tempSlave>>
+<<link "Apply">>
+	<<if (def $tempSlave) && ($tempSlave !== "")>>
+		<<set $tempSlave = eval('({' + $tempSlave + '})')>>
+		<<set $tempSlave.ID = $IDNumber>>
+		<<set $IDNumber += 1>>
+		<<AddSlave $tempSlave>>
+		<<replace #import>>
+			''Slave imported successfully!''
+			<br><br>
+		<</replace>>
+		<<unset $tempSlave>>
+	<<else>>
+		<<replace #import>>
+			''Slave not imported!''
+			<br><br>
+		<</replace>>
+	<</if>>
+<</link>>
+<br><br>
+<<link "Continue">>
+	<<goto "Slave Interact">>
+<</link>>
+

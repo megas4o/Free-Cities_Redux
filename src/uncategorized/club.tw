@@ -1,0 +1,195 @@
+:: Club [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Club", $showEncyclopedia = 1, $encyclopedia = "Club", $clubSlaves = $ClubiIDs.length>>
+
+<<if $clubName != "the Club">>
+	<<set $clubNameCaps = $clubName.replace("the ", "The ")>>
+<</if>>
+
+<<clubDescriptionFS>>
+
+<<if $clubAdsSpending > 0>>
+	Screens outside the entrance are showing softcore music videos to advertise $clubNameCaps.
+	<<if $clubAdsOld == 1>>
+		The featured strippers are all MILFs.
+	<<elseif $clubAdsOld == -1>>
+		The featured strippers are all nice and young.
+	<<else>>
+		The featured strippers vary in age.
+	<</if>>
+	<<if $clubAdsStacked == 1>>
+		Lots of bouncing breasts and butts
+	<<elseif $clubAdsStacked == -1>>
+		Lots of trim breasts and shapely butts
+	<<else>>
+		A variety of breast and butt sizes and shapes
+	<</if>>
+	are on display, and
+	<<if $clubAdsImplanted == 1>>
+		most of these are augmented by implants.
+	<<elseif $clubAdsImplanted == -1>>
+		they're all natural.
+	<<else>>
+		some are augmented by implants.
+	<</if>>
+	<<if $clubAdsModded == 1>>
+		Everything is heavily pierced and tattooed.
+	<<elseif $clubAdsModded == -1>>
+		Everything is free of tattoos and piercings.
+	<<else>>
+		Some of these assets are tattooed and pierced, and some aren't.
+	<</if>>
+	The strippers get naked quickly, and show off
+	<<if $clubAdsXX == 1>>
+		their pussies and assholes.
+	<<elseif $clubAdsXX == -1>>
+		their assholes.
+	<<else>>
+		their holes.
+	<</if>>
+	The ads are shown across the arcology.
+	<<if ($clubAdsXX == 1) && ($clubAdsImplants == 1) && ($clubAdsStacked == 1)>>
+		As a result, $clubName is known as the place to spend a night partying with bimbos.
+	<<elseif ($clubAdsXX == 1) && ($clubAdsOld == 1)>>
+		As a result, $clubName is known as the place to spend a night partying with MILFs.
+	<<elseif ($clubAdsXX == -1) && ($clubAdsStacked == 1)>>
+		As a result, $clubName is known as the place to spend a night partying with shemales.
+	<<elseif ($clubAdsXX == -1) && ($clubAdsStacked == -1)>>
+		As a result, $clubName is known as the place to spend a night partying with traps.
+	<</if>>
+<</if>>
+
+<<if $clubSlaves > 2>>
+	$clubNameCaps is dotted with pretty, flirtatious slaves, stripping on stages, serving drinks, and dancing. They're very willing to suck patrons off in the open or give a public handjob, and there are little private rooms for them to use when engaging in heavier intercourse.
+<<elseif $clubSlaves > 0>>
+	There are a few pretty, flirtatious slaves, stripping on stages, serving drinks, and dancing. They're very willing to suck patrons off in the open or give a public handjob, and there are little private rooms for them to use when engaging in heavier intercourse.
+<<elseif $DJ != 0>>
+	$clubNameCaps is doing business normally, without a complement of sex slaves to spice things up. $DJ.slaveName is alone in $clubName, and can accomplish little by herself.
+<<else>>
+	$clubNameCaps is doing business normally, without a complement of sex slaves to spice things up.
+	<<link "Decommission the club">>
+		<<set $club = 0, $clubDecoration = "standard", $clubUpgradePDAs = 0>>
+		<<for _i = 0; _i < $sectors.length; _i++>>
+		<<if $sectors[_i].type == "Club">>
+			<<set $sectors[_i].type = "Shops">><<break>>
+		<</if>>
+		<</for>>
+		<<goto "Main">>
+	<</link>>
+<</if>>
+
+<<if $clubSlaves > 2>>
+<<switch $clubDecoration>>
+<<case "Chattel Religionist">>
+	From one of the private rooms, praying interspersed with the slap of leather on flesh can be heard.
+<<case "Degradationist">>
+	Agonized screaming can be heard from one of the private rooms.
+<<case "Asset Expansionist">>
+	A wet slapping sound is coming from one of the private rooms, the kind of sound made by mammary intercourse with very large breasts.
+<<case "Transformation Fetishist">>
+	A wet slapping sound is coming from one of the private rooms, the kind of sound made by mammary intercourse with very large fake breasts.
+<<case "Gender Radicalist">>
+	Uncomfortable moaning from one of the private rooms suggests that a slave inside is taking a painfully large cock up her tight butt.
+<<case "Gender Fundamentalist">>
+	The unmistakable sound of vigorous vaginal intercourse can be heard from one of the private rooms.
+<<case "Physical Idealist">>
+	Bestial grunting can be heard from one of the private rooms.
+<<case "Supremacist">>
+	The sound of a beating, interspersed with desperate begging, can be heard from one of the private rooms.
+<<case "Subjugationist">>
+	The sound of a beating, interspersed with desperate begging, can be heard from one of the private rooms.
+<<case "Paternalist">>
+	The unmistakable sound of a slave experiencing an authentic orgasm can be heard from one of the private rooms.
+<<case "Body Purist">>
+	The faint but unmistakable sound of a slave trying to keep quiet while orgasming can be heard from one of the private rooms.
+<<case "Slimness Enthusiast">>
+	The faint but unmistakable sound of a shrill climax can be heard from one of the private rooms.
+<<case "Pastoralist">>
+	A faint gushing sound is audible from one of the private rooms.
+<<case "Roman Revivalist">>
+	A business meeting is just audible from one of the private rooms; only an occasional moan indicates that the businessmen are enjoying a couple of serving girls at the same time.
+<<case "Aztec Revivalist">>
+	A muffled scream, followed by the sounds of liquid gently dripping on the stone floors denote the goings-on in the building.
+<<case "Egyptian Revivalist">>
+	The smell of incense and the sounds of sex are drifting out of the private rooms.
+<<case "Edo Revivalist">>
+	The faint but unmistakable sound of a slave trying to keep quiet while orgasming can be heard from one of the private rooms.
+<<case "Arabian Revivalist">>
+	The faint sound of multiple slaves pleasuring a single patron can be heard from one of the private rooms.
+<<case "Chinese Revivalist">>
+	The faint but unmistakable sound of a slave trying to keep quiet while orgasming can be heard from one of the private rooms.
+<<case "Maturity Preferentialist">>
+	The faint sound of a well traveled slave showing off her experience can be heard from one of the private rooms.
+<<case "Youth Preferentialist">>
+	The faint but unmistakable sound of a shrill climax can be heard from one of the private rooms.
+<<default>>
+	The faint but unmistakable sound of a shrill climax can be heard from one of the private rooms.
+<</switch>>
+<</if>>
+
+<<set _Tmult0 = Math.trunc($club*1000*$upgradeMultiplierArcology)>>
+<br>There are rooms off $clubName to support slaves as they work as club sluts. They can support $club slaves.
+[[Expand the club|Club][$cash -= _Tmult0, $club += 5]] //Costs ¤_Tmult0 and will increase upkeep costs//
+
+<br>
+<<if $clubUpgradePDAs == 1>>
+	$clubNameCaps has been wired for unobtrusive personal data assistants to let your sluts pass tips about enslaveable people to your recruiter.
+<<else>>
+	<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+	The rooms are standard. [[Upgrade them with PDAs to help your recruiter|Club][$cash -= _Tmult1, $clubUpgradePDAs = 1]] //Costs ¤_Tmult1 and will increase upkeep costs//
+<</if>>
+
+<br>
+<<if $clubAdsSpending > 0>>
+	$clubNameCaps is the subject of an active ad campaign.
+<<else>>
+	$clubNameCaps is not being advertised.
+<</if>>
+<<link "Manage club Advertisements">><<set $nextLink = passage()>><<set $nextButton = "Back">><<goto "Club Advertisement">><</link>>
+
+<br><br>
+<<if $DJ != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<<else>>
+	You do not have a slave serving as a DJ. [[Appoint one|DJ Select]]
+<</if>>
+
+<br><br>
+<<if ($club <= $clubSlaves)>>
+	''$clubNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $clubSlaves)>>
+	<<link "''Send a slave to slut around $clubName''">>
+		<<set $leaveClub = 0>>
+		<<replace #clubComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $clubSlaves > 0>>
+	| <<link "''Bring a slave out of $clubName''">>
+		<<set $leaveClub = 1>>
+		<<replace #clubComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//$clubNameCaps is empty for the moment.<br>//
+<</if>>
+
+<span id="clubComingGoing">
+<<if $leaveClub == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<<unset $Flag>>
+
+<br><br>Rename $clubName: <<textbox "$clubName" $clubName "Club">> //Use a noun or similar short phrase//

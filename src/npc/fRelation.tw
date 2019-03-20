@@ -1,0 +1,115 @@
+:: FRelation [nobr]
+
+<<if ($partner == "mother")>>
+	<<set $partner = $slaves.findIndex(function(s) { return s.ID == $activeSlave.mother; })>>
+	<<set _activeSlaveRel = "daughter", _partnerRel = "mother">>
+<<elseif ($partner == "father")>>
+	<<set $partner = $slaves.findIndex(function(s) { return s.ID == $activeSlave.father; })>>
+	<<set _activeSlaveRel = "daughter", _partnerRel = "father">>
+<<elseif ($partner == "daughter")>>
+	<<set $partner = randomAvailableDaughter($activeSlave)>>
+	<<set $partner = $slaves.findIndex(function(s) { return s.ID == $partner.ID; })>>
+	<<if $activeSlave.ID == $slaves[$partner].father>>
+		<<set _activeSlaveRel = "father", _partnerRel = "daughter">>
+	<<elseif $activeSlave.ID == $slaves[$partner].mother>>
+		<<set _activeSlaveRel = "mother", _partnerRel = "daughter">>
+	<</if>>
+<<elseif ($partner == "sister")>>
+	<<set $partner = randomAvailableSister($activeSlave)>>
+	<<set $partner = $slaves.findIndex(function(s) { return s.ID == $partner.ID; })>>
+	<<switch areSisters($activeSlave, $slaves[$partner])>>
+		<<case 3>>
+			<<set _activeSlaveRel = "half-sister", _partnerRel = "half-sister">>
+		<<case 2>>
+			<<set _activeSlaveRel = "sister", _partnerRel = "sister">>
+		<<case 1>>
+			<<set _activeSlaveRel = "twin", _partnerRel = "twin">>
+	<</switch>>
+<<elseif ($partner == "relation")>>
+	<<set $partner = $slaves.findIndex(function(s) { return s.ID == $activeSlave.relationTarget; })>>
+	<<set _activeSlaveRel = $activeSlave.relation, _partnerRel = $slaves[$partner].relation>>
+<<else>>
+	<<set $partner = $slaves.findIndex(function(s) { return s.ID == $activeSlave.relationshipTarget; })>>
+	<<switch $activeSlave.relationship>>
+	<<case 1>>
+		<<set _activeSlaveRel = "friend", _partnerRel = "friend">>
+	<<case 2>>
+		<<set _activeSlaveRel = "best friend", _partnerRel = "best friend">>
+	<<case 3>>
+		<<set _activeSlaveRel = "friend with benefits", _partnerRel = "friend with benefits">>
+	<<case 4>>
+		<<set _activeSlaveRel = "lover", _partnerRel = "lover">>
+	<<case 5>>
+		<<set _activeSlaveRel = "slave wife", _partnerRel = "slave wife">>
+	<</switch>>
+<</if>>
+<<Enunciate $activeSlave>>
+
+You call both $activeSlave.slaveName and $slaves[$partner].slaveName to your office.
+
+<<if canWalk($activeSlave) && canWalk($slaves[$partner]) && ($activeSlave.devotion > 50) && ($slaves[$partner].devotion > 50) && canPenetrate($activeSlave) && canPenetrate($slaves[$partner]) && ($slaves[$partner].anus > 0) && ($activeSlave.anus > 0) && ($PC.dick == 1)>>
+	There are three stiff pricks available. Since $activeSlave.slaveName was already in your office, she goes on the bottom. She lies on the floor, spreads her <<if $seeRace == 1>>$activeSlave.race <</if>>buttocks, relaxes her anus, and then begs her _partnerRel to buttfuck her. $slaves[$partner].slaveName does, slipping her cock into her _activeSlaveRel's ass. She then stops and waits for you to buttfuck her in turn. It isn't a particularly convenient way to fuck, but it's got the virtue of being uncommon. $slaves[$partner].slaveName, both fucking and getting fucked, comes in her _activeSlaveRel's rectum first. They switch places so $activeSlave.slaveName can have a turn in the middle, leaving you to finish into $activeSlave.slaveName's already cum-soaked hole.
+	<<set $activeSlave.analCount += 2, $activeSlave.penetrativeCount++, $slaves[$partner].analCount += 2, $slaves[$partner].penetrativeCount++, $analTotal += 4, $penetrativeTotal += 2>>
+<<elseif ($slaves[$partner].devotion - $activeSlave.devotion > 20) && ($slaves[$partner].devotion <= 50)>>
+	$slaves[$partner].slaveName is a lot more ready and willing for this than $activeSlave.slaveName, so<<if ($PC.dick == 0)>>while getting into a strap-on, you<</if>> you sit her on the couch and make $activeSlave.slaveName sit on her lap, facing her. In this position, $slaves[$partner].slaveName can reach around and spread her _activeSlaveRel's <<if $seeRace == 1>>$slaves[$partner].race <</if>>buttocks for her, controlling her all the while in case she has hesitations about this. $activeSlave.slaveName knows that she's trapped, and lets her _partnerRel hold her ass wide so you can use her. They're face to face, and it's not hard to tell that $activeSlave.slaveName is glaring daggers at $slaves[$partner].slaveName. You reward $slaves[$partner].slaveName for her obedience and punish $activeSlave.slaveName for her resistance by forcing her to orally service $slaves[$partner].slaveName while you finish using $activeSlave.slaveName.
+	<<set $activeSlave.oralCount++, $slaves[$partner].oralCount++, $oralTotal++>>
+	<<BothVCheck>>
+<<elseif ($activeSlave.devotion - $slaves[$partner].devotion > 20) && ($slaves[$partner].devotion <= 50)>>
+	$activeSlave.slaveName is a lot more ready and willing for this than $slaves[$partner].slaveName, so<<if ($PC.dick == 0)>>while getting into a strap-on, you<</if>> you sit her on the couch and make $slaves[$partner].slaveName sit on her lap, facing her. In this position, $activeSlave.slaveName can reach around and spread her _partnerRel's <<if $seeRace == 1>>$activeSlave.race <</if>>buttocks for her, controlling her all the while in case she has hesitations about this. $slaves[$partner].slaveName knows that she's trapped, and lets her _activeSlaveRel hold her ass wide so you can use her. They're face to face, and it's not hard to tell that $slaves[$partner].slaveName is glaring daggers at $activeSlave.slaveName. You reward $activeSlave.slaveName for her obedience and punish $slaves[$partner].slaveName for her resistance by forcing her to suck $activeSlave.slaveName off while you finish using $slaves[$partner].slaveName.
+	<<set $activeSlave.oralCount++, $slaves[$partner].oralCount++, $oralTotal++>>
+	<<PartnerVCheck>>
+<<elseif canWalk($activeSlave) && canWalk($slaves[$partner]) && ($activeSlave.devotion > 50) && ($slaves[$partner].devotion > 20) && (_activeSlaveRel == "mother")>>
+	$activeSlave.slaveName gives you a little smile when she hears you wish to fuck her and her daughter $slaves[$partner].slaveName<<if ($PC.dick == 0)>> and sees your strap-on<</if>>. On your direction, $activeSlave.slaveName sits on the couch. When $slaves[$partner].slaveName enters, her mother spreads her arms and tells her to sit on her lap. $slaves[$partner].slaveName gets the idea and straddles her so they're face to face. You take $slaves[$partner].slaveName from behind; she gasps as she feels her mother's hands stimulate her from the front. They make out shamelessly while you take your pleasure. When you finish, $activeSlave.slaveName lies down on the couch so $slaves[$partner].slaveName can ride her <<if $seeRace == 1>>$activeSlave.race <</if>>face. As she sucks the cum out of her daughter's sopping fuckhole, $slaves[$partner].slaveName sucks you hard again. In the mood for something harder this time, you jam yourself into the older $activeSlave.slaveName. $slaves[$partner].slaveName gets off $activeSlave.slaveName's face so she can offer herself for fondling and groping while you pound $activeSlave.slaveName. After you're done, $slaves[$partner].slaveName returns her mother's affection and gives her some gentle oral as the older slave lies there exhausted.
+	<<set $activeSlave.oralCount += 2, $slaves[$partner].oralCount += 2, $oralTotal += 2>>
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif canWalk($activeSlave) && canWalk($slaves[$partner]) && ($activeSlave.devotion > 50) && ($slaves[$partner].devotion > 20) && (_activeSlaveRel == "father")>>
+	$activeSlave.slaveName gives you a little smile when she hears you wish to fuck her and her daughter $slaves[$partner].slaveName<<if ($PC.dick is 0)>> and sees your strap-on<</if>>. On your direction, $activeSlave.slaveName sits on the couch. When $slaves[$partner].slaveName enters, her father spreads her arms and tells her to sit on her lap. $slaves[$partner].slaveName gets the idea and straddles her so they're face to face. You take $slaves[$partner].slaveName from behind; she gasps as she feels her father's hands stimulate her from the front. They make out shamelessly while you take your pleasure. When you finish, $activeSlave.slaveName lies down on the couch so $slaves[$partner].slaveName can ride her <<if $seeRace == 1>>$activeSlave.race <</if>>face. As she sucks the cum out of her daughter's sopping fuckhole, $slaves[$partner].slaveName sucks you hard again. In the mood for something harder this time, you jam yourself into the older $activeSlave.slaveName. $slaves[$partner].slaveName gets off $activeSlave.slaveName's face so she can offer herself for fondling and groping while you pound $activeSlave.slaveName. After you're done, $slaves[$partner].slaveName returns her father's affection and gives her some gentle oral as the older slave lies there exhausted.
+	<<set $activeSlave.oralCount += 2, $slaves[$partner].oralCount += 2, $oralTotal += 2>>
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif canWalk($activeSlave) && canWalk($slaves[$partner]) && ($activeSlave.devotion > 50) && ($slaves[$partner].devotion > 20) && (_activeSlaveRel == "daughter")>>
+	$activeSlave.slaveName is enthusiastic when she hears you order $slaves[$partner].slaveName to come over. Her total immersion in sexual slavery has clearly uncovered a willingness to get very close to her mother. You<<if ($PC.dick == 0)>> don a strap-on,<</if>> lie on the floor and instruct $slaves[$partner].slaveName to ride you. She complies, and finds her daughter $activeSlave.slaveName <<if ($slaves[$partner].dick > 0)>>stroking her cock while she humps her <<if $seeRace == 1>>$activeSlave.race <</if>>butt up and down on your cock.<<else>>licking her anus while she humps herself up and down on your cock.<</if>> Your use of $slaves[$partner].slaveName's mature body is the focus. She finds herself caught up in a miasma of sexual pleasure and perversion, moaning and blushing as your <<if ($PC.dick == 0)>>strap-on and fingers<<else>>cock<</if>> and $slaves[$partner].slaveName's mouth tour her body. When you finish in her <<if ($slaves[$partner].dick > 0)>>asshole, her daughter hastens to lavish attention on her mother's well fucked, cum filled butt.<<else>>pussy, her daughter hastens to lavish attention on her mother's well fucked, cum filled cunt.<</if>>
+	<<set $activeSlave.oralCount += 2, $slaves[$partner].oralCount += 2, $oralTotal += 2>>
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif canDoVaginal($activeSlave) && canDoVaginal($slaves[$partner]) && canWalk($activeSlave) && canWalk($slaves[$partner]) && ($activeSlave.devotion > 50) && ($slaves[$partner].devotion > 50) && (_activeSlaveRel == "twin")>>
+	$activeSlave.slaveName and $slaves[$partner].slaveName are such devoted sex slaves that they've long since lost any hesitations about their partnership, and generally approach sex as though their bodies were interchangeable. (This means that they almost never masturbate, for one thing, preferring to have sex with each other, instead.) Giggling and kissing each other, they eagerly kneel before your chair and give you simultaneous oral sex, making an effort to play with their symmetry. They kiss around your <<if ($PC.dick == 0)>>pussy<<else>>cock, making a complete seal around you with their lips<</if>>, one on each side. Then they jump up on your desk and press their <<if ($activeSlave.dick > 0) && ($slaves[$partner].dick > 0)>>cocks<<elseif ($activeSlave.dick > 0) || ($slaves[$partner].dick > 0)>>cock and pussy<<else>>pussies<</if>> against one another<<if ($PC.dick == 0)>> while you don a strap-on<</if>>, spreading their legs to offer you everything. You switch back and forth, with the twin you're not in rubbing and grinding against her sister, until both of $slaves[$partner].slaveName and $activeSlave.slaveName are lying on the desk<<if ($PC.dick == 1)>> with cum dripping out of them<</if>>, making out tiredly.
+	<<set $slaves[$partner].oralCount++, $activeSlave.oralCount++, $oralTotal++>>
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif canWalk($activeSlave) && canWalk($slaves[$partner]) && ($activeSlave.devotion > 50) && ($slaves[$partner].devotion > 20) && (_activeSlaveRel == "sister")>>
+	You call $activeSlave.slaveName's sister $slaves[$partner].slaveName in for some incestuous fun, but see no reason to wait for her. When she arrives, it's to the sight of $activeSlave.slaveName sitting on the couch with her legs spread with you <<if ($activeSlave.vagina > -1)>>gently fucking her pussy<<else>>using her asshole<</if>><<if ($PC.dick == 0)>> with a strap-on<</if>>. You pull out and order $slaves[$partner].slaveName to orally service her sister. She gets down before the spreadeagled slave girl to get to work. After watching $activeSlave.slaveName enjoy the attention for a while, you move behind the busy $slaves[$partner].slaveName and pull her into a good position so you can fuck her while she sucks. After a few thrusts, $activeSlave.slaveName's eyes roll back. <<if ($activeSlave.voice == 0) || ($activeSlave.accent >= 3)>>She gestures that it feels really good when you make her sister moan into her.<<else>>"Oh <<Master>>," she <<say squeal>>s, "it feel<<s>> <<s>>o good when you make her moan into me!"<</if>>
+	<<set $slaves[$partner].oralCount++, $activeSlave.oralCount++, $oralTotal++>>
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif canWalk($activeSlave) && canWalk($slaves[$partner]) && ($activeSlave.devotion > 50) && ($slaves[$partner].devotion > 20) && (_activeSlaveRel == "half-sister")>>
+	You call $activeSlave.slaveName's half-sister $slaves[$partner].slaveName in for some incestuous fun, but see no reason to wait for her. When she arrives, it's to the sight of $activeSlave.slaveName sitting on the couch with her legs spread with you <<if ($activeSlave.vagina > -1)>>gently fucking her pussy<<else>>using her asshole<</if>><<if ($PC.dick == 0)>> with a strap-on<</if>>. You pull out and order $slaves[$partner].slaveName to orally service her half-sister. She gets down before the spreadeagled slave girl to get to work. After watching $activeSlave.slaveName enjoy the attention for a while, you move behind the busy $slaves[$partner].slaveName and pull her into a good position so you can fuck her while she sucks. After a few thrusts, $activeSlave.slaveName's eyes roll back. <<if ($activeSlave.voice == 0) || ($activeSlave.accent >= 3)>>She gestures that it feels really good when you make her sister moan into her.<<elseif SlaveStatsChecker.checkForLisp($activeSlave)>>"Oh <<Master>>," she lisps, "it feelth tho good when thee moanth into me!"<<else>>"Oh <<Master>>," she squeals, "it feels great when you make her moan into me!"<</if>>
+	<<set $slaves[$partner].oralCount++, $activeSlave.oralCount++, $oralTotal++>>
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif (_activeSlaveRel == "twin") || (_activeSlaveRel == "daughter") || (_activeSlaveRel == "mother") || (_activeSlaveRel == "father") || (_activeSlaveRel == "sister") || (_activeSlaveRel == "half-sister")>>
+	Since between them they aren't able to enthusiastically perform an incestuous threesome, you simply line $activeSlave.slaveName and $slaves[$partner].slaveName up next to one another on the couch next to your desk,<<if ($PC.dick == 0)>> don a strap-on,<</if>> and fuck <<if $seeRace == 1>>$activeSlave.race holes <</if>>at will. Whenever a hole begins to pall you just switch to another. $activeSlave.slaveName tries hard to ignore the fact that she's getting fucked next to her _partnerRel, and $slaves[$partner].slaveName pretends the cock getting shoved into her isn't slick from her _activeSlaveRel's fuckhole.
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif ((_activeSlaveRel == "friend") || (_activeSlaveRel == "best friend")) && ($activeSlave.devotion > 20) && ($slaves[$partner].devotion > 20)>>
+	$activeSlave.slaveName and $slaves[$partner].slaveName line up next to one another on the couch next to your desk<<if ($PC.dick == 0)>> while you don a strap-on,<</if>> and offer you their holes. They're just friends, but they're sex slaves and they see nothing wrong with enjoying sex with you, together. They keep up a constant stream of giggling, gasping, and smiling as each of them in turn feels a cock, warm and wet from her friend's body, transferred into her. Each of them does her best to help the other do well, even manually stimulating her friend when necessary<<if ($PC.boobs > 0)>> and spinning around to lavish attention on your nipples<</if>>.
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<elseif ((_activeSlaveRel == "friend with benefits") || (_activeSlaveRel == "lover") || (_activeSlaveRel == "slave wife")) && ($activeSlave.devotion > 20) && ($slaves[$partner].devotion > 20)>>
+	$activeSlave.slaveName and $slaves[$partner].slaveName eagerly repair to the couch and arrange themselves face to face so they can make out and enjoy each other's bodies as you enjoy theirs. You decide not to set up an elaborate threesome, and just <<if ($PC.dick == 0)>>engage in a little tribadism with<<else>>fuck<</if>> whatever hole catches your eye next. They rarely break their intimate kissing, forming between the two of them a loving entity on the couch with all sorts of interesting parts to experience. They're sex slaves, and you're fucking them, but they're also lovers who are very comfortable in each others' arms, kissing, fondling each other, and <<if ($PC.dick == 0)>>enjoying your pussy loving<<else>>taking your dick<</if>>.
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<<else>>
+	Since between them they aren't able to enthusiastically perform a threesome, you simply line $activeSlave.slaveName and $slaves[$partner].slaveName up next to one another on the couch next to your desk, and fuck <<if $seeRace == 1>>$activeSlave.race holes <</if>>at will. Whenever a hole begins to pall you just switch to another. $activeSlave.slaveName tries hard to ignore the fact that she's getting fucked next to her _partnerRel, and $slaves[$partner].slaveName pretends the <<if ($PC.dick == 0)>>strap-on<<else>>cock<</if>> getting shoved into her isn't slick from her _activeSlaveRel's fuckhole.
+	<<BothVCheck>>
+	<<PartnerVCheck>>
+<</if>>
+
+<<if passage() !== "Slave Interact">>
+	<<set $nextLink = "AS Dump">>
+<</if>>
+
+<<set $partner = 0>>
+<<set $relation = "">>
+<<set $relationType = "">>

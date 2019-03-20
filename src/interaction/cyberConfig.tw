@@ -1,0 +1,115 @@
+:: cyberConfig [nobr]
+
+<<switch $temp>>
+
+<<case 0>>
+	This room is lined with shelves and cabinets, it could be easily mistaken for a storage room if it were not for examination table in its center.<br>
+	<<set $nextButton to "Back", $nextLink to "Slave Interact">>
+		<<if $activeSlave.amp != 1>>
+			Your slave $activeSlave.slaveName is obediently waiting for your instructions.
+		<<else>>
+			Your slave $activeSlave.slaveName is lying on the table, waiting for your instructions.
+		<</if>>
+	
+	<<if $activeSlave.origEye == "implant">><br><br>&nbsp;
+		$pronounCap has an ocular implant installed. 
+		<<if $activeSlave.eyes == 1>>
+			They are operating normally.
+		<<elseif $activeSlave.eyes == -1>>
+			They are set to blur her vision.
+		<<else>>
+			They are turned off.
+		<</if>>
+		<br><br>
+		<<if $activeSlave.eyes != 1>>[[Restore vision|cyberConfig][$activeSlave.eyes to 1,$temp to 3]] | <</if>>
+		<<if $activeSlave.eyes != -1>>[[Blur|cyberConfig][$activeSlave.eyes to -1,$temp to 3]] | <</if>>
+		<<if $activeSlave.eyes != -2>>[[Disable|cyberConfig][$activeSlave.eyes to -2,$temp to 3]]<</if>>
+
+		$pronounCap currently has $activeSlave.eyeColor lenses equipped.
+
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+		Swap out $possessive lenses:
+		[[Blue|cyberConfig][$activeSlave.eyeColor to "blue",$temp to 2,$cash -= $modCost]]
+		| [[Black|cyberConfig][$activeSlave.eyeColor to "black",$temp to 2,$cash -= $modCost]]
+		| [[Brown|cyberConfig][$activeSlave.eyeColor to "brown",$temp to 2,$cash -= $modCost]]
+		| [[Green|cyberConfig][$activeSlave.eyeColor to "green",$temp to 2,$cash -= $modCost]]
+		| [[Turquoise|cyberConfig][$activeSlave.eyeColor to "turquoise",$temp to 2,$cash -= $modCost]]
+		| [[Sky-blue|cyberConfig][$activeSlave.eyeColor to "sky-blue",$temp to 2,$cash -= $modCost]]
+		| [[Hazel|cyberConfig][$activeSlave.eyeColor to "hazel",$temp to 2,$cash -= $modCost]]
+		| [[Pale-grey|cyberConfig][$activeSlave.eyeColor to "pale-grey",$temp to 2,$cash -= $modCost]]
+		| [[White|cyberConfig][$activeSlave.eyeColor to "white",$temp to 2,$cash -= $modCost]]
+		| [[Pink|cyberConfig][$activeSlave.eyeColor to "pink",$temp to 2,$cash -= $modCost]]
+		| [[Amber|cyberConfig][$activeSlave.eyeColor to "amber",$temp to 2,$cash -= $modCost]]
+		| [[Red|cyberConfig][$activeSlave.eyeColor to "red",$temp to 2,$cash -= $modCost]]
+		| [[Catlike|cyberConfig][$activeSlave.eyeColor to "catlike",$temp to 2,$cash -= $modCost]]
+		| [[Serpent-like|cyberConfig][$activeSlave.eyeColor to "serpent-like",$temp to 2,$cash -= $modCost]]
+		| [[Devilish|cyberConfig][$activeSlave.eyeColor to "devilish",$temp to 2,$cash -= $modCost]]
+		| [[Demonic|cyberConfig][$activeSlave.eyeColor to "demonic",$temp to 2,$cash -= $modCost]]
+		| [[Hypnotic|cyberConfig][$activeSlave.eyeColor to "hypnotic",$temp to 2,$cash -= $modCost]]
+		| [[Heart-shaped|cyberConfig][$activeSlave.eyeColor to "heart-shaped",$temp to 2,$cash -= $modCost]]
+	<</if>>
+	
+	<<if $activeSlave.PLimb > 0>><br><br>
+		$pronounCap has PLimb interface installed. You can assign and adjust $possessive prosthetics here.
+		<<if $activeSlave.amp <= -1>><br>&nbsp;
+			$possessiveCap prosthetics are currently attached, if you wish to change them you will first need to detach them.<br>
+			[[Detach|cyberConfig][$temp to 1,$nextButton to "Continue", $nextLink to "cyberConfig"]]
+		<<else>><br>&nbsp;
+			<<if $stockpile.basicPLimb > 0>>[[Attach basic limbs|cyberConfig][$temp to 4, $activeSlave.amp to -1, $stockpile.basicPLimb -= 1]]<</if>>
+			<<if $stockpile.advSexPLimb > 0>>[[Attach sex limbs|cyberConfig][$temp to 4, $activeSlave.amp to -2, $stockpile.advSexPLimb -= 1]]<</if>>
+			<<if $stockpile.advGracePLimb > 0>>[[Attach beauty limbs|cyberConfig][$temp to 4, $activeSlave.amp to -3, $stockpile.advGracePLimb -= 1]]<</if>>
+			<<if $stockpile.advCombatPLimb > 0>>[[Attach combat limbs|cyberConfig][$temp to 4, $activeSlave.amp to -4, $stockpile.advCombatPLimb -= 1]]<</if>>
+			<<if $activeSlave.PLimb == 2>>
+				<<if $stockpile.cyberneticPLimb > 0>>[[Attach cybernetic limbs|cyberConfig][$temp to 4, $activeSlave.amp to -5, $stockpile.cyberneticPLimb -= 1]]<</if>>
+			<<else>>
+				 //To equip more advanced prosthetics you will need to upgrade your slaves' PLimb interface.//
+			<</if>>
+		<</if>>
+	
+	<<else>>
+		<<if $activeSlave.amp == 0>><br>
+			$pronounCap has healthy limbs so there is no need for prosthetics.
+		<<else>><br>
+			$pronounCap does not have a PLimb interface installed so you can't give $possessive any prosthetics.
+		<</if>>
+	<</if>>
+
+<<case 1>>
+	<<set $temp to 0, $nextButton to "Continue", $nextLink to "cyberConfig">>
+	<<if $activeSlave.amp is -1>><<set $stockpile.basicPLimb += 1>>
+	<<elseif $activeSlave.amp is -2>><<set $stockpile.advSexPLimb += 1>>
+	<<elseif $activeSlave.amp is -3>><<set $stockpile.advGracePLimb += 1>>
+	<<elseif $activeSlave.amp is -4>><<set $stockpile.advCombatPLimb += 1>>
+	<<elseif $activeSlave.amp is -5>><<set $stockpile.cyberneticPLimb += 1>>
+	<</if>>
+	<<set $activeSlave.amp to 1>>
+	Due to built-in safeties it is necessary to remove each limb separately, first releasing the lock and then waiting for automated seal release.<br>
+	<<if ($activeSlave.devotion > 20)>>
+		You instruct $possessive to lie down on the table and proceed to remove $possessive limbs. $pronounCap <<if canSee($activeSlave)>>watches<<else>>listens<</if>> with interest as you work.<<if ($activeSlave.devotion > 50)>> As you remove the last limb $pronoun playfully wiggles $possessive stumps at you.<</if>>
+	<<else>>
+		You order $possessive to lie down on the table and proceed to remove $possessive limbs. $pronounCap <<if canSee($activeSlave)>>watches<<else>>listens<</if>> with a bitter expression as you work. 
+	<</if>>
+	
+<<case 2>>
+	<<set $temp to 0, $nextButton to "Continue", $nextLink to "cyberConfig">>
+	<<if $activeSlave.amp != 1>>You have $possessive lie down and<<else>>You<</if>> use speculum to keep $possessive eyes open while you disengage $possessive lenses remotely and swap them out with $possessive new $activeSlave.eyeColor lenses.
+<<case 3>>
+	<<set $temp to 0, $nextButton to "Continue", $nextLink to "cyberConfig">>
+	<<if $activeSlave.eyes == 1>>
+		$pronounCap blinks as $possessive vision returns.
+	<<elseif $activeSlave.eyes == -1>>
+		$pronounCap squints at you as $possessive vision becomes a blur.
+	<<else>>
+		$pronounCap has a panicked expression when $possessive vision suddenly goes out.
+	<</if>>
+<<case 4>>
+	<<set $temp to 0, $nextButton to "Continue", $nextLink to "cyberConfig">>
+	Attaching $possessive limbs is a simple procedure, simply push connector on each limb into the socket in $possessive implants until lock engages.<<if $activeSlave.PLimb == 2>> $pronounCap jumps a bit as limbs connect to $possessive nerves.<</if>> When you are done, $pronoun sits up and 
+	<<if $activeSlave.amp == -2>>experimentally engages the vibe function in $possessive fingers.
+	<<elseif $activeSlave.amp == -3>>runs a hand over the smooth skin of $possessive new legs.
+	<<elseif $activeSlave.amp == -4>>engages and disengages the blade in $possessive forearm.
+	<<elseif $activeSlave.amp == -5>>experimentally flexes the muscles in $possessive artificial arm.
+	<<else>>catches $possessive balance.
+	<</if>>
+<</switch>>

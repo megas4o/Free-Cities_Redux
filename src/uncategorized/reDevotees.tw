@@ -1,0 +1,50 @@
+:: RE devotees [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+<<set _i = $slaves.findIndex(function(s) { return s.ID == $devotedSlaves[0].ID; })>>
+<<set _j = $slaves.findIndex(function(s) { return s.ID == $devotedSlaves[1].ID; })>>
+<<set _k = $slaves.findIndex(function(s) { return s.ID == $devotedSlaves[2].ID; })>>
+<<set _l = $slaves.findIndex(function(s) { return s.ID == $devotedSlaves[3].ID; })>>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+    <div class="imageRef medImg">
+        <<SlaveArt $slaves[_i] 2 0>>
+    </div>
+    <div class="imageRef medImg">
+        <<SlaveArt $slaves[_j] 2 0>>
+    </div>
+    <div class="imageRef medImg">
+        <<SlaveArt $slaves[_k] 2 0>>
+    </div>
+    <div class="imageRef medImg">
+        <<SlaveArt $slaves[_l] 2 0>>
+    </div>
+<</if>>
+/* 000-250-006 */
+
+You have a mature, well-trained household of slaves. $slaves[_i].slaveName, $slaves[_j].slaveName, $slaves[_k].slaveName, and $slaves[_l].slaveName are all devoted to you. There are all manner of ways you could display this coterie of loyal sex slaves to show off your wealth and power.
+<br><br>
+<span id="result">
+<<link "See an operetta with four attendants">>
+	<<replace "#result">>
+	<<PCTitle>>
+	You reserve a box at an upcoming operetta; classical Italian music is enjoying a renaissance these days. The doormen at the fashionable opera house promptly widen the velvet ropes so that you and your party may proceed unimpeded. Their quick thinking is necessary, since there are five of you walking sedately up the steps: you in the middle, impeccable in <<if $PC.title == 1>>gentleman's evening wear, complete with gloves and cane<<else>>a fine and noble lady's tuxedo<</if>>; and $slaves[_i].slaveName, $slaves[_j].slaveName, $slaves[_k].slaveName, and $slaves[_l].slaveName, all dressed in the gorgeous fashion of the seventeenth century, all plunging necklines, piled hair, and ruffled petticoats. The splendid master of ceremonies clears his throat and announces in a sonorous voice, "$PCTitle." The ostentation @@.green;turns every head and catches every eye.@@
+	<<set $rep += 500>>
+	<</replace>>
+<</link>>
+<br><<link "Visit a casino in good company">>
+	<<replace "#result">>
+	The croupiers, bouncers and regulars down at the nearest casino hardly know what to think when you appear with a chit full of cash and twice as many girls as you have arms. You live the night big, starting at the poker table with so many tits and asses on display behind you that, @@.yellowgreen;baby, you make a killing.@@ $slaves[_i].slaveName, $slaves[_j].slaveName, $slaves[_k].slaveName, and $slaves[_l].slaveName quickly catch the rhythm of the place: slaves can get away with a little more in the smoky, whiskey soaked, money tinted atmosphere, and they @@.hotpink;enjoy themselves immensely.@@ They flirt, flash, giggle, kiss each other, and generally destroy the concentration of everyone within twenty yards - except you. Ring-a-ding-ding.
+	<<set $slaves[_i].devotion += 4>>
+	<<set $slaves[_j].devotion += 4>>
+	<<set $slaves[_k].devotion += 4>>
+	<<set $slaves[_l].devotion += 4>>
+	<<slavePaid $slaves[_i] 125>>
+	<<slavePaid $slaves[_j] 125>>
+	<<slavePaid $slaves[_k] 125>>
+	<<slavePaid $slaves[_l] 125>>
+	<</replace>>
+<</link>>
+</span>

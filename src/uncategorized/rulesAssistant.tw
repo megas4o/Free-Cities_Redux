@@ -1,0 +1,2464 @@
+:: Rules Assistant [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Main">>
+<<set $showEncyclopedia = 1, $encyclopedia = "Personal Assistant">>
+
+<<set _length = $defaultRules.length>>
+
+<<if _length > 0>>
+
+	<<if ndef $currentRule || $currentRule == null>>  <<set $currentRule = $defaultRules[0]>>           <</if>>
+	<<if ndef $currentRule.selectedSlaves>>           <<set $currentRule.selectedSlaves = []>>          <</if>>
+	<<if ndef $currentRule.excludedSlaves>>           <<set $currentRule.excludedSlaves = []>>          <</if>>
+	<<if ndef $currentRule.assignment>>               <<set $currentRule.assignment = []>>              <</if>>
+	<<if ndef $currentRule.excludeAssignment>>        <<set $currentRule.excludeAssignment = []>>       <</if>>
+	<<if ndef $currentRule.facility>>                 <<set $currentRule.facility = []>>                <</if>>
+	<<if ndef $currentRule.excludeFacility>>          <<set $currentRule.excludeFacility = []>>         <</if>>
+
+	/* Sanitize textbox inputs. */
+	<<if $currentRule.growth.boobs != "no default setting">><<set $currentRule.growth.boobs = Number($currentRule.growth.boobs), $currentRule.growth.boobs = Math.clamp($currentRule.growth.boobs,0,48000)>><</if>>
+	<<if $currentRule.growth.butt != "no default setting">><<set $currentRule.growth.butt = Number($currentRule.growth.butt), $currentRule.growth.butt = Math.clamp($currentRule.growth.butt,0,10)>><</if>>
+	<<if $currentRule.growth.lips != "no default setting">><<set $currentRule.growth.lips = Number($currentRule.growth.lips), $currentRule.growth.lips = Math.clamp($currentRule.growth.lips,0,100)>><</if>>
+	<<if $currentRule.growth.dick != "no default setting">><<set $currentRule.growth.dick = Number($currentRule.growth.dick), $currentRule.growth.dick = Math.clamp($currentRule.growth.dick,0,10)>><</if>>
+<<if $currentRule.growth.balls != "no default setting">><<set $currentRule.growth.balls = Number($currentRule.growth.balls), $currentRule.growth.balls = Math.clamp($currentRule.growth.balls,0,10)>><</if>>
+	<<for $r = _length - 1; $r >= 0; $r-->>
+		<<if $defaultRules[$r] == null>>
+			<<set $defaultRules.deleteAt($r)>>
+			<<goto "Rules Assistant">>
+		<<elseif $currentRule.ID == $defaultRules[$r].ID>>
+			<<set $r = $r + 1>>
+			<<break>>
+		<</if>>
+	<</for>>
+
+	<center>
+		<<if $r > 1>>
+			@@.cyan;[Shift+←,Shift+Q] @@
+			<span id="firstRule">
+				''[[First|Rules Assistant][$currentRule = $defaultRules[0]]]''
+			</span>
+			|
+			@@.cyan;[←,Q] @@
+			<span id="prevRule">
+				''[[Prev|Rules Assistant][$currentRule = $defaultRules[$r-2]]]''
+			</span>
+		<<else>>
+			[Shift+←,Shift+Q] First  |  [←,Q] Prev
+		<</if>>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;''Viewing Rule $r of _length''&nbsp;&nbsp;&nbsp;&nbsp;
+
+		<<if $r < _length>>
+			<span id="nextRule">
+				''[[Next|Rules Assistant][$currentRule = $defaultRules[$r]]]''
+			</span>@@.cyan; [E,→]@@
+			|
+			<span id="lastRule">
+				''[[Last|Rules Assistant][$currentRule = $defaultRules[_length-1]]]''
+			</span>@@.cyan; [Shift+E,Shift+→]@@
+		<<else>>
+			Next [E,→]  |  Last [Shift+E,Shift+→]
+		<</if>>
+	</center>
+
+	<center>
+		<<if $r > 1>>
+			<<= $defaultRules[$r-2].name>> &emsp; <- &emsp;&emsp;
+		<<else>>
+			&emsp;&emsp;&emsp;&emsp;&emsp;
+		<</if>>
+
+		<span id="rulename">
+			@@.yellow;$currentRule.name@@
+		</span>
+
+		<<if $r < _length>>
+			&emsp;&emsp; -> &emsp; <<= $defaultRules[$r].name>>
+		<<else>>
+			&emsp;&emsp;&emsp;&emsp;&emsp;
+		<</if>>
+	</center>
+
+	<center>
+		<span id="ruleDown">
+			<<if $r > 1>>
+				<<link "Lower Priority">>
+					<<set _tmpRule = $defaultRules[$r-1]>>
+					<<set $defaultRules[$r-1] = $defaultRules[$r-2]>>
+					<<set $defaultRules[$r-2] = _tmpRule>>
+					<<goto "Rules Assistant">>
+				<</link>>
+			<<else>>
+				Lower Priority
+			<</if>>
+		</span>
+		|
+		<<link "Rename">>
+			<<replace "#rulename">>
+				<<textbox "$currentRule.name" $currentRule.name "Rules Assistant">>
+			<</replace>>
+		<</link>>
+		|
+		<span id="ruleUp">
+			<<if $r < _length>>
+				<<link "Higher Priority">>
+					<<set _tmpRule = $defaultRules[$r-1]>>
+					<<set $defaultRules[$r-1] = $defaultRules[$r]>>
+					<<set $defaultRules[$r] = _tmpRule>>
+					<<goto "Rules Assistant">>
+				<</link>>
+			<<else>>
+				Higher Priority
+			<</if>>
+		</span>
+	</center>
+<</if>> /* closes if _length > 0 */
+
+<br>
+
+//<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I will review your slaves and make changes that will have a beneficial effect. Apologies, sir, but this function is... not fully complete. It may have some serious limitations. Please use the 'no default setting' option to identify areas I should not address.//
+
+<br><br>
+
+<<if _length < 1>>
+''No rules.''
+
+<<else>>
+
+__Rule $r Automatic Activation__
+<span id="activation"></span>
+
+<<if isSimpleCondition($currentRule.condition, ["devotion", "trust", "health", "energy", "weight", "age"])>>
+
+<<timed 50ms>>
+	<<RAChangeActivation>>
+<</timed>>
+
+<br>
+<<link "None">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = {id: "false"}>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Always">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = {id: "true"}>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Devotion">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = changeVariable($currentRule.condition, "devotion")>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Trust">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = changeVariable($currentRule.condition, "trust")>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Health">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = changeVariable($currentRule.condition, "health")>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Sex drive">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = changeVariable($currentRule.condition, "energy")>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Weight">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = changeVariable($currentRule.condition, "weight")>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Age">>
+	<<unset _customCondition>>
+	<<set $currentRule.condition = changeVariable($currentRule.condition, "age")>>
+	<<RAChangeActivation>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Custom">>
+	<<if (def _customConditionOld)>>
+		<<set _customCondition = _customConditionOld>>
+	<<else>>
+		<<set _customCondition = unparseExpr($currentRule.condition)>>
+	<</if>>
+	<<replace "#activation">>
+		(custom): <br>
+		<<textinput "_customCondition" _customCondition>>
+			<<set _customConditionOld = _customCondition>>
+			<<RARuleModified>>
+		<</textinput>>
+	<</replace>>
+	<<RARuleModified>>
+<</link>>
+
+<<else>>
+	<<if (def _customConditionOld)>>
+		<<set _customCondition = _customConditionOld>>
+	<<else>>
+		<<set _customCondition = unparseExpr($currentRule.condition)>>
+	<</if>>
+	<<timed 50ms>>
+	<<replace "#activation">>
+		(custom): <br>
+		//Sir, I'm afraid the condition you have given me is too complex to display in the usual interface.//
+		<<textinput "_customCondition" _customCondition>>
+			<<set _customConditionOld = _customCondition>>
+			<<RARuleModified>>
+		<</textinput>>
+	<</replace>>
+	<</timed>>
+<</if>>
+
+<br><br>
+
+<span id="applyassignment"></span>
+<<timed 50ms>>
+	<<RAChangeApplyAssignment>>
+<</timed>>
+
+<br>
+<span id="excludeassignment"></span>
+<<timed 50ms>>
+	<<RAChangeExcludeAssignment>>
+<</timed>>
+
+<span id="applyfacility"></span>
+<<timed 50ms>>
+	<<RAChangeApplyFacility>>
+<</timed>>
+
+<span id="excludefacility"></span>
+<<timed 50ms>>
+	<<RAChangeExcludeFacility>>
+<</timed>>
+
+<br><br>
+<span id="specialslaves"></span>
+<<timed 50ms>>
+	<<RASpecialSlaves>>
+<</timed>>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<<if $currentRule.selectedSlaves.length < 1 && $currentRule.excludedSlaves.length < 1>>
+  @@.gray;No specific slaves selected:@@
+	[[Limit to specific slaves|Rules Slave Select][$currentRule.excludedSlaves = []]] | [[Exclude specific slaves|Rules Slave Exclude][$currentRule.selectedSlaves = []]]
+<<elseif $currentRule.selectedSlaves.length < 1 && $currentRule.excludedSlaves.length > 0>>
+	<br>Excluding specific slaves:
+	<ul>
+	<<for _j = 0; _j < $slaves.length; _j++>>
+		<<if $currentRule.excludedSlaves.includes($slaves[_j].ID)>>
+			<li>$slaves[_j].slaveName</li>
+		<</if>>
+	<</for>>
+	</ul>
+	[[Change specific slaves|Rules Slave Exclude]] | [[Don't exclude specific slaves|Rules Assistant][$currentRule.excludedSlaves = []]]
+<<else>>
+	<br>Limited to specific slaves (this list does not override the exclude special slaves setting above):
+	<ul>
+	<<for _j = 0; _j < $slaves.length; _j++>>
+		<<if $currentRule.selectedSlaves.includes($slaves[_j].ID)>>
+			<li>$slaves[_j].slaveName</li>
+		<</if>>
+	<</for>>
+	</ul>
+	[[Change specific slaves|Rules Slave Select]] | [[Don't limit to specific slaves|Rules Assistant][$currentRule.selectedSlaves = [], $currentRule.excludedSlaves = []]]
+<</if>>
+
+<span id="setassignment"></span>
+<<timed 50ms>>
+	<<RAChangeSetAssignment>>
+<</timed>>
+
+<span id="assignfacility"></span>
+<<timed 50ms>>
+	<<RAChangeAssignFacility>>
+<</timed>>
+
+<br><br>
+
+__Rule $r Default Appearance:__
+<br>
+Clothes:
+<span id="clothes">
+<<if ($currentRule.clothes == "choosing her own clothes")>>
+	''slave's choice.''
+<<else>>
+	''$currentRule.clothes.''
+<</if>>
+</span>
+|
+<<link "Select her own outfit">>
+	<<set $currentRule.clothes = "choosing her own clothes">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Nice://
+<<link "No default clothes setting">>
+	<<set $currentRule.clothes = "no default setting">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Bangles">>
+	<<set $currentRule.clothes = "slutty jewelry">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Bodysuit">>
+	<<set $currentRule.clothes = "a comfortable bodysuit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Cheerleader outfit">>
+	<<set $currentRule.clothes = "a cheerleader outfit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Clubslut netting">>
+	<<set $currentRule.clothes = "clubslut netting">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Cutoffs and a t-shirt">>
+	<<set $currentRule.clothes = "cutoffs and a t-shirt">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Fallen nun">>
+	<<set $currentRule.clothes = "a fallen nuns habit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Halter top">>
+	<<set $currentRule.clothes = "a halter top dress">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Hijab and abaya">>
+	<<set $currentRule.clothes = "a hijab and abaya">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Latex catsuit">>
+	<<set $currentRule.clothes = "a latex catsuit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Leotard">>
+	<<set $currentRule.clothes = "a leotard">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Maid (nice)">>
+	<<set $currentRule.clothes = "a nice maid outfit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Maid (slutty)">>
+	<<set $currentRule.clothes = "a slutty maid outfit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Military uniform">>
+	<<set $currentRule.clothes = "a military uniform">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Mini dress">>
+	<<set $currentRule.clothes = "a mini dress">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Nice lingerie">>
+	<<set $currentRule.clothes = "attractive lingerie">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Nurse (nice)">>
+	<<set $currentRule.clothes = "a nice nurse outfit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Nurse (slutty)">>
+	<<set $currentRule.clothes = "a slutty nurse outfit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Schoolgirl">>
+	<<set $currentRule.clothes = "a schoolgirl outfit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Silken ballgown">>
+	<<set $currentRule.clothes = "a ball gown">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Skimpy battledress">>
+	<<set $currentRule.clothes = "battledress">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Slave gown">>
+	<<set $currentRule.clothes = "a slave gown">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "String bikini">>
+	<<set $currentRule.clothes = "a string bikini">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Succubus costume">>
+	<<set $currentRule.clothes = "a succubus outfit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Suit (nice)">>
+	<<set $currentRule.clothes = "nice business attire">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Suit (slutty)">>
+	<<set $currentRule.clothes = "slutty business attire">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<if ($arcologies[0].FSPhysicalIdealist != "unset") || ($cheatMode == 1) || ($clothesBoughtOil == 1)>>
+	//FS//
+	<<link "Body oil">>
+		<<set $currentRule.clothes = "body oil">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist != "unset") || ($cheatMode == 1) || ($clothesBoughtBunny == 1)>>
+	//FS//
+	<<link "Bunny outfit">>
+		<<set $currentRule.clothes = "a bunny outfit">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSDegradationist != "unset") || ($cheatMode == 1) || ($clothesBoughtChains == 1)>>
+	//FS//
+	<<link "Chains">>
+		<<set $currentRule.clothes = "chains">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist != "unset") || ($cheatMode == 1) || ($clothesBoughtHabit == 1)>>
+	//FS//
+	<<link "Chattel habit">>
+		<<set $currentRule.clothes = "a chattel habit">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSPaternalist != "unset") || ($cheatMode == 1) || ($clothesBoughtConservative == 1)>>
+	//FS//
+	<<link "Conservative clothing">>
+		<<set $currentRule.clothes = "conservative clothing">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSArabianRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtHarem == 1)>>
+	//FS//
+	<<link "Harem gauze">>
+		<<set $currentRule.clothes = "harem gauze">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSAztecRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtHuipil == 1)>>
+	//FS//
+	<<link "Huipil">>
+		<<set $currentRule.clothes = "a huipil", $currentRule.choosesOwnClothes = 0>>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSEdoRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtKimono == 1)>>
+	//FS//
+	<<link "Kimono">>
+		<<set $currentRule.clothes = "a kimono">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSChineseRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtQipao == 1)>>
+	//FS//
+	<<link "Slutty qipao">>
+		<<set $currentRule.clothes = "a slutty qipao">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtToga == 1)>>
+	//FS//
+	<<link "Toga">>
+		<<set $currentRule.clothes = "a toga">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+	|
+<</if>>
+<<if ($arcologies[0].FSPastoralist != "unset") || ($cheatMode == 1) || ($clothesBoughtWestern == 1)>>
+	//FS//
+	<<link "Western clothing">>
+		<<set $currentRule.clothes = "Western clothing">>
+		<<RAChangeClothes>>
+		<<RARuleModified>>
+	<</link>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Harsh://
+<<link "Nude">>
+	<<set $currentRule.clothes = "no clothing">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Penitent nun">>
+	<<set $currentRule.clothes = "a penitent nuns habit">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Restrictive latex">>
+	<<set $currentRule.clothes = "restrictive latex">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Shibari ropes">>
+	<<set $currentRule.clothes = "shibari ropes">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Uncomfortable straps">>
+	<<set $currentRule.clothes = "uncomfortable straps">>
+	<<RAChangeClothes>>
+	<<RARuleModified>>
+<</link>>
+
+
+<br>
+Collar: <span id="collar">''$currentRule.collar.''</span>
+<<link "No default collar setting">>
+	<<set $currentRule.collar = "no default setting">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "No collar">>
+	<<set $currentRule.collar = "none">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Nice://
+<<link "Stylish leather">>
+	<<set $currentRule.collar = "stylish leather">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Satin choker">>
+	<<set $currentRule.collar = "satin choker">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Heavy Gold">>
+	<<set $currentRule.collar = "heavy gold">>
+	<<RAChangeCollar>>
+<</link>>
+|
+<<link "Pretty jewelry">>
+	<<set $currentRule.collar = "pretty jewelry">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<if $seeAge != 0>>
+<<link "Nice retirement counter">>
+	<<set $currentRule.collar = "nice retirement counter">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<</if>>
+<<link "Cowbell">>
+	<<set $currentRule.collar = "leather with cowbell">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+<<if ($arcologies[0].FSGenderFundamentalist != "unset") || ($cheatMode == 1) || ($clothesBoughtBunny == 1)>>
+   | //FS//
+<<link "Bowtie collar">>
+	<<set $currentRule.collar = "bowtie">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+<</if>>
+<<if ($arcologies[0].FSEgyptianRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtEgypt == 1)>>
+   | //FS//
+<<link "Ancient Egyptian">>
+	<<set $currentRule.collar = "ancient Egyptian">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Harsh://
+<<link "Tight steel">>
+	<<set $currentRule.collar = "tight steel">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<if $seeAge != 0>>
+<<link "Cruel retirement counter">>
+	<<set $currentRule.collar = "cruel retirement counter">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<</if>>
+<<link "Uncomfortable leather">>
+	<<set $currentRule.collar = "uncomfortable leather">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Shock punishment">>
+	<<set $currentRule.collar = "shock punishment">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Dildo gag">>
+	<<set $currentRule.collar = "dildo gag">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Ball gag">>
+	<<set $currentRule.collar = "ball gag">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Bit gag">>
+	<<set $currentRule.collar = "bit gag">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Neck corset">>
+	<<set $currentRule.collar = "neck corset">>
+	<<RAChangeCollar>>
+	<<RARuleModified>>
+<</link>>
+
+
+<br>
+Shoes: <span id="shoes">''$currentRule.shoes.''</span>
+<<link "No default footwear setting">>
+	<<set $currentRule.shoes = "no default setting">>
+	<<RAChangeShoes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Barefoot">>
+	<<set $currentRule.shoes = "none">>
+	<<RAChangeShoes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Flats">>
+	<<set $currentRule.shoes = "flats">>
+	<<RAChangeShoes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Heels">>
+	<<set $currentRule.shoes = "heels">>
+	<<RAChangeShoes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Thigh boots">>
+	<<set $currentRule.shoes = "boots">>
+	<<RAChangeShoes>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Painfully extreme heels">>
+	<<set $currentRule.shoes = "extreme heels">>
+	<<RAChangeShoes>>
+	<<RARuleModified>>
+<</link>>
+
+
+<br>
+Corsetage: <span id="baccessory">''$currentRule.bellyAccessory.''</span>
+<<link "No default setting">>
+	<<set $currentRule.bellyAccessory = "no default setting">>
+	<<RAChangeBelly>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.bellyAccessory = "none">>
+	<<RAChangeBelly>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Tight corset">>
+	<<set $currentRule.bellyAccessory = "a corset">>
+	<<RAChangeBelly>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Extreme corset">>
+	<<set $currentRule.bellyAccessory = "an extreme corset">>
+	<<RAChangeBelly>>
+	<<RARuleModified>>
+<</link>>
+
+
+<br>
+Vaginal accessories for
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+virgins: <span id = "vaccessory">''$currentRule.virginAccessory.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.virginAccessory = "no default setting">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.virginAccessory = "none">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Dildo">>
+	<<set $currentRule.virginAccessory = "dildo">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Large dildo">>
+	<<set $currentRule.virginAccessory = "large dildo">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Huge dildo">>
+	<<set $currentRule.virginAccessory = "huge dildo">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+//Will permanently gape pussies//
+|
+<<link "Chastity belt">>
+	<<set $currentRule.virginAccessory = "chastity belt">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Anal chastity belt">>
+	<<set $currentRule.virginAccessory = "anal chastity">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Combined chastity belt">>
+	<<set $currentRule.virginAccessory = "combined chastity">>
+	<<RAChangeVAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+anal virgins: <span id="avaccessory">''$currentRule.aVirginAccessory.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.aVirginAccessory = "no default setting">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.aVirginAccessory = "none">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Dildo">>
+	<<set $currentRule.aVirginAccessory = "dildo">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Large dildo">>
+	<<set $currentRule.aVirginAccessory = "large dildo">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Huge dildo">>
+	<<set $currentRule.aVirginAccessory = "huge dildo">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+//Will permanently gape pussies//
+|
+<<link "Chastity belt">>
+	<<set $currentRule.aVirginAccessory = "chastity belt">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Anal chastity belt">>
+	<<set $currentRule.aVirginAccessory = "anal chastity">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Combined chastity belt">>
+	<<set $currentRule.aVirginAccessory = "combined chastity">>
+	<<RAChangeVAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+other slaves: <span id="voaccessory">''$currentRule.vaginalAccessory.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.vaginalAccessory = "no default setting">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.vaginalAccessory = "none">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Dildo">>
+	<<set $currentRule.vaginalAccessory = "dildo">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Large dildo">>
+	<<set $currentRule.vaginalAccessory = "large dildo">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Huge dildo">>
+	<<set $currentRule.vaginalAccessory = "huge dildo">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+//Will permanently gape pussies//
+|
+<<link "Chastity belt">>
+	<<set $currentRule.vaginalAccessory = "chastity belt">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Anal chastity belt">>
+	<<set $currentRule.vaginalAccessory = "anal chastity">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Combined chastity belt">>
+	<<set $currentRule.vaginalAccessory = "combined chastity">>
+	<<RAChangeVAccessory 2>>
+	<<RARuleModified>>
+<</link>>
+
+
+<<if $seeDicks != 0>>
+<br>
+Dick accessories for
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+anal virgins: <span id="avdaccessory">''$currentRule.aVirginDickAccessory.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.aVirginDickAccessory = "no default setting">>
+	<<RAChangeDAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.aVirginDickAccessory = "none">>
+	<<RAChangeDAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Chastity cage">>
+	<<set $currentRule.aVirginDickAccessory = "chastity">>
+	<<RAChangeDAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Anal chastity belt">>
+	<<set $currentRule.aVirginDickAccessory = "anal chastity">>
+	<<RAChangeDAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Combined chastity belt">>
+	<<set $currentRule.aVirginDickAccessory = "combined chastity">>
+	<<RAChangeDAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+other slaves: <span id="daccessory">''$currentRule.dickAccessory.''</span>
+
+
+<<link "No default setting">>
+	<<set $currentRule.dickAccessory = "no default setting">>
+	<<RAChangeDAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.dickAccessory = "none">>
+	<<RAChangeDAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Chastity cage">>
+	<<set $currentRule.dickAccessory = "chastity">>
+	<<RAChangeDAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Anal chastity belt">>
+	<<set $currentRule.dickAccessory = "anal chastity">>
+	<<RAChangeDAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Combined chastity belt">>
+	<<set $currentRule.dickAccessory = "combined chastity">>
+	<<RAChangeDAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+<</if>>
+
+
+<br>
+Buttplugs for
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+anal virgins: <span id="avbuaccessory">''$currentRule.aVirginButtplug.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.aVirginButtplug = "no default setting">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.aVirginButtplug = "none">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Standard plug">>
+	<<set $currentRule.aVirginButtplug = "plug">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Large plug">>
+	<<set $currentRule.aVirginButtplug = "large plug">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Huge plug">>
+	<<set $currentRule.aVirginButtplug = "huge plug">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+//Will permanently gape assholes//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Standard tailed plug">>
+	<<set $currentRule.aVirginButtplug = "tailed plug">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Large tailed plug">>
+	<<set $currentRule.aVirginButtplug = "large tailed plug">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Huge tailed plug">>
+	<<set $currentRule.aVirginButtplug = "huge tailed plug">>
+	<<RAChangeBAccessory 0>>
+	<<RARuleModified>>
+<</link>>
+//Will permanently gape assholes//
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+other slaves: <span id="buaccessory">''$currentRule.buttplug.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.buttplug = "no default setting">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.buttplug = "none">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Standard plug">>
+	<<set $currentRule.buttplug = "plug">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Large plug">>
+	<<set $currentRule.buttplug = "large plug">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Huge plug">>
+	<<set $currentRule.buttplug = "huge plug">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+//Will permanently gape assholes//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Standard tailed plug">>
+	<<set $currentRule.buttplug = "tailed plug">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Large tailed plug">>
+	<<set $currentRule.buttplug = "large tailed plug">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Huge tailed plug">>
+	<<set $currentRule.buttplug = "huge tailed plug">>
+	<<RAChangeBAccessory 1>>
+	<<RARuleModified>>
+<</link>>
+//Will permanently gape assholes//
+
+<br><br>
+Further appearance changes: [[Cosmetic Rules Assistant Settings][$artificialEyeColor = "",$artificialEyeShape = ""]] | [[Body Mod Rules Assistant Settings]]
+
+<br><br>
+
+__Rule $r Physical Regimen:__
+
+<br>
+
+Growth hormone regimes for healthy slaves:
+<span id="growth"></span>
+
+<<link "No default setting" "Rules Assistant">> <<set $currentRule.growth = {boobs: "no default setting", butt: "no default setting", lips: "no default setting", dick: "no default setting", balls: "no default setting"}>><</link>> |
+<<link "Girlish figure" "Rules Assistant">>     <<set $currentRule.growth = {boobs: 350, butt: 2, lips: 25, dick: 0, balls: 0}>><</link>> |
+<<link "Stacked figure" "Rules Assistant">>	<<set $currentRule.growth = {boobs: 1000, butt: 4, lips: 25, dick: 4, balls: 4}>><</link>> |
+<<link "Huge but functional" "Rules Assistant">><<set $currentRule.growth = {boobs: 9000, butt: 10, lips: 45, dick: 6, balls: 6}>><</link>> |
+<<link "Unlimited" "Rules Assistant">>          <<set $currentRule.growth = {boobs: 48000, butt: 10, lips: 100, dick: 10, balls: 6}>><</link>> |
+<<link "None" "Rules Assistant">>               <<set $currentRule.growth = {boobs: 0, butt: 0, lips: 0, dick: 0, balls: 0}>><</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Breasts://
+<<textbox "$currentRule.growth.boobs" $currentRule.growth.boobs "Rules Assistant">>
+<<link "No default setting" "Rules Assistant">><<set $currentRule.growth.boobs = "no default setting">><</link>> |
+<<link "B Cup" "Rules Assistant">><<set $currentRule.growth.boobs = 350>><</link>> |
+<<link "D Cup" "Rules Assistant">><<set $currentRule.growth.boobs = 1000>><</link>> |
+<<link "Monstrous" "Rules Assistant">><<set $currentRule.growth.boobs = 9000>><</link>> |
+<<link "Unlimited" "Rules Assistant">><<set $currentRule.growth.boobs = 48000>><</link>> |
+<<link "None" "Rules Assistant">><<set $currentRule.growth.boobs = 0>><</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Butts://
+<<textbox "$currentRule.growth.butt" $currentRule.growth.butt "Rules Assistant">>
+<<link "No default setting" "Rules Assistant">><<set $currentRule.growth.butt = "no default setting">><</link>> |
+<<link "Cute" "Rules Assistant">><<set $currentRule.growth.butt = 2>><</link>> |
+<<link "Big" "Rules Assistant">><<set $currentRule.growth.butt = 4>><</link>> |
+<<link "Huge" "Rules Assistant">><<set $currentRule.growth.butt = 6>><</link>> |
+<<link "Unlimited" "Rules Assistant">><<set $currentRule.growth.butt = 10>><</link>> |
+<<link "None" "Rules Assistant">><<set $currentRule.growth.butt = 0>><</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Lips://
+<<textbox "$currentRule.growth.lips" $currentRule.growth.lips "Rules Assistant">>
+<<link "No default setting" "Rules Assistant">><<set $currentRule.growth.lips = "no default setting">><</link>> |
+<<link "Plump" "Rules Assistant">><<set $currentRule.growth.lips = 25>><</link>> |
+<<link "Beestung" "Rules Assistant">><<set $currentRule.growth.lips = 45>><</link>> |
+<<link "Facepussy" "Rules Assistant">><<set $currentRule.growth.lips = 100>><</link>> |
+<<link "None" "Rules Assistant">><<set $currentRule.growth.lips = 0>><</link>>
+<<if $seeDicks>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	//Dicks, if present://
+	<<textbox "$currentRule.growth.dick" $currentRule.growth.dick "Rules Assistant">>
+	<<link "No default setting" "Rules Assistant">><<set $currentRule.growth.dick = "no default setting">><</link>> |
+	<<link "Above average" "Rules Assistant">><<set $currentRule.growth.dick = 4>><</link>> |
+	<<link "Pornstar" "Rules Assistant">><<set $currentRule.growth.dick = 6>><</link>> |
+	<<link "Unlimited" "Rules Assistant">><<set $currentRule.growth.dick = 10>><</link>> |
+	<<link "None" "Rules Assistant">><<set $currentRule.growth.dick = 0>><</link>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	//Balls, if present://
+	<<textbox "$currentRule.growth.balls" $currentRule.growth.balls "Rules Assistant">>
+	<<link "No default setting" "Rules Assistant">><<set $currentRule.growth.balls = "no default setting">><</link>> |
+	<<link "Sizeable" "Rules Assistant">><<set $currentRule.growth.balls = 4>><</link>> |
+	<<link "Cumslave" "Rules Assistant">><<set $currentRule.growth.balls = 6>><</link>> |
+	<<link "Unlimited" "Rules Assistant">><<set $currentRule.growth.balls = 10>><</link>> |
+	<<link "None" "Rules Assistant">><<set $currentRule.growth.balls = 0>><</link>>
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+Drug regimes will be
+<<if $currentRule.growth.intensity>>
+	''intensive'' for slaves whose health can bear it. <<link "Moderate" "Rules Assistant">><<set $currentRule.growth.intensity = 0>><</link>>
+<<else>>
+	''moderate'' for all slaves. <<link "Intensify" "Rules Assistant">><<set $currentRule.growth.intensity = 1>><</link>>
+<</if>>
+
+<br>
+
+Health drugs:
+<span id = "curatives">
+<<if $currentRule.curatives == "no default setting">>
+	''no default setting.''
+<<elseif $currentRule.curatives > 0>>
+	<<if $currentRule.curatives > 1>>
+		''curatives.''
+	<<else>>
+		''preventatives.''
+	<</if>>
+<<else>>
+	''none.''
+<</if>>
+</span>
+
+<<link "No default setting">>
+	<<set $currentRule.curatives = "no default setting">>
+	<<RAChangeCuratives>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.curatives = 0>>
+	<<RAChangeCuratives>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Preventatives">>
+	<<set $currentRule.curatives = 1>>
+	<<RAChangeCuratives>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Curatives">>
+	<<set $currentRule.curatives = 2>>
+	<<RAChangeCuratives>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Aphrodisiacs:
+<span id = "aphrodisiacs">
+<<if $currentRule.aphrodisiacs == "no default setting">>
+	''no default setting.''
+<<elseif $currentRule.aphrodisiacs > 0>>
+	<<if $currentRule.aphrodisiacs > 1>>
+		''extreme.''
+	<<else>>
+		''standard.''
+	<</if>>
+<<else>>
+	''none.''
+<</if>>
+</span>
+
+<<link "No default setting">>
+	<<set $currentRule.aphrodisiacs = "no default setting">>
+	<<RAChangeAphrodisiacs>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.aphrodisiacs = 0>>
+	<<RAChangeAphrodisiacs>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Standard">>
+	<<set $currentRule.aphrodisiacs = 1>>
+	<<RAChangeAphrodisiacs>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Extreme">>
+	<<set $currentRule.aphrodisiacs = 2>>
+	<<RAChangeAphrodisiacs>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Contraceptives for fertile slaves: // Will override hormones and drugs if applicable.//
+<span id = "preg">
+<<if $currentRule.preg == 0>>
+	''fertile.''
+<<elseif $currentRule.preg == 1>>
+	''very fertile.''
+<<elseif $currentRule.preg == 2>>
+	''extremely fertile.''
+<<elseif $currentRule.preg == -1>>
+	''contraceptives.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "No default setting">>
+	<<set $currentRule.preg = "no default setting">>
+	<<RAChangePreg>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Fertile">>
+	<<set $currentRule.preg = 0>>
+	<<RAChangePreg>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Very fertile">>
+	<<set $currentRule.preg = 1>>
+	<<RAChangePreg>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Extremely fertile">>
+	<<set $currentRule.preg = 2>>
+	<<RAChangePreg>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Contraceptives">>
+	<<set $currentRule.preg = -1>>
+	<<RAChangePreg>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Hormones for
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+female slaves:
+<span id = "xxhormones">
+<<if $currentRule.XX == 0>>
+	''no hormones.''
+<<elseif $currentRule.XX == 1>>
+	''female.''
+<<elseif $currentRule.XX == 2>>
+	''intensive female.''
+<<elseif $currentRule.XX == -1>>
+	''male.''
+<<elseif $currentRule.XX == -2>>
+	''intensive male.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "No default setting">>
+	<<set $currentRule.XX = "no default setting">>
+	<<RAChangeXXHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Intensive Female">>
+	<<set $currentRule.XX = 2>>
+	<<RAChangeXXHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Female">>
+	<<set $currentRule.XX = 1>>
+	<<RAChangeXXHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.XX = 0>>
+	<<RAChangeXXHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Male">>
+	<<set $currentRule.XX = -1>>
+	<<RAChangeXXHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Intensive Male">>
+	<<set $currentRule.XX = -2>>
+	<<RAChangeXXHormones>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+shemales:
+<span id = "xyhormones">
+<<if $currentRule.XY == 0>>
+	''no hormones.''
+<<elseif $currentRule.XY == 1>>
+	''female.''
+<<elseif $currentRule.XY == 2>>
+	''intensive female.''
+<<elseif $currentRule.XY == -1>>
+	''male.''
+<<elseif $currentRule.XY == -2>>
+	''intensive male.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "No default setting">>
+	<<set $currentRule.XY = "no default setting">>
+	<<RAChangeXYHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Intensive Female">>
+	<<set $currentRule.XY = 2>>
+	<<RAChangeXYHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Female">>
+	<<set $currentRule.XY = 1>>
+	<<RAChangeXYHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.XY = 0>>
+	<<RAChangeXYHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Male">>
+	<<set $currentRule.XY = -1>>
+	<<RAChangeXYHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Intensive Male">>
+	<<set $currentRule.XY = -2>>
+	<<RAChangeXYHormones>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+geldings:
+<span id = "geldhormones">
+<<if $currentRule.gelding == 0>>
+	''no hormones.''
+<<elseif $currentRule.gelding == 1>>
+	''female.''
+<<elseif $currentRule.gelding == 2>>
+	''intensive female.''
+<<elseif $currentRule.gelding == -1>>
+	''male.''
+<<elseif $currentRule.gelding == -2>>
+	''intensive male.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "No default setting">>
+	<<set $currentRule.gelding = "no default setting">>
+	<<RAChangeGeldHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Intensive Female">>
+	<<set $currentRule.gelding = 2>>
+	<<RAChangeGeldHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Female">>
+	<<set $currentRule.gelding = 1>>
+	<<RAChangeGeldHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.gelding = 0>>
+	<<RAChangeGeldHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Male">>
+	<<set $currentRule.gelding = -1>>
+	<<RAChangeGeldHormones>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Intensive Male">>
+	<<set $currentRule.gelding = -2>>
+	<<RAChangeGeldHormones>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Slave diets:
+<span id = "diet">
+<<if $currentRule.diet == 30>>
+	''designed to keep slaves plush.''
+<<elseif $currentRule.diet == 0>>
+	''designed for average weight.''
+<<elseif $currentRule.diet == -30>>
+	''designed to keep slaves thin.''
+<<elseif $currentRule.diet == "attractive">>
+	''fat slaves will slim down to plush; skinny slaves will fill out to thin.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "No default diet setting">>
+	<<set $currentRule.diet = "no default setting">>
+	<<RAChangeDiet>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Fix fat and skinny slaves">>
+	<<set $currentRule.diet = "attractive">>
+	<<RAChangeDiet>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Curvy">>
+	<<set $currentRule.diet = 30>>
+	<<RAChangeDiet>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Average">>
+	<<set $currentRule.diet = 0>>
+	<<RAChangeDiet>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Thin">>
+	<<set $currentRule.diet = -30>>
+	<<RAChangeDiet>>
+	<<RARuleModified>>
+<</link>>
+
+<span id = "dietsupport">
+<<if $currentRule.diet !== "no default setting">>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+Diet support for growth drugs:
+<<if $currentRule.dietGrowthSupport == 1>>
+	''on.''
+<<else>>
+	''off.''
+<</if>>
+
+<<link "On">>
+	<<set $currentRule.dietGrowthSupport = 1>>
+	<<RAChangeDiet>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Off">>
+	<<set $currentRule.dietGrowthSupport = 0>>
+	<<RAChangeDiet>>
+	<<RARuleModified>>
+<</link>>
+<</if>>
+</span>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+Diet base:
+<span id = "dietBase">
+<<if ($currentRule.dietCum == 2)>>
+	''slaves' diets are heavily based on cum.''
+<<elseif (($currentRule.dietCum == 1) && ($currentRule.dietMilk == 0))>>
+	''cum is added to slaves' diets.''
+<<elseif (($currentRule.dietCum == 1) && ($currentRule.dietMilk == 1))>>
+	''both cum and human milk are added to slaves' diets.''
+<<elseif (($currentRule.dietCum == 0) && ($currentRule.dietMilk == 1))>>
+	''human milk is added to slaves' diets.''
+<<elseif ($currentRule.dietMilk == 2)>>
+	''slaves' diets are heavily based on human milk.''
+<<elseif (($currentRule.dietMilk == 0) && ($currentRule.dietCum == 0))>>
+	''slaves' diets do not include cum or human milk.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "no default setting">>
+	<<set $currentRule.dietCum = "no default setting">>
+	<<RAChangeDietBase>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Normal Diet">>
+	<<set $currentRule.dietCum = 0>>
+	<<set $currentRule.dietMilk = 0>>
+	<<RAChangeDietBase>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Cum Added">>
+	<<set $currentRule.dietCum = 1>>
+	<<set $currentRule.dietMilk = 0>>
+	<<RAChangeDietBase>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Milk Added">>
+	<<set $currentRule.dietCum = 0>>
+	<<set $currentRule.dietMilk = 1>>
+	<<RAChangeDietBase>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Cum & Milk Added">>
+	<<set $currentRule.dietCum = 1>>
+	<<set $currentRule.dietMilk = 1>>
+	<<RAChangeDietBase>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Cum-Based">>
+	<<set $currentRule.dietCum = 2>>
+	<<set $currentRule.dietMilk = 0>>
+	<<RAChangeDietBase>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Milk Based">>
+	<<set $currentRule.dietCum = 0>>
+	<<set $currentRule.dietMilk = 2>>
+	<<RAChangeDietBase>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Muscles:
+<span id = "muscles">
+<<if $currentRule.muscles > 95>>
+	''massive.''
+<<elseif $currentRule.muscles > 30>>
+	''ripped.''
+<<elseif $currentRule.muscles > 5>>
+	''toned.''
+<<elseif $currentRule.muscles == 0>>
+	''none.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "No default diet setting">>
+	<<set $currentRule.muscles = "no default setting">>
+	<<RAChangeMuscles>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.muscles = 0>>
+	<<RAChangeMuscles>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Toned">>
+	<<set $currentRule.muscles = 20>>
+	<<RAChangeMuscles>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Ripped">>
+	<<set $currentRule.muscles = 50>>
+	<<RAChangeMuscles>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Massive">>
+	<<set $currentRule.muscles = 100>>
+	<<RAChangeMuscles>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Braces:
+<span id = "braces">
+<<if $currentRule.teeth == "straighten">>
+	''straighten'' teeth, then remove.
+<<elseif $currentRule.teeth == "universal">>
+	''universally'' applied.
+<<elseif $currentRule.teeth == "none">>
+	''none.''
+<<else>>
+	''no default setting.''
+<</if>>
+</span>
+
+<<link "No default braces setting">>
+	<<set $currentRule.teeth = "no default setting">>
+	<<RAChangeBraces>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.teeth = "none">>
+	<<RAChangeBraces>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Straighten">>
+	<<set $currentRule.teeth = "straighten">>
+	<<RAChangeBraces>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Universal">>
+	<<set $currentRule.teeth = "universal">>
+	<<RAChangeBraces>>
+	<<RARuleModified>>
+<</link>>
+
+<br><br>
+
+Surgical changes: [[Autosurgery Settings]]:
+<span id = "assistantimplants">
+<<if $currentRule.autoSurgery == 1>>
+	''ACTIVE, STAND CLEAR.''
+	<<link "Off">>
+		<<set $currentRule.autoSurgery = 0>>
+		<<RAChangeAssistantImplants>>
+		<<RARuleModified>>
+	<</link>>
+<<else>>
+	''off.''
+	<<link "Activate">>
+		<<set $currentRule.autoSurgery = 1>>
+		<<RAChangeAssistantImplants>>
+		<<RARuleModified>>
+	<</link>>
+<</if>>
+</span>
+<br><br>
+
+__Rule $r Behavior Rules:__
+<br>
+
+Living standard: <span id="living">''$currentRule.livingRules.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.livingRules = "no default setting">>
+	<<RAChangeLiving>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Luxurious">>
+	<<set $currentRule.livingRules = "luxurious">>
+	<<RAChangeLiving>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Normal">>
+	<<set $currentRule.livingRules = "normal">>
+	<<RAChangeLiving>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Spare">>
+	<<set $currentRule.livingRules = "spare">>
+	<<RAChangeLiving>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Typical punishment: <span id="punish">''$currentRule.standardPunishment.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.standardPunishment = "no default setting">>
+	<<RAChangePunish>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Confinement">>
+	<<set $currentRule.standardPunishment = "confinement">>
+	<<RAChangePunish>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Whipping">>
+	<<set $currentRule.standardPunishment = "whipping">>
+	<<RAChangePunish>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Chastity">>
+	<<set $currentRule.standardPunishment = "chastity">>
+	<<RAChangePunish>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Situational">>
+	<<set $currentRule.standardPunishment = "situational">>
+	<<RAChangePunish>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Typical reward: <span id="reward">''$currentRule.standardReward.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.standardReward = "no default setting">>
+	<<RAChangeReward>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Relaxation">>
+	<<set $currentRule.standardReward = "relaxation">>
+	<<RAChangeReward>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Drugs">>
+	<<set $currentRule.standardReward = "drugs">>
+	<<RAChangeReward>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Orgasm">>
+	<<set $currentRule.standardReward = "orgasm">>
+	<<RAChangeReward>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Situational">>
+	<<set $currentRule.standardReward = "situational">>
+	<<RAChangeReward>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Release rules: <span id="mast">''$currentRule.releaseRules.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.releaseRules = "no default setting">>
+	<<RAChangeMast>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Permissive">>
+	<<set $currentRule.releaseRules = "permissive">>
+	<<RAChangeMast>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Sapphic">>
+	<<set $currentRule.releaseRules = "sapphic">>
+	<<RAChangeMast>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Restrictive">>
+	<<set $currentRule.releaseRules = "restrictive">>
+	<<RAChangeMast>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Smart piercing
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+fetish target: <span id="spf">''$currentRule.clitSetting.''</span>
+<<link "No default setting">>
+	<<set $currentRule.clitSetting = "no default setting">>
+	<<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Vanilla">>
+    <<set $currentRule.clitSetting = "vanilla">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Oral">>
+    <<set $currentRule.clitSetting = "oral">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Anal">>
+    <<set $currentRule.clitSetting = "anal">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Boobs">>
+    <<set $currentRule.clitSetting = "boobs">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Sub">>
+    <<set $currentRule.clitSetting = "submissive">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Dom">>
+    <<set $currentRule.clitSetting = "dom">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Humiliation">>
+    <<set $currentRule.clitSetting = "humiliation">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Preg">>
+    <<set $currentRule.clitSetting = "pregnancy">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Pain">>
+    <<set $currentRule.clitSetting = "masochist">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Sadism">>
+    <<set $currentRule.clitSetting = "sadist">>
+    <<RAChangeSPF>>
+	<<RARuleModified>>
+<</link>>
+
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+XY attraction target: <span id = "spxy"><<RAInitSPXY>></span>
+
+<<link "No default setting">>
+	<<set $currentRule.clitSettingXY = "no default setting">>
+	<<RAChangeSPXY>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Passionate">>
+	<<set $currentRule.clitSettingXY = 100>>
+	<<RAChangeSPXY>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Attracted">>
+	<<set $currentRule.clitSettingXY = 75>>
+	<<RAChangeSPXY>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Indifferent">>
+	<<set $currentRule.clitSettingXY = 45>>
+	<<RAChangeSPXY>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.clitSettingXY = 0>>
+	<<RAChangeSPXY>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+XX attraction target: <span id = "spxx"><<RAInitSPXX>></span>
+
+
+<<link "No default setting">>
+	<<set $currentRule.clitSettingXX = "no default setting">>
+	<<RAChangeSPXX>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Passionate">>
+	<<set $currentRule.clitSettingXX = 100>>
+	<<RAChangeSPXX>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Attracted">>
+	<<set $currentRule.clitSettingXX = 75>>
+	<<RAChangeSPXX>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Indifferent">>
+	<<set $currentRule.clitSettingXX = 45>>
+	<<RAChangeSPXX>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "None">>
+	<<set $currentRule.clitSettingXX = 0>>
+	<<RAChangeSPXX>>
+	<<RARuleModified>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+sex drive target: <span id = "spe"><<RAInitSPE>></span>
+
+<<link "No default setting">>
+	<<set $currentRule.clitSettingEnergy = "no default setting">>
+	<<RAChangeSPE>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Nympho">>
+	<<set $currentRule.clitSettingEnergy = 100>>
+	<<RAChangeSPE>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Sex Addict">>
+	<<set $currentRule.clitSettingEnergy = 85>>
+	<<RAChangeSPE>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Powerful">>
+	<<set $currentRule.clitSettingEnergy = 65>>
+	<<RAChangeSPE>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Healthy">>
+	<<set $currentRule.clitSettingEnergy = 45>>
+	<<RAChangeSPE>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Weak">>
+	<<set $currentRule.clitSettingEnergy = 25>>
+	<<RAChangeSPE>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Frigid">>
+	<<set $currentRule.clitSettingEnergy = 0>>
+	<<RAChangeSPE>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Speech rules: <span id="speech">''$currentRule.speechRules.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.speechRules = "no default setting">>
+	<<RAChangeSpeech>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Permissive">>
+	<<set $currentRule.speechRules = "permissive">>
+	<<RAChangeSpeech>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Suppress accents">>
+	<<set $currentRule.speechRules = "accent elimination">>
+	<<RAChangeSpeech>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Restrictive">>
+	<<set $currentRule.speechRules = "restrictive">>
+	<<RAChangeSpeech>>
+	<<RARuleModified>>
+<</link>>
+
+<br>
+
+Relationship rules: <span id="relation">''$currentRule.relationshipRules.''</span>
+
+<<link "No default setting">>
+	<<set $currentRule.relationshipRules = "no default setting">>
+	<<RAChangeRelationship>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Permissive">>
+	<<set $currentRule.relationshipRules = "permissive">>
+	<<RAChangeRelationship>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Just friends">>
+	<<set $currentRule.relationshipRules = "just friends">>
+	<<RAChangeRelationship>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "Restrictive">>
+	<<set $currentRule.relationshipRules = "restrictive">>
+	<<RAChangeRelationship>>
+	<<RARuleModified>>
+<</link>>
+
+<<if $studio == 1>>
+<br>
+<span id="pornfame">
+<<if $currentRule.pornFameSpending == -1>>
+	Release of feeds showing excellent slaves' sex lives: ''off.''
+<<else>>
+	Weekly porn publicity subsidy: ''¤$currentRule.pornFameSpending.''
+<</if>>
+</span>
+
+<<link "No default setting">>
+	<<set $currentRule.pornFameSpending = "no default setting">>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "No broadcasting">>
+	<<set $currentRule.pornFameSpending = -1>>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "No subsidy">>
+	<<set $currentRule.pornFameSpending = 0>>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "1000">>
+	<<set $currentRule.pornFameSpending = 1000>>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "2000">>
+	<<set $currentRule.pornFameSpending = 2000>>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "3000">>
+	<<set $currentRule.pornFameSpending = 3000>>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "4000">>
+	<<set $currentRule.pornFameSpending = 4000>>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+|
+<<link "5000">>
+	<<set $currentRule.pornFameSpending = 5000>>
+	<<RAChangeFameSpending>>
+	<<RARuleModified>>
+<</link>>
+
+<</if>>
+
+
+<br><br>
+
+<span id="saveresult"></span>
+<<timed 50ms>>
+	<<RAChangeSave>>
+<</timed>>
+
+<<if ($currentRule.ID == 1) || ($currentRule.ID == 2) || ($currentRule.ID == 3)>>
+|
+<<link "Reset this rule to use FC Dev's preferred options">>
+
+	<<if ($currentRule.ID == 1)>>
+		<<set $currentRule.name = "Obedient Slaves">>
+		<<set $currentRule.condition = {id: ">", first: {id: "(name)", name: "devotion"}, second: {id: "(number)", value: 20}}>>
+		<<set $currentRule.clothes = "slutty jewelry">>
+		<<set $currentRule.collar = "pretty jewelry">>
+		<<set $currentRule.shoes = "heels">>
+		<<set $currentRule.vaginalAccessory = "none">>
+		<<set $currentRule.virginAccessory = "chastity belt">>
+		<<set $currentRule.aVirginAccessory = "anal chastity">>
+		<<set $currentRule.dickAccessory = "none">>
+		<<set $currentRule.aVirginDickAccessory = "anal chastity">>
+		<<set $currentRule.bellyAccessory = "no default setting">>
+		<<set $currentRule.aVirginButtplug = "none">>
+		<<set $currentRule.buttplug = "none">>
+		<<set $currentRule.eyes = "no default setting">>
+		<<set $currentRule.makeup = 1>>
+		<<set $currentRule.nails = 1>>
+		<<set $currentRule.hColor = "no default setting">>
+		<<set $currentRule.hStyle = "neat">>
+		<<set $currentRule.pubicHColor = "no default setting">>
+		<<set $currentRule.pubicHStyle = "waxed">>
+		<<set $currentRule.earPiercing = 1>>
+		<<set $currentRule.nosePiercing = 0>>
+		<<set $currentRule.eyebrowPiercing = 0>>
+		<<set $currentRule.navelPiercing = 1>>
+		<<set $currentRule.nipplesPiercing = 0>>
+		<<set $currentRule.lipsPiercing = 0>>
+		<<set $currentRule.tonguePiercing = 0>>
+		<<set $currentRule.clitPiercing = 3>>
+		<<set $currentRule.vaginaPiercing = 1>>
+		<<set $currentRule.dickPiercing = 1>>
+		<<set $currentRule.anusPiercing = 1>>
+		<<set $currentRule.anusTat = "bleached">>
+		<<set $currentRule.curatives = "no default setting">>
+		<<set $currentRule.preg = -1>>
+		<<set $currentRule.XX = 2>>
+		<<set $currentRule.XY = 2>>
+		<<set $currentRule.gelding = 2>>
+		<<set $currentRule.diet = 30>>
+		<<set $currentRule.dietGrowthSupport = 1>>
+		<<set $currentRule.muscles = 20>>
+		<<set $currentRule.releaseRules = "restrictive">>
+		<<set $currentRule.standardPunishment = "confinement">>
+		<<set $currentRule.standardReward = "relaxation">>
+		<<set $currentRule.clitSetting = "anal", $currentRule.clitSettingXY = 100, $currentRule.clitSettingXX = 100, $currentRule.clitSettingEnergy = 100>>
+		<<set $currentRule.speechRules = "permissive">>
+		<<set $currentRule.relationshipRules = "permissive">>
+		<<set $currentRule.livingRules = "luxurious">>
+		<<set $currentRule.growth = {boobs: 9000, butt: 10, lips: 45, dick: 6, balls: 6}>>
+		<<set $currentRule.autoBrand = 1>>
+		<<set $currentRule.assignment = []>>
+		<<set $currentRule.excludeAssignment = []>>
+		<<set $currentRule.setAssignment = "no default setting">>
+		<<set $currentRule.facility = []>>
+		<<set $currentRule.excludeFacility = []>>
+		<<set $currentRule.excludeSpecialSlaves = true>>
+		<<set $currentRule.facilityRemove = false>>
+		<<set $currentRule.removalAssignment = "rest">>
+		<<set $currentRule.selectedSlaves = []>>
+		<<set $currentRule.excludedSlaves = []>>
+		<<set $currentRule.teeth = "straighten">>
+		<<set $currentRule.autosurgery = 1>>
+		<<set $currentRule.surgery.eyes = "no default setting">>
+		<<set $currentRule.surgery.lactation = "no default setting">>
+		<<set $currentRule.surgery.prostate = "no default setting">>
+		<<set $currentRule.surgery.cosmetic = 1>>
+		<<set $currentRule.surgery.accent = 0>>
+		<<set $currentRule.surgery.shoulders = 0>>
+		<<set $currentRule.surgery.shouldersImplant = 0>>
+		<<set $currentRule.surgery.boobs = 0>>
+		<<set $currentRule.surgery.hips = 0>>
+		<<set $currentRule.surgery.hipsImplant = 0>>
+		<<set $currentRule.surgery.butt = 0>>
+		<<set $currentRule.surgery.faceShape = "normal">>
+		<<set $currentRule.surgery.lips = 0>>
+		<<set $currentRule.surgery.holes = 0>>
+
+	<<elseif ($currentRule.ID == 2)>>
+		<<set $currentRule.name = "Disobedient Slaves">>
+		<<set $currentRule.condition = {id: "<=", first: {id: "(name)", name: "devotion"}, second: {id: "(number)", value: 20}}>>
+		<<set $currentRule.clothes = "uncomfortable straps">>
+		<<set $currentRule.collar = "uncomfortable leather">>
+		<<set $currentRule.shoes = "heels">>
+		<<set $currentRule.vaginalAccessory = "no default setting">>
+		<<set $currentRule.virginAccessory = "no default setting">>
+		<<set $currentRule.aVirginAccessory = "no default setting">>
+		<<set $currentRule.dickAccessory = "no default setting">>
+		<<set $currentRule.aVirginDickAccessory = "no default setting">>
+		<<set $currentRule.bellyAccessory = "no default setting">>
+		<<set $currentRule.aVirginButtplug = "no default setting">>
+		<<set $currentRule.buttplug = "no default setting">>
+		<<set $currentRule.eyes = "no default setting">>
+		<<set $currentRule.makeup = 1>> <<set $currentRule.nails = 1>>
+		<<set $currentRule.hColor = "no default setting">>
+		<<set $currentRule.hStyle = "neat">>
+		<<set $currentRule.pubicHColor = "no default setting">>
+		<<set $currentRule.pubicHStyle = "waxed">>
+		<<set $currentRule.earPiercing = 0>>
+		<<set $currentRule.nosePiercing = 0>>
+		<<set $currentRule.eyebrowPiercing = 0>>
+		<<set $currentRule.navelPiercing = 0>>
+		<<set $currentRule.nipplesPiercing = 0>>
+		<<set $currentRule.lipsPiercing = 0>>
+		<<set $currentRule.tonguePiercing = 0>>
+		<<set $currentRule.clitPiercing = 3>>
+		<<set $currentRule.vaginaPiercing = 0>>
+		<<set $currentRule.dickPiercing = 0>>
+		<<set $currentRule.anusPiercing = 0>>
+		<<set $currentRule.anusTat = "no default setting">>
+		<<set $currentRule.curatives = "no default setting">>
+		<<set $currentRule.preg = -1>>
+		<<set $currentRule.XX = 2>>
+		<<set $currentRule.XY = 2>>
+		<<set $currentRule.gelding = 2>>
+		<<set $currentRule.diet = 30>>
+		<<set $currentRule.dietGrowthSupport = 1>>
+		<<set $currentRule.muscles = 20>>
+		<<set $currentRule.releaseRules = "restrictive">>
+		<<set $currentRule.standardPunishment = "whipping">>
+		<<set $currentRule.standardReward = "orgasm">>
+		<<set $currentRule.clitSetting = "anal", $currentRule.clitSettingXY = 100, $currentRule.clitSettingXX = 100, $currentRule.clitSettingEnergy = 100>>
+		<<set $currentRule.speechRules = "restrictive">>
+		<<set $currentRule.relationshipRules = "restrictive">>
+		<<set $currentRule.livingRules = "spare">>
+		<<set $currentRule.autoSurgery = 0>>
+		<<set $currentRule.growth = {boobs: 9000, butt: 10, lips: 45, dick: 6, balls: 6}>>
+		<<set $currentRule.autoBrand = 1>>
+		<<set $currentRule.assignment = []>>
+		<<set $currentRule.excludeAssignment = []>>
+		<<set $currentRule.setAssignment = "no default setting">>
+		<<set $currentRule.facility = []>>
+		<<set $currentRule.excludeFacility = []>>
+		<<set $currentRule.excludeSpecialSlaves = true>>
+		<<set $currentRule.facilityRemove = false>>
+		<<set $currentRule.removalAssignment = "rest">>
+		<<set $currentRule.selectedSlaves = []>>
+		<<set $currentRule.excludedSlaves = []>>
+		<<set $currentRule.surgery.eyes = "no default setting">>
+		<<set $currentRule.surgery.lactation = "no default setting">>
+		<<set $currentRule.surgery.prostate = "no default setting">>
+		<<set $currentRule.surgery.cosmetic = 0>>
+		<<set $currentRule.surgery.accent = 0>>
+		<<set $currentRule.surgery.shoulders = 0>>
+		<<set $currentRule.surgery.shouldersImplant = 0>>
+		<<set $currentRule.surgery.boobs = "no default setting">>
+		<<set $currentRule.surgery.hips = 0>>
+		<<set $currentRule.surgery.hipsImplant = 0>>
+		<<set $currentRule.surgery.butt = "no default setting">>
+		<<set $currentRule.surgery.faceShape = "no default setting">>
+		<<set $currentRule.surgery.lips = "no default setting">>
+		<<set $currentRule.surgery.holes = 0>>
+
+	<<elseif ($currentRule.ID == 3)>>
+		<<set $currentRule.name = "Unhealthy Slaves">>
+		<<set $currentRule.condition = {id: "<", first: {id: "(name)", name: "health"}, second: {id: "(number)", value: -2}}>>
+		<<set $currentRule.clothes = "no default setting">>
+		<<set $currentRule.collar = "no default setting">>
+		<<set $currentRule.shoes = "no default setting">>
+		<<set $currentRule.vaginalAccessory = "no default setting">>
+		<<set $currentRule.virginAccessory = "no default setting">>
+		<<set $currentRule.aVirginAccessory = "no default setting">>
+		<<set $currentRule.dickAccessory = "no default setting">>
+		<<set $currentRule.aVirginDickAccessory = "no default setting">>
+		<<set $currentRule.bellyAccessory = "no default setting">>
+		<<set $currentRule.aVirginButtplug = "no default setting">>
+		<<set $currentRule.buttplug = "no default setting">>
+		<<set $currentRule.eyes = "no default setting">>
+		<<set $currentRule.makeup = "no default setting">>
+		<<set $currentRule.nails = "no default setting">>
+		<<set $currentRule.hColor = "no default setting">>
+		<<set $currentRule.hStyle = "no default setting">>
+		<<set $currentRule.pubicHColor = "no default setting">>
+		<<set $currentRule.pubicHStyle = "no default setting">>
+		<<set $currentRule.earPiercing = "no default setting">>
+		<<set $currentRule.nosePiercing = "no default setting">>
+		<<set $currentRule.eyebrowPiercing = "no default setting">>
+		<<set $currentRule.navelPiercing = "no default setting">>
+		<<set $currentRule.nipplesPiercing = "no default setting">>
+		<<set $currentRule.lipsPiercing = "no default setting">>
+		<<set $currentRule.tonguePiercing = "no default setting">>
+		<<set $currentRule.clitPiercing = "no default setting">>
+		<<set $currentRule.vaginaPiercing = "no default setting">>
+		<<set $currentRule.dickPiercing = "no default setting">>
+		<<set $currentRule.anusPiercing = "no default setting">>
+		<<set $currentRule.anusTat = "no default setting">>
+		<<set $currentRule.curatives = "applied">>
+		<<set $currentRule.preg = "no default setting">>
+		<<set $currentRule.XX = "no default setting">>
+		<<set $currentRule.XY = "no default setting">>
+		<<set $currentRule.gelding = "no default setting">>
+		<<set $currentRule.diet = "no default setting">>
+		<<set $currentRule.muscles = "no default setting">>
+		<<set $currentRule.releaseRules = "no default setting">>
+		<<set $currentRule.standardPunishment = "no default setting">>
+		<<set $currentRule.standardReward = "no default setting">>
+		<<set $currentRule.clitSetting = "no default setting", $currentRule.clitSettingXY = "no default setting", $currentRule.clitSettingXX = "no default setting", $currentRule.clitSettingEnergy = "no default setting">>
+		<<set $currentRule.speechRules = "no default setting">>
+		<<set $currentRule.relationshipRules = "no default setting">>
+		<<set $currentRule.livingRules = "no default setting">>
+		<<set $currentRule.growth = {boobs: 9000, butt: 10, lips: 45, dick: 6, balls: 6}>>
+		<<set $currentRule.autoBrand = "no default setting">>
+		<<set $currentRule.assignment = []>>
+		<<set $currentRule.excludeAssignment = []>>
+		<<set $currentRule.setAssignment = "no default setting">>
+		<<set $currentRule.facility = []>>
+		<<set $currentRule.excludeFacility = []>>
+		<<set $currentRule.excludeSpecialSlaves = true>>
+		<<set $currentRule.facilityRemove = false>>
+		<<set $currentRule.removalAssignment = "rest">>
+		<<set $currentRule.selectedSlaves = []>>
+		<<set $currentRule.excludedSlaves = []>>
+		<<set $currentRule.surgery.eyes = "no default setting">>
+		<<set $currentRule.surgery.lactation = "no default setting">>
+		<<set $currentRule.surgery.prostate = "no default setting">>
+		<<set $currentRule.surgery.cosmetic = 0>>
+		<<set $currentRule.surgery.accent = 0>>
+		<<set $currentRule.surgery.shoulders = 0>>
+		<<set $currentRule.surgery.shouldersImplant = 0>>
+		<<set $currentRule.surgery.boobs = "no default setting">>
+		<<set $currentRule.surgery.hips = 0>>
+		<<set $currentRule.surgery.hipsImplant = 0>>
+		<<set $currentRule.surgery.butt = "no default setting">>
+		<<set $currentRule.surgery.faceShape = "no default setting">>
+		<<set $currentRule.surgery.lips = "no default setting">>
+		<<set $currentRule.surgery.holes = 0>>
+	<</if>>
+
+	<<set $defaultRules[$r-1] = $currentRule>>
+	<<goto "Rules Assistant">>
+<</link>>
+<</if>>
+
+|
+<<link "Remove rule $r">>
+	<<set $defaultRules.deleteAt($r-1)>>
+	<<for $r = $defaultRules.length; $r > 0; $r-->>
+		<<if def $defaultRules[$r-1]>>
+			<<set $currentRule = $defaultRules[$r-1]>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<goto "Rules Assistant">>
+<</link>>
+
+<</if>> /* closes if _length > 0 */
+
+<br><br>
+
+<<if _length < 10>>
+
+	<<link "Add a new rule">>
+
+	<<set _tempRule = {aphrodisiacs: "no default setting", condition: {id: "false"}, releaseRules: "no default setting", clitSetting: "no default setting", clitSettingXY: "no default setting", clitSettingXX: "no default setting", clitSettingEnergy: "no default setting", speechRules: "no default setting", clothes: "no default setting", collar: "no default setting", shoes: "no default setting", virginAccessory: "no default setting", aVirginAccessory: "no default setting", vaginalAccessory: "no default setting", aVirginDickAccessory: "no default setting", dickAccessory: "no default setting", bellyAccessory: "no default setting", aVirginButtplug: "no default setting", buttplug: "no default setting", eyeColor: "no default setting", makeup: "no default setting", nails: "no default setting", hColor: "no default setting", hLength: "no default setting", hStyle: "no default setting", pubicHColor: "no default setting", pubicHStyle: "no default setting", nipplesPiercing: "no default setting", areolaePiercing: "no default setting", clitPiercing: "no default setting", vaginaLube: "no default setting", vaginaPiercing: "no default setting", dickPiercing: "no default setting", anusPiercing: "no default setting", lipsPiercing: "no default setting", tonguePiercing: "no default setting", earPiercing: "no default setting", nosePiercing: "no default setting", eyebrowPiercing: "no default setting", navelPiercing: "no default setting", corsetPiercing: "no default setting", boobsTat: "no default setting", buttTat: "no default setting", vaginaTat: "no default setting", dickTat: "no default setting", lipsTat: "no default setting", anusTat: "no default setting", shouldersTat: "no default setting", armsTat: "no default setting", legsTat: "no default setting", backTat: "no default setting", stampTat: "no default setting", curatives: "no default setting", livingRules: "no default setting", relationshipRules: "no default setting", standardPunishment: "no default setting", standardReward: "no default setting", diet: "no default setting", dietCum: "no default setting", dietMilk: "no default setting", muscles: "no default setting", XY: "no default setting", XX: "no default setting", gelding: "no default setting", preg: "no default setting", growth: {boobs: "no default setting", butt: "no default setting", lips: "no default setting", dick: "no default setting", balls: "no default setting"}, autoSurgery: 0, autoBrand: 0, pornFameSpending: "no default setting", dietGrowthSupport: 0, eyewear: "no default setting", assignment: [], excludeAssignment: [], setAssignment: "no default setting", facility: [], excludeFacility: [], excludeSpecialSlaves: true, facilityRemove: false, removalAssignment: "rest", selectedSlaves: [], excludedSlaves: [], surgery: {eyes: "no default setting", lactation: "no default setting", prostate: "no default setting", cosmetic: 0, accent: "no default setting", shoulders: "no default setting", shouldersImplant: "no default setting", boobs: "no default setting", hips: "no default setting", hipsImplant: "no default setting", butt: "no default setting", faceShape: "no default setting", lips: "no default setting", holes: 0}, }>>
+
+		/* pick an ID higher than the highest ID of any existing rule */
+		<<for _tempRule.ID = 1, _r = 0; _r < _length; _r++>>
+			<<set _tempRule.ID = Math.max(_tempRule.ID, $defaultRules[_r].ID + 1)>>
+		<</for>>
+		<<set _tempRule.name = "Rule " + (_length+1)>>
+
+		<<set $defaultRules.push(_tempRule)>>
+		<<set $currentRule = $defaultRules[_length]>>
+		<<goto "Rules Assistant">>
+
+	<</link>> |
+
+<</if>>
+
+<<if _length > 0>>
+	<span id="applyresult"></span>
+	<span id="applied"></span>
+	<<timed 50ms>>
+	<<RAChangeApply>>
+	<</timed>>
+
+	<br><br>
+
+	[[Export this rule|Export Rule]] |
+<</if>>
+
+[[Import a rule|Import Rule]]

@@ -1,0 +1,244 @@
+:: RE relative recruiter [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check", $returnTo = "RIE Eligibility Check">>
+<<Enunciate $eventSlave>>
+
+<<set $i = $slaves.findIndex(function(o) { return o.ID == $recruiterSlave.ID; })>>
+<<set $j = $slavesOriginal.findIndex(function(o) { return o.ID == $slaves[$i].ID; })>>
+
+<<set $eventSlave = $slaves[$i]>>
+<<set $activeSlave = $slavesOriginal[$j]>>
+<<Enunciate $eventSlave>>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+<<if $imageChoice == 1>>
+    <div class="imageRef lrgVector"><<SlaveArt $activeSlave 2 0>></div>
+<<else>>
+    <div class="imageRef lrgRender"><<SlaveArt $activeSlave 2 0>></div>
+<</if>>
+<</if>>
+/* 000-250-006 */
+
+$eventSlave.slaveName requests an interview with you. She's a devoted slave, and you grant it, and are happy you did when you see the troubled expression on her face. She explains<<if !canTalk($eventSlave)>> with desperate gestures<</if>> that
+<<switch $eventSlave.recruiter>>
+<<case "mother">>
+	she had a daughter, who was sent to the slave orphanages. Today will be the daughter's 18th birthday, which means she'll go up for sale.
+<<case "daughter">>
+	her mother has been enslaved. She was free the last $eventSlave.slaveName knew of her. She's heard a rumor through other slaves that her mother will go up for sale soon.
+<<case "older sister">>
+	her older sister is being sold. She was likely to be enslaved the last $eventSlave.slaveName knew of her, and now she's heard a rumor through other slaves that her big sister is going to be sold to a new owner.
+<<case "young sister">>
+	her younger sister is being sold. She was likely to be enslaved the last $eventSlave.slaveName knew of her, and now she's heard a rumor through other slaves that her little sister is going to be sold to a new owner.
+<<default>>
+	she has a twin sister, who was still free the last $eventSlave.slaveName knew of her. She's heard a rumor through other slaves that her twin has finally been enslaved, and will soon go up for sale.
+<</switch>>
+<br><br>
+<<if !canTalk($eventSlave)>>She urgently gestures for permission to write. It's unusual, but she seems quite serious, so you grant it. She writes,<</if>>
+"You've been <<s>>o good to me, <<Master>>. I'm <<s>>ure <<s>>he look<<s>> like I did when you bought me. Plea<<s>>e, <<Master>>, will you buy her like you bought me? I'm afraid <<s>>he'll go to a cruel <<Master>>." She bites her lip. "And, <<Master>>, I'm <<s>>ure <<s>>he'd learn to love
+<<if $eventSlave.fetish == "cumslut">>
+	the ta<<s>>te of your cum
+<<elseif $eventSlave.fetish == "submissive">>
+	<<s>>ubmi<<ss>>ion
+<<elseif $eventSlave.fetish == "humiliation">>
+	being treated like a dirty <<s>>lut
+<<elseif $eventSlave.fetish == "buttslut">>
+	the feeling of your cock in her butt
+<<elseif $eventSlave.fetish == "sadist">>
+	hurting your other <<s>>laves
+<<elseif $eventSlave.fetish == "masochist">>
+	being beaten
+<<elseif $eventSlave.fetish == "dom">>
+	fucking your other <<s>>lave<<s>>
+<<elseif $eventSlave.energy > 95>>
+	being a good nympho <<s>>lut
+<<elseif $eventSlave.addict > 2>>
+	being a druggie whore
+<<elseif $eventSlave.anus > 2>>
+	getting her butt <<s>>tretched out
+<<elseif $eventSlave.boobsImplant > 20>>
+	getting turned into a bimbo <<s>>lut
+<<else>>
+	the feeling of your cock in her
+<</if>>
+a<<s>> much a<<s>> I do.
+<<if $eventSlave.fetish == "cumslut">>
+	We could blow you at the <<s>>ame time, <<Master>>! And <<s>>hare cum!"
+<<elseif $eventSlave.fetish == "submissive">>
+	You could u<<s>>e u<<s>> together, <<Master>>!"
+<<elseif $eventSlave.fetish == "humiliation">>
+	You could make u<<s>> fuck each other in public, <<Master>>!"
+<<elseif $eventSlave.fetish == "buttslut">>
+	You could fuck our butt<<s>> right next to each other, <<Master>>!"
+<<elseif $eventSlave.energy > 95>>
+	I'm <<s>>ure <<s>>he'd love to have three<<s>>ome<<s>>, <<Master>>!"
+<<elseif $eventSlave.fetish == "sadist">>
+	I'm <<s>>ure <<s>>he'd love to help me, <<Master>>!"
+<<elseif $eventSlave.fetish == "masochist">>
+	You could whip u<<s>> both, <<Master>>!"
+<<elseif $eventSlave.fetish == "dom">>
+	I'm <<s>>ure <<s>>he'd love to help me u<<s>>e other <<s>>lave<<s>>, <<Master>>!"
+<<else>>
+	You could fuck u<<s>> together, <<Master>>!"
+<</if>>
+She waits anxiously for your decision.
+
+<<if (random(0,99) < $seeDicks)>>
+<<if random(1,100) > 60>>
+	<<if $activeSlave.dick > 0>>
+		<<set $activeSlave.dick = 0>>
+		<<set $activeSlave.balls = 0>>
+		<<set $activeSlave.scrotum = 0>>
+		<<set $activeSlave.ovaries = 1>>
+		<<set $activeSlave.vagina = either(0,1,1,1,2,2)>>
+		<<set $activeSlave.boobs += 100*random(1,4)>>
+		<<set $activeSlave.butt += random(1,2)>>
+		<<if $activeSlave.muscles > 5>>
+		<<set $activeSlave.muscles -= random(0,10)>>
+		<</if>>
+		<<if $activeSlave.height >= 150>>
+		<<set $activeSlave.height -= 10*random(0,1)>>
+		<</if>>
+	<<else>>
+		<<set $activeSlave.dick = random(1,4)>>
+		<<set $activeSlave.balls = random(1,4)>>
+		<<set $activeSlave.ovaries = 0>>
+		<<set $activeSlave.vagina = -1>>
+		<<set $activeSlave.boobs = 100*random(1,4)>>
+		<<if $activeSlave.boobsImplant > 0>>
+		<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+		<</if>>
+		<<set $activeSlave.butt = random(1,3)>>
+		<<if $activeSlave.buttImplant > 0>>
+		<<set $activeSlave.butt += $activeSlave.buttImplant>>
+		<</if>>
+		<<if $activeSlave.muscles <= 95>>
+		<<set $activeSlave.muscles += random(0,10)>>
+		<</if>>
+		<<if $activeSlave.height < 185>>
+		<<set $activeSlave.height += 10*random(0,1)>>
+		<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<switch $eventSlave.recruiter>>
+<<case "mother">>
+	<<set $activeSlave.origin = "She was recruited into your service by her mother.">>
+	<<set $activeSlave.anus = 0>>
+	<<if  $activeSlave.vagina > -1>><<set $activeSlave.vagina = 0>><</if>>
+	<<set $activeSlave.preg = -1>>
+	<<set $activeSlave.oralSkill = 0>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.lactation = 0>>
+	<<set $activeSlave.age = 18>>
+	<<set $activeSlave.birthWeek = 0>>
+<<case "daughter">>
+	<<set $activeSlave.origin = "She was recruited into your service by her daughter.">>
+	<<if $activeSlave.vagina == 0>>
+		<<set $activeSlave.vagina = 1>>
+	<</if>>
+	<<set $activeSlave.preg = -1>>
+	<<set $activeSlave.oralSkill += random(0,20)>>
+	<<set $activeSlave.vaginalSkill += random(0,20)>>
+	<<set $activeSlave.analSkill += random(0,20)>>
+	<<set $activeSlave.entertainSkill += random(0,20)>>
+	<<set $activeSlave.whoreSkill += random(0,20)>>
+	<<set $activeSlave.lactation = 0>>
+	<<set $activeSlave.age += random(15,20)>>
+<<case "older sister">>
+	<<set $activeSlave.origin = "She was recruited into your service by her older sister.">>
+	<<if $activeSlave.ovaries == 1>>
+		<<set $activeSlave.boobs += 200>>
+		<<set $activeSlave.butt += 1>>
+	<</if>>
+	<<set $activeSlave.age = $activeSlave.age+2>>
+<<case "young sister">>
+	<<set $activeSlave.origin = "She was recruited into your service by her younger sister.">>
+	<<if $activeSlave.ovaries == 1>>
+		<<set $activeSlave.boobs = Math.trunc($activeSlave.boobs-200,0,50000)>>
+		<<set $activeSlave.butt = Math.trunc($activeSlave.butt-1,0,10)>>
+	<</if>>
+	<<set $activeSlave.age = $activeSlave.age-2>>
+<<default>>
+	<<set $activeSlave.origin = "She was recruited into your service by her twin sister.">>
+<</switch>>
+
+<<if $eventSlave.recruiter != "twin">>
+	<<set $activeSlave.devotion = random(25,45)>>
+	<<set $activeSlave.trust = random(-15,15)>>
+	<<if $activeSlave.weight > 30>>
+		<<set $activeSlave.weight -= random(0,50)>>
+	<<elseif $activeSlave.weight < -30>>
+		<<set $activeSlave.weight += random(0,50)>>
+	<<else>>
+		<<set $activeSlave.weight += random(-20,20)>>
+	<</if>>
+	<<set $activeSlave.height += random(-5,5)>>
+<</if>>
+
+<<set $activeSlave.ageImplant = 0>>
+<<if $activeSlave.career != "a Futanari Sister">><<set $activeSlave.career = "a slave">><</if>>
+<<set $activeSlave.relationship = 0>>
+<<set $activeSlave.relationshipTarget = 0>>
+<<set $activeSlave.births = 0>>
+<<set $activeSlave.oralCount = 0>>
+<<set $activeSlave.vaginalCount = 0>>
+<<set $activeSlave.analCount = 0>>
+<<set $activeSlave.mammaryCount = 0>>
+<<set $activeSlave.penetrativeCount = 0>>
+<<set $activeSlave.pitKills = 0>>
+<<set $activeSlave.drugs = "no drugs">>
+<<set $activeSlave.shoes = "none">>
+<<set $activeSlave.clothes = "no clothing">>
+<<set $activeSlave.hormones = 0>>
+<<set $activeSlave.assignment = "rest">>
+<<set $activeSlave.assignmentVisible = 1>>
+<<set $activeSlave.choosesOwnAssignment = 0>>
+<<set $activeSlave.fetishStrength = random(0,90)>>
+<<set $activeSlave.fetish = either("none", "none", "none", "none", "none", "none", "submissive", "cumslut", "humiliation", "buttslut", "boobs","pregnancy")>>
+<<set $activeSlave.sexualFlaw = either("none", "none", "none", "none", "hates oral", "hates anal", "hates penetration")>>
+<<set $activeSlave.behavioralFlaw = either("none", "none", "none", "arrogant", "bitchy", "odd", "anorexic", "hates men", "hates women", "hates women")>>
+<<set $activeSlave.weekAcquired = $week>>
+<<RandomizeAttraction>>
+
+<<slaveCost $activeSlave>>
+
+<<if $activeSlave.slaveSurname>><<set _familyName = $activeSlave.slaveSurname>><</if>>
+<<set _familyBirthSurname = $activeSlave.birthSurname>>
+<<NationalityToName $activeSlave>>
+<<if _familyName>><<set $activeSlave.slaveSurname = _familyName>><</if>>
+<<set $activeSlave.birthSurname = _familyBirthSurname>>
+
+<<set $activeSlave.slaveName = $activeSlave.birthName>>
+<<set $activeSlave.ID += 1000>>
+<<set $activeSlave.relation = $eventSlave.recruiter>>
+<<if $activeSlave.relation.indexOf("sister") != -1>><<set $activeSlave.relation = "sister">><</if>>
+<<set $activeSlave.relation = relationTargetWord($activeSlave)>>
+<<set $activeSlave.relationTarget = $eventSlave.ID>>
+<<set $activeSlave.recruiter = 0>>
+
+<br><br>
+
+You look up the $activeSlave.relation. She costs ¤$slaveCost, a bargain, but you won't be able to inspect her beyond her likely resemblance to her <<print relationTargetWord($activeSlave)>>.
+
+<br><br>
+
+<<set $slaves[$i].recruiter = 0>> /* the chance to recruit this particular related slave will not be offered again, regardless of player decision */
+
+<span id="result">
+<<link "Buy her">>
+	<<replace "#result">>
+	/* update $slaves[$i] (eventSlave) before calling any widgets */
+	<<set $slaves[$i].relation = relationTargetWord($activeSlave)>>
+	<<set $slaves[$i].relationTarget = $activeSlave.ID>>
+	<<set $cash -= $slaveCost>>
+	<<SlaveTitle $eventSlave>>
+	You complete the legalities and biometric scanning quickly and without fuss. $activeSlave.slaveName arrives shortly. The two slaves remember each other only dimly - they parted a long time ago - but they embrace. The devoted $desc explains the situation and encourages her $activeSlave.relation to be a good slave to you. $activeSlave.slaveName looks a little fearful but clearly realizes that she's lucky to be here.
+	<<include "New Slave Intro">>
+	<</replace>>
+<</link>>
+</span>

@@ -1,0 +1,117 @@
+:: Office Description [nobr]
+
+&nbsp;&nbsp;&nbsp;&nbsp;You are at your desk in your penthouse office. It has a glass top interface from which you can rule over $arcologies[0].name; $assistantName's avatar is visible in one corner.
+
+<<include "Personal Assistant Appearance">>
+
+<<if $clubAdsSpending >= 5000>>
+	A corner of your desk is piled with sample merchandise from the campaign promoting your club.
+	<<set $eventSlaves = []>>
+	<<for _odi = 0; _odi < $slaves.length; _odi++>>
+	<<if ($slaves[_odi].assignment == "serve in the club") && canWalk($slaves[_odi])>>
+		<<set $eventSlaves.push($slaves[_odi])>>
+	<</if>>
+	<</for>>
+	<<if $eventSlaves.length > 0>>
+	<<set $activeSlave = $eventSlaves.random()>>
+	<<if random(1,2) == 1>>
+		This includes a sex toy based on $activeSlave.slaveName's
+		<<if (random(1,3) == 1) && ($activeSlave.vaginalSkill >= 100)>>
+		<<if $activeSlave.vagina > 3>>massive vagina<<elseif $activeSlave.vagina > 2>>gaping cunt<<elseif $activeSlave.vagina > 1>>hot cunt<<elseif $activeSlave.vagina > 0>>tight pussy<<else>>virgin pussy<</if>>.
+		<<elseif (random(1,2) == 1) && ($activeSlave.oralSkill >= 100)>>
+		<<if $activeSlave.lips > 40>>huge<<elseif $activeSlave.lips > 20>>pillowlike<<elseif $activeSlave.lips > 10>>pretty<<else>>thin<</if>> lips and throat.
+		<<else>>
+		<<if $activeSlave.anus > 3>>blown-out butthole<<elseif $activeSlave.anus > 2>>roomy anus<<elseif $activeSlave.anus > 1>>big butthole<<elseif $activeSlave.anus > 0>>tight asshole<<else>>virgin backdoor<</if>>.
+		<</if>>
+	<<else>>
+		There is a figurine of $activeSlave.slaveName; she's depicted
+		<<if (random(1,3) == 1) && ($activeSlave.vaginalSkill >= 100)>>
+		lying nude on her back, spreading her legs to <<if $activeSlave.vagina > 3>>exhibit her massive vagina<<elseif $activeSlave.vagina > 2>>show off her gaping cunt<<elseif $activeSlave.vagina > 1>>offer her hot cunt<<elseif $activeSlave.vagina > 0>>display her tight pussy<<else>>tantalize with her virgin pussy<</if>>.
+		<<elseif (random(1,2) == 1) && ($activeSlave.oralSkill >= 100)>>
+		with her <<if $activeSlave.lips > 40>>huge<<elseif $activeSlave.lips > 20>>pillowlike<<elseif $activeSlave.lips > 10>>pretty<<else>>thin<</if>> lips parted, her tongue partway out.
+		<<else>>
+		bending at the waist and spreading her <<if $activeSlave.butt > 6>>gigantic buttocks<<elseif $activeSlave.butt > 4>>meaty asscheeks<<elseif $activeSlave.butt > 2>>healthy buttocks<<else>>cute butt<</if>> to show off her <<if $activeSlave.anus > 3>>blown-out butthole<<elseif $activeSlave.anus > 2>><<elseif $activeSlave.anus > 1>>big butthole<<elseif $activeSlave.anus > 0>>tight asshole<<else>>virgin backdoor<</if>>.
+		<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $brothelAdsSpending >= 5000>>
+	<<if $clubAdsSpending >= 5000>>
+	There's just as much from the similar campaign advertising $brothelName.
+	<<else>>
+	A corner of your desk is piled with sample merchandise from the campaign promoting $brothelName.
+	<</if>>
+	<<set $eventSlaves = []>>
+	<<for _odi = 0; _odi < $slaves.length; _odi++>>
+	<<if ($slaves[_odi].assignment == "work in the brothel") && canWalk($slaves[_odi])>>
+		<<set $eventSlaves.push($slaves[_odi])>>
+	<</if>>
+	<</for>>
+	<<if $eventSlaves.length > 0>>
+	<<set $activeSlave = $eventSlaves.random()>>
+	<<if random(1,2) == 1>>
+		This includes a sex toy based on $activeSlave.slaveName's
+		<<if (random(1,3) == 1) && ($activeSlave.vaginalSkill >= 100)>>
+		<<if $activeSlave.vagina > 3>>massive vagina<<elseif $activeSlave.vagina > 2>>gaping cunt<<elseif $activeSlave.vagina > 1>>hot cunt<<elseif $activeSlave.vagina > 0>>tight pussy<<else>>virgin pussy<</if>>.
+		<<elseif (random(1,2) == 1) && ($activeSlave.oralSkill >= 100)>>
+		<<if $activeSlave.lips > 40>>huge<<elseif $activeSlave.lips > 20>>pillowlike<<elseif $activeSlave.lips > 10>>pretty<<else>>thin<</if>> lips and throat.
+		<<else>>
+		<<if $activeSlave.anus > 3>>blown-out butthole<<elseif $activeSlave.anus > 2>><<elseif $activeSlave.anus > 1>>big butthole<<elseif $activeSlave.anus > 0>>tight asshole<<else>>virgin backdoor<</if>>.
+		<</if>>
+	<<else>>
+		This includes paired figurines of $activeSlave.slaveName with a faceless male figure;
+		<<if (random(1,3) == 1) && ($activeSlave.vaginalSkill >= 100)>>
+		she's shamelessly riding his dick.
+		<<elseif (random(1,2) == 1) && ($activeSlave.oralSkill >= 100)>>
+		she's on her knees with her <<if $activeSlave.lips > 40>>huge<<elseif $activeSlave.lips > 20>>pillowlike<<elseif $activeSlave.lips > 10>>pretty<<else>>thin<</if>> lips wrapped around his dick.
+		<<else>>
+		she's shown <<if $activeSlave.anus > 3>>blown-out butthole<<elseif $activeSlave.anus > 2>>looking up teasingly as she takes his dick up her roomy anus<<elseif $activeSlave.anus > 1>>looking up teasingly as she takes his dick in her big butthole<<elseif $activeSlave.anus > 0>>gasping as she takes his dick in her tight asshole<<else>>screaming as he fucks her virgin backdoor<</if>>.
+		<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Next to your desk is a sturdy black leather couch. All the walls on this floor are glass, so you can see your <<if $slaves.length > 50>>innumerable<<elseif $slaves.length > 20>>many<<elseif $slaves.length > 10>>numerous<<elseif $slaves.length > 5>>handful of<<else>>few<</if>> slaves going about their business. The room is designed so that everyone must walk past the door to your office to get anywhere.
+<<if $personalArms > 0>>
+	Your custom armor rests in the corner of the room where visitors can admire it, and you can don it quickly if necessary.
+	<<if ($week > (43-$nationHate)) && ($mercenaries >= 5)>>
+		Its plates bear scarring won in victorious battle, and from its back rises a banner depicting you at the head of your $mercenariesTitle.
+	<<elseif $week > (43-$nationHate)>>
+		Its plates bear scarring fairly won.
+	<</if>>
+	<<if $assistant > 0>>
+		The last time she had it maintained, $assistantName added
+		<<switch $assistantAppearance>>
+		<<case "monstergirl">>
+			a pinup of herself to its plating: she's depicted with her fangs bared, each strand of her tentacle hair holding a lightning bolt, and both of her cocks ejaculating fire.
+		<<case "shemale">>
+			a pinup of herself to its plating: she's depicted straddling a battle rifle so closely that it looks like she's intimately entangled in the action.
+		<<case "amazon">>
+			a pinup of herself to its plating: she's depicted in a classic nude bodybuilder's pose, but with a cutely coquettish expression.
+		<<case "businesswoman">>
+			a pinup of herself to its plating: she's depicted wearing underwear, for once, and looking very severe as she straddles a cruise missile in a classic bombshell pose.
+		<<case "goddess">>
+			a pinup of herself to its plating: she's depicted demurely but barely covering her radiant body with a flowing ribbon, like a goddess about to burst with triplets.
+		<<case "schoolgirl">>
+			a pinup of herself to its plating: she's depicted up on tiptoe, back turned, with her schoolgirl skirt riding up to bare her bottom.
+		<<default>>
+			her own symbol to its insignia.
+		<</switch>>
+	<</if>>
+<</if>>
+<<if $trinkets.length > 0>>
+There's a display case behind your desk,
+<<if $trinkets.length > 2>>
+	with
+	<<for $i = 0; $i < $trinkets.length; $i++>>
+	<<if $i < $trinkets.length-1>>
+		$trinkets[$i],
+	<<else>>
+		and $trinkets[$i].
+	<</if>>
+	<</for>>
+<<elseif $trinkets.length > 1>>
+	with a couple of items: $trinkets[0], and $trinkets[1].
+<<else>>
+	with a single item: $trinkets[0].
+<</if>>
+<</if>>

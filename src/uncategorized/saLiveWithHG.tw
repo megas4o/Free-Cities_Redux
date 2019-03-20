@@ -1,0 +1,776 @@
+:: SA live with HG [nobr]
+
+<<set $HeadGirl = $slaves[_iTemp]>>
+<<set _oralUse = 0, _analUse = 0, _vaginalUse = 0, _mammaryUse = 0, _penetrativeUse = 0>>
+
+<<if $slaves[$i].devotion > 20>>
+	<<if $HGSlaveSuccess == 1>>
+		looks after your Head Girl $HeadGirl.slaveName domestically and sexually, freeing her to devote more of her time to looking after your other slaves.
+	<<else>>
+		does her best to look after your Head Girl $HeadGirl.slaveName domestically and sexually, but doesn't free up much of her time this week.
+	<</if>>
+<<elseif $slaves[$i].trust < -20>>
+	<<if $HGSlaveSuccess == 1>>
+		obeys Head Girl $HeadGirl.slaveName domestically and sexually, freeing her to devote more of her time to looking after your other slaves.
+	<<else>>
+		tries to look after your Head Girl $HeadGirl.slaveName domestically and sexually, but doesn't free up much of her time this week.
+	<</if>>
+<<else>>
+	<<if $HGSlaveSuccess == 1>>
+		resists Head Girl $HeadGirl.slaveName's domestic and sexual use, but still frees her to devote more of her time to looking after your other slaves.
+	<<else>>
+		resists Head Girl $HeadGirl.slaveName's domestic and sexual use, and doesn't free up much of her time this week.
+	<</if>>
+<</if>>
+
+<<if ($HeadGirl.fetish == "sadist") && ($HeadGirl.fetishStrength > 60) && ($HeadGirl.fetishKnown == 1)>>
+	Since $HeadGirl.slaveName is a sadist, poor $slaves[$i].slaveName lives a life of fear and pain.
+	<<if ($slaves[$i].energy > 95)>>
+		Though it's hard, she manages to find @@.hotpink;sexual satisfaction@@ being a pain slave.
+		<<set $slaves[$i].devotion += 4>>
+		<<set $slaves[$i].need = 0>>
+	<<elseif ($slaves[$i].fetish == "masochist")>>
+		<<if $slaves[$i].fetishKnown == 1>>
+			<<if ($slaves[$i].fetishStrength > 95)>>
+				She finds deep @@.hotpink;sexual satisfaction@@ being a pain slave.
+				<<set $slaves[$i].devotion += 4>>
+			<<else>>
+				This forces her to find solace in @@.lightcoral;deeper masochism.@@
+				<<set $slaves[$i].fetishStrength += 4>>
+			<</if>>
+		<<else>>
+			Oddly enough, she seems to find it enjoyable; @@.lightcoral;she's a natural masochist.@@
+			<<set $slaves[$i].fetishKnown = 1>>
+		<</if>>
+		<<set $slaves[$i].need = 0>>
+	<<elseif ($slaves[$i].devotion < -20)>>
+		This rapidly fills her with @@.mediumorchid;hatred@@ and @@.mediumorchid;fear.@@
+		<<set $slaves[$i].devotion -= 10, $slaves[$i].trust -= 10>>
+	<<elseif ($slaves[$i].devotion > 20)>>
+		This fills her with @@.mediumorchid;bitterness@@ and @@.mediumorchid;fear.@@
+		<<set $slaves[$i].devotion -= 5, $slaves[$i].trust -= 5>>
+	<</if>>
+<<elseif ($slaves[$i].devotion < -20)>>
+	<<if ($slaves[$i].trust >= -20)>>
+		Since she is not yet obedient, $HeadGirl.slaveName @@.gold;punishes@@ her constantly, training her to be a decent assistant or suffer pain.
+		<<set $slaves[$i].trust -= 5>>
+	<<else>>
+		Since she isn't suitably broken into slavery yet, $HeadGirl.slaveName trains her to be @@.hotpink;obediant@@ or suffer pain.
+		<<set $slaves[$i].devotion += 5>>
+	<</if>>
+<<elseif ($slaves[$i].devotion <= 20)>>
+	Since she is not yet well trained, $HeadGirl.slaveName instructs her, @@.hotpink;training@@ her to be a proper assistant.
+	<<set $slaves[$i].devotion += 4>>
+<<elseif ($slaves[$i].devotion <= 50)>>
+	Since she is not yet a devoted slave, $HeadGirl.slaveName works with her, @@.hotpink;training@@ her to be a good assistant.
+	<<set $slaves[$i].devotion += 2>>
+<<else>>
+	Since she is a devoted assistant, $HeadGirl.slaveName @@.hotpink;praises@@ and encourages her.
+	<<set $slaves[$i].devotion += 1>>
+<</if>>
+
+<<if ($HeadGirl.rivalry != 0) && ($HeadGirl.relationshipTarget == $slaves[$i].ID)>>
+	$HeadGirl.slaveName @@.lightgreen;resolves the rivalry@@ between her and $slaves[$i].slaveName, mostly by the expedient of punishing $slaves[$i].slaveName savagely whenever she gives any trouble.
+	<<set $HeadGirl.rivalry = 0, $HeadGirl.rivalryTarget = 0, $slaves[$i].rivalry = 0, $slaves[$i].rivalryTarget = 0>>
+<<elseif ($HeadGirl.relationship == 0)>>
+	<<if $slaves[$i].relation != 0 && $slaves[$i].relationTarget == $HeadGirl.ID>>
+		$HeadGirl.slaveName
+		<<if $HeadGirl.devotion > 95>>
+			is so inured to the perversities of slavery that she @@.hotpink;enjoys@@ the prospect of sexual service from her
+			<<set $HeadGirl.devotion += 1>>
+		<<elseif $HeadGirl.devotion > 60>>
+			is so devoted to you that she accepts the prospect of sexual service from her
+		<<else>>
+			is somewhat @@.mediumorchid;disturbed@@ by the prospect of sexual service from her
+			<<set $HeadGirl.devotion -= 2>>
+		<</if>>
+		<<if $HeadGirl.relation == "twin">>
+			twin.
+		<<elseif $HeadGirl.relation == "sister">>
+			sister.
+		<<elseif $HeadGirl.relation == "mother">>
+			daughter.
+		<<elseif $HeadGirl.relation == "daughter">>
+			mother.
+		<</if>>
+		$slaves[$i].slaveName
+		<<if $slaves[$i].devotion > 95>>
+			is so inured to the perversities of slavery that she @@.hotpink;enjoys@@ the prospect of sexually servicing her
+			<<set $slaves[$i].devotion += 1>>
+		<<elseif $slaves[$i].devotion > 60>>
+			is so devoted to you that she accepts the prospect of sexually servicing her
+		<<elseif $slaves[$i].devotion > 40>>
+			is somewhat @@.mediumorchid;disturbed@@ by the prospect of sexually servicing her
+			<<set $slaves[$i].devotion -= 2>>
+		<<elseif $slaves[$i].devotion > 20>>
+			is @@.mediumorchid;disturbed@@ by the prospect of sexually servicing her
+			<<set $slaves[$i].devotion -= 4>>
+		<<elseif $slaves[$i].devotion >= -20>>
+			is @@.mediumorchid;strongly disturbed@@ by the prospect of sexually servicing her
+			<<set $slaves[$i].devotion -= 5>>
+		<<else>>
+			is @@.mediumorchid;revolted@@ by the prospect of sexually servicing her
+			<<set $slaves[$i].devotion -= 10>>
+		<</if>>
+		<<if $slaves[$i].relation == "twin">>
+			twin.
+		<<elseif $slaves[$i].relation == "sister">>
+			sister.
+		<<elseif $slaves[$i].relation == "mother">>
+			daughter.
+		<<elseif $slaves[$i].relation == "daughter">>
+			mother.
+		<</if>>
+	<</if>>
+	<<if ($slaves[$i].relationship == 0) && ($slaves[$i].devotion > 20)>>
+		$slaves[$i].slaveName sees $HeadGirl.slaveName constantly, and does her best to @@.lightgreen;become her friend.@@
+		<<set $HeadGirl.relationship = 1, $HeadGirl.relationshipTarget = $slaves[$i].ID, $slaves[$i].relationship = 1, $slaves[$i].relationshipTarget = $HeadGirl.ID>>
+	<<elseif ($slaves[$i].relationship == -2) && ($slaves[$i].devotion > 20) && ($slaves[$i].devotion > 50)>>
+		$slaves[$i].slaveName sees $HeadGirl.slaveName so much more than she see you and begins to warm up to her instead of you, @@.lightgreen;becoming her friend.@@
+		<<set $HeadGirl.relationship = 1, $HeadGirl.relationshipTarget = $slaves[$i].ID, $slaves[$i].relationship = 1, $slaves[$i].relationshipTarget = $HeadGirl.ID>>
+	<<elseif ($slaves[$i].relationship != 5) && ($slaves[$i].relationship > 0) && ($slaves[$i].relationshipTarget != $HeadGirl.ID)>>
+		<<set _j = $slaves.findIndex(function(s) { return s.ID == $slaves[$i].relationshipTarget; })>>
+		$slaves[_j].slaveName cannot compete with $HeadGirl.slaveName, and her relationship with the Head Girl's bitch fades.
+		<<set $slaves[$i].relationship = 0, $slaves[$i].relationshipTarget = 0, $slaves[_j].relationship = 0, $slaves[_j].relationshipTarget = 0>>
+	<</if>>
+<<else>>
+	<<if ($HeadGirl.relationshipTarget == $slaves[$i].ID)>>
+		<<set $slaves[$i].trust += 1, $HeadGirl.trust += 1>>
+		<<if $slaves[$i].relationship <= 2>>
+			Since $HeadGirl.slaveName and $slaves[$i].slaveName are already friends, they're @@.mediumaquamarine;thankful@@ to you for allowing it. After a few nights of offering each other sexual comfort, they consider themselves @@.lightgreen;friends with benefits.@@
+			<<set $HeadGirl.relationship = 3, $HeadGirl.relationshipTarget = $slaves[$i].ID>>
+			<<set $slaves[$i].relationship = 3, $slaves[$i].relationshipTarget = $HeadGirl.ID>>
+		<<elseif $slaves[$i].relationship <= 3>>
+			Since $HeadGirl.slaveName and $slaves[$i].slaveName are already lovers, they both @@.hotpink;enjoy@@ living together and are @@.mediumaquamarine;thankful@@ to you for allowing it. After living together for a few days, they draw closer emotionally, too, and consider themselves @@.lightgreen;lovers.@@
+			<<set $HeadGirl.relationship = 4, $HeadGirl.relationshipTarget = $slaves[$i].ID>>
+			<<set $slaves[$i].relationship = 4, $slaves[$i].relationshipTarget = $HeadGirl.ID>>
+		<<elseif $slaves[$i].relationship <= 4>>
+			<<if ($HeadGirl.fetishKnown == 1) && ($HeadGirl.fetishStrength <= 60) && ($HeadGirl.fetish == "sadist") && ($slaves[$i].fetish != "masochist")>>
+				Since their relationship is very abusive, only $HeadGirl.slaveName @@.hotpink;enjoys@@ living together with $slaves[$i].slaveName.
+				<<set $slaves[$i].devotion -= 5, $slaves[$i].trust -= 5>>
+			<<else>>
+				Since $HeadGirl.slaveName and $slaves[$i].slaveName are lovers, they @@.hotpink;enjoy@@ living together.
+			<</if>>
+		<<else>>
+			Since $HeadGirl.slaveName and $slaves[$i].slaveName are slave wives, they @@.hotpink;enjoy@@ living together.
+		<</if>>
+	<</if>>
+<</if>>
+
+<<set $skillIncrease = 10>>
+<<if ($slaves[$i].oralSkill <= 30)>>
+	$HeadGirl.slaveName wants to come home to a talented tongue, so she trains $slaves[$i].slaveName's oral skills.
+	<<OralSkillIncrease $slaves[$i]>>
+<<elseif ($slaves[$i].vagina > 0) && ($slaves[$i].vaginalSkill <= 30)>>
+	$HeadGirl.slaveName wants her personal sex slave to be as skilled with her pussy as possible, so she trains $slaves[$i].slaveName's vaginal skills.
+	<<VaginalSkillIncrease $slaves[$i]>>
+<<elseif ($slaves[$i].anus > 0) && ($slaves[$i].analSkill <= 30)>>
+	$HeadGirl.slaveName wants her personal sex slave to be a skillful backdoor whore, so she trains $slaves[$i].slaveName's anal skills.
+	<<AnalSkillIncrease $slaves[$i]>>
+<<elseif ($slaves[$i].entertainSkill <= 10)>>
+	$HeadGirl.slaveName wants to be kept amused in her occasional free time, so she trains $slaves[$i].slaveName's entertainment skills.
+	<<EntertainSkillIncrease $slaves[$i]>>
+<<elseif ($slaves[$i].sexualFlaw != "none")>>
+	$HeadGirl.slaveName is annoyed by $slaves[$i].slaveName's sexual flaws, so she @@.green;trains@@ her out of them.
+	<<set $slaves[$i].sexualFlaw = "none">>
+<<elseif ($slaves[$i].behavioralFlaw != "none")>>
+	$HeadGirl.slaveName is irritated by $slaves[$i].slaveName's flaws, so she @@.green;trains@@ her out of them.
+	<<set $slaves[$i].behavioralFlaw = "none">>
+<</if>>
+
+<<if canPenetrate($HeadGirl)>>
+	<<if canDoVaginal($slaves[$i])>>
+		<<if ($slaves[$i].vagina == 0)>>
+			$HeadGirl.slaveName @@.hotpink;loves@@ @@.lime;taking@@ $slaves[$i].slaveName's virginity, and spends much of the week ogling her conquest complacently.
+			<<set $slaves[$i].vagina = 1, $HeadGirl.devotion += 4>>
+		<<elseif ($slaves[$i].vagina == 1)>>
+			<<if ($HeadGirl.dick > 4) && ($HeadGirl.energy > 95)>>
+				$HeadGirl.slaveName has such a ferocious sex drive and such a big dick that her constant pounding of $slaves[$i].slaveName @@.lime;loosens@@ the poor girl's pussy.
+				<<set $slaves[$i].vagina += 1>>
+			<<elseif ($HeadGirl.dick > 5)>>
+				Serving $HeadGirl.slaveName's monster cock @@.lime;loosens@@ $slaves[$i].slaveName's pussy.
+				<<set $slaves[$i].vagina += 1>>
+			<</if>>
+		<<elseif ($slaves[$i].vagina == 2)>>
+			<<if ($HeadGirl.dick > 5) && ($HeadGirl.energy > 95)>>
+				$HeadGirl.slaveName has such a ferocious sex drive and such a monster cock that her constant pounding of $slaves[$i].slaveName @@.lime;loosens@@ the poor girl's pussy.
+				<<set $slaves[$i].vagina += 1>>
+			<</if>>
+		<<elseif ($slaves[$i].vagina == 3)>>
+			<<if ($HeadGirl.dick > 5) && ($HeadGirl.energy > 95) && random(1,100) > 80>>
+				$HeadGirl.slaveName has such a ferocious sex drive and such a monster cock that her constant pounding of $slaves[$i].slaveName's loose pussy inevitably leaves it @@.lime;gaping.@@
+				<<set $slaves[$i].vagina += 1>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if canDoAnal($slaves[$i])>>
+		<<if ($slaves[$i].anus == 0)>>
+			$HeadGirl.slaveName @@.hotpink;relishes@@ @@.lime;taking@@ $slaves[$i].slaveName's anal virginity, and spends much of the week groping her conquest's rear end possessively.
+			<<set $slaves[$i].anus = 1, $HeadGirl.devotion += 4>>
+		<<elseif ($slaves[$i].anus == 1)>>
+			<<if ($HeadGirl.dick > 4) && ($HeadGirl.energy > 95)>>
+				$HeadGirl.slaveName uses $slaves[$i].slaveName's anus to vent her sexual addiction. Constant assrape from such a huge dick @@.lime;loosens@@ her sphincter.
+				<<set $slaves[$i].anus += 1>>
+			<<elseif ($HeadGirl.dick > 5)>>
+				Taking $HeadGirl.slaveName's monster cock up the butt @@.lime;loosens@@ $slaves[$i].slaveName's anal sphincter.
+				<<set $slaves[$i].anus += 1>>
+			<</if>>
+		<<elseif ($slaves[$i].anus == 2)>>
+			<<if ($HeadGirl.dick > 5) && ($HeadGirl.energy > 95)>>
+				$HeadGirl.slaveName uses $slaves[$i].slaveName's anus to vent her sexual addiction. Constant assrape from the Head Girl's monster cock @@.lime;loosens@@ her sphincter.
+				<<set $slaves[$i].anus += 1>>
+			<</if>>
+		<<elseif ($slaves[$i].anus == 3)>>
+			<<if ($HeadGirl.dick > 5) && ($HeadGirl.energy > 95) && random(1,100) > 80>>
+				$HeadGirl.slaveName uses $slaves[$i].slaveName's loose anus to vent her sexual addiction. Constant assrape from the Head Girl's monster cock eventually leaves it @@.lime;gaping.@@
+				<<set $slaves[$i].anus += 1>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if ($HeadGirl.fetish == "pregnancy") && canImpreg($slaves[$i], $HeadGirl)>>
+	$HeadGirl.slaveName promptly @@.lime;impregnates@@
+	<<if $HeadGirl.fetishKnown == 1>>
+		$slaves[$i].slaveName, to your Head Girl's considerable @@.hotpink;satisfaction.@@
+		<<set $HeadGirl.devotion += 4>>
+	<<else>>
+		$slaves[$i].slaveName. Her eagerness completely exposes her hidden @@.lightcoral;pregnancy kink.@@
+		<<set $HeadGirl.fetishKnown = 1>>
+	<</if>>
+	<<set $slaves[$i].preg = 1, $slaves[$i].pregSource = $HeadGirl.ID>>
+	<<SetPregType $slaves[$i]>>
+	<<if ($HeadGirl.fetishStrength > 70) && canImpreg($HeadGirl, $slaves[$i])>>
+		Unsuprisingly, she gives in to her own cravings and takes $slaves[$i].slaveName's loads until she @@.lime;gets pregnant@@ too.
+		<<set $HeadGirl.preg = 1, $HeadGirl.pregSource = $slaves[$i].ID>>
+		<<SetPregType $HeadGirl>>
+	<</if>>
+<<elseif ($HeadGirl.fetish == "pregnancy") && canImpreg($HeadGirl, $slaves[$i]) && ($HeadGirl.fetishStrength > 70)>>
+	$HeadGirl.slaveName promptly @@.lime;knocks herself up@@ with $slaves[$i].slaveName's
+	<<if $HeadGirl.fetishKnown == 1>>
+		seed, to your Head Girl's considerable @@.hotpink;satisfaction.@@
+		<<set $HeadGirl.devotion += 4>>
+	<<else>>
+		seed. Her @@.hotpink;pride@@ over her new pregnancy and eagerness to get pregnant completely exposes her hidden, and powerful, @@.lightcoral;pregnancy fetish.@@
+		<<set $HeadGirl.fetishKnown = 1, $HeadGirl.devotion += 4>>
+	<</if>>
+	<<set $HeadGirl.preg = 1, $HeadGirl.pregSource = $slaves[$i].ID>>
+	<<SetPregType $HeadGirl>>
+<</if>>
+
+<<if ($slaves[$i].devotion > 50)>>
+	<<if (($slaves[$i].fetishStrength <= 95) || ($slaves[$i].fetishKnown == 0)) && ($HeadGirl.fetishKnown == 1) && ($HeadGirl.fetishStrength > 60) && ($slaves[$i].fetish != $HeadGirl.fetish) && ($slaves[$i].fetish != "mindbroken")>>
+		<<if ($HeadGirl.fetish == "submissive")>>
+			$slaves[$i].slaveName slowly gets used to $HeadGirl.slaveName's need to be sexually dominated, and begins to @@.pink;enjoy being a top@@ within the confines of the suite.
+			<<set $slaves[$i].fetish = "dom", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+		<<elseif ($HeadGirl.fetish == "dom")>>
+			<<if ($slaves[$i].fetish != "submissive") || ($slaves[$i].fetish == 0)>>
+				$slaves[$i].slaveName slowly gets used to being tied up and fucked regularly, and accepts that it's how $HeadGirl.slaveName sexual attraction to her expresses itself. She begins to @@.pink;enjoy being a sub,@@ especially for $HeadGirl.slaveName.
+				<<set $slaves[$i].fetish = "submissive", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+			<</if>>
+		<<elseif ($HeadGirl.fetish == "boobs")>>
+			$HeadGirl.slaveName lavishes so much attention on $slaves[$i].slaveName's boobs that $slaves[$i].slaveName really starts to @@.pink;fetishize tits@@ too.
+			<<set $slaves[$i].fetish = "boobs", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+		<<elseif ($HeadGirl.fetish == "pregnancy")>>
+			$slaves[$i].slaveName and $HeadGirl.slaveName spend so much time talking about pregnancy and fertility $slaves[$i].slaveName really starts to @@.pink;fetishize pregnancy@@ too.
+			<<set $slaves[$i].fetish = "pregnancy", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+		<<elseif ($HeadGirl.fetish == "cumslut")>>
+			$slaves[$i].slaveName participates in enough of $HeadGirl.slaveName's cum games that she can't help but @@.pink;enjoy oral sex@@ herself.
+			<<set $slaves[$i].fetish = "cumslut", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+		<<elseif ($HeadGirl.fetish == "humiliation")>>
+			$slaves[$i].slaveName has so much public sex with $HeadGirl.slaveName that she really starts to @@.pink;enjoy humiliation@@ herself.
+			<<set $slaves[$i].fetish = "humiliation", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+		<<elseif ($HeadGirl.fetish == "buttslut")>>
+			<<if canDoAnal($slaves[$i])>>
+				$slaves[$i].slaveName takes $HeadGirl.slaveName's <<if canPenetrate($HeadGirl)>>dick<<else>>strap-on and dildos<</if>> up her poor anus so often that she starts to @@.pink;enjoy buttsex@@ herself.
+			<<else>>
+				$HeadGirl.slaveName lavishes so much attention on $slaves[$i].slaveName's butt, since she can't use it, that $slaves[$i].slaveName really starts to @@.pink;fetishize rears@@ too.
+			<</if>>
+			<<set $slaves[$i].fetish = "buttslut", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+		<<elseif ($HeadGirl.fetish == "masochist")>>
+			<<if ($slaves[$i].fetish != "submissive") || ($slaves[$i].fetish == 0)>>
+				$slaves[$i].slaveName is initially shocked to be asked to cause $HeadGirl.slaveName pain, but she slowly begins to understand the honestly sexual nature of the arrangement. She starts to @@.pink;enjoy causing pain,@@ since $HeadGirl.slaveName is clearly enjoying it so much.
+				<<set $slaves[$i].fetish = "sadist", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+			<</if>>
+		<<else>>
+			$slaves[$i].slaveName often takes $HeadGirl.slaveName's <<if canPenetrate($HeadGirl)>>dick<<else>>strap-on<</if>> in the missionary position, after some light foreplay and before bed; she honestly enjoys the respectful lovemaking, and begins to @@.pink;enjoy vanilla sex@@ herself.
+			<<set $slaves[$i].fetish = "none", $slaves[$i].fetishKnown = 1, $slaves[$i].fetishStrength = 10>>
+		<</if>>
+	<</if>>
+	<<if ($HeadGirl.attrKnown == 1)>>
+		<<if ($HeadGirl.attrXX > 85) && ($slaves[$i].attrXX > 65) && ($slaves[$i].attrXX <= 85)>>
+			$slaves[$i].slaveName and $HeadGirl.slaveName spend so much time giggling over which of your other slaves they think is prettiest (typically followed by giggling sex) that $slaves[$i].slaveName really starts to @@.green;fetishize girls@@ too.
+			<<set $slaves[$i].attrXX += 2, $slaves[$i].attrKnown = 1>>
+		<</if>>
+		<<if ($HeadGirl.attrXY > 85) && ($slaves[$i].attrXY > 65) && ($slaves[$i].attrXY <= 85)>>
+			$slaves[$i].slaveName and $HeadGirl.slaveName have so much fun debating which male citizens and slave dickgirls are cutest (typically followed by <<if canDoAnal($slaves[$i]) || canDoVaginal($slaves[$i])>>$HeadGirl.slaveName banging her girltoy <<if canPenetrate($HeadGirl)>>with a strap-on<<else>>senseless<</if>><<else>>giggling sex<</if>>) that $slaves[$i].slaveName really starts to @@.green;fetishize boys@@ too.
+			<<set $slaves[$i].attrXY += 2, $slaves[$i].attrKnown = 1>>
+		<</if>>
+		<<if ($HeadGirl.energy > 95) && ($slaves[$i].energy <= 95)>>
+			$slaves[$i].slaveName has so much fun sex with $HeadGirl.slaveName that @@.green;her sex drive is slowly enhanced.@@
+			<<set $slaves[$i].energy += 2>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if ($HeadGirl.fetishKnown == 1)>>
+	<<if ($HeadGirl.energy > 95)>>
+		$slaves[$i].slaveName spends a lot of time getting fucked in whichever hole $HeadGirl.slaveName decides to shove her <<if canPenetrate($HeadGirl)>>dick<<else>>strap-on<</if>> into next.
+		<<set _oralUse += 5>>
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse += 5>>
+		<<elseif $slaves[$i] >= 500>>
+			<<set _mammaryUse += 5>>
+		<<else>>
+			<<set _oralUse += 5>>
+		<</if>>
+		<<if ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+			<<set _vaginalUse += 5>>
+		<<elseif canDoAnal($slaves[$i])>>
+			<<set _analUse += 5>>
+		<<else>>
+			<<set _oralUse += 5>>
+		<</if>>
+		<<set $HeadGirl.penetrativeCount += 15, $penetrativeTotal += 15>>
+	<<elseif ($HeadGirl.fetish == "submissive")>>
+		$HeadGirl.slaveName walks a fine line with $slaves[$i].slaveName. They work out a sexual life in which $HeadGirl.slaveName is in charge, but $slaves[$i].slaveName takes the sexual lead: $slaves[$i].slaveName serves her superior by taking her firmly.
+		<<set _oralUse += 4>>
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<elseif $slaves[$i] >= 500>>
+			<<set _mammaryUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<if ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+			<<set _vaginalUse += 3>>
+		<<elseif canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<set $HeadGirl.penetrativeCount += 10, $penetrativeTotal += 10>>
+	<<elseif ($HeadGirl.fetish == "dom")>>
+		$slaves[$i].slaveName serves $HeadGirl.slaveName as her sexual and moral inferior, taking the Head Girl's <<if canPenetrate($HeadGirl)>>dick<<else>>strap-on<</if>> in all her holes. Though it isn't necessary with such an obedient partner, $slaves[$i].slaveName is often tied up for use.
+		<<set _oralUse += 4>>
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<elseif $slaves[$i] >= 500>>
+			<<set _mammaryUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<if ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+			<<set _vaginalUse += 3>>
+		<<elseif canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<set $HeadGirl.penetrativeCount += 10, $penetrativeTotal += 10>>
+	<<elseif ($HeadGirl.fetish == "humiliation")>>
+		$HeadGirl.slaveName is such an exhibitionist that $slaves[$i].slaveName finds herself taking $HeadGirl.slaveName's <<if canPenetrate($HeadGirl)>>dick<<else>>strap-on<</if>> in public quite often.
+		<<set _oralUse += 4>>
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<elseif $slaves[$i] >= 500>>
+			<<set _mammaryUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<if ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+			<<set _vaginalUse += 3>>
+		<<elseif canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<set $HeadGirl.penetrativeCount += 10, $penetrativeTotal += 10>>
+	<<elseif ($HeadGirl.fetish == "boobs")>>
+		$HeadGirl.slaveName is such a boob fetishist that $slaves[$i].slaveName sometimes wonders whether $HeadGirl.slaveName thinks there are four clits in the suite: the four nipples between the two of them.
+		<<set _oralUse += 4>>
+		<<set _mammaryUse += 6>>
+		<<set $HeadGirl.mammaryCount += 10, $mammaryTotal += 10>>
+	<<elseif ($HeadGirl.fetish == "buttslut")>>
+		$HeadGirl.slaveName takes a dominant sexual role with $slaves[$i].slaveName; she indulges her <<if canDoAnal($slaves[$i])>>anal addiction by constantly buttfucking $slaves[$i].slaveName<<else>>ass obsession by constantly molesting and using $slaves[$i].slaveName's buttcheeks as a sex toy<</if>> while wearing a vibrating plug herself.
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse += 10>>
+			<<set $HeadGirl.penetrativeCount += 10, $penetrativeTotal += 10>>
+		<</if>>
+	<<elseif ($HeadGirl.fetish == "cumslut")>>
+		$HeadGirl.slaveName takes a dominant sexual role with $slaves[$i].slaveName; she indulges her oral fixation with constant oral sex. She certainly applies her mouth to $slaves[$i].slaveName when she gets the chance, but $slaves[$i].slaveName does most of the sucking.
+		<<set _oralUse += 20>>
+		<<set $HeadGirl.oralCount += 10, $oralTotal += 10>>
+		<<set $HeadGirl.penetrativeCount += 10, $penetrativeTotal += 10>>
+	<<elseif ($HeadGirl.fetish == "masochist")>>
+		$HeadGirl.slaveName carefully structures her sexual games with $slaves[$i].slaveName to gratify her deep need to be physically hurt during sex without damaging her leadership. Usually, $slaves[$i].slaveName tortures $HeadGirl.slaveName until she's quite sated, and then takes a rough <<if canDoAnal($slaves[$i])>>buttfuck<<else>>facefucking<</if>> from the aroused $HeadGirl.slaveName's <<if canPenetrate($HeadGirl)>>dick<<else>>strap-on<</if>> to restore their relative positions.
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse += 10>>
+		<<else>>
+			<<set _oralUse += 10>>
+		<</if>>
+		<<set $HeadGirl.penetrativeCount += 10, $penetrativeTotal += 10>>
+	<<elseif ($HeadGirl.attrXX > 65)>>
+		$HeadGirl.slaveName expects $slaves[$i].slaveName to be girlish sexually, and $slaves[$i].slaveName spends a lot of time on her knees.
+		<<set _oralUse += 6>>
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse++>>
+		<<elseif $slaves[$i] >= 500>>
+			<<set _mammaryUse++>>
+		<<else>>
+			<<set _oralUse++>>
+		<</if>>
+		<<if ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+			<<set _vaginalUse++>>
+		<<elseif canDoAnal($slaves[$i])>>
+			<<set _analUse++>>
+		<<else>>
+			<<set _oralUse++>>
+		<</if>>
+		<<set $HeadGirl.penetrativeCount += 8, $penetrativeTotal += 8>>
+	<<else>>
+		$HeadGirl.slaveName takes a dominant sexual role with $slaves[$i].slaveName, mostly getting oral<<if canPenetrate($HeadGirl) && (canDoVaginal($slaves[$i]) || canDoAnal($slaves[$i]))>> and fucking her in the missionary position<<elseif $slaves[$i] >= 300>> and molesting her breasts<</if>>.
+		<<set _oralUse += 4>>
+		<<if canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<elseif $slaves[$i] >= 300>>
+			<<set _mammaryUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<if ($slaves[$i].vagina > 0) && canDoVaginal($slaves[$i])>>
+			<<set _vaginalUse += 3>>
+		<<elseif canDoAnal($slaves[$i])>>
+			<<set _analUse += 3>>
+		<<elseif $slaves[$i] >= 300>>
+			<<set _mammaryUse += 3>>
+		<<else>>
+			<<set _oralUse += 3>>
+		<</if>>
+		<<set $HeadGirl.penetrativeCount += 10, $penetrativeTotal += 10>>
+	<</if>>
+<</if>>
+
+<<set $slaves[$i].oralCount += _oralUse, $oralTotal += _oralUse>>
+<<set $slaves[$i].analCount += _analUse, $analTotal += _analUse>>
+<<set $slaves[$i].vaginalCount += _vaginalUse, $vaginalTotal += _vaginalUse>>
+<<set $slaves[$i].mammaryCount += _mammaryUse, $mammaryTotal += _mammaryUse>>
+<<set $slaves[$i].penetrativeCount += _penetrativeUse, $mammaryTotal += _penetrativeUse>>
+
+<<if $slaves[$i].need>>
+<<if $slaves[$i].fetishKnown>>
+	<<switch $slaves[$i].fetish>>
+	<<case "submissive" "masochist">>
+		<<if _analUse+_vaginalUse > 0>>
+			Being someone's submissive toy really satisfies $slaves[$i].slaveName.
+			<<set $slaves[$i].need = 0>>
+		<</if>>
+	<<case "dom" "sadist">>
+		<<if _penetrativeUse > 0>>
+			Getting to be on top is precious, and it really satisfies $slaves[$i].slaveName.
+			<<set $slaves[$i].need = 0>>
+		<</if>>
+	<<case "cumslut">>
+		<<if _oralUse > 0>>
+			Being someone's oral toy really satisfies $slaves[$i].slaveName.
+			<<set $slaves[$i].need = 0>>
+		<</if>>
+	<<case "buttslut">>
+		<<if _analUse > 0>>
+			Having her butthole serve as someone's toy really satisfies $slaves[$i].slaveName.
+			<<set $slaves[$i].need = 0>>
+		<</if>>
+	<<case "pregnancy">>
+		<<if _vaginalUse > 0>>
+			Having her pussy serve as someone's toy really satisfies $slaves[$i].slaveName.
+			<<set $slaves[$i].need = 0>>
+		<</if>>
+	<<case "humiliation">>
+		Having all the other slaves see her in such a humiliating role really satisfies $slaves[$i].slaveName.
+		<<set $slaves[$i].need = 0>>
+	<</switch>>
+<</if>>
+<</if>>
+
+<<set $HeadGirl.need = 0>>
+
+<<if ($HeadGirl.fetishKnown == 1)>>
+	<<if ($HeadGirl.energy > 95)>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName naked so she doesn't have to waste any time tearing her clothes off.
+		<<set $slaves[$i].clothes = "no clothing">>
+	<<elseif ($HeadGirl.fetish == "submissive")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName dressed up in slutty power clothing, since she's attracted to competence.
+		<<set $slaves[$i].clothes = "slutty business attire">>
+	<<elseif ($HeadGirl.fetish == "masochist")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName in battledress, since she likes the fantasy of being raped by a soldier girl.
+		<<set $slaves[$i].clothes = "battledress">>
+	<<elseif ($HeadGirl.fetish == "dom")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName dressed up as a schoolgirl to infantilize her sub.
+		<<set $slaves[$i].clothes = "a schoolgirl outfit">>
+	<<elseif ($HeadGirl.fetish == "boobs")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName wearing a string bikini, since she likes seeing those tits.
+		<<set $slaves[$i].clothes = "a string bikini">>
+	<<elseif ($HeadGirl.fetish == "cumslut")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName in restrictive latex, because she likes how it draws attention to her mouth.
+		<<set $slaves[$i].clothes = "restrictive latex">>
+	<<elseif ($HeadGirl.fetish == "humiliation")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName in humiliating bondage gear, because she likes to see others blush, too.
+		<<set $slaves[$i].clothes = "uncomfortable straps">>
+	<<elseif ($HeadGirl.fetish == "sadist")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName in humiliating bondage gear, because it can easily be tightened to cause considerable anguish.
+		<<set $slaves[$i].clothes = "uncomfortable straps">>
+	<<elseif ($HeadGirl.fetish == "buttslut")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName wearing nothing but slutty bangles, since she likes dressing her up but wants that butt bare.
+		<<set $slaves[$i].clothes = "slutty jewelry">>
+	<<elseif ($HeadGirl.fetish == "pregnancy") && ($slaves[$i].preg <= 10) && ($clothesBoughtBelly == 1 || $cheatMode == 1)>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName wearing an empathy belly, since she likes her girls with a bun in the oven.
+		<<set $slaves[$i].bellyAccessory = "a large empathy belly">>
+	<<elseif ($HeadGirl.fetish == "pregnancy")>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName dressed as a slutty maid, since she wants her to look motherly yet fuckable while she fantasizes about putting a bun in her oven.
+		<<set $slaves[$i].clothes = "a slutty maid outfit">>
+	<<elseif ($HeadGirl.attrXX > 85)>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName wearing nice lingerie, since girls and girliness turn her on.
+		<<set $slaves[$i].clothes = "attractive lingerie">>
+	<<elseif ($HeadGirl.attrXY > 85) && ($slaves[$i].dick > 0)>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName wearing slutty netting with a hole for her dick to stick through, since she likes it bare.
+		<<set $slaves[$i].clothes = "clubslut netting">>
+	<<else>>
+		$HeadGirl.slaveName keeps $slaves[$i].slaveName dressed as a slutty maid, since she likes seeing her body as she looks after their suite.
+		<<set $slaves[$i].clothes = "a slutty maid outfit">>
+	<</if>>
+<<else>>
+	$HeadGirl.slaveName keeps $slaves[$i].slaveName dressed as a slutty maid, since she likes seeing her body as she looks after their suite.
+	<<set $slaves[$i].clothes = "a slutty maid outfit">>
+<</if>>
+<<set $slaves[$i].devotion += 1>>
+
+<<if $HeadGirl.energy > 95>>
+	<<if $HeadGirl.origHColor != "bald" && $HeadGirl.hLength > 0>>
+		<<if $slaves[$i].origHColor != "bald">>
+			<<if !hasHColorRule($slaves[$i],$defaultRules)>>
+				<<if ($slaves[$i].hColor != $HeadGirl.hColor)>>
+					$HeadGirl.slaveName dyes $slaves[$i].slaveName's hair $HeadGirl.hColor, just like her own, since with nymphomania comes narcissism.
+					<<set $slaves[$i].hColor = $HeadGirl.hColor>>
+				<</if>>
+			<</if>>
+			<<if !hasHStyleRule($slaves[$i],$defaultRules)>>
+				<<if ($slaves[$i].hStyle != $HeadGirl.hStyle)>>
+					$HeadGirl.slaveName styles $slaves[$i].slaveName's hair just like her own, since with nymphomania comes narcissism.
+					<<set $slaves[$i].hStyle = $HeadGirl.hStyle>>
+					<<set $slaves[$i].hLength = $HeadGirl.hLength>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if !hasHColorRule($slaves[$i],$defaultRules)>>
+				<<if ($slaves[$i].hColor != $HeadGirl.hColor)>>
+					$HeadGirl.slaveName changes $slaves[$i].slaveName's wig to $HeadGirl.hColor, just like her own hair, since with nymphomania comes narcissism.
+					<<set $slaves[$i].hColor = $HeadGirl.hColor>>
+				<</if>>
+			<</if>>
+			<<if !hasHStyleRule($slaves[$i],$defaultRules)>>
+				<<if ($slaves[$i].hStyle != $HeadGirl.hStyle)>>
+					$HeadGirl.slaveName changes $slaves[$i].slaveName's wig style to look just like her own hair, since with nymphomania comes narcissism.
+					<<set $slaves[$i].hStyle = $HeadGirl.hStyle>>
+					<<set $slaves[$i].hLength = $HeadGirl.hLength>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $slaves[$i].origEye == "none">>
+		<<if !hasEyeColorRule($slaves[$i],$defaultRules)>>
+			<<if ($slaves[$i].eyeColor != $HeadGirl.eyeColor)>>
+				<<set $slaves[$i].eyeColor = $HeadGirl.eyeColor>>
+				$HeadGirl.slaveName gives $slaves[$i].slaveName $slaves[$i].eyeColor glass eyes, to match her own eyes, since with nymphomania comes narcissism.
+			<</if>>
+		<</if>>
+	<<elseif $slaves[$i].origEye == "implant">>
+		<<if !hasEyeColorRule($slaves[$i],$defaultRules)>>
+			<<if ($slaves[$i].eyeColor != $HeadGirl.eyeColor)>>
+				<<set $slaves[$i].eyeColor = $HeadGirl.eyeColor>>
+				$HeadGirl.slaveName changes $slaves[$i].slaveName $slaves[$i].eyeColor eye lenses, to match her own eyes, since with nymphomania comes narcissism.
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if !hasEyeColorRule($slaves[$i],$defaultRules)>>
+			<<if ($slaves[$i].eyeColor != $HeadGirl.eyeColor)>>
+				<<set $slaves[$i].eyeColor = $HeadGirl.eyeColor>>
+				$HeadGirl.slaveName gives $slaves[$i].slaveName $slaves[$i].eyeColor contact lenses, to match her own eyes, since with nymphomania comes narcissism.
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].weight > 30) && ($slaves[$i].diet != "restricted")>>
+	$HeadGirl.slaveName puts $slaves[$i].slaveName on a diet.
+	<<set $slaves[$i].diet = "restricted">>
+<<elseif ($slaves[$i].weight < -10) && ($slaves[$i].diet != "fattening")>>
+	$HeadGirl.slaveName puts $slaves[$i].slaveName on a fattening diet.
+	<<set $slaves[$i].diet = "fattening">>
+<<elseif ($slaves[$i].muscles <= 95) && ($arcologies[0].FSPhysicalIdealist > 0) && ($slaves[$i].amp != 1) && ($slaves[$i].diet != "muscle building")>>
+	$HeadGirl.slaveName wants to support your societal goals, so she makes $slaves[$i].slaveName work out hard.
+	<<set $slaves[$i].diet = "muscle building">>
+<<elseif ($slaves[$i].muscles <= 95) && ($HeadGirl.fetish == "submissive") && ($HeadGirl.fetishKnown == 1) && ($slaves[$i].amp != 1) && ($slaves[$i].diet != "muscle building")>>
+	$HeadGirl.slaveName wants a strong girl in bed with her, so she makes $slaves[$i].slaveName work out hard.
+	<<set $slaves[$i].diet = "muscle building">>
+<<elseif ($slaves[$i].muscles <= 95) && ($HeadGirl.fetish == "masochist") && ($HeadGirl.fetishKnown == 1) && ($slaves[$i].amp != 1) && ($slaves[$i].diet != "muscle building")>>
+	$HeadGirl.slaveName wants a strong girl to spank her, so she makes $slaves[$i].slaveName work out hard.
+	<<set $slaves[$i].diet = "muscle building">>
+<<elseif ($slaves[$i].muscles <= 5) && ($slaves[$i].amp != 1) && ($slaves[$i].diet != "muscle building")>>
+	$HeadGirl.slaveName likes a bit of muscle, so she makes $slaves[$i].slaveName work out hard.
+	<<set $slaves[$i].diet = "muscle building">>
+<<elseif ($slaves[$i].diet != "healthy")>>
+	<<set $slaves[$i].diet = "healthy">>
+<</if>>
+
+<<if $HGSuiteHormones != 0 && $slaves[$i].hormones != 2>>
+	$HeadGirl.slaveName puts $slaves[$i].slaveName on intensive female hormones, since she expects her to act as the submissive, feminine partner.
+	<<set $slaves[$i].hormones = 2>>
+<</if>>
+
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<set $HGTastes = 1>>
+<<elseif $arcologies[0].FSBodyPurist != "unset">>
+	<<set $HGTastes = 1>>
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	<<set $HGTastes = 3>>
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	<<set $HGTastes = 3>>
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	<<set $HGTastes = 3>>
+<<else>>
+	<<set $HGTastes = 2>>
+<</if>>
+
+<<if $HGSuiteDrugs != 0>>
+	<<if ($slaves[$i].health < 60)>>
+		$HeadGirl.slaveName gives $slaves[$i].slaveName curatives, since she wants a shiningly healthy living partner.
+		<<set $slaves[$i].curatives = 2>>
+	<</if>>
+	<<if ($slaves[$i].lips <= 20)>>
+		$HeadGirl.slaveName gives $slaves[$i].slaveName lip injections, since she wants to get oral from plump, luscious lips.
+		<<set $slaves[$i].drugs = "lip injections">>
+	<<elseif ($HeadGirl.fetishKnown == 1) && ($HeadGirl.fetish == "buttslut") && ($slaves[$i].butt < 8)>>
+		$HeadGirl.slaveName gives $slaves[$i].slaveName ass injections, since she likes comfortable padding as she fucks a butt.
+		<<set $slaves[$i].drugs = "butt injections">>
+	<<elseif ($HeadGirl.fetishKnown == 1) && ($HeadGirl.fetish == "boobs") && ($slaves[$i].boobs < 8000)>>
+		$HeadGirl.slaveName gives $slaves[$i].slaveName tit injections, since as far as she's concerned there's no such thing as too much boob.
+		<<set $slaves[$i].drugs = "breast injections">>
+	<<elseif $HGTastes > 1>>
+		<<if ($slaves[$i].lips <= 70)>>
+			$HeadGirl.slaveName gives $slaves[$i].slaveName lip injections, since she thinks $slaves[$i].slaveName should have lips so big she can barely speak.
+			<<set $slaves[$i].drugs = "lip injections">>
+		<<elseif ($slaves[$i].butt < $slaves[$i].boobs/1000)>>
+			$HeadGirl.slaveName gives $slaves[$i].slaveName ass injections, since she loves curves and thinks $slaves[$i].slaveName's butt needs the most work.
+			<<set $slaves[$i].drugs = "butt injections">>
+		<<else>>
+			$HeadGirl.slaveName gives $slaves[$i].slaveName boob injections, since she loves curves and thinks $slaves[$i].slaveName's tits need the most work.
+			<<set $slaves[$i].drugs = "breast injections">>
+		<</if>>
+	<<else>>
+		<<set $slaves[$i].drugs = "none">>
+	<</if>>
+<<else>>
+	<<if ($slaves[$i].health < 100)>>
+		$HeadGirl.slaveName gives $slaves[$i].slaveName curatives, since her assistant could be healthier.
+		<<set $slaves[$i].curatives = 2>>
+	<</if>>
+<</if>>
+
+<<if $HGSuiteSurgery != 0>>
+	<<if ($slaves[$i].health > 40) && $arcologies[0].FSBodyPurist == "unset">>
+		$HeadGirl.slaveName sends $assistantName notes on what surgical modifications she wants for $slaves[$i].slaveName.
+		<<include "Rules Autosurgery">>
+	<</if>>
+	<<if $HeadGirl.fetishKnown == 1>>
+		<<if ($HeadGirl.fetish == "sadist") && ($HeadGirl.fetishStrength > 95) && ($seeExtreme == 1) && ($slaves[$i].fetish != "mindbroken")>>
+			<<if ($slaves[$i].health > 40)>>
+				<<if ($slaves[$i].amp != 1) && ($slaves[$i].devotion < -20)>>
+					$HeadGirl.slaveName decides to extract the ultimate in sadistic pleasure from $slaves[$i].slaveName, and directs the autosurgery to @@.red;amputate her arms and legs.@@ She carefully describes the entire process to the sobbing slave @@.gold;in minute detail@@ before allowing her to be sedated.
+					<<set $slaves[$i].devotion -= 20, $slaves[$i].trust -= 20, $slaves[$i].health -= 40, $slaves[$i].amp = 1>>
+				<</if>>
+				<<if ($slaves[$i].balls > 0) && ($slaves[$i].devotion <= 50)>>
+					$HeadGirl.slaveName decides to have some once-only sadistic pleasure, and carefully straps $slaves[$i].slaveName into the surgery until she's completely immobile. $HeadGirl.slaveName situates a mirror so the terrified girl can see her own crotch, gets behind her, and carefully sodomizes her during the entire process of @@.red;castration.@@ $slaves[$i].slaveName is anesthetized down there and can't feel the brutal anal rape, but her abuser orgasms repeatedly to her @@.gold;weeping at the sight of being gelded and raped at once.@@
+					<<set $slaves[$i].devotion -= 20, $slaves[$i].trust -= 20, $slaves[$i].health -= 20, $slaves[$i].balls = 0>>
+				<</if>>
+			<</if>>
+			<<if ($slaves[$i].devotion < -90) && ($slaves[$i].fetish != "mindbroken")>>
+				$HeadGirl.slaveName tires of $slaves[$i].slaveName's protests that $HeadGirl.slaveName is a monster for hurting her this way and her complaints that she deserves better. $HeadGirl.slaveName decides that it'll be just as much fun and a lot less trouble to mistreat $slaves[$i].slaveName once she's mindbroken, and sends her in for @@.red;chemical lobotomization.@@
+				<<set $slaves[$i].health -= 20, $slaves[$i].fetish = "mindbroken">>
+			<</if>>
+		<<elseif ($HeadGirl.fetish == "dom") && ($HeadGirl.fetishStrength > 60) && ($seeExtreme == 1) && ($slaves[$i].fetish != "mindbroken") && ($slaves[$i].devotion <= 50)>>
+			<<if ($slaves[$i].health > 40)>>
+				<<if ($slaves[$i].heels == 0) && ($slaves[$i].amp != 1)>>
+					$HeadGirl.slaveName is not satisfied with $slaves[$i].slaveName's submissiveness, and directs the autosurgery to @@.red;clip her Achilles tendons.@@ Once the slave is recovered from surgery, $HeadGirl.slaveName removes all shoes from the suite, too, so $slaves[$i].slaveName is forced to crawl like a good little bitch. $slaves[$i].slaveName is @@.gold;angry@@ and @@.gold;frightened.@@
+					<<set $slaves[$i].devotion -= 5, $slaves[$i].health -= 20, $slaves[$i].heels = 1, $slaves[$i].shoes = "none">>
+				<</if>>
+				<<if ($slaves[$i].balls > 0)>>
+					$HeadGirl.slaveName decides that it's counterproductive for $slaves[$i].slaveName to be able to get hard, and sends her in to have her @@.red;balls removed.@@ $slaves[$i].slaveName is horrified, but $HeadGirl.slaveName uses her anus with such persistence and mercilessness that the poor gelding doesn't have much time to mourn. $slaves[$i].slaveName is badly @@.gold;frightened@@ by her new role as nothing but a recipient of anal.
+					<<set $slaves[$i].trust -= 10, $slaves[$i].health -= 20, $slaves[$i].balls = 0>>
+				<</if>>
+			<</if>>
+		<<elseif $HeadGirl.energy > 95>>
+			<<if ($slaves[$i].health > 40) && ($slaves[$i].heels == 0) && ($slaves[$i].amp != 1) && ($slaves[$i].devotion <= 50) && ($slaves[$i].fetish != "mindbroken")>>
+				$HeadGirl.slaveName wants a good little bimbo who sticks her butt out all the time, and directs the autosurgery to @@.red;clip $slaves[$i].slaveName's Achilles tendons.@@ Once the slave is recovered from surgery, $HeadGirl.slaveName presents $slaves[$i].slaveName with a new pair of extra-tall heels to totter around in like a good little slut. $slaves[$i].slaveName is @@.gold;angry@@ and @@.gold;frightened.@@
+				<<set $slaves[$i].devotion -= 5, $slaves[$i].trust -= 5, $slaves[$i].health -= 20, $slaves[$i].heels = 1, $slaves[$i].shoes = "heels">>
+			<</if>>
+		<<elseif $HeadGirl.fetish == "masochist">>
+			<<if ($slaves[$i].health > 40) && ($slaves[$i].heightImplant == 0) && ($slaves[$i].height < 185) && ($slaves[$i].amp != 1)>>
+					$HeadGirl.slaveName has a subconscious need to be hurt by the biggest, strongest girl possible, and directs the autosurgery to extend $slaves[$i].slaveName's arm and leg bones to make her a little @@.lime;taller.@@
+					<<set $slaves[$i].health -= 20, $slaves[$i].heightImplant = 1, $slaves[$i].height += 1>>
+			<</if>>
+		<<elseif $HeadGirl.fetish == "submissive">>
+			<<if ($slaves[$i].health > 40) && ($slaves[$i].heightImplant == 0) && ($slaves[$i].height < 185) && ($slaves[$i].amp != 1)>>
+				$HeadGirl.slaveName wants to be topped by the biggest, strongest girl possible, and directs the autosurgery to extend $slaves[$i].slaveName's arm and leg bones to make her a little @@.lime;taller.@@
+				<<set $slaves[$i].health -= 20, $slaves[$i].heightImplant = 1, $slaves[$i].height += 1>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $HGSuiteEquality != 0>>
+	<<if $slaves[$i].devotion > 50>>
+		$HeadGirl.slaveName and $slaves[$i].slaveName @@.hotpink;really appreciate@@ the equal, alternating Head Girl system, and @@.yellow;switch places at the end of the week.@@
+		<<set $HeadGirl.devotion += 1, $slaves[$i].devotion += 1>>
+	<<else>>
+		$slaves[$i].slaveName is not a decent Head Girl candidate, so $HeadGirl.slaveName keeps the position for now.
+	<</if>>
+<<else>>
+	<<set $seed = $HGSuiteSurgery + $HGSuiteDrugs + $HGSuiteHormones>>
+	<<if $seed > 2>>
+		Your Head Girl @@.hotpink;really enjoys@@ being given total freedom to customize her very own bitch.
+		<<set $HeadGirl.devotion += 2>>
+	<<elseif $seed == 2>>
+		Your Head Girl @@.hotpink;enjoys@@ being given freedom to customize her very own girl.
+		<<set $HeadGirl.devotion += 1>>
+	<<elseif $seed == 1>>
+		Your Head Girl @@.hotpink;appreciates@@ being given some freedom to customize her own servant.
+		<<set $HeadGirl.devotion += 1>>
+	<</if>>
+<</if>>
+
+<<if ($HeadGirl.relationshipTarget == $slaves[$i].ID)>>
+	<<set ($HeadGirl.relationship = $slaves[$i].relationship)>>
+<</if>>
+<<set $slaves[_iTemp] = $HeadGirl>>
+
+<<if $showEWD == 0>>
+	<<silently>>
+	<<include "SA chooses own clothes">>
+	<<include "SA diet">>
+	<<include "SA long term effects">>
+	<<include "SA drugs">>
+	<<include "SA relationships">>
+	<<include "SA rivalries">>
+	<<include "SA devotion">>
+	<</silently>>
+<<else>>
+	<<include "SA chooses own clothes">>
+	<<include "SA diet">>
+	<<include "SA long term effects">>
+	<<include "SA drugs">>
+	<<include "SA relationships">>
+	<<include "SA rivalries">>
+	<br><<include "SA devotion">>
+<</if>>
+
+<<unset $HGTastes>>

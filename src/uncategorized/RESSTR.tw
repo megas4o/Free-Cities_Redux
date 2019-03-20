@@ -1,0 +1,404 @@
+:: RESSTR [nobr]
+
+/* This is one of several files that contains and organizes many different events.	*/
+/*  genericPlotEvents.tw															*/
+/*  PESS.tw: Player Event, Single Slave												*/
+/*  PETS.tw: Player Event, Two Slaves												*/
+/*  RECI.tw: Random Event, Check In													*/
+/*  REFI.tw: Random Event, Fetish Interest											*/
+/*  REFS.tw: Random Event, Future Societies											*/
+/*  RESS.tw: Random Event, Single Slave												*/
+/*  RESSTR.tw: Random Event, Single Slave (Test Realm, for debugging events)		*/
+/*  RETS.tw: Random Event, Two Slaves												*/
+/*  																				*/
+/* Events can also be in a dedicated *.tw file, formatted as follows:				*/
+/*  jeXXXXX.tw:	Justice Event														*/
+/*  pXXXXXX.tw:	Player event														*/
+/*  peXXXXX.tw:	Player Event focused on a slave										*/
+/*  reXXXXX.tw:	Random Event														*/
+/*  resXXXX.tw:	Random Event, School												*/
+/*  seXXXXX.tw:	Slave Event, focuses on slaves coming or going						*/
+/*																					*/
+/* Some scenes are also stored in useGuard.tw, walkPast.tw, and toychest.tw			*/
+
+<<if Array.isArray($RESSTRevent)>>
+  <<set $activeSlave = $eventSlave>>
+  <<if $cheatMode == 1>>
+	<<set $nextButton = "Back", $nextLink = "Nonrandom Event", $returnTo = "Nonrandom Event">> /* if user just clicks spacebar */
+	''A random event would have been selected from the following:''
+	<br>
+	<<for _i = 0; _i < $RESSTRevent.length; _i++>>
+		<<print "[[$RESSTRevent[_i]|RESSTR][$RESSTRevent = $RESSTRevent[" + _i + "]]]">>
+		<br>
+	<</for>>
+	<br><br>[[Go Back to Random Individual Event|Random Individual Event][$activeSlave = 0]]
+  <<else>>
+	<<set $RESSTRevent = $RESSTRevent.random()>>
+	<<goto "RESSTR">>
+  <</if>>
+<<else>>
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Next Week">>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+<<if $imageChoice == 1>>
+    <div class="imageRef lrgVector"><<SlaveArt $activeSlave 2 0>></div>
+<<else>>
+    <div class="imageRef lrgRender"><<SlaveArt $activeSlave 2 0>></div>
+<</if>>
+<</if>>
+/* 000-250-006 */
+
+<<SlaveTitle $activeSlave>>
+<<Enunciate $activeSlave>>
+
+<<switch $RESSTRevent>>
+
+<<case "objectifying visit">>
+
+At appropriate intervals during the day $assistantName directs an unoccupied slave to visit your office, and to ensure all your needs are currently being met. With such a vague task set before them, the slaves who enter your office in such a way often find themselves used in a multitude of refreshingly novel ways. At this particular moment, <<EventNameLink $activeSlave>> comes through the door of your office and obediently kneels beside your desk to await further orders. It occurs to you, gazing down at your obedient slave, that she exists as little more than an object to meet your various needs. Perhaps you should treat her as such.
+
+<<case "implant inspection">>
+
+<<EventNameLink $activeSlave>> comes before you naked for a routine inspection. You take particular care to examine her implants; even a careful hand at the remote surgery has been known to produce unsightly scars, stretch marks, and the like. Her breasts are <<if $activeSlave.boobs < 1200>>large<<else>>massive<</if>>, but her implants render them perky and rounded despite their size. An impossibility, had they been fully natural. Standing before you, her breasts protrude outward from her chest proudly and without sagging. As you inspect her with your hands, she <<if canTalk($activeSlave) == false || ($activeSlave.accent >= 3)>>breathes a little harder and looks like she would speak, were she not mute.<<elseif ($activeSlave.lips > 70)>>murmurs through her huge lips, "Dat feelth good, <<Master>>."<<elseif ($activeSlave.lipsPiercing+$activeSlave.tonguePiercing > 2)>>murmurs through her piercings, "Dat feelth good, <<Master>>."<<else>>murmurs, "That feels really nice, <<Master>>."<</if>>
+
+<<case "gagged slave">>
+
+You cross paths with <<EventNameLink $activeSlave>> as she returns from $activeSlave.assignment after a long day. One of the things most readily apparent about $activeSlave.slaveName is the <<if ($activeSlave.collar == "ball gag")>>ball gag keeping her mouth filled<<elseif ($activeSlave.collar == "bit gag")>>cruel bit gag keeping her jaw locked<<elseif ($activeSlave.collar == "dildo gag")>>dildo gag filling her mouth and throat<<elseif ($activeSlave.collar == "massive dildo gag")>>dildo gag hugely distending her throat<</if>>, the existence of which is a constant reminder to her of her submission to you and your immense power over her.
+<br><br>
+Since she cannot speak through her gag, she merely gestures her recognition of your presence and lingers in case you wish to use her. Though she does her best to avoid showing her discomfort, it is clear from the expression on her <<if $activeSlave.face > 95>>gorgeous<<elseif $activeSlave.face > 50>>beautiful<<elseif $activeSlave.face >= 10>>pretty<<elseif $activeSlave.face >= 0>>nice<<else>>homely<</if>> face that the gag is a distressing addition to her life. When you don't immediately give your assent one way or another, she kneels before you out of <<if $activeSlave.devotion > 50>>submission<<else>>fatigue after her long day<</if>>. From her new position beneath you, she must crane her neck so her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>sightless eyes<</if>> may meet yours. With her mouth gagged, she is almost the perfect image of a submissive slave.
+
+<<case "back stretch">>
+
+You pass through your slaves' living area as some of them are starting their days. <span id="name"><<print "[[$activeSlave.slaveName|Long Slave Description][$nextLink to passage(), $eventDescription to 1]]">></span> is one of them, and she's just
+<<if $activeSlave.livingRules == "spare">>
+	crawled out of her spartan bedroll.
+<<elseif $activeSlave.livingRules == "normal">>
+	gotten out of her neat little cot.
+<<elseif $activeSlave.relationship >= 4>>
+	climbed out of bed. ($activeSlave.slaveName's <<if $activeSlave.relationship == 5>>wife<<else>>girlfriend<</if>>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+	<<if $slaves[_i].ID == $activeSlave.relationTarget>>
+		$slaves[_i].slaveName is still asleep in it, and the shape of her
+		<<if canAchieveErection($slaves[_i])>>half-erect dick is
+		<<elseif $slaves[_i].dick > 3>>huge soft cock
+		<<elseif $slaves[_i].preg > 15>>big pregnant belly
+		<<elseif $slaves[_i].nipples == "huge">>huge nipples
+		<<elseif $slaves[_i].boobsImplant>>fake tits
+		<<elseif $slaves[_i].boobs > 5000>>monstrous breasts
+		<<elseif $slaves[_i].boobs > 2000>>huge tits
+		<<elseif $slaves[_i].butt > 5>>monstrous ass
+		<<elseif $slaves[_i].muscles > 30>>muscular body
+		<<elseif $slaves[_i].weight > 10>>chubby belly
+		<<elseif $slaves[_i].weight >= -10>>feminine form
+		<<else>>thin body
+		<</if>>
+		is clearly visible under the sheet. They sleep naked, of course.)
+	<</if>>
+	<</for>>
+<<else>>
+	climbed out of her comfortable bed.
+<</if>>
+It's time for her to start another strenuous day of carrying the weight of her <<if $activeSlave.boobs > 10000>>disproportionate<<elseif $activeSlave.boobs > 5000>>massive<<else>>heavy<</if>> <<if $activeSlave.boobsImplant>>implants<<elseif $activeSlave.lactation>>milk-bearing udders<<else>>natural breasts<</if>>. She can manage it <<if $activeSlave.muscles <= 10>>only with difficulty, since she's not in good shape<<elseif $activeSlave.boobs <= 20000+($activeSlave.muscles*100)>>with ease, since she's in good shape<<else>>with some difficulty, since they're so big<</if>>. Slaves with endowments like hers are trained to stretch, and since she's a good $desc, she does it as soon as she gets up. She's doing it now.
+<br><br>
+She kneels with her legs together, and then sits back, her <<if $activeSlave.buttImplant>>fake ass not changing shape at all as it rests on her heels<<elseif $activeSlave.butt > 6>>mass of assflesh extinguishing her feet completely<<elseif $activeSlave.butt > 2>>big butt resting heavily on her heels<<else>>cute butt resting lightly on her heels<</if>>. Then she reaches her arms back, and leans back, as far as she can go. She arches her spine, closing her eyes voluptuously as she enjoys the stretch in her lower back. The pose thrusts her chest up and out,
+<<if $activeSlave.boobsImplant*0.5 > $activeSlave.boobs>>
+	but her implants stretch her skin so tight that they stay tacked to her chest, right where they are. She looks like a stereotypical silicone queen, arching her back and sticking her fake cans out.
+<<elseif $activeSlave.boobShape == "perky">>
+	making her spectacularly perky breasts point their $activeSlave.nipples nipples straight up at the ceiling. It's incredible, that they've managed to maintain their youthful shape despite their great weight.
+<<elseif $activeSlave.boobShape == "downward-facing">>
+	showing off the huge area of soft skin above her $activeSlave.nipples nipples. Since these face somewhat downward, her swell of bosom above them is a pair of uninterrupted mounds of $activeSlave.skin breast.
+<<elseif $activeSlave.boobShape == "torpedo-shaped">>
+	making her absurd torpedo-shaped tits stick out even farther than they usually do. Her $activeSlave.nipples nipples point out so far that it's difficult to see how such delectably soft flesh can support its shape.
+<<elseif $activeSlave.boobShape == "wide-set">>
+	making her wide-set breasts spread even farther, to hang almost to her armpits on either side. It's not conventionally attractive, but she's certainly very well endowed.
+<<elseif $activeSlave.boobShape == "saggy">>
+	emphasizing how saggy her tits are. They <<if $activeSlave.preg > 10>>rest heavily atop her tautly gravid belly<<else>>hang down far enough to obscure the top of her belly<</if>>. It's not conventionally attractive, but she's certainly very well endowed.
+<<else>>
+	making her beautiful breasts stick out nicely. They maintain their perfect shape surprisingly well for being so enormous, and her $activeSlave.nipples nipples stick out at you prominently.
+<</if>>
+She sits back up and rubs her hands down her lower back on either side, sighing contentedly at the feeling. She opens her eyes, and sees you looking at her.
+<<if $activeSlave.energy > 80>>
+	"Hi <<Master>>," she <<say>>s flirtatiously, and hugs herself under her boobs, presenting them even more obviously. Her strong sex drive is awake, too. She watches at you speculatively, obviously hoping to get fucked.
+<<elseif $activeSlave.trust > 20>>
+	"Hi <<Master>>," she <<say>>s cutely, and gives her torso a flirty little shake from side to side, making her boobs move interestingly. She watches you trustingly, obviously wondering if you'd like to enjoy her body.
+<<else>>
+	"Good morning, <<Master>>," she <<say>>s properly, doing her best to be good. She watches you closely, ready to obey any command you might give her.
+<</if>>
+
+<<case "modest clothes">>
+
+Near the end of her weekly inspection, <span id="name"><<print "[[$activeSlave.slaveName|Long Slave Description][$nextLink to passage(), $eventDescription to 1]]">></span> asks you a question. The inspection happens to have been at the start of her day, and after you're done with her, she'll be heading off to get dressed. She's naked for inspection, of course,
+<<if $activeSlave.fetishKnown && $activeSlave.fetish == "humiliation">>which has the humiliation fetishist $desc decently aroused<<else>>but she's a good $desc, and she trusts you, so she has no problem at all with being seen nude<</if>>. In fact, that's what she asks you about.
+<br><br>
+"<<Master>>," she <<say>>s, "may I plea<<s>>e wear <<s>>omething a little more revealing, ju<<s>>t for today?" She <<if $activeSlave.trust > 95>>trusts you completely, enough to have confidence that you'll understand she isn't<<else>>bites her lip, realizing that she might have come across as<</if>> questioning you. "Wearing $activeSlave.clothes is ni<<c>>e," she <<if $activeSlave.trust > 95>>allows<<else>>hurries to add<</if>>.
+<<if $activeSlave.fetishKnown && $activeSlave.fetish == "humiliation">>"They're not really embara<<ss>>ing, though. It would be <<s>>o <<s>>exy to be, um, falling out of my clothe<<s>>.
+<<elseif $activeSlave.fetishKnown && $activeSlave.fetish == "buttslut">>"But they cover my a<<ss>>hole.
+<<elseif $activeSlave.fetishKnown && $activeSlave.fetish == "boobs">>"But they cover my boob<<s>>.
+<<elseif $activeSlave.assignment == "whore">>"But I al<<s>>o like being a pro<<s>>titute, <<Master>>. It'd be fun to try looking like a total whore.
+<<elseif $activeSlave.assignment == "serve the public">>"But I al<<s>>o like being a public <<s>>lut, <<Master>>. It'd be fun to really flaunt it.
+<<else>>"But it'd be fun and different to wear <<s>>omething really naughty.
+<</if>>
+May I plea<<s>>e try out <<s>>omething <<s>>kimpier today?"
+
+<<default>>
+	<br>ERROR: bad RESSTR event $RESSTRevent
+<</switch>>
+
+<br><br>
+<span id="result">
+<<switch $RESSTRevent>>
+
+<<case "objectifying visit">>
+
+<<link "Use her as a footrest">>
+	<<EventNameDelink $activeSlave>>
+	<<replace "#result">>
+	You order her to get beneath your desk on all fours, a task that she carries out quickly and obediently. Once as comfortable as she can be perched awkwardly underneath your desk, she braces her ass for the inevitable rough anal she assumes must be coming. Fortunately for her, it never does. Instead, you kick your feet up and rest them on the small of her back. After a few hours of objectifying degradation in this way, you rise from your chair to attend business elsewhere in your penthouse and dismiss $activeSlave.slaveName. Although you didn't fuck her, her experience as a piece of furniture for your comfort @@.hotpink;has increased her submissiveness@@.
+	<<set $activeSlave.devotion += 5>>
+	<</replace>>
+<</link>>
+<br><<link "Use her breasts as stress balls">>
+	<<EventNameDelink $activeSlave>>
+	<<replace "#result">>
+	She came to your office clearly expecting to get fucked, but takes it in stride when you order her to kneel beside you and stick out her breasts. She is similarly unruffled when you first reach over to take one of her <<if $activeSlave.boobs > 2000>>massive breasts<<elseif $activeSlave.boobs > 1000>>large breasts<<elseif $activeSlave.boobs > 400>>breasts<<else>>tiny breasts<</if>> in your hand and slowly squeeze it. As a result, when a particularly irritating piece of news is relayed through your monitor and you suddenly crush the breast held in your hand in response, $activeSlave.slaveName can't help but let out a sharp yelp before silencing herself. She soon realizes her time with you in the near future will be as an outlet for your frustrations, and her breasts will be taking the brunt of the punishment. When you dismiss her hours later, she scurries out of your office cradling her bruised breasts and @@.gold;trembling from her recent objectifying experience@@.
+	<<set $activeSlave.trust -= 5>>
+	<</replace>>
+<</link>>
+<<if canDoAnal($activeSlave) || canDoVaginal($activeSlave)>>
+<br><<link "Use her as an exercise ball">>
+	<<EventNameDelink $activeSlave>>
+	<<replace "#result">>
+	You order her to get down on all fours and stick her butt up in the air, a position she assumes with the practiced efficiency of a veteran sex slave. She's expecting doggystyle and only lets out a perfunctory moan when you<<if $PC.dick == 0>> don a strap-on and<</if>> mount her ass from behind. However, she is caught off guard when you half sit on her ass while fucking it, using it like an exercise ball as you bounce up and down. Her <<if ($activeSlave.butt > 5)>>huge ass cushions your thighs as you pummel her into the ground<<elseif ($activeSlave.butt > 2)>>ass provides some cushioning as you pound her into the ground<<else>>ass does little to cushion you as you fuck her into the ground<</if>>, but $activeSlave.slaveName fares much worse in her role as living exercise equipment. By the end of your power workout you manage to work up quite a sweat, while your slave lays limp in the middle of your office with her gaped butt comically held up in the air. Using her ass in such a way @@.hotpink;nearly fucked her senseless@@, but she'll remember @@.gold;your objectifying treatment of her@@.
+	<<set $activeSlave.devotion += 2>>
+	<<set $activeSlave.trust -= 2>>
+	<<set $activeSlave.analCount += 1>>
+	<<set $analTotal += 1>>
+	<</replace>>
+<</link>><<if ($activeSlave.anus == 0)>> //This option will take anal virginity//<</if>>
+<</if>>
+
+<<case "implant inspection">>
+
+<<link "Give her a nice massage">>
+	<<EventNameDelink $activeSlave>>
+	<<replace "#result">>
+	You sit on the couch next to your desk and pat your thighs. She smiles and comes over, lowering herself <<if $PC.dick == 0>>into your lap<<else>>onto your member<<if $PC.vagina == 1>> and sliding a hand down to see to your pussy<</if>><</if>> without hesitation. You help her get comfortable and instead of <<if $PC.dick == 0>>grinding<<else>>thrusting<</if>> or telling her to ride, you just sit there with her in your lap, gently massaging her <<if $activeSlave.boobs < 900>>big <<else>>huge <</if>> tits. Despite their fine craftsmanship, implants are prone to rendering breasts sore, so she's soon groaning with relief at the attention you lavish upon them. You finally manage to bring her to orgasm with almost nothing but delicate stimulation of her nipples, despite her implants making them less sensitive than usual. @@.mediumaquamarine;She has become more trusting of you.@@
+	<<set $activeSlave.trust += 4>>
+	<<if ($activeSlave.vagina > -1)>>
+		<<set $activeSlave.vaginalCount += 1>>
+		<<set $vaginalTotal += 1>>
+	<<else>>
+		<<set $activeSlave.analCount += 1>>
+		<<set $analTotal += 1>>
+	<</if>>
+	<</replace>>
+<</link>>
+<br><<link "See if they've got any bounce">>
+	<<EventNameDelink $activeSlave>>
+	<<replace "#result">>
+	You tell her to kneel on the smooth floor. She knows this means doggy style, so she compliantly arches her back and cocks her hips to offer herself to you. You<<if $PC.dick == 0>> don a strap-on and<</if>> enter <<if ($activeSlave.vagina == -1)>>her ass<<else>>her pussy<</if>> without preamble and seize her hips. She braces herself, knowing what's coming, but soon she discovers a new disadvantage to her augmented breasts: even as you pound her hard and grope her chest, her tits barely move despite their rough treatment. Her unyielding breasts only encourage you to fuck her harder, in an effort to garner any iota of movement from her ample chest. <<if ($activeSlave.dick > 0)>>Her cock doesn't help, either, flopping around half-erect as she vacillates between pain and arousal. <<elseif ($activeSlave.clit > 2)>>Her huge clit doesn't help, either, flopping around half-erect as she vacillates between pain and arousal. <</if>><<if ($activeSlave.vagina > -1)>>Even a switch to her ass does little to slow your thrusts, and so her breasts continue to rest impassively on her chest as their owner is buttfucked senseless. <</if>> You finish with a particularly hard thrust <<if $PC.dick == 0>>and shake with climax<<else>>to spill your seed deep inside her butt<</if>>, ramming forward hard enough to knock her down to the floor. As you rise, her discomfited form is a pretty sight, with her perfectly rounded breasts keeping her body suspended off the ground and her well fucked butt lewdly relaxed. @@.hotpink;She has become more submissive.@@
+	<<set $activeSlave.devotion += 4>>
+	<<BothVCheck>>
+	<</replace>>
+<</link>><<if ($activeSlave.anus == 0) || ($activeSlave.vagina == 0)>> //This option will take virginity//<</if>>
+<br><<link "Show her off in public">>
+	<<EventNameDelink $activeSlave>>
+	<<replace "#result">>
+	You bring her out onto the promenade, still nude, her impressively augmented breasts attracting open stares with their perfect roundness and perkiness. <<if ($activeSlave.energy > 95)>>The nympho slut loves being shown off, and she flaunts her implanted boobs shamelessly.<<elseif ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60) && ($activeSlave.fetish == "humiliation")>>The slut loves being embarrassed, and she blushes furiously as her nipples stiffen with arousal despite her implants having sapped them off some of their sensitivity.<<elseif ($activeSlave.analCount > 100) && ($activeSlave.oralCount > 100)>>She's such a veteran sex slave that she takes the stares in stride.<<else>>She blushes a little, but tips her chin up and follows you obediently.<</if>> When you reach a good spot, you grab her <<if ($activeSlave.weight > 30)>>fat ass<<elseif ($activeSlave.weight > 10)>>plush hips<<elseif ($activeSlave.weight >= -10)>>trim hips<<elseif ($activeSlave.butt > 2)>>big butt<<else>>skinny ass<</if>> and <<if ($activeSlave.height >= 185)>>pull her tall body in<<elseif ($activeSlave.height >= 160)>>pull her up on tiptoe<<else>>push her petite form up onto a railing<</if>> for standing sex. She cocks her hips and takes your <<if $PC.dick == 0>>strap-on<<else>>cock<</if>> compliantly, and after a few thrusts you reach down, seize her behind each knee, and hoist her legs up so she's pinned against your <<if ($PC.boobs == 0)>>chest<<else>>boobs<</if>>, helpless to do anything but let you hold her in midair and fuck her. <<if ($activeSlave.vagina > 1)>>Her pussy can take a hard pounding, so you give it to her.<<elseif ($activeSlave.vagina > -1)>>Her poor tight pussy can barely take the pounding you're administering.<<elseif ($activeSlave.anus > 1)>>Her loose butthole can take a hard pounding, so you give it to her.<<else>>Her poor tight butthole can barely take the pounding you're administering.<</if>> She loses all composure, gasping and panting as the massive weight of her augmented chest weighs her down, causing her to all but collapse against you. Despite this, or perhaps partly because of it, she begins to orgasm,
+	<<if ($activeSlave.dick > 0) && ($activeSlave.dickAccessory == "chastity")>>
+		the discomfort of being half-hard under her chastity cage making her squirm as cum rushes out of the hole at its tip.
+	<<elseif ($activeSlave.dick > 0) && ($activeSlave.hormones < 1) && ($activeSlave.balls > 0)>>
+		<<if ($activeSlave.dick > 3)>>her huge cock releasing a jet of cum with each thrust into her<<elseif ($activeSlave.dick > 1)>>her cock releasing a spurt of cum with each thrust into her<<else>>her tiny dick spurting cum with each thrust into her<</if>>.
+	<<elseif ($activeSlave.dick > 0)>>
+		her soft cock scattering cum all over the place as it flops around.
+	<<elseif ($activeSlave.preg > 1)>>
+		her pregnant belly adding to her near-total discomfiture.
+	<<elseif ($activeSlave.muscles > 5)>>
+		her abs convulsing deliciously as she climaxes.
+	<<elseif ($activeSlave.vagina > -1)>>
+		her pussy tightening.
+	<<else>>
+		her poor anal ring tightening.
+	<</if>>
+	The crowd that surrounds you during this noisy spectacle @@.green;is suitably impressed.@@
+	<<set $rep += 250>>
+	<<BothVCheck>>
+	<</replace>>
+<</link>><<if ($activeSlave.anus == 0) || ($activeSlave.vagina == 0)>> //This option will take virginity//<</if>>
+
+<<case "gagged slave">>
+
+<<link "Give her something else to gag on">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	As pleasant an image as $activeSlave.slaveName's mouth filled by $activeSlave.collar is, one of her mouth's primary purposes is still to provide you with ample <<if $PC.dick == 1>>blowjobs<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>cunnilingus<</if>>. With $activeSlave.slaveName already kneeling, it is merely a matter of undoing her gag before you can put her mouth to work. <<if $activeSlave.oralSkill >= 100>>Though she has spent much time gagged, her mastery at giving oral is unaffected<<elseif $activeSlave.oralSkill > 60>>Though she has spent much time gagged, her oral skills still provide ample pleasure<<else>>Her time spent gagged has limited the growth of her mediocre oral skills, though she is still able to provide some relief<</if>>.<<if $activeSlave.teeth > 2>> Though your attention is largely sapped by her tender oral ministrations, you note that she takes care not to rake you with her sharklike teeth.<<elseif $activeSlave.lips > 40>> Though your attention is largely sapped by her tender oral ministrations, you note that her huge lips are soft and pillowy against you.<<elseif ($activeSlave.teeth is "straightening braces") || ($activeSlave.teeth is "cosmetic braces")>> Though your attention is largely sapped by her tender oral ministrations, you note that she takes care to keep her braces off you.<</if>> When you eveventually move on, it is with a ruffle <<if $activeSlave.hLength > 1>>of $activeSlave.slaveName's $activeSlave.hColor hair<<else>> $activeSlave.slaveName's scalp<</if>> and the return of the gag to her mouth. Though her continued gagging is an uncomfortable experience, $activeSlave.slaveName enjoyed @@.hotpink;being free of it for a moment, even if just to pleasure you.@@
+	<<set $activeSlave.devotion += 4, $activeSlave.oralCount += 1, $oralTotal += 1>>
+	<</replace>>
+<</link>>
+<br><<link "Remove the gag for a few minutes">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	You wordlessly remove the $activeSlave.collar and watch as $activeSlave.slaveName opens and closes her mouth testingly, as if she has forgotten what it feels like to do so without obstruction. Though you eventually return to the gag to its rightful place in her mouth, she @@.mediumaquamarine;trusts you more@@ for granting her a few moments respite from the gag.
+  <<set $activeSlave.trust += 4>>
+	<</replace>>
+<</link>>
+<br><<link "Torment her with the gag">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	Though having a $activeSlave.collar constrict her mouth is torment enough, you take the time to linger and add to her torturous existence. $activeSlave.slaveName soon discovers that the straps of a gag can always be made tighter, the <<if ($activeSlave.collar == "ball gag")>>ball can always be made larger<<elseif ($activeSlave.collar == "bit gag")>>the bit can always be made larger<<elseif ($activeSlave.collar == "dildo gag")>>the dildo can always be made larger<<elseif ($activeSlave.collar == "massive dildo gag")>>the dildo can always be made wider and longer<</if>>, and the punishments rendered for daring to show any discomfort can always be harsher and stricter. Come the end of your session with her, $activeSlave.slaveName <<if $activeSlave.fetish == "masochist">> is mortified by the intensity of her orgasms,@@.hotpink; and more convinced than ever that she's a pain slut,@@ and yet<</if>> @@.gold;scuttles away quickly, having learnt a harsh lesson about your power over her body.@@
+	<<set $activeSlave.trust -= 5>>
+	<<if $activeSlave.fetish == "masochist">><<set $activeSlave.devotion += 4>><</if>>
+	<</replace>>
+<</link>>
+
+<<case "back stretch">>
+
+<<link "Fuck her boobs">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	When she sees you <<if $PC.dick == 1>>get your dick out<<else>>approaching her with sapphic lust in your eyes<</if>>, she
+	<<if $activeSlave.energy > 80>>grins with anticipation,
+	<<elseif $activeSlave.trust > 20>>smiles appealingly,
+	<<else>>does her best to look submissive,
+	<</if>>
+	and offers you her chest.
+	<<if $PC.dick == 1>>
+		You collect some lubrication for it by sticking your dick in her mouth. <<if $activeSlave.oralSkill >= 100>>She swallows you to your base, and is such a skilled cocksucker that she salivates at will, doing her best to get you<<else>>She does her best to swallow you as deeply as she can manage, and get your cock<</if>> nice and slick. You pull your member out of her industriously sucking mouth with a pop, and slide it between her warm breasts. She promptly grabs them and squeezes them together, forming a nice channel for you to fuck. As you start pounding away, she does her best to crane her head down and suckle your dickhead whenever it appears between her boobs, adding more lubrication from her lewdly wet mouth. She knows when you're about to climax, and makes no attempt to avoid it, opening her mouth wide to accept your load. She catches most of it, but your generous ejaculation spatters her face with pearly decoration.
+	<<else>>
+		Deciding to do something a little more intimate than fucking her cleavage with a strap-on, you walk forward and into her face, pressing her inexorably backwards as she nuzzles your pussy until she's forced to collapse onto the ground. Then you scoot backwards a little, until you're straddling her ribcage just below her breasts. Her huge breasts rest atop your inner thighs, <<if $activeSlave.boobsImplant>>her skin taut against yours, from the implants<<else>>heavy and soft and female<</if>>. You ride her gently like this for a little while, enjoying the feminine weight of her and the effects of this intimacy on her face. Once you're ready for some more stimulation, you pull one of her hands down between her breasts; she gets her thumb down into her cleavage, all the way down until it can stimulate your button and bring you to a soft orgasm. Pleased, you slide down until you're face to face with her, and give her a kiss.
+	<</if>>
+	She
+	<<if $activeSlave.energy > 80>>was looking after herself with a hand the whole time, and she @@.mediumaquamarine;smiles gratefully at you@@ with satisfaction.
+	<<elseif $activeSlave.trust > 20>>giggles a little, @@.mediumaquamarine;pleased with herself.@@
+	<<else>>smiles hesitantly, clearly thinking that @@.mediumaquamarine;she did well.@@
+	<</if>>
+	<<set $activeSlave.trust += 5>>
+	<<EventFetish $activeSlave "boobs">>
+	<</replace>>
+<</link>>
+<br><<link "Hurt her">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	You decide to exercise a little maliciousness. You take a step forward, producing a look of
+	<<if $activeSlave.energy > 80>>lustful anticipation<<elseif $activeSlave.trust > 20>>expectation<<else>>trepidation<</if>>,
+	but then you stop, wordlessly gesturing at her to continue. She does, bending her back forward and backward, concave and convex, rolling herself around on her hips a little, and making her breasts move mesmerizingly. Eventually, she stretches deeply enough that<<if $activeSlave.trust <= 50>> she lets her guard down and<</if>> her eyes close again.
+	<<switch $activeSlave.nipples>>
+	<<case "tiny">>
+		Her tiny little nipples are too small to grab and pull effectively, so you simply flick them, aiming a vicious high-velocity fingernail at each of them, using both hands.
+	<<case "puffy">>
+		Her puffy nipples provide shamefully easy targets. You grab them in a mercilessly tight grip and haul, jerking her whole body forward until she's about to topple over.
+	<<case "partially inverted">>
+		You grab each of her nipples around the margins of her areolae, and squeeze them with such force that, partially inverted as they are, they protrude instantly.
+	<<case "inverted">>
+		You seize each of her inverted nipples, your thumbs uppermost, squeezing her sensitive, hidden nipples inside their fleshy prisons with cruel force.
+	<<case "huge">>
+		Her huge nipples provide you an excellent grip as you grab them and haul on them, jerking her whole body forward until she's about to topple over.
+	<<default>>
+		You grab each of her nipples in a merciless grip and pinch them with abandon, adding a cruel twist as soon as you've got them held tightly enough.
+	<</switch>>
+	Her $activeSlave.eyeColor eyes fly open and she	<<if $activeSlave.voice == 1>>bellows with pain, her deep voice very loud<<elseif $activeSlave.voice == 2>>screams at the tops of her lungs<<elseif $activeSlave.voice == 3>>shrieks, her high, girlish voice very shrill<</if>>. The sudden agony discombobulates her so badly that for a few moments, she has no idea what's going on, and her hands fly forward reflexively. She manages to stop herself at the last minute, realizing that trying to knock your hands away from her poor nipples would be a very bad idea indeed. She looks up at you with huge eyes, mewling helplessly, @@.gold;tears beginning to collect at the corners of her eyes.@@ Pleased, you turn and go.
+	<<set $activeSlave.trust -= 5>>
+	<<EventFetish $activeSlave "masochist">>
+	<</replace>>
+<</link>>
+<<if $activeSlave.lactation > 0>>
+<br><<link "Drink from her">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	Her eyes widen with surprise when you kneel down in front of her. She begins to straighten, to face you, but you place a <<if $PC.title == 1>>strong<<else>>feminine<</if>> hand on her chest, right between her breasts, and keep her leaning backward. Then, without any preamble, you take her right breast in both of your hands, bend forward, and take her nipple into your mouth. She gasps, <<say>>s "Oh, <<Master>>" quietly, and then begins to moan as you begin to suck powerfully,
+	<<switch $activeSlave.nipples>>
+	<<case "tiny">>drawing her tiny nipple entirely into your mouth.
+	<<case "puffy">>engorging her soft, puffy nipple until it fills your mouth.
+	<<case "partially inverted">>pulling her partially inverted nipple straight out and into your mouth.
+	<<case "inverted">>gradually pulling at her inverted nipple until it's finally forced to pop out and into your mouth.
+	<<case "huge">>her huge nipple filling your mouth comfortably.
+	<<default>>pulling her soft nipple and some of the areolae around it into your mouth.
+	<</switch>>
+	Her rich milk begins to flow across your tongue, creamy and with a hint of vanilla. She breathes faster and faster as she becomes aroused, but then the stimulation peaks. You keep drinking from her, making no move to stop nursing and start fucking her. She sighs with sudden contentment, realizing that you're going to drink every drop she has, and her sudden relaxation sends a little extra gush of milk into your mouth. She @@.hotpink;definitely enjoys the experience,@@ leaning back compliantly as you drain that breast and then her left one, too.
+	<<set $activeSlave.devotion += 5>>
+	<<EventFetish $activeSlave "boobs">>
+	<</replace>>
+<</link>>
+<</if>>
+
+<<case "modest clothes">>
+
+<<link "No">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	You tell her no. She's a good enough slave that making a simple request and having you return a straightforward negative without punishment @@.mediumaquamarine;makes her just slightly more trusting.@@ It's nice for her to be allowed to ask things.
+	<<set $activeSlave.trust += 2>>
+	<</replace>>
+<</link>>
+<br><<link "Show her how much you like her usual outfit">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	You tell her to go get dressed as usual. Her face falls a little, but there was no condemnation in your tone, and she hurries off, <<if $activeSlave.dick > 6>>monstrous cock dangling<<elseif $activeSlave.scrotum > 4>>big balls dangling<<elseif $activeSlave.preg > 15>>as fast as her swollen belly will allow<<elseif $activeSlave.boobsImplant>>fake tits bouncing<<elseif $activeSlave.butt > 4>>her big booty jiggling<<elseif $activeSlave.boobs > 2000>>udders jiggling<<else>>giving you a nice view of her naked rear<</if>>. She returns quickly, in her proper $activeSlave.clothes. You tell her that you like how she looks, and that she's pretty. She wasn't expecting such a blunt compliment, and her $activeSlave.eyeColor eyes flick down to the ground for a moment as she blushes. "T-thank you, <<Master>>," she stutters.
+	<br><br>
+	You add that she looks so good that she had better take her nice clean $activeSlave.clothes off again, because
+	<<if canDoVaginal($activeSlave) && $activeSlave.vagina != 0>>
+		you're going to <<if $PC.dick>>fuck<<else>>trib<</if>> her senseless.
+		<<set $activeSlave.vaginalCount += 1, $vaginalTotal += 1>>
+	<<elseif canDoAnal($activeSlave) && $activeSlave.anus != 0>>
+		you're going to fuck her butt<<if $activeSlave.balls>> until she cums<</if>>.
+		<<set $activeSlave.analCount += 1, $analTotal += 1>>
+	<<else>>
+		she's going to <<if $PC.dick>>suck your dick until you cover her in cum<<else>>eat you out until she's got your pussyjuice running down her chin<</if>>.
+		<<set $activeSlave.oralCount += 1, $oralTotal += 1>>
+	<</if>>
+	She giggles at the sudden lewdness, and quickly strips naked again, complimented and @@.hotpink;eager to be used.@@
+	<<set $activeSlave.devotion += 5>>
+	<</replace>>
+<</link>>
+<br><<link "Put her in a string bikini">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	You tell her that the wardrobe's sorting system will present her with a new outfit, just for today. She's to go try it on and come right back, to see how it fits. "Thank<<s>>, <<Master>>!" she <<say>>s brightly, and hurries off to see what's in store for her. She might be a slave and a $desc but girls everywhere love trying on new clothes. She makes an entrance when she comes back, spinning around to show off. She's wearing the briefest possible string bikini. The top, rather than having patches of material to cover her nipples, forms a string triangle around them, framing them but not covering them. The bottom is a single string in front, <<if $activeSlave.dick>>which looks rather sad and alone, pushed aside by her dick as it is<<elseif $activeSlave.labia>>and it's embraced completely by her generous pussylips<<else>>and it threatens to disappear inside her pussylips<</if>>. "Thi<<s>> feel<<s>> <<s>>o hot, <<Master>>," she <<say>>s, and
+	<<if $activeSlave.fetishKnown && $activeSlave.fetish == "humiliation">>
+		blushes cutely. She looks up at you, sees the way you're staring at her, and hangs her head, blushing even harder.
+	<<elseif $activeSlave.fetishKnown && $activeSlave.fetish == "buttslut">>
+		turns around again, bending a little and cocking her hips to show off the way the string between her buttocks totally fails to conceal her <<if $activeSlave.anus > 2>>huge soft asspussy<<elseif $activeSlave.anus > 1>>nice butthole<<else>>tight little anus<</if>>.
+	<<elseif $activeSlave.fetishKnown && $activeSlave.fetish == "boobs">>
+		bounces her <<if $activeSlave.boobsImplant>>fake tits<<elseif $activeSlave.boobs > 8000>>earth-shattering tits<<elseif $activeSlave.boobs > 2000>>huge boobs<<elseif $activeSlave.boobs > 400>>boobs<<else>>petite chest<</if>>. Giggling, she bounces harder, and her nipples escape from her top, such as it is.
+    <<elseif $activeSlave.assignment == "whore" || $activeSlave.assignment == "serve the public">>
+		sneaks a hand under the string around her waist, tugging her bottom up <<if $activeSlave.vagina != -1>>until the string between her legs is pulled up into the entrance of her womanhood<<else>>and turning sideways to suggest her ass<</if>>. "Guy<<s>>'ll <<if $activeSlave.assignment == "whore">>pay money for<<else>>line up to fuck<</if>> thi<<s>>," she giggles.
+	<<else>>
+		bounces a little, smiling. "I'm ba<<s>>ically naked," she giggles. "Today i<<s>> going to be fun. The other girl<<s>>'ll be jealou<<s>> you wanted me to look <<s>>o <<s>>lutty. Love you, <<Master>>."
+	<</if>>
+	She's happy you indulged her, and @@.mediumaquamarine;satisfied that you think she's cute@@ enough to have around (practically) nude.
+	<<set $activeSlave.trust += 5>>
+	<</replace>>
+<</link>>
+<br><<link "Force uncomfortable straps on her">>
+	<<replace "#name">>$activeSlave.slaveName<</replace>>
+	<<replace "#result">>
+	You tell her that the wardrobe's sorting system will present her with a new outfit, just for today. She's to go try it on and come right back, to see how it fits. "Thanks, <<Master>>!" she <<say>>s brightly, and hurries off to see what's in store for her. She might be a slave and a $desc but girls everywhere love trying on new clothes. She's wrong to be so enthusiastic. She comes obediently back, wearing a set of cruelly uncomfortable leather straps in the general shape of a bikini, but much tighter and more restrictive. It isn't at all what she was expecting, but she did her best to obey. She's @@.gold;tightened her own straps down@@ until they're just short of cutting off circulation, in an obvious effort to please you. You ask her how she likes her outfit. "It'<<s>> ni<<c>>e, <<Master>>," she <<say>>s, but she sounds a little sad.
+	<<if $activeSlave.fetishKnown && $activeSlave.fetish == "humiliation">>
+		"I'm ju<<s>>t a worthle<<ss>> humiliation <<s>>lut. I love having <<s>>teel ring<<s>> around my hole<<s>> like thi<<s>>," she adds.
+	<<elseif $activeSlave.fetishKnown && $activeSlave.fetish == "buttslut">>
+		She turns to show you her asshole, framed by a steel ring that spreads her buttocks to keep it nice and defenseless. "I know my backpu<<ss>>y'<<s>> the be<<s>>t thing about me," she adds.
+	<<elseif $activeSlave.fetishKnown && $activeSlave.fetish == "boobs">>
+		She does her best to thrust out her chest, making the straps creak. "I know I'm, I'm ju<<s>>t, ju<<s>>t a pair of boob<<s>>," she adds.
+	<<elseif $activeSlave.assignment == "whore" || $activeSlave.assignment == "serve the public">>
+		She hangs her head. "I feel like a worthle<<ss>> <<if $activeSlave.assignment == "whore">>whore<<else>>bitch<</if>>," she adds. "Gue<<ss>> I am."
+	<<else>>
+		She indicates the steel rings that frame her holes and keep them defenseless. "I know I'm ju<<s>>t a collection of fuckhole<<s>>," she adds.
+	<</if>>
+	She sounds like she's trying to convince herself, but her @@.hotpink;abasement us not feigned.@@
+	<<set $activeSlave.devotion += 5, $activeSlave.trust -= 5>>
+	<</replace>>
+<</link>>
+
+<<default>>
+	<br>ERROR: bad RESSTR event $RESSTRevent
+<</switch>>
+
+<<if $cheatMode == 1>>
+	<br><br>DEBUG: &nbsp;&nbsp;&nbsp;&nbsp;[[Go back to Nonrandom Event|Nonrandom Event][$activeSlave = 0, $eventSlave = 0]]
+<</if>>
+
+</span>
+
+<</if>> /* CLOSES EVENT SELECTION */

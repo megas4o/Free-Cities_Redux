@@ -1,0 +1,917 @@
+:: Nationality to Accent [nobr]
+
+<<set $seed = either(0,1,1,2,2,2,3,3,3,3)>>
+
+<<if ($activeSlave.nationality == "American")>>
+	<<if $activeSlave.race == "black">>
+	<<if $language == "English">>
+		<<set $activeSlave.accent = 0>>
+	<<else>>
+		<<set $activeSlave.accent = either(0,1,1,2,2,2,3,3,3,3)>>
+	<</if>>
+	<<elseif $activeSlave.race == "latina">>
+	<<if $language == "English">>
+		<<set $activeSlave.accent = 0>>
+	<<elseif $language == "Spanish">>
+		<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+		<<set $activeSlave.accent = $seed>>
+	<</if>>
+	<<elseif $activeSlave.race == "asian">>
+	<<if $language == "English">>
+		<<set $activeSlave.accent = 0>>
+	<<elseif $language == "Chinese">>
+		<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+		<<set $activeSlave.accent = $seed>>
+	<</if>>
+	<<elseif $activeSlave.race == "middle eastern">>
+	<<if $language == "English">>
+		<<set $activeSlave.accent = 0>>
+	<<elseif $language == "Arabic">>
+		<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+		<<set $activeSlave.accent = $seed>>
+	<</if>>
+	<<else>>
+	<<if $language == "English">>
+		<<set $activeSlave.accent = 0>>
+	<<else>>
+		<<set $activeSlave.accent = $seed>>
+	<</if>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Canadian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Mexican")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Puerto Rican")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Haitian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Jamaican")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 2>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Cuban")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Guatemalan")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Chilean")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Peruvian")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Bolivian")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Venezuelan")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Russian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Ukrainian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Italian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Spanish")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "British")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "French")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "German")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Lithuanian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Norwegian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Slovak")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Danish")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Dutch")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Austrian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Swiss")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Serbian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Belgian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Czech")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Portuguese")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Swedish")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Romanian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Hungarian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Estonian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Irish")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Icelandic")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Finnish")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Greek")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Polish")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Brazilian")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Egyptian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Colombian")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Argentinian")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Turkish")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Iranian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Armenian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Israeli")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Saudi")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "South African")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Nigerian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Congolese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Kenyan")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Tanzanian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Zimbabwean")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Ghanan")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Ugandan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Ethiopian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Moroccan")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Chinese")>>
+	<<if $language == "Chinese">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Korean")>>
+	<<if $language == "Chinese">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Thai")>>
+	<<if $language == "Chinese">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Vietnamese")>>
+	<<if $language == "Chinese">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Japanese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Indonesian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Filipina")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Bangladeshi")>>
+	<<if $language == "Indian">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Malaysian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Uzbek")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Afghan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Nepalese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Burmese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Iraqi")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Yemeni")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Sudanese")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Algerian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Tunisian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Libyan")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Omani")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Malian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Jordanian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Lebanese")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Emirati")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Kazakh")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Pakistani")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Indian")>>
+	<<if $language == "Indian">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Australian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "a New Zealander")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Sammarinese")>>
+	<<if $language == "Italian">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Marshallese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Syrian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Bermudian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Uruguayan")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Monégasque")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Montenegrin")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Cambodian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Cameroonian")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Gabonese")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Djiboutian")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Greenlandic")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Tuvaluan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Zambian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Albanian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Bruneian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Singaporean")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Laotian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Mongolian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Taiwanese")>>
+	<<if $language == "Chinese">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Belizean")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 2>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Grenadian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 2>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "I-Kiribati")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Malagasy")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Maldivian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Bosnian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Croatian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Kosovan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Macedonian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Honduran")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Maltese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Nauruan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Micronesian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 2>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Costa Rican")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Salvadoran")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Nicaraguan")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Panamanian")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Nigerien")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = either(0,1,2,3)>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Andorran")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Bulgarian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Luxembourgian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Moldovan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Bahamian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Barbadian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Dominiquais")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Trinidadian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Palauan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Papua New Guinean")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Kittitian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Ecuadorian")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "French Guianan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Guyanese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Paraguayan")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Surinamese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Bhutanese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "East Timorese")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Kyrgyz")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Sri Lankan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "a Liechtensteiner")>>
+	<<if $language == "German">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Scottish")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 2>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Vatican")>>
+	<<if $language == "Italian">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Belarusian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Burundian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Latvian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Seychellois")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Slovene")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Antiguan")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Dominican")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Saint Lucian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Aruban")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Azerbaijani")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Bahraini")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Cypriot")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Georgian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Kuwaiti")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Qatari")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Tajik")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Turkmen")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Vincentian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "a Cook Islander")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Fijian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Ni-Vanuatu")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Niuean")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Palestinian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Samoan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "a Solomon Islander")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Tongan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Catalan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Equatoguinean")>>
+	<<if $language == "Spanish">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "French Polynesian")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Kurdish")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Tibetan")>>
+	<<if $language == "Chinese">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Bissau-Guinean")>>
+	<<if $language == "Portuguese">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Chadian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Comorian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Ivorian")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Mauritanian")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Mauritian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Mosotho")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Sierra Leonean")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Swazi")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Angolan")>>
+	<<if $language == "Portuguese">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Sahrawi")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Burkinabé")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Cape Verdean")>>
+	<<if $language == "Portuguese">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Motswana")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Somali")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Rwandan")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "São Toméan")>>
+	<<if $language == "Portuguese">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Beninese")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Central African")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Gambian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Senegalese")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Togolese")>>
+	<<if $language == "French">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Eritrean")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Guinean")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Malawian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Zairian")>>
+	<<set $activeSlave.accent = $seed>>
+<<elseif ($activeSlave.nationality == "Liberian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Mozambican")>>
+	<<if $language == "Portuguese">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Namibian")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "South Sudanese")>>
+	<<if $language == "English">>
+	<<set $activeSlave.accent = 1>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Roman Revivalist")>>
+	<<if $language == "Latin">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Aztec Revivalist")>>
+	<<if $language == "Nahuatl">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Ancient Egyptian Revivalist")>>
+	<<if $language == "Ancient Egyptian">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Edo Revivalist")>>
+	<<if $language == "Japanese">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Arabian Revivalist")>>
+	<<if $language == "Arabic">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<elseif ($activeSlave.nationality == "Ancient Chinese Revivalist")>>
+	<<if $language == "Chinese">>
+	<<set $activeSlave.accent = 0>>
+	<<else>>
+	<<set $activeSlave.accent = $seed>>
+	<</if>>
+<<else>>
+	<<set $activeSlave.accent = $seed>>
+<</if>>
+
+<<if $activeSlave.nationality == $language>>
+	<<set $activeSlave.accent = 0>>
+<</if>>

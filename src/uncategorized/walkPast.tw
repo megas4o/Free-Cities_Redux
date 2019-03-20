@@ -1,0 +1,1668 @@
+:: Walk Past [nobr]
+
+//
+<<set $target = "">>
+<<if ($activeSlave.relation !== 0) && (random(1,100) > 80)>>
+	<<set _seed = 110, $partner = "relation">>
+<<elseif ($activeSlave.relationship > 0) && (random(1,100) > 70)>>
+	<<set _seed = 120, $partner = "relationship">>
+<<elseif ($activeSlave.rivalry !== 0) && ($activeSlave.amp !== 1) && (random(1,100) > 70)>>
+	<<set _seed = 130, $partner = "rivalry">>
+<<else>>
+	<<set _seed = random(1,100), $partner = "">>
+<</if>>
+
+<<SlavePronouns $activeSlave>>
+/* Persistent Summary flag - this is here because if the slave gets used it can change her summary */
+<<set $activeSlave.currentSummary = 0>>
+
+<span id="walk">
+
+<<if ($partner !== "relationship") || ($activeSlave.relationship == 1) || ($activeSlave.relationship == 2) || ($activeSlave.releaseRules == "restrictive")>>
+	$activeSlave.slaveName
+	<<switch $activeSlave.assignment>>
+	<<case "work in the dairy">>
+		<<if ($dairyRestraintsSetting > 1)>>
+		is strapped to a milking machine in $dairyName.
+		<<elseif ($activeSlave.lactation == 0) && ($activeSlave.balls > 0)>>
+		is working in $dairyName, and is having her cock milked. As you watch, her balls tighten as the phallus up her butt brings her closer to a copious ejaculation.
+		<<elseif _seed > 50>>
+		is working in $dairyName, and is having her tits milked, but you have a good view of her <<if $seeRace == 1>>$activeSlave.race body <</if>>on the feeds.
+		<<else>>
+		is working in $dairyName, and is massaging her sore tits, but you have a good view of her <<if $seeRace == 1>>$activeSlave.race body <</if>>on the feeds.
+		<</if>>
+	<<case "work in the brothel">>
+		<<Beauty $activeSlave>>
+		is working in $brothelName, and is
+		<<if ($beauty > 100) && (random(1,2) == 1)>>
+			<<if (_seed > 80)>>
+			riding one customer's dick while she gives another a blowjob.
+			<<elseif (_seed > 60)>>
+			sucking one customer's cock while giving another a handjob.
+			<<elseif (_seed > 40)>>
+			eating out one customer's cunt while another uses a strap-on on her.
+			<<elseif (_seed > 20)>>
+			getting pounded by two women wearing strap-ons.
+			<<else>>
+			being double penetrated by a pair of customers.
+			<</if>>
+		<<elseif (_seed > 80)>>
+		riding a customer's dick.
+		<<elseif (_seed > 60)>>
+		sucking a customer's cock.
+		<<elseif (_seed > 40)>>
+		pleasuring a customer's cunt.
+		<<elseif (_seed > 20)>>
+		getting pounded by a woman wearing a strap-on.
+		<<else>>
+		being held down and buttfucked by a customer.
+		<</if>>
+		You have a voyeuristic view of her <<if $seeRace == 1>>$activeSlave.race body <</if>>on the feeds.
+	<<case "serve the public">>
+		<<Beauty $activeSlave>>
+		is serving the public, and is
+		<<if ($beauty > 100) && (random(1,2) == 1)>>
+			<<if (_seed > 80)>>
+			riding one citizen's dick while she gives another a blowjob.
+			<<elseif (_seed > 60)>>
+			sucking one citizen's cock while giving another a handjob.
+			<<elseif (_seed > 40)>>
+			eating out one citizen's cunt while another uses a strap-on on her.
+			<<elseif (_seed > 20)>>
+			getting pounded by two women wearing strap-ons.
+			<<else>>
+			being double penetrated by a pair of citizens.
+			<</if>>
+		<<elseif (_seed > 80)>>
+		riding a citizen's dick.
+		<<elseif (_seed > 60)>>
+		sucking a citizen's cock.
+		<<elseif (_seed > 40)>>
+		pleasuring a citizen's cunt.
+		<<elseif (_seed > 20)>>
+		getting pounded by a citizen wearing a strap-on.
+		<<else>>
+		being held down and buttfucked by a citizen.
+		<</if>>
+		You have a voyeuristic view of her <<if $seeRace == 1>>$activeSlave.race body <</if>>on the feeds.
+	<<case "serve in the club">>
+		is working in $clubName,
+		<<if _seed > 50>>
+		displaying her <<if $seeRace == 1>>$activeSlave.race <</if>>body, keeping citizens company, and flirting with anyone who shows interest.
+		<<else>>
+		or rather just off it, having taken a prominent citizen back to a discreet room <<if $seeRace == 1>> so he can use her $activeSlave.race body<</if>>.
+		<</if>>
+	<<case "work as a servant">>
+		<<if _seed > 50>>
+		was scrubbing the penthouse floor, until another slave requested oral service.
+		<<else>>
+		is scrubbing the penthouse floor.
+		<</if>>
+	<<case "serve in the master suite">>
+		<<if $activeSlave.fuckdoll > 0>>
+			waiting for use in $masterSuiteName, next to a display case full of other sex toys.
+		<<elseif $masterSuiteUpgradeLuxury == 1>>
+			<<if _seed > 50>>
+				is kneeling on the big bed in $masterSuiteName, awaiting your return.
+			<<else>>
+				is beautifying herself in $masterSuiteName so she'll be pretty when you return.
+			<</if>>
+		<<elseif $masterSuiteUpgradeLuxury == 2>>
+			is in $masterSuiteName's fuckpit,
+			<<if (_seed > 80)>>
+				with a pair of her fellow fucktoys industriously sucking on her nipples.
+			<<elseif (_seed > 60)>>
+				<<if $activeSlave.anus > 0>>
+				taking double penetration from
+				<<else>>
+				being spitroasted by
+				<</if>>
+				a pair of her fellow fucktoys.
+			<<elseif (_seed > 40)>>
+				<<if canAchieveErection($activeSlave)>>
+				with her dick inside
+				<<elseif $activeSlave.dick > 0>>
+				getting her soft dick sucked by
+				<<else>>
+				getting eaten out by
+				<</if>>
+				a fellow fucktoy.
+			<<elseif (_seed > 20)>>
+				<<if $activeSlave.anus > 0>>
+				getting her ass pounded
+				<<else>>
+				getting eaten out
+				<</if>>
+				by a fellow fucktoy.
+			<<else>>
+				performing oral sex on a fellow fucktoy.
+			<</if>>
+		<<else>>
+			<<if ($activeSlave.energy > 95)>>
+				is having enthusiastic sex with your other pets while waiting for your cock.
+			<<else>>
+				is having idle sex with several of your other toys while they await your pleasure.
+				<<if ($activeSlave.fetishKnown == 1)>>
+					<<switch $activeSlave.fetish>>
+					<<case "buttslut">>
+						She's happily taking a strap-on up her asspussy.
+					<<case "cumslut">>
+						She's happily performing oral on another slave.
+					<<case "dom">>
+						She's holding another slave down while she fucks her.
+					<<case "submissive">>
+						She's letting another slave hold her down as she fucks her.
+					<<case "sadist">>
+						She's spanking another slave with one hand and giving her a handjob with the other.
+					<<case "masochist">>
+						Another slave is spanking her and giving her a handjob at the same time.
+					<<case "boobs">>
+						She has a slave sucking on each of her nipples while she gives each a handjob.
+					<<case "pregnancy">>
+						<<if $activeSlave.preg > 20>>
+							She's sighing contentedly as her rounded belly is sensually rubbed.
+						<<else>>
+							She's happily roleplaying conceiving a child as she gets fucked.
+						<</if>>
+					<</switch>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<case "stay confined">>
+		is confined, but you have a fine view of her <<if $seeRace == 1>>$activeSlave.race body <</if>>on the feed from her cell.
+	<<case "be confined in the cellblock">>
+		is confined in $cellblockName, but you have a fine view of her <<if $seeRace == 1>>$activeSlave.race body <</if>>on the feed from her cell.
+	<<case "be confined in the arcade" "work a glory hole">>
+		is confined in <<if $activeSlave.assignment == "be confined in the arcade">>$arcadeName<<else>>a glory hole<</if>>;
+		<<if (_seed > 80)>>
+		$possessive ass is held out at cock height, and a customer is using $possessive fuckhole.
+		<<elseif (_seed > 60)>>
+		$possessive mouth is held open at cock height, and a customer is fucking $possessive throat.
+		<<elseif (_seed > 40)>>
+		a woman is abusing $possessive with a couple of dildos.
+		<<elseif (_seed > 20)>>
+		a customer is cruelly spanking $possessive helpless butt.
+		<<else>>
+		a customer is harshly using $possessive defenseless anus.
+		<</if>>
+	<<case "be the Madam">>
+		is managing $brothelName: she is making sure all the customers are satisfied and all the whores are working hard.
+	<<case "be your Concubine">>
+		<<if random(1,2) == 1>>
+			is looking after herself; she spends many hours every day on her beauty regimen.
+		<<else>>
+			is checking over the appearance of your harem, making sure everyone looks perfect.
+		<</if>>
+	<<case "be the Wardeness">>
+		is looking after the cells: she is
+		<<if _seed > 50>>
+		forcing a resistant slave to orally service her.
+		<<else>>
+		beating a rebellious slave across the buttocks.
+		<</if>>
+	<<case "live with your Head Girl">>
+		is getting the Head Girl's suite cleaned up while $HeadGirl.slaveName is out working.
+	<<case "be the Stewardess">>
+		is managing the house servants in $servantsQuartersName: she overseeing the laboring house slaves and punishing any that step out of line.
+	<<case "be the Schoolteacher">>
+		is teaching classes in $schoolroomName: she is leading the slave students in rote recitation.
+	<<case "be the DJ">>
+		is right where she belongs, in the DJ booth in $clubName she leads. She's bouncing in time with the beat to show off her tits.
+	<<case "be the Milkmaid">>
+		is working in $dairyName, looking after your stock.
+/%
+	<<case "guard you">>
+		is standing discreetly behind your left shoulder, watching for threats. She has a straight ceramic sword strapped to her back and a machine pistol at her hip.
+%/
+	<<default>> /* WALKPASTS START HERE */
+
+		<<if ($activeSlave.heels == 1) && ($activeSlave.shoes !== "flats") && ($activeSlave.shoes !== "none")>>
+			walks past your desk with the tiny swaying steps she must take in order to walk on her surgically altered legs. She is on her way to
+		<<elseif ($activeSlave.shoes == "heels")>>
+			walks past your desk with the swaying steps she must take in her high heels. She is on her way to
+		<<elseif ($activeSlave.shoes == "boots")>>
+			walks past your desk with the confident gait encouraged by her high heeled boots. She is on her way to
+		<<elseif ($activeSlave.shoes == "extreme heels")>>
+			walks past your desk with the tiny swaying steps she must take in her ridiculous heels. She is on her way to
+		<<elseif ($activeSlave.heels == 1)>>
+			crawls past your desk on all fours, since she has not been allowed the heels she needs to walk upright. She is on her way to
+		<<elseif ($activeSlave.amp == 1)>>
+			is carried past your desk by one of your other slaves. She is on her way to
+		<<elseif !canWalk($activeSlave)>>
+			is helped past your desk by one of your other slaves. She is on her way to
+		<<else>>
+			walks past your desk on her way to
+		<</if>>
+
+		<<switch $activeSlave.assignment>>
+		<<case "rest">>
+			<<if _seed > 50>>
+			bed;
+			<<else>>
+			eat;
+			<</if>>
+		<<case "get milked">>
+			drain her
+			<<if ($activeSlave.lactation == 0) && ($activeSlave.balls > 0)>>
+			cum-filled, <<if $seeRace == 1>>$activeSlave.race <</if>>balls;
+			<<elseif ($activeSlave.lactation > 0) && ($activeSlave.balls > 0)>>
+			cum-filled, <<if $seeRace == 1>>$activeSlave.race <</if>>balls and milky udders;
+			<<else>>
+			milky <<if $seeRace == 1>>$activeSlave.race <</if>>udders;
+			<</if>>
+		<<case "whore">>
+			<<if _seed > 50>>
+			sell her <<if $seeRace == 1>>$activeSlave.race <</if>>body;
+			<<else>>
+			ply her trade as a whore;
+			<</if>>
+		<<case "serve the public">>
+			<<if _seed > 50>>
+			serve the public;
+			<<else>>
+			be a public slut;
+			<</if>>
+		<<case "rest in the spa">>
+			relax in $spaName;
+		<<case "be a servant">>
+			clean up after your other slaves;
+		<<case "learn in the schoolroom">>
+			attend classes
+			<<if $Schoolteacher == 0>>
+			in $schoolroomName;
+			<<else>>
+			under $Schoolteacher.slaveName, perhaps literally;
+			<</if>>
+		<<case "be a subordinate slave">>
+			service your other slaves;
+		<<case "be the Attendant">>
+			look after the girls in $spaName;
+		<<case "take classes">>
+			attend classes with $assistantName;
+		<<case "be your Head Girl">>
+			oversee your other slaves;
+/%
+		<<case "please you">>
+			sit next to you and wait for
+			<<if _seed > 50>>
+			you to fuck her;
+			<<else>>
+			her Master to use her<<if $seeRace == 1>> $activeSlave.race body<</if>>;
+			<</if>>
+%/
+		<<case "be your Recruiter">>
+			use her connections to recruit slaves;
+		<<default>>
+			$activeSlave.assignment;
+		<</switch>>
+		<<if ($activeSlave.amp == 1)>>
+			she is carried by on her way to her next task.
+		<<elseif $activeSlave.fetish == "mindbroken">>
+			she does not even glance at you as she goes mindlessly to her next task.
+		<<elseif $activeSlave.devotion < -50>>
+			she directs a look of pure hatred at where you sit as she passes.
+		<<elseif $activeSlave.devotion < -20>>
+			she cannot keep the loathing from her face as she passes.
+		<<elseif $activeSlave.devotion <= 20>>
+			she passes quickly, obviously hoping to avoid you.
+		<<elseif $activeSlave.devotion <= 50>>
+			she rushes by, hurrying to her next task.
+		<<else>>
+			as she passes she gives you a look of adoration.
+		<</if>>
+	<</switch>>
+	/* WALKPASTS END */
+<</if>>
+/* TIME TOGETHER EXCEPTION ENDS */
+
+<<if ($partner == "rivalry")>>
+	<<set _partnerSlave = null>>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<if $slaves[_i].ID == $activeSlave.rivalryTarget>>
+		<<set _partnerSlave = $slaves[_i]>>
+		<<break>>
+		<</if>>
+	<</for>>
+	<<if _partnerSlave == null>>
+		<<goto "Main">>
+	<</if>>
+
+	Meanwhile,
+	<<if $activeSlave.rivalry >= 3>>
+		_partnerSlave.slaveName, whom she hates,
+	<<elseif $activeSlave.rivalry >= 2>>
+		her rival _partnerSlave.slaveName
+	<<else>>
+		_partnerSlave.slaveName, whom she dislikes,
+	<</if>>
+
+	<<switch _partnerSlave.assignment>>
+	<<case "stay confined">>
+		is confined, but you have a fine view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feed from her cell.
+	<<case "work in the brothel">>
+		is working in the brothel, and is
+		<<if _seed > 80>>
+		riding a customer's dick.
+		<<elseif _seed > 60>>
+		sucking a customer's cock.
+		<<elseif _seed > 40>>
+		pleasuring a customer's cunt.
+		<<elseif _seed > 20>>
+		getting pounded by a woman wearing a strap-on.
+		<<else>>
+		being held down and buttfucked by a customer.
+		<</if>>
+		You have a voyeuristic view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feeds.
+	<<case "serve the public">>
+		is serving the public, and is
+		<<if _seed > 80>>
+		riding a citizen's dick.
+		<<elseif _seed > 60>>
+		sucking a citizen's cock.
+		<<elseif _seed > 40>>
+		pleasuring a citizen's cunt.
+		<<elseif _seed > 20>>
+		getting pounded by a citizen wearing a strap-on.
+		<<else>>
+		being held down and buttfucked by a citizen.
+		<</if>>
+		You have a voyeuristic view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feeds.
+	<<case "work in the dairy">>
+		<<if ($dairyRestraintsSetting > 1)>>
+		is strapped to a milking machine in $dairyName.
+		<<elseif (_partnerSlave.lactation == 0) && (_partnerSlave.balls > 0)>>
+		is working in $dairyName, and is having her cock milked. As you watch, her balls tighten as the phallus up her butt brings her closer to a copious ejaculation.
+		<<elseif _seed > 50>>
+		is working in $dairyName, having her tits milked.
+		<<else>>
+		is working in $dairyName, massaging her sore tits.
+		<</if>>
+		You have a good view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feeds.
+	<<case "serve in the club">>
+		is working on the club,
+		<<if _seed > 50>>
+		displaying her <<if $seeRace == 1>>_partnerSlave.race <</if>>body, keeping citizens company, and flirting with anyone who shows interest.
+		<<else>>
+		or rather just off it, having taken a prominent citizen back to a discreet room <<if $seeRace == 1>> so he can use her _partnerSlave.race body<</if>>.
+		<</if>>
+	<<case "work as a servant">>
+		<<if _seed > 50>>
+		was scrubbing the penthouse floor, until another slave requested oral service.
+		<<else>>
+		is scrubbing the penthouse floor.
+		<</if>>
+	<<case "guard you">>
+		is standing discreetly behind your left shoulder, watching for threats. She has a straight ceramic sword strapped to her back and a machine pistol at her hip.
+	<<case "be the Madam">>
+		is managing the brothel: she is making sure all the customers are satisfied and all the whores are working hard.
+	<<case "be the Stewardess">>
+		is managing the house servants: she overseeing the laboring house slaves and punishing any that step out of line.
+	<<case "be the Schoolteacher">>
+		is teaching classes: she is leading the slave students in rote recitation.
+	<<case "be the Attendant">>
+		is seeing to girls in the spa: she is gently soaping an exhausted slave.
+	<<case "be the DJ">>
+		is taking the lead on the club: she greets new arrivals, flirts with them prettily, and subtly guides them towards choice sluts.
+	<<case "be the Milkmaid">>
+		is working in the dairy, looking after your stock.
+	<<default>>
+
+	<<if (_partnerSlave.heels == 1) && (_partnerSlave.shoes !== "flats") && (_partnerSlave.shoes !== "none")>>
+		walks past your desk with the tiny swaying steps she must take in order to walk on her surgically altered legs. She is on her way to
+	<<elseif (_partnerSlave.shoes == "heels")>>
+		walks past your desk with the swaying steps she must take in her high heels. She is on her way to
+	<<elseif (_partnerSlave.shoes == "boots")>>
+		walks past your desk with the confident gait encouraged by her high heeled boots. She is on her way to
+	<<elseif (_partnerSlave.shoes == "extreme heels")>>
+		walks past your desk with the tiny swaying steps she must take in her ridiculous heels. She is on her way to
+	<<elseif (_partnerSlave.heels == 1)>>
+		crawls past your desk on all fours, since she has not been allowed the heels she needs to walk upright. She is on her way to
+	<<elseif (_partnerSlave.amp == 1)>>
+		is carried past your desk by one of your other slaves. She is on her way to
+	<<elseif !canWalk(_partnerSlave)>>
+		is helped past your desk by one of your other slaves. She is on her way to
+	<<else>>
+		walks past your desk on her way to
+	<</if>>
+
+	<<switch _partnerSlave.assignment>>
+	<<case "whore">>
+		<<if _seed > 50>>
+		whore;
+		<<else>>
+		sell her <<if $seeRace == 1>>_partnerSlave.race <</if>>body;
+		<</if>>
+	<<case "serve the public">>
+		<<if _seed > 50>>
+		serve the public;
+		<<else>>
+		be a public slut;
+		<</if>>
+	<<case "rest">>
+		<<if _seed > 50>>
+		eat;
+		<<else>>
+		bed;
+		<</if>>
+	<<case "get milked">>
+		<<if _seed > 50>>
+		milk her overfull <<if $seeRace == 1>>_partnerSlave.race <</if>>tits;
+		<<else>>
+		drain her milky <<if $seeRace == 1>>_partnerSlave.race <</if>>udders;
+		<</if>>
+	<<case "please you">>
+		wait next to you and wait for you to fuck $object;
+	<<case "be a subordinate slave">>
+		service your other slaves;
+	<<case "be a servant">>
+		clean up after your other slaves;
+	<<case "be your Head Girl">>
+		oversee your other slaves;
+	<<case "be your Recruiter">>
+		use her connections to recruit slaves;
+	<<default>>
+		_partnerSlave.assignment;
+	<</switch>>
+
+	<<if (_partnerSlave.amp == 1)>>
+		she is carried by on her way to her next task.
+	<<elseif _partnerSlave.fetish == "mindbroken">>
+		she does not even glance at you as she goes mindlessly to her next task.
+	<<elseif _partnerSlave.devotion < -50>>
+		she directs a look of pure hatred at where you sit as she passes.
+	<<elseif _partnerSlave.devotion < -20>>
+		she cannot keep the loathing from her face as she passes.
+	<<elseif _partnerSlave.devotion <= 20>>
+		she passes quickly, obviously hoping to avoid you.
+	<<elseif _partnerSlave.devotion <= 50>>
+		she rushes by, hurrying to her next task.
+	<<else>>
+		as she passes she gives you a look of adoration.
+	<</if>>
+
+	<</switch>>
+	<<set $target = "FRival", _partnerSlave = null>>
+<<elseif ($partner == "relationship") && ($activeSlave.relationship >= 3) && ($activeSlave.releaseRules !== "restrictive")>>
+	<<set _partnerSlave = null>>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<if $slaves[_i].ID == $activeSlave.relationshipTarget>>
+			<<set _partnerSlave = $slaves[_i]>>
+			<<if $activeSlave.relationship <= 3>>
+			<<set _activeSlaveRel = "friend with benefits">>
+			<<elseif $activeSlave.relationship <= 4>>
+			<<set _activeSlaveRel = "lover">>
+			<<else>>
+			<<set _activeSlaveRel = "slave wife">>
+			<</if>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<if _partnerSlave == null>>
+		<<goto "Main">>
+	<</if>>
+
+	$activeSlave.slaveName and _partnerSlave.slaveName are
+	<<set _seed = random(1,3)>>
+	<<if _seed == 1>> /* SEXY TIMES */
+
+	<<if (($activeSlave.fetish == "dom") || ($activeSlave.fetish == "sadist")) && ($activeSlave.dick > 0) && canPenetrate($activeSlave) && ((_partnerSlave.fetish == "dom") || (_partnerSlave.fetish == "sadist")) && (_partnerSlave.dick > 0) && canPenetrate(_partnerSlave)>>
+		performing double anal on another slave. They're face to face over their sub's shoulders, looking into each other's eyes with every appearance of enjoyment and love, since for them rubbing dicks inside another slave's butt is what constitutes healthy sexual activity. _partnerSlave.slaveName is on the bottom, and holds their victim atop her with _partnerSlave.slaveName's cock already hilted in her ass so $activeSlave.slaveName can force herself inside as well. They enjoy the overstimulated girl's struggles.
+		<<set $activeSlave.penetrativeCount++, _partnerSlave.penetrativeCount++, $penetrativeTotal += 2>>
+	<<elseif ($activeSlave.energy > 95)>>
+		having loud sex <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName is such a sexual addict that she wants it all the time, and _partnerSlave.slaveName does her best to help her _activeSlaveRel get off.
+		<<if ($activeSlave.vagina > 0) || ($activeSlave.anus > 0)>>
+			$activeSlave.slaveName is down on her knees in front of _partnerSlave.slaveName, taking
+			<<if (_partnerSlave.dick > 1) && canPenetrate(_partnerSlave)>>
+				her cock doggy style,
+			<<elseif (_partnerSlave.dick > 1)>>
+				a finger fuck, since her _activeSlaveRel is impotent,
+			<<else>>
+				a strap-on, doggy style,
+			<</if>>
+			<<if ($activeSlave.vagina > 0) && canDoVaginal($activeSlave) && (random(1,100) > 50)>>
+				in her pussy.
+				<<VaginalVCheck>>
+			<<elseif canDoAnal($activeSlave) >>
+				in her ass.
+				<<AnalVCheck>>
+			<</if>>
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<else>>
+			They're scissoring enthusiastically and playing with each other's breasts.
+			<<set $activeSlave.mammaryCount++, _partnerSlave.mammaryCount++, $mammaryTotal += 2>>
+		<</if>>
+	<<elseif ($activeSlave.fetishStrength > 60) && ($activeSlave.fetishKnown == 1)>>
+	<<switch $activeSlave.fetish>>
+	<<case "boobs">>
+		snuggling rather sexually <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName loves having her breasts touched and massaged, so _partnerSlave.slaveName looks after her _activeSlaveRel's tits.
+		<<if (_partnerSlave.amp == 1)>>
+			Since _partnerSlave.slaveName is an amputee $activeSlave.slaveName has her propped on her belly so she can easily suckle and nuzzle.
+		<<else>>
+			They're spooning in bed with _partnerSlave.slaveName forming the large spoon so she can reach around and play with $activeSlave.slaveName's boobs.
+		<</if>>
+		<<set $activeSlave.mammaryCount++, _partnerSlave.mammaryCount++, $mammaryTotal += 2>>
+	<<case "buttslut">>
+		having loud buttsex <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName is such an anal addict that she wants it all the time, and _partnerSlave.slaveName does her best to keep her _activeSlaveRel satisfied.
+		<<if ($activeSlave.anus > 0)>>
+			$activeSlave.slaveName is down on her knees in front of _partnerSlave.slaveName, taking
+			<<if (_partnerSlave.dick > 1) && canPenetrate(_partnerSlave)>>
+				her cock up the butt.
+				<<if ($activeSlave.anus > 2) && (_partnerSlave.dick > 2)>>
+					$activeSlave.slaveName is clearly enjoying getting buttfucked by a cock big enough to make her feel tight again.
+				<<elseif ($activeSlave.anus > 2) && (_partnerSlave.dick > 1)>>
+					$activeSlave.slaveName's gaping ass takes _partnerSlave.slaveName's cock easily.
+				<<elseif ($activeSlave.anus > 2)>>
+					$activeSlave.slaveName can barely tell _partnerSlave.slaveName's little dick is even there, but it's the thought that counts.
+				<<elseif ($activeSlave.anus < 2) && (_partnerSlave.dick > 2)>>
+					$activeSlave.slaveName is panting and writhing with the pain of taking her _activeSlaveRel's massive dick. _partnerSlave.slaveName is doing her best to be gentle.
+				<<elseif ($activeSlave.anus < 2) && (_partnerSlave.dick > 1)>>
+					$activeSlave.slaveName is writhing with the mixed pain and pleasure of having her tight ass stretched by her _activeSlaveRel's nice cock.
+				<<elseif ($activeSlave.anus < 2)>>
+					$activeSlave.slaveName's tight anus and _partnerSlave.slaveName's little dick work well together; $activeSlave.slaveName can take it easily, and _partnerSlave.slaveName gets to fuck a hole that's tight, even for her.
+				<</if>>
+			<<elseif (_partnerSlave.dick > 1)>>
+				a finger fuck, since her _activeSlaveRel is impotent.
+				<<if ($activeSlave.anus > 2)>>
+					Or rather, a fist fuck, since that's what it takes to satisfy her _activeSlaveRel's gaping hole.
+				<<elseif ($activeSlave.anus > 1)>>
+					_partnerSlave.slaveName is using three fingers to stretch her _activeSlaveRel's asshole.
+				<<else>>
+					_partnerSlave.slaveName is using two fingers to gently fuck her _activeSlaveRel's tight anus.
+				<</if>>
+			<<else>>
+				a strap-on up the butt, doggy style. _partnerSlave.slaveName is using a
+				<<if ($activeSlave.anus > 2)>>
+					massive fake phallus to satisfy her _activeSlaveRel's gaping hole.
+				<<elseif ($activeSlave.anus > 1)>>
+					decent-sized fake phallus to stretch her _activeSlaveRel's asshole.
+				<<else>>
+					small fake phallus to gently fuck her _activeSlaveRel's tight anus.
+				<</if>>
+			<</if>>
+			<<AnalVCheck>>
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<else>>
+			Since $activeSlave.slaveName is an anal virgin, _partnerSlave.slaveName is rimming her _activeSlaveRel, who is clearly enjoying herself.
+			<<set $activeSlave.oralCount++, _partnerSlave.oralCount++, $oralTotal += 2>>
+		<</if>>
+	<<case "cumslut">>
+		sharing oral pleasure <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName is such an oral addict that she wants it all the time, and _partnerSlave.slaveName certainly doesn't mind all the loving oral attention. They're lying down to 69 comfortably,
+		<<if (_partnerSlave.dick > 1) && canPenetrate(_partnerSlave)>>
+			with $activeSlave.slaveName hungrily sucking her _activeSlaveRel's turgid cock.
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<elseif (_partnerSlave.dick > 1) && (_partnerSlave.anus > 0)>>
+			with $activeSlave.slaveName hungrily sucking her _activeSlaveRel's limp cock. She has a finger up poor impotent _partnerSlave.slaveName's butt to stimulate her prostate so she can cum for her.
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<elseif (_partnerSlave.dick > 1)>>
+			with $activeSlave.slaveName hungrily sucking her _activeSlaveRel's limp cock. She has a finger massaging poor impotent _partnerSlave.slaveName's perineum in the hope of stimulating her so she can cum for her.
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<else>>
+			and $activeSlave.slaveName is sating her oral fixation for the moment by eagerly polishing her _activeSlaveRel's pearl.
+			<<set _partnerSlave.oralCount++, $oralTotal++>>
+		<</if>>
+		<<set $activeSlave.oralCount++, $oralTotal++>>
+	<<case "submissive">>
+		wrestling <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName is such a submissive that she wants it rough all the time, and _partnerSlave.slaveName does her best give her _activeSlaveRel the constant abuse she loves. $activeSlave.slaveName is down on her knees in front of _partnerSlave.slaveName, worshipping
+		<<if (_partnerSlave.dick > 1) && canPenetrate(_partnerSlave)>>
+			her cock
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<elseif (_partnerSlave.dick > 1)>>
+			her asshole
+			<<set _partnerSlave.oralCount++, $oralTotal++>>
+		<<else>>
+			her cunt
+			<<set _partnerSlave.oralCount++, $oralTotal++>>
+		<</if>>
+		while _partnerSlave.slaveName rains light slaps and loving insults down on her bitch of a _activeSlaveRel.
+		<<set $activeSlave.oralCount++, $oralTotal++>>
+	<<case "dom">>
+		wrestling <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName is so dominant with other slaves that she prefers to take what she wants, and _partnerSlave.slaveName does her best give her _activeSlaveRel the struggle fucking she loves. $activeSlave.slaveName is on top of _partnerSlave.slaveName getting oral, though it's more of a rough facefuck as $activeSlave.slaveName forces
+		<<if ($activeSlave.dick > 1) && canPenetrate($activeSlave)>>
+			her cock
+		<<else>>
+			a strap-on
+		<</if>>
+		down _partnerSlave.slaveName's throat.
+		<<set _partnerSlave.oralCount++, $activeSlave.penetrativeCount++, $oralTotal++, $penetrativeTotal++>>
+	<<case "sadist">>
+		playing pain games <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName loves hurting other slaves, even her friends, and _partnerSlave.slaveName submits to her agonizing ministrations as often as $activeSlave.slaveName can cajole or force her into it. $activeSlave.slaveName has _partnerSlave.slaveName over her knee and is methodically tanning _partnerSlave.slaveName's $activeSlave.skin ass.
+	<<case "masochist">>
+		playing pain games <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName loves being hurt, so _partnerSlave.slaveName frequently indulges her with spanking, slapping, pinching, and more exotic forms of abuse. _partnerSlave.slaveName has $activeSlave.slaveName over her knee and is methodically tanning $activeSlave.slaveName's $activeSlave.skin ass.
+	<<case "humiliation">>
+		having open and visible sex <<if $activeSlave.livingRules == "luxurious">>in the doorway of the nice little room they share.<<else>>out in the hallway near the slave dormitory.<</if>> $activeSlave.slaveName pretends to hate fucking where other slaves can see her, but _partnerSlave.slaveName knows her _activeSlaveRel gets off on the mild humiliation. _partnerSlave.slaveName
+		<<if ($activeSlave.vagina > 0) || ($activeSlave.anus > 0)>>
+			has her back propped up against a doorframe and $activeSlave.slaveName in her lap, so she can blush at any passing slave as she shyly rides _partnerSlave.slaveName's
+			<<if (_partnerSlave.dick > 1) && canPenetrate(_partnerSlave)>>
+				cock
+			<<else>>
+				strap-on
+			<</if>>
+			<<if ($activeSlave.vagina > 0) && canDoVaginal($activeSlave) && (random(1,100) > 50)>>
+				in her pussy.
+				<<VaginalVCheck>>
+			<<else>>
+				up her ass.
+				<<AnalVCheck>>
+			<</if>>
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<else>>
+			is giving $activeSlave.slaveName oral out in the open so she can blush and shiver as passing slaves see her climax.
+			<<set $activeSlave.oralCount++, _partnerSlave.oralCount++, $oralTotal += 2>>
+		<</if>>
+	<<case "pregnancy">>
+		having intimate sex <<if $activeSlave.livingRules == "luxurious">>in the nice little room they share.<<elseif ($activeSlave.ID == $HeadGirl.ID) && ($HGSuite == 1)>>in $activeSlave.ID's suite.<<else>>out in the open in the slave dormitory.<</if>> $activeSlave.slaveName's <<if $activeSlave.preg > 10>>middle is round with child<<else>>desire to be bred is raging<</if>>, and _partnerSlave.slaveName does her best to keep her _activeSlaveRel satisfied.
+		_partnerSlave.slaveName
+		<<if ($activeSlave.vagina > 0) || ($activeSlave.anus > 0)>>
+			<<if _partnerSlave.preg > 20>> is heavily pregnant herself, so she has $activeSlave.slaveName on her back so that she can penetrate her as best she can with her<<elseif _partnerSlave.preg > 10>> is pregnant herself, so she has $activeSlave.slaveName on her back so that she can penetrate her easier with her<<else>>has $activeSlave.slaveName on her back so that tease her belly as she fucks her with her<</if>>
+			<<if (_partnerSlave.dick > 1) && canPenetrate(_partnerSlave)>>
+				cock
+			<<else>>
+				strap-on
+			<</if>>
+			<<if ($activeSlave.vagina > 0) && canDoVaginal($activeSlave) && (random(1,100) > 50)>>
+				in her <<if $activeSlave.preg > 10>>pregnant <</if>>pussy.
+				<<VaginalVCheck>>
+			<<else>>
+				in her ass.
+				<<AnalVCheck>>
+			<</if>>
+			<<set _partnerSlave.penetrativeCount++, $penetrativeTotal++>>
+		<<else>>
+			is giving $activeSlave.slaveName oral to try and sate her lust.
+			<<set $activeSlave.oralCount++, _partnerSlave.oralCount++, $oralTotal += 2>>
+		<</if>>
+	<</switch>>
+	<<elseif !$activeSlave.need>>
+		just spooning in bed. Since $activeSlave.slaveName gets fucked at work, _partnerSlave.slaveName understands that what she really wants from her is emotional intimacy. They're cuddling quietly, offering each other silent comfort and companionship.
+	<<elseif ($activeSlave.dick > 1) && canPenetrate($activeSlave) && (_partnerSlave.vagina > 0) && canDoVaginal(_partnerSlave) && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> making love in the missionary position. _partnerSlave.slaveName has her legs wrapped around $activeSlave.slaveName's waist and her arms hugging her around the chest, and is looking deep into her eyes as she enjoys the wonderful feeling of her _activeSlaveRel's cock in her womanhood.
+		<<set $activeSlave.penetrativeCount++, _partnerSlave.vaginalCount++, $vaginalTotal++, $penetrativeTotal++>>
+	<<elseif ($activeSlave.clit > 2) && ($activeSlave.vaginalAccessory != "chastity belt") && (_partnerSlave.vagina > 0) && canDoVaginal(_partnerSlave) && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> making love in the missionary position. _partnerSlave.slaveName has her legs wrapped around $activeSlave.slaveName's waist and her arms hugging her around the chest, and is looking deep into her eyes as she enjoys the wonderful feeling of her _activeSlaveRel's huge clit in her womanhood.
+		<<set _partnerSlave.vaginalCount++, $activeSlave.penetrativeCount++, $vaginalTotal++, $penetrativeTotal++>>
+	<<elseif ($activeSlave.dick > 1) && canPenetrate($activeSlave) && canDoAnal(_partnerSlave) && (_partnerSlave.anus > 0) && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> having gentle anal sex while spooning. $activeSlave.slaveName is enjoying _partnerSlave.slaveName's ass, and is doing her best to ensure her _activeSlaveRel enjoys being buttfucked. She's nibbling her _activeSlaveRel's ears and neck, cupping a breast with one hand, and lightly stimulating her with the other.
+		<<set _partnerSlave.analCount++, $activeSlave.penetrativeCount++, $analTotal++, $penetrativeTotal++>>
+	<<elseif ($activeSlave.clit > 2) && canDoAnal(_partnerSlave) && (_partnerSlave.anus > 0) && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> managing to have clitoral-anal sex. _partnerSlave.slaveName is facedown with her ass up, spreading her buttocks as wide as possible, giving her _activeSlaveRel the opportunity to squat over her and penetrate it with her huge, erect clit. $activeSlave.slaveName can't thrust much, but the shocking lewdness of the act is enough for both of them.
+		<<set _partnerSlave.analCount++, $activeSlave.penetrativeCount++, $analTotal++, $penetrativeTotal++>>
+	<<elseif ($activeSlave.dick > 1) && canPenetrate($activeSlave) && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> spooning while $activeSlave.slaveName gently rubs her cock between _partnerSlave.slaveName's thighs, pressed tightly together. Since _partnerSlave.slaveName is a virgin, this is the closest they can come to penetrative intercourse, but $activeSlave.slaveName is enjoying _partnerSlave.slaveName's body anyway, and is doing her best to ensure her _activeSlaveRel enjoys herself. She's nibbling her _activeSlaveRel's ears and neck, cupping a breast with one hand, and lightly stimulating her with the other.
+		<<set $activeSlave.penetrativeCount++, $penetrativeTotal++>>
+	<<elseif ($activeSlave.clit > 2) && ($activeSlave.vaginalAccessory != "chastity belt") && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in the nice little room they share,<<else>>out in the open in the slave dormitory,<</if>> with _partnerSlave.slaveName down on her knees in front of $activeSlave.slaveName. From behind _partnerSlave.slaveName it looks like she's giving her _activeSlaveRel a conventional, if enthusiastic, blowjob. Only on closer inspection does it become clear how unusual the oral is: $activeSlave.slaveName has such a huge clit that her _activeSlaveRel can suck her off just like it were a penis.
+		<<set _partnerSlave.oralCount++, $activeSlave.penetrativeCount++, $oralTotal++, $penetrativeTotal++>>
+	<<elseif (_partnerSlave.vagina > 0) && canDoVaginal(_partnerSlave) && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> making love in the missionary position. _partnerSlave.slaveName has her legs wrapped around $activeSlave.slaveName's waist and her arms hugging her around the chest, and is looking deep into her eyes as she enjoys the feeling of her _activeSlaveRel fucking her with a strap-on.
+		<<set _partnerSlave.vaginalCount++, $activeSlave.penetrativeCount++, $vaginalTotal++, $penetrativeTotal++>>
+	<<elseif (_partnerSlave.anus > 0) && (_partnerSlave.amp != 1) && ($activeSlave.amp != 1) && canDoAnal(_partnerSlave)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> having gentle anal sex while spooning. $activeSlave.slaveName is enjoying penetrating _partnerSlave.slaveName's ass  with a strap-on, and is doing her best to ensure her _activeSlaveRel enjoys being buttfucked. She's nibbling her _activeSlaveRel's ears and neck, cupping a breast with one hand, and lightly stimulating her with the other.
+		<<set _partnerSlave.analCount++, $activeSlave.penetrativeCount++, $analTotal++, $penetrativeTotal++>>
+	<<elseif (_partnerSlave.amp != 1) && ($activeSlave.amp != 1)>>
+		<<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share,<<else>>out in the open on $activeSlave.slaveName's bedroll in the slave dormitory,<</if>> enjoying some mutual masturbation.
+	<<elseif (_partnerSlave.amp == 1)>>
+		just cuddling <<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share.<<else>>on $activeSlave.slaveName's bedroll in the slave dormitory.<</if>> $activeSlave.slaveName is using _partnerSlave.slaveName's limbless torso as a pillow, which _partnerSlave.slaveName seems to be enjoying, by her contented expression.
+	<<else>>
+		just cuddling <<if $activeSlave.livingRules == "luxurious">>in bed in the nice little room they share.<<else>>on $activeSlave.slaveName's bedroll in the slave dormitory.<</if>> They're lying quietly, offering each other silent comfort and companionship.
+	<</if>>
+
+	<<elseif _seed == 2>> /* CUDDLE TIME */
+	<<if ($activeSlave.energy > 95) && (random(0,2) == 0)>>
+		lying in bed together. _partnerSlave.slaveName has somehow managed to exhaust her _activeSlaveRel, and the sexually sated nympho is curled up with her head on _partnerSlave.slaveName's chest, snoring lightly. _partnerSlave.slaveName is smiling fondly at her.
+	<<elseif (_partnerSlave.dick > 6) && ($activeSlave.amp !== 1)>>
+		sleeping in bed together. $activeSlave.slaveName is cuddled up close to _partnerSlave.slaveName, and is cradling her _activeSlaveRel's enormous, soft cock with one hand.
+	<<elseif ($activeSlave.fetishKnown == 1)>>
+		<<switch $activeSlave.fetish>>
+		<<case "boobs">>
+			sleeping in bed together. $activeSlave.slaveName is using _partnerSlave.slaveName's <<if _partnerSlave.boobs > 2000>>enormous breasts<<elseif _partnerSlave.boobs > 1000>>huge boobs<<elseif _partnerSlave.boobs > 300>>healthy tits<<else>>flat chest<</if>>, which she loves, as a pillow.
+		<<case "buttslut">>
+			sleeping in bed together. _partnerSlave.slaveName is sleeping face down so $activeSlave.slaveName can use her <<if _partnerSlave.butt > 5>>enormous posterior<<elseif _partnerSlave.butt > 2>>big butt<<elseif _partnerSlave.butt > 1>>trim behind<<else>>skinny ass<</if>>, which $activeSlave.slaveName loves, as a pillow.
+		<<case "cumslut">>
+			sleeping in bed together. $activeSlave.slaveName is spooning her _activeSlaveRel, her head nestled alongside _partnerSlave.slaveName's, her <<if $activeSlave.lips > 70>>enormous<<elseif $activeSlave.lips > 40>>pillowlike<<elseif $activeSlave.lips > 10>>plush<<else>>pretty<</if>> lips wet from kissing her to sleep.
+		<<case "submissive" "masochist" "humiliation">>
+			sleeping in bed together. $activeSlave.slaveName is being spooned by her _activeSlaveRel, smiling peacefully at being held.
+		<<case "dom" "sadist">>
+			sleeping in bed together. $activeSlave.slaveName is spooning her _activeSlaveRel possessively<<if $activeSlave.amp !== 1>>, and even in her sleep, has a proprietary hand on _partnerSlave.slaveName's <<if _partnerSlave.balls > 0>>balls<<elseif _partnerSlave.balls > 0>>soft cock<<else>>pussy<</if>><</if>>.
+		<<case "pregnancy">>
+			sleeping in bed together.
+			<<if $activeSlave.preg > 20 && _activeSlaveRel.preg > 20>>
+				They are pressed as close as they can be with their rounded middles in the way.
+			<<elseif $activeSlave.preg > 20>>
+				$activeSlave.slaveName is spooning her _activeSlaveRel possessively, her rounded belly pushing into her back.
+			<<elseif _activeSlaveRel.preg > 20>>
+				$activeSlave.slaveName is spooning her _activeSlaveRel possessively<<if $activeSlave.amp != 1>>, and even in her sleep, has a proprietary hand on _partnerSlave.slaveName's belly<</if>>.
+			<<else>>
+				$activeSlave.slaveName is being spooned by her _activeSlaveRel, smiling peacefully at being held.
+			<</if>>
+		<</switch>>
+	<<elseif $activeSlave.height > _partnerSlave.height>>
+		sleeping in bed together, with the taller $activeSlave.slaveName curled around her little _activeSlaveRel.
+	<<elseif $activeSlave.amp == 1>>
+		sleeping in bed together; _partnerSlave.slaveName is using her limbless _activeSlaveRel as a pillow.
+	<<elseif _partnerSlave.amp !== 1>>
+		resting in bed together, holding hands in their sleep.
+	<<else>>
+		sleeping quietly in bed together.
+	<</if>>
+
+	<<else>> /* TOGETHER TIME */
+	<<if ($activeSlave.age >= _partnerSlave.age+10) && canTalk(_partnerSlave)>>
+		tidying up their room together. _partnerSlave.slaveName is chattering about her day, while $activeSlave.slaveName listens quietly, smiling fondly at her _activeSlaveRel's prattle.
+	<<elseif ($activeSlave.amp !== 1) && (canTalk($activeSlave) == false)>>
+		getting ready for bed. $activeSlave.slaveName is using gestures to tell her $activeSlave.slaveName about her day; _partnerSlave.slaveName is very patient and does her best to follow.
+	<<elseif ($activeSlave.behavioralQuirk == "confident") && canTalk($activeSlave)>>
+		finishing up a meal together. $activeSlave.slaveName is concluding a story, her clear confident voice ringing as she relates a slight.
+	<<elseif ($activeSlave.behavioralQuirk == "cutting") && canTalk($activeSlave)>>
+		seeing to their chores together. $activeSlave.slaveName is making biting remarks about another one of your other slaves, with which her _activeSlaveRel agrees tolerantly.
+	<<elseif ($activeSlave.behavioralQuirk == "funny") && canTalk(_partnerSlave)>>
+		seeing to their chores together. $activeSlave.slaveName has just produced some unintentional slapstick humor, and her _activeSlaveRel is giggling helplessly at her antics.
+	<<elseif ($activeSlave.behavioralQuirk == "fitness")>>
+		have just woken up. $activeSlave.slaveName is doing her morning crunches, and her _activeSlaveRel is sleepily sitting on her feet to help.
+	<<elseif ($activeSlave.behavioralQuirk == "insecure") && canTalk(_partnerSlave)>>
+		have just woken up. $activeSlave.slaveName is getting dressed when her _activeSlaveRel pays her a compliment; $activeSlave.slaveName blushes and gives _partnerSlave.slaveName a kiss.
+	<<elseif ($activeSlave.behavioralQuirk == "sinful") && canTalk($activeSlave)>>
+		have just woken up. $activeSlave.slaveName appears to be praying, but to go by her _activeSlaveRel's quiet mirth, she seems to be substituting in some lewd words.
+	<<elseif ($activeSlave.behavioralQuirk == "advocate") && canTalk($activeSlave)>>
+		starting a meal together. A third, less well trained slave has asked $activeSlave.slaveName an innocent question, and is getting enthusiastic slave dogma in return. Her _activeSlaveRel smiles tolerantly.
+	<<elseif ($activeSlave.amp == 1) && (_partnerSlave.amp !== 1)>>
+		using some of their free time to watch the weather; _partnerSlave.slaveName carried her _activeSlaveRel to a window so she could look out with her.
+	<<elseif ($activeSlave.amp !== 1) && (_partnerSlave.amp == 1)>>
+		using some of their free time to watch the weather; $activeSlave.slaveName carried her _activeSlaveRel to a window so she could look out with her.
+	<<elseif $cockFeeder == 1>>
+		taking in a meal together; they've chosen dispensers next to each other and are slurping away.
+	<<elseif $suppository == 1>>
+		taking their drugs together; they've chosen fuckmachines next to each other and are chatting quietly as they're sodomized.
+	<<else>>
+		eating a quiet meal together.
+	<</if>>
+
+	<</if>>
+	/* CLOSE SEXY/CUDDLE/TOGETHER TIME */
+
+	<<if $slaves[_i].ID == _partnerSlave.ID>>
+		<<set $slaves[_i] = _partnerSlave>>
+	<<else>>
+		<<for _i = 0; _i < $slaves.length; _i++>>
+			<<if $slaves[_i].ID == _partnerSlave.ID>>
+			<<set $slaves[_i] = _partnerSlave>>
+			<<break>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<if $slaves[_i].ID == $activeSlave.ID>>
+		<<set $slaves[_i] = $activeSlave>>
+		<<break>>
+		<</if>>
+	<</for>>
+	<<set $target = "FRelation", _partnerSlave = null>>
+
+<<elseif ($partner == "relationship") || ($partner == "relation")>>
+	<<set _partnerSlave = null>>
+	<<if ($partner == "relation")>>
+			<<for _i = 0; _i < $slaves.length; _i++>>
+				<<if $slaves[_i].ID == $activeSlave.relationTarget>>
+					<<set _partnerSlave = $slaves[_i]>>
+					<<break>>
+				<</if>>
+			<</for>>
+	<<else>>
+		<<for _i = 0; _i < $slaves.length; _i++>>
+			<<if $slaves[_i].ID == $activeSlave.relationshipTarget>>
+			<<set _partnerSlave = $slaves[_i]>>
+			<<if $activeSlave.relationship <= 1>>
+				<<set _activeSlaveRel = "friend", _partnerRel = "friend">>
+			<<elseif $activeSlave.relationship <= 2>>
+				<<set _activeSlaveRel = "best friend", _partnerRel = "best friend">>
+			<<elseif $activeSlave.relationship <= 3>>
+				<<set _activeSlaveRel = "friend with benefits", _partnerRel = "friend with benefits">>
+			<<elseif $activeSlave.relationship <= 4>>
+				<<set _activeSlaveRel = "lover", _partnerRel = "lover">>
+			<<elseif $activeSlave.relationship > 4>>
+				<<set _activeSlaveRel = "slave wife", _partnerRel = "slave wife">>
+			<</if>>
+			<<break>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<<if _partnerSlave == null>>
+		<<goto "Main">>
+	<</if>>
+
+	Her <<if ($partner == "relation")>>_partnerSlave.relation<<else>>_activeSlaveRel<</if>> _partnerSlave.slaveName
+	<<switch _partnerSlave.assignment>>
+	<<case "stay confined">>
+		is confined, but you have a fine view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feed from her cell.
+	<<case "work in the brothel">>
+		is working in the brothel, and is
+		<<if (_seed > 80)>>
+		riding a customer's dick.
+		<<elseif (_seed > 60)>>
+		sucking a customer's cock.
+		<<elseif (_seed > 40)>>
+		pleasuring a customer's cunt.
+		<<elseif (_seed > 20)>>
+		getting pounded by a woman wearing a strap-on.
+		<<else>>
+		being held down and buttfucked by a customer. You have a voyeuristic view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feeds.
+		<</if>>
+		You have a voyeuristic view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feeds.
+	<<case "serve the public">>
+		is serving the public, and is
+		<<if (_seed > 80)>>
+		riding a citizen's dick.
+		<<elseif (_seed > 60)>>
+		sucking a citizen's cock.
+		<<elseif (_seed > 40)>>
+		pleasuring a citizen's cunt.
+		<<elseif (_seed > 20)>>
+		getting pounded by a citizen wearing a strap-on.
+		<<else>>
+		being held down and buttfucked by a citizen.
+		<</if>>
+		You have a voyeuristic view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feeds.
+	<<case "work in the dairy">>
+		<<if ($dairyRestraintsSetting > 1)>>
+		is strapped to a milking machine in $dairyName.
+		<<elseif (_partnerSlave.lactation == 0) && (_partnerSlave.balls > 0)>>
+		is working in $dairyName, and is having her cock milked. As you watch, her balls tighten as the phallus up her butt brings her closer to a copious ejaculation.
+		<<elseif _seed > 50>>
+		is working in $dairyName, having her tits milked.
+		<<else>>
+		is working in $dairyName, massaging her sore tits.
+		<</if>>
+		You have a good view of her <<if $seeRace == 1>>_partnerSlave.race body <</if>>on the feeds.
+	<<case "serve in the club">>
+		is working on the club,
+		<<if _seed > 50>>
+		displaying her <<if $seeRace == 1>>_partnerSlave.race <</if>>body, keeping citizens company, and flirting with anyone who shows interest.
+		<<else>>
+		or rather just off it, having taken a prominent citizen back to a discreet room <<if $seeRace == 1>> so he can use her _partnerSlave.race body<</if>>.
+		<</if>>
+	<<case "work as a servant">>
+		<<if _seed > 50>>
+		was scrubbing the penthouse floor, until another slave requested oral service.
+		<<else>>
+		is scrubbing the penthouse floor.
+		<</if>>
+	<<case "guard you">>
+		is standing discreetly behind your left shoulder, watching for threats. She has a straight ceramic sword strapped to her back and a machine pistol at her hip.
+	<<case "be the Madam">>
+		is managing the brothel: she is making sure all the customers are satisfied and all the whores are working hard.
+	<<case "be the Attendant">>
+		is seeing to girls in the spa: she is gently soaping an exhausted slave.
+	<<case "be the Stewardess">>
+		is managing the house servants: she overseeing the laboring house slaves and punishing any that step out of line.
+	<<case "be the DJ">>
+		is taking the lead on the club: she greets new arrivals, flirts with them prettily, and subtly guides them towards choice sluts.
+	<<case "be the Schoolteacher">>
+		is teaching classes: she is leading the slave students in rote recitation.
+	<<case "be the Milkmaid">>
+		is working in the dairy, looking after your stock.
+	<<default>>
+
+	<<if (_partnerSlave.heels == 1) && (_partnerSlave.shoes !== "flats") && (_partnerSlave.shoes !== "none")>>
+		walks past your desk with the tiny swaying steps she must take in order to walk on her surgically altered legs. She is on her way to
+	<<elseif (_partnerSlave.shoes == "heels")>>
+		walks past your desk with the swaying steps she must take in her high heels. She is on her way to
+	<<elseif (_partnerSlave.shoes == "boots")>>
+		walks past your desk with the confident gait encouraged by her high heeled boots. She is on her way to
+	<<elseif (_partnerSlave.shoes == "extreme heels")>>
+		walks past your desk with the tiny swaying steps she must take in her ridiculous heels. She is on her way to
+	<<elseif (_partnerSlave.heels == 1)>>
+		crawls past your desk on all fours, since she has not been allowed the heels she needs to walk upright. She is on her way to
+	<<elseif (_partnerSlave.amp == 1)>>
+		is carried past your desk by one of your other slaves. She is on her way to
+	<<else>>
+		walks past your desk on her way to
+	<</if>>
+
+	<<switch _partnerSlave.assignment>>
+	<<case "whore">>
+		<<if _seed > 50>>
+		whore;
+		<<else>>
+		sell her <<if $seeRace == 1>>_partnerSlave.race <</if>>body;
+		<</if>>
+	<<case "serve the public">>
+		<<if _seed > 50>>
+		serve the public;
+		<<else>>
+		be a public slut;
+		<</if>>
+	<<case "rest">>
+		<<if _seed > 50>>
+		eat;
+		<<else>>
+		bed;
+		<</if>>
+	<<case "get milked">>
+		<<if _seed > 50>>
+		milk her overfull <<if $seeRace == 1>>_partnerSlave.race <</if>>tits;
+		<<else>>
+		drain her milky <<if $seeRace == 1>>_partnerSlave.race <</if>>udders;
+		<</if>>
+	<<case "please you">>
+		sit next to you and wait for
+		<<if _seed > 50>>
+		you to fuck her;
+		<<else>>
+		her Master to use her<<if $seeRace == 1>> _partnerSlave.race body<</if>>;
+		<</if>>
+	<<case "be a subordinate slave">>
+		service your other slaves;
+	<<case "be a servant">>
+		clean up after your other slaves;
+	<<case "be your Head Girl">>
+		oversee your other slaves;
+	<<case "be your Recruiter">>
+		use her connections to recruit slaves;
+	<</switch>>
+
+	<<if (_partnerSlave.amp == 1)>>
+		she is carried by on her way to her next task.
+	<<elseif _partnerSlave.fetish == "mindbroken">>
+		she does not even glance at you as she goes mindlessly to her next task.
+	<<elseif _partnerSlave.devotion < -50>>
+		she directs a look of pure hatred at where you sit as she passes.
+	<<elseif _partnerSlave.devotion < -20>>
+		she cannot keep the loathing from her face as she passes.
+	<<elseif _partnerSlave.devotion <= 20>>
+		she passes quickly, obviously hoping to avoid you.
+	<<elseif _partnerSlave.devotion <= 50>>
+		she rushes by, hurrying to her next task.
+	<<else>>
+		as she passes she gives you a look of adoration.
+	<</if>>
+
+	<</switch>>
+	<<set $target = "FRelation", _partnerSlave = null>>
+<<elseif (_seed > 80) && ($activeSlave.fuckdoll == 0)>>
+	<<BoobsDescription>>
+	<<switch $activeSlave.clothes>>
+	<<case "uncomfortable straps">>
+		<<if $activeSlave.boobs < 300>>
+			The rings constantaly rub against her chest and force her nipples to stick out.
+		<<else>>
+			The strap over her tits presses the soft flesh, and the ring around each nipple forces them to stick out.
+		<</if>>
+	<<case "shibari ropes">>
+		<<if $activeSlave.boobs < 300>>
+			The ropes binding her chest shift slightly with every step, since she lacks any breasts to hold them in place.
+		<<else>>
+			The ropes binding her chest dig into the soft flesh as she moves.
+		<</if>>
+	<<case "restrictive latex">>
+		<<if $activeSlave.boobs < 300>>
+			Her lack of breasts draws your eyes straight to her exposed nipples.
+		<<else>>
+			Her tits stick out through her latex outfit.
+		<</if>>
+	<<case "attractive lingerie">>
+		Her pretty white lace bra has thoughtful cuts that tastefully let her nipples stick through.
+	<<case "a succubus outfit">>
+		<<if $activeSlave.boobs < 300>>
+			Her succubus outfit presents this sex demon's flat chest, inviting a damning fondle.
+		<<else>>
+			Her succubus outfit presents this sex demon's breasts, inviting a damning fondle.
+		<</if>>
+	<<case "a slutty maid outfit">>
+		<<if $activeSlave.boobs < 300>>
+			Her maid outfit covers her flat chest with a thin white blouse designed to be easy to pull down.
+		<<else>>
+			Her maid outfit covers her breasts with a thin white blouse designed to be easy to pull down.
+		<</if>>
+	<<case "a nice maid outfit">>
+		<<if $activeSlave.boobs < 300>>
+			Her maid outfit covers her flat chest demurely, offering the diverting task of pulling it off her.
+		<<else>>
+			Her maid outfit covers her breasts demurely, offering the diverting task of pulling it off her.
+		<</if>>
+	<<case "a string bikini">>
+		Her string bikini covers only her nipples, leaving the remainder of her <<if $activeSlave.boobs < 300>>flat chest<<else>>breasts<</if>> naked.
+	<<case "clubslut netting">>
+		As she moves, the weave of the netting over her chest slips back and forth across her nipples.
+	<<case "a cheerleader outfit">>
+		<<if $activeSlave.boobs < 300>>
+			As she moves, the tight fabric rubs across her obvious nipples.
+		<<else>>
+			As she moves, her chest threatens to fall out of her cheerleader top.
+		<</if>>
+	<<case "cutoffs and a t-shirt">>
+		<<if $activeSlave.boobs < 300>>
+			Her non-existent breasts are bare under her t-shirt; not that you can really tell since they lack motion completely.
+		<<else>>
+			Her tits are bare under her t-shirt, so movement gives delicious hints of their motion.
+		<</if>>
+	<<case "a slutty outfit">>
+		<<if (random(1,100) > 50)>>
+			For today's slutty outfit she's chosen a handkerchief top that occasionally comes untied and <<if $activeSlave.boobs < 300>>reveals her flat chest<<else>>spills her breasts out naked<</if>>.
+		<<else>>
+			For today's slutty outfit she's chosen a halter top cut so low that <<if $activeSlave.boobs < 300>>it occasionally slips down her flat chest to reveal a nipple<<else>>her breasts occasionally pop out<</if>>.
+		<</if>>
+	<<case "a slave gown">>
+		Her gorgeous dress has thoughtful cuts that tastefully bares her <<if $activeSlave.boobs < 300>>non-existent <</if>>breasts.
+	<<case "slutty business attire">>
+		Her suit jacket and blouse are low enough to show off a lot of boob<<if $activeSlave.boobs < 300>>, or they would, had she had any<</if>>.
+	<<case "nice business attire">>
+		Her suit jacket and blouse are businesslike, but they could be removed easily enough.
+	<<case "a halter top dress">>
+		Her beautiful halter top dress almost seems to be sculpted around her body.
+	<<case "a ball gown">>
+		Her fabulous silken ball gown is tailored to accentuate the shape of her <<if $activeSlave.boobs < 300>>flat chest<<else>>breasts<</if>>.
+	<<case "a slutty nurse outfit">>
+		Her jacket presents her <<if $activeSlave.boobs < 300>>nipples<<else>>breasts<</if>> to be ogled.
+	<<case "a schoolgirl outfit">>
+		Her blouse lewdly displays her <<if $activeSlave.boobs < 300>>$activeSlave.nipples nipples<<else>>breasts<</if>>.
+	<<case "a kimono">>
+	<<case "a hijab and abaya">>
+	<<case "a huipil">>
+	<<case "battledress">>
+		<<if $activeSlave.boobs < 300>>
+			As she moves, you can occasionally spot her lack of undergarments.
+		<<else>>
+			Her tank top and sports bra support rather than flatter her breasts.
+		<</if>>
+	<<case "a fallen nuns habit">>
+		Her slutty nun outfit leaves her <<if $activeSlave.boobs < 300>>flat <</if>>tits sinfully bare.
+	<<case "a chattel habit">>
+		Her chattel habit leaves her <<if $activeSlave.boobs < 300>>flat <</if>>tits virtuously bare.
+	<<case "a penitent nuns habit">>
+		Her habit chafes her nipples so harshly that it would probably be a relief to her to have it stripped off her.
+	<<case "a comfortable bodysuit">>
+		Her bodysuit is tight enough to show off <<if $activeSlave.boobs < 300>>just how flat she is<<else>>every contour of her chest<</if>>.
+	<<case "a latex catsuit">>
+		Her latex catsuit is tight enough to show off <<if $activeSlave.boobs < 300>>just how flat she is<<else>>every contour of her chest<</if>>.
+	<<case "a military uniform">>
+		Her uniform tunic and shirt are formal, but they could be removed easily enough.
+	<<case "a nice nurse outfit">>
+		Her nurse's outfit is functional, but they could be removed easily enough.
+	<<case "a mini dress">>
+		Her mini dress is tight enough to show off <<if $activeSlave.boobs < 300>>just how flat she is<<else>>every contour of her chest<</if>>.
+	<<case "a leotard">>
+		<<if $activeSlave.boobs < 300>>
+			Her leotard draws the eye straight to her obvious nipples, since it lacks anything else to show off.
+		<<else>>
+			Her leotard is tight enough that it not only hugs her breasts, but shows off her nipples.
+		<</if>>
+	<<case "a bunny outfit">>
+		<<if $activeSlave.boobs < 300>>
+			With no breasts to speak of, her strapless corset teddy manages to look rather slutty.
+		<<else>>
+			Her strapless corset teddy presents her boobs while still managing to look a bit classy.
+		<</if>>
+	<<case "harem gauze">>
+		Her <<if $activeSlave.boobs < 300>>non-existent <</if>>breasts are clearly visible through the thin gauze that covers them.
+	<<case "slutty jewelry">>
+		<<if $activeSlave.boobs < 300>>
+			The light chain across her non-existent breasts is the only thing on her chest capable of moving as she walks.
+		<<else>>
+			The light chain under her breasts accentuates their natural movement.
+		<</if>>
+	<<default>>
+		<<if ($activeSlave.vaginalAccessory == "chastity belt")>>
+			Since she's wearing nothing but a chastity belt, her <<if $activeSlave.boobs < 300>>non-existent <</if>>breasts are delightfully naked.
+		<<else>>
+			Her naked <<if $activeSlave.boobs < 300>> flat chest and nipples<<else>>breasts<</if>> catch your eye.
+		<</if>>
+	<</switch>>
+	<<set $target = "FBoobs">>
+<<elseif (_seed > 60)>>
+	<<ButtDescription>>
+	<<switch $activeSlave.clothes>>
+	<<case "a Fuckdoll suit">>
+		Its suit is expressly designed to encourage use of its rear hole.
+	<<case "uncomfortable straps">>
+		A strap passes between her
+		<<if ($activeSlave.amp !== 1 )>>
+		legs, giving her gait an awkward sway.
+		<<else>>
+		leg stumps, pressing against her genitals.
+		<</if>>
+	<<case "shibari ropes">>
+		<<if ($activeSlave.amp !== 1 )>>
+		Ropes bind her legs, giving her gait an awkward sway.
+		<<else>>
+		A rope passes between her leg stumps, pressing against her genitals.
+		<</if>>
+	<<case "restrictive latex">>
+		As some of the only islands in the sea of black latex, her holes are eyecatching.
+	<<case "a fallen nuns habit">>
+		Her slutty nun outfit invites sin.
+	<<case "a chattel habit">>
+		Her chattel habit is designed for sex without being removed.
+	<<case "a penitent nuns habit">>
+		Her habit chafes her so cruelly that it would probably be a relief to her to have it pulled off, even if she's roughly fucked afterward.
+	<<case "attractive lingerie">>
+		As she moves, her pretty white garter belt holds her stockings high up on her thighs.
+	<<case "a succubus outfit">>
+		Her succubus outfit's tail holds her skirt up high in back, inviting a damning fuck.
+	<<case "a slutty maid outfit">>
+		Her maid's skirt is cut extremely short, so that the slightest movement reveals a glimpse of her ass.
+	<<case "a nice maid outfit">>
+		Her maid's skirt is cut conservatively, but it will lift easily enough.
+	<<case "a string bikini">>
+		As she moves, her string lingerie leaves the entire line of her hips naked and enticing.
+	<<case "clubslut netting">>
+		As she moves, her clubslut netting moves with her, leaving nothing to the imagination.
+	<<case "a cheerleader outfit">>
+		As she moves, her pleated cheerleader bounces up and down flirtily.
+	<<case "cutoffs and a t-shirt">>
+		As she moves, her cutoffs hug her butt.
+	<<case "a slutty outfit">>
+		For today's slutty outfit she's chosen
+		<<if (random(1,100) > 50) && ($activeSlave.amp !== 1)>>
+		yoga pants so sheer that everything she's got is clearly visible.
+		<<elseif ($activeSlave.dick > 0)>>
+		a miniskirt so brief that her ass is hanging out the back, and her dick is occasionally visible from the front.
+		<<else>>
+		a miniskirt so brief that her ass is hanging out the back, and her naked cunt is occasionally visible from the front.
+		<</if>>
+	<<case "a slave gown">>
+		<<if ($activeSlave.amp == 1)>>
+		Her gorgeous dress is specially designed for her limbless form, but without legs to support it, it can hardly conceal the outline of everything she has.
+		<<else>>
+		Her gorgeous dress has a thoughtful cut that runs all the way from her ankle to over her hip, baring a leg all the way up.
+		<</if>>
+	<<case "a halter top dress">>
+		Her beautiful halter top dress seems to be sculpted around her bottom.
+	<<case "a ball gown">>
+		Her fabulous silken ball gown is tailored to fit her and accentuates the shape of her butt.
+	<<case "a slutty nurse outfit">>
+		Her tight skirt flatters her ass.
+	<<case "a schoolgirl outfit">>
+		<<if $activeSlave.anus == 0>>
+			This schoolgirl clearly needs to lose her anal virginity.
+		<<elseif $activeSlave.vagina == 0>>
+			This schoolgirl clearly takes it up the ass; that way, she can remain a virgin, and be, like, totally pure and innocent.
+		<<else>>
+			This schoolgirl clearly takes it up the ass.
+		<</if>>
+	<<case "a kimono">>
+		<<if ($activeSlave.butt > 5)>>
+		Her kimono demurely covers her behind, though it cannot conceal its massive shape.
+		<<else>>
+		Her kimono demurely covers her behind.
+		<</if>>
+	<<case "a hijab and abaya">>
+		<<if ($activeSlave.butt > 5)>>
+		Her abaya totally covers her behind, though it cannot conceal its massive shape.
+		<<else>>
+		Her abaya totally conceals her behind.
+		<</if>>
+	<<case "battledress">>
+		Her fatigue trousers are not particularly flattering to her butt.
+	<<case "nice business attire">>
+		Her attractive skirt is nevertheless tight enough to show off her derriere.
+	<<case "slutty business attire">>
+		Her skirt is so short it'll barely be necessary to lift it.
+	<<case "a comfortable bodysuit">>
+		Her bodysuit displays the curves of her butt.
+	<<case "a latex catsuit">>
+		Her latex catsuit displays the curves of her butt.
+	<<case "a military uniform">>
+		Her uniform skirt is nevertheless tight enough to show off her derriere.
+	<<case "a nice nurse outfit">>
+		Her nurse's trousers demurely cover her behind.
+	<<case "a mini dress">>
+		Her mini dress displays the curves of her butt.
+	<<case "a leotard">>
+		Her leotard leaves her buttocks gloriously bare.
+	<<case "a bunny outfit">>
+		Her teddy covers her rear, but in tight satin that flatters its curves.
+	<<case "harem gauze">>
+		Her hips are clearly visible through the thin gauze that covers it.
+	<<case "a toga">>
+		Her stellar behind is accented by the light material of her toga.
+	<<case "a huipil ">>
+		Her huipil is so short that her butt is on display.
+	<<case "slutty jewelry">>
+		Her belt of light chain accentuates her hips.
+	<<default>>
+		<<if ($activeSlave.vaginalAccessory == "chastity belt")>>
+			Her chastity belt protects her from vanilla intercourse.
+		<<else>>
+			You run your eye over her naked hips.
+		<</if>>
+	<</switch>>
+	<<set $target = "FButt">>
+<<elseif (_seed > 40)>>
+	<<if ($activeSlave.preg > 30) || ($activeSlave.bellyAccessory == "a huge empathy belly") || ($activeSlave.bellyAccessory == "a large empathy belly")>>
+		<<BellyDescription>>
+		<<switch $activeSlave.clothes>>
+		<<case "conservative clothing">>
+			Her taut blouse shows off her huge belly.
+		<<case "chains">>
+			Her huge belly bulges between her tight chains.
+		<<case "a slutty qipao">>
+			The front of her qipao rests atop her huge belly.
+		<<case "uncomfortable straps">>
+			A steel ring rests around her navel, held in place by tight straps. Her huge belly bulges around them.
+		<<case "shibari ropes">>
+			Her huge belly bulges out from between her ropes.
+		<<case "restrictive latex" "a latex catsuit">>
+			Her huge belly looks like a large beach ball under her tight latex, her popped navel breaks the smoothness.
+		<<case "a military uniform">>
+			Her huge belly threatens to pop the buttons off her tunic.
+		<<case "a nice nurse outfit">>
+			Her huge belly strains against her scrub top, making her resemble more a maternity ward patient than a nurse.
+		<<case "a mini dress">>
+			Her huge belly threatens to tear apart her mini dress.
+		<<case "a slutty maid outfit">>
+			Her huge belly is partially covered by a thin white blouse.
+		<<case "a nice maid outfit">>
+			Her huge belly threatens to tear her maid outfit open, her popped navel is visible under her apron.
+		<<case "a penitent nuns habit">>
+			Her huge belly bulges her habit, it looks absolutely sinful.
+		<<case "clubslut netting">>
+			Her huge belly threatens to tear apart her clubslut netting.
+		<<case "a cheerleader outfit">>
+			Her huge belly is partly covered by her cheerleader's top.
+		<<case "a halter top dress">>
+			Her huge belly fills out her halter top dress, the seams straining to contain it.
+		<<case "a ball gown">>
+			Your gaze is drawn to her huge pregnant belly by her fabulous silken ball gown.
+		<<case "a slave gown">>
+			Her huge belly is gently caressed by her gown.
+		<<case "nice business attire">>
+			Her huge belly threatens to pop the buttons off her jacket.
+		<<case "harem gauze">>
+			Her silken garb and huge pregnant belly makes her look like a belly dancer.
+		<<case "a toga">>
+			Her loose fitted toga leaves plenty of space for her swollen belly.
+		<<case "a huipil">>
+			Her pregnant belly is so huge that the huipil won't even come close to reaching her protruding navel.
+		<<case "a comfortable bodysuit">>
+			Her huge belly lewdly fills her bodysuit. <<if ($activeSlave.bellyAccessory !== "a huge empathy belly") && ($activeSlave.bellyAccessory !== "a large empathy belly")>>You swear you can see her babies kicking underneath the form fitting material.<</if>>
+		<<case "a schoolgirl outfit">>
+			Her huge belly is only partly covered by her blouse.
+		<<case "a kimono">>
+			Her kimono demurely covers the sides of her huge belly.
+		<<case "a hijab and abaya">>
+			Her huge belly tents her abaya.
+		<<case "a leotard">>
+			Her huge belly lewdly stretches her leotard. <<if ($activeSlave.bellyAccessory !== "a huge empathy belly") && ($activeSlave.bellyAccessory !== "a large empathy belly")>>You swear you can see her babies kicking underneath the form fitting material.<</if>>
+		<<case "a chattel habit">>
+			Her huge belly shoves the strip of cloth on her front to her side.
+		<<case "a bunny outfit">>
+			Her huge belly is threatening to tear her teddy, the seams along the side are already splitting.
+		<<default>>
+			Her bare huge pregnant belly catches your eye.
+		<</switch>>
+	<<elseif ($activeSlave.preg > 20) || ($activeSlave.bellyAccessory == "a medium empathy belly")>>
+		<<BellyDescription>>
+		<<switch $activeSlave.clothes>>
+		<<case "conservative clothing">>
+			Her taut blouse shows off her big belly.
+		<<case "chains">>
+			Her big belly bulges between her tight chains.
+		<<case "a slutty qipao">>
+			The front of her qipao rests atop her big belly.
+		<<case "uncomfortable straps">>
+			A steel ring rests around her navel, held in place by tight straps. Her big belly bulges around them.
+		<<case "shibari ropes">>
+			Her big belly bulges out from between her ropes.
+		<<case "restrictive latex" "a latex catsuit">>
+			Her big belly looks like a beach ball under her tight latex, her popped navel breaks the smoothness.
+		<<case "a military uniform">>
+			Her big belly strains the buttons on her jacket.
+		<<case "a nice nurse outfit">>
+			Her large belly strains against her scrub top, making her resemble more a maternity ward patient than a nurse.
+		<<case "a mini dress">>
+			Her large belly strains against her mini dress.
+		<<case "a slutty maid outfit">>
+			Her big belly is partially covered by a thin white blouse.
+		<<case "a nice maid outfit">>
+			Her big belly strains her maid outfit, her popped navel is visible under her apron.
+		<<case "a penitent nuns habit">>
+			Her big belly bulges her habit, it looks absolutely sinful.
+		<<case "clubslut netting">>
+			Her big belly strains her clubslut netting.
+		<<case "a cheerleader outfit">>
+			Her big belly is partly covered by her cheerleader's top.
+		<<case "a halter top dress">>
+			Her big belly fills out her halter top dress.
+		<<case "a ball gown">>
+			Your gaze is drawn to her big pregnant belly by her fabulous silken ball gown.
+		<<case "a slave gown">>
+			Her big belly is gently caressed by her gown.
+		<<case "nice business attire">>
+			Her big belly strains the buttons on her jacket.
+		<<case "harem gauze">>
+			Her silken garb and big pregnant belly makes her look like a belly dancer.
+		<<case "a toga">>
+			Her loose fitted toga leaves plenty of space for her swollen belly.
+		<<case "a huipil">>
+			Her pregnant belly is so big that the huipil won't even reach her protruding navel.
+		<<case "a comfortable bodysuit">>
+			Her big belly fills her bodysuit. <<if ($activeSlave.bellyAccessory !== "a medium empathy belly")>>You swear you can see her babies kicking underneath the form fitting material.<</if>>
+		<<case "a schoolgirl outfit">>
+			Her big belly is only partly covered by her blouse.
+		<<case "a kimono">>
+			Her kimono demurely covers her big belly.
+		<<case "a hijab and abaya">>
+			Her big belly tents her abaya.
+		<<case "a leotard">>
+			Her big belly stretches her leotard. <<if ($activeSlave.bellyAccessory !== "a medium empathy belly")>>You swear you can see her babies kicking underneath the form fitting material.<</if>>
+		<<case "a chattel habit">>
+			Her big belly shoves the strip of cloth on her front to her side.
+		<<case "a bunny outfit">>
+			Her big belly is strains her teddy, the seams along the side are showing signs of wear.
+		<<default>>
+			Her bare pregnant belly catches your eye.
+		<</switch>>
+	<<elseif $activeSlave.weight >= 95>>
+		<<BellyDescription>>
+		<<switch $activeSlave.clothes>>
+		<<case "a Fuckdoll suit">>
+			Its suit is expressly designed to encourage use of its holes.
+		<<case "conservative clothing">>
+			Her taut blouse shows every jiggle in her fat gut as she moves.
+		<<case "chains">>
+			Her fat gut jiggles lewdly between her tight chains.
+		<<case "a slutty qipao">>
+			The front of her qipao rests atop, and jiggles with, her fat gut as she moves.
+		<<case "uncomfortable straps">>
+			Her fat gut jiggles lewdly between her tight straps.
+		<<case "shibari ropes">>
+			Her fat gut jiggles lewdly between the binding ropes.
+		<<case "restrictive latex" "a latex catsuit">>
+			Her fat gut barely has any room to move under her tight latex.
+		<<case "a military uniform">>
+			The buttons on her staining jacket can barely hold back her fat, jiggling gut.
+		<<case "a nice nurse outfit">>
+			Her scrub top jiggles along with her fat gut as she moves.
+		<<case "a mini dress">>
+			Her stretched minidress shows every jiggle in her fat gut as she moves.
+		<<case "a slutty maid outfit">>
+			Her fat gut is partially covered by a thin white blouse, that happily jiggles along with every motion.
+		<<case "a nice maid outfit">>
+			As she moves, a slight jiggle can be seen within her maid's dress.
+		<<case "a penitent nuns habit">>
+			Her habit does nothing to stop her fat gut from jiggling against the coarse cloth as she moves.
+		<<case "clubslut netting">>
+			Her clubslut netting jiggles lewdly along with her fat gut as she moves.
+		<<case "a cheerleader outfit">>
+			Her fat gut is partially covered by her cheerleader's top, which happily jiggles along with every motion.
+		<<case "a halter top dress">>
+			Her stretched halter top dress shows every jiggle in her fat gut as she moves.
+		<<case "a ball gown">>
+			Your gaze is drawn to her fat gut by her fabulous silken ball gown.
+		<<case "a slave gown">>
+			Her fat, jiggly gut is gently caressed by her gown.
+		<<case "nice business attire">>
+			Slight jiggling from her fat gut can be seen under her jacket.
+		<<case "harem gauze">>
+			Her silken garb and fat, jiggly gut makes her look like a belly dancer.
+		<<case "a toga">>
+			Her toga swerves loosely from side to side as her chubby body moves inside it.
+		<<case "a huipil">>
+			Her lithe huipil can't hide her voluptuous shape unless she stands completely still.
+		<<case "a comfortable bodysuit">>
+			The taut material of her bodysuit shows every jiggle in her fat gut as she moves.
+		<<case "a schoolgirl outfit">>
+			Her fat gut is partially covered by her blouse, which happily jiggles along with every motion.
+		<<case "a kimono">>
+			Slight jiggling can be seen through her kimono whenever she moves.
+		<<case "a hijab and abaya">>
+			Slight jiggling can be seen through her abaya whenever she moves.
+		<<case "a leotard">>
+			The taut material of her leotard shows every jiggle in her fat gut as she moves.
+		<<case "a chattel habit">>
+			Her fat gut jiggles around the strip of cloth down her front as she moves.
+		<<case "a bunny outfit">>
+			She is a sight in her bunny outfit. The front of her fat gut is held still by her teddy, but everything else of it jiggles obscenely with her every motion.
+		<<default>>
+			Her bare, jiggling, fat gut catches your eye.
+		<</switch>>
+	<<elseif ($activeSlave.preg > 10) || ($activeSlave.bellyAccessory == "a small empathy belly")>>
+		<<BellyDescription>>
+		<<switch $activeSlave.clothes>>
+		<<case "a Fuckdoll suit">>
+			Its suit is expressly designed to encourage use of its holes.
+		<<case "conservative clothing">>
+			Her blouse bulges with her growing belly.
+		<<case "chains">>
+			Her growing belly bulges between her tight chains.
+		<<case "a slutty qipao">>
+			The front of her qipao rests atop her growing belly.
+		<<case "uncomfortable straps">>
+			A steel ring rests around her navel, held in place by tight straps.  Her growing belly bulges around them.
+		<<case "shibari ropes">>
+			Her growing belly bulges out from between her ropes.
+		<<case "restrictive latex" "a latex catsuit">>
+			Her growing belly bulges beneath her tight latex.
+		<<case "a military uniform">>
+			Her growing belly bulges her uniform tunic.
+		<<case "a nice nurse outfit">>
+			Her growing belly is clearly visible through her scrub top.
+		<<case "a mini dress">>
+			Her growing belly bulges her tight mini dress.
+		<<case "a slutty maid outfit">>
+			Her growing belly bulges her thin white blouse.
+		<<case "a nice maid outfit">>
+			Her growing belly is concealed by her maid outfit.
+		<<case "a penitent nuns habit">>
+			Her growing belly bulges her habit.
+		<<case "clubslut netting">>
+			Her growing belly fills out her clubslut netting.
+		<<case "a cheerleader outfit">>
+			Her growing belly peeks out from under her cheerleader's top.
+		<<case "a halter top dress">>
+			Her growing belly bulges her halter top dress.
+		<<case "a ball gown">>
+			Your gaze is drawn to her growing pregnant belly by her fabulous silken ball gown.
+		<<case "a slave gown">>
+			Her growing belly is gently caressed by her gown.
+		<<case "nice business attire">>
+			Her growing belly bulges her suit jacket.
+		<<case "harem gauze">>
+			Her silken garb and growing pregnant belly makes her look like a belly dancer.
+		<<case "a toga">>
+			Her toga is so loose that you can barely notice her growing belly.
+		<<case "a huipil">>
+			Her growing belly can be seen from the sides of her huipil.
+		<<case "a comfortable bodysuit">>
+			Her growing belly fills her bodysuit.
+		<<case "a schoolgirl outfit">>
+			Her growing belly peeks out from under her blouse.
+		<<case "a kimono">>
+			Her kimono demurely covers her growing belly.
+		<<case "a hijab and abaya">>
+			Her growing belly gently tents her abaya.
+		<<case "a leotard">>
+			Her growing belly fills her leotard.
+		<<case "a chattel habit">>
+			Her growing belly shows under the strip of cloth on her front.
+		<<case "a bunny outfit">>
+			Her growing belly fills her teddy.
+		<<default>>
+			Her barely visible pregnancy catches your eye.
+		<</switch>>
+	<</if>>
+	<<set $target = "FVagina">>
+<<elseif (_seed > 20)>>
+	<<AnusDescription>>
+	<<switch $activeSlave.clothes>>
+	<<case "a Fuckdoll suit">>
+		Its suit is expressly designed to encourage use of its rear hole.
+	<<case "uncomfortable straps">>
+		The ring over her asshole beckons.
+	<<case "shibari ropes">>
+		The rope between her buttocks presses lewdly against her anus as she moves.
+	<<case "restrictive latex">>
+		As one of the only islands in the sea of black latex, her asshole is eye catching.
+	<<case "a fallen nuns habit">>
+		Her slutty nun outfit leaves her butthole bare and available for anal sin.
+	<<case "a chattel habit">>
+		Her chattel habit covers her anus with a strip of cloth, but it's designed to be lifted readily.
+	<<case "a penitent nuns habit">>
+		Her habit chafes her rear end so cruelly that it would probably be a relief to her to have it pulled up for a rough buttfuck.
+	<<case "attractive lingerie">>
+		<<if ($activeSlave.anus > 1) && ($activeSlave.amp == 1)>>
+		Her pretty g-string frequently fails to cover her big butthole.
+		<<elseif ($activeSlave.anus > 1)>>
+		As she moves, her pretty g-string frequently fails to cover her big butthole.
+		<<else>>
+		As she moves, her pretty g-string draws your attention to her ass.
+		<</if>>
+	<<case "a succubus outfit">>
+		Her succubus outfit's tail holds her skirt up high in back, inviting a damning buttfuck.
+	<<case "a nice maid outfit">>
+		Her long maid's skirt will have to be gotten out of the way to permit access to her ass.
+	<<case "a slutty maid outfit">>
+		Her short maid's skirt can be lifted to reveal her bare buttocks.
+	<<case "a slutty nurse outfit">>
+		Her tight skirt flatters her ass as she moves.
+	<<case "a schoolgirl outfit">>
+		<<if $activeSlave.anus == 0>>
+			This schoolgirl clearly needs to lose her anal virginity.
+		<<elseif $activeSlave.vagina == 0>>
+			This schoolgirl clearly takes it up the ass; that way, she can remain a virgin, and be, like, totally pure and innocent.
+		<<else>>
+			This schoolgirl clearly takes it up the ass.
+		<</if>>
+	<<case "a kimono">>
+		<<if ($activeSlave.butt > 5)>>
+		Her kimono demurely covers her behind, though it cannot conceal its massive shape.
+		<<else>>
+		Her kimono demurely covers her behind.
+		<</if>>
+	<<case "a hijab and abaya">>
+		<<if ($activeSlave.butt > 5)>>
+		Her abaya totally covers her behind, though it cannot conceal its massive shape.
+		<<else>>
+		Her abaya totally conceals her behind.
+		<</if>>
+	<<case "battledress">>
+		Her fatigue trousers are not particularly flattering to her butt.
+	<<case "a string bikini">>
+		<<if ($activeSlave.anus > 1)>>
+		As she moves, her big butthole is clearly visible behind her tiny g-string.
+		<<else>>
+		As she moves, her tiny g-string draws your attention to her ass.
+		<</if>>
+	<<case "clubslut netting">>
+		As she moves, the hole in her netting right over her butthole looks inviting.
+	<<case "a cheerleader outfit">>
+		As she moves, her short pleated cheerleader skirt shows off her butt.
+	<<case "cutoffs and a t-shirt">>
+		As she moves, her tight cutoffs flatter her butt.
+	<<case "a slutty outfit">>
+		<<if ($activeSlave.butt > 5)>>
+		For today's slutty outfit she's chosen a leather skirt with zippers that permit ready access to her butt.
+		<<else>>
+		For today's slutty outfit she's chosen fishnets with a hole cut over her asshole so she can be sodomized without removing or damaging her clothing.
+		<</if>>
+	<<case "a slave gown">>
+		Her gorgeous dress leaves little to the imagination; there's little doubt her butt is bare beneath it.
+	<<case "a halter top dress">>
+		Her dress should slide up over her butt to reveal her backdoor.
+	<<case "a ball gown">>
+		Her ballgown and its petticoats could easily be flipped up to bare her butt.
+	<<case "slutty business attire">>
+		Her short skirt will easily slide up to bare her asshole.
+	<<case "nice business attire">>
+		Her conservative skirt can be slid up over her hips to bare her butthole.
+	<<case "a comfortable bodysuit">>
+		Her bodysuit demands attention for her tightly clad backdoor.
+	<<case "a latex catsuit">>
+		Her latex catsuit's crotch zipper offer ready access to her backdoor.
+	<<case "a military uniform">>
+		Her uniform skirt can be slid up over her hips to bare her butthole.
+	<<case "a nice nurse outfit">>
+		Her nurse's trousers can be easily slid down to expose her butthole.
+	<<case "a mini dress">>
+		Her mini dress can be easily slid up to expose her butthole.
+	<<case "a leotard">>
+		As her buttocks work naturally with her movement, her tight leotard gives hints of her asshole.
+	<<case "a bunny outfit">>
+		Her fluffy white cottontail draws attention to her butt, inevitably bringing anal to mind.
+	<<case "harem gauze">>
+		Her ass is clearly visible through the thin gauze that covers it.
+	<<case "a toga">>
+		Her toga is so transparent it can't hide her asscrack, which looks very seductive
+	<<case "a huipil">>
+		Her huipil can be easily lifted to access her naked butt.
+	<<case "slutty jewelry">>
+		Her belt of light chain threatens to dip into her asscrack with each step.
+	<<default>>
+		<<if ($activeSlave.vaginalAccessory == "chastity belt")>>
+			Her chastity belt leaves her ass available.
+		<<else>>
+			You run your eye over her naked ass.
+		<</if>>
+	<</switch>>
+	<<set $target = "FAnus">>
+<<elseif (_seed > 0)>>
+	<<faceDescription>>
+	<<mouthDescription>>
+	<<switch $activeSlave.collar>>
+	<<case "a Fuckdoll suit">>
+		Its suit is expressly designed to encourage use of its face hole.
+	<<case "uncomfortable leather">>
+		Her uncomfortable leather collar makes her swallow and lick her lips periodically, making it look like she's offering oral even though she's just trying to relieve the discomfort.
+	<<case "tight steel" "cruel retirement counter">>
+		Her tight steel collar makes her swallow and lick her lips periodically, making it look like she's offering oral even though she's just trying to relieve the discomfort.
+	<<case "dildo gag">>
+		Her ring gag would make her ready for oral service, as soon as the formidable dildo it secures down her throat is removed.
+	<<case "massive dildo gag">>
+		Your eyes are drawn to the distinct bulge in her throat caused by the enormous dildo in it, though her mouth would only be suitable for the largest of cocks right now.
+	<<case "shock punishment">>
+		Her shock collar rests threateningly at her throat, ready to compel her to do anything you wish.
+	<<case "neck corset">>
+		Her fitted neck corset keeps her breaths shallow, and her head posture rigidly upright.
+	<<case "stylish leather">>
+		Her stylish leather collar is at once a fashion statement, and a subtle indication of her enslavement.
+	<<case "satin choker">>
+		Her elegant satin choker is at once a fashion statement, and a subtle indication of her enslavement.
+	<<case "heavy gold">>
+		Her heavy gold collar draws attention to the sexual decadence of her mouth.
+	<<case "pretty jewelry"  "nice retirement counter">>
+		Her pretty necklace can hardly be called a collar, but it's just slavish enough to hint that the throat it rests on is available.
+	<<case "leather with cowbell">>
+		Her cowbell tinkles merrily whenever she moves, instantly dispelling any grace or gravity.
+	<<case "bowtie">>
+		Her black bowtie contrasts with her white collar, drawing the eye towards her neck and face.
+	<<case "ancient Egyptian">>
+		Her wesekh glints richly as she moves, sparkling with opulence and sensuality.
+	<<case "ball gag">>
+		Her ball gag uncomfortably holds her jaw apart as it fills her mouth.
+	<<case "bit gag">>
+		Her bit gag uncomfortably keeps her from closing her jaw; drool visibly pools along the corners of her mouth, where the rod forces back her cheeks.
+	<<default>>
+		Her unadorned <<if $PC.dick == 1>>throat is just waiting to be wrapped around a thick shaft<<else>>lips are just begging for a cunt to lavish attention on<</if>>.
+	<</switch>>
+	<<if random(1,3) == 1>>
+		<<set $target = "FKiss">>
+	<<else>>
+		<<set $target = "FLips">>
+	<</if>>
+<</if>>
+
+<<if $activeSlave.fuckdoll == 0>>
+	<<if (_seed <= 80) && (_seed > 40) && ($activeSlave.vaginalAccessory == "chastity belt")>>
+		//If you wish to have vanilla intercourse with her you must order her to remove her chastity belt.//
+	<<elseif _seed > 100>>
+		<span id="walkpast"><<link "Summon them both">><<replace "#walk">><<include $target>><</replace>><</link>></span>
+	<<elseif $activeSlave.assignment == "stay confined">>
+		<span id="walkpast"><<link "Have her brought out of her cell">><<replace "#walk">><<include $target>><</replace>><</link>></span>
+	<<elseif ($activeSlave.assignment == "work in the dairy") && ($dairyRestraintsSetting > 1)>>
+		//She is strapped into a milking machine and cannot leave $dairyName.//
+	<<elseif ($activeSlave.assignmentVisible == 0)>>
+		<span id="walkpast"><<link "Have her take a break and come up">><<replace "#walk">><<include $target>><</replace>><</link>></span>
+	<<else>>
+		<span id="walkpast"><<link "Call her over">><<replace "#walk">><<include $target>><</replace>><</link>></span>
+	<</if>>
+<<else>>
+	<<switch $target>>
+	<<case "FVagina">>
+		<span id="walkpast"><<link "Fuck it">><<replace "#walk">><<FFuckdollVaginal>><</replace>><</link>></span>
+	<<case "FButt" "FAnus">>
+		<span id="walkpast"><<link "Fuck it">><<replace "#walk">><<FFuckdollAnal>><</replace>><</link>></span>
+	<<default>>
+		<span id="walkpast"><<link "Fuck it">><<replace "#walk">><<FFuckdollOral>><</replace>><</link>></span>
+	<</switch>>
+<</if>>
+</span>
+//

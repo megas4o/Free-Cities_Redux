@@ -1,0 +1,69 @@
+:: Head Girl Suite [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Head Girl Suite", $showEncyclopedia = 1, $encyclopedia = "Head Girl Suite", $HGSuiteSlaves = $HGSuiteiIDs.length, _SL = $slaves.length>>
+
+<<if $HGSuiteName != "the Head Girl Suite">>
+	<<set $HGSuiteNameCaps = $HGSuiteName.replace("the ", "The ")>>
+<</if>>
+
+<<for _i = 0; _i < _SL; _i++>>
+	<<if $slaves[_i].assignment == "live with your Head Girl">>
+		<<break>>
+	<</if>>
+<</for>>
+
+<<if $HeadGirl == 0>>
+	You have no Head Girl appointed to live in $HGSuiteName.
+<<elseif $HGSuiteSlaves > 0>>
+	Your Head Girl $HeadGirl.slaveName has $slaves[_i].slaveName living in $HGSuiteName with her, as her servant, assistant, and sexual appliance.
+<<else>>
+	Your Head Girl $HeadGirl.slaveName lives alone in her handsome suite.
+<</if>>
+
+<br>//Any slave assigned to live with your Head Girl will become, for most practical purposes, her slave.//
+
+<br>
+<<if $HGSuiteEquality == 1>>
+	The two slaves living in $HGSuiteName are ''equals,'' and will alternate weeks as Head Girl and Head Girl's bitch. [[Stop|Head Girl Suite][$HGSuiteEquality = 0]]
+<<else>>
+	The current Head Girl will ''remain Head Girl.'' [[Have them alternate|Head Girl Suite][$HGSuiteEquality = 1,$HGSuiteSurgery = 0,$HGSuiteDrugs = 0,$HGSuiteHormones = 0]] //This will only take effect if the other girl is an appropriate candidate//
+	<br>
+	<<if $HGSuiteSurgery == 1>>
+	She is ''allowed'' to use surgical modification on her slave. [[Disallow|Head Girl Suite][$HGSuiteSurgery = 0]]
+	<<else>>
+	She is ''not allowed'' to use surgical modification on her slave. [[Allow|Head Girl Suite][$HGSuiteSurgery = 1]]
+	<</if>>
+	<br>
+	<<if $HGSuiteDrugs == 1>>
+	She is ''allowed'' to use growth hormones on her slave. [[Disallow|Head Girl Suite][$HGSuiteDrugs = 0]]
+	<<else>>
+	She is ''not allowed'' to use growth hormones on her slave. [[Allow|Head Girl Suite][$HGSuiteDrugs = 1]]
+	<</if>>
+	<br>
+	<<if $HGSuiteHormones == 1>>
+	She is ''allowed'' to customize her slave with hormone treatments. [[Disallow|Head Girl Suite][$HGSuiteHormones = 0]]
+	<<else>>
+	She is ''not allowed'' to customize her slave with hormone treatments. [[Allow|Head Girl Suite][$HGSuiteHormones = 1]]
+	<</if>>
+<</if>>
+
+
+
+	<br><br><span id="manageHG"><strong><<link "Manage Head Girl">><<goto "HG Select">><</link>></strong></span> @@.cyan;[H]@@
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+
+<<if $HGSuiteSlaves > 0>>
+	<br><br>''The Head Girl's girl:''
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<</if>>
+
+<<if ($slaves.length > $HGSuiteSlaves) && ($HGSuiteSlaves < 1)>>
+	<br><br>''Candidates for Head Girl's girls:''
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+<<unset $Flag>>
+
+<br><br>Rename $HGSuiteName: <<textbox "$HGSuiteName" $HGSuiteName "Head Girl Suite">> //Use a noun or similar short phrase//

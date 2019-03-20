@@ -1,0 +1,730 @@
+:: Costs Budget [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main">>
+
+<<if def $lastWeeksFinances>>
+	<<set $lastWeeksFinances.incomeTotal = 0>>
+	<<set $lastWeeksFinances.expensesTotal = 0>>
+	<<set $lastWeeksFinances.profitsTotal = 0>>
+<</if>>
+
+//Here you can view many of the financial details of your arcology.  A list of details about slaves and their costs (food, hormones) can be found in the "Slave maintenance" link.  Other links will take you to relevant areas of your arcology where costs may be able to be adjusted.  "Actuals" are visible back at the main screen (as "since last week") and listed at the very bottom of this page; they very accurately record the total cash change since the previous week.  The other numbers may have small inaccuracies, and some transactions may not be tracked yet at all, but they should help you keep a finger on the financial pulse of your arcology.
+
+<br style="clear:both" /><<if $lineSeparations == 0>><br><<else>><hr style="margin:0"><</if>>
+<br>
+Your weekly costs are as follows://
+
+/* Table of Totals */
+<<if ndef $lastWeeksFinances>>
+	There doesn't see to be financial data available right now.
+<<else>>
+
+<style>
+	table.finances {
+		/*table-layout: fixed;*/
+		text-align: right;
+		border-collapse: separate;
+		border-spacing: 5px;
+		border-style: hidden;
+		empty-cells: hide;
+		width: 75%;
+	}
+</style>
+
+
+<table class="finances" border="1">
+	<tr>
+		<th><h2>Penthouse</h2></th>
+		<th>Income</th>
+		<th>Expense</th>
+		<th>Totals</th>
+	</tr>
+
+	<<if $lastWeeksFinances.incomeWhore || $lastWeeksFinances.expensesWhore>> /* If it's not 0, it will return true. */
+		<tr>
+			<td>Whores</td>
+			<td>$lastWeeksFinances.incomeWhore</td>
+			<td>/*$lastWeeksFinances.expensesWhore*/</td>
+			<td>
+				<<set $lastWeeksFinances.profitsWhore =($lastWeeksFinances.incomeWhore - $lastWeeksFinances.expensesWhore)>>
+				$lastWeeksFinances.profitsWhore
+			</td>
+		</tr>
+	<</if>>
+
+	/*<tr>
+		<td>Rests</td>
+		<td>$lastWeeksFinances.incomeRest</td>
+		<td>$lastWeeksFinances.expensesRest</td>
+		<td>
+			<<set $lastWeeksFinances.profitsRest =($lastWeeksFinances.incomeRest - $lastWeeksFinances.expensesRest)>>
+			$lastWeeksFinances.profitsRest
+		</td>
+	</tr>*/
+
+	<<if $lastWeeksFinances.incomeFucktoy || $lastWeeksFinances.expensesFucktoy>>
+		<tr>
+			<td>Fucktoys <<if $Concubine != 0>>including your concubine <</if>>($fuckSlaves slaves)</td>
+			<td>Rep: $lastWeeksFinances.incomeFucktoy</td>
+			<td>/*$lastWeeksFinances.expensesFucktoy*/</td>
+			<td>
+				<<set $lastWeeksFinances.profitsFucktoy =(- $lastWeeksFinances.expensesFucktoy)>>
+				$lastWeeksFinances.profitsFucktoy
+			</td>
+		</tr>
+	<</if>>
+
+	/*<tr>
+		<td>SubordinateSlaves</td>
+		<td>$lastWeeksFinances.incomeSubordinateSlave</td>
+		<td>$lastWeeksFinances.expensesSubordinateSlave</td>
+		<td>
+			<<set $lastWeeksFinances.profitsSubordinateSlave =($lastWeeksFinances.incomeSubordinateSlave - $lastWeeksFinances.expensesSubordinateSlave)>>
+			$lastWeeksFinances.profitsSubordinateSlave
+		</td>
+	</tr>*/
+
+	/*<tr>
+		<td>HouseServants</td>
+		<td>$lastWeeksFinances.incomeHouseServant</td>
+		<td>$lastWeeksFinances.expensesHouseServant</td>
+		<td>
+			<<set $lastWeeksFinances.profitsHouseServant =($lastWeeksFinances.incomeHouseServant - $lastWeeksFinances.expensesHouseServant)>>
+			$lastWeeksFinances.profitsHouseServant
+		</td>
+	</tr>*/
+
+	/*<tr>
+		<td>Confined</td>
+		<td>$lastWeeksFinances.incomeConfined</td>
+		<td>$lastWeeksFinances.expensesConfined</td>
+		<td>
+			<<set $lastWeeksFinances.profitsConfined =($lastWeeksFinances.incomeConfined - $lastWeeksFinances.expensesConfined)>>
+			$lastWeeksFinances.profitsConfined
+		</td>
+	</tr>*/
+
+	<<if $lastWeeksFinances.incomePublicServant || $lastWeeksFinances.expensesPublicServant>>
+		<tr>
+			<td>Public servants</td>
+			<td>Rep: $lastWeeksFinances.incomePublicServant</td>
+			<td>/*$lastWeeksFinances.expensesPublicServant*/</td>
+			<td>
+				<<set $lastWeeksFinances.profitsPublicServant =($lastWeeksFinances.incomePublicServant - $lastWeeksFinances.expensesPublicServant)>>
+				$lastWeeksFinances.profitsPublicServant
+			</td>
+		</tr>
+	<</if>>
+
+	/*<tr>
+		<td>Classes</td>
+		<td>$lastWeeksFinances.incomeClasses</td>
+		<td>$lastWeeksFinances.expensesClasses</td>
+		<td>
+			<<set $lastWeeksFinances.profitsClasses =($lastWeeksFinances.incomeClasses - $lastWeeksFinances.expensesClasses)>>
+			$lastWeeksFinances.profitsClasses
+		</td>
+	</tr>  Slaves students never make any money.  Why did I even put this here.*/
+
+
+	<<if $lastWeeksFinances.incomeMilked || $lastWeeksFinances.expensesMilked>>
+		<tr>
+			<td>Milked</td>
+			<td>$lastWeeksFinances.incomeMilked</td>
+			<td>/*$lastWeeksFinances.expensesMilked*/</td>
+			<td>
+				<<set $lastWeeksFinances.profitsMilked =($lastWeeksFinances.incomeMilked - $lastWeeksFinances.expensesMilked)>>
+				$lastWeeksFinances.profitsMilked
+			</td>
+		</tr>
+	<</if>>
+
+	<<if $lastWeeksFinances.incomeGloryhole || $lastWeeksFinances.expensesGloryhole>>
+		<tr>
+			<td>Gloryhole</td>
+			<td>$lastWeeksFinances.incomeGloryhole</td>
+			<td>/*$lastWeeksFinances.expensesGloryhole*/</td>
+			<td>
+				<<set $lastWeeksFinances.profitsGloryhole =($lastWeeksFinances.incomeGloryhole - $lastWeeksFinances.expensesGloryhole)>>
+				$lastWeeksFinances.profitsGloryhole
+			</td>
+		</tr>
+	<</if>>
+
+	<tr>
+		<h2>Structures</h2>
+	</tr>
+
+	<<if $brothel > 0>>
+		<tr>
+			<td>[[$brothelName|Brothel]] ($brothelSlaves slaves)</td>
+			<td>$lastWeeksFinances.incomeBrothel</td>
+			<td>$lastWeeksFinances.expensesBrothel</td>
+			<td>
+				<<set $lastWeeksFinances.profitsBrothel = ($lastWeeksFinances.incomeBrothel - $lastWeeksFinances.expensesBrothel)>>
+				$lastWeeksFinances.profitsBrothel
+			</td>
+		</tr>
+	<</if>>
+
+	<<if $club > 0>>
+		<tr>
+			<td>[[$clubName|Club]] ($clubSlaves slaves)</td>
+			<td>Rep:$lastWeeksFinances.incomeClub</td>
+			<td>$lastWeeksFinances.expensesClub</td>
+			<td>
+				<<set $lastWeeksFinances.profitsClub = ($lastWeeksFinances.incomeClub - $lastWeeksFinances.expensesClub)>>
+				$lastWeeksFinances.profitsClub
+			</td>
+		</tr>
+	<</if>>
+
+	<<if $arcade > 0>>
+	<tr>
+		<td>[[$arcadeName|Arcade]] ($arcadeSlaves slaves)</td>
+		<td>$lastWeeksFinances.incomeArcade</td>
+		<td>$lastWeeksFinances.expensesArcade</td>
+		<td>
+			<<set $lastWeeksFinances.profitsArcade = ($lastWeeksFinances.incomeArcade - $lastWeeksFinances.expensesArcade)>>
+			$lastWeeksFinances.profitsArcade
+		</td>
+	</tr>
+	<</if>>
+
+	<<if $dairy > 0>>
+		<tr>
+			<td>[[$dairyName|Dairy]] ($dairySlaves slaves)</td>
+			<td>/*$lastWeeksFinances.incomeDairy*/</td>
+			<td>$lastWeeksFinances.expensesDairy</td>
+			<td>
+				<<set $lastWeeksFinances.profitsDairy = ($lastWeeksFinances.incomeDairy - $lastWeeksFinances.expensesDairy)>>
+				$lastWeeksFinances.profitsDairy
+			</td>
+		</tr>
+	<</if>>
+
+	<<if ($servantsQuarters > 0) && ($servantsQuartersUpgradeMonitoring > 0)>>
+		<tr>
+			<td>[[Servants' Quarters]] ($servantsQuartersSlaves slaves)</td>
+			<td>$lastWeeksFinances.incomeServantsQuarters</td> /*Does not count servants who are serving, only what Stewardess makes.  If I can find savings, perhaps show as negative expense? */
+			<td>$lastWeeksFinances.expensesServantsQuarters</td>
+			<td>
+				<<set $lastWeeksFinances.profitsServantsQuarters = ($lastWeeksFinances.incomeServantsQuarters - $lastWeeksFinances.expensesServantsQuarters)>>
+				//$lastWeeksFinances.profitsServantsQuarters//
+			</td>
+		</tr>
+	<</if>>
+
+	<<if ($masterSuiteUpgradePregnancy == 1)>>
+		<tr>
+			<td>[[Master Suite]] ($masterSuiteSlaves slaves)</td>
+			<td>Rep: $lastWeeksFinances.incomeMasterSuite</td>
+			<td>$lastWeeksFinances.expensesMasterSuite</td>
+			<td>
+				<<set $lastWeeksFinances.profitsMasterSuite = ($lastWeeksFinances.incomeMasterSuite - $lastWeeksFinances.expensesMasterSuite)>>
+				$lastWeeksFinances.profitsMasterSuite
+			</td>
+		</tr>
+	<</if>>
+
+	<<if $schoolroom>>
+		<tr>
+			<td>[[$schoolroomName|Schoolroom]] ($schoolroomSlaves slaves)</td>
+			<td>$lastWeeksFinances.incomeSchool</td>
+			<td>$lastWeeksFinances.expensesSchool</td>
+			<td>
+				<<set $lastWeeksFinances.profitsSchool = ($lastWeeksFinances.incomeSchool - $lastWeeksFinances.expensesSchool)>>
+				$lastWeeksFinances.profitsSchool</td>
+		</tr>
+	<</if>>
+
+	<<if $spa>>
+		<tr>
+			<td>[[$spaName|Spa]] ($spaSlaves slaves)</td>
+			<td>$lastWeeksFinances.incomeSpa</td>
+			<td>$lastWeeksFinances.expensesSpa</td>
+			<td>
+				<<set $lastWeeksFinances.profitsSpa = ($lastWeeksFinances.incomeSpa - $lastWeeksFinances.expensesSpa)>>
+				$lastWeeksFinances.profitsSpa</td>
+		</tr>
+	<</if>>
+
+	<<if $clinic>>
+		<tr>
+			<td>[[$clinicName|Clinic]] ($clinicSlaves slaves)</td>
+			<td>$lastWeeksFinances.incomeClinic</td>
+			<td>$lastWeeksFinances.expensesClinic</td>
+			<td>
+				<<set $lastWeeksFinances.profitsClinic = ($lastWeeksFinances.incomeClinic - $lastWeeksFinances.expensesClinic)>>
+				$lastWeeksFinances.profitsClinic</td>
+		</tr>
+	<</if>>
+
+	<<if $cellblock>>
+		<tr>
+			<td>[[$cellblockName|Cellblock]] ($cellblockSlaves slaves)</td>
+			<td>$lastWeeksFinances.incomeCellblock</td>
+			<td>$lastWeeksFinances.expensesCellblock</td>
+			<td>
+				<<set $lastWeeksFinances.profitsCellblock = ($lastWeeksFinances.incomeCellblock - $lastWeeksFinances.expensesCellblock)>>
+				$lastWeeksFinances.profitsCellblock</td>
+		</tr>
+	<</if>>
+
+
+	<<if ($lastWeeksFinances.incomeArcologyImprovement != 0) || ($lastWeeksFinances.expensesArcologyImprovement != 0)>>
+		<tr>
+			<td>Arcology construction and repair</td>
+			<td>$lastWeeksFinances.incomeArcologyImprovement</td>
+			<td>$lastWeeksFinances.expensesArcologyImprovement</td>
+			<td>$lastWeeksFinances.profitsArcologyImprovement</td>
+		</tr>
+	<</if>>
+
+
+	<tr>
+		<h2>Slaves</h2>
+	</tr>
+
+	<tr>
+		<td>[[Slave maintenance|Costs Report]] (food, hormones) ($slaves.length slaves)</td>
+		<td>/*$lastWeeksFinances.incomeSlaves*/</td>
+		<td>
+			<<if $lastWeeksFinances.expensesSlaves < 0>>
+				<<set $lastWeeksFinances.expensesSlaves *= -1>>
+			<</if>>
+			$lastWeeksFinances.expensesSlaves
+		</td>
+		<td>
+			<<set $lastWeeksFinances.profitsSlaves =($lastWeeksFinances.incomeSlaves - $lastWeeksFinances.expensesSlaves)>>
+		</td>
+	</tr>
+
+	<<if $marketAssistantLimit>>
+		<tr>
+			<td>Menials: [[Assistant's|Personal assistant options]] flipping</td>
+			<td>$lastWeeksFinances.incomeMenialTrades</td>
+			<td>$lastWeeksFinances.expensesMenialTrades</td>
+			<td>
+				<<set $lastWeeksFinances.profitsMenialTrades =($lastWeeksFinances.incomeMenialTrades + $lastWeeksFinances.expensesMenialTrades)>>
+				$lastWeeksFinances.profitsMenialTrades
+			</td>
+		</tr>
+	<</if>>
+	<<if ($lastWeeksFinances.incomeFuckDollBioFactory) || ($lastWeeksFinances.expensesFuckDollBioFactory)>>
+		<tr>
+			<td>Menials: labor</td>
+			<td>$lastWeeksFinances.incomeFuckDollBioFactory</td>
+			<td>/*$lastWeeksFinances.expensesFuckDollBioFactory*/</td>
+			<td>
+				<<set $lastWeeksFinances.profitsFuckDollBioFactory =($lastWeeksFinances.incomeFuckDollBioFactory - $lastWeeksFinances.expensesFuckDollBioFactory)>>
+				$lastWeeksFinances.profitsFuckDollBioFactory
+			</td>
+		</tr>
+	<</if>>
+
+	<<if $lastWeeksFinances.incomeExtraMilk>>
+		<tr>
+			<td>Extra Milk</td>
+			<td>$lastWeeksFinances.incomeExtraMilk</td>
+			<td></td>
+			<td>$lastWeeksFinances.incomeExtraMilk</td>
+		</tr>
+	<</if>>
+
+
+
+	<tr>
+		<h2>Finance</h2>
+	</tr>
+
+	<<if $lastWeeksFinances.incomePersonalBusiness != 0>>
+		<tr>
+			<td>Your personal business work:</td>
+			<td>$lastWeeksFinances.incomePersonalBusiness</td>
+			<td></td>
+			<td>$lastWeeksFinances.incomePersonalBusiness</td>
+		</tr>
+	<</if>>
+
+	<tr>
+		<td>Your rents</td>
+		<td>$lastWeeksFinances.incomeRents</td>
+		<td></td>
+		<td>$lastWeeksFinances.incomeRents</td>
+	</tr>
+
+	<<if ($lastWeeksFinances.incomeStocks != 0) || ($personalShares > 0)>>
+		<tr>
+			<td>Stock income ($personalShares/<<print ($publicShares +$personalShares)>> shares):</td>
+			<td>$lastWeeksFinances.incomeStocks</td>
+			<td>$lastWeeksFinances.expensesStocks</td>
+			<td>
+				<<set $lastWeeksFinances.profitsStocks = ($lastWeeksFinances.incomeStocks - $lastWeeksFinances.expensesStocks)>>
+				$lastWeeksFinances.profitsStocks
+			</td>
+		</tr>
+	<</if>>
+
+	<<if ($lastWeeksFinances.incomeStocksBought !=0) || ($lastWeeksFinances.expensesStocksBought != 0)>>
+		<tr>
+			<td>Stock trading</td>
+			<td>$lastWeeksFinances.incomeStocksBought</td>
+			<td>$lastWeeksFinances.expensesStocksBought</td>
+			<td>
+				<<set $lastWeeksFinances.profitsStocksBought = ($lastWeeksFinances.incomeStocksBought - $lastWeeksFinances.expensesStocksBought)>>
+				$lastWeeksFinances.profitsStocksBought
+			</td>
+		</tr>
+	<</if>>
+
+	<tr>
+		<h2>Policies</h2> /* A lot of the old code below guesses what a policy WOULD cost, instead of showing a record of what things DID cost.  As such, it also only checks current policies, instead of last weeks policies. */
+	</tr>
+
+	<tr>
+		<<set _livingExpenses = ($girls*(250+($economy*500)))>>
+		<<if $girls == 3>>
+			<td>Since you are accustomed to luxury, your personal living expenses are:</td>
+			<td></td>
+			<td>_livingExpenses</td>
+			<td>-_livingExpenses</td>
+		<<elseif $girls == 2>>
+			<td>Since you are used to living well, your personal living expenses are:</td>
+			<td></td>
+			<td>_livingExpenses</td>
+			<td>-_livingExpenses</td>
+		<<else>>
+			<td>Since you are used to a fairly normal life, your personal living expenses are:</td>
+			<td></td>
+			<td>_livingExpenses</td>
+			<td>-_livingExpenses</td>
+		<</if>>
+	</tr>
+
+	<<if $citizenOrphanageTotal+$privateOrphanageTotal > 0>>
+		<<if $citizenOrphanageTotal > 0>>
+			<tr>
+				<td>Education of $citizenOrphanageTotal of your slaves' children in citizen schools</td>
+				<td></td>
+				<td>$lastWeeksFinances.expensesCitizenOrphanage</td>
+				<td>-$lastWeeksFinances.expensesCitizenOrphanage</td>
+			</tr>
+		<</if>>
+		<<if $privateOrphanageTotal > 0>>
+			<tr>
+				<td>Private tutelage of $privateOrphanageTotal of your slaves' children</td>
+				<td></td>
+				<td>$lastWeeksFinances.expensesPrivateOrphanage</td>
+				<td>-$lastWeeksFinances.expensesPrivateOrphanage</td>
+			</tr>
+		<</if>>
+	<</if>>
+
+	<<set _mercCosts = 0>>
+	<<if $mercenaries > 0>>
+		<<set _mercCosts = $mercenaries*2000>>
+		<<if $barracks>><<set _mercCosts *= 0.5>><</if>>
+		<<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>><<set _mercCosts *= 0.5>><</if>>
+		<tr>
+			<td>Security: [[$mercenariesTitle|Barracks]]
+			<<if $barracks>><<else>><br>//@@.red;Cost increased by the lack of a barracks.@@//<</if>>
+			<<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>><br>//Cost reduced by your @@.springgreen;mercenary contacts.@@//<</if>>
+			</td>
+			<td></td>
+			<td>_mercCosts</td>
+			<td><<print -_mercCosts>></td>
+		</tr>
+	<</if>>
+
+	<<set _undermining = 0>>
+	<<if (def $peacekeepers) and ($peacekeepers != 0) >>
+		<<if $peacekeepers.undermining != 0>>
+			<<set _undermining = $peacekeepers.undermining>>
+			<tr>
+				<td>Undermine political support for the nearby old world peacekeeping mission.</td>
+				<td></td>
+				<td>_undermining</td>
+				<td>_undermining</td>
+			</tr>
+		<</if>>
+	<</if>>
+
+	<<if $FSSpending != 0>>
+		<tr><td>[[Society Shaping|Future Society]]</td>
+		<td></td>
+		<td>$FSSpending</td></tr>
+	<</if>>
+
+	<<set _recruiter = 0>>
+	<<if $Recruiter != 0>>
+		<<set _recruiter = 250>>
+		<tr><td>__Recruiting__</td>
+		<td></td>
+		<td>_recruiter</td></tr>
+	<</if>>
+
+	<<set _schoolSubsidies = 0>>
+	<<if $TSS.schoolPresent == 1>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[The Slavegirl School|Policies]] branch campus upkeep </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $GRI.schoolPresent == 1>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[Growth Research Institute|Policies]] subsidiary lab upkeep </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $SCP.schoolPresent == 1>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[St. Claver Preparatory|Policies]] branch campus upkeep </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $LDE.schoolPresent == 1>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[L'Encole des Enculees|Policies]] branch campus upkeep </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $TGA.schoolPresent == 1>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[The Gymnasium-Academy|Policies]] branch campus upkeep </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if ($TFS.schoolPresent == 1) && (($PC.dick == 0) || ($PC.vagina == 0) || ($PC.boobs == 0))>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[The Futanari Sisters|Policies]] community upkeep </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $TSS.subsidize != 0>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[The Slavegirl School|Policies]] branch campus influence </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $GRI.subsidize != 0>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[Growth Research Institute|Policies]] subsidiary lab influence </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $SCP.subsidize != 0>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[St. Claver Preparatory|Policies]] branch campus influence </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $LDE.subsidize != 0>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[L'Encole des Enculees|Policies]] branch campus influence </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $TGA.subsidize != 0>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[The Gymnasium-Academy|Policies]] branch campus influence </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+	<<if $TFS.subsidize != 0>>
+		<<set _schoolSubsidies += 1000>>
+		<tr><td>[[The Futanari Sisters|Policies]] community influence </td>
+		<td></td>
+		<td>1000</td></tr>
+	<</if>>
+
+
+	<<set _policyCost = 0>>
+	<<if $alwaysSubsidizeGrowth == 1>>
+		<<set _policyCost += $policyCost>>
+		<tr><td>[[Weekly arcology growth subsidy|Policies]]
+		$policyCost</td></tr>
+	<</if>>
+	<<if $alwaysSubsidizeRep == 1>>
+		<<set _policyCost += $policyCost>>
+		<tr><td>[[Weekly self-promotion budget|Policies]]
+		$policyCost</td></tr>
+	<</if>>
+	<<if $RegularParties == 1>>
+		<<set _policyCost += $policyCost>>
+		<tr><td>[[Weekly social gatherings|Policies]]</td>
+		<td></td>
+		<td>$policyCost</td></tr>
+	<</if>>
+
+	<<if $ProImmigrationCash == 1>>
+		<<set _policyCost += $policyCost>>
+		<tr><td>[[Pro-immigration promotion budget|Policies]]</td>
+		<td></td>
+		<td>$policyCost</td></tr>
+	<</if>>
+	<<if $AntiEnslavementCash == 1>>
+		<<set _policyCost += $policyCost>>
+		<tr><td>[[Anti-enslavement charity budget|Policies]]</td>
+		<td></td>
+		<td>$policyCost</td></tr>
+	<</if>>
+
+	<<set _coursingCost = 0>>
+	<<if $CoursingAssociation == 1>>
+		<<set _coursingCost += 1000>>
+		<tr><td>[[Coursing Association membership|Policies]]</td>
+		<td></td>
+		<td>_coursingCost</td>
+		<td>_coursingCost</td></tr>
+	<</if>>
+
+
+	<<set _tradingTrainerCost = 0, _warfareTrainerCost = 0, _slavingTrainerCost = 0, _engineeringTrainerCost = 0, _medicineTrainerCost = 0>>
+	<<if ($personalAttention == "trading")>>
+		<<set _tradingTrainerCost = 10000>>
+		<tr><td>[[Trading trainer|Personal Attention Select]] fees</td>
+		<td></td>
+		<td>_tradingTrainerCost</td>
+		<td>_tradingTrainerCost</td></tr>
+	<<elseif ($personalAttention == "warfare")>>
+		<<set _warfareTrainerCost = 10000>>
+		<tr><td>[[Warfare trainer|Personal Attention Select]] fees</td>
+		<td></td>
+		<td>_warfareTrainerCost</td>
+		<td>_warfareTrainerCost</td></tr>
+	<<elseif ($personalAttention == "slaving")>>
+		<<set _slavingTrainerCost = 10000>>
+		<tr><td>[[Slaving trainer|Personal Attention Select]] fees</td>
+		<td></td>
+		<td>_slavingTrainerCost</td>
+		<td>_slavingTrainerCost</td></tr>
+	<<elseif ($personalAttention == "engineering")>>
+		<<set _engineeringTrainerCost = 10000>>
+		<tr><td>[[Engineering trainer|Personal Attention Select]] fees</td>
+		<td></td>
+		<td>_engineeringTrainerCost</td>
+		<td>_engineeringTrainerCost</td></tr>
+	<<elseif ($personalAttention == "medicine")>>
+		<<set _medicineTrainerCost = 10000>>
+		<tr><td>[[Medicine trainer|Personal Attention Select]] fees</td>
+		<td></td>
+		<td>_medicineTrainerCost</td>
+		<td>_medicineTrainerCost</td></tr>
+	<</if>>
+
+
+	<tr><td></td></tr>
+	<tr>
+		<td>Totals</td>
+		<td>
+			<<set $lastWeeksFinances.incomeTotal  = (
+			/* JOBS */
+			$lastWeeksFinances.incomeWhore +
+			$lastWeeksFinances.incomeRest +
+			/*$lastWeeksFinances.incomeFucktoy + Rep as Income */
+			$lastWeeksFinances.incomeSubordinateSlave +
+			$lastWeeksFinances.incomeHouseServant +
+			$lastWeeksFinances.incomeConfined +
+			/*$lastWeeksFinances.incomePublicServant + Rep as income */
+			$lastWeeksFinances.incomeClasses +
+			$lastWeeksFinances.incomeMilked +
+			$lastWeeksFinances.incomeGloryhole +
+			$lastWeeksFinances.incomeSlaves +
+			$lastWeeksFinances.incomeFuckDollBioFactory +
+			/* BUILDINGS */
+			$lastWeeksFinances.incomeLab +
+			$lastWeeksFinances.incomeBrothel +
+			/*$lastWeeksFinances.incomeClub + Club has rep as income */
+			$lastWeeksFinances.incomeArcade +
+			$lastWeeksFinances.incomeDairy +
+			$lastWeeksFinances.incomeServantsQuarters +
+			/*$lastWeeksFinances.incomeMasterSuite + MS has rep as income */
+			$lastWeeksFinances.incomeSchool +
+			$lastWeeksFinances.incomeSpa +
+			$lastWeeksFinances.incomeClinic +
+			$lastWeeksFinances.incomeCellblock +
+			/* EXTRA */
+			$lastWeeksFinances.incomeMercenaries +
+			$lastWeeksFinances.incomeStocksBought +
+			$lastWeeksFinances.incomeStocks +
+			$lastWeeksFinances.incomeMenialTrades +
+			$rents +
+			$lastWeeksFinances.incomePersonalBusiness +
+			$lastWeeksFinances.incomeExtraMilk
+			)
+			>>$lastWeeksFinances.incomeTotal
+		</td>
+
+		<td>
+			<<set $lastWeeksFinances.expensesTotal = (
+			/* JOBS */
+			$lastWeeksFinances.expensesWhore +
+			$lastWeeksFinances.expensesRest +
+			$lastWeeksFinances.expensesFucktoy +
+			$lastWeeksFinances.expensesSubordinateSlave +
+			$lastWeeksFinances.expensesHouseServant +
+			$lastWeeksFinances.expensesConfined +
+			$lastWeeksFinances.expensesPublicServant +
+			$lastWeeksFinances.expensesClasses +
+			$lastWeeksFinances.expensesMilked +
+			$lastWeeksFinances.expensesGloryhole +
+			$lastWeeksFinances.expensesSlaves +
+			$lastWeeksFinances.expensesMenialTrades +
+			$lastWeeksFinances.expensesFuckDollBioFactory +
+			/* BUILDINGS */
+			$lastWeeksFinances.expensesLab +
+			$lastWeeksFinances.expensesBrothel +
+			$lastWeeksFinances.expensesClub +
+			$lastWeeksFinances.expensesArcade +
+			$lastWeeksFinances.expensesDairy +
+			$lastWeeksFinances.expensesServantsQuarters +
+			$lastWeeksFinances.expensesMasterSuite +
+			$lastWeeksFinances.expensesSchool +
+			$lastWeeksFinances.expensesSpa +
+			$lastWeeksFinances.expensesClinic +
+			$lastWeeksFinances.expensesCellblock +
+			/*Policies*/
+			$lastWeeksFinances.expensesStocksBought +
+			$lastWeeksFinances.expensesMercenaries +
+			$lastWeeksFinances.expensesStocks +
+			_livingExpenses +
+			$lastWeeksFinances.expensesCitizenOrphanage +
+			$lastWeeksFinances.expensesPrivateOrphanage +
+			_mercCosts +
+			$lastWeeksFinances.expensesMercenaries +
+			_undermining +
+			$FSSpending +
+			_recruiter +
+			_schoolSubsidies +
+			_policyCost +
+			_coursingCost +
+			_tradingTrainerCost +
+			_warfareTrainerCost +
+			_slavingTrainerCost +
+			_engineeringTrainerCost +
+			_medicineTrainerCost
+
+			)
+			>>$lastWeeksFinances.expensesTotal
+		</td>
+		<td>
+			<<set $lastWeeksFinances.profitsTotal  = ($lastWeeksFinances.incomeTotal - $lastWeeksFinances.expensesTotal)
+			>>$lastWeeksFinances.profitsTotal
+		</td>
+	</tr>
+	<tr>
+		<td>Last week actuals</td>
+		<td></td>
+		<td>$costs</td>
+		<td><<print ($cash-$cashLastWeek)>></td>
+	</tr>
+</table>
+
+<br>
+
+<table> /* long entries */
+
+
+</table>
+<</if>>

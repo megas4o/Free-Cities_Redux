@@ -1,0 +1,37 @@
+:: Apartments [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+This is a sector of the arcology's living areas,
+<<switch $sectors[$AS].type>>
+<<case "Apartments">>
+	occupied by citizens of varying wealth and social standing.
+<<case "DenseApartments">>
+	upgraded for dense occupancy by as many citizens as possible.
+<<case "LuxuryApartments">>
+	improved for occupancy by the Free Cities' wealthiest citizens.
+<<default>>ERROR: bad sector type
+<</switch>>
+
+You control this part of the arcology and all these tenants pay you rent.
+<<SectorSell>>
+<br>
+<<set _buildingCost = Math.trunc(10000*$upgradeMultiplierArcology)>>
+
+<<if $sectors[$AS].type != "DenseApartments">>
+	<br>
+	[[Upgrade this sector of apartments for dense occupancy by as many citizens as possible|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $sectors[$AS].type = "DenseApartments"]]
+	//Costs ¤<<print Math.trunc(10000*$upgradeMultiplierArcology)>>//
+<</if>>
+
+<<if $sectors[$AS].type != "LuxuryApartments">>
+	<br>
+	[[Improve this sector of apartments for occupancy by the Free Cities' wealthiest citizens|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $sectors[$AS].type = "LuxuryApartments"]]
+	//Costs ¤<<print Math.trunc(10000*$upgradeMultiplierArcology)>>//
+<</if>>
+
+<<if $sectors[$AS].type != "Apartments">>
+	<br>
+	[[Return this sector to standard, mixed housing|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $sectors[$AS].type = "Apartments"]]
+	//Costs ¤<<print Math.trunc(10000*$upgradeMultiplierArcology)>>//
+<</if>>

@@ -1,0 +1,11 @@
+:: P coup loss
+
+You are awakened in the middle of the night by a jolt that shakes the entire arcology, accompanied by a distant boom. It is followed by another, and another, and then the wail of the arcology's alarm systems, and then finally by a faint crackle that grows to a constant chatter of gunfire. Main power goes out, and you claw your way in the darkness to the video feeds, running on emergency backup.
+
+<<if $mercenaries > 0>>Sheets of flame are pouring from your mercenaries' quarters; it seems they were among the first targets for bombs. <</if>>Heavy gunfire is bringing down security drones by the scores. The attackers seem to have figured out where the drone hangars are, and are laying down fire on the exits the drones must use to get into action. <<if $traitor != 0>>You can see $traitor.slaveName on one of the feeds, encouraging her fellow fighters with yells, and when that fails, leading them by example. <</if>> In areas already controlled by your enemies, slaveowners are being summarily shot in the streets. <<if $hackerSupport == 1>>"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," $assistantName says, "the Daughters of Liberty are attempting a coup. They appear to have smuggled a significant quantity of arms and explosives into the arcology.<<else>>"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," $assistantName says, "the Daughters of Liberty are attempting a coup. They appear to have smuggled a significant qua - zzzt -" There is nothing more from the computer systems.<</if>>
+
+<<if $traitor != 0>>If this were a movie, $traitor.slaveName would be the one to kill you after a desperate struggle in your office. Reality does not have such a refined sense of drama. <</if>>If the Daughters had any plans to take you alive, they are lost to the exigencies of combat. Your penthouse remains locked down, forcing them to use breaching charges to make an entrance. These prove entirely too effective, and your last impression is of the floor heaving bodily up toward the ceiling.
+
+''GAME OVER''
+
+<<set $ui = "start">>

@@ -1,0 +1,1222 @@
+:: Policies [nobr]
+
+<<set $nextButton = "Back">>
+<<set $nextLink = "Main">>
+<<set $showEncyclopedia = 1>><<set $encyclopedia = "Future Societies">>
+<<if $rep < 0>><<set $rep = 0>><</if>>
+<<set $customRetirementAge = Math.clamp($customRetirementAge, 20, 45)>>
+<<if $CustomRetirementAgePolicy == 1>><<set $retirementAge = $customRetirementAge>><</if>>
+<<set $retirementSex = Math.clamp($retirementSex, 1000, 100000)>>
+<<set $retirementMilk = Math.clamp($retirementMilk, 10000, 1000000)>>
+<<set $retirementBirths = Math.clamp($retirementBirths, 1, 20)>>
+<<set $retirementKills = Math.clamp($retirementKills, 1, 20)>>
+
+''__Active policies__''
+<br>//These policies are active within your arcology. Slave Market Regulations (SMRs) will affect slaves that come through the official slave markets in your arcology. The markets themselves will bear the cost of these regulations, but the minimum practicable slave prices may rise as a result.//
+
+<<if $BasicSMR + $HealthInspectionSMR + $EducationSMR + $IntelligenceEugenicsSMR + $HeightEugenicsSMR + $FaceEugenicsSMR + $HonestySMR > 0>>
+<br>__Slave Market Regulations__
+
+<<if $BasicSMR == 1>>
+	<br>''Basic SMR:'' the slave market is subject to very basic regulations designed to offer buyers some confidence.
+	[[Repeal|Policies][$BasicSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $HealthInspectionSMR == 1>>
+	<br>''Health Inspection SMR:'' in order to be sold in the slave market, chattel must pass a straightforward health inspection.
+	[[Repeal|Policies][$HealthInspectionSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $EducationSMR == 1>>
+	<br>''Basic Education SMR:'' in order to be sold in the slave market, chattel must be put through a straightforward course of slave education.
+	[[Repeal|Policies][$EducationSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $IntelligenceEugenicsSMR == 1>>
+	<br>''Intelligence Eugenics SMR:'' in order to be sold in the slave market, chattel must either pass a challenging intelligence test or be sterilized.
+	[[Repeal|Policies][$IntelligenceEugenicsSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $HeightEugenicsSMR == 1>>
+	<br>''Height Eugenics SMR:'' in order to be sold in the slave market, chattel must either be taller than a very tall minimum height or be sterilized.
+	[[Repeal|Policies][$HeightEugenicsSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $FaceEugenicsSMR == 1>>
+	<br>''Facial Eugenics SMR:'' in order to be sold in the slave market, chattel must either pass a rigorous facial exam or be sterilized.
+	[[Repeal|Policies][$FaceEugenicsSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $HonestySMR == 1>>
+	<br>''Gingering Prohibition SMR:'' slave sellers must contract to provide slaves honestly and without drugging to improve their behavior.
+	[[Repeal|Policies][$HonestySMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<</if>>
+<<if $OralEncouragement + $OralDiscouragement + $VaginalEncouragement + $VaginalDiscouragement + $AnalEncouragement + $AnalDiscouragement > 0>>
+<br>__Sexual Trendsetting__
+
+<<if $OralEncouragement == 1>>
+	<br>''Oral Sex Encouragement:'' you are using your personal influence to make blowjobs the most fashionable sex act in the arcology.
+	[[Repeal|Policies][$OralEncouragement = 0]]
+<</if>>
+
+<<if $OralDiscouragement == 1>>
+	<br>''Anti-Oral Campaign:'' you are using your personal influence to denigrate oral sex.
+	[[Repeal|Policies][$OralDiscouragement = 0]]
+<</if>>
+
+<<if $VaginalEncouragement == 1>>
+	<br>''Vaginal Sex Encouragement:'' you are using your personal influence to keep pussies the most fashionable holes in the arcology.
+	[[Repeal|Policies][$VaginalEncouragement = 0]]
+<</if>>
+
+<<if $VaginalDiscouragement == 1>>
+	<br>''Anti-Vaginal Campaign:'' you are using your personal influence to communicate disapproval of vaginal sex.
+	[[Repeal|Policies][$VaginalDiscouragement = 0]]
+<</if>>
+
+<<if $AnalEncouragement == 1>>
+	<br>''Anal Sex Encouragement:'' you are using your personal influence to make anuses the most fashionable holes in the arcology.
+	[[Repeal|Policies][$AnalEncouragement = 0]]
+<</if>>
+
+<<if $AnalDiscouragement == 1>>
+	<br>''Anti-Anal Campaign:'' you are using your personal influence to communicate disgust with putting things up the butt.
+	[[Repeal|Policies][$AnalDiscouragement = 0]]
+<</if>>
+
+<</if>>
+<<if $ProRefugees + $ProRecruitment + $ProImmigrationCash + $ProImmigrationRep + $AntiImmigrationCash + $AntiImmigrationRep + $ProEnslavementCash + $ProEnslavementRep + $AntiEnslavementCash + $AntiEnslavementRep > 0>>
+<br>__Population Policy__
+
+<<if $ProRefugees == 1>>
+	<br>''Encourage Refugee Servitude:'' the image of slavery in your arcology is being softened, encouraging old world refugees to consider becoming menial slaves.
+	[[Repeal|Policies][$ProRefugees = 0]]
+<</if>>
+
+<<if $ProRecruitment == 1>>
+	<br>''Encourage Self-Enslavement:'' your image as a slaveowner is being softened, encouraging the desperate to consider coming to you for enslavement.
+	[[Repeal|Policies][$ProRecruitment = 0]]
+<</if>>
+
+<<if $ProImmigrationCash == 1>>
+	<br>''Immigration Promotion:'' you are offering citizen immigrants a generous promotion.
+	[[Repeal|Policies][$ProImmigrationCash = 0]]
+<</if>>
+
+<<if $ProImmigrationRep == 1>>
+	<br>''Welcome Program:'' you are using your personal influence to encourage wealthy people to immigrate.
+	[[Repeal|Policies][$ProImmigrationRep = 0]]
+<</if>>
+
+<<if $AntiImmigrationCash == 1>>
+	<br>''Immigrant Information Brokerage:'' you are covertly selling information on troubled potential immigrants to your arcology.
+	[[Repeal|Policies][$AntiImmigrationCash = 0]]
+<</if>>
+
+<<if $AntiImmigrationRep == 1>>
+	<br>''Citizen Input on Immigration:'' you are selectively turn away potential immigrants to the arcology based on the recommendations of citizens.
+	[[Repeal|Policies][$AntiImmigrationRep = 0]]
+<</if>>
+
+<<if $ProEnslavementCash == 1>>
+	<br>''Enslavement Kickbacks:'' you are taking kickbacks in return for turning a blind eye to enslavement of poor citizens.
+	[[Repeal|Policies][$ProEnslavementCash = 0]]
+<</if>>
+
+<<if $ProEnslavementRep == 1>>
+	<br>''Covert Upstart Enslavement:'' you are offering prominent citizens your tacit assistance in enslaving rivals.
+	[[Repeal|Policies][$ProEnslavementRep = 0]]
+<</if>>
+
+<<if $AntiEnslavementCash == 1>>
+	<br>''Poor Citizen Relief:'' you are offering limited emergency assistance to poor citizens in danger of being enslaved.
+	[[Repeal|Policies][$AntiEnslavementCash = 0]]
+<</if>>
+
+<<if $AntiEnslavementRep == 1>>
+	<br>''Charity Promotion Efforts:'' you are using your personal influence to discourage enslavement of citizens.
+	[[Repeal|Policies][$AntiEnslavementRep = 0]]
+<</if>>
+
+<</if>>
+<<if $alwaysSubsidizeGrowth + $alwaysSubsidizeRep + $CashForRep + $RepForCash + $RegularParties + $PAPublic + $CoursingAssociation + $RaidingMercenaries > 0>>
+<br>__Domestic Policy__
+
+<<if $alwaysSubsidizeGrowth == 1>>
+	<br>''Economic Growth Subsidy:'' promising new businesses are offered generous subsidies, driving arcology prosperity.
+	[[Repeal|Policies][$alwaysSubsidizeGrowth = 0]]
+<</if>>
+
+<<if $alwaysSubsidizeRep == 1>>
+	<br>''Self-Promotion Program:'' subtle paid advertising communicates your good side to the public.
+	[[Repeal|Policies][$alwaysSubsidizeRep = 0]]
+<</if>>
+
+<<if $CashForRep == 1>>
+	<br>''Business Generosity:'' you are doing your best to help your citizens, even when it disadvantages you personally.
+	[[Repeal|Policies][$CashForRep = 0]]
+<</if>>
+
+<<if $RepForCash == 1>>
+	<br>''Business Selfishness:'' you are leveraging your position as arcology owner for money, even when it disadvantages citizens.
+	[[Repeal|Policies][$RepForCash = 0]]
+<</if>>
+
+<<if $RegularParties == 1>>
+	<br>''Regular Entertainments:'' you are hosting regular parties for prominent citizens, an expected social duty of an arcology owner.
+	[[Repeal|Policies][$RegularParties = 0]]
+	<<if $rep > 18000>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will damage your reputation//
+	<</if>>
+<</if>>
+
+<<if $PAPublic == 1>>
+	<br>''Public Personal Assistant:'' $assistantName is part of your public image.
+	[[Repeal|Policies][$PAPublic = 0]]
+<</if>>
+
+<<if $CoursingAssociation == 1>>
+	<br>''Coursing Association:'' you are sponsoring a [[Coursing Association]] that will hold monthly races.
+	[[Repeal|Policies][$CoursingAssociation = 0]]
+<</if>>
+
+<<if $RaidingMercenaries == 1>>
+	<br>''Raiding Mercenaries:'' you are allowing your mercenaries to occasionally raid for your direct benefit.
+	[[Repeal|Policies][$RaidingMercenaries = 0]]
+<</if>>
+
+<</if>>
+<<if ($TSS.subsidize != 0) || ($GRI.subsidize != 0) || ($SCP.subsidize != 0) || ($LDE.subsidize != 0) || ($TGA.subsidize != 0) || ($TFS.subsidize != 0)>>
+<br>__Education Policy__
+
+<<if $TSS.subsidize == 1>>
+	<br>''The Slave School subsidy:'' you are subsidizing this school's branch campus in your arcology.
+	[[Repeal|Policies][$TSS.subsidize = 0]]
+<</if>>
+
+<<if $TSS.subsidize == -1>>
+	<br>''Undermine The Slave School:'' you are covertly hurting this school's branch campus in your arcology.
+	[[Repeal|Policies][$TSS.subsidize = 0]]
+<</if>>
+
+<<if $GRI.subsidize == 1>>
+	<br>''The Growth Research Institute subsidy:'' you are subsidizing this school's branch campus in your arcology.
+	[[Repeal|Policies][$GRI.subsidize = 0]]
+<</if>>
+
+<<if $GRI.subsidize == -1>>
+	<br>''Undermine the Growth Research Institute:'' you are covertly hurting this school's branch campus in your arcology.
+	[[Repeal|Policies][$GRI.subsidize = 0]]
+<</if>>
+
+<<if $SCP.subsidize == 1>>
+	<br>''St. Claver Preparatory subsidy:'' you are subsidizing this school's branch campus in your arcology.
+	[[Repeal|Policies][$SCP.subsidize = 0]]
+<</if>>
+
+<<if $SCP.subsidize == -1>>
+	<br>''Undermine St. Claver Preparatory:'' you are covertly hurting this school's branch campus in your arcology.
+	[[Repeal|Policies][$SCP.subsidize = 0]]
+<</if>>
+
+<<if $LDE.subsidize == 1>>
+	<br>''L'Ecole des Enculees subsidy:'' you are subsidizing this school's branch campus in your arcology.
+	[[Repeal|Policies][$LDE.subsidize = 0]]
+<</if>>
+
+<<if $LDE.subsidize == -1>>
+	<br>''Undermine L'Ecole des Enculees:'' you are covertly hurting this school's branch campus in your arcology.
+	[[Repeal|Policies][$LDE.subsidize = 0]]
+<</if>>
+
+<<if $TGA.subsidize == 1>>
+	<br>''The Gymnasium-Academy subsidy:'' you are subsidizing this school's branch campus in your arcology.
+	[[Repeal|Policies][$TGA.subsidize = 0]]
+<</if>>
+
+<<if $TGA.subsidize == -1>>
+	<br>''Undermine the Gymnasium-Academy:'' you are covertly hurting this school's branch campus in your arcology.
+	[[Repeal|Policies][$TGA.subsidize = 0]]
+<</if>>
+
+<<if $TFS.subsidize == 1>>
+	<br>''Futanari Sisters subsidy:'' you are subsidizing this school's branch campus in your arcology.
+	[[Repeal|Policies][$TFS.subsidize = 0]]
+<</if>>
+
+<<if $TFS.subsidize == -1>>
+	<br>''Undermine the Futanari Sisters:'' you are covertly hurting this school's branch campus in your arcology.
+	[[Repeal|Policies][$TFS.subsidize = 0]]
+<</if>>
+
+<</if>>
+<br>__Slave Retirement Planning__
+
+<<if $CustomRetirementAgePolicy == 1>>
+	<br>''Redefined Mandatory Retirement Age:'' you have set your arcology's standard retirement age for sex slaves at $retirementAge.
+	[[Repeal|Policies][$CustomRetirementAgePolicy = 0, $retirementAge = 45]]
+<<else>>
+	<br>''Default Retirement Age:'' in the absence of a defined slave retirement age, slaves will not remain sex slaves after reaching age $retirementAge.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//This is a current content and mechanical limitation in FC $ver, not a universal Free Cities rule.//
+<</if>>
+
+<<if $BioreactorRetirement == 1>>
+	<br>''Public Fluid Production Retirement:'' once reaching mandatory retirement age, slaves are converted for full-time milk<<if $seeDicks != 0>>, vaginal secretion, and semen<</if>> production.
+	[[Repeal|Policies][$BioreactorRetirement = 0]]
+<<elseif $ArcadeRetirement == 1>>
+	<br>''Public Arcade Retirement:'' once reaching mandatory retirement age, slaves are placed in cheap public arcades to be used until useless.
+	[[Repeal|Policies][$ArcadeRetirement = 0]]
+<<elseif $CitizenRetirement == 1>>
+	<br>''Citizen Retirement:'' all slaveowners are required to pay into accounts to support their slaves as lower-class citizens in retirement.
+	[[Repeal|Policies][$CitizenRetirement = 0, $SexMilestoneRetirement = 0, $MilkMilestoneRetirement = 0, $BirthsMilestoneRetirement = 0, $KillsMilestoneRetirement = 0]]
+<<else>>
+	<br>''Menial Retirement:'' in the absence of a clear slave retirement policy, overaged sex slaves will become menial slaves.
+<</if>>
+
+<<if $SexMilestoneRetirement == 1>>
+	<br>''Sexual Milestone Retirement:'' slaves will be rewarded with their freedom once they have been fucked $retirementSex times.
+	[[Repeal|Policies][$SexMilestoneRetirement = 0]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;Set a new retirement requirement: <<textbox "$retirementSex" $retirementSex "Policies">>
+<</if>>
+
+<<if $MilkMilestoneRetirement == 1>>
+	<br>''Productive Cow Retirement:'' slaves will be rewarded with their freedom once they have given $retirementMilk liters of milk.
+	[[Repeal|Policies][$MilkMilestoneRetirement = 0]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;Set a new retirement requirement: <<textbox "$retirementMilk" $retirementMilk "Policies">>
+<</if>>
+
+<<if $BirthsMilestoneRetirement == 1>>
+	<br>''Fertile Breeder Retirement:'' slaves will be rewarded with their freedom once they add $retirementBirths new slaves to the population of $arcologies[0].name.
+	[[Repeal|Policies][$BirthsMilestoneRetirement = 0]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;Set a new retirement requirement: <<textbox "$retirementBirths" $retirementBirths "Policies">>
+<</if>>
+
+<<if $KillsMilestoneRetirement == 1>>
+	<br>''Champion Gladiatrix Retirement:'' slaves will be rewarded with their freedom once they have killed $retirementKills of their fellow slaves in the pit.
+	[[Repeal|Policies][$KillsMilestoneRetirement = 0]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;Set a new retirement requirement: <<textbox "$retirementKills" $retirementKills "Policies">>
+<</if>>
+
+<<if $MixedMarriage == 1>>
+	<br>''Marriage between Owners and Slaves:'' you are providing a legal basis for citizens to marry their slaves without impacting their rights as slaveowners.
+	[[Repeal|Policies][$MixedMarriage = 0]]
+<</if>>
+
+<<if ndef $arcologies[0].FSGenderFundamentalistLawBimbo>><<set $arcologies[0].FSGenderFundamentalistLawBimbo = 0>><</if>>
+<<if (($arcologies[0].FSSupremacistLawME + $arcologies[0].FSSupremacistSMR + $arcologies[0].FSSubjugationistLawME + $arcologies[0].FSSubjugationistSMR + $arcologies[0].FSGenderRadicalistLawBeauty + $arcologies[0].FSGenderRadicalistLawFuta + $arcologies[0].FSGenderFundamentalistLawBeauty + $arcologies[0].FSGenderFundamentalistLawBimbo + $arcologies[0].FSGenderFundamentalistSMR + $arcologies[0].FSPaternalistLaw + $arcologies[0].FSPaternalistSMR + $arcologies[0].FSDegradationistLaw + $arcologies[0].FSDegradationistSMR + $arcologies[0].FSBodyPuristLaw + $arcologies[0].FSBodyPuristSMR + $arcologies[0].FSTransformationFetishistSMR + $arcologies[0].FSYouthPreferentialistLaw + $arcologies[0].FSYouthPreferentialistSMR + $arcologies[0].FSMaturityPreferentialistLaw + $arcologies[0].FSMaturityPreferentialistSMR + $arcologies[0].FSSlimnessEnthusiastSMR + $arcologies[0].FSAssetExpansionistSMR + $arcologies[0].FSPastoralistLaw + $arcologies[0].FSPastoralistSMR + $arcologies[0].FSPhysicalIdealistSMR + $arcologies[0].FSChattelReligionistLaw + $arcologies[0].FSChattelReligionistSMR + $arcologies[0].FSChattelReligionistCreed + $arcologies[0].FSRomanRevivalistLaw + $arcologies[0].FSRomanRevivalistSMR + $arcologies[0].FSAztecRevivalistLaw + $arcologies[0].FSAztecRevivalistSMR + $arcologies[0].FSEgyptianRevivalistLaw + $arcologies[0].FSEgyptianRevivalistSMR + $arcologies[0].FSEdoRevivalistLaw + $arcologies[0].FSEdoRevivalistSMR + $arcologies[0].FSArabianRevivalistLaw + $arcologies[0].FSArabianRevivalistSMR + $arcologies[0].FSChineseRevivalistLaw + $arcologies[0].FSChineseRevivalistSMR) > 0) || ($CulturalOpenness != 0)>>
+<br>__Future Society Policies__
+
+<<if $CulturalOpenness == 1>>
+	<br>''Cultural Openness:'' you are promoting the exchange of ideas between arcologies, increasing cultural crossover between your arcology and its neighbors.
+	[[Repeal|Policies][$CulturalOpenness = 0]]
+<</if>>
+
+<<if $CulturalOpenness == -1>>
+	<br>''Cultural Defensiveness:'' you are doing your best to suppress the exchange of ideas between arcologies, reducing cultural crossover between your arcology and its neighbors.
+	[[Repeal|Policies][$CulturalOpenness = 0]]
+<</if>>
+
+<<if $arcologies[0].FSSupremacistLawME == 1>>
+	<br>''Universal Enslavement of the Impure:'' by law, anyone not of the $arcologies[0].FSSupremacistRace in your arcology is a slave.
+	[[Repeal|Policies][$arcologies[0].FSSupremacistLawME = 0]]
+<</if>>
+
+<<if $arcologies[0].FSSupremacistSMR == 1>>
+	<br>''Ethnic Preservation SMR:'' in order to be sold in the arcology, slaves of inferior races with dicks must have their balls removed to prevent racial pollution.
+	[[Repeal|Policies][$arcologies[0].FSSupremacistSMR = 0]]
+<</if>>
+
+<<if $arcologies[0].FSSubjugationistLawME == 1>>
+	<br>''Universal Enslavement of Subhumans:'' by law, all $arcologies[0].FSSubjugationistRace subhumans in your arcology are slaves.
+	[[Repeal|Policies][$arcologies[0].FSSubjugationistLawME = 0]]
+<</if>>
+
+<<if $arcologies[0].FSSubjugationistSMR == 1>>
+	<br>''Racial Purity SMR:'' in order to be sold in the arcology, subhumans with dicks must have their balls removed to prevent racial pollution.
+	[[Repeal|Policies][$arcologies[0].FSSubjugationistSMR = 0]]
+<</if>>
+
+<<if $arcologies[0].FSGenderRadicalistLawBeauty == 1>>
+	<br>''Fashionable Feminine Aspiration:'' you are doing your best to maintain a fashion for turning slaves into elegant girls with just the right amount of T&A. [[Repeal|Policies][$arcologies[0].FSGenderRadicalistLawBeauty = 0]]
+<</if>>
+
+<<if $arcologies[0].FSGenderRadicalistLawFuta == 1>>
+	<br>''Futanari Focused Radicalism:'' you are encouraging Gender Radicalism towards veneration of slaves with both dicks and pussies.
+	[[Repeal|Policies][$arcologies[0].FSGenderRadicalistLawFuta = 0]]
+<<elseif $arcologies[0].FSGenderRadicalistLawFuta == 2>>
+	<br>''Cock and Balls Focused Radicalism:'' you are encouraging Gender Radicalism towards an appreciation for stiff dicks and swinging balls.
+	[[Repeal|Policies][$arcologies[0].FSGenderRadicalistLawFuta = 0]]
+<<elseif $arcologies[0].FSGenderRadicalistLawFuta == 3>>
+	<br>''Bottom Heavy Radicalism:'' you are encouraging an appreciation for broad hips, plush asses, big buttholes, and skilled sphincters.
+	[[Repeal|Policies][$arcologies[0].FSGenderRadicalistLawFuta = 0]]
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalistLawBeauty == 1>>
+	<br>''Fashionable Feminine Ideal:'' you are doing your best to maintain a fashion for elegant girls with just the right amount of T&A. [[Repeal|Policies][$arcologies[0].FSGenderFundamentalistLawBeauty = 0]]
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalistLawBimbo == 1>>
+	<br>''Bimbo Fetishism:'' you are doing your best to encourage sexual attraction to female stupidity.
+	[[Repeal|Policies][$arcologies[0].FSGenderFundamentalistLawBimbo = 0]]
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalistSMR == 1>>
+	<br>''Mandatory Feminization SMR:'' in order to be sold in the arcology, slaves with dicks must have their balls removed. [[Repeal|Policies][$arcologies[0].FSGenderFundamentalistSMR = 0]]
+<</if>>
+
+<<if $arcologies[0].FSPaternalistLaw == 1>>
+	<br>''Good Treatment Subsidy:'' slaveowners who treat their slaves well are offered reduced rent.
+	[[Repeal|Policies][$arcologies[0].FSPaternalistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSPaternalistSMR == 1>>
+	<br>''Human Dignity SMR:'' the slave markets are required to treat incoming slaves reasonably well.
+	[[Repeal|Policies][$arcologies[0].FSPaternalistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSDegradationistLaw == 1>>
+	<br>''Universal Arcade Access Mandate:'' slaveowners are required to allow their menial slaves to use the sex arcades.
+	[[Repeal|Policies][$arcologies[0].FSDegradationistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSDegradationistSMR == 1>>
+	<br>''Agonizing Induction SMR:'' slave markets are required to punish new slaves severely simply to introduce them to pain.
+	[[Repeal|Policies][$arcologies[0].FSDegradationistSMR = 0]]
+<</if>>
+
+<<if $arcologies[0].FSBodyPuristLaw == 1>>
+	<br>''Drug Purity Mandate:'' all drugs in the arcology must pass rigorous testing for purity.
+	[[Repeal|Policies][$arcologies[0].FSBodyPuristLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSBodyPuristSMR == 1>>
+	<br>''Body Purity SMR:'' in order to be sold in your arcology, slaves must be stripped of implants and body modifications.
+	[[Repeal|Policies][$arcologies[0].FSBodyPuristSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSTransformationFetishistSMR == 1>>
+	<br>''Mandatory Bimbofication SMR:'' in order to be sold in your arcology, slaves must be given a set of fake tits and ass.
+	[[Repeal|Policies][$arcologies[0].FSTransformationFetishistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialistLaw == 1>>
+	<br>''Youthful Citizen Subsidy:'' young citizens are offered reduced rent.
+	[[Repeal|Policies][$arcologies[0].FSYouthPreferentialistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialistSMR == 1>>
+	<br>''Respect for Youth SMR:'' slave markets in your arcology are required to treat younger slaves carefully.
+	[[Repeal|Policies][$arcologies[0].FSYouthPreferentialistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSMaturityPreferentialistLaw == 1>>
+	<br>''Mature Citizen Subsidy:'' older citizens are offered reduced rent.
+	[[Repeal|Policies][$arcologies[0].FSMaturityPreferentialistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSMaturityPreferentialistSMR == 1>>
+	<br>''Respect for Maturity SMR:'' slave markets in your arcology are required to treat mature slaves properly.
+	[[Repeal|Policies][$arcologies[0].FSMaturityPreferentialistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSSlimnessEnthusiastSMR == 1>>
+	<br>''Physical fitness SMR:'' in order to be sold in the arcology, chubby slaves must be forced to work out first.
+	[[Repeal|Policies][$arcologies[0].FSSlimnessEnthusiastSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSAssetExpansionistSMR == 1>>
+	<br>''Asset Expansion SMR:'' in order to be sold in the arcology, slaves must have their assets expanded with growth hormones.
+	[[Repeal|Policies][$arcologies[0].FSAssetExpansionistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSPastoralistLaw == 1>>
+	<br>''Animal Products Ban:'' animal products that compete with slave fluids are banned.
+	[[Repeal|Policies][$arcologies[0].FSPastoralistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSPastoralistSMR == 1>>
+	<br>''Universal Slave Lactation SMR:'' in order to be sold in the arcology, slaves must be actively lactating.
+	[[Repeal|Policies][$arcologies[0].FSPastoralistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSPhysicalIdealistSMR == 1>>
+	<br>''Lifting SMR:'' in order to be sold in the arcology, slaves must be bulked.
+	[[Repeal|Policies][$arcologies[0].FSPhysicalIdealistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionistLaw == 1>>
+	<br>''Official Religion:'' you are enshrined as the prophet of a vibrant slaveowning religion.
+	[[Repeal|Policies][$arcologies[0].FSChattelReligionistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionistSMR == 1>>
+	<br>''Consecration by Public Use SMR:'' in order to be sold in the arcology, slaves must be offered for public use for a single day.
+	[[Repeal|Policies][$arcologies[0].FSChattelReligionistSMR = 0]]
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionistCreed == 1>>
+	<br>''Chattel Religionist Creed:'' Chattel Religionism in your arcology subscribes to the creed established by the $nicaeaName, which honors <<if $nicaeaFocus == "slaves">>slaves<<else>>slaveowners<</if>>, enhances <<if $nicaeaAssignment == "whore">>prostitution<<elseif $nicaeaAssignment == "serve the public">>public service<<else>>fucktoy duty<</if>>, and respects <<if $nicaeaAchievement == "slaves">>owning many sex slaves<<elseif $nicaeaAchievement == "devotion">>worshipful slaves<<else>>trusting slaves<</if>>. The creed is <<if $nicaeaPower > 1>>strong<<else>>somewhat weak<</if>>.
+	[[Repeal|Policies][$arcologies[0].FSChattelReligionistCreed = 0, $cash -=10000, $rep -= 2000]]
+	//Repealing this policy costs twice as much as implementing one.//
+<</if>>
+
+<<if $arcologies[0].FSRomanRevivalistLaw == 1>>
+	<br>''Republican Military Establishment:'' all citizens of stature are required to participate personally in the defense of the state.
+	[[Repeal|Policies][$arcologies[0].FSRomanRevivalistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSRomanRevivalistSMR == 1>>
+	<br>''Market Slave Expendability SMR:'' slave markets are encouraged to immediately dispose of low quality menial slaves in gladiatorial combats.
+	[[Repeal|Policies][$arcologies[0].FSRomanRevivalistSMR = 0]]
+<</if>>
+
+<<if $arcologies[0].FSAztecRevivalistLaw == 1>>
+	<br>''Mandatory Artisan Training:'' to inherit or receive a trade a citizen must pass a mandatory course in one of the academies.
+	[[Repeal|Policies][$arcologies[0].FSAztecRevivalistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSAztecRevivalistSMR == 1>>
+	<br>''Captured and Incorrigible Slaves Tribute:'' all captured and incorrigible slaves must be made tribute to the altars.
+	[[Repeal|Policies][$arcologies[0].FSAztecRevivalistSMR = 0]]
+<</if>>
+
+<<if $arcologies[0].FSEgyptianRevivalistLaw == 1>>
+	<br>''Pharaoh's Consort:'' your Head Girl holds legal status as your Consort, increasing her prominence.
+	[[Repeal|Policies][$arcologies[0].FSEgyptianRevivalistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSEgyptianRevivalistSMR == 1>>
+	<br>''Egyptian Cultural Induction SMR:'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of ancient Egypt.
+	[[Repeal|Policies][$arcologies[0].FSEgyptianRevivalistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSEdoRevivalistLaw == 1>>
+	<br>''Cultural Insularity:'' protects the arcology from old world influences, speeding the acceptance of all future societies.
+	[[Repeal|Policies][$arcologies[0].FSEdoRevivalistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSEdoRevivalistSMR == 1>>
+	<br>''Edo Cultural Induction SMR:'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of Edo Japan.
+	[[Repeal|Policies][$arcologies[0].FSEdoRevivalistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSArabianRevivalistLaw == 1>>
+	<br>''Jizya Tax:'' raises the rents of unassimilated citizens, speeding the acceptance of all future societies.
+	[[Repeal|Policies][$arcologies[0].FSArabianRevivalistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSArabianRevivalistSMR == 1>>
+	<br>''Arabian Cultural Induction SMR:'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of the old Caliphate.
+	[[Repeal|Policies][$arcologies[0].FSArabianRevivalistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<<if $arcologies[0].FSChineseRevivalistLaw == 1>>
+	<br>''Slave Administrator Enabling Law:'' affords your Head Girl considerable legal power, allowing her to accomplish even more slave training.
+	[[Repeal|Policies][$arcologies[0].FSChineseRevivalistLaw = 0]]
+<</if>>
+
+<<if $arcologies[0].FSChineseRevivalistSMR == 1>>
+	<br>''Imperial Cultural Induction SMR:'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of Imperial China.
+	[[Repeal|Policies][$arcologies[0].FSChineseRevivalistSMR = 0, $minimumSlaveCost -= 500]]
+<</if>>
+
+<</if>> /* CLOSES FINAL CATEGORY DISPLAY */
+<br><br>
+''__Available policies__''
+<br>//Passing any law will cost ¤5000 and a small amount of reputation. More policies will become available as the arcology develops.//
+
+<<if $rep >= 1000>>
+
+<br>__Slave Market Regulations__
+
+<<if $BasicSMR == 0>>
+	<br>''Basic SMR:'' the slave market will be subject to very basic regulations designed to offer buyers some confidence.
+	[[Implement|Policies][$BasicSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help your reputation and affect slaves in the markets//
+<</if>>
+
+<<if $HealthInspectionSMR == 0>>
+	<br>''Health Inspection SMR:'' in order to be sold in the slave market, chattel will have to pass a straightforward health inspection.
+	[[Implement|Policies][$HealthInspectionSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will improve the health of slaves in the markets//
+<</if>>
+
+<<if $EducationSMR == 0>>
+	<br>''Basic Education SMR:'' in order to be sold in the slave market, chattel will have to be put through a straightforward course of slave education.
+	[[Implement|Policies][$EducationSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cause all slaves who pass through the markets to become educated//
+<</if>>
+
+<<if $arcologies[0].FSPaternalist == "unset">>
+<<if $IntelligenceEugenicsSMR == 0>>
+	<br>''Intelligence Eugenics SMR:'' in order to be sold in the slave market, chattel will have to either pass a challenging intelligence test or be sterilized.
+	[[Implement|Policies][$IntelligenceEugenicsSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will
+	<<if $seeDicks == 0>>
+	sterilize
+	<<elseif $seeDicks == 100>>
+	geld
+	<<else>>
+	sterilize or geld
+	<</if>> all market slaves below the maximum intelligence level//
+<</if>>
+<<if $HeightEugenicsSMR == 0>>
+	<br>''Height Eugenics SMR:'' in order to be sold in the slave market, chattel will have to either be taller than a very tall minimum height or be sterilized.
+	[[Implement|Policies][$HeightEugenicsSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will
+	<<if $seeDicks == 0>>
+	sterilize
+	<<elseif $seeDicks == 100>>
+	geld
+	<<else>>
+	sterilize or geld
+	<</if>> all market slaves below the maximum height//
+<</if>>
+<<if $FaceEugenicsSMR == 0>>
+	<br>''Facial Eugenics SMR:'' in order to be sold in the slave market, chattel will have to either pass a rigorous facial exam or be sterilized.
+	[[Implement|Policies][$FaceEugenicsSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will
+	<<if $seeDicks == 0>>
+	sterilize
+	<<elseif $seeDicks == 100>>
+	geld
+	<<else>>
+	sterilize or geld
+	<</if>> all market slaves below the maximum facial beauty//
+<</if>>
+<</if>>
+
+<<if $HonestySMR == 0>>
+	<br>''Gingering Prohibition SMR:'' slave sellers will have to contract to provide slaves honestly and without drugging to improve their behavior.
+	[[Implement|Policies][$HonestySMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will prevent dishonest adulteration of slaves in the markets//
+<</if>>
+
+<br>__Sexual Trendsetting__
+
+<<if $OralEncouragement+$VaginalEncouragement+$AnalEncouragement == 0>>
+	<<if $OralDiscouragement == 0>>
+		<br>''Oral Sex Encouragement:'' you will use your personal influence to make blowjobs the most fashionable sex act in the arcology.
+		[[Implement|Policies][$OralEncouragement = 1, $cash -=5000, $rep -= 1000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will increase the weight on slaves' oral skills//
+	<</if>>
+	<<if $VaginalDiscouragement == 0>>
+		<br>''Vaginal Sex Encouragement:'' you will use your personal influence to keep pussies the most fashionable holes in the arcology.
+		[[Implement|Policies][$VaginalEncouragement = 1, $cash -=5000, $rep -= 1000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will increase the weight on slaves' vaginal skills//
+	<</if>>
+	<<if $AnalDiscouragement == 0>>
+		<br>''Anal Sex Encouragement:'' you will use your personal influence to make anuses the most fashionable holes in the arcology.
+		[[Implement|Policies][$AnalEncouragement = 1, $cash -=5000, $rep -= 1000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will increase the weight on slaves' anal skills//
+	<</if>>
+<</if>>
+
+<<if $OralDiscouragement == 0>>
+<<if $OralEncouragement == 0>>
+	<br>''Anti-Oral Campaign:'' you will use your personal influence to denigrate oral sex.
+	[[Implement|Policies][$OralDiscouragement = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will decrease the weight on slaves' oral skills//
+<</if>>
+<</if>>
+<<if $VaginalDiscouragement == 0>>
+<<if $VaginalEncouragement == 0>>
+	<br>''Anti-Vaginal Campaign:'' you will use your personal influence to communicate disapproval of vaginal sex.
+	[[Implement|Policies][$VaginalDiscouragement = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will decrease the weight on slaves' vaginal skills//
+<</if>>
+<</if>>
+<<if $AnalDiscouragement == 0>>
+<<if $AnalEncouragement == 0>>
+	<br>''Anti-Anal Campaign:'' you will use your personal influence to communicate disgust with putting things up the butt.
+	[[Implement|Policies][$AnalDiscouragement = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will decrease the weight on slaves' anal skills//
+<</if>>
+<</if>>
+
+<br>__Population Policy__
+
+<<if $arcologies[0].FSDegradationist == "unset">>
+<<if $ProRefugees == 0>>
+	<br>''Encourage Refugee Servitude:'' the image of slavery in your arcology will be softened, encouraging old world refugees to consider slavery.
+	[[Implement|Policies][$ProRefugees = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will increase immigration of refugees to become menial slaves//
+<</if>>
+<<if $ProRecruitment == 0>>
+	<br>''Encourage Self-Enslavement:'' your image as a slaveowner will be softened, encouraging the desperate to consider coming to you for enslavement.
+	[[Implement|Policies][$ProRecruitment = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will increase the chances of desperate people offering themselves to you for enslavement//
+<</if>>
+<</if>>
+
+<<if $AntiImmigrationCash == 0>>
+<<if $ProImmigrationCash == 0>>
+	<br>''Immigration Promotion:'' you will offer citizen immigrants a generous promotion.
+	[[Implement|Policies][$ProImmigrationCash = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤$policyCost weekly to maintain, and increase the citizen population//
+<</if>>
+<</if>>
+
+<<if $AntiImmigrationRep == 0>>
+<<if $ProImmigrationRep == 0>>
+	<br>''Welcome Program:'' you will use your personal influence to encourage wealthy people to immigrate.
+	[[Implement|Policies][$ProImmigrationRep = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will annoy some longstanding citizens, and increase the citizen population//
+<</if>>
+<</if>>
+
+<<if $ProImmigrationCash == 0>>
+<<if $AntiImmigrationCash == 0>>
+	<br>''Immigrant Information Brokerage:'' you will covertly sell information on troubled potential immigrants to your arcology to their old world enemies.
+	[[Implement|Policies][$AntiImmigrationCash = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will produce ¤$policyCost weekly, and slow growth of the citizen population//
+<</if>>
+<</if>>
+
+<<if $ProImmigrationRep == 0>>
+<<if $AntiImmigrationRep == 0>>
+	<br>''Citizen Input on Immigration:'' you will selectively turn away potential immigrants to the arcology based on the recommendations of citizens.
+	[[Implement|Policies][$AntiImmigrationRep = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will produce a small amount of reputation weekly, and slow growth of the citizen population//
+<</if>>
+<</if>>
+
+<<if $AntiEnslavementCash == 0>>
+<<if $ProEnslavementCash == 0>>
+	<br>''Enslavement Kickbacks:'' you will take kickbacks in return for turning a  blind eye to enslavement of poor citizens.
+	[[Implement|Policies][$ProEnslavementCash = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will produce ¤$policyCost weekly, and reduce the population of citizens//
+<</if>>
+<</if>>
+
+<<if $AntiEnslavementRep == 0>>
+<<if $ProEnslavementRep == 0>>
+	<br>''Covert Upstart Enslavement:'' you will offer prominent citizens your tacit assistance in enslaving rivals.
+	[[Implement|Policies][$ProEnslavementRep = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will produce a small amount of reputation weekly, and reduce the population of citizens//
+<</if>>
+<</if>>
+
+<<if $ProEnslavementCash == 0>>
+<<if $AntiEnslavementCash == 0>>
+	<br>''Poor Citizen Relief:'' you will offer limited emergency assistance to poor citizens in danger of being enslaved.
+	[[Implement|Policies][$AntiEnslavementCash = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤$policyCost weekly to maintain, and slow population movement from citizens to slaves//
+<</if>>
+<</if>>
+
+<<if $ProEnslavementRep == 0>>
+<<if $AntiEnslavementRep == 0>>
+	<br>''Charity Promotion Efforts:'' you will use your personal influence to discourage enslavement of citizens.
+	[[Implement|Policies][$AntiEnslavementRep = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will annoy some prominent citizens, and slow population movement from citizens to slaves//
+<</if>>
+<</if>>
+
+<br>__Domestic Policy__
+
+<<if $alwaysSubsidizeGrowth == 0>>
+	<br>''Economic Growth Subsidy:'' promising new businesses will be offered generous subsidies, driving arcology prosperity.
+	[[Implement|Policies][$alwaysSubsidizeGrowth = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤$policyCost weekly to maintain, and improve arcology prosperity//
+<</if>>
+
+<<if $alwaysSubsidizeRep == 0>>
+	<br>''Self-Promotion Program:'' subtle paid advertising will communicate your good side to the public.
+	[[Implement|Policies][$alwaysSubsidizeRep = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤$policyCost weekly to maintain, and improve your reputation//
+<</if>>
+
+<<if $RepForCash == 0>>
+<<if $CashForRep == 0>>
+	<br>''Business Generosity:'' you will do your best to help your citizens, even when it disadvantages you personally.
+	[[Implement|Policies][$CashForRep = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost approximately ¤$policyCost weekly, and improve your reputation//
+	<br>''Business Selfishness:'' you will leverage your position as arcology owner for money, even when it disadvantages citizens.
+	[[Implement|Policies][$RepForCash = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost some reputation, and produce approximately ¤$policyCost weekly//
+<</if>>
+<</if>>
+
+<<if $RegularParties == 0>>
+	<br>''Regular Entertainments:'' you will host regular parties for prominent citizens, an expected social duty of an arcology owner.
+	[[Implement|Policies][$RegularParties = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤$policyCost weekly<<if $rep > 18000>>, and prevent damage to your reputation<</if>>//
+<</if>>
+
+<<if $PAPublic == 0>>
+	<br>''Public Personal Assistant:'' $assistantName will become part of your public image.
+	[[Implement|Policies][$PAPublic = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//May improve cultural development if $assistantName's appearance is fashionable//
+<</if>>
+
+<<if $CoursingAssociation == 0>>
+	<br>''Coursing Association:'' you will sponsor a Coursing Association that will hold monthly races.
+	[[Implement|Policies][$CoursingAssociation = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤$policyCost weekly to maintain//
+<</if>>
+
+<<if ($RaidingMercenaries == 0) && ($mercenariesHelpCorp == 1)>>
+	<br>''Mercenary Raiding:'' you will allow your mercenaries to occasionaly conduct a raid directly for your benefit.
+	[[Implement|Policies][$RaidingMercenaries = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤$policyCost weekly to maintain//
+<</if>>
+
+<br>__Education Policy__
+
+<<if $TSS.schoolPresent != 0>>
+<<if $TSS.subsidize == 0>>
+	<<if $TSS.schoolProsperity < 10>>
+		<br>''The Slave School subsidy:'' you will subsidize this school's branch campus in your arcology.
+		[[Implement|Policies][$TSS.subsidize = 1, $cash -=5000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+	<</if>>
+	<br>''Undermine The Slave School:'' you will covertly hurt this school's branch campus in your arcology.
+	[[Implement|Policies][$TSS.subsidize = -1, $cash -=5000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+<</if>>
+<</if>>
+
+<<if $GRI.schoolPresent != 0>>
+<<if $GRI.subsidize == 0>>
+	<<if $GRI.schoolProsperity < 10>>
+		<br>''The Growth Research Institute subsidy:'' you will subsidize this school's branch campus in your arcology.
+		[[Implement|Policies][$GRI.subsidize = 1, $cash -=5000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+	<</if>>
+	<br>''Undermine the Growth Research Institute:'' you will covertly hurt this school's branch campus in your arcology.
+	[[Implement|Policies][$GRI.subsidize = -1, $cash -=5000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+<</if>>
+<</if>>
+
+<<if $SCP.schoolPresent != 0>>
+<<if $SCP.subsidize == 0>>
+	<<if $SCP.schoolProsperity < 10>>
+		<br>''St. Claver Preparatory subsidy:'' you will subsidize this school's branch campus in your arcology.
+		[[Implement|Policies][$SCP.subsidize = 1, $cash -=5000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+	<</if>>
+	<br>''Undermine St. Claver Preparatory:'' you will covertly hurt this school's branch campus in your arcology.
+	[[Implement|Policies][$SCP.subsidize = -1, $cash -=5000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+<</if>>
+<</if>>
+
+<<if $LDE.schoolPresent != 0>>
+<<if $LDE.subsidize == 0>>
+	<<if $LDE.schoolProsperity < 10>>
+		<br>''L'Ecole des Enculees subsidy:'' you will subsidize this school's branch campus in your arcology.
+		[[Implement|Policies][$LDE.subsidize = 1, $cash -=5000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+	<</if>>
+	<br>''Undermine L'Ecole des Enculees:'' you will covertly hurt this school's branch campus in your arcology.
+	[[Implement|Policies][$LDE.subsidize = -1, $cash -=5000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+<</if>>
+<</if>>
+
+<<if $TGA.schoolPresent != 0>>
+<<if $TGA.subsidize == 0>>
+	<<if $TGA.schoolProsperity < 10>>
+		<br>''The Gymnasium-Academy subsidy:'' you will subsidize this school's branch campus in your arcology.
+		[[Implement|Policies][$TGA.subsidize = 1, $cash -=5000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+	<</if>>
+	<br>''Undermine the Gymnasium-Academy:'' you will covertly hurt this school's branch campus in your arcology.
+	[[Implement|Policies][$TGA.subsidize = -1, $cash -=5000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+<</if>>
+<</if>>
+
+<<if $TFS.schoolPresent != 0>>
+<<if $TFS.subsidize == 0>>
+	<<if $TFS.schoolProsperity < 10>>
+		<br>''Futanari Sisters subsidy:'' you will subsidize this school's branch campus in your arcology.
+		[[Implement|Policies][$TFS.subsidize = 1, $cash -=5000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+	<</if>>
+	<br>''Undermine the Futanari Sisters:'' you will covertly hurt this school's branch campus in your arcology.
+	[[Implement|Policies][$TFS.subsidize = -1, $cash -=5000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will cost ¤1000 weekly to maintain; does not cost reputation to start//
+<</if>>
+<</if>>
+
+<br>__Slave Retirement Planning__
+
+<<if $CustomRetirementAgePolicy == 0>>
+	<br>''Redefined Mandatory Retirement Age:'' you will set your arcology's standard retirement age for sex slaves at age
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;<<textbox "$customRetirementAge" $customRetirementAge "Policies">>
+	[[Implement|Policies][$CustomRetirementAgePolicy = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+
+<<if $BioreactorRetirement == 0>>
+<<if $ArcadeRetirement == 0>>
+<<if $CitizenRetirement == 0>>
+<<if $arcologies[0].FSDegradationist == "unset">>
+	<br>''Citizen Retirement:'' all slaveowners will be required to pay into accounts to support their slaves as lower-class citizens in retirement.
+	[[Implement|Policies][$CitizenRetirement = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will add upkeep to all slaves//
+<</if>>
+<<if $arcologies[0].FSPaternalist == "unset">>
+	<br>''Public Arcade Retirement:'' once reaching mandatory retirement age, slaves will be placed in cheap public arcades to be used until useless.
+	[[Implement|Policies][$ArcadeRetirement = 1, $cash -=5000, $rep -= 1000]]
+	<br>''Public Fluid Production Retirement:'' once reaching mandatory retirement age, slaves will be converted for full-time milk<<if $seeDicks != 0>>, vaginal secretion, and semen<</if>> production.
+	[[Implement|Policies][$BioreactorRetirement = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $CitizenRetirement == 1>>
+<<if $SexMilestoneRetirement == 0>>
+	<br>''Sexual Milestone Retirement:'' slaves will be rewarded with their freedom once they have been fucked $retirementSex times.
+	[[Implement|Policies][$SexMilestoneRetirement = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<<if $MilkMilestoneRetirement == 0>>
+	<br>''Productive Cow Retirement:'' slaves will be rewarded with their freedom once they have given $retirementMilk liters of milk.
+	[[Implement|Policies][$MilkMilestoneRetirement = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<<if $BirthsMilestoneRetirement == 0>>
+	<br>''Fertile Breeder Retirement:'' slaves will be rewarded with their freedom once they add $retirementBirths new slaves to the population of $arcologies[0].name.
+	[[Implement|Policies][$BirthsMilestoneRetirement = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<<if $KillsMilestoneRetirement == 0>>
+	<br>''Champion Gladiatrix Retirement:'' slaves will be rewarded with their freedom once they have killed $retirementKills of their fellow slaves in the pit.
+	[[Implement|Policies][$KillsMilestoneRetirement = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSDegradationist == "unset">>
+<<if $MixedMarriage == 0>>
+	<br>''Marriage between Owners and Slaves:'' you will provide a legal basis for citizens to marry their slaves without impacting their rights as slaveowners.
+	[[Implement|Policies][$MixedMarriage = 1, $cash -=5000, $rep -= 1000]]
+	<<if $arcologies[0].FSPaternalist >= 60>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will not damage your reputation due to your arcology's advanced Paternalism//
+	<<else>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will damage your reputation//
+	<</if>>
+<</if>>
+<</if>>
+
+<br>__Future Society Policies__
+
+<<if $arcologies.length > 1>>
+<<if $CulturalOpenness == 0>>
+	<br>''Cultural Openness:'' you will promote the exchange of ideas between arcologies, increasing cultural crossover between your arcology and its neighbors.
+	[[Implement|Policies][$CulturalOpenness = 1, $cash -=5000, $rep -= 1000]]
+	<br>''Cultural Defensiveness:'' you will do your best to suppress the exchange of ideas between arcologies, reducing cultural crossover between your arcology and its neighbors.
+	[[Implement|Policies][$CulturalOpenness = -1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<</if>>
+
+<<if $seeDicks != 0>>
+<<if $arcologies[0].FSSupremacist >= 40>>
+<<if $arcologies[0].FSSupremacistSMR == 0>>
+	<br>''@@.lime;Ethnic Preservation SMR:@@'' in order to be sold in the arcology, slaves of inferior races with dicks will have to have their balls removed to prevent racial pollution.
+	[[Implement|Policies][$arcologies[0].FSSupremacistSMR = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance racial Supremacy//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSupremacist >= 90>>
+<<if $arcologies[0].FSSupremacistLawME == 0>>
+	<br>''@@.lime;Universal Enslavement of the Impure:@@'' will force anyone not of the $arcologies[0].FSSupremacistRace to emigrate or accept enslavement, and make sex with non-$arcologies[0].FSSupremacistRace people such an expectation that the appetite for all such slaves will increase slightly.
+	[[Implement|Policies][$arcologies[0].FSSupremacistLawME = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will affect the slave markets in unpredictable ways//
+<</if>>
+<</if>>
+
+<<if $seeDicks != 0>>
+<<if $arcologies[0].FSSubjugationist >= 40>>
+<<if $arcologies[0].FSSubjugationistSMR == 0>>
+	<br>''@@.lime;Racial Purity SMR:@@'' in order to be sold in the arcology, subhumans with dicks will have to have their balls removed to prevent racial pollution.
+	[[Implement|Policies][$arcologies[0].FSSubjugationistSMR = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance racial Subjugation//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSubjugationist >= 90>>
+<<if $arcologies[0].FSSubjugationistLawME == 0>>
+	<br>''@@.lime;Universal Enslavement of Subhumans:@@'' will force slavery on all $arcologies[0].FSSubjugationistRace subhumans in your arcology, and make sex with $arcologies[0].FSSubjugationistRace people such an expectation that the appetite for all such slaves will increase slightly.
+	[[Implement|Policies][$arcologies[0].FSSubjugationistLawME = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will affect the slave markets in unpredictable ways//
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalist >= 20>>
+<<if $arcologies[0].FSGenderFundamentalistLawBeauty == 0>>
+	<br>''@@.lime;Fashionable Feminine Ideal:@@'' you will do your best to start a fashion for elegant girls with just the right amount of T&A.
+	[[Implement|Policies][$arcologies[0].FSGenderFundamentalistLawBeauty = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<<if $arcologies[0].FSGenderFundamentalistLawBimbo == 0>>
+	<br>''@@.lime;Bimbo Fetishism:@@'' you will do your best to encourage sexual attraction to female stupidity.
+	[[Implement|Policies][$arcologies[0].FSGenderFundamentalistLawBimbo = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<<if $arcologies[0].FSGenderFundamentalist >= 40>>
+<<if $arcologies[0].FSGenderFundamentalistSMR == 0>>
+	<br>''@@.lime;Mandatory Feminization SMR:@@'' in order to be sold in the arcology, slaves with dicks must have their balls removed.
+	[[Implement|Policies][$arcologies[0].FSGenderFundamentalistSMR = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Gender Fundamentalism//
+<</if>>
+<</if>>
+<<elseif $arcologies[0].FSGenderRadicalist >= 20>>
+<<if $arcologies[0].FSGenderRadicalistLawBeauty == 0>>
+	<br>''@@.lime;Fashionable Feminine Aspiration:@@'' you will do your best to start a fashion for turning slaves into elegant girls with just the right amount of T&A.
+	[[Implement|Policies][$arcologies[0].FSGenderRadicalistLawBeauty = 1, $cash -=5000, $rep -= 1000]]
+<</if>>
+<<if $seeDicks != 0>>
+<<if $arcologies[0].FSGenderRadicalist >= 60>>
+<<if ($arcologies[0].FSGenderRadicalistLawFuta == 0)>>
+	<br>''@@.lime;Futanari Focused Radicalism:@@'' you will encourage veneration of slaves with both dicks and pussies.
+	[[Implement|Policies][$arcologies[0].FSGenderRadicalistLawFuta = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will affect citizens' appreciation of futas//
+	<br>''@@.lime;Cock and Balls Focused Radicalism:@@'' you will encourage an appreciation for stiff dicks and swinging balls.
+	[[Implement|Policies][$arcologies[0].FSGenderRadicalistLawFuta = 2, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will affect slaves' attractiveness to citizens//
+	<br>''@@.lime;Bottom Heavy Radicalism:@@'' you will encourage an appreciation for broad hips, plush asses, big buttholes, and skilled sphincters.
+	[[Implement|Policies][$arcologies[0].FSGenderRadicalistLawFuta = 3, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will affect slaves' attractiveness to citizens//
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPaternalist >= 40>>
+<<if $arcologies[0].FSDegradationistSMR == 0>>
+<<if $arcologies[0].FSPaternalistSMR == 0>>
+	<br>''@@.lime;Human Dignity SMR:@@'' the slave markets will be required to treat incoming slaves reasonably well.
+	[[Implement|Policies][$arcologies[0].FSPaternalistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will reduce the arcology's prosperity and help advance Paternalism//
+<</if>>
+<</if>>
+<<if $arcologies[0].FSPaternalist >= 60>>
+<<if $arcologies[0].FSPaternalistLaw == 0>>
+	<br>''@@.lime;Good Treatment Subsidy:@@'' slaveowners who treat their slaves well will be offered reduced rent.
+	[[Implement|Policies][$arcologies[0].FSPaternalistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will reduce your rental income//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSDegradationist >= 40>>
+<<if $arcologies[0].FSPaternalistSMR == 0>>
+<<if $arcologies[0].FSDegradationistSMR == 0>>
+	<br>''@@.lime;Agonizing Induction SMR:@@''  slave markets are required to punish new slaves severely simply to introduce them to pain.
+	[[Implement|Policies][$arcologies[0].FSDegradationistSMR = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Degradationism//
+<</if>>
+<</if>>
+<<if $arcologies[0].FSDegradationist >= 90>>
+<<if $arcologies[0].FSDegradationistLaw == 0>>
+	<br>''@@.lime;Universal Arcade Access Mandate:@@'' slaveowners will be required to allow their menial slaves to use the sex arcades.
+	[[Implement|Policies][$arcologies[0].FSDegradationistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will reduce labor efficiency, damaging the arcology's prosperity//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSBodyPurist >= 40>>
+<<if $arcologies[0].FSBodyPuristSMR == 0>>
+	<br>''@@.lime;Body Purity SMR:@@'' in order to be sold in your arcology, slaves must be stripped of implants and body modifications.
+	[[Implement|Policies][$arcologies[0].FSBodyPuristSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Body Purism//
+<</if>>
+<<if $arcologies[0].FSBodyPurist >= 90>>
+<<if $arcologies[0].FSBodyPuristLaw == 0>>
+	<br>''@@.lime;Drug Purity Mandate:@@'' all drugs in the arcology will be subjected to rigorous testing for purity.
+	[[Implement|Policies][$arcologies[0].FSBodyPuristLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will reduce slaving profits, damaging the arcology's prosperity//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSTransformationFetishist >= 40>>
+<<if $arcologies[0].FSTransformationFetishistSMR == 0>>
+	<br>''@@.lime;Mandatory Bimbofication SMR:@@'' in order to be sold in your arcology, slaves must be given a set of fake tits and ass.
+	[[Implement|Policies][$arcologies[0].FSTransformationFetishistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Transformation Fetishism//
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialist >= 40>>
+<<if $arcologies[0].FSYouthPreferentialistSMR == 0>>
+	<br>''@@.lime;Respect for Youth SMR:@@'' slave markets in your arcology are required to treat younger slaves carefully.
+	[[Implement|Policies][$arcologies[0].FSYouthPreferentialistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Youth Preferentialism//
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialist >= 90>>
+<<if $arcologies[0].FSYouthPreferentialistLaw == 0>>
+	<br>''@@.lime;Youthful Citizen Subsidy:@@'' young citizens will be offered reduced rent.
+	[[Implement|Policies][$arcologies[0].FSYouthPreferentialistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will reduce your rental income//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSMaturityPreferentialist >= 40>>
+<<if $arcologies[0].FSMaturityPreferentialistSMR == 0>>
+	<br>''@@.lime;Respect for Maturity SMR:@@'' slave markets in your arcology are required to treat mature slaves properly.
+	[[Implement|Policies][$arcologies[0].FSMaturityPreferentialistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Maturity Preferentialism//
+<</if>>
+<<if $arcologies[0].FSMaturityPreferentialist >= 90>>
+<<if $arcologies[0].FSMaturityPreferentialistLaw == 0>>
+	<br>''@@.lime;Mature Citizen Subsidy:@@'' older citizens will be offered reduced rent.
+	[[Implement|Policies][$arcologies[0].FSMaturityPreferentialistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will reduce your rental income//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSlimnessEnthusiast >= 40>>
+<<if $arcologies[0].FSSlimnessEnthusiastSMR == 0>>
+	<br>''@@.lime;Physical fitness SMR:@@'' in order to be sold in the arcology, chubby slaves will have to be forced to work out first.
+	[[Implement|Policies][$arcologies[0].FSSlimnessEnthusiastSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSAssetExpansionist >= 40>>
+<<if $arcologies[0].FSAssetExpansionistSMR == 0>>
+	<br>''@@.lime;Asset Expansion SMR:@@'' in order to be sold in the arcology, slaves will have to have their assets expanded with growth hormones.
+	[[Implement|Policies][$arcologies[0].FSAssetExpansionistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPastoralist >= 40>>
+<<if $arcologies[0].FSPastoralistSMR == 0>>
+	<br>''@@.lime;Universal Slave Lactation SMR:@@'' in order to be sold in the arcology, slaves must be actively lactating.
+	[[Implement|Policies][$arcologies[0].FSPastoralistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Pastoralism//
+<</if>>
+<<if $arcologies[0].FSPastoralist >= 90>>
+<<if $arcologies[0].FSPastoralistLaw == 0>>
+	<br>''@@.lime;Animal Products Ban:@@'' animal products that compete with slave fluids will be banned.
+	[[Implement|Policies][$arcologies[0].FSPastoralistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will reduce market freedom, damaging the arcology's prosperity//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPhysicalIdealist >= 40>>
+<<if $arcologies[0].FSPhysicalIdealistSMR == 0>>
+	<br>''@@.lime;Lifting SMR:@@'' in order to be sold in the arcology, slaves will have to be bulked.
+	[[Implement|Policies][$arcologies[0].FSPhysicalIdealistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionist >= 40>>
+	<<if $arcologies[0].FSChattelReligionistSMR == 0>>
+		<br>''@@.lime;Consecration by Public Use SMR:@@'' in order to be sold in the arcology, slaves must be offered for public use for a single day.
+		[[Implement|Policies][$arcologies[0].FSChattelReligionistSMR = 1, $cash -=5000, $rep -= 1000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Chattel Religionism//
+	<</if>>
+	<<if $arcologies[0].FSChattelReligionist >= 90>>
+	<<if $arcologies[0].FSChattelReligionistLaw == 0>>
+		<br>''@@.lime;Official Religion:@@'' you will be enshrined as the prophet of a vibrant slaveowning religion.
+		[[Implement|Policies][$arcologies[0].FSChattelReligionistLaw = 1, $cash -=5000, $rep -= 1000]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will increase your renown//
+	<</if>>
+	<</if>>
+<</if>>
+<<if $nicaeaHeld == 1>>
+<<if $arcologies[0].FSChattelReligionistCreed == 0>>
+	<br>''@@.lime;Chattel Religionist Creed:@@'' Chattel Religionism in your arcology will subscribe to the creed established by the $nicaeaName, which honors <<if $nicaeaFocus == "slaves">>slaves<<else>>slaveowners<</if>>, enhances <<if $nicaeaAssignment == "whore">>prostitution<<elseif $nicaeaAssignment == "serve the public">>public service<<else>>fucktoy duty<</if>>, and respects <<if $nicaeaAchievement == "slaves">>owning many sex slaves<<elseif $nicaeaAchievement == "devotion">>worshipful slaves<<else>>trusting slaves<</if>>. The creed is <<if $nicaeaPower > 1>>strong<<else>>somewhat weak<</if>>.
+	[[Implement|Policies][$arcologies[0].FSChattelReligionistCreed = 1, $cash -=5000, $rep -= 1000]]
+	//Repealing this policy costs twice as much as implementing it.//
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSRomanRevivalist >= 40>>
+<<if $arcologies[0].FSRomanRevivalistSMR == 0>>
+	<br>''@@.lime;Market Slave Expendability SMR:@@'' slave markets are encouraged to immediately dispose of low quality menial slaves in gladiatorial combats.
+	[[Implement|Policies][$arcologies[0].FSRomanRevivalistSMR = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Roman Revivalism//
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist >= 90>>
+<<if $arcologies[0].FSRomanRevivalistLaw == 0>>
+	<br>''@@.lime;Republican Military Establishment:@@'' all citizens of stature will be required to participate personally in the defense of the state.
+	[[Implement|Policies][$arcologies[0].FSRomanRevivalistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will improve your arcology's combat power during crises//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSAztecRevivalist >= 40>>
+<<if $arcologies[0].FSAztecRevivalistSMR == 0>>
+	<br>''@@.lime;Captured and Incorrigible Slaves Tribute:@@'' all captured and incorrigible slaves must be made tribute to the altars.
+	[[Implement|Policies][$arcologies[0].FSAztecRevivalistSMR = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Aztec Revivalism//
+<</if>>
+<<if $arcologies[0].FSAztecRevivalist >= 90>>
+<<if $arcologies[0].FSAztecRevivalistLaw == 0>>
+	<br>''@@.lime;Mandatory Artisan Training:@@'' to inherit or receive a trade a citizen must pass a mandatory course in one of the academies.
+	[[Implement|Policies][$arcologies[0].FSAztecRevivalistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will improve your arcology's combat power during crises//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSEgyptianRevivalist >= 40>>
+<<if $arcologies[0].FSEgyptianRevivalistSMR == 0>>
+	<br>''@@.lime;Egyptian Cultural Induction SMR:@@'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of ancient Egypt.
+	[[Implement|Policies][$arcologies[0].FSEgyptianRevivalistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Egyptian Revivalism//
+<</if>>
+<<if $arcologies[0].FSEgyptianRevivalist >= 90>>
+<<if $arcologies[0].FSEgyptianRevivalistLaw == 0>>
+	<br>''@@.lime;Pharaoh's Consort:@@'' your Head Girl will be given legal status as your Consort.
+	[[Implement|Policies][$arcologies[0].FSEgyptianRevivalistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will increase your Head Girl's prominence//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSEdoRevivalist >= 40>>
+<<if $arcologies[0].FSEdoRevivalistSMR == 0>>
+	<br>''@@.lime;Edo Cultural Induction SMR:@@'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of Edo Japan.
+	[[Implement|Policies][$arcologies[0].FSEdoRevivalistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Edo Revivalism//
+<</if>>
+<<if $arcologies[0].FSEdoRevivalist >= 90>>
+<<if $arcologies[0].FSEdoRevivalistLaw == 0>>
+	<br>''@@.lime;Cultural Insularity:@@'' will protect the arcology from old world influences.
+	[[Implement|Policies][$arcologies[0].FSEdoRevivalistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will speed the acceptance of all future societies//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSArabianRevivalist >= 40>>
+<<if $arcologies[0].FSArabianRevivalistSMR == 0>>
+	<br>''@@.lime;Arabian Cultural Induction SMR:@@'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of the old Caliphate.	[[Implement|Policies][$arcologies[0].FSArabianRevivalistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Arabian Revivalism//
+<</if>>
+<<if $arcologies[0].FSArabianRevivalist >= 90>>
+<<if $arcologies[0].FSArabianRevivalistLaw == 0>>
+	<br>''@@.lime;Jizya Tax:@@'' will raise the rents of unassimilated citizens, speeding the acceptance of all future societies.	[[Implement|Policies][$arcologies[0].FSArabianRevivalistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will moderately increase rental income and improve acceptance of all future societies//
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSChineseRevivalist >= 40>>
+<<if $arcologies[0].FSChineseRevivalistSMR == 0>>
+	<br>''@@.lime;Imperial Cultural Induction SMR:@@'' in order to be sold in the arcology, slaves must be instructed in the cultural tenets of Imperial China.	[[Implement|Policies][$arcologies[0].FSChineseRevivalistSMR = 1, $cash -=5000, $rep -= 1000, $minimumSlaveCost += 500]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will help advance Chinese Revivalism//
+<</if>>
+<<if $arcologies[0].FSChineseRevivalist >= 90>>
+<<if $arcologies[0].FSChineseRevivalistLaw == 0>>
+	<br>''@@.lime;Slave Administrator Enabling Law:@@'' will afford your Head Girl considerable legal power, allowing her to accomplish even more slave training.	[[Implement|Policies][$arcologies[0].FSChineseRevivalistLaw = 1, $cash -=5000, $rep -= 1000]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Will moderately increase rental income//
+<</if>>
+<</if>>
+<</if>>
+
+<<else>>
+	<br>//@@.red;You lack the reputation to implement policy.@@//
+<</if>>

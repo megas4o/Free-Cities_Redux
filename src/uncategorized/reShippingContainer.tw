@@ -1,0 +1,90 @@
+:: RE shipping container [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+
+<<set $seed = Math.trunc(($slaveCostFactor*1000)/100)*100>>
+<<set $seed = Math.clamp($seed, 500, 1500)>>
+
+<<set _newSlaves = []>>
+<<for $i = 0; $i < 5; $i++>>
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.origin = "She arrived at your arcology in an undocumented shipping container.">>
+	<<set $activeSlave.devotion = random(-90,-75)>>
+	<<set $activeSlave.trust = -20>>
+	<<set $activeSlave.health = -10>>
+	<<set _newSlaves.push($activeSlave)>>
+<</for>>
+<<set $helots += 25>>
+
+You receive an alert from $assistantName that there's a situation developing down in the shipping area at the base of the arcology. A shipping container arrived <<if $terrain == "urban">>through the vehicular arteries that connect the arcology to the city that surrounds it<<elseif $terrain == "rural">>via one of the transportation links that traverses the wilderness around the Free City<<else>>at the docks this morning<</if>>, without the proper documentation, or indeed any documentation at all. This is not uncommon in the rough and tumble world of Free Cities business; the automated handling systems scan such containers for dangerous material and then put them in a holding area until the matter can be untangled. They accumulate fees while there, and you're not infrequently able to confiscate the contents when those fees accumulate sufficiently. There are unusual reports about this container, though: citizens at the <<if $terrain == "urban">>shipping area<<elseif $terrain == "rural">>transport hub<<else>>docks<</if>> are reporting that this particular container is shouting. With nothing else pressing, you decide to handle the situation personally.
+
+<br><br>
+
+On the way, $assistantName updates you: a curious crowd is gathering, drawn by the commotion. As you step off the elevator, you see that it's true. The crowd parts for you amiably, partaking in the collective human eagerness to know what's inside a locked box, and knowing you'll probably sate their curiosity. You've got the scan records at your fingertips, and if it wasn't already obvious, the container is full of slaves. Shipping fresh chattel to the arcology in containers is perfectly normal. When you direct the container handling systems to open it by force, though, it's clear that this is a shoddy job. The random mix of slaves in the container are simply packed inside, with no provision for safety at all. There's about thirty of them, though most are, charitably, menial material. You confirm your suspicions with $assistantName: this is an attempt at smuggling slaves past your slave market regulations, though a laughably bad one that stood no chance of success. Someone was probably hoping to pull them out of the holding area later.
+
+<br><br>
+
+For now, the crowd around you is looking at the helpless human cargo with
+<<if $arcologies[0].FSDegradationist !== "unset">>
+	undisguised lust.
+<<elseif $arcologies[0].FSPaternalist !== "unset">>
+	concern, wondering if any of them need medical attention, and wanting to reassure them about the arcology they've entered.
+<<else>>
+	cupidity.
+<</if>>
+
+<br><br>
+
+<span id="result">
+<<link "Conduct an impromptu auction">>
+	<<replace "#result">>
+	<<for _i = 0; _i < _newSlaves.length; _i++>>
+		<<slaveCost _newSlaves[_i]>>
+		<<set $cash += $slaveCost>>
+	<</for>>
+	Allowing humor into your voice, you announce an auction, to be held immediately. The crowd appreciates the wit, and @@.green;appreciates it even more@@ when you conduct the auction yourself. It's always good to take an opportunity to show off your understanding of the slave market in public. You @@.yellowgreen;sell them all,@@ sex slaves and menials alike. Welcome to the Free Cities.
+	<<set $helots -= 25>>
+	<<set $cash += 25*$seed>>
+	<<set $rep += 100>>
+	<</replace>>
+<</link>>
+<br><<link "Keep them">>
+	<<replace "#result">>
+	<<for _i = 0; _i < _newSlaves.length; _i++>>
+		<<AddSlave _newSlaves[_i]>> /* skip New Slave Intro */
+		<<set $activeSlave.slaveCost = 0>>
+	<</for>>
+	You announce that the shipment is in violation of shipping and slave market regulations, and is being confiscated. There's a certain @@.red;disappointment@@ in the crowd that nothing more interesting came of it, but it's minor when compared to the chattel you just seized.
+	<<set $rep -= 50>>
+	<</replace>>
+<</link>>
+<<if $arcologies[0].FSDegradationist !== "unset">>
+<br><<link "Indulge the crowd's Degradationism">>
+	<<replace "#result">>
+	<<for _i = 0; _i < _newSlaves.length; _i++>>
+		<<if _newSlaves[_i].vagina > -1>><<set _newSlaves[_i].vagina = 3>><</if>>
+		<<set _newSlaves[_i].anus = 3>>
+		<<set _newSlaves[_i].health -= 20>>
+		<<AddSlave _newSlaves[_i]>> /* skip New Slave Intro */
+		<<set $activeSlave.slaveCost = 2000>>
+	<</for>>
+	You use the container handling systems to segregate the obvious menials from the those with any potential as sex slaves. The menials go into a different container, which is whisked off, leaving a little shivering knot of frightened bodies, vulnerable and naked. The crowd watched all this with good humor, and there's silence enough that everyone hears your quiet announcement. You announce that the shipment is in violation of shipping and slave market regulations, and is being confiscated; however, you don't expect to see these particular slaves delivered to your penthouse for a couple of hours. Then you turn your back and walk away. The crowd gives a kind of @@.green;appreciative howl@@ which, understandably, produces a wail of terror from the slaves. As you head off, the sobbing turns into screaming. It sounds like your new slaves might be a bit stretched out, here and there.
+	<<set $rep += 200>>
+	<</replace>>
+<</link>>
+<<elseif $arcologies[0].FSPaternalist !== "unset">>
+<br><<link "Indulge the crowd's Paternalism">>
+	<<replace "#result">>
+	<<for _i = 0; _i < _newSlaves.length; _i++>>
+		<<slaveCost _newSlaves[_i]>>
+		<<set $cash += $slaveCost>>
+		<<set $activeSlave.slaveCost = 2000>>
+	<</for>>
+	You hurry forward, beckoning the crowd to accompany you. The wretched slaves cringe with fear, but soon they're being comforted, offered water, and examined for injury. Once the most pressing needs are attended to, you call for everyone's attention. You pride yourself on knowing your citizens well, and you can pick good Paternalists out of the crowd at will. Calling them by name, you ask whether they'd be willing to take on one of these poor slaves. One by one, you pair slave and Master or Mistress, rewarding your best people with public approbation, not to mention a free slave. The initial gasps of surprise quickly grow into @@.green;thunderous applause.@@ Your people love you. Several of the slaves begin to cry, mostly from confusion or sheer exhaustion; they don't yet know how lucky they are.
+	<<set $helots -= 25>>
+	<<set $rep += 2500>>
+	<</replace>>
+<</link>>
+<</if>>
+</span>

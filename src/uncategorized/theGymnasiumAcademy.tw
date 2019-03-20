@@ -1,0 +1,42 @@
+:: The Gymnasium-Academy [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Buy Slaves", $returnTo = "Buy Slaves", $showEncyclopedia = 1, $encyclopedia = "Slave Schools">>
+/* Multi-Purchase Support */
+<<if ndef $newSlaves>><<set $newSlaves = []>><</if>>
+<<if $newSlaves.length > 0>>
+	<<set $nextButton = "Continue", $nextLink = "Bulk Slave Intro", $slaveMarket = "TGA", $returnTo = "Main", $newSlaveIndex = 0>>
+<</if>>
+
+//The Gymnasium-Academy is a very unusual slave school. It sits at a bizarre juncture of the evolving gender roles and slave roles in the Free Cities. Its graduates are exclusively born male, and are not surgically or hormonally changed, but are thoroughly indoctrinated in the gender roles of the Free Cities to be accepting of their place in the new and rapidly changing world. Since the Gymnasium-Academy produces graduates with a greater ability to build muscle, fitness and virility than any of its competitors, it also trains for athletic perfection to further differentiate them. This training relies on traditional methods of corporal punishment. <<if $TGA.schoolUpgrade != 0>><br><br>Since you have endowed <<if $TGA.schoolUpgrade == 1>>advanced training methods at the Gymnasium-Academy, its graduates are now fanatically loyal.<<else>>a combat training center at the Gymnasium-Academy, its graduates are now deadly fighters.<</if>> As a major <<if $PC.title == 0>>benefactrix<<else>>benefactor<</if>> of the institution, you also receive a discount on them.<</if>>//
+
+<br><br>The Gymnasium-Academy offers a fresh graduate for inspection via video call. The interview takes place in an office overlooking an expansive workout room, in which a large number of naked, fit young bodies are performing punishing workout routines.
+
+<<GenerateMarketSlave "TGA">>
+<<slaveCost $activeSlave>>
+<<if $TGA.schoolSale != 0>>
+	<<set $slaveCost = Math.trunc($slaveCost*0.5)>>
+<<elseif $TGA.schoolUpgrade != 0>>
+	<<set $slaveCost = Math.trunc($slaveCost*0.8)>>
+<</if>>
+<<if $slavesSeen > $slaveMarketLimit>><<set $slaveCost += Math.trunc($slaveCost*(($slavesSeen-$slaveMarketLimit)*0.1))>><</if>>
+
+<br><br>The price is ¤<<print $slaveCost>>.<<if $slavesSeen > $slaveMarketLimit>> You have cast such a wide net for slaves this week that it is becoming more expensive to find more for sale. Your reputation helps determine your reach within the slave market.<</if>>
+
+<<if $cash >= $slaveCost>>
+	<br>[[Buy her and check out other slaves to order|The Gymnasium-Academy][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $TGA.schoolSale = 0, $TGA.studentsBought += 1, $newSlaves.push($activeSlave), $introType = "multi", $slavesSeen+=1]]
+	<<if $newSlaves.length == 0>>
+		<br>[[Buy her slave contract|New Slave Intro][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $TGA.schoolSale = 0, $TGA.studentsBought += 1, $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Main"]]
+	<<else>>
+		<br>[[Buy her and Finish your order of slaves|Bulk Slave Intro][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $TGA.schoolSale = 0, $TGA.studentsBought += 1, $newSlaves.push($activeSlave)]]
+	<</if>>
+<<else>>
+	//You lack the necessary funds to buy this slave.//
+<</if>>
+<br>[[Decline to purchase her and check out another slave|The Gymnasium-Academy][$slavesSeen += 1]]
+<<if $newSlaves.length > 0>>
+	<br>[[Finish your order of slaves|Bulk Slave Intro]]
+<</if>>
+
+<br><br>
+
+<<set $saleDescription = 1, $applyLaw = 1>><<include "Long Slave Description">>

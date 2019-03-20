@@ -1,0 +1,561 @@
+:: tattoo description widgets [widget nobr]
+
+/* Tattoo Descriptions */
+
+<<widget "shouldersTatDescription">>
+  <<if $activeSlave.shouldersTat == "tribal patterns">>
+	Tribal tattoos encircle both her shoulders in swirling patterns.
+  <<elseif $activeSlave.shouldersTat == "flowers">>
+	A gorgeous flower tattoo covers each shoulder.
+  <<elseif ($activeSlave.shouldersTat == "advertisements") && ($activeSlave.vagina < 0)>>
+	'Two Hole Whore' is tattooed on each of her shoulders.
+  <<elseif ($activeSlave.shouldersTat == "advertisements")>>
+	'Three Hole Whore' is tattooed on each of her shoulders.
+  <<elseif $activeSlave.shouldersTat == "rude words">>
+	'Dickholster' is tattooed on her left shoulder, and 'Fuckmeat' is tattooed on her right.
+  <<elseif ($activeSlave.shouldersTat == "scenes") && ($activeSlave.vagina < 0)>>
+	A stylized rendition of a dick plunging into an open mouth is tattooed on her left shoulder, and a similar image of a dick entering an anus on her right.
+  <<elseif ($activeSlave.shouldersTat == "scenes")>>
+	A stylized rendition of a dick going into a pussy is tattooed on her left shoulder, and a similar image of a dick entering an anus on her right.
+  <<elseif ($activeSlave.shouldersTat == "Asian art")>>
+	Beautiful, colorful tattoos cover her upper body: a line of wind-whipped waves lashing against mountains runs across her collarbone and around both shoulders.
+  <<elseif $activeSlave.shouldersTat == "degradation">>
+	'Hurt Me' is tattooed on her left shoulder, and 'Rape Me' on her right.
+  <<elseif $activeSlave.shouldersTat == "counting">>
+	¤ tattoo counting her earnings and acquirements cover her shoulders.
+  <<elseif $activeSlave.shouldersTat == "bovine patterns">>
+	Her shoulders are flecked with tattoos of bovine blotches.
+  <<elseif $activeSlave.shouldersTat == "possessive">>
+	A rendition of your face inside a heart is tattooed onto her left shoulder, and the words 'I love my <<if $PC.title == 1>>Master<<else>>Mistress<</if>>' inside an identical heart are tattooed on her right.
+  <<elseif $activeSlave.shouldersTat == "sacrament">>
+	Tattoos depicting saintly nude figures adorn her shoulders.
+  <<elseif $activeSlave.shouldersTat == "sacrilege">>
+	Tattoos depicting demonic nude figures adorn her shoulders.
+  <<elseif $activeSlave.shouldersTat == "paternalist">>
+	'Love Me' is tattooed on her left shoulder, and 'Teach Me' on her right.
+  <</if>>
+<</widget>>
+
+<<widget "lipsTatDescription">>
+	<<switch $activeSlave.lipsTat>>
+	<<case "tribal patterns">>
+		$possessiveCap face is tattooed with tribal patterns that make $possessive seem mysterious and exotic.
+	<<case "flowers">>
+		$possessiveCap minimal facial tattoos are limited to a cute flower on each cheek.
+	<<case "Asian art">>
+		$pronounCap has a blossoming cherry tree tattooed on one temple; its pink petals are dappled across $possessive cheeks.
+	<<case "advertisements">>
+		$possessiveCap facial tattoos include 'Facefuck Me' across $possessive forehead, 'Cock' to the left of $possessive mouth, and 'Sucker' to the right of it.
+	<<case "rude words">>
+		$possessiveCap facial tattoos include 'Sex Slave' across $possessive forehead, 'Face' to the left of $possessive mouth, and 'Pussy' to the right of it.
+	<<case "permanent makeup">>
+		<<if $activeSlave.makeup == 0>>
+			$possessiveCap face appears to bear very heavy, slutty makeup, but on closer inspection, the makeup is actually tattooed on.
+		<<else>>
+			Her normal makeup is difficult to distinguish from the underlying very heavy slutty makeup that is tattooed on.
+		<</if>>
+	<<case "degradation">>
+		'$desc' is tattooed across $possessive forehead.
+	<<case "counting">>
+		<<if $activeSlave.oralCount == 0>>
+			There is a horizontal line tattooed across the $possessive cheeks for symbols counting $possessive oral totals to be inscribed under, once $pronoun has some.
+		<<elseif $activeSlave.oralCount < 500>>
+			Tiny dick, pussy, and anus symbols are tattooed all over $possessive cheeks, one for every thing $pronoun's sucked.
+		<<else>>
+			Tiny dick, pussy, and anus symbols are tattooed all over $possessive face, forehead, and neck, one for every thing $pronoun's sucked.
+		<</if>>
+	<<case "bovine patterns">>
+		$possessiveCap face is subtly tattooed to give $possessive a somewhat bovine appearance.
+	<<case "possessive">>
+		'Property of <<PlayerName>>' is tattooed across $possessive forehead.
+	<<case "sacrament">>
+		$possessiveCap face is subtly tattooed to give $possessive a decidedly angelic appearance.
+	<<case "sacrilege">>
+		$possessiveCap face is subtly tattooed to give $possessive a decidedly demonic appearance.
+	<<case "paternalist">>
+		'Beloved $desc' is tattooed across one of $possessive cheeks.
+<</switch>>
+<</widget>>
+
+<<widget "boobsTatDescription">>
+	<<switch $activeSlave.boobsTat>>
+	<<case "tribal patterns">>
+		$possessiveCap chest and breasts are tattooed with tribal patterns that focus attention on $possessive nipples.
+	<<case "flowers">>
+		$possessiveCap chest is tattooed with a pattern of flowering vines that delicately outlines $possessive breasts.
+	<<case "advertisements">>
+		'Fuck Me!' is tattooed across $possessive chest in such large letters that the word is visible a long way off.
+	<<case "rude words">>
+		'Fuckslave' is tattooed across $possessive chest in such large letters that the word is visible a long way off.
+	<<case "scenes">>
+		$possessiveCap chest is tattooed with lewd scenes; each of $possessive breasts shows a phallus receiving a titfuck while each of $possessive collarbones shows a woman deepthroating a large phallus.
+	<<case "degradation">>
+		'<<if $PC.title == 1>>Master<<else>>Mistress<</if>>'s' is tattooed across the top of $possessive right breast; 'Bitch' is tattooed across the top of $possessive left.
+	<<case "counting">>
+		<<if $activeSlave.mammaryCount == 0>>
+			There is a horizontal line tattooed across $possessive middle chest for symbols counting $possessive mammary encounters to be inscribed under, once $pronoun has some.
+		<<elseif $activeSlave.mammaryCount < 500>>
+			Tiny dick, lips, breast, and even pussy symbols are tattooed all over $possessive cleavage, one for each of $possessive mammary encounters.
+		<<else>>
+			Tiny dick, lips, breast, and even pussy symbols cover $possessive breasts, cleavage, and sides, one for each of $possessive mammary encounters.
+		<</if>>
+	<<case "bovine patterns">>
+		$possessiveCap chest is tattooed to look like a Holstein cow's, with $possessive udders left bare to draw attention to them.
+	<<case "Asian art">>
+		An octopus is tattooed on $possessive upper chest; its tentacles reach down to envelop $possessive breasts, their tips reaching for but not quite reaching each nipple.
+	<<case "possessive">>
+		Your personal symbol is tattooed above $possessive left breast, <<PlayerName>>' tattooed above $possessive right, leaving the rest of $possessive chest and breasts bare.
+	<<case "sacrament">>
+		Each of $possessive breasts is tattooed with a depiction of a crucifix, with $possessive nipples forming the center.
+	<<case "sacrilege">>
+		Each of $possessive breasts is tattooed with a depiction of a pentagram, with $possessive nipples forming the center.
+	<<case "paternalist">>
+		'<<if $PC.title == 1>>Master<<else>>Mistress<</if>>'s' is tattooed across the top of $possessive right breast; 'Darling' is tattooed across the top of $possessive left.
+	<</switch>>
+<</widget>>
+
+<<widget "armsTatDescription">>
+  <<if $activeSlave.amp != 1>>
+	<<if ($activeSlave.armsTat == "tribal patterns")>>
+		Her tribal tattoos run down her arms.
+	<<elseif ($activeSlave.armsTat == "flowers")>>
+		Her floral tattoos run down her arms to end in a pretty bloom on the back of each hand.
+	<<elseif ($activeSlave.armsTat == "advertisements")>>
+		Her right arm is tattooed with a price list for use if she's whoring, and her left with a simple tourist guide for use if she's serving the public.
+	<<elseif ($activeSlave.armsTat == "rude words")>>
+		Her arms have helpful instructions on how to restrain her for rape, including indications of the best anchor points at her wrists.
+	<<elseif ($activeSlave.armsTat == "scenes")>>
+		Her lewd tattoos cover her arms; they include lots of little vignettes of sex, with dates to show when she was first fucked like that.
+	<<elseif ($activeSlave.armsTat == "Asian art")>>
+		Tattoos of fierce dragons wind around both her arms.
+	<<elseif $activeSlave.armsTat == "possessive">>
+		Her arm tattoos depict notable moments during her enslavement by you, culminating in a stylized rendition of your first initial on her left hand and your second on the right.
+	<<elseif $activeSlave.armsTat == "sacrament">>
+		Tattoos of swirling thorns run down her arms, culminating in a stylized depiction of a bloody nail on the back of each hand.
+	<<elseif $activeSlave.armsTat == "sacrilege">>
+		Tattoos of swirling flames run down her arms.
+	<<elseif $activeSlave.armsTat == "paternalist">>
+		<<if $activeSlave.dick > 0>>
+		  <<if $activeSlave.vagina > -1>>
+			<<if $activeSlave.boobs > 600>>
+			  'Boobs Pussy Cock Asshole' is tattooed on her left arm, and 'Caress Pleasure Stroke Stretch' is tattooed on her right.
+			<<else>>
+			  'Half Pussy & Half Cock' is tattooed on her left arm, and 'All Loved' is tattooed on her right.
+			<</if>>
+		  <<elseif $activeSlave.boobs > 600>>
+			'I didn't used to have boobs' is tattooed on her left arm, and 'And now I do!' is tattooed on her right.
+		  <<else>>
+			'I promise to cum buckets' is tattooed on her left arm, and 'If you treat me right' is tattooed on her right.
+		  <</if>>
+		<<else>>
+		  <<if ($activeSlave.boobs > 800) && ($activeSlave.lactation > 0)>>
+			'Please drink' is tattooed on her left arm, and 'All my milk' is tattooed on her right.
+		  <<elseif ($activeSlave.age > 35)>>
+			'Please let Mommy worship your cock' is tattooed on her left arm, and 'Please pleasure Mommy's pussy' is tattooed on her right.
+		  <<elseif ($activeSlave.age < 25)>>
+			'Please teach me how to suck cock' is tattooed on her left arm, and 'Please teach me how to fuck' is tattooed on her right.
+		  <<else>>
+			'There are many sex slaves like me' is tattooed on her left arm, and 'But <<if $PC.title == 1>>Master<<else>>Mistress<</if>> loves me' is tattooed on her right.
+		  <</if>>
+		<</if>>
+	<<elseif ($activeSlave.armsTat == "degradation")>>
+		<<if $activeSlave.dick > 0>>
+		  <<if $activeSlave.vagina > -1>>
+			<<if $activeSlave.boobs > 600>>
+			  'Boobs Pussy Cock Asshole' is tattooed on her left arm, and 'Suck Fuck Hurt Rape' is tattooed on her right.
+			<<else>>
+			  'Half Pussy & Half Cock' is tattooed on her left arm, and 'All Whore' is tattooed on her right.
+			<</if>>
+		  <<elseif $activeSlave.boobs > 600>>
+			'I didn't used to have boobs' is tattooed on her left arm, and 'I didn't always take it up the ass' is tattooed on her right.
+		  <<else>>
+			'I promise to cum buckets' is tattooed on her left arm, and 'If you fuck my butt' is tattooed on her right.
+		  <</if>>
+		<<else>>
+		  <<if ($activeSlave.boobs > 800) && ($activeSlave.lactation > 0)>>
+			'Grade AAA Milker' is tattooed on her left arm, and 'Grade AAA Breeder' is tattooed on her right.
+		  <<elseif ($activeSlave.age > 35)>>
+			'Please let Mommy suck your cock' is tattooed on her left arm, and 'Please rape Mommy's cunt' is tattooed on her right.
+		  <<elseif ($activeSlave.age < 25)>>
+			'Teach me how to suck cock' is tattooed on her left arm, and 'Teach me how to take dick' is tattooed on her right.
+		  <<else>>
+			'There are many sex slaves like me' is tattooed on her left arm, and 'But this one is <<if $PC.title == 1>>Master<<else>>Mistress<</if>>'s' is tattooed on her right.
+		  <</if>>
+		<</if>>
+	<<elseif $activeSlave.armsTat == "counting">>
+		<<if $activeSlave.oralCount == 0>>
+		  There are horizontal lines tattooed around her forearms, creating a blank space to permanently tally future sexual exploits.
+		<<elseif $activeSlave.oralCount < 500>>
+		  Tiny dick, pussy, and anus symbols are tattooed on her forearms, one for each organ she's manually pleasured.
+		<<else>>
+		  Tiny dick, pussy, and anus symbols are tattooed all over both her arms, one for each organ she's manually pleasured.
+		<</if>>
+	<<elseif $activeSlave.armsTat == "bovine patterns">>
+		Tattoos of cow-like spots cover her arms, but stop short of each of her elbows.
+	<</if>>
+  <</if>>
+<</widget>>
+
+<<widget "backTatDescription">>
+	<<if $activeSlave.backTat == "tribal patterns">>
+		She has a totem of her spirit animal tattooed across her back.
+	<<elseif $activeSlave.backTat == "flowers">>
+		Her back is covered in hundreds of beautiful flower tattoos; one could spend half an hour examining them all.
+	<<elseif ($activeSlave.backTat == "advertisements")>>
+		She has an ad for the arcology itself tattooed across her back.
+	<<elseif $activeSlave.backTat == "rude words">>
+		'Sex Slave' is tattooed across her back; the tattoo uses the broad space to make each letter six inches tall, so that her identity can be read from hundreds of meters off.
+	<<elseif ($activeSlave.backTat == "scenes")>>
+		<<if $activeSlave.vagina == -1>>
+			A line-art rendition of $activeSlave.slaveName herself cumming copiously while riding a dick is tattooed across her entire back.
+		<<elseif $activeSlave.lactation > 0>>
+			A line-art rendition of $activeSlave.slaveName herself nursing a pair of her fellow slaves is tattooed across her entire back.
+		<<elseif $activeSlave.vaginalSkill >= 100>>
+			A line-art rendition of $activeSlave.slaveName herself performing reverse cowgirl and spreading her pussy is tattooed across her entire back.
+		<<elseif $PC.vagina == 1>>
+			A line-art rendition of $activeSlave.slaveName herself eating pussy is tattooed across her entire back.
+		<<else>>
+			A line-art rendition of $activeSlave.slaveName herself deepthroating a cock is tattooed across her entire back.
+		<</if>>
+	<<elseif ($activeSlave.backTat == "Asian art")>>
+		An Asian dragon is tattooed in a circle across her back; the dragon has subtle features that, according to traditional meanings, relate it to her personality.
+	<<elseif $activeSlave.shouldersTat == "possessive">>
+		An abridged and stylized version of her slave contract is tattooed across her entire back.
+	<<elseif $activeSlave.shouldersTat == "sacrament">>
+		She has a pair of pure white wings tattooed across her entire back.
+	<<elseif $activeSlave.shouldersTat == "sacrilege">>
+		She has a pair of blackened wings tattooed across her entire back.
+	<<elseif $activeSlave.shouldersTat == "paternalist">>
+		She has your name and the location of your penthouse tattooed on her upper back, so kind citizens can return her to you if she wanders off.
+	<<elseif $activeSlave.backTat == "degradation">>
+		She has
+		<<if $activeSlave.dick > 0>>
+			<<if $activeSlave.vagina > -1>>
+				<<if $activeSlave.boobs > 600>>
+					'Futa<<if $activeSlave.age > 35>> MILF<</if>> Slave'
+				<<else>>
+					'<<if $activeSlave.age > 35>>MILF <</if>>Hermaphrodite'
+				<</if>>
+			<<elseif $activeSlave.boobs > 600>>
+				'Shemale<<if $activeSlave.age > 35>> MILF<</if>> Slave'
+			<<else>>
+				'Dickgirl<<if $activeSlave.age > 35>> MILF<</if>> Slave'
+			<</if>>
+		<<else>>
+			<<if ($activeSlave.boobs > 800) && ($activeSlave.lactation > 0)>>
+				'Slave Cow'
+			<<elseif ($activeSlave.age > 35)>>
+				'MILF Slave'
+			<<elseif ($activeSlave.age < 25)>>
+				'Slave Girl'
+			<<else>>
+				'Sex Slave'
+			<</if>>
+		<</if>>
+		tattooed across her back in gothic script.
+	<<elseif $activeSlave.backTat == "counting">>
+		Her back is tattooed with tick marks to count the days of her sexual slavery
+		<<set $seed = (($week-$activeSlave.weekAcquired)*7)+random(-3,3)>>
+		<<if $seed < 10>>
+			here. There are only a few.
+		<<else>>
+			here: $seed of them.
+		<</if>>
+	<<elseif $activeSlave.shouldersTat == "bovine patterns">>
+		$possessiveCap back is tattooed to resemble the dappled flank of a cow.
+<</if>>
+<</widget>>
+
+<<widget "stampTatDescription">>
+	<<if $activeSlave.fuckdoll == 0>>
+	<<if $activeSlave.stampTat != 0>>
+	<<switch $activeSlave.stampTat>>
+		<<case "tribal patterns">>
+			$pronounCap has a tribal-patterned tramp stamp.
+		<<case "flowers">>
+			$pronounCap has a floral-patterned tramp stamp.
+		<<case "advertisements">>
+			$pronounCap has a tramp stamp which reads 'Fuck my ass!'
+		<<case "rude words">>
+			$pronounCap has a tramp stamp which reads 'Rear Entrance,' with an arrow pointing downward.
+		<<case "sacrilege">>
+			$pronounCap has a tramp stamp which reads 'Fuck my ass and be damned.'
+		<<case "scenes">>
+			$pronounCap has a tramp stamp which shows a cock entering an anus, recognizably hers.
+		<<case "Asian art">>
+			A traditional Asian household scene is tattooed on $possessive lower back, showing a rendition of $activeSlave.slaveName, dressed in rich silks, having sex with a <<if $PC.title == 1>>gentleman<<else>>lady<</if>>. The slave and the <<if $PC.title == 1>>gentleman<<else>>lady<</if>> are kissing passionately as <<if $PC.title == 1>>he<<else>>she<</if>>
+			<<if $activeSlave.vagina < 0>>
+			penetrates the slave's anus.
+			<<elseif $activeSlave.preg > 5>>
+			embraces the slave's pregnant belly.
+			<<else>>
+			penetrates the slave's vagina.
+			<</if>>
+		<<case "degradation">>
+			$pronounCap has a tramp stamp formed from gothic lettering that reads 'Anal Whore.'
+		<<case "counting">>
+			<<if $activeSlave.anus == 0>>
+				$pronounCap has the dashed outline of a cock tattooed across $possessive lower back.
+			<<else>>
+				$pronounCap has the silhouette of the largest cock $pronoun's ever had up $possessive anus tattooed across $possessive lower back.
+			<</if>>
+		<<case "possessive">>
+			$pronounCap has a tramp stamp which reads '$PC.name's $desc.'
+		<<case "sacrament">>
+			$pronounCap has a tramp stamp which reads 'Fuck my ass and be blessed.'
+		<<case "paternalist">>
+			$pronounCap has a tramp stamp which reads 'Fuck me slowly' with an arrow pointing downward.
+		<<case "bovine patterns">>
+			$pronounCap has an identifying barcode tattooed across $possessive lower back.
+	<</switch>>
+	<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "buttTatDescription">>
+	<<switch $activeSlave.buttTat>>
+	<<case "tribal patterns">>
+		$possessiveCap buttocks and hips are tattooed with tribal patterns that emphasize $possessive womanly curves.
+	<<case "flowers">>
+		$possessiveCap hips are tattooed with a cute floral design.
+	<<case "advertisements">>
+		'Shove' is tattooed across $possessive left buttock; 'It In' is tattooed across $possessive right.
+	<<case "rude words">>
+		<<if $activeSlave.vagina > 0>>
+			'No. 2'
+		<<else>>
+			'No. 1'
+		<</if>>
+		is tattooed across $possessive left buttock; 'Fuckhole' is tattooed across $possessive right.
+	<<case "sacrilege">>
+		'It's not a sin' is tattooed across $possessive left buttock;
+		<<if $activeSlave.vagina > -1>>
+			'If I don't enjoy it'
+		<<else>>
+			'I'm a girl'
+		<</if>> is tattooed across $possessive right.
+	<<case "scenes">>
+		<<if ($activeSlave.dick > 0) && ($activeSlave.balls > 0)>>
+			$possessiveCap buttocks are tattooed with lewd scenes; each of $possessive buttocks shows a smiling shemale offering $possessive anus, while each of $possessive thighs shows a rear view of a shemale simultaneously being sodomized and sodomizing.
+		<<elseif ($activeSlave.dick > 0)>>
+			$possessiveCap buttocks are tattooed with lewd scenes; each of $possessive buttocks shows a gelding, legs together to conceal $possessive cock and display $possessive anus, while each of $possessive thighs shows a gelding being double penetrated in $possessive gaping anus.
+		<<else>>
+			$possessiveCap buttocks are tattooed with lewd scenes; each of $possessive buttocks shows a woman being sodomized while each of $possessive thighs shows a woman being gangbanged in all $possessive holes.
+		<</if>>
+	<<case "degradation">>
+		'Treat it' is tattooed across $possessive left buttock; 'Like a Pussy' is tattooed across $possessive right.
+	<<case "counting">>
+		<<if $activeSlave.analCount == 0>>
+			There is a horizontal line tattooed across the tops of $possessive buttocks for symbols counting $possessive anal exploits to be inscribed under, once $pronoun has some.
+		<<elseif $activeSlave.analCount < 500>>
+			Tiny dick symbols are tattooed all over $possessive the tops of $possessive buttocks, one for every time $pronoun's been assfucked.
+		<<else>>
+			Tiny dick symbols are tattooed all over $possessive entire buttocks, attesting to long anal slavery.
+		<</if>>
+	<<case "bovine patterns">>
+		$possessiveCap buttocks are tattooed with large black splotches like those of a Holstein cow.
+	<<case "Asian art">>
+		Each of $possessive buttocks bears a tattoo of a coiled dragon, advancing meaningfully towards $possessive anus.
+	<<case "possessive">>
+		'$PC.name made me their' is tattooed across $possessive left buttock; with '$desc' tattooed across $possessive right.
+	<<case "sacrament">>
+		'This is my penance' is tattooed across $possessive left buttock;
+		<<if $activeSlave.vagina > -1>>
+			'Make me suffer.'
+		<<else>>
+			'As a slave.'
+		<</if>> is tattooed across $possessive right.
+	<<case "paternalist">>
+		'Treat it' is tattooed across $possessive left buttock; 'Gently' is tattooed across $possessive right.
+	<</switch>>
+	<<if ($activeSlave.brand != 0) && (($activeSlave.brandLocation == "left buttock") || ($activeSlave.brandLocation == "right buttock") || ($activeSlave.brandLocation == "buttocks") || ($activeSlave.brandLocation == "left thigh") || ($activeSlave.brandLocation == "right thigh") || ($activeSlave.brandLocation == "thighs"))>>
+		<<brandDescription>>
+	<</if>>
+<</widget>>
+
+<<widget "vaginaTatDescription">>
+	<<if ($activeSlave.vaginaTat != 0)>>
+	<<switch $activeSlave.vaginaTat>>
+	<<case "tribal patterns">>
+		$possessiveCap abdomen is tattooed with tribal patterns that draw the eye down toward $possessive <<if $activeSlave.dick != 0>>cock<<elseif $activeSlave.vagina == -1>>featureless crotch<<else>>vagina<</if>>.
+	<<case "flowers">>
+		$possessiveCap abdomen bears a tasteful tattoo of a <<if $activeSlave.dick != 0>>lily with a large stamen<<else>>blooming flower<</if>>.
+	<<case "advertisements">>
+		$possessiveCap abdomen reads <<if $activeSlave.vagina < 0>>'Rear Entrance Other Side.'<<else>>'Insert Cock' with an arrow pointing downward.<</if>>
+	<<case "rude words">>
+		$possessiveCap abdomen reads <<if $activeSlave.vagina < 0>>'Useless, Rape Ass Instead' with an arrow pointing downward<<else>>'Fucktoy'<</if>>.
+	<<case "degradation">>
+		$possessiveCap abdomen is tattooed with <<if $activeSlave.dick != 0>>a downward-pointing arrow which reads 'Bounces When Buttfucked.'<<else>>gothic script that reads '<<if $PC.dick == 1>><<if $PC.vagina == 1>>Futa<<else>>Cock<</if>><<else>>Cunt<</if>> Pleaser.'<</if>>
+	<<case "scenes">>
+		$possessiveCap abdomen is tattooed with a lewd scenes. It entices with a depiction of <<if $activeSlave.dick != 0>><<if $activeSlave.balls != 0>>sodomy of a shemale<<else>>sodomy of a gelding<</if>><<elseif $activeSlave.vagina == -1>>sodomy of a null<<else>>loving intercourse<</if>>.
+	<<case "counting">>
+		<<if $activeSlave.vaginalCount == 0>>
+			$possessiveCap abdomen reads 'count begins other side, sorry.'
+		<<elseif $activeSlave.vaginalCount < 500>>
+			Tiny dick symbols are tattooed all over $possessive abdomen, one for every time $pronoun's been fucked.
+		<<else>>
+			Tiny dick symbols are tattooed all over $possessive abdomen, one for every time $pronoun's been fucked. There are so many that they spread up to $possessive breasts and around $possessive sides.
+		<</if>>
+	<<case "bovine patterns">>
+		$possessiveCap abdomen is tattooed in a Holstein cow pattern.
+	<<case "Asian art">>
+		$pronounCap has formal Asian characters tattooed across $possessive abdomen. To those who do not know the language, they look elegant, but roughly translated, they read
+		<<if ($activeSlave.dick > 0) && canAchieveErection($activeSlave)>>
+		'dick girl slut.'
+		<<elseif $activeSlave.dick > 0>>
+		'limp dick slut.'
+		<<elseif $activeSlave.preg > 5>>
+		'pregnant cow.'
+		<<elseif $activeSlave.age > 35>>
+		'horny old bitch.'
+		<<else>>
+		'sex slave.'
+		<</if>>
+	<<case "possessive">>
+		$possessiveCap abdomen is tattooed with 
+		<<if ($activeSlave.dick > 0) && canAchieveErection($activeSlave)>>
+		'Dick girl slave
+		<<elseif $activeSlave.dick > 0>>
+		'Limp dick slave
+		<<elseif $activeSlave.preg > 5>>
+		'Breeder slave
+		<<elseif $activeSlave.age > 35>>
+		'MILF slave
+		<<else>>
+		'Sex slave
+		<</if>>
+		of <<if $PC.title == 1>>Master<<else>>Mistress<</if>> $PC.name.' 
+	<<case "sacrament">>
+		$possessiveCap abdomen is tattooed with a variety of religious symbols.
+	<<case "sacrilege">>
+		$possessiveCap abdomen is tattooed with a variety of heretical symbols.
+	<<case "paternalist">>
+		$possessiveCap abdomen is tattooed with a downward-pointing arrow which reads 'Let's come together.'
+	<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "dickTatDescription">>
+	<<if ($activeSlave.dick != 0)>>
+	<<if ($activeSlave.dickTat != 0)>>
+	<<switch $activeSlave.dickTat>>
+	<<case "tribal patterns">>
+		$possessiveCap cock is tattooed with tribal patterns.
+	<<case "flowers">>
+		$possessiveCap cock is tattooed with a vine that wraps around its shaft.
+	<<case "advertisements">>
+		$possessiveCap cock reads 'Sissy Slut.'
+	<<case "Asian art">>
+		$possessiveCap cock has an Asian dragon rushing down each side to the tip.
+	<<case "rude words">>
+		$possessiveCap cock reads 'Bitchstick.'
+	<<case "degradation">>
+		<<if $activeSlave.anus == 0>>
+		$possessiveCap cock reads '100% Virgin Anus.'
+		<<else>>
+		$possessiveCap cock reads 'Comes When Assraped.'
+		<</if>>
+	<<case "counting">>
+		<<if $activeSlave.penetrativeCount == 0>>
+			There is a horizontal line tattooed around the base of $possessive dick for symbols counting $possessive penetrative exploits to be inscribed under, once $pronoun has some.
+		<<elseif $activeSlave.penetrativeCount < 500>>
+			Tiny anus, pussy and mouth symbols are tattooed all over $possessive dick, recounting $possessive penetrative exploits.
+		<<else>>
+			Tiny anus, pussy and mouth symbols are tattooed all over $possessive dick, recounting $possessive penetrative exploits. $pronounCap has so many that they radiate out across $possessive crotch, too.
+		<</if>>
+	<<case "bovine patterns">>
+		$possessiveCap cock is tattooed to make it look a little like a bulls'.
+	<<case "possessive">>
+		$possessiveCap cock has an identification barcode tattooed on its side.
+	<<case "sacrament">>
+		$possessiveCap cock is covered in tiny words, each derived from a sacred scripture.
+	<<case "sacrilege">>
+		$possessiveCap cock is covered in tiny words, each derived from a sacrilegious text.
+	<<case "paternalist">>
+		<<if $activeSlave.anus == 0>>
+		$possessiveCap cock reads 'Still an Ass Virgin.'
+		<<else>>
+		$possessiveCap cock reads 'Comes When Stroked.'
+		<</if>>
+	<</switch>>
+	<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "anusTatDescription">>
+	<<if $activeSlave.anusTat != 0>>
+	<<switch $activeSlave.anusTat>>
+	<<case "bleached">>
+		$possessiveCap anus is bleached.
+	<<case "flowers">>
+		$pronounCap has a huge blooming flower tattooed right over $possessive anus.
+	<<case "advertisements">>
+		<<if ($activeSlave.vagina > -1)>>
+		$pronounCap has a ring of text tattooed around $possessive anus which reads 'Second Pussy.'
+		<<else>>
+		$pronounCap has a ring of text tattooed around $possessive anus which reads 'Spit First.'
+		<</if>>
+	<<case "rude words">>
+		<<if ($activeSlave.vagina > -1)>>
+		$pronounCap has a ring of text tattooed around $possessive anus which reads 'Fucktoy's Favorite Fuckhole.'
+		<<else>>
+		$pronounCap has a ring of text tattooed around $possessive anus which reads 'Sissy Slut's Sodomy Slit.'
+		<</if>>
+	<<case "sacrilege">>
+		$pronounCap has a ring of Aramaic text tattooed around $possessive anus, which translates to horrible blasphemy.
+	<<case "tribal patterns">>
+		$possessiveCap anus is bleached. It is tattooed with a tribal pattern that changes interestingly when $pronoun relaxes or tightens $possessive sphincter.
+	<<case "degradation">>
+		$possessiveCap anus is bleached. It is tattooed with gothic script in a ring around $possessive hole, reading '<<if $PC.title == 1>>Master<<else>>Mistress<</if>> Made Me An Anal Slut.'
+	<<case "counting">>
+		<<if $activeSlave.analCount == 0>>
+			$pronounCap has a dashed line tattooed around $possessive anus as a guideline for where her anal count will be inscribed.
+		<<elseif $activeSlave.analCount < 1000>>
+			$pronounCap has fine rings tattooed around $possessive anus, one for each hundred cocks.
+		<<else>>
+			$pronounCap has thick and fine rings tattooed around $possessive anus, for each thousand and hundred cocks.
+		<</if>>
+	<<case "bovine patterns">>
+		$possessiveCap anus is tattooed to mimic the puffy, dark appearance of a cow's.
+	<<case "possessive">>
+		$pronounCap has a ring of numbers around $possessive anus, detailing the date she was enslaved by you.
+	<<case "sacrament">>
+		$pronounCap has a ring of Aramaic text tattooed around $possessive anus, which translates to a comforting blessing.
+	<<case "paternalist">>
+		$possessiveCap anus is bleached. It is tattooed with text in a ring around $possessive hole, reading '<<if $PC.title == 1>>Master<<else>>Mistress<</if>> Helped Me Love Anal.'
+	<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "legsTatDescription">>
+	<<switch $activeSlave.legsTat>>
+	<<case "tribal patterns">>
+		$possessiveCap tribal tattoos run down $possessive legs.
+	<<case "flowers">>
+		$possessiveCap floral tattoos run down $possessive legs, with an especially beautiful bouquet of blooms sprayed across each thigh.
+	<<case "advertisements">>
+		$possessiveCap thighs are used as simple ad space, promoting $arcologies[0].name and your business pursuits.
+	<<case "rude words">>
+		$possessiveCap left thigh reads '$desc' and the right 'slut.'
+	<<case "scenes">>
+		$pronounCap has symmetrical tattoos on each thigh depicting $possessive being spitroasted.
+	<<case "degradation">>
+		<<if ($activeSlave.vagina < 0)>>
+		$possessiveCap left thigh reads 'I Used To Fuck,' and the right 'But Now I Get Fucked.'
+		<<else>>
+		$possessiveCap left thigh reads 'My Life Is Sex,' and the right 'All I'm Good For.'
+		<</if>>
+	<<case "counting">>
+		$possessiveCap thighs are used as space for tattoos that count the number of times $pronoun's done various degrading but nonsexual things.
+	<<case "possessive">>
+		$possessiveCap left thigh is tattooed with a stylized representation of your initials, and the right with a depiction of your personal symbol.
+	<<case "sacrament">>
+		$possessiveCap legs are covered in tattoos of swirling thorns.
+	<<case "sacrilege">>
+		$possessiveCap legs are covered in tattoos of swirling flames.
+	<<case "paternalist">>
+		$possessiveCap left thigh reads 'I Love My Life,' and the right 'It's All I'm Good For.'
+	<<case "bovine patterns">>
+		$possessiveCap legs are covered in tattoos of spots, giving $possessive a noticeably bovine appearance.
+	<</switch>>
+<</widget>>

@@ -1,0 +1,102 @@
+:: Rename [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Slave Interact">>
+
+/* First time renaming reaction */
+<<if $activeSlave.fetish == "mindbroken">>
+	$activeSlave.slaveName doesn't even recognize that she's been renamed. It simply does not register.
+<<elseif $oldName == $activeSlave.birthName || $oldSurname == $activeSlave.birthSurname>>
+	$activeSlave.slaveName
+	<<if $activeSlave.devotion > 50>>
+		accepts her new name cheerfully. This attachment to you @@.hotpink; increases her devotion.@@
+		<<set $activeSlave.devotion += 4>>
+	<<elseif $activeSlave.devotion >= -20>>
+		obediently accepts her new name. This surrender to you @@.hotpink; increases her obedience.@@
+		<<set $activeSlave.devotion += 4>>
+	<<elseif $activeSlave.devotion >= -50>>
+		reluctantly accepts her new name.
+	<<else>>
+		angrily tries to resist her new name, insisting that her name is $activeSlave.birthName<<if $activeSlave.birthSurname>> $activeSlave.birthSurname<</if>>. This resistance @@.mediumorchid; increases her rebelliousness.@@
+		<<set $activeSlave.devotion -= 5>>
+	<</if>>
+<<else>>
+	Since $activeSlave.slaveName has already had a new name <<if $activeSlave.devotion > 20>>given to<<else>>forced on<</if>> her before, the mere fact of having it changed again doesn't really affect her.
+<</if>>
+
+/* Rude name reaction */
+/* Disabled until a fix for the .toLowerCase and .indexOf */
+/*
+<<set _insultingName = 0>>
+<<if $oldName != $activeSlave.slaveName>>
+	<<set _toSearch = $activeSlave.slaveName>>
+	<<set _toSearch = _toSearch.toLowerCase();>>
+	<<for $i = 0; $i < setup.badWords.length; $i++>>
+	<<if _toSearch.indexOf(setup.badWords[$i]) != -1>>
+		<<set _insultingName = 1>>
+	<</if>>
+	<</for>>
+<</if>>
+<<if !_insultingName>>
+<<if $oldSurname != $activeSlave.slaveSurname>>
+	<<set _toSearch = $activeSlave.slaveSurname>>
+	<<set _toSearch = _toSearch.toLowerCase();>>
+	<<for $i = 0; $i < setup.badWords.length; $i++>>
+	<<if _toSearch.indexOf(setup.badWords[$i]) != -1>>
+		<<set _insultingName = 1>>
+	<</if>>
+	<</for>>
+<</if>>
+<</if>>
+<<if _insultingName == 1>>
+<<if $activeSlave.fetish == "mindbroken">>
+	Her new name would be insulting to a normal girl, but she dully accepts that it is an accurate description and goes about her duties.
+<<elseif $activeSlave.devotion < -50>>
+	Being given such a degrading name @@.mediumorchid;further increases her hatred@@ of you.
+	<<set $activeSlave.devotion -= 5>>
+<<elseif $activeSlave.devotion <= 50>>
+	Being given such a degrading name @@.gold;terrifies her,@@ since she thinks it's fair warning for what she'll suffer in the future.
+	<<set $activeSlave.trust -= 5>>
+<</if>>
+<</if>>
+*/
+
+/* Wife's surname reaction */
+<<if $oldSurname != $activeSlave.slaveSurname>>
+<<if $activeSlave.relationship >= 5>>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+	<<if $activeSlave.relationshipTarget == $slaves[_i].ID>>
+		<<if $slaves[_i].slaveSurname>>
+		<<if $activeSlave.slaveSurname == $slaves[_i].slaveSurname>>
+			She's touched that she now shares a surname with her wife $slaves[_i].slaveName $slaves[_i].slaveSurname, and is @@.mediumaquamarine;more confident than ever@@ that you intend to keep them together in marital bliss.
+			<<set $activeSlave.trust += 5>>
+			<<break>>
+		<<elseif $oldSurname == $slaves[_i].slaveSurname>>
+			She's concerned that she no longer shares a surname her wife $slaves[_i].slaveName $slaves[_i].slaveSurname, and is @@.gold;very worried@@ that you might be considering splitting them up.
+			<<set $activeSlave.trust -= 5>>
+			<<break>>
+		<</if>>
+		<</if>>
+	<</if>>
+	<</for>>
+<</if>>
+<</if>>
+
+/* PC's surname reaction */
+<<if $oldSurname != $activeSlave.slaveSurname>>
+<<if $activeSlave.relationship == -3>>
+	<<if $PC.surname>>
+	<<if $activeSlave.slaveSurname == $PC.surname>>
+		<<if $activeSlave.amp <= 0>>
+			<br><br>
+			When you tell her that she's to be known as $activeSlave.slaveName $activeSlave.slaveSurname now, she starts to cry. She tries to get herself under control and thank you as best she can, wiping at the tears running down her $activeSlave.skin cheeks, but she can't seem to stop weeping as she thanks you over and over. She's a sex slave, your property, and it's understandable that some doubts about the permanence of her place as your slave wife. This has @@.mediumaquamarine;helped reassure her,@@ and explains the strength of her emotional reaction. The next time you make love to her, she @@.hotpink;presses herself as close to you as she can,@@ eager to drink in as much of your presence as she can get.
+		<<else>>
+			She's @@.hotpink;deeply touched@@ that she now shares a surname with you, and has @@.mediumaquamarine;an additional source of confidence@@ that she'll remain your amputee slave wife.
+		<</if>>
+		<<set $activeSlave.devotion += 5, $activeSlave.trust += 5>>
+	<<elseif $oldSurname == $PC.slaveSurname>>
+		She's devastated that you'd rename her something other than your name. She's @@.gold;terrified@@ that you intend to discard her as your slave wife, and @@.mediumorchid;saddened@@ that you would take away something that was precious to her.
+		<<set $activeSlave.devotion -= 5, $activeSlave.trust -= 5>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>

@@ -1,0 +1,162 @@
+:: Slave Markets [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Buy Slaves", $returnTo = "Buy Slaves", $showEncyclopedia = 1, $encyclopedia = "Kidnapped Slaves">>
+/* Multi-Purchase Support */
+<<if ndef $newSlaves>><<set $newSlaves = []>><</if>>
+<<if $newSlaves.length > 0>>
+	<<set $nextButton = "Continue", $nextLink = "Bulk Slave Intro", $returnTo = "Main", $newSlaveIndex = 0>>
+<</if>>
+
+You visit the slave markets off the arcology plaza. It's always preferable to examine merchandise in person.
+
+<<if $slaveMarket == "kidnappers">>
+	You're in the area of the slave market populated by slave kidnappers, though of course they prefer more polite titles. The slaves here are cheap, and they look it. They're almost all recent catches from bad parts of the old world, and most of them have seen considerable abuse between the moment of their capture and entering your arcology.
+	<<if $arcologies[0].FSPaternalistSMR == 1>>
+		Fortunately for them, such behavior is not permitted here. Though they remain frightened and angry, they are safe from rape, for now.
+	<<else>>
+		<<set $seed = random(1,4)>>
+		There's more merchandise out of sight in the holding areas. To go by what you can hear,
+		<<if ($seed == 1) && (random(0,99) < $seeDicks)>>
+		muffled insistence that the speaker is not a girl followed by struggling and then shrieks as a resistant dickgirl takes anal rape,
+		<<elseif ($seed == 2) && (random(1,100) > $seeDicks)>>
+		muffled begging followed by struggling and then crying as a new slave learns how it feels to have a slave's cunt,
+		<<elseif ($seed == 3)>>
+		muffled gagging followed gasping and sobbing as a new slave tries to get her breath back after oral rape,
+		<<else>>
+		the unmistakable slap of flesh on flesh,
+		<</if>>
+		at least one of the slavers is amusing himself<<if $arcologies[0].FSGenderFundamentalist == "unset">> (or herself)<</if>> back there.
+	<</if>>
+	<<GenerateMarketSlave "kidnappers">>
+
+
+<<elseif $slaveMarket == "indentures">>
+	You're in the area of the slave market that deals in indentured servants. The people sold here are slaves, but they are temporary slaves, and many of them have clauses in their indentures that prohibit some of the most severe practices. They exhibit a strange variety, with some looking more frightened than the most downtrodden slave and some looking almost cheerful.
+	<<if $arcologies[0].FSPaternalistSMR == 1>>
+		The generous protections for slaves in your arcology lend this last group extra confidence.
+	<<else>>
+		<<set $seed = random(1,4)>>
+		The area is crowded, and more indentured servants are packed together in the holding areas. To go by what you can hear,
+		<<if ($seed == 1) && (random(0,99) < $seeDicks)>>
+		the unmistakable mixed shrieks, sobs, and slaps of anal rape,
+		<<elseif ($seed == 2) && (random(1,100) > $seeDicks)>>
+		the characteristic crying and gasping of an unwilling girl giving up her cunt,
+		<<elseif ($seed == 3)>>
+		the gagging and expectoration of someone who has just gotten a mouthful of unwelcome cum,
+		<<else>>
+		disconsolate sobbing interrupted by a gasp as something is stuffed inside someone's mouth, and followed by muffled screams,
+		<</if>>
+		one of them is learning exactly what her indenture allows.
+	<</if>>
+	<<GenerateMarketSlave "indentures">>
+
+
+<<elseif $slaveMarket == "hunters">>
+	You're in the area of the slave market populated by runaway slave catchers, a proud group. The slaves here know their way around Free Cities slavery already, and their eyes are watchful. Most of them probably harbor thoughts of another attempt at escape, though the slavers to their best to disabuse them of these notions.
+	<<if $arcologies[0].FSPaternalistSMR == 1>>
+		Their methods are somewhat limited, as the rules in your arcology preclude the more effective methods of punishment.
+	<<else>>
+		<<set $seed = random(1,4)>>
+		The slave catchers consider their catches fair game, though they usually confine their amusements to the holding areas out of sight. Not out of earshot, though; to go by what you can hear,
+		<<if ($seed == 1) && (random(0,99) < $seeDicks)>>
+		vehement insistence that the speaker is not a girl followed by a beating and then shrieks as a rebellious dickgirl takes anal rape,
+		<<elseif ($seed == 2) && (random(1,100) > $seeDicks)>>
+		vehement protestations followed by a beating and then crying as a slave's cunt takes her punishment for her,
+		<<elseif ($seed == 3)>>
+		struggling and gagging followed gasping and angry swearing as a rebellious slave tries to get her breath back after oral rape,
+		<<else>>
+		struggling followed by the slap of flesh on flesh,
+		<</if>>
+		at least one of the runaway hunters is amusing himself<<if $arcologies[0].FSGenderFundamentalist == "unset">> (or herself)<</if>> back there.
+	<</if>>
+	<<GenerateMarketSlave "hunters">>
+
+
+<<elseif $slaveMarket == "raiders">>
+	You're in the area of the slave market populated by girl raiders, that daredevil subset of slave kidnappers that specifically target old world schools, preparatory institutions, religious groups, and other sources of slaves that can soon be sold right after they reach their majorities. The extreme risk of these raids makes the slavers here aggressive and confident,
+	<<if $arcologies[0].FSPaternalistSMR == 1>>
+		though they do obey the rules of your arcology that restrain them from abusing the girls.
+	<<else>>
+		<<set $seed = random(1,4)>>
+		though they restrain themselves from reducing the value of their captures by taking virginities. They do have their fun, though; to go by what you can hear from the holding area where they keep slaves of age who can be sold,
+		<<if ($seed == 1) && (random(0,99) < $seeDicks)>>
+		a muffled but obviously sadistic description of feminization, and the desperate sobbing in response,
+		<<elseif ($seed == 2) && (random(1,100) > $seeDicks)>>
+		a muffled but obviously sadistic description of breeding, and the desperate sobbing in response,
+		<<elseif ($seed == 3)>>
+		faint struggling and crying that suggests that someone is being thoroughly groped and pinched,
+		<<else>>
+		the lewd, lubricated noise of someone giving a reluctant handjob,
+		<</if>>
+		at least one of the raiders is amusing himself<<if $arcologies[0].FSGenderFundamentalist == "unset">> (or herself)<</if>> back there.
+	<</if>>
+	<<GenerateMarketSlave "raiders">>
+
+
+<<elseif $slaveMarket == "neighbor">>
+	You're in the area of the slave market that specializes in slaves from within the Free City, viewing slaves from ''<<print "$arcologies["+$numArcology+"].name">>''. Some were trained there, specifically for sale, while others are simply being sold.
+	<<GenerateMarketSlave "neighbor">>
+
+
+<<else>>
+	You're in the area of the slave market populated by slave trainers, easily the wealthiest vendors. The slaves here have received obedience training and medical care, and many have had some basic sexual skills forced on them.
+	<<if $arcologies[0].FSPaternalistSMR == 1>>
+		Though the rules of your arcology protected them from the worst excesses of the training profession, many of the slaves on sale have the haunted look of people still coming to terms with the idea that they no longer have any bodily autonomy.
+	<<else>>
+		<<set $seed = random(1,4)>>
+		The trainers are a competitive bunch, and to go by what you can hear,
+		<<if ($seed == 1) && ($seeDicks != 0) && (random(0,100) > $seeDicks)>>
+		moaning interspersed with lewd, well-lubricated noises coming from both anal sex and vigorous masturbation,
+		<<elseif ($seed == 2) && ($seeDicks != 100) && (random(0,100) > $seeDicks)>>
+		moaning and the distinctive slap of feminine buttocks on thighs beneath them as a girl rides a dick,
+		<<elseif ($seed == 3)>>
+		the lush, lewd sounds of diligent oral sex,
+		<<else>>
+		the call-and-response of a trainer and a slave running through a memorized obedience exercise,
+		<</if>>
+		at least one of them is applying some last-minute training to a slave in the holding pens nearby.
+	<</if>>
+	<<GenerateMarketSlave "trainers">>
+
+
+<</if>>
+
+<br><br>
+
+<<slaveCost $activeSlave>>
+<<if $slavesSeen > $slaveMarketLimit>><<set $slaveCost += $slaveCost*(($slavesSeen-$slaveMarketLimit)*0.1)>><</if>>
+
+<<if $slaveMarket == "neighbor">>
+	<<if $opinion != 0>>
+		<<set $slaveCost -= Math.trunc($slaveCost*$opinion*0.05)>>
+		<<if $opinion > 2>>
+			Your cultural ties with ''$arcologies[$numArcology].name'' helps keep the price reasonable.
+		<<elseif $opinion < -2>>
+			Your social misalignment with ''$arcologies[$numArcology].name'' drives up the price.
+		<</if>>
+	<</if>>
+<</if>>
+
+<<set $slaveCost = 500*Math.trunc($slaveCost/500)>>
+The offered price is ¤<<print $slaveCost>>.<<if $slavesSeen > $slaveMarketLimit>> You have cast such a wide net for slaves this week that it is becoming more expensive to find more for sale. Your reputation helps determine your reach within the slave market.<</if>>
+
+<<if $cash >= $slaveCost>>
+	<br>[[Buy her and check out other slaves to order|Slave Markets][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $newSlaves.push($activeSlave), $introType = "multi", $slavesSeen+=1]]
+	<<if $newSlaves.length == 0>>
+		<br>[[Buy her slave contract|New Slave Intro][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost,$nextButton = "Continue",$nextLink = "AS Dump",$returnTo = "Main"]]
+	<<else>>
+		<br>[[Buy her and Finish your order of slaves|Bulk Slave Intro][$cash -= $slaveCost, $activeSlave.slaveCost = $slaveCost, $newSlaves.push($activeSlave)]]
+	<</if>>
+<<else>>
+	//You lack the necessary funds to buy this slave.//
+<</if>>
+<br>[[Decline to purchase her and check out another slave|Slave Markets][$slavesSeen += 1]]
+<<if $newSlaves.length > 0>>
+	<br>[[Finish your order of slaves|Bulk Slave Intro]]
+<</if>>
+
+<br><br>
+<<if $slaveMarket != "indentures">>
+	<<set $applyLaw = 1>>
+<</if>>
+<<set $saleDescription = 1>><<include "Long Slave Description">>

@@ -1,0 +1,49 @@
+:: RE resistant mother daughter [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check">>
+
+<<set $i = $slaves.findIndex(function(s) { return s.ID == $mother.ID; })>>
+<<set $j = $slaves.findIndex(function(s) { return s.ID == $daughter.ID; })>>
+
+$mother.slaveName and her daughter are both having trouble getting acclimated to your ownership, with their obedience suffering as a result. Though neither of them have done anything particular egregious lately, their combined list of minor transgressions is reaching a point where rendering punishment on the two would not be seen as unfair. By happenstance they come before you for inspection one after the other. Though they certainly see each other naked frequently around the penthouse, neither seems particularly comfortable around the other when nudity is involved. While you finish $mother.slaveName's inspection, her daughter fidgets uneasily even while trying to mimic the posture and appearance of an obedient slave. It occurs to you that the current situation presents an opportunity to do //something// about this resistant mother daughter pair.
+
+<br><br>
+<span id="result">
+<br><<link "Spend the evening gently acclimating them to your ownership">>
+	<<replace "#result">>
+	Though neither of the two vehemently protests your decision to have them both join you in bed, furtive uneasy glances are exchanged between the two. Since they're already naked, they clamber onto your bed before you and reluctantly kneel facing each other, leaving enough space between them for you and for them to avert their eyes to avoid the other's nakedness. They clearly assume you would start by using one of them, so they're quite taken aback when you remain standing at the edge of the bed and suggest that $mother.slaveName play with her daughter. $daughter.slaveName awkwardly flounders a little as her mother's hands roam about her body, but does not reel back from the intimate touching. In time you instruct $daughter.slaveName to pleasure her mother, but still decline to join the incestuous union unfolding on your sheets. You extend the foreplay for hours, bringing both mother and daughter to such a state of naked arousal that they begin grinding against each other uninhibitedly. They are both so desperate for release that they do not object when you finally decide to join them, instead eagerly moving to include you in their coupling. What started with $daughter.slaveName awkwardly kneeling unmoving while her mother sucked her nipples ends with $daughter.slaveName on all fours getting fucked by you while orally pleasuring $mother.slaveName. You gaze over at $mother.slaveName and she moans and licks her lips enticingly back at you as $daughter.slaveName moans into her fuckhole.
+	@@.mediumaquamarine;They have both become more trusting of you.@@
+
+	<<set $slaves[$i].trust += 4, $slaves[$j].trust += 4, $slaves[$i].oralCount += 1, $slaves[$j].oralCount += 1, $oralTotal += 2>>
+	
+	<<if canDoAnal($slaves[$j])>>
+		<<set $slaves[$j].analCount += 1>>
+		<<set $analTotal += 1>>
+	<<elseif canDoVaginal($slaves[$j])>>
+		<<set $slaves[$j].vaginalCount += 1>>
+		<<set $vaginalTotal += 1>>
+	<</if>>
+
+	<<if canDoAnal($slaves[$i])>>
+		<<set $slaves[$i].analCount += 1>>
+		<<set $analTotal += 1>>
+	<<elseif canDoVaginal($slaves[$i])>>
+		<<set $slaves[$i].vaginalCount += 1>>
+		<<set $vaginalTotal += 1>>
+	<</if>>
+
+	<</replace>>
+<</link>>
+<br><<link "Make an example of the mother">>
+	<<replace "#result">>
+	You give them orders of devastating simplicity: You are going to assrape $mother.slaveName and if her daughter offers even the most token of resistance, you'll punish $mother.slaveName. They're stunned, but you shake them out of their shock by grabbing $mother.slaveName by the arm <<if $PC.dick == 0>>,donning a strap-on<</if>>and shoving her over your desk. $daughter.slaveName flinches visibly as you enter her mother's ass in one brutal stroke, for which you stain her mother's asscheeks a rosy red with a torrent of harsh spanks. $mother.slaveName takes the rough anal pounding with only quiet sobbing and the occasional whimper of pain, but her daughter can't bear to see $mother.slaveName in such duress and breaks her shortlived silence to beg for mercy. When you step away from $mother.slaveName, $daughter.slaveName lets out a sigh of relief, but her expression soon turns to horror and revulsion when you return to mount her mother with a lash in hand.
+	<br><br>
+	When you eventually finish your merciless assrape of $mother.slaveName, her body is covered in bruises, marks and handprints. A testament to $daughter.slaveName's inability to keep her silence as you brutalized her mother. You leave your office wordlessly to attend to other matters, while behind you $daughter.slaveName gazes forlornly at the gibbering mess you have reduced her mother to.
+	Your severe punishment of her mother has encouraged $daughter.slaveName to @@.gold;fear you@@. $mother.slaveName has been fucked into @@.hotpink;submission@@ but your savage treatment has caused her to @@.red;hate buttsex.@@
+
+	<<set $slaves[$j].trust -= 10>>
+	<<set $slaves[$i].devotion += 4, $slaves[$i].analCount += 1, $analTotal += 1, $slaves[$i].sexualFlaw = "hates anal">>
+
+	<</replace>>
+<</link>>
+</span>

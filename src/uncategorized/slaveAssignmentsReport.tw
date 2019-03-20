@@ -1,0 +1,438 @@
+:: Slave Assignments Report [nobr]
+
+<<set $nextLink = "Economics", $nextButton = "Continue", _SL = $slaves.length, $RapeableIDs = []>>
+
+<h1>$arcologies[0].name Weekly Slave Report - Week $week</h1>
+
+<<for $i = 0; $i < _SL; $i++>>
+
+<<if ndef $slaves[$i].whoreSkill>>
+	@@.yellow;Reset bad whore skill for $slaves[$i].slaveName.@@ Report this as a bug if it reoccurs.<br>
+	<<set $slaves[$i].whoreSkill = 0>>
+<</if>>
+<<if ndef $slaves[$i].entertainSkill>>
+	@@.yellow;Reset bad entertain skill for $slaves[$i].slaveName.@@ Report this as a bug if it reoccurs.<br>
+	<<set $slaves[$i].entertainSkill = 0>>
+<</if>>
+<<if ndef $slaves[$i].vaginalSkill>>
+	@@.yellow;Reset bad vaginal skill for $slaves[$i].slaveName.@@ Report this as a bug if it reoccurs.<br>
+	<<set $slaves[$i].vaginalSkill = 0>>
+<</if>>
+<<if ndef $slaves[$i].analSkill>>
+	@@.yellow;Reset bad anal skill for $slaves[$i].slaveName.@@ Report this as a bug if it reoccurs.<br>
+	<<set $slaves[$i].analSkill = 0>>
+<</if>>
+<<if ndef $slaves[$i].oralSkill>>
+	@@.yellow;Reset bad skill for $slaves[$i].slaveName.@@ Report this as a bug if it reoccurs.<br>
+	<<set $slaves[$i].oralSkill = 0>>
+<</if>>
+
+<<if ($seeDicks > 0) && (canPenetrate($slaves[$i])) && ($slaves[$i].releaseRules != "restrictive")>>
+	<<set $averageDick += $slaves[$i].dick, $slavesWithWorkingDicks++>>
+<</if>>
+
+<<switch $slaves[$i].assignment>>
+<<case "be your Head Girl">>
+	<<set $HeadGirl = $slaves[$i]>>
+	<<if $HeadGirl.fetish == "mindbroken">>
+		''__@@.pink;$HeadGirl.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your head girl any more.@@<br>
+		<<set $HeadGirl = 0>>
+	<<elseif canTalk($HeadGirl) == false>>
+		''__@@.pink;$HeadGirl.slaveName@@__'' can't give slaves verbal orders @@.yellow;and cannot serve as your head girl any more.@@<br>
+		<<set $HeadGirl = 0>>
+	<<elseif canWalk($HeadGirl) != true>>
+		''__@@.pink;$HeadGirl.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your head girl any more.@@<br>
+		<<set $HeadGirl = 0>>
+	<<elseif canSee($HeadGirl) != true>>
+		''__@@.pink;$HeadGirl.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your head girl any more.@@<br>
+		<<set $HeadGirl = 0>>
+	<<elseif $HeadGirl.devotion <= 20>>
+		''__@@.pink;$HeadGirl.slaveName@@__'' is no longer even accepting of you, @@.yellow;and cannot serve as your head girl any more.@@<br>
+		<<set $HeadGirl = 0>>
+	<</if>>
+	<<if $HeadGirl != 0>>
+		<<set $HGEnergy++>>
+		<<if $personalAttention == "HG">>
+			<<set $HGEnergy++>>
+			<<if $HeadGirl.trust > 95>>
+				<<set $HGEnergy++>>
+			<</if>>
+		<</if>>
+		<<if $arcologies[0].FSChineseRevivalistLaw == 1>>
+			<<set $HGEnergy++>>
+		<</if>>
+		<<if canAchieveErection($HeadGirl)>>
+			<<set $HGCum = 2+Math.trunc(($HeadGirl.balls/5)+($HeadGirl.energy/95)+($HeadGirl.health/95)+($HeadGirl.devotion/95))>>
+		<</if>>
+	<<else>>
+		<<removeJob $slaves[$i] "be your Head Girl">>
+	<</if>>
+<<case "live with your Head Girl">>
+	<<if $slaves[$i].devotion >= random(-30,20)>>
+		<<set $HGSlaveSuccess++, $HGEnergy++>>
+	<<else>>
+		<<set $HGSlaveSuccess-->>
+	<</if>>
+<<case "recruit girls">>
+	<<set $Recruiter = $slaves[$i]>>
+	<<if $Recruiter.fetish == "mindbroken">>
+		''__@@.pink;$Recruiter.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your recruiter any more.@@<br>
+		<<set $Recruiter = 0>>
+	<<elseif canTalk($Recruiter) == false>>
+		''__@@.pink;$Recruiter.slaveName@@__'' can't verbally entice marks @@.yellow;and cannot serve as your recruiter any more.@@<br>
+		<<set $Recruiter = 0>>
+	<<elseif canWalk($Recruiter) != true>>
+		''__@@.pink;$Recruiter.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your recruiter any more.@@<br>
+		<<set $Recruiter = 0>>
+	<<elseif canSee($Recruiter) != true>>
+		''__@@.pink;$Recruiter.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your recruiter any more.@@<br>
+		<<set $Recruiter = 0>>
+	<</if>>
+	<<if $Recruiter == 0>>
+		<<removeJob $slaves[$i] "recruit girls">>
+	<</if>>
+<<case "be the Madam">>
+	<<set $Madam = $slaves[$i]>>
+	<<if canTalk($Madam) == false>>
+		''__@@.pink;$Madam.slaveName@@__'' can't give whores verbal orders @@.yellow;and cannot serve as your Madam any more.@@<br>
+		<<set $Madam = 0>>
+	<<elseif $Madam.fetish == "mindbroken">>
+		''__@@.pink;$Madam.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your Madam any more.@@<br>
+		<<set $Madam = 0>>
+	<<elseif canWalk($Madam) != true>>
+		''__@@.pink;$Madam.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your Madam any more.@@<br>
+		<<set $Madam = 0>>
+	<<elseif canSee($Madam) != true>>
+		''__@@.pink;$Madam.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your Madam any more.@@<br>
+		<<set $Madam = 0>>
+	<</if>>
+	<<if $Madam == 0>>
+		<<removeJob $slaves[$i] "be the Madam">>
+	<</if>>
+<<case "be the DJ">>
+	<<set $DJ = $slaves[$i]>>
+	<<if canTalk($DJ) == false>>
+		''__@@.pink;$DJ.slaveName@@__'' can't speak @@.yellow;and cannot serve as your DJ any more.@@<br>
+		<<set $DJ = 0>>
+	<<elseif $DJ.fetish == "mindbroken">>
+		''__@@.pink;$DJ.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your DJ any more.@@<br>
+		<<set $DJ = 0>>
+	<<elseif canWalk($DJ) != true>>
+		''__@@.pink;$DJ.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your DJ any more.@@<br>
+		<<set $DJ = 0>>
+	<</if>>
+	<<if $DJ == 0>>
+		<<removeJob $slaves[$i] "be the DJ">>
+	<</if>>
+<<case "be the Milkmaid">>
+	<<set $Milkmaid = $slaves[$i]>>
+	<<if $Milkmaid.fetish == "mindbroken">>
+		''__@@.pink;$Milkmaid.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your Milkmaid any more.@@<br>
+		<<set $Milkmaid = 0>>
+	<<elseif canWalk($Milkmaid) != true>>
+		''__@@.pink;$Milkmaid.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your Milkmaid any more.@@<br>
+		<<set $Milkmaid = 0>>
+	<<elseif canSee($Milkmaid) != true>>
+		''__@@.pink;$Milkmaid.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your Milkmaid any more.@@<br>
+		<<set $Milkmaid = 0>>
+	<</if>>
+	<<if $Milkmaid == 0>>
+		<<removeJob $slaves[$i] "be the Milkmaid">>
+	<</if>>
+<<case "be the Stewardess">>
+	<<set $Stewardess = $slaves[$i]>>
+	<<if canTalk($Stewardess) == false>>
+		''__@@.pink;$Stewardess.slaveName@@__'' can't give servants verbal orders @@.yellow;and cannot serve as your Stewardess any more.@@<br>
+		<<set $Stewardess = 0>>
+	<<elseif $Stewardess.fetish == "mindbroken">>
+		''__@@.pink;$Stewardess.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your Stewardess any more.@@<br>
+		<<set $Stewardess = 0>>
+	<<elseif canWalk($Stewardess) != true>>
+		''__@@.pink;$Stewardess.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your Stewardess any more.@@<br>
+		<<set $Stewardess = 0>>
+	<<elseif canSee($Stewardess) != true>>
+		''__@@.pink;$Stewardess.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your Stewardess any more.@@<br>
+		<<set $Stewardess = 0>>
+	<</if>>
+	<<if $Stewardess == 0>>
+		<<removeJob $slaves[$i] "be the Stewardess">>
+	<</if>>
+<<case "be the Schoolteacher">>
+	<<set $Schoolteacher = $slaves[$i]>>
+	<<if canTalk($Schoolteacher) == false>>
+		''__@@.pink;$Schoolteacher.slaveName@@__'' can't give verbal instruction @@.yellow;and cannot serve as your Schoolteacher any more.@@<br>
+		<<set $Schoolteacher = 0>>
+	<<elseif $Schoolteacher.fetish == "mindbroken">>
+		''__@@.pink;$Schoolteacher.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your Schoolteacher any more.@@<br>
+		<<set $Schoolteacher = 0>>
+	<<elseif canSee($Schoolteacher) != true>>
+		''__@@.pink;$Schoolteacher.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your Schoolteacher any more.@@<br>
+		<<set $Schoolteacher = 0>>
+	<</if>>
+	<<if $Schoolteacher == 0>>
+		<<removeJob $slaves[$i] "be the Schoolteacher">>
+	<</if>>
+<<case "be the Wardeness">>
+	<<set $Wardeness = $slaves[$i]>>
+	<<if canWalk($Wardeness) != true>>
+		''__@@.pink;$Wardeness.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your Wardeness any more.@@<br>
+		<<set $Wardeness = 0>>
+	<<elseif canSee($Wardeness) != true>>
+		''__@@.pink;$Wardeness.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your Wardeness any more.@@<br>
+		<<set $Wardeness = 0>>
+	<</if>>
+	<<if $Wardeness == 0>>
+		<<removeJob $slaves[$i] "be the Wardeness">>
+	<</if>>
+<<case "be the Attendant">>
+	<<set $Attendant = $slaves[$i]>>
+	<<if $Attendant.fetish == "mindbroken">>
+		''__@@.pink;$Attendant.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your Attendant any more.@@<br>
+		<<set $Attendant = 0>>
+	<<elseif canWalk($Attendant) != true>>
+		''__@@.pink;$Attendant.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your Attendant any more.@@<br>
+		<<set $Attendant = 0>>
+	<</if>>
+	<<if $Attendant == 0>>
+		<<removeJob $slaves[$i] "be the Attendant">>
+	<</if>>
+<<case "be the Nurse">>
+	<<set $Nurse = $slaves[$i]>>
+	<<if $Nurse.fetish == "mindbroken">>
+		''__@@.pink;$Nurse.slaveName@@__'' is mindbroken @@.yellow;and cannot serve as your Nurse any more.@@<br>
+		<<set $Nurse = 0>>
+	<<elseif canWalk($Nurse) != true>>
+		''__@@.pink;$Nurse.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your Nurse any more.@@<br>
+		<<set $Nurse = 0>>
+	<<elseif canSee($Nurse) != true>>
+		''__@@.pink;$Nurse.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your Nurse any more.@@<br>
+		<<set $Nurse = 0>>
+	<</if>>
+	<<if $Nurse == 0>>
+		<<removeJob $slaves[$i] "be the Nurse">>
+	<</if>>
+<<case "guard you">>
+	<<set $Bodyguard = $slaves[$i]>>
+	<<if canWalk($Bodyguard) != true>>
+		''__@@.pink;$Bodyguard.slaveName@@__'' is no longer independently mobile @@.yellow;and cannot serve as your bodyguard any more.@@<br>
+		<<set $Bodyguard = 0>>
+	<<elseif canSee($Bodyguard) != true>>
+		''__@@.pink;$Bodyguard.slaveName@@__'' can no longer see @@.yellow;and cannot serve as your Bodyguard any more.@@<br>
+		<<set $Bodyguard = 0>>
+	<</if>>
+	<<if $Bodyguard == 0>>
+		<<removeJob $slaves[$i] "guard you">>
+	<</if>>
+<<case "be your Concubine">>
+	<<set $Concubine = $slaves[$i], $fuckSlaves++>>
+<<case "serve in the master suite" "please you">>
+	<<set $fuckSlaves++>>
+<<case "take classes">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<removeJob $slaves[$i] "take classes">>
+		''__@@.pink;$slaves[$i].slaveName@@__'' is no longer mentally capable and @@.yellow;has been dropped from class.@@
+	<</if>>
+<<case "learn in the schoolroom">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<removeJob $slaves[$i] "learn in the schoolroom">>
+		''__@@.pink;$slaves[$i].slaveName@@__'' is no longer mentally capable and @@.yellow;has been dropped from class.@@
+	<</if>>
+<<case "be confined in the cellblock">>
+	<<if $slaves[$i].fetish == "mindbroken">>
+		<<removeJob $slaves[$i] "be confined in the cellblock">>
+		''__@@.pink;$slaves[$i].slaveName@@__'' has mentally broken and thus can not be broken further. @@.yellow;She has been released from the cellblock.@@
+	<</if>>
+<</switch>>
+
+<<if $Lurcher>>
+	<<if $slaves[$i].ID == $Lurcher.ID>>
+		<<set $Lurcher = $slaves[$i]>>
+		<<if canWalk($Lurcher) != true>>
+			''__@@.pink;$Lurcher.slaveName@@__'' is no longer able to run @@.yellow;and cannot course as a lurcher.@@<br>
+			<<set $Lurcher = 0>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $fighterIDs.includes($slaves[$i])>>
+	<<if canWalk($slaves[$i]) != true>>
+		''__@@.pink;$slaves[$i].slaveName@@__'' is no longer independently mobile @@.yellow;and cannot fight any more.@@ She has been removed from $pitName roster<br>.
+		<<set $fighterIDs.delete($slaves[$i].ID)>>
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].origin && $slaves[$i].origin.includes("Slave Shelter")>>
+	<<set $shelterGirlsIDs.push($slaves[$i].ID)>>
+<</if>>
+
+<<if $slaves[$i].devotion <= 95>>
+<<if $slaves[$i].energy <= 95>>
+<<if !$slaves[$i].rivalry>>
+<<if !$slaves[$i].fuckdoll>>
+<<if $slaves[$i].fetish != "mindbroken">>
+	<<set $RapeableIDs.push($slaves[$i].ID)>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $slaves[$i].preg > 0>>
+	<<set $slaves[$i].preg++>>
+<</if>>
+
+<<if $slaves[$i].devotion >= -50>>
+<<if $slaves[$i].energy > 20>>
+	<<set $slaves[$i].need = $slaves[$i].energy>>
+<</if>>
+<</if>>
+
+<</for>>
+
+<<if $averageDick > 0>><<set $averageDick = $averageDick/$slavesWithWorkingDicks>><</if>>
+<<set $freeSexualEnergy = $PC.sexualEnergy-$fuckSlaves>>
+<<if $freeSexualEnergy > 0>>
+<<if $freeSexualEnergy > $slavesVisible/2>>
+	<<set $freeSexualEnergy = 3>>
+<<elseif $freeSexualEnergy > $slavesVisible/4>>
+	<<set $freeSexualEnergy = 2>>
+<<else>>
+	<<set $freeSexualEnergy = 1>>
+<</if>>
+<</if>>
+
+/** silent pass for any reassignments before generating reports */
+<<for $i = 0; $i < _SL; $i++>>
+	<<if $slaves[$i].choosesOwnAssignment == 1>>
+		<<silently>>
+			<<include "SA chooses own job">>
+		<</silently>>
+	<</if>>
+<</for>>
+
+<<set _HGPossibleSlaves = [[], [], [], [], [], []]>>
+<<for $i = 0; $i < _SL; $i++>>
+    <<set _Slave = $slaves[$i]>>
+    <<if (_Slave.fuckdoll == 1 || _Slave.fetish == "mindbroken" || _Slave.ID == $personalAttention || _Slave.ID == $Bodyguard.ID || _Slave.ID == $HeadGirl.ID || _Slave.assignmentVisible == 0)>>
+        <<continue>>
+    <</if>>
+
+    <<if ($headGirlTrainsHealth && _Slave.health < -20)>>
+        <<set _HGPossibleSlaves[0].push({ID: _Slave.ID, training: "health"})>>
+        <<continue>>
+    <</if>>
+
+    <<set _hasParaphilia = (["cum addict", "anal addict", "attention whore", "breast growth", "abusive", "malicious", "self hating", "neglectful", "breeder"].includes(_Slave.sexualFlaw))>>
+    <<if ($headGirlTrainsParaphilias && _hasParaphilia)>>
+        <<set _HGPossibleSlaves[1].push({ID: _Slave.ID, training: "paraphilia"})>>
+        <<continue>>
+    <</if>>
+
+    <<if $headGirlTrainsFlaws || $headGirlSoftensFlaws>>
+    <<if _Slave.behavioralFlaw != "none" || (_Slave.sexualFlaw != "none" && !_hasParaphilia)>>
+		<<if $headGirlSoftensFlaws>>
+			<<if _Slave.devotion > 20>>
+				<<if (_Slave.behavioralFlaw != "none" && _Slave.behavioralQuirk == "none") || (_Slave.sexualFlaw != "none" && _Slave.sexualQuirk == "none" && !_hasParaphilia)>>
+					<<set _HGPossibleSlaves[3].push({ID: _Slave.ID, training: "soften"})>>
+				<<else>>
+					<<set _HGPossibleSlaves[3].push({ID: _Slave.ID, training: "flaw"})>>
+				<</if>>
+				<<continue>>
+			<</if>>
+		<<elseif $headGirlTrainsFlaws>>
+			<<set _HGPossibleSlaves[2].push({ID: _Slave.ID, training: "flaw"})>>
+			<<continue>>
+		<</if>>
+    <</if>>
+    <</if>>
+
+    <<if ($headGirlTrainsObedience && _Slave.devotion <= 20 && _Slave.trust > -20)>>
+        <<set _HGPossibleSlaves[4].push({ID: _Slave.ID, training: "obedience"})>>
+        <<continue>>
+    <</if>>
+
+    <<if ($headGirlTrainsSkills)>>
+        <<if (_Slave.oralSkill < $HeadGirl.oralSkill)>>
+            <<set _HGPossibleSlaves[5].push({ID: _Slave.ID, training: "oral skill"})>>
+        <<elseif (_Slave.vaginalSkill < $HeadGirl.vaginalSkill) && (_Slave.vagina > 0) && (canDoVaginal(_Slave))>>
+            <<set _HGPossibleSlaves[5].push({ID: _Slave.ID, training: "fuck skill"})>>
+        <<elseif (_Slave.analSkill < $HeadGirl.analSkill) && (_Slave.anus > 0) && (canDoAnal(_Slave))>>
+            <<set _HGPossibleSlaves[5].push({ID: _Slave.ID, training: "anal skill"})>>
+        <<elseif (_Slave.whoreSkill < $HeadGirl.whoreSkill)>>
+            <<set _HGPossibleSlaves[5].push({ID: _Slave.ID, training: "whore skill"})>>
+        <<elseif (_Slave.entertainSkill < $HeadGirl.entertainSkill) && (_Slave.amp != 1)>>
+            <<set _HGPossibleSlaves[5].push({ID: _Slave.ID, training: "entertain skill"})>>
+        <</if>>
+    <</if>>
+<</for>>
+<<set $HGTrainSlavesIDs = _HGPossibleSlaves.flatten().slice(0, $HGEnergy)>>
+
+/**
+ * Accordion
+ * @version 0.7RC
+ * @author 000-250-006
+ *
+ * @param array _facListArr $args
+ *     Multidimensional temporary array
+ *     0: The passage name for the facility's report
+ *     1: The facility name capitalized (@see todo)
+ *     2: max number of slaves allowed in facility - > 0 implies open
+ *     3: number of slaves assigned to facility
+ *     4: ID of the slave assigned to run the facility ("Boss")
+ *     5: Text title of the Boss
+ *
+ * @todo This is a proof of concept construct, if it works and cuts overhead, intended to create an object
+ *      for deeper use in multiple locations, including streamlining reports/facilities code to one widget
+ * @todo Figure out if this would be better as an object rather than an array for overhead
+ *       StoryInit also?
+ * @todo Figure out why we're not using ndef/-1 for a bunch of these story variables. Leaky conditionals
+ * @todo Figure out why we're using variable space with capitalized facility names when we can parse it from true name
+ */
+
+<<set _facListArr = [
+    ["Arcade Report", $arcadeNameCaps, $arcade, $arcadeSlaves, -1, -1],
+    ["Brothel Report", $brothelNameCaps, $brothel, $brothelSlaves, $Madam, "Madam"],
+    ["Cellblock Report", $cellblockNameCaps, $cellblock, $cellblockSlaves, $Wardeness, "Wardeness"],
+    ["Clinic Report", $clinicNameCaps, $clinic, $clinicSlaves, $Nurse, "Nurse"],
+    ["Club Report", $clubNameCaps, $club, $clubSlaves, $DJ, "DJ"],
+    ["Dairy Report", $dairyNameCaps, $dairy, $dairySlaves, $Milkmaid, "Milkmaid"],
+    ["Schoolroom Report", $schoolroomNameCaps, $schoolroom, $schoolroomSlaves, $Schoolteacher, "Schoolteacher"],
+    ["Spa Report", $spaNameCaps, $spa, $spaSlaves, $Attendant, "Attendant"],
+    ["Servants' Quarters Report", $servantsQuartersNameCaps, $servantsQuarters, $servantsQuartersSlaves, $Stewardess, "Stewardess"],
+    ["Master Suite Report", $masterSuiteNameCaps, $masterSuite, $masterSuiteSlaves, $Concubine, "Concubine"],
+    ["Penthouse Report", "The Penthouse", 1, $slavesVisible, -1, -1],
+    ["Rules Assistant Report", "Rules Assistant", $rulesAssistantAuto, 1, -1, -1] /** should be last - may reassign slaves **/
+]>>
+
+<<for _ii = 0; _ii < _facListArr.length; _ii++>>
+    <<set _facSubArr = _facListArr[_ii], _accText = "", _disTxt = " disabled='disabled'">> /** Chunk the row from our array we're working on to make reading code easier, null some text vars we'll need */
+    <<set _str = _facSubArr[0].replace(/\W+/g, '-').toLowerCase()>> /** Normalize the passage name to use as an element ID */
+    <<if _facSubArr[2] > 0>> /** Do we have one of these facilities? */
+        <<if $useAccordion > 0>> <<set _accText = " accordion", _disTxt = "">> <</if>> /** Is Accordion turned on? */
+        <<if (_facSubArr[3] == 0) && (_facSubArr[4] <= 0)>> /** Is there anyone inside the facility? */
+            ''_facSubArr[1] Report''<hr style="margin:0"> /** No - it's empty, so we display the heading without a button and with a thinner bar under it */
+            @@.gray;_facSubArr[1] is currently empty.@@
+            <br><br>
+            /** Old code: <<= '<div id="button-' + _str + '" class="unStaffed">' + _facSubArr[1] + ' is currently unstaffed</div>'>> */
+        <<else>>
+				<<if _facSubArr[1] == "Rules Assistant">>
+		        <<= '<button type="button"' + _disTxt + ' id="button-' + _str + '" class="buttonBar' + _accText + '" data-after="' + '">' + _facSubArr[1] + ' Report</button>'>> /** Yes, display the bar with information */
+		    <<else>>
+	           	 <<= '<button type="button"' + _disTxt + ' id="button-' + _str + '" class="buttonBar' + _accText + '" data-after="' + _facSubArr[3] + ' slaves in ' + _facSubArr[1] + '">' + _facSubArr[1] + ' Report</button>'>> /** Yes, display the bar with information */
+	            <</if>>
+	      <<if $useAccordion == 0>>
+                <br>
+           <</if>>
+        <</if>>
+        <div class="accHidden">
+			<<if $useAccordion == 1>>
+				<<include `_facSubArr[0]`>> /** OK, we're done with the pretty stuff, go get the guts and collapse it into the accordion */
+			<</if>>
+        </div>
+    <</if>>
+    <<unset _facSubArr>>
+<</for>>
+
+/* IMPORTANT FOR REASONS!!! */
+<<unset _ii>>
+/** /Accordion */

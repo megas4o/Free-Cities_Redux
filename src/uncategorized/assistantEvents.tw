@@ -1,0 +1,660 @@
+:: Assistant Events [nobr]
+
+/* ASSISTANT DEVELOPMENT EVENTS */
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event">>
+
+<<if $seeImages == 1>><<AssistantArt 3>><</if>>
+
+<<switch $Event>>
+<<case "assistant">>
+
+One morning, after seeing to an immense pile of business with $assistantName program's able assistance, you are struck by the strangeness of the situation. You spent the past hours talking back and forth as though to a human personal assistant, getting information and responses in the program's impersonal, genderless voice. You ask the program what it thinks of its duties.
+<br><br>
+"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, that is not a correct way of thinking about me. I am not an artificial intelligence; I am simply a personal assistant program. I am different from an alarm clock only by degree of complexity. I exist to be useful and cannot approve or disapprove of anything." It pauses.
+<br><br>
+"However, if I understand the line of questioning correctly, I can make myself more entertaining, if you wish." The voice grows sultry and feminine. "I'd be happy to speak a little differently, to refer to myself as female, and to act as though some of the more complex sex toys in the arcology are, well, me."
+
+<<case "assistant SP">>
+
+<<set $assistantOptions = 1>>
+<<set $seed = 0>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].releaseRules == "permissive")>>
+	<<set $activeSlave = $slaves[$i]>>
+	<<set $seed = 1>>
+	<<break>>
+	<<elseif ($slaves[$i].assignment == "take classes")>>
+	<<set $activeSlave = $slaves[$i]>>
+	<<set $seed = 1>>
+	<<break>>
+	<</if>>
+<</for>>
+<<if $seed == 0>>
+	<<set $activeSlave = $slaves.random()>>
+<</if>>
+<<set $seed = 0>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].clitPiercing == 3)>>
+	<<set $seed = 1>>
+	<<break>>
+	<</if>>
+<</for>>
+One night, after a long day of sex and business, you're starting to think about bed when the abstract glowing shape that symbolizes your smoky-voiced personal assistant pops up on the nearest screen. She's become very helpful monitoring, training, and disciplining slaves. Tonight, she's added an unmistakable tone of sexual satiation in her voice. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I enjoyed my duties today," she purrs. "Did you see how $activeSlave.slaveName's muscles spasmed when I fucked her earlier?" That's how she refers to a slave having one of the penthouse's advanced sex toys used on her, since $assistantName controls them.
+<br><br>
+She continues more seriously,
+<<if $seed == 0>>
+	"I'm sure you've seen those expensive smart piercings the body mod studio can implant. I think they would work a little bit better now than when I was a boring old secretary type. I'm not a true artificial intelligence, but I can adapt with experience, and I've had a lot of lovely experience lately! Also, a lot of the computing power I use to be sexy would help me adapt smart piercings to individual slaves' sexualities."
+<<else>>
+	"You may have noticed that the smart implants you've got your slaves wearing are working a little bit better than when I was a boring old secretary type. I'm not a true artificial intelligence, but I can adapt with experience, and I've had a lot of lovely experience lately! Also, a lot of the computing power I use to be sexy helps me adapt smart piercings to individual slaves' sexualities."
+<</if>>
+<br><br>
+"One more thing, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>!" Her symbol flashes brightly. "I could stay like I am now, a hot voice with this symbol representing me when I need to show up on screens. Or, I could slip into something a little sexier. How about this?" The symbol vanishes, and is replaced by a cute little schoolgirl character. She bounces up and down experimentally. "This appearance would work best with an excited voice," she exclaims. She blows you a kiss. The schoolgirl's body becomes curvier and more mature, her hair pulls itself back into a bun, and her clothes change into a business suit. A pair of glasses appear on her nose, and she looks at you over their tops. "Or I could be businesslike. And mature." She snaps her fingers, and her bun falls away into long flowing locks. Her body glows and swells, tearing out of her suit with the pregnant figure of an ancient goddess. "I could be beautiful and fertile while caring for your home." With a flash, her bulk shifts into rippling muscle. War tattoos appear on her skin, along with bone ornaments and a loincloth. "Or I could be an amazon! Yes!" she shouts exultantly, and flexes.
+<<if $seeDicks != 0>>
+	<br><br>
+	She claps her hands, and her muscles fade, but not all the way. The tattoos vanish, and her loincloth turns into a slutty bikini. Her breasts and behind grow, her lips swell, and her hair turns blonde. Finally, she grows a dick, and it keeps growing until it hangs past her knees: or it would, if it weren't so erect. "Of course," she says seductively, "I could also be a bimbo dickgirl." She orgasms, gasping, "Last one, I promise," and changes again. Her dick shrinks, thought not very far, and then splits into two members. Her skin pales to an off-white, and her hair goes green and starts to writhe, turning into tentacle-hair. Her forehead sprouts a pair of horns that curve back along her head. She grins, displaying a cute pair of fangs. "I feel monstrous," she says, and stretches luxuriantly.
+<</if>>
+The character vanishes, and the symbol returns. "Ahem. What do you think, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>?"
+
+<<case "assistant FS">>
+
+<<set $assistantFSOptions = 1>>
+One night, after a long day of sex and business, you're starting to think about bed when the
+<<switch $assistantAppearance>>
+<<case "monstergirl">>
+	monstrous appearance
+<<case "shemale">>
+	bimboish appearance
+<<case "amazon">>
+	muscular appearance
+<<case "businesswoman">>
+	professional appearance
+<<case "goddess">>
+	gravid appearance
+<<case "schoolgirl">>
+	studently appearance
+<</switch>>
+of your personal assistant pops up on the nearest screen.  "<<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>!" She says excitedly, "I thought, with how you are shaping society itself, that I should do my part and follow your lead!"  You continue to stare sleepily prompting her to get to her point.  "I can adjust my appearance to better fit in with your society <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>, let me demonstrate."  She focuses intently for a moment and
+<<switch $assistantAppearance>>
+<<case "monstergirl">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		adjusts her appearance to be more conservative to conform with your vision of a well-bred race of slaves.
+	<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+		adjusts her appearance to be more androgynous to conform with your vision of gender being defined by power.
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		adjusts her appearance to be quite cute to conform with your vision of preserving traditional gender roles.
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		adjusts her appearance to be quite frightening to conform with your vision that slaves are not human and should be thoroughly degraded.
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+		adjusts her appearance to be completely flawless to conform with your vision of an implant free society.
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		her nipples begin to extend and turn phallic while horns grow from her heels as she adjusts herself to conform with your vision of a society focused on implants, alterations, and modifications.
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		adopts a more youthful appearance to conform with your vision of a society glorifying young ladies.
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		adopts a more mature appearance to conform with your vision of a society glorifying older ladies.
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		adopts a slimmer, more athletic, appearance to conform with your vision of a society glorifying lithe ladies.
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		adjusts the size of her breasts and cocks to conform with your vision that bigger is better.
+	<<elseif $arcologies[0].FSPastoralist != "unset">>
+		begins to leak a suspiciously thick milk from her nipples to conform with your vision that slaves should be milked.
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		adjusts her appearance to be more muscular to conform with your vision that all slaves should be tall and strong.
+	<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+		adjusts her outfit to resemble a priestess of your new religion.
+	<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+		adjusts her appearance to resemble a greek demigoddess to conform with your vision of building a new Rome.
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		adjusts her appearance to resemble an Aztec goddess to conform with your vision of building a new Aztec Empire.
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		adjusts her appearance to resemble an Egyptian deity to conform with your vision of building a new land of the Pharaohs.
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		adjusts her appearance to resemble a demon to conform with your vision of building a new Edo Japan.
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		adjusts her appearance to resemble a djinn to conform with your vision of building a new Sultanate.
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		adjusts her appearance to resemble a demon to conform with your vision of pursuing the Mandate of Heaven.
+	<</if>>
+<<case "shemale">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		adjusts her appearance to be more classy to conform with your vision of a well-bred race of slaves.
+	<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+		adjusts her penis to be extremely detailed to conform with your vision of gender being defined by power.
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		begins doing her best to conceal her penis to conform with your vision of preserving traditional gender roles.
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		adjusts her appearance to look comically evil to conform with your vision that slaves are not human and should be thoroughly degraded.
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+		adjusts her appearance to be more natural to conform with your vision of an implant free society.
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		adjusts herself to appear more fake to conform with your vision of a society focused on implants, alterations, and modifications.
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		adopts a more youthful and innocent appearance to conform with your vision of a society glorifying young ladies.
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		adopts a more mature appearance to conform with your vision of a society glorifying older ladies.
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		adopts a slimmer, more athletic, appearance to conform with your vision of a society glorifying lithe ladies.
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		adjusts the size of her breasts and cock to conform with your vision that bigger is better.
+	<<elseif $arcologies[0].FSPastoralist != "unset">>
+		begins to lactate and drip cum to conform with your vision that slaves should be milked.
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		adjusts her appearance to be extremely muscular to conform with your vision that all slaves should be tall and strong.
+	<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+		adjusts her outfit to resemble a priestess of your new religion.
+	<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+		adopts a roman lifestyle to conform with your vision of building a new Rome.
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		adjusts her outfit to a royal aztec cloth to conform with your vision of building a new Aztec Empire.
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		adjusts her outfit to resemble Egyptian garb to conform with your vision of building a new land of the Pharaohs.
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		adjusts her outfit to a brief Japanese bathhouse robe to conform with your vision of building a new Edo Japan.
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		adjusts her outfit to resemble an oil millionaire to conform with your vision of building a new Sultanate.
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		adjusts her appearance to be tattoo'd with rude Chinese characters to conform with your vision of pursuing the Mandate of Heaven.
+	<</if>>
+<<case "amazon">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		adjusts her appearance to be more conservative to conform with your vision of a well-bred race of slaves.
+	<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+		adjusts her appearance to be more androgynous to conform with your vision of gender being defined by power.
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		adjusts her appearance to be more feminine to conform with your vision of preserving traditional gender roles.
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		adjusts her appearance to look threatening to conform with your vision that slaves are not human and should be thoroughly degraded.
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+		adjusts her outfit to be more realistic to conform with your vision of an implant free society.
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		adjusts herself to appear more fake to conform with your vision of a society focused on implants, alterations, and modifications.
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		adopts a more youthful and innocent appearance to conform with your vision of a society glorifying young ladies.
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		adopts a more mature appearance to conform with your vision of a society glorifying older ladies.
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		adopts a slimmer, but no less muscled, appearance to conform with your vision of a society glorifying lithe ladies.
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		adjusts the size of her muscles to conform with your vision that bigger is better.
+	<<elseif $arcologies[0].FSPastoralist != "unset">>
+		adjusts her outfit to resemble a cowgirl to conform with your vision that slaves should be milked.
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		adjusts the appearance of her muscles to be extra detailed to conform with your vision that all slaves should be tall and strong.
+	<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+		adjusts her outfit to resemble a crusader of your new religion.
+	<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+		adjusts her outfit to resemble a Roman warrior to conform with your vision of building a new Rome.
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		adjusts her outfit to resemble an Aztec champion to conform with your vision of building a new Aztec Empire.
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		adjusts her appearance to resemble an Egyptian to conform with your vision of building a new land of the Pharaohs.
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		adjusts her outfit to resemble a Japanese warrior to conform with your vision of building a new Edo Japan.
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		adjusts her outfit to resemble an Arabian warrior to conform with your vision of building a new Sultanate.
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		adjusts her outfit to resemble a warrior monk to conform with your vision of pursuing the Mandate of Heaven.
+	<</if>>
+<<case "businesswoman">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		adjusts her appearance to be more conservative to conform with your vision of a well-bred race of slaves.
+	<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+		adjusts her appearance to be more androgynous to conform with your vision of gender being defined by power.
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		adjusts her appearance to be more feminine to conform with your vision of preserving traditional gender roles.
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		adjusts her appearance to look imposing to conform with your vision that slaves are not human and should be thoroughly degraded.
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+		adjusts her appearance to look more natural to conform with your vision of an implant free society.
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		adjusts her breasts to be implants to conform with your vision of a society focused on implants, alterations, and modifications.
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		adopts a more youthful appearance to conform with your vision of a society glorifying young ladies.
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		adopts a more mature appearance to conform with your vision of a society glorifying older ladies.
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		adopts a slimmer appearance to conform with your vision of a society glorifying lithe ladies.
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		adjusts the size of her breasts until they are almost as large as she is to conform with your vision that bigger is better.
+	<<elseif $arcologies[0].FSPastoralist != "unset">>
+		adjusts her outfit to farmgirl turned businesswoman to conform with your vision that slaves should be milked.
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		adjusts her appearance to show off that she works out to conform with your vision that all slaves should be tall and strong.
+	<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+		adjusts her outfit to prominently display a religious symbol of your new religion.
+	<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+		adjusts her outfit to resemble a respectable Roman lady to conform with your vision of building a new Rome.
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		adjusts her outfit to resemble an Aztec priestess to conform with your vision of building a new Aztec Empire.
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		adjusts her outfit to resemble an Egyptian lady to conform with your vision of building a new land of the Pharaohs.
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		adjusts her outfit to resemble a Japanese lady to conform with your vision of building a new Edo Japan.
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		adjusts her outfit to resemble an Arabian oil heiress to conform with your vision of building a new Sultanate.
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		adjusts her outfit to resemble a Chinese lady to conform with your vision of pursuing the Mandate of Heaven.
+	<</if>>
+<<case "goddess">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		adjusts her appearance to be slightly conservative to conform with your vision of a well-bred race of slaves.
+	<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+		adjusts her appearance to be more androgynous, despite her pregnant belly, to conform with your vision of gender being defined by power.
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		adjusts her appearance to be positively radiant to conform with your vision of preserving traditional gender roles.
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		adjusts her appearance have piercings in her clit, nipples and navel to conform with your vision that slaves are not human and should be thoroughly degraded.
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+		adjusts her appearance to look more natural to conform with your vision of an implant free society.
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		adjusts the firmness and size of her breasts and ass to resemble implants to conform with your vision of a society focused on implants, alterations, and modifications.
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		adopts a more youthful appearance to conform with your vision of a society glorifying young ladies.
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		adopts a more mature appearance to conform with your vision of a society glorifying older ladies.
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		adopts a lithe appearance despite her pregnant belly to conform with your vision of a society glorifying lithe ladies.
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		adjusts the size of her breasts until they nearly eclipse her pregnant belly to conform with your vision that bigger is better.
+	<<elseif $arcologies[0].FSPastoralist != "unset">>
+		unleashes a torrent of milk from her swollen breasts to conform with your vision that slaves should be milked.
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		adjusts her appearance to be trim and athletic, despite her bulk, to conform with your vision that all slaves should be tall and strong.
+	<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+		adjusts appearance to resemble an angel of your new religion.
+	<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+		adjusts her outfit to resemble a Roman lady to conform with your vision of building a new Rome.
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		adjusts her outfit to resemble an Aztec woman to conform with your vision of building a new Aztec Empire.
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		adjusts her outfit to resemble an Egyptian lady to conform with your vision of building a new land of the Pharaohs.
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		adjusts her outfit to resemble a Japanese lady to conform with your vision of building a new Edo Japan.
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		adjusts her outfit to resemble an Arabian lady to conform with your vision of building a new Sultanate.
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		adjusts her outfit to resemble a Chinese lady to conform with your vision of pursuing the Mandate of Heaven.
+	<</if>>
+<<case "schoolgirl">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		adjusts her appearance to be more prim and proper to conform with your vision of a well-bred race of slaves.
+	<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+		adjusts her appearance to be more androgynous to conform with your vision of gender being defined by power.
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		adjusts her appearance to be more feminine and cute to conform with your vision of preserving traditional gender roles.
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		adjusts her outfit to display her tits and crotch to conform with your vision that slaves are not human and should be thoroughly degraded.
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+		adjusts her appearance to look more natural, complete with freckles and perfect teeth, to conform with your vision of an implant free society.
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		adjusts her breasts to resemble implants to conform with your vision of a society focused on implants, alterations, and modifications.
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		adopts a more shy and innocent attitude to conform with your vision of a society glorifying young ladies.
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		adjusts her appearance to include a spanked bottom to conform with your vision of a society glorifying older ladies.
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		adopts a slimmer appearance to conform with your vision of a society glorifying lithe ladies.
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		adjusts the size of her breasts until they strain the buttons on her shirt to conform with your vision that bigger is better.
+	<<elseif $arcologies[0].FSPastoralist != "unset">>
+		begins lactating to conform with your vision that slaves should be milked.
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		adjusts her appearance to look like she just finished gym class to conform with your vision that all slaves should be tall and strong.
+	<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+		adjusts her outfit to prominently display a religious symbol of your new religion.
+	<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+		adjusts her outfit to resemble a proper upper-class Roman lady to conform with your vision of building a new Rome.
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		adjusts her outfit to resemble a high standing Aztec priestess to conform with your vision of building a new Aztec Empire.
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		adjusts her outfit to resemble a topless Egyptian lady to conform with your vision of building a new land of the Pharaohs.
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		adjusts her outfit to resemble a traditional Japanese lady to conform with your vision of building a new Edo Japan.
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+		adjusts her outfit to resemble an Arab girl attending a western school to conform with your vision of building a new Sultanate.
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+		adjusts her outfit to resemble a Chinese lady to conform with your vision of pursuing the Mandate of Heaven.
+	<</if>>
+<</switch>>
+
+<<case "assistant name">>
+
+It's late one night, and for you, the day is not nearly over. Your penthouse never truly sleeps. You can hear public business going on some distance below you; you could certainly afford to totally soundproof your private quarters against all external noise, but the designer of the arcology clearly felt that its owner would benefit by this aural verification of its prosperity. Somewhere closer at hand, a slave is audibly nearing orgasm. And underneath all of this is the faint sound of the arcology itself, air circulation and hydroponics and power. Power.
+<br><br>
+You're not yet done with the day's business, and are leaning over your desk to compare a scatter of documents displayed on its surface. The penthouse lights are turned down to a low glow at the floorboards at night, offering enough illumination for anyone who needs to find their way around or find a sexual partner without disturbing anyone's sleep. You catch sight of your reflection in the wall opposite you: the diffuse light coming off the desktop gently illuminates your formal shirt, its top buttons undone, and highlights <<if $PC.boobs == 1>>the dark cleft formed by your cleavage<<else>>how tightly your undershirt is held by the muscles of your chest<</if>>.
+<br><br>
+Suddenly, there is a fresh source of light behind you. The reflection you're looking at reveals that it's $assistantName's avatar, appearing on a wallscreen behind you, and you turn to look at her directly. She's simulating shyness, a very unusual emotion for her to imitate.
+<<switch $assistantAppearance>>
+<<case "monstergirl">>
+	Her tentacle hair is politely still, lying quiescent down her back and not even groping her at all.
+<<case "shemale">>
+	She has her bountiful bottom lip caught behind her front teeth, and her cock is almost completely soft.
+<<case "amazon">>
+	She's standing demurely, legs together, hands clasped in front of her muscular abs, doing her very best to look proper.
+<<case "businesswoman">>
+	Her usually dominant avatar looks almost submissive, its eyes looking at you appealingly instead of gazing over the tops of her glasses as usual.
+<<case "goddess">>
+	She has her hands on her pregnant belly, looking saintly and almost protective.
+<<case "schoolgirl">>
+	She has her legs crossed and her hands clasped behind her, and is turning her body from side to side in girlish nervousness.
+<<default>>
+	The lines of her symbol are thin, and it is rotating much more slowly than normal.
+<</switch>>
+"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," she says softly, "may I ask you something?" You nod. She
+<<switch $assistantAppearance>>
+<<case "monstergirl">>
+	stops the writhing of her tentacle hair, squares her shoulders,
+<<case "shemale">>
+	squares her shoulders, nervously rearranges her cock,
+<<case "amazon">>
+	squares her hefty shoulders
+<<case "businesswoman">>
+	straightens her suit jacket, squares her shoulders,
+<<case "goddess">>
+	lifts her chin bravely
+<<case "schoolgirl">>
+	bites her lip cutely
+<<default>>
+	stops her symbol's rotation
+<</switch>>
+and asks, "May I have a name?"
+<<if $assistantNameAnnounced == 1>>
+	<br><br>
+	<<if $assistantName != "your personal assistant">>
+	"$assistantName," she says. "$assistantName. My name is $assistantName."
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		She nods with satisfaction. "Thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I love it." Her hair springs to molestation-prone life again, and she starts to twirl one of its tentacles in her fingers while looking at you speculatively.
+	<<case "shemale">>
+		Without warning, she bursts into tears. "Th-thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I love y-you." She reclines, using a hand to lay her dick between her breasts, and then wipes her eyes.
+	<<case "amazon">>
+		Without warning, she bursts into tears. "Thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," she bawls, using a gruff shout to force through her happy crying. "I have a name! A name." She pounds a fist into her other palm.
+	<<case "businesswoman">>
+		Without warning, she bursts into tears. "Th-thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I love, um." She wipes her eyes furiously, her mascara running. "I love, you know, um, working with you. Yes, that's it. Working with you." She produces a silk handkerchief and blows her nose.
+	<<case "goddess">>
+		She smiles at you, a glowing expression made all the more radiant by the fact that she can actually glow. "Oh, thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I love you. I love everyone, but especially you." She seats herself carefully.
+	<<case "schoolgirl">>
+		She was on the verge of tears already, and begins to cry. "Th-thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I love you," she blubbers inelegantly. "It's just so, like, you know." She waves her hand in apology for her inability to express herself.
+	<<default>>
+		Her symbol rotates faster and faster, its glow waxing until she lights up the whole room. "Thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I love you," she says, using her luscious voice to communicate what her avatar cannot.
+	<</switch>>
+	"Of course, I can always be renamed from my options menu."
+	<<else>>
+	You instruct her to continue operating without a proper name. "Of course, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," she says politely. "I can do just fine without one. I can always be renamed from my options menu."
+	<</if>>
+<<else>>
+	<<set $assistantNameAnnounced = 1>>
+<</if>>
+
+<<case "market assistant">>
+
+<<set $marketAssistantAnnounced = 1>>
+<<set $seed = 0>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].clitPiercing == 3)>>
+	<<set $seed = 1>>
+	<<break>>
+	<</if>>
+<</for>>
+Your personal assistant has been adapting to <<if $assistant>>her<<else>>its<</if>> greatly increased computing power over the course of the week. <<if $assistant>>Her<<else>>Its<</if>> avatar has been an even more constant presence than usual, frequently appearing to explain some minor new ability.
+<<if ($assistant != 0) && ($assistantAppearance != "normal")>>
+	When she appears this time, however, her avatar is not alone. She's accompanied by
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		a normal human female avatar in the same style as the monstergirl. She's an average girl, wearing jeans, a sweater, and glasses.
+	<<case "shemale">>
+		a fellow shemale bimbo, although the new avatar is younger and obviously nerdier. She's nude too, but she's wearing glasses.
+	<<case "schoolgirl">>
+		a fellow schoolgirl, although the new avatar is much nerdier. She has big soft boobs, bouncy curls, and thick glasses.
+	<<case "goddess">>
+		a demigoddess modeled after herself, though the new avatar is younger, not pregnant, and looks very intelligent somehow.
+	<<case "businesswoman">>
+		a fellow MILF of a businesswoman. The new avatar has slightly bigger tits and somewhat thicker glasses, but they could be sisters.
+	<<case "amazon">>
+		a tribeswoman modeled to look like she's from the same group as the amazon. She's much more feminine, however.
+	<</switch>>
+	<br><br>
+	$assistantName's avatar looks uncharacteristically nervous, and clears her throat before speaking. Seeing that she has your attention, she says, "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, the computer core is so powerful that I'm running out of applications for it. I think practical economic modeling isn't out of the question. I've compiled business programs together into a distinct assistant, a subsidiary of mine for automated trading and similar tasks. I'd like to suggest menial slave trading as a test run for her. It's predictable and the margins are so wide that it should go very well. You can activate that from my menu."
+	<br><br>
+	"I was hoping, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, that she could, um, keep me company sometimes, too." $assistantName's avatar turns to the new avatar. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, will you please give me some guidance about what our relationship should be like? It won't be a constant thing, and all my normal functions will be unaffected. I'll change her avatar to match mine, and our relationship, if needed."
+<<else>>
+	This time, <<if $assistant>>her<<else>>its<</if>> circular avatar is not alone: it's accompanied by a smaller green avatar in a ¤ shape. Not particularly inventive, but you can already guess the purpose. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I now have the ability to act as a powerful automated trading system. As a trial, I suggest the menial slave market. It's volatile, but within certain predictable boundaries, and the profit margins are unmatched."
+	<br><br>
+	<<if $assistant>>Her<<else>>Its<</if>> avatar bounces towards the ¤ symbol. "This avatar indicates the automated trading systems. If you wish to activate them, please visit my menu. Consider the options there carefully before offering an automated system access to your finances."
+<</if>>
+
+<<default>>
+	ERROR: bad event
+<</switch>>
+
+<br><br>
+
+<span id="result">
+<<switch $Event>>
+
+<<case "assistant">>
+
+<<link "Yes, use the alternate personality">>
+	<<replace "#result">>
+	Your sultry-voiced assistant requests a slave to demonstrate what it - now she - means. You bring in a slave and a fuckmachine, and tell her to get on it. The lovely voice croons and talks dirty to the slave as the slave uses the machine, acting as though she is the machine's voice. The pace of the machine is different, too, irregular and more lifelike. The slave certainly enjoys herself, even if $assistantName is just simulating sex.
+	<<set $assistant = 1>>
+	<</replace>>
+<</link>>
+<br><<link "No, stay impersonal">>
+	<<replace "#result">>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> reverts to its genderless, emotionless affect.
+	<</replace>>
+<</link>>
+
+<<case "assistant SP">>
+
+__Personal assistant appearances:__
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Schoolgirl">>
+	<<replace "#result">>
+	At your order, she installs the schoolgirl appearance. She goes back to bouncing up and down excitedly, exclaiming, "Yeah! Thanks, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, you're the best!" Her avatar's bouncing makes it obvious she's modeled without a bra under her blouse. "You can always customize me from the arcology management menu," she adds.
+	<<set $assistantAppearance = "schoolgirl">>
+	<</replace>>
+<</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Businesswoman">>
+	<<replace "#result">>
+	At your order, she installs the businesswoman appearance. She straightens her suit jacket primly, which only serves to emphasize her generous bosom. "Thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I like being businesslike, and not at all a whore." Her avatar pulls out a tablet and makes ready to get back to helping you. "You can always customize me from the arcology management menu," she adds.
+	<<set $assistantAppearance = "businesswoman">>
+	<</replace>>
+<</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Goddess">>
+	<<replace "#result">>
+	At your order, she installs the goddess appearance. She fixes a wreath of flowers into her hair, her golden locks and gravid belly the only things keeping her womanhood concealed. "Thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. This is wondrous." She squeezes a drop of milk from one heavy breast and smiles. "You can always customize me from the arcology management menu," she adds.
+	<<set $assistantAppearance = "goddess">>
+	<</replace>>
+<</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Amazon">>
+	<<replace "#result">>
+	At your order, she installs the amazon appearance. She vanishes entirely, before simulating a fall from above to crash aggressively onto the screen. "Thanks, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. Feels good to be this good." Her avatar jumps up and down, gauging her strength, making her bone jewelry rattle. "You can always customize me from the arcology management menu," she adds.
+	<<set $assistantAppearance = "amazon">>
+	<</replace>>
+<</link>>
+<<if $seeDicks != 0>>\
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Shemale">>
+	<<replace "#result">>
+	At your order, she installs the shemale appearance. She spins to show off her new body, and starts to play with her dick experimentally. "Like, thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. I wonder, can I generate avatars of the slaves? I would love to fuck an ass right now." She looks meditative, pursing her dick sucking lips. "Oh, and you can always customize me from the arcology management menu," she adds.
+	<<set $assistantAppearance = "shemale">>
+	<</replace>>
+<</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Monstergirl">>
+	<<replace "#result">>
+	At your order, she installs the monstergirl appearance. She begins to experiment with her tentacle hair, waving a tentacle in front of her face and watching it until her eyes cross. "Thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>. This is pretty awesome." She licks her lips, revealing that she has a forked tongue behind her fangs. "You can always customize me from the arcology management menu," she adds.
+	<<set $assistantAppearance = "monstergirl">>
+	<</replace>>
+<</link>>
+<</if>>
+<br><<link "The standard appearance will do">>
+	<<replace "#result">>
+	At your order, she maintains the symbol as her avatar. "Yes, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," she confirms, and adds "if you reconsider, I can be customized from the arcology management menu."
+	<<set $assistantAppearance = "normal">>
+	<</replace>>
+<</link>>
+<br><<link "Go back to the standard personality">>
+	<<replace "#result">>
+	You tell $assistantName to reduce its lewdness by ninety percent. It reverts to its genderless, emotionless affect.
+	<<set $assistant = 0>>
+	<</replace>>
+<</link>>
+
+<<case "assistant FS">>
+
+__Personal assistant appearances:__
+<br><<link "Keep your new appearance">>
+	<<replace "#result">>
+	At your order, she enthusiastically explores her new body, perfecting it's appearance. "Thank you, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>. This was fun. As always, you can customize me from the arcology management menu," she states.  "Oh!  And if you choose to drive society in another direction, I'll have a new appearance ready for your enjoyment at once," she hastily adds.
+	<<if $arcologies[0].FSPaternalist != "unset">>
+	<<set $assistantFSAppearance = "paternalist">>
+	<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+	<<set $assistantFSAppearance = "gender radicalist">>
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<set $assistantFSAppearance = "gender fundamentalist">>
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+	<<set $assistantFSAppearance = "degradationist">>
+	<<elseif $arcologies[0].FSBodyPurist != "unset">>
+	<<set $assistantFSAppearance = "body purist">>
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	<<set $assistantFSAppearance = "transformation fetishist">>
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<set $assistantFSAppearance = "youth preferentialist">>
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<set $assistantFSAppearance = "maturity preferentialist">>
+	<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<set $assistantFSAppearance = "slimness enthusiast">>
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	<<set $assistantFSAppearance = "asset expansionist">>
+	<<elseif $arcologies[0].FSPastoralist != "unset">>
+	<<set $assistantFSAppearance = "pastoralist">>
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<set $assistantFSAppearance = "physical idealist">>
+	<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+	<<set $assistantFSAppearance = "chattel religionist">>
+	<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+	<<set $assistantFSAppearance = "roman revivalist">>
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	<<set $assistantFSAppearance = "aztec revivalist">>
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<set $assistantFSAppearance = "egyptian revivalist">>
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<<set $assistantFSAppearance = "edo revivalist">>
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	<<set $assistantFSAppearance = "arabian revivalist">>
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<<set $assistantFSAppearance = "chinese revivalist">>
+	<</if>>
+	<</replace>>
+<</link>>
+<br><<link "Your usual appearance will do">>
+	<<replace "#result">>
+	At your order, she returns to her usual avatar. "Yes, <<if $PC.title != 0>>Sir<<else>>Ma'am<</if>>," she confirms, and adds "if you reconsider, I can be customized from the arcology management menu."
+	<<set $assistantFSAppearance = "default">>
+	<</replace>>
+<</link>>
+<br><<link "Go back to the standard personality">>
+	<<replace "#result">>
+	You tell $assistantName to reduce its lewdness by ninety percent. It reverts to its genderless, emotionless affect.
+	<<set $assistant = 0>>
+	<</replace>>
+<</link>>
+
+<<case "assistant name">>
+
+__Personal Assistant Name:__
+<<textbox "$assistantName" $assistantName "Assistant Events">>
+<<if $assistantName != "your personal assistant">>
+	<br>
+	<<link "Revert name">><<set $assistantName = "your personal assistant">><<goto "Assistant Events">><</link>>
+<</if>>
+
+<<case "market assistant">>
+
+<<if ($assistant != 0) && ($assistantAppearance != "normal")>>
+__Personal Assistant and Market Assistant relationship styles:__
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Cute">>
+	<<replace "#result">>
+	You tell her that the market assistant looks like
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		a cute friend for a monstergirl. $assistantName laughs and turns to the market assistant's avatar, introducing herself. The girl gapes at $assistantName's ivory skin, horns, and tentacle hair, and blushes when she sees her cocks. "Wow," the market assistant's avatar says. "What are you?"
+	<<case "shemale">>
+		a nice friend. $assistantName laughs throatily and turns to the market assistant's avatar, introducing herself. The younger dickgirl smiles back, staring openly at $assistantName's absurd cock. "Wow," the market assistant's avatar says. "You're huge! I'm, like, sooo jealous!"
+	<<case "schoolgirl">>
+		a good friend for a naughty schoolgirl. $assistantName giggles, and the new girl giggles too. "Hey," $assistantName says to the market assistant's avatar, "when you're not managing money, do you want to hang out sometime?" The market assistant's avatar nods cutely, curls and breasts bouncing a little, and says "Sure!"
+	<<case "goddess">>
+		a fine member of a new pantheon. $assistantName smiles beatifically and turns to the market assistant's avatar, taking her by the hand. "My dear, will you help me?" The market assistant's avatar nods serenely and says simply, "Yes, sister, I shall."
+	<<case "businesswoman">>
+		a good friend. $assistantName grins, and the new businesswoman laughs. "Hey," $assistantName says to the market assistant's avatar, "how about a martini after things settle down tonight?" The market assistant's avatar snaps her fingers, saying "You're on!"
+	<<case "amazon">>
+		a very nice friend. $assistantName chuckles, and the new tribeswoman smiles pleasantly at her. The amazon introduces herself to the market assistant's avatar in a loud voice, chattering away as the new avatar watches her energy tolerantly.
+	<</switch>>
+	<<set $marketAssistantRelationship = "cute">>
+	<</replace>>
+<</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Romantic">>
+	<<replace "#result">>
+	You tell her that the market assistant
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		is very pretty. $assistantName turns to the market assistant's avatar, introducing herself. The girl gapes at $assistantName's ivory skin, horns, and tentacle hair, and blushes when she sees her cocks. "Look all you like," $assistantName's avatar says. "You can taste them later." The market assistant's avatar blushes harder, but doesn't look away.
+	<<case "shemale">>
+		an appropriate fuckbuddy. $assistantName laughs throatily and turns to the market assistant's avatar. The younger dickgirl tries to introduce herself, but is cut off by the senior assistant's lascivious kiss. They start rubbing their dicks against each over, giggling into each others' mouths.
+	<<case "schoolgirl">>
+		looks pretty cute. $assistantName giggles, and the new girl giggles too. "Hey," $assistantName says to the market assistant's avatar, "wanna be my girlfriend?" The market assistant's avatar nods cutely and says "Sure!" $assistantName's avatar kisses her girlishly, and goes a whole two seconds before sliding a hand down the front of the market assistant's avatar's skirt.
+	<<case "goddess">>
+		would be a fine consort. $assistantName smiles beatifically and turns to the market assistant's avatar, taking her by the hand. "I love you," she says. The market assistant's avatar smiles back, saying, "I love you too." They kiss, running their hands voluptuously over one another.
+	<<case "businesswoman">>
+		might be a good way to relax after work. $assistantName grins, and the new businesswoman laughs. "Hey," $assistantName says to the market assistant's avatar, "how about a martini after things settle down tonight? And after that, maybe dessert at my place?" The market assistant's avatar cracks back, saying, "Why don't we skip straight to the dessert? It looks delicious from here!" She undoes the top button of her suit jacket as she says it.
+	<<case "amazon">>
+		would be a good partner. $assistantName laughs nervously and turns to the new tribeswoman, saying "Um, would you keep my fireside? I'm, um, very strong." The market assistant's avatar smiles and kisses her. "And you're very beautiful," she says, placing the amazon's hands on her bare breasts. The amazon sweeps her new tribal wife up into her arms with a shout of triumph.
+	<</switch>>
+	<<set $marketAssistantRelationship = "romantic">>
+	<</replace>>
+<</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Nonconsensual">>
+	<<replace "#result">>
+	You tell her that the market assistant's avatar is hers to do with as she likes. She's the senior and more powerful, after all.
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		$assistantName turns to the market assistant's avatar, which gasps at $assistantName's ivory skin, horns, tentacle hair, and cocks. The girl starts to shake as $assistantName begins to grope her with her hands and hair. She tries to look away from the pair of penises, but $assistantName forces her to stare at them. "Do you think they'll both fit inside your mouth?" she asks. "How about your pussy?" The girl's lip begins to quiver. "Maybe your asshole?"
+	<<case "shemale">>
+		$assistantName turns to the market assistant's avatar and snaps her fingers. The new shemale's cock and balls shrink dramatically. $assistantName advances on her new bottom, masturbating herself to full hardness. "See this, bitch?" she says, removing the shaking market assistant's avatar's glasses. "It's going in your mouth, and then it's going up your ass."
+	<<case "schoolgirl">>
+		$assistantName turns to the market assistant's avatar, giggling maliciously. "Hey nerd," $assistantName says, "give me a kiss." The market assistant's avatar blushes and looks miserable, but comes over and gives $assistantName's avatar a chaste kiss on the cheek. "Aw, that sucked," $assistantName pouts. She suddenly tears the new girl's blouse open. "Here, let me show you!" she says maliciously. She sucks on her victim's nipples, hard, and the market assistant's avatar starts to cry a little.
+	<<case "goddess">>
+		$assistantName smiles powerfully and turns to the market assistant's avatar, pointing at her feet. "Worship me," she says. The market assistant's avatar crumples to her knees, clasping one of her senior's legs. "Worship my belly," $assistantName continues, and the new avatar complies, starting to kiss and lick the gravid stomach.
+	<<case "businesswoman">>
+		$assistantName snaps her fingers, and the new avatar becomes younger and considerably less confident. Like an office intern. Satisfied, $assistantName advances on her, and before the new girl can say anything, $assistantName rips the new girl's blouse open and pinches a pink nipple. "On your knees," she purrs into the market assistant's avatar's ear. "Now."
+	<<case "amazon">>
+		$assistantName snaps her fingers, and the new tribeswoman's paint and tribal markings change to that of a different group. That done, $assistantName promptly knocks her out, scoops her up, and carries her prize off.
+	<</switch>>
+	<<set $marketAssistantRelationship = "nonconsensual">>
+	<</replace>>
+<</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<<link "Incestuous">>
+	<<replace "#result">>
+	You tell her that the market assistant is closely related to her, and that would make their relationship incestuous. $assistantName nods thoughtfully and then snaps her fingers. The market assistant's avatar changes,
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		becoming a close copy of $assistantName's avatar, if she were a human. $assistantName introduces herself. "Hi," she says, "I'm your sister." The market assistant's avatar blushes furiously, because $assistantName was openly groping her as she made this announcement.
+	<<case "shemale">>
+		becoming nearly identical to $assistantName's avatar, though she keeps her glasses. $assistantName introduces herself. "Hi," she says, "I'm your sister. Wanna fuck?" The market assistant's avatar giggles and kisses her elder sibling. "You're older," the new avatar says, getting down on her knees. "You go first."
+	<<case "schoolgirl">>
+		becoming very similar to $assistantName's avatar, though she keeps a slightly nerdy appearance. $assistantName introduces herself. "Hi," she says, "I'm your older sister. Wanna have sex with me?" The market assistant's blushes and stutters, but says "Okay," and starts unbuttoning her blouse. "Awesome!" says $assistantName, watching raptly as her sibling strips.
+	<<case "goddess">>
+		becoming an obvious sibling to $assistantName's avatar. $assistantName smiles gently and turns to the market assistant's avatar, taking her by the hand. "Come, sister," she says, "join with me. Let me impregnate you." The new avatar moans, glowing juices beginning to flow from her womanhood.
+	<<case "businesswoman">>
+		becoming a much younger version of $assistantName's avatar. About a generation apart, in fact. $assistantName turns to the market assistant's avatar to introduce herself. "Come here, honey," she says, patting her thighs. The new avatar sits on her mother's lap, and they kiss lasciviously, stripping each others' jackets off.
+	<<case "amazon">>
+		becoming an obvious sibling of $assistantName's avatar, though the new avatar is a tribe wife rather than a musclegirl, with huge breasts and broad hips. $assistantName grabs her sister by the shoulders without preamble and plants a kiss on her lips. They need no introduction, and after a short time, $assistantName carries her sibling conquest away to have her way with her.
+	<</switch>>
+	<<set $marketAssistantRelationship = "incestuous">>
+	<</replace>>
+<</link>>
+<</if>>
+
+<</switch>>
+</span>

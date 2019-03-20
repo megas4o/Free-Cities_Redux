@@ -1,0 +1,889 @@
+:: Neighbors FS Adoption [nobr]
+
+<br><br>
+''$arcologies[$i].name'', your <<if $arcologies[$i].direction == 0>>arcology<<else>>neighbor to the $arcologies[$i].direction<</if>>,
+is prosperous enough that
+<<switch $arcologies[$i].government>>
+<<case "elected officials">>
+	its elected officials consider
+<<case "a committee">>
+	the committee that controls it considers
+<<case "an oligarchy" "your trustees">>
+	its leading citizens consider
+<<case "an individual">>
+	its owner and its citizens consider
+<<case "your agent">>
+	your agent and its citizens consider
+<<case "a corporation">>
+	its board of directors considers
+<<default>>
+	its citizens consider
+<</switch>>
+societal development.
+<<set $adopted = 0>>
+
+/* PRIME RIVALRY FS ADOPTION */
+
+<<if $arcologies[$i].rival == 1>>
+<<if $arcologies[$i].government == "an individual">>
+<<if $rivalryFSAdopted == 0>>
+
+  <<set $rivalryFSAdopted = 1>>
+  <<set $desc = "Its owner is">>
+  <<switch $rivalryFS>>
+  <<case "Racial Subjugationism">>
+	<<if $arcologies[$i].FSSubjugationist != "unset">><<set $arcologies[$i].FSSubjugationist = "unset">><</if>>
+	$desc preoccupied by belief in the superiority of the $arcologies[0].FSSubjugationistRace race, leading the arcology to @@.yellow;adopt $arcologies[0].FSSubjugationistRace Supremacy.@@
+	<<set $arcologies[$i].FSSupremacist = 5>><<set $adopted = 1>>
+	<<set $arcologies[$i].FSSupremacistRace = $arcologies[0].FSSubjugationistRace>>
+  <<case "Racial Supremacism">>
+	<<if $arcologies[$i].FSSupremacist != "unset">><<set $arcologies[$i].FSSupremacist = "unset">><</if>>
+	$desc preoccupied by a racial animus towards $arcologies[0].FSSupremacistRace people, leading the arcology to @@.yellow;adopt $arcologies[0].FSSupremacistRace Subjugation.@@
+	<<set $arcologies[$i].FSSubjugationist = 5>><<set $adopted = 1>>
+	<<set $arcologies[$i].FSSubjugationistRace = $arcologies[0].FSSupremacistRace>>
+  <<case "Gender Radicalism">>
+	<<if $arcologies[$i].FSGenderRadicalist != "unset">><<set $arcologies[$i].FSGenderRadicalist = "unset">><</if>>
+	$desc enthusiastic about knocking slaves up, leading the arcology to @@.yellow;adopt Gender Fundamentalism.@@
+	<<set $arcologies[$i].FSGenderFundamentalist = 5>><<set $adopted = 1>>
+  <<case "Gender Fundamentalism">>
+	<<if $arcologies[$i].FSGenderFundamentalist != "unset">><<set $arcologies[$i].FSGenderFundamentalist = "unset">><</if>>
+	$desc enthusiastic about fucking slaves in the butt, leading the arcology to @@.yellow;adopt Gender Radicalism.@@
+	<<set $arcologies[$i].FSGenderRadicalist = 5>><<set $adopted = 1>>
+  <<case "Paternalism">>
+	<<if $arcologies[$i].FSPaternalist != "unset">><<set $arcologies[$i].FSPaternalist = "unset">><</if>>
+	$desc partial to screaming and struggling, leading the arcology to @@.yellow;adopt Degradationism.@@
+	<<set $arcologies[$i].FSDegradationist = 5>><<set $adopted = 1>>
+  <<case "Degradationism">>
+	<<if $arcologies[$i].FSDegradationist != "unset">><<set $arcologies[$i].FSDegradationist = "unset">><</if>>
+	$desc devoted to their slaves' advancement, leading the arcology to @@.yellow;adopt Paternalism.@@
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+  <<case "Body Purism">>
+	<<if $arcologies[$i].FSBodyPurist != "unset">><<set $arcologies[$i].FSBodyPurist = "unset">><</if>>
+	$desc fascinated with extreme surgery, leading the arcology to @@.yellow;adopt Transformation Fetishism.@@
+	<<set $arcologies[$i].FSTransformationFetishist = 5>><<set $adopted = 1>>
+  <<case "Transformation Fetishism">>
+	<<if $arcologies[$i].FSTransformationFetishist != "unset">><<set $arcologies[$i].FSTransformationFetishist = "unset">><</if>>
+	$desc concerned by trends in their slaves' health, leading the arcology to @@.yellow;adopt Body Purism.@@
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+  <<case "Youth Preferentialism">>
+	<<if $arcologies[$i].FSYouthPreferentialist != "unset">><<set $arcologies[$i].FSYouthPreferentialist = "unset">><</if>>
+	$desc devoted to time in bed with their MILF slaves, leading the arcology to @@.yellow;adopt Maturity Preferentialism.@@
+	<<set $arcologies[$i].FSMaturityPreferentialist = 5>><<set $adopted = 1>>
+  <<case "Maturity Preferentialism">>
+	<<if $arcologies[$i].FSMaturityPreferentialist != "unset">><<set $arcologies[$i].FSMaturityPreferentialist = "unset">><</if>>
+	$desc devoted to fucking nubile young slaves, leading the arcology to @@.yellow;adopt Youth Preferentialism.@@
+	<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $adopted = 1>>
+  <<case "Slimness Enthusiasm">>
+	<<if $arcologies[$i].FSSlimnessEnthusiast != "unset">><<set $arcologies[$i].FSSlimnessEnthusiast = "unset">><</if>>
+	$desc loves boobs, the bigger, the better, leading the arcology to @@.yellow;adopt Asset Expansionism.@@
+	<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+  <<case "Asset Expansionism">>
+	<<if $arcologies[$i].FSAssetExpansionist != "unset">><<set $arcologies[$i].FSAssetExpansionist = "unset">><</if>>
+	$desc loves a slim slave with tight holes, leading the arcology to @@.yellow;adopt Slimness Enthusiasm.@@
+	<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+  <<case "Chattel Religionism">>
+	<<if $arcologies[$i].FSNull != "unset">><<set $arcologies[$i].FSNull = "unset">><</if>>
+	$desc open minded, leading the arcology to @@.yellow;permit cultural freedom.@@
+	<<set $arcologies[$i].FSNull = 5>><<set $adopted = 1>>
+  <<case "Multiculturalism">>
+	<<if $arcologies[$i].FSChattelReligionist != "unset">><<set $arcologies[$i].FSChattelReligionist = "unset">><</if>>
+	$desc devoutly religious, and interested in a reformation, leading the arcology to @@.yellow;adopt Chattel Religionism.@@
+	<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+  <<case "Roman Revivalism">>
+	<<if $arcologies[$i].FSRomanRevivalist != "unset">><<set $arcologies[$i].FSRomanRevivalist = "unset">><</if>>
+	$desc fascinated by ancient Aztec history, leading the arcology to @@.yellow;adopt Aztec Revivalism.@@
+	<<set $arcologies[$i].FSAztecRevivalist = 5>><<set $adopted = 1>>
+  <<case "Egyptian Revivalism">>
+	<<if $arcologies[$i].FSEgyptianRevivalist != "unset">><<set $arcologies[$i].FSEgyptianRevivalist = "unset">><</if>>
+	$desc fascinated by Arabian romanticism, leading the arcology to @@.yellow;adopt Arabian Revivalism.@@
+	<<set $arcologies[$i].FSArabianRevivalist = 5>><<set $adopted = 1>>
+  <<case "Edo Revivalism">>
+	<<if $arcologies[$i].FSEdoRevivalist != "unset">><<set $arcologies[$i].FSEdoRevivalist = "unset">><</if>>
+	$desc fascinated by the long tale of Chinese history, leading the arcology to @@.yellow;adopt Chinese Revivalism.@@
+	<<set $arcologies[$i].FSChineseRevivalist = 5>><<set $adopted = 1>>
+  <<case "Arabian Revivalism">>
+	<<if $arcologies[$i].FSArabianRevivalist != "unset">><<set $arcologies[$i].FSArabianRevivalist = "unset">><</if>>
+	$desc fascinated by ancient Egyptian history, leading the arcology to @@.yellow;adopt Egyptian Revivalism.@@
+	<<set $arcologies[$i].FSEgyptianRevivalist = 5>><<set $adopted = 1>>
+  <<case "Chinese Revivalism">>
+	<<if $arcologies[$i].FSChineseRevivalist != "unset">><<set $arcologies[$i].FSChineseRevivalist = "unset">><</if>>
+	$desc fascinated by Japanese history, leading the arcology to @@.yellow;adopt Edo Revivalism.@@
+	<<set $arcologies[$i].FSEdoRevivalist = 5>><<set $adopted = 1>>
+	<<case "Aztec Revivalism">>
+	<<if $arcologies[$i].FSAztecRevivalist != "unset">><<set $arcologies[$i].FSAztecRevivalist = "unset">><</if>>
+	$desc fascinated by classical Roman history, leading the arcology to @@.yellow;adopt Roman Revivalism.@@
+	<<set $arcologies[$i].FSRomanRevivalist = 5>><<set $adopted = 1>>
+  <</switch>>
+
+<<else>>
+
+/* RIVAL ADOPTION */
+
+  <<set $desc = "Its owner is">>
+  <<if $arcologies[0].FSSubjugationist > random(5,60)>>
+	<<if ($arcologies[$i].FSSupremacist == "unset")>>
+	<<if ($arcologies[$i].FSSubjugationist == "unset")>>
+	$desc preoccupied by belief in the superiority of the $arcologies[0].FSSubjugationistRace race, leading the arcology to @@.yellow;adopt $arcologies[0].FSSubjugationistRace Supremacy.@@
+	<<set $arcologies[$i].FSSupremacist = 5>><<set $adopted = 1>>
+	<<set $arcologies[$i].FSSupremacistRace = $arcologies[0].FSSubjugationistRace>>
+	<</if>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSSupremacist > random(5,60)>>
+	<<if ($arcologies[$i].FSSubjugationist == "unset")>>
+	<<if ($arcologies[$i].FSSupremacist == "unset")>>
+	$desc preoccupied by a racial animus towards $arcologies[0].FSSupremacistRace people, leading the arcology to @@.yellow;adopt $arcologies[0].FSSupremacistRace Subjugation.@@
+	<<set $arcologies[$i].FSSubjugationist = 5>><<set $adopted = 1>>
+	<<set $arcologies[$i].FSSubjugationistRace = $arcologies[0].FSSupremacistRace>>
+	<</if>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSGenderRadicalist > random(5,60)>>
+	<<if ($arcologies[$i].FSGenderRadicalist == "unset") && ($arcologies[$i].FSGenderFundamentalist == "unset")>>
+	$desc enthusiastic about knocking slaves up, leading the arcology to @@.yellow;adopt Gender Fundamentalism.@@
+	<<set $arcologies[$i].FSGenderFundamentalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSGenderFundamentalist > random(5,60)>>
+	<<if ($arcologies[$i].FSGenderRadicalist == "unset") && ($arcologies[$i].FSGenderFundamentalist == "unset")>>
+	$desc enthusiastic about fucking slaves in the butt, leading the arcology to @@.yellow;adopt Gender Radicalism.@@
+	<<set $arcologies[$i].FSGenderRadicalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSPaternalist > random(5,60)>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	$desc partial to screaming and struggling, leading the arcology to @@.yellow;adopt Degradationism.@@
+	<<set $arcologies[$i].FSDegradationist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSDegradationist > random(5,60)>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	$desc devoted to their slaves' advancement, leading the arcology to @@.yellow;adopt Paternalism.@@
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSBodyPurist > random(5,60)>>
+	<<if ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	$desc fascinated with extreme surgery, leading the arcology to @@.yellow;adopt Transformation Fetishism.@@
+	<<set $arcologies[$i].FSTransformationFetishist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSTransformationFetishist > random(5,60)>>
+	<<if ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	$desc concerned by trends in their slaves' health, leading the arcology to @@.yellow;adopt Body Purism.@@
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSYouthPreferentialist > random(5,60)>>
+	<<if ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	$desc devoted to time in bed with their MILF slaves, leading the arcology to @@.yellow;adopt Maturity Preferentialism.@@
+	<<set $arcologies[$i].FSMaturityPreferentialist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSMaturityPreferentialist > random(5,60)>>
+	<<if ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	$desc devoted to fucking nubile young slaves, leading the arcology to @@.yellow;adopt Youth Preferentialism.@@
+	<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $adopted = 1>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSSlimnessEnthusiast > random(5,60)>>
+	<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSAssetExpansionist == "unset")>>
+	$desc loves boobs, the bigger, the better, leading the arcology to @@.yellow;adopt Asset Expansionism.@@
+	<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSAssetExpansionist > random(5,60)>>
+	<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSAssetExpansionist == "unset")>>
+	$desc loves a slim slave with tight holes, leading the arcology to @@.yellow;adopt Slimness Enthusiasm.@@
+	<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSPastoralist > random(5,60)>>
+	<<if ($arcologies[$i].FSPastoralist == "unset") && ($arcologies[$i].FSPhysicalIdealist == "unset")>>
+	$desc addicted to breast milk straight from the nipple, leading the arcology to @@.yellow;adopt Pastoralism.@@
+	<<set $arcologies[$i].FSPastoralist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSPhysicalIdealist > random(5,60)>>
+	<<if ($arcologies[$i].FSPhysicalIdealist == "unset") && ($arcologies[$i].FSPastoralist == "unset")>>
+	$desc pretty devoted to spending time in the gym, leading the arcology to @@.yellow;adopt Physical Idealism.@@
+	<<set $arcologies[$i].FSPhysicalIdealist = 5>><<set $adopted = 1>>
+	<</if>>
+  <</if>>
+  <<if $arcologies[0].FSRomanRevivalist > random(5,60)>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by ancient Aztec history, leading the arcology to @@.yellow;adopt Aztec Revivalism.@@
+	<<set $arcologies[$i].FSAztecRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSAztecRevivalist > random(5,60)>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+ 	$desc fascinated by classical Roman history, leading the arcology to @@.yellow;adopt Roman Revivalism.@@
+ 	<<set $arcologies[$i].FSRomanRevivalist = 5>><<set $adopted = 1>>
+ 	<</if>>
+  <<elseif $arcologies[0].FSEgyptianRevivalist > random(5,60)>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by Arabian romanticism, leading the arcology to @@.yellow;adopt Arabian Revivalism.@@
+	<<set $arcologies[$i].FSArabianRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSEdoRevivalist > random(5,60)>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by the long tale of Chinese history, leading the arcology to @@.yellow;adopt Chinese Revivalism.@@
+	<<set $arcologies[$i].FSChineseRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSArabianRevivalist > random(5,60)>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by ancient Egyptian history, leading the arcology to @@.yellow;adopt Egyptian Revivalism.@@
+	<<set $arcologies[$i].FSEgyptianRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <<elseif $arcologies[0].FSChineseRevivalist > random(5,60)>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by Japanese history, leading the arcology to @@.yellow;adopt Edo Revivalism.@@
+	<<set $arcologies[$i].FSEdoRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+  <</if>>
+
+<</if>>
+<</if>>
+<</if>>
+
+/* AGENT ADOPTION*/
+
+<<if ($arcologies[$i].government == "your agent")>>
+<<for $j = 0; $j < $leaders.length; $j++>>
+<<if $arcologies[$i].leaderID == $leaders[$j].ID>>
+
+<<if $adopted == 0>>
+<<if ($arcologies[$i].FSGenderRadicalist == "unset")>>
+<<if ($arcologies[$i].FSGenderFundamentalist == "unset")>>
+	<<if $leaders[$j].dick > 0>>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Gender Radicalism@@, since she's a walking, swinging argument for dickgirls.
+		<<set $arcologies[$i].FSGenderRadicalist = 5>><<set $adopted = 1>>
+	<<elseif $leaders[$j].preg > 0>>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Gender Fundamentalism@@, since its citizens find leadership by a pregnant woman fascinating.
+		<<set $arcologies[$i].FSGenderFundamentalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if ($arcologies[$i].FSPaternalist == "unset")>>
+<<if ($arcologies[$i].FSDegradationist == "unset")>>
+	<<if $leaders[$j].behavioralQuirk == "advocate">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Paternalism@@, since as an advocate for slavery, she believes in its benefits.
+		<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<<elseif $leaders[$j].fetish == "sadist">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Degradationism@@, since as a sexual sadist, she's excited by the idea of leading a society that applauds her cruelest impulses.
+		<<set $arcologies[$i].FSDegradationist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if ($arcologies[$i].FSBodyPurist == "unset")>>
+<<if ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	<<if $leaders[$j].chem > 50>>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Body Purism@@, since she knows what long term drug damage feels like, and doesn't want any slave to ever experience it again.
+		<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<<elseif $leaders[$j].boobsImplant > 1000>>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Transformation Fetishism@@, out of a perverse desire to subject all slaves to massive implants like hers.
+		<<set $arcologies[$i].FSTransformationFetishist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if ($arcologies[$i].FSYouthPreferentialist == "unset")>>
+<<if ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	<<if $leaders[$j].age <= 25>>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Youth Preferentialism@@, to buttress acceptance of her own young age.
+		<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $adopted = 1>>
+	<<elseif $leaders[$j].age > 35>>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Maturity Preferentialism@@, since she has a certain personal interest in promoting the idea that MILFs are sexy.
+		<<set $arcologies[$i].FSMaturityPreferentialist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset")>>
+<<if ($arcologies[$i].FSAssetExpansionist == "unset")>>
+	<<if $leaders[$j].behavioralQuirk == "insecure">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Slimness Enthusiasm@@, since her history of anorexia has deeply impacted her idea of beauty.
+		<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+	<<elseif $leaders[$j].fetish == "boobs">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Asset Expansionism@@, since she's a breast expansion fetishist in addition to being a mere breast fetishist.
+		<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if ($arcologies[$i].FSPastoralist == "unset")>>
+<<if ($arcologies[$i].FSPhysicalIdealist == "unset")>>
+	<<if $leaders[$j].fetish == "cumslut">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Pastoralism@@, since she already loves sucking down slaves' precious fluids.
+		<<set $arcologies[$i].FSPastoralist = 5>><<set $adopted = 1>>
+	<<elseif $leaders[$j].behavioralQuirk == "fitness">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Physical Idealism@@, since she's a fitness fanatic herself.
+		<<set $arcologies[$i].FSPhysicalIdealist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if ($arcologies[$i].FSChattelReligionist == "unset")>>
+<<if ($arcologies[$i].FSNull == "unset")>>
+	<<if $leaders[$j].behavioralQuirk == "devout">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Chattel Religionism@@, to share and spread her deeply held beliefs about the holiness of sexual service.
+		<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+	<<elseif $leaders[$j].behavioralQuirk == "sinful">>
+		Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Chattel Religionism@@, since she's excited by the prospect of getting away with horrible sins against old religions in public.
+		<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+	<<if $adopted == 0>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset")>>
+	<<if ($arcologies[$i].FSAztecRevivalist == "unset")>>
+	<<if ($arcologies[$i].FSEgyptianRevivalist == "unset")>>
+	<<if ($arcologies[$i].FSEdoRevivalist == "unset")>>
+	<<if ($arcologies[$i].FSArabianRevivalist == "unset")>>
+	<<if ($arcologies[$i].FSChineseRevivalist == "unset")>>
+		<<if ($leaders[$j].relationshipTarget != 0) && ($leaders[$j].relationshipTarget == $leaders[$j].relationTarget)>>
+			Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Egyptian Revivalism@@, since she's already part of a gloriously incestuous relationship.
+			<<set $arcologies[$i].FSEgyptianRevivalist = 5>><<set $adopted = 1>>
+		<<elseif $leaders[$j].nationality == "Chinese">>
+			Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Chinese Revivalism@@, since she's Chinese herself and can claim high honor in such a society.
+			<<set $arcologies[$i].FSChineseRevivalist = 5>><<set $adopted = 1>>
+		<<elseif $leaders[$j].nationality == "Japanese">>
+			Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Edo Revivalism@@, since she's Japanese herself and can claim high honor in such a society.
+			<<set $arcologies[$i].FSEdoRevivalist = 5>><<set $adopted = 1>>
+		<<elseif $leaders[$j].nationality == "Mexican">>
+			Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Aztec Revivalism@@, since she's Mexican herself and can claim high honor in such a society.
+			<<set $arcologies[$i].FSAztecRevivalist = 5>><<set $adopted = 1>>
+		<<elseif $leaders[$j].behavioralQuirk == "confident">>
+			Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Roman Revivalism@@, since it appeals to her confident, patrician nature.
+			<<set $arcologies[$i].FSRomanRevivalist = 5>><<set $adopted = 1>>
+		<<elseif $leaders[$j].fetish == "dom">>
+			Your agent @@.pink;$leaders[$j].slaveName@@ successfully pushes it to @@.yellow;adopt Arabian Revivalism@@, since she's sexually dominant and quite likes the idea of overseeing slave bazaars.
+			<<set $arcologies[$i].FSArabianRevivalist = 5>><<set $adopted = 1>>
+		<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+
+<<break>>
+<</if>>
+<</for>>
+<</if>>
+
+/* CROSS-FS ADOPTION*/
+
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSSubjugationist > random(50,200)>>
+	<<if ($arcologies[$i].FSDegradationist == "unset") && ($arcologies[$i].FSPaternalist == "unset")>>
+	The arcology's racial Subjugationist culture @@.yellow;pushes it towards Degradationism.@@
+	<<set $arcologies[$i].FSDegradationist = 5>><<set $adopted = 1>>
+	<<break>>
+	<<elseif ($arcologies[$i].FSRomanRevivalist == "unset") && $arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+		<<if random(0,1) == 0>>
+			The arcology's racial Subjugationist culture @@.yellow;pushes it towards Egyptian Revivalism,@@ since the Ancient Egyptians are famous for keeping a race of slaves.
+			<<set $arcologies[$i].FSEgyptianRevivalist = 5>><<set $adopted = 1>>
+		<<else>>
+			The arcology's racial Supremacist culture @@.yellow;pushes it towards Aztec Revivalism,@@ since the enslavement and sacrifice of slaves was fundamental to the culture.
+			<<set $arcologies[$i].FSAztecRevivalist = 5>><<set $adopted = 1>>
+		<</if>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSSupremacist > random(50,200)>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	The arcology's racial Supremacist culture @@.yellow;pushes it towards Paternalism.@@
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset") && ($arcologies[$i].FSSupremacistRace == "asian")>>
+	<<if random(0,1) == 0>>
+		The arcology's racial Supremacist culture @@.yellow;pushes it towards Edo Revivalism,@@ since the beauty and grace of the Japanese people are watchwords there.
+		<<set $arcologies[$i].FSEdoRevivalist = 5>><<set $adopted = 1>>
+	<<else>>
+		The arcology's racial Supremacist culture @@.yellow;pushes it towards Chinese Revivalism,@@ since the wisdom of the Middle Kingdom is admired there.
+		<<set $arcologies[$i].FSChineseRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSGenderRadicalist > random(50,200)>>
+	<<if ($arcologies[$i].FSTransformationFetishist == "unset") && ($arcologies[$i].FSBodyPurist == "unset")>>
+	The arcology's Gender Radicalist culture @@.yellow;pushes it towards Transformation Fetishism,@@ since surgery can turn a slave into anything.
+	<<set $arcologies[$i].FSTransformationFetishist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSAssetExpansionist == "unset")>>
+	The arcology's Gender Radicalist culture @@.yellow;pushes it towards Slimness Enthusiasm,@@ since that's the kind of body many of its slaves have.
+	<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+	<</if>>
+<<elseif $arcologies[$i].FSGenderFundamentalist > random(50,200)>>
+	<<if ($arcologies[$i].FSPastoralist == "unset")>>
+	The arcology's Gender Fundamentalist culture @@.yellow;pushes it towards Pastoralism,@@ since its pregnant slaves are already giving milk.
+	<<set $arcologies[$i].FSPastoralist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	The arcology's Gender Fundamentalist culture @@.yellow;pushes it towards Youth Preferentialism,@@ since younger slaves are beautiful and fertile.
+	<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSPaternalist > random(50,200)>>
+	<<if ($arcologies[$i].FSChattelReligionist == "unset")>>
+	The arcology's Paternalist culture @@.yellow;pushes it towards Chattel Religionism,@@ since many of its slaves are already worshipful.
+	<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	The arcology's Paternalist culture @@.yellow;pushes it towards Body Purism,@@ since giving slaves dangerous drugs is hardly good for them.
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	The arcology's Paternalist culture @@.yellow;pushes it towards Roman Revivalism,@@ since loyal service to the res publica bears similarity to their existing mores.
+	<<set $arcologies[$i].FSRomanRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<elseif $arcologies[$i].FSDegradationist > random(50,200)>>
+	<<if ($arcologies[$i].FSTransformationFetishist == "unset") && ($arcologies[$i].FSBodyPurist == "unset")>>
+	The arcology's Degradationist culture @@.yellow;pushes it towards Transformation Fetishism,@@ the ultimate expression of power over slave bodies.
+	<<set $arcologies[$i].FSTransformationFetishist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSGenderRadicalist == "unset") && ($arcologies[$i].FSGenderFundamentalist == "unset")>>
+	The arcology's Degradationist culture @@.yellow;pushes it towards Gender Radicalism,@@ since the joy of forcing a gender role on a slave is already popular.
+	<<set $arcologies[$i].FSGenderRadicalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSBodyPurist > random(50,200)>>
+	<<if ($arcologies[$i].FSPhysicalIdealist == "unset")>>
+	The arcology's Body Purist culture @@.yellow;pushes it towards Physical Idealism,@@ since it already takes an intense interest in bodily perfection.
+	<<set $arcologies[$i].FSPhysicalIdealist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	The arcology's Body Purist culture @@.yellow;pushes it towards Paternalism,@@ since it's become obvious that happiness is a necessary part of wellness.
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<elseif $arcologies[$i].FSTransformationFetishist > random(50,200)>>
+	<<if ($arcologies[$i].FSAssetExpansionist == "unset") && ($arcologies[$i].FSSlimnessEnthusiast == "unset")>>
+	The arcology's Transformation Fetishist culture @@.yellow;pushes it towards Asset Expansionism,@@ since it's already overrun with massive tits and asses.
+	<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSDegradationist == "unset") && ($arcologies[$i].FSPaternalist == "unset")>>
+	The arcology's Transformation Fetishist culture @@.yellow;pushes it towards Degradationism,@@ since it's already used to slaves whining about their latest surgeries.
+	<<set $arcologies[$i].FSDegradationist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSYouthPreferentialist > random(50,200)>>
+	<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSAssetExpansionist == "unset")>>
+	The arcology's Youth Preferentialist culture @@.yellow;pushes it towards Slimness Enthusiasm,@@ since that's the kind of body many of its slaves have.
+	<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSGenderFundamentalist == "unset") && ($arcologies[$i].FSGenderRadicalist == "unset")>>
+	The arcology's Youth Preferentialist culture @@.yellow;pushes it towards Gender Fundamentalism,@@ since many of its slaves are deliciously ripe for breeding.
+	<<set $arcologies[$i].FSGenderFundamentalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<elseif $arcologies[$i].FSMaturityPreferentialist > random(50,200)>>
+	<<if ($arcologies[$i].FSAssetExpansionist == "unset") && ($arcologies[$i].FSSlimnessEnthusiast == "unset")>>
+	The arcology's Maturity Preferentialist culture @@.yellow;pushes it towards Asset Expansionism,@@ since that's the kind of body many of its slaves have.
+	<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	The arcology's Maturity Preferentialist culture @@.yellow;pushes it towards Paternalism,@@ since its many older slaves have skills best applied by a happy woman.
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSSlimnessEnthusiast > random(50,200)>>
+	<<if ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	The arcology's Slimness Enthusiast culture @@.yellow;pushes it towards Youth Preferentialism,@@ since younger slaves are often attractively slim.
+	<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	The arcology's Slimness Enthusiast culture @@.yellow;pushes it towards Body Purism,@@ since the last thing they want is prettily slender girls with health trouble.
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<</if>>
+<<elseif $arcologies[$i].FSAssetExpansionist > random(50,200)>>
+	<<if ($arcologies[$i].FSMaturityPreferentialist == "unset") && ($arcologies[$i].FSYouthPreferentialist == "unset")>>
+	The arcology's Asset Expansionist culture @@.yellow;pushes it towards Maturity Preferentialism,@@ since MILF slaves tend to come with nice big tits.
+	<<set $arcologies[$i].FSMaturityPreferentialist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	The arcology's Asset Expansionist culture @@.yellow;pushes it towards Body Purism,@@ since slaves on curatives are slaves not on growth hormones.
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSPastoralist > random(50,200)>>
+	<<if ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	The arcology's Pastoralist culture @@.yellow;pushes it towards Body Purism,@@ since there have been concerns about milk purity.
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSAssetExpansionist == "unset") && ($arcologies[$i].FSSlimnessEnthusiast == "unset")>>
+	The arcology's Pastoralist culture @@.yellow;pushes it towards Asset Expansionism,@@ since they're convinced that there's no such thing as udders that are too big.
+	<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+	<</if>>
+<<elseif $arcologies[$i].FSPhysicalIdealist > random(50,200)>>
+	<<if ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	The arcology's Physical Idealist culture @@.yellow;pushes it towards Body Purism,@@ since it's already used to treating slaves' bodies as temples.
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	The arcology's Physical Idealist culture @@.yellow;pushes it towards Youth Preferentialism,@@ since beauty and athletic prowess do tend to peak early.
+	<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $seed = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSChattelReligionist > random(50,200)>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	The arcology's Chattel Religionist culture @@.yellow;pushes it towards Paternalism,@@ since charitable care for slaves' welfare has become widespread.
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<<elseif ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	The arcology's Chattel Religionist culture @@.yellow;pushes it towards Arabian Revivalism,@@ since such an intermingling of slavery and faith fascinates them.
+	<<set $arcologies[$i].FSArabianRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSRomanRevivalist > random(50,200)>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	The arcology's Roman Revivalist culture @@.yellow;pushes it towards Paternalism,@@ since some Roman slaves were traditionally permitted limited rights.
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSAztecRevivalist > random(50,200)>>
+	<<if ($arcologies[$i].FSDegradationist == "unset") && ($arcologies[$i].FSPaternalist == "unset")>>
+	The arcology's Aztec Revivalist culture @@.yellow;pushes it towards Degradation,@@ since most Aztec war slaves were tortured and sacrificed.
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSEgyptianRevivalist > random(50,200)>>
+	<<if ($arcologies[$i].FSChattelReligionist == "unset")>>
+	The arcology's Egyptian Revivalist culture @@.yellow;pushes it towards Chattel Religionism,@@ since worship is already becoming an established part of its life.
+	<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSEdoRevivalist > random(50,200)>>
+	<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	The arcology's Edo Revivalist culture @@.yellow;pushes it towards Slimness Enthusiasm,@@ since slim and elegant slaves are already fashionable there.
+	<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSArabianRevivalist > random(50,200)>>
+	<<if ($arcologies[$i].FSChattelReligionist == "unset")>>
+	The arcology's Arabian Revivalist culture @@.yellow;pushes it towards Chattel Religionism,@@ since the word of God is already a matter of daily significance there.
+	<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $adopted == 0>>
+<<if $arcologies[$i].FSChineseRevivalist > random(50,200)>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	The arcology's Chinese Revivalist culture @@.yellow;pushes it towards Paternalism,@@ since traditional beliefs about duty and order have become accepted.
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</if>>
+<</if>>
+
+/* NEIGHBOR ADOPTION*/
+
+<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+
+	<<set $influenceBonus = 0>>
+	<<if $arcologies[$i].direction == $arcologies[$j].influenceTarget>>
+		$arcologies[$j].name's directed cultural influence gives it some input $arcologies[$i].name's choice of direction.
+		<<set $influenceBonus = 20>>
+	<</if>>
+
+	<<set $activeArcology = $arcologies[$i]>>
+	<<set $targetArcology = $arcologies[$j]>>
+
+	<<include "Arcology Opinion">>
+	<<if $opinion >= 50>>
+		$arcologies[$i].name is already aligned with $arcologies[$j].name socially, encouraging it to consider adopting all its cultural values.
+		<<set $influenceBonus += $opinion-50>>
+	<<elseif $opinion <= -50>>
+		$arcologies[$i].name is culturally opposed to $arcologies[$j].name, encouraging it to resist adopting its cultural values.
+		<<set $influenceBonus += $opinion+50>>
+	<</if>>
+
+	<<if ($arcologies[$i].FSSubjugationist == "unset")>>
+	<<if ($arcologies[$i].FSSupremacist == "unset") || ($arcologies[$i].FSSupremacistRace != $arcologies[$j].FSSubjugationistRace)>>
+		<<if $arcologies[$j].FSSubjugationist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts $arcologies[$j].FSSubjugationistRace Subjugation@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSSubjugationist = 5>><<set $adopted = 1>>
+		<<set $arcologies[$i].FSSubjugationistRace = $arcologies[$j].FSSubjugationistRace>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSSupremacist == "unset")>>
+	<<if ($arcologies[$i].FSSubjugationist == "unset") || ($arcologies[$i].FSSubjugationistRace != $arcologies[$j].FSSupremacistRace)>>
+		<<if $arcologies[$j].FSSupremacist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts $arcologies[$j].FSSupremacistRace Subjugation@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSSupremacist = 5>><<set $adopted = 1>>
+		<<set $arcologies[$i].FSSupremacistRace = $arcologies[$j].FSSupremacistRace>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSGenderRadicalist == "unset") && ($arcologies[$i].FSGenderFundamentalist == "unset")>>
+		<<if $arcologies[$j].FSGenderRadicalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Gender Radicalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSGenderRadicalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSGenderFundamentalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Gender Fundamentalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSGenderFundamentalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+		<<if $arcologies[$j].FSPaternalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Paternalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSDegradationist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Degradationism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSDegradationist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+		<<if $arcologies[$j].FSBodyPurist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Body Purism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSTransformationFetishist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Transformation Fetishism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSTransformationFetishist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+		<<if $arcologies[$j].FSYouthPreferentialist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Youth Preferentialism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSMaturityPreferentialist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Maturity Preferentialism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSMaturityPreferentialist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSAssetExpansionist == "unset")>>
+		<<if $arcologies[$j].FSSlimnessEnthusiast > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Slimness Enthusiasm@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSAssetExpansionist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Asset Expansionism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSPastoralist == "unset") && ($arcologies[$i].FSPhysicalIdealist == "unset")>>
+		<<if $arcologies[$j].FSPastoralist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Pastoralism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSPastoralist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSPhysicalIdealist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Physical Idealism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSPhysicalIdealist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSChattelReligionist == "unset") && ($arcologies[$i].FSNull == "unset")>>
+		<<if $arcologies[$j].FSChattelReligionist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Chattel Religionism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+		<<if $arcologies[$j].FSRomanRevivalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Roman Revivalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSRomanRevivalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSAztecRevivalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Aztec Revivalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSAztecRevivalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSEgyptianRevivalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Egyptian Revivalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSEgyptianRevivalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSEdoRevivalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Edo Revivalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSEdoRevivalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSArabianRevivalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Arabian Revivalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSArabianRevivalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+		<<if $arcologies[$j].FSChineseRevivalist > random(0,200)+($adopted*100)-$influenceBonus>>
+		It @@.yellow;adopts Chinese Revivalism@@ due to influence from its trading partner $arcologies[$j].name.
+		<<set $arcologies[$i].FSChineseRevivalist = 5>><<set $adopted = 1>>
+		<<break>>
+		<</if>>
+	<</if>>
+	<</if>>
+<</for>>
+
+/* RANDOM ADOPTION*/
+
+<<if $adopted == 0>>
+<<if random(0,4) == 1>>
+<<switch $arcologies[$i].government>>
+<<case "elected officials">>
+	<<set $desc = "Its elected leaders are">>
+<<case "a committee">>
+	<<set $desc = "A majority of its ruling committee is">>
+<<case "an oligarchy" "your trustees">>
+	<<set $desc = "Its leading citizens are">>
+<<case "an individual">>
+	<<set $desc = "Its owner is">>
+<<case "your agent">>
+	<<set $desc = "Your agent and its citizens are">>
+<<case "a corporation">>
+	<<set $desc = "Most of its board of directors are">>
+<<default>>
+	<<set $desc = "Its citizens are">>
+<</switch>>
+<<switch random(1,21)>>
+<<case 1>>
+	<<set $seed = either("white", "asian", "latina", "middle eastern", "black", "indo-aryan", "pacific islander", "malay", "amerindian", "southern european", "semitic", "mixed race")>>
+	<<if ($arcologies[$i].FSSubjugationist == "unset")>>
+	<<if ($arcologies[$i].FSSupremacist == "unset") || ($seed != $arcologies[$i].FSSupremacistRace)>>
+	$desc preoccupied by a racial animus towards $seed people, leading the arcology to @@.yellow;adopt $seed Subjugation.@@
+	<<set $arcologies[$i].FSSubjugationist = 5>><<set $adopted = 1>>
+	<<set $arcologies[$i].FSSubjugationistRace = $seed>>
+	<</if>>
+	<</if>>
+<<case 2>>
+	<<set $seed = either("white", "asian", "latina", "middle eastern", "black", "indo-aryan", "pacific islander", "malay", "amerindian", "southern european", "semitic", "mixed race")>>
+	<<if ($arcologies[$i].FSSupremacist == "unset")>>
+	<<if ($arcologies[$i].FSSubjugationist == "unset") || ($seed != $arcologies[$i].FSSubjugationistRace)>>
+	$desc preoccupied by belief in the superiority of the $seed race, leading the arcology to @@.yellow;adopt $seed Supremacy.@@
+	<<set $arcologies[$i].FSSupremacist = 5>><<set $adopted = 1>>
+	<<set $arcologies[$i].FSSupremacistRace = $seed>>
+	<</if>>
+	<</if>>
+<<case 3>>
+	<<if ($arcologies[$i].FSGenderRadicalist == "unset") && ($arcologies[$i].FSGenderFundamentalist == "unset")>>
+	$desc enthusiastic about fucking slaves in the butt, leading the arcology to @@.yellow;adopt Gender Radicalism.@@
+	<<set $arcologies[$i].FSGenderRadicalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 4>>
+	<<if ($arcologies[$i].FSGenderRadicalist == "unset") && ($arcologies[$i].FSGenderFundamentalist == "unset")>>
+	$desc enthusiastic about knocking slaves up, leading the arcology to @@.yellow;adopt Gender Fundamentalism.@@
+	<<set $arcologies[$i].FSGenderFundamentalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 5>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	$desc devoted to their slaves' advancement, leading the arcology to @@.yellow;adopt Paternalism.@@
+	<<set $arcologies[$i].FSPaternalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 6>>
+	<<if ($arcologies[$i].FSPaternalist == "unset") && ($arcologies[$i].FSDegradationist == "unset")>>
+	$desc partial to screaming and struggling, leading the arcology to @@.yellow;adopt Degradationism.@@
+	<<set $arcologies[$i].FSDegradationist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 7>>
+	<<if ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	$desc concerned by trends in their slaves' health, leading the arcology to @@.yellow;adopt Body Purism.@@
+	<<set $arcologies[$i].FSBodyPurist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 8>>
+	<<if ($arcologies[$i].FSBodyPurist == "unset") && ($arcologies[$i].FSTransformationFetishist == "unset")>>
+	$desc fascinated with extreme surgery, leading the arcology to @@.yellow;adopt Transformation Fetishism.@@
+	<<set $arcologies[$i].FSTransformationFetishist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 9>>
+	<<if ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	$desc devoted to fucking nubile young slaves, leading the arcology to @@.yellow;adopt Youth Preferentialism.@@
+	<<set $arcologies[$i].FSYouthPreferentialist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 10>>
+	<<if ($arcologies[$i].FSYouthPreferentialist == "unset") && ($arcologies[$i].FSMaturityPreferentialist == "unset")>>
+	$desc devoted to time in bed with their MILF slaves, leading the arcology to @@.yellow;adopt Maturity Preferentialism.@@
+	<<set $arcologies[$i].FSMaturityPreferentialist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 11>>
+	<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSAssetExpansionist == "unset")>>
+	$desc loves a slim slave with tight holes, leading the arcology to @@.yellow;adopt Slimness Enthusiasm.@@
+	<<set $arcologies[$i].FSSlimnessEnthusiast = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 12>>
+	<<if ($arcologies[$i].FSSlimnessEnthusiast == "unset") && ($arcologies[$i].FSAssetExpansionist == "unset")>>
+	$desc loves boobs, the bigger, the better, leading the arcology to @@.yellow;adopt Asset Expansionism.@@
+	<<set $arcologies[$i].FSAssetExpansionist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 13>>
+	<<if ($arcologies[$i].FSPastoralist == "unset")>>
+	$desc addicted to breast milk straight from the nipple, leading the arcology to @@.yellow;adopt Pastoralism.@@
+	<<set $arcologies[$i].FSPastoralist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 14>>
+	<<if ($arcologies[$i].FSPhysicalIdealist == "unset")>>
+	$desc pretty devoted to spending time in the gym, leading the arcology to @@.yellow;adopt Physical Idealism.@@
+	<<set $arcologies[$i].FSPhysicalIdealist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 15>>
+	<<if ($arcologies[$i].FSChattelReligionist == "unset")>>
+	$desc is devoutly religious, and interested in a reformation, leading the arcology to @@.yellow;adopt Chattel Religionism.@@
+	<<set $arcologies[$i].FSChattelReligionist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 16>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by classical Roman history, leading the arcology to @@.yellow;adopt Roman Revivalism.@@
+	<<set $arcologies[$i].FSRomanRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 17>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by ancient Aztec history, leading the arcology to @@.yellow;adopt Aztec Revivalism.@@
+	<<set $arcologies[$i].FSAztecRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 18>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by ancient Egyptian history, leading the arcology to @@.yellow;adopt Egyptian Revivalism.@@
+	<<set $arcologies[$i].FSEgyptianRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 19>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by Japanese history, leading the arcology to @@.yellow;adopt Edo Revivalism.@@
+	<<set $arcologies[$i].FSEdoRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 20>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by Arabian romanticism, leading the arcology to @@.yellow;adopt Arabian Revivalism.@@
+	<<set $arcologies[$i].FSArabianRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<<case 21>>
+	<<if ($arcologies[$i].FSRomanRevivalist == "unset") && ($arcologies[$i].FSAztecRevivalist == "unset") && ($arcologies[$i].FSEgyptianRevivalist == "unset") && ($arcologies[$i].FSEdoRevivalist == "unset") && ($arcologies[$i].FSArabianRevivalist == "unset") && ($arcologies[$i].FSChineseRevivalist == "unset")>>
+	$desc fascinated by the long tale of Chinese history, leading the arcology to @@.yellow;adopt Chinese Revivalism.@@
+	<<set $arcologies[$i].FSChineseRevivalist = 5>><<set $adopted = 1>>
+	<</if>>
+<</switch>>
+<</if>>
+<</if>>
+
+<<if $adopted == 0>>
+	Its future is bitterly controversial, and no side is predominant this week. The dissention reduces the arcology's prosperity.
+	<<set $arcologies[$i].prosperity -= 1>>
+<</if>>

@@ -1,0 +1,23 @@
+:: Rules Slave Select
+
+<<nobr>>
+<<set $nextButton = "Continue", $nextLink = "Rules Assistant">>
+
+<<if ndef $currentRule.selectedSlaves>>
+	<<set $currentRule.selectedSlaves to []>>
+<</if>>
+
+<<if ($currentRule.selectedSlaves.length < 1)>>
+	<<set $Flag = 0>>
+	Choose specific slaves to limit Rule $r:
+	<<include "Slave Summary">>
+<<else>>
+	Rule $r currently limited to specific slaves: [[Clear list|Rules Slave Select][$currentRule.selectedSlaves = []]]
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+	<br><br>
+	Choose more specific slaves:
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<</if>>
+<</nobr>>

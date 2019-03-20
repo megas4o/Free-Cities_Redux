@@ -1,0 +1,116 @@
+:: Description Options [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Options">>
+
+//These options will affect both the long form description of each slave and the miniscenes available from the main menu.//
+
+<br><br>
+
+<<if $showSexualHistory == 1>>
+	Sexual histories are @@.green;SHOWN.@@ //[[Hide|Description Options][$showSexualHistory = 0]]//
+<<else>>
+	Sexual histories are @@.red;HIDDEN.@@ //[[Show|Description Options][$showSexualHistory = 1]]//
+<</if>>
+
+<br>
+
+<<if $showBodyMods == 1>>
+	Cosmetic body mods are @@.green;SHOWN.@@ //[[Hide|Description Options][$showBodyMods = 0]]//
+<<else>>
+	Cosmetic body mods are @@.red;HIDDEN.@@ //[[Show|Description Options][$showBodyMods = 1]]//
+<</if>>
+
+<br>
+
+<<if $showImplantEffects == 1>>
+	The effects of implants are @@.green;SHOWN.@@ //[[Hide|Description Options][$showImplantEffects = 0]]//
+<<else>>
+	The effects of implants are @@.red;HIDDEN.@@ //[[Show|Description Options][$showImplantEffects = 1]]//
+<</if>>
+
+<br>
+
+<<if $showClothing == 1>>
+	Clothing is mostly @@.green;SHOWN.@@ //[[Hide|Description Options][$showClothing = 0]]//
+<<else>>
+	Clothing is mostly @@.red;HIDDEN.@@ //[[Show|Description Options][$showClothing = 1]]//
+<</if>>
+
+<br>
+
+Detailed slave age information is
+<<if $showAgeDetail == 1>>
+	@@.green;SHOWN.@@ //[[Hide|Description Options][$showAgeDetail = 0]]//
+<<else>>
+	@@.red;HIDDEN.@@ //[[Show|Description Options][$showAgeDetail = 1]]//
+<</if>>
+
+<br>
+
+Approximate height is
+<<if $showHeightCMs == 1>>
+	@@.green;SHOWN.@@ //[[Hide|Description Options][$showHeightCMs = 0]]//
+<<else>>
+	@@.red;HIDDEN.@@ //[[Show|Description Options][$showHeightCMs = 1]]//
+<</if>>
+
+<br>
+
+Volume, in CCs, of breasts is
+<<if $showBoobCCs == 1>>
+	@@.green;SHOWN.@@ //[[Hide|Description Options][$showBoobCCs = 0]]//
+<<else>>
+	@@.red;HIDDEN.@@ //[[Show|Description Options][$showBoobCCs = 1]]//
+<</if>>
+
+<<if $seeDicks != 0>>
+<br>
+Approximate sizes of dicks and balls are
+<<if $showDickCMs == 1>>
+	@@.green;SHOWN.@@ //[[Hide|Description Options][$showDickCMs = 0]]//
+<<else>>
+	@@.red;HIDDEN.@@ //[[Show|Description Options][$showDickCMs = 1]]//
+<</if>>
+<</if>>
+
+<br>
+
+Attractiveness and Sexual scores are
+<<if $showScores == 1>>
+	@@.green;SHOWN.@@ //[[Hide|Description Options][$showScores = 0]]//
+<<else>>
+	@@.red;HIDDEN.@@ //[[Show|Description Options][$showScores = 1]]//
+<</if>>
+
+<br>
+
+<span id="result">
+<<if ndef $PC.customTitle>>
+	<<link "Set a custom title for slaves to address you">>
+		<<replace "#result">>
+			Custom title: <<textbox "$PC.customTitle" $PC.customTitle>>
+			<<link "Apply">>
+				<<replace "#result">>
+					Your title is now $PC.customTitle.
+					<<set $PC.customTitleLisp = $PC.customTitle, $PC.customTitleLisp = $PC.customTitleLisp.replace("ss", "th"), $PC.customTitleLisp = $PC.customTitleLisp.replace("S", "Th"), $PC.customTitleLisp = $PC.customTitleLisp.replace("s", "th")>>
+				<</replace>>
+			<</link>>
+		<</replace>>
+	<</link>>
+<<else>>
+	Your custom title is <<textbox "$PC.customTitle" $PC.customTitle>>
+	<<link "Apply">>
+		<<replace "#result">>
+			Your title is now $PC.customTitle.
+			<<set $PC.customTitleLisp = $PC.customTitle, $PC.customTitleLisp = $PC.customTitleLisp.replace("ss", "th"), $PC.customTitleLisp = $PC.customTitleLisp.replace("S", "Th"), $PC.customTitleLisp = $PC.customTitleLisp.replace("s", "th")>>
+		<</replace>>
+	<</link>> |
+	<<link "Stop using a custom title">>
+		<<replace "#result">>
+			You stop using a custom title
+			<<set $PC.customTitle = undefined>>
+			<<set $PC.customTitleLisp = undefined>>
+		<</replace>>
+	<</link>>
+<</if>>
+</span>

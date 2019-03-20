@@ -1,0 +1,316 @@
+:: SE retirement [nobr]
+
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Scheduled Event">>
+
+<<set $retired = 1>>
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].ID == $retiree.ID>>
+	<<set $activeSlave = $slaves[$i]>>
+	<<break>>
+	<</if>>
+<</for>>
+<<Enunciate $activeSlave>>
+$activeSlave.slaveName is retiring from sexual slavery this week,
+
+<<if $CitizenRetirement == 1>>
+
+in a way that will fill the rest of your property with envy and @@.mediumaquamarine;trust.@@
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<set $slaves[$i].trust += 3>>
+<</for>>
+<<if $activeSlave.relationship > 3>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].ID == $activeSlave.relationshipTarget>>
+	($slaves[$i].slaveName, for her part, is @@.hotpink;overjoyed,@@ though also a bit sad. She looks forward to joining $activeSlave.slaveName one day.)
+	<<set $slaves[$i].devotion += 10>>
+	<</if>>
+<</for>>
+<</if>>
+<br><br>
+
+She is retiring into citizenship, with a substantial annuity that will provide her with a secure if not luxurious life.
+<<if $activeSlave.fetish == "mindbroken">>
+	Sadly, she is not mentally equipped to look after herself, but the arcology hosts several fine institutions capable of caring for her. They'll have someone check in on her daily.
+<<elseif $activeSlave.relationship == -3>>
+	She wishes she could continue to be your slave wife, but she understands that marriages between slaves and slave owners are predicated on the slave relationship. She knows that her retirement has come, meaning that her slave relationship to you is ending. She's had a long time to get used to the idea, and gets through the process with dignity, doing her best to avoid embarrassing you.
+<<elseif $activeSlave.devotion > 95>>
+	She desperately wishes she could continue to be your sex slave, but she understands that her retirement has come. More importantly, she's had a long time to get used to the idea, and gets through the process with resolution, doing her best to avoid embarrassing herself or you.
+<<elseif $activeSlave.devotion > 20>>
+	She is very happy to be a free person again, though she does her best to do you the favor of not being too ostentatious about this.
+<<else>>
+	It is with an ill-disguised triumphalism that she leaves sexual slavery behind her, and enters into a life in which she can decline to have things inserted into her body.
+<</if>>
+She's certainly going to have some adjustments to make.
+<<if $activeSlave.energy > 90>>
+	Notably, dealing with her formidable sex drive is now her business. You suspect the arcology's clubs are about to receive a fanatical new regular, and the arcology's whores may not know what hit them when she realizes that she's now quite capable of buying whatever she wants on a semi-regular basis.
+	<<if $activeSlave.analSkill+$activeSlave.oralSkill >= 120>>
+	She's so sexually skilled, though, that she probably won't have much trouble. She'll probably have more than a few eager lovers within days.
+	<</if>>
+	<<if $activeSlave.face > 40>>
+	She's certainly attractive enough that she'll have no trouble finding as many casual hookups as she likes.
+	<</if>>
+<</if>>
+
+<<if $activeSlave.prestigeDesc == 0>>
+  <<set $toSearch = "null">>
+<<else>>
+<<set $toSearch = $activeSlave.prestigeDesc>>
+<</if>>
+<<if ($toSearch.indexOf("Head Girl") != -1) || ($HeadGirl.ID == $activeSlave.ID)>>
+	<br><br>
+	She has a reputation from her long service as your Head Girl. To her bemusement, and considerable satisfaction, she has multiple job offers from slaving operations without even having to circulate her resume.
+	<<if $activeSlave.fetish == "sadist">>
+	The prospect of a virtually unlimited field for abuse and rape is something she'd pay for, now that she has her own money. She's excited beyond description to find that there are people interested in paying her to exercise her exquisitely horrible skills.
+	<<elseif $activeSlave.fetish == "dom">>
+	Dominance is second nature to her. Though she doesn't have to work, her slaving skills are valuable enough that she'd probably be tempted by the pay she can expect, even if she didn't derive real pleasure from exercising them.
+	<<else>>
+	Her annuity means that she doesn't have to work, but she's inclined to do so. Her skills command reasonable wages in the slave training field, and between those prospects and her annuity, she stands to become wealthy.
+	<</if>>
+<<elseif ($toSearch.indexOf("is world famous for") != -1)>>
+	<br><br>
+	<<set $seed = $activeSlave.prestigeDesc>>
+	<<set $seed = $seed.replace("She is world famous for her career in slave pornography. Millions are intimately familiar with", "enjoy")>>
+	<<set $seed = $seed.replace(".", ",")>>
+	In addition to her annuity, you've laid the groundwork for her to become wealthy by the way you publicized pornography of her. Many thousands of people across the world are willing to pay to $seed and they enjoy it in part because she doesn't mind it, either. She's in a position to make great money for doing on camera what she would probably do anyway.
+<<elseif ($activeSlave.intelligence >= -1) && ($activeSlave.muscles > 5) && ($activeSlave.combatSkill >= 1) && ($activeSlave.amp != 1) && ($activeSlave.face > 10)>>
+	<br><br>
+	She's pretty and deadly. If she feels she prefers wealth and danger to living on her annuity, she'll have no trouble finding work. In fact, she'll likely have trouble sifting through all the mercenary organizations, businesses in need of attractive and competent guards for public spaces, and citizens looking for effective bodyguards willing to hire her.
+<<elseif ($activeSlave.intelligence >= 2) && ($activeSlave.intelligenceImplant >= 1)>>
+	<br><br>
+	She has no skills extraordinary enough to bring prospective employers in search of her, in this new, slaveowning economy, but she is highly intelligent, educated, and has a small income. As you know from your own abundant personal experience, her intelligence is a lever, her annuity is a fulcrum, and with the two, she may move the world someday. You have no doubt that, at the very least, she will be far from the poorest of your citizens.
+<</if>>
+
+<br><br>
+As she takes her leave, heading the short distance down to her modest little apartment, she presents a strange appearance. She's wearing cheap but not unattractive clothing, and you are struck by a crystal-clear mental image of what she looks like nude.
+<<if $activeSlave.fetish != "mindbroken">>
+<<if $activeSlave.devotion > 20>>
+	<<if $activeSlave.devotion > 95>>
+		She's doing her absolute best not to sob, but her lips are quivering.
+	<<else>>
+		She looks like she might cry.
+	<</if>>
+	<<if $activeSlave.relationship == -3>>
+		The ring she wore when she was your slave wife is nowhere to be seen; she's either taken it with her as a souvenir, or left it back in her sleeping area. If it's the former, no matter: you can always get more.
+	<</if>>
+	<<if (canTalk($activeSlave) == false)>>
+		She gestures her thanks, and ironically indicates that she'll see you around.
+	<<else>>
+		"Well, thank<<s>>, <<Master>>, um, I mean $PC.name. I g-gue<<s>> I'll <<s>>ee you around. I mean, the arcology. Anyway. Bye."
+	<</if>>
+	<<if $activeSlave.devotion > 95>>
+		She turns resolutely away and flees, trying to choke back her tears.
+	<<else>>
+		She turns resolutely away.
+	<</if>>
+<</if>>
+<</if>>
+<br><br>
+
+<<if $activeSlave.energy > 50>>
+<<if $activeSlave.devotion > 20>>
+<span id="result">
+<<link "See her around">>
+	<<replace "#result">>
+	Later that week, <<if $club > 0>>as you take an evening to enjoy $clubName in person<<else>>out in one of $arcologies[0].name's better clubs<</if>>, you run into $activeSlave.slaveName. She looks good, and happy, and is not at all displeased to see you. She sidles up to you and makes it clear without a
+	<<if (canTalk($activeSlave) == false)>>
+		gesture
+	<<else>>
+		word
+	<</if>>
+	that she's quite eager to fuck you as a free woman.
+	<<if $activeSlave.relationship == -3>>
+		When she knows she has your attention, she produces the steel ring that she wore when she was your slave wife. She doesn't put it on, but she kisses it suggestively before putting it back in her purse.
+	<</if>>
+	<<if ($activeSlave.fetish == "submissive") && ($activeSlave.fetishKnown == 1)>>
+		Taking the lead as you know she prefers, you lead her to a private booth and make love to her, holding her down with the gentle but firm grip that never fails to bring her through a long and gasping climax.
+	<<elseif ($activeSlave.fetish == "cumslut") && ($activeSlave.fetishKnown == 1)>>
+		She <<if $PC.dick == 1>>sucks your dick<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>eats you out<</if>> right there, eagerly <<if $activeSlave.vagina > -1>>jilling off<<else>>jacking off<</if>> as she enjoys your infinitely familiar taste and scent.
+	<<elseif ($activeSlave.fetish == "humiliation") && ($activeSlave.fetishKnown == 1)>>
+		You take her right there, the humiliation slut getting what she came to the club to get: an opportunity to orgasm in public with many eyes enjoying the sight of her pleasure.
+	<<elseif ($activeSlave.fetish == "buttslut") && ($activeSlave.fetishKnown == 1)>>
+		Your <<if $PC.dick == 1>>dick is<<else>>fingers are<</if>> up her ass in no time, and she's so primed for anal that she climaxes with indecent speed. She begs you to keep fucking her butt, and you do.
+	<<elseif ($activeSlave.fetish == "boobs") && ($activeSlave.fetishKnown == 1)>>
+		She grinds shamelessly against you, your hands holding her breasts just the way you know she loves them held. Your <<if $PC.boobs == 1>>own tits press softly<<else>>manly chest presses<</if>> against her back as she cranes back to kiss you.
+	<<elseif ($activeSlave.fetish == "pregnancy") && ($activeSlave.fetishKnown == 1)>>
+		She begs shamelessly for your seed, right here and right now, and <<if $PC.dick == 1>>you give it to her, producing the usual perverted orgasm as she feels it inside her.<<else>>as usual, she doesn't care that the phallus you fuck her with is actually a strap-on. She manages to pretend it's a cock knocking her up.<</if>>
+	<<elseif ($activeSlave.fetish == "dom") && ($activeSlave.fetishKnown == 1)>>
+		After some mutually aggressive dancing that leaves you both panting and sweaty, you work together to attract another free dancer, a girl who $activeSlave.slaveName had her eye on already. Before long, the poor girl is screaming with orgasm in a private booth as you take her together.
+	<<elseif ($activeSlave.fetish == "sadist") && ($activeSlave.fetishKnown == 1)>>
+		After some mutually aggressive dancing that leaves you both panting and sweaty, you mutually select one of the club's slaves, and drag her back to a private booth. Before long, her screams for mercy are audible on the floor.
+	<<elseif ($activeSlave.fetish == "masochist") && ($activeSlave.fetishKnown == 1)>>
+		You don't have the setup for really elaborate pain, so you fuck her hard and fast, to give her that edge of discomfort that she now requires to get off. She gasps as she gets what she needs, not free of her perversions despite her status as a citizen.
+	<<else>>
+		You remember her uncomplicated tastes well, though the total confidence that her willingness and pleasure are unfeigned is novel. You dance, you laugh, and you make love to her, all through the night.
+	<</if>>
+	<</replace>>
+<</link>>
+<br />
+<<if $activeSlave.relationship >= 4>>
+<<link "Send her girl into retirement with her">>
+	<<replace "#result">>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].ID == $activeSlave.relationshipTarget>>
+		She doesn't get far before she hears a desperate pursuit behind her. It's her <<if $activeSlave.relationship >= 5>>wife<<else>>lover<</if>>, $slaves[$i].slaveName, hurrying to catch up. Watching on the monitors, you see $activeSlave.slaveName's mixed pleasure and pain at seeing her again so soon, followed by a tearful explanation and an embrace so heartfelt that the pair of ex-slaves collapse to the floor together, sobbing.
+		<<set $activeSlave = $slaves[$i]>>
+		<<include "Remove activeSlave">>
+		<<break>>
+		<</if>>
+	<</for>>
+	<br><br>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		Of course, your paternalistic arcology thinks this @@.green;almost too romantic,@@ and there are jesting suggestions that outcomes this adorable ought to be illegal. The pair become celebrated citizens immediately.
+		<<set $rep += 10*$FSSingleSlaveRep*($arcologies[0].FSPaternalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSPaternalist += 0.1*$FSSingleSlaveRep>>
+	<<else>>
+		Though it is not ordinarily paternalistic, even your society thinks this is @@.green;pretty romantic.@@
+		<<set $rep += 5*$FSSingleSlaveRep>>
+	<</if>>
+	<</replace>>
+<</link>>
+<</if>>
+</span>
+<</if>>
+<</if>>
+
+<br><br>
+Your arcology has gained a citizen.
+<<set $ACitizens += 1>>
+
+<<elseif $BioreactorRetirement == 1>>
+
+in a way that will inevitably fill the rest of your property with @@.gold;fear.@@
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<set $slaves[$i].trust -= 3>>
+<</for>>
+<<if $activeSlave.relationship > 3>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].ID == $activeSlave.relationshipTarget>>
+	($slaves[$i].slaveName, for her part, is @@.mediumorchid;horrified.@@)
+	<<set $slaves[$i].devotion -= 20>>
+	<</if>>
+<</for>>
+<</if>>
+<br><br>
+
+She is retiring into a featureless existence where the only realities are the phalli ejaculating food, fluid, and drugs into her <<if $activeSlave.vagina > -1>> vagina,<</if>> anus, and throat,<<if $activeSlave.balls > 0>> the relentless sodomy forcing semen out of her distended balls,<</if>> and the milk flowing into the milkers tugging at  her painfully engorged nipples.
+<<if $activeSlave.fetish == "mindbroken">>
+	She's already broken in spirit, and she complies with her installation into a milking machine with the dumb obedience of the animal she has become.
+<<elseif $activeSlave.devotion > 20>>
+	She complies with her installation into a milking machine with the dumb obedience of someone whose mind will not allow them to understand their true situation out of simple immediate self-preservation.
+<<elseif $activeSlave.trust < 50>>
+	She is so terrified of punishment that she complies with her installation into a milking machine to avoid pain. She knows that if she does not obey, there will be pain, and if she obeys, there may be pain but it will come later.
+<<else>>
+	She resists, of course, giving the compliance systems an excuse to unload quite a few volts of electricity into her. This disobedience is one of her more abortive attempts to resist your will, and it is her last.
+<</if>>
+<br><br>
+
+It will take her some time to reach full production, a state that she'll be kept in until it becomes impossible for the most reckless drug regime to keep her there. Near the end of the week, you check in on her idly. Her breasts are already swelling under the hormonal treatments that can only be applied when the sole priority is production. The rhythm of the milkers gives them a slight pulsing heave, first one, then the other. Her milk whitens the lines running away from her udders.
+<br><br>
+
+<span id="result">
+<<link "Have a taste">>
+	<<replace "#result">>
+	You tug one of the milkers off a nipple, producing a lewd sucking noise as the wet flesh pops free of the machinery. It must have been quite painful, but the feeding apparatus that covers much of the slave's face affords no indication of her reaction, if any. You heft the boob with both hands and take the nipple into your mouth, sucking gently. A rich jet of cream hits your tongue, the milkfat luscious with hints of vanilla. The warm breastflesh fills your hands, and you fancy that you can feel the prosperity under your fingers as her body desperately hurries to make more.
+	<</replace>>
+<</link>>
+</span>
+
+<br><br>
+You have @@.yellowgreen;gained a standard bioreactor.@@
+<<set $menialBioreactors += 1>>
+
+<<elseif $ArcadeRetirement == 1>>
+
+in a way that will inevitably fill the rest of your property with @@.gold;fear.@@
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<set $slaves[$i].trust -= 3>>
+<</for>>
+<<if $activeSlave.relationship > 3>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].ID == $activeSlave.relationshipTarget>>
+	($slaves[$i].slaveName, for her part, is @@.mediumorchid;horrified.@@)
+	<<set $slaves[$i].devotion -= 20>>
+	<</if>>
+<</for>>
+<</if>>
+<br><br>
+
+She is retiring into a dark, featureless eternity in which the only realities are phalli intruding into her<<if $activeSlave.vagina > -1>> vagina,<</if>> anus, and throat, and the drug-induced haze that will leave her no choice but to orgasm when she is penetrated.
+<<if $activeSlave.fetish == "mindbroken">>
+	She's already broken in spirit, and she complies with the conversion process with the dumb obedience of the animal she has become.
+<<elseif $activeSlave.devotion > 20>>
+	She complies with the conversion process with the dumb obedience of someone whose mind will not allow them to understand their true situation out of simple immediate self-preservation.
+<<elseif $activeSlave.trust < 50>>
+	She is so terrified of punishment that she complies with the conversion process to avoid pain. She knows that if she does not obey, there will be pain, and if she obeys, there may be pain but it will come later.
+<<else>>
+	She resists, of course, giving the compliance systems an excuse to unload quite a few volts of electricity into her. This disobedience is one of her more abortive attempts to resist your will, and it is her last.
+<</if>>
+<br><br>
+
+She is brought down to
+<<if $arcade != 0>>
+	$arcadeName,
+<<else>>
+	the autosurgery,
+<</if>>
+and, a disturbingly short time later, there is a new Fuckdoll, a humanoid figure encased in a tough black bodysuit, in your office.
+<<if $activeSlave.amp == 1>>
+	Its limbless form is not obviously human. It's a sex toy, with several interesting holes and nothing else worth noticing.
+<<else>>
+	It stands immobile, the hydraulic system hidden within the suit stiffened to make voluntary movement impossible.
+<</if>>
+<<if $activeSlave.boobs > 2000>>
+	The suit has a pair of gaps for its monstrous breasts, bare expanses of $activeSlave.skin skin.
+<</if>>
+<<if $activeSlave.lips > 40>>
+	Its upper hole is surrounded by a ludicrous set of swollen lips.
+<</if>>
+<<if $activeSlave.labia > 0>>
+	The conversion process left its labia permanently engorged.
+<</if>>
+<<if $activeSlave.vaginaLube > 0>>
+	Its front hole is dripping streams of natural lubrication.
+<</if>>
+<<if $activeSlave.anus > 2>>
+	The gap in the suit over its rear hole opens into the Fuckdoll's interior, since it's the same size as the Fuckdoll's loose sphincter.
+<</if>>
+<br><br>
+
+<span id="result">
+<<link "Fuck it">>
+	<<replace "#result">>
+	<<if $PC.dick == 1>>
+		You enter a command, and the Fuckdoll instantly <<if $activeSlave.amp == 1>>presents its upper hole<<else>>collapses to its knees<</if>>. You tug the plug clear of its upper hole, and insert your cock. The Fuckdoll's nose ports open when it needs to breathe, but periodically close without warning to force its throat to spasm. When you're bored of this, you pull your dick clear and haul the Fuckdoll over to the couch, entering the command that forces it to present its rear hole. Your saliva-slicked shaft slides readily inside the sex toy's warm interior. After a while, you enter the tightening command, and the Fuckdoll's sphincter obediently cinches down, encouraging you to shoot your load inside it. A low moaning sound issues from its upper hole.
+	<<else>>
+		You shove the Fuckdoll backward onto the couch, and enter a command that forces it into a bridged position. <<if $activeSlave.vagina > -1>>Its clit is brought to full hardness, and its front hole becomes wet and flushed. You ride this until you orgasm, the Fuckdoll's copious juices adding lewd noises to each grinding motion.<<else>>Its dick is forced to perfect hardness. Its tubes have been tied to prevent any unseemly contamination, allowing you to ride it until you are satisfied. When you're done, the Fuckdoll is allowed to go soft. It did not climax.<</if>>
+	<</if>>
+	You leave it where it is, your personal assistant directing a slave to perform maintenance on it when she has the time.
+	<</replace>>
+<</link>>
+</span>
+
+<br><br>
+You have @@.yellowgreen;gained a fuckdoll.@@
+<<set $fuckdolls += 1>>
+
+<<else>>
+
+into a life of menial drudgery. This has little impact on your other human property.
+<<if $activeSlave.relationship > 3>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].ID == $activeSlave.relationshipTarget>>
+	($slaves[$i].slaveName, for her part, is @@.mediumorchid;saddened,@@ but not seriously affected. She knew this was coming.)
+	<<set $slaves[$i].devotion -= 5>>
+	<</if>>
+<</for>>
+<</if>>
+There are a thousand things a slave like her can usefully do around the arcology, and she'll do them. But she's reached the age where it's time for you and the arcology's citizens to fuck younger girls.
+
+<br><br>
+You have @@.yellowgreen;gained a menial slave.@@
+<<set $helots += 1>>
+
+<</if>>

@@ -1,0 +1,17 @@
+:: Costs Report [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Costs Budget">>
+
+
+//Here you can view details of slave expenses in a complete list.
+
+<br><br>
+
+<<set $individualCosts = 0>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<set $activeSlave = $slaves[$i]>>
+	<br style="clear:both" /><<if $lineSeparations == 0>><br><<else>><hr style="margin:0"><</if>>
+	[[$slaves[$i].slaveName|Slave Interact][$activeSlave = $slaves[$i]]] will $slaves[$i].assignment.
+	<<SlaveExpenses>>
+<</for>>
+<<set $activeSlave = 0>>

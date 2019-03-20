@@ -1,0 +1,115 @@
+:: Club Advertisement [nobr]
+
+<<clubDescriptionFS>>
+
+<<if $clubAdsSpending > 0>>
+	Screens outside the entrance are showing softcore music videos to advertise $clubName.
+	<<if $clubAdsOld == 1>>
+		The featured strippers are all MILFs.
+	<<elseif $clubAdsOld == -1>>
+		The featured strippers are all nice and young.
+	<<else>>
+		The featured strippers vary in age.
+	<</if>>
+
+	<<if $clubAdsStacked == 1>>
+		Lots of bouncing breasts and butts
+	<<elseif $clubAdsStacked == -1>>
+		Lots of trim breasts and shapely butts
+	<<else>>
+		A variety of breast and butt sizes and shapes
+	<</if>>
+
+	are on display, and
+
+	<<if $clubAdsImplanted == 1>>
+		most of these are augmented by implants.
+	<<elseif $clubAdsImplanted == -1>>
+		they're all natural.
+	<<else>>
+		some are augmented by implants.
+	<</if>>
+
+	<<if $clubAdsModded == 1>>
+		Everything is heavily pierced and tattooed.
+	<<elseif $clubAdsModded == -1>>
+		Everything is free of tattoos and piercings.
+	<<else>>
+		Some of these assets are tattooed and pierced, and some aren't.
+	<</if>>
+
+	The strippers get naked quickly, and show off
+
+	<<if $clubAdsXX == 1>>
+		their pussies and assholes.
+	<<elseif $clubAdsXX == -1>>
+		their assholes.
+	<<else>>
+		their holes.
+	<</if>>
+<</if>>
+
+<<if $clubAdsSpending >= 5000>>
+	Advertisements based on these scenes run constantly in media across $arcologies[0].name, and there's an active merchandising campaign underway to promote your club and its girls.
+<<elseif $clubAdsSpending >= 4000>>
+	Advertisements based on these scenes run constantly in media across $arcologies[0].name.
+<<elseif $clubAdsSpending >= 3000>>
+	Advertisements based on these scenes are run in media across $arcologies[0].name.
+<<elseif $clubAdsSpending >= 2000>>
+	Advertisements based on these scenes run regularly in arcology media.
+<<elseif $clubAdsSpending >= 1000>>
+	Advertisements based on these scenes run occasionally in arcology media.
+<<else>>
+	$arcologies[0].name has a robust internal media that could be used to bring patrons into the club.
+<</if>>
+
+<br><br>
+
+You are spending ¤$clubAdsSpending each week to advertise $clubName.
+
+<<if $clubAdsSpending > 900>>
+	<<link "Decrease">><<set $clubAdsSpending -= 1000>><<goto "Club Advertisement">><</link>> |
+<<else>>
+	Decrease |
+<</if>>
+<<if $clubAdsSpending < 5000>>
+	<<link "Increase">><<set $clubAdsSpending += 1000>><<goto "Club Advertisement">><</link>>
+<<else>>
+	Increase
+<</if>>
+
+<br><br>
+
+__Design Club Ad Campaign__ //Will replace relevant variety bonuses//<br>
+
+Asset size:
+<<if $clubAdsStacked != 1>><<link "Stacked">><<set $clubAdsStacked = 1>><<goto "Club Advertisement">><</link>> | <<else>>Stacked | <</if>>
+<<if $clubAdsStacked != -1>><<link "Slim">><<set $clubAdsStacked = -1>><<goto "Club Advertisement">><</link>> | <<else>>Slim | <</if>>
+<<if $clubAdsStacked != 0>><<link "Variety">><<set $clubAdsStacked = 0>><<goto "Club Advertisement">><</link>><<else>>Variety<</if>>
+<br>
+
+Asset origin:
+<<if $clubAdsImplanted != 1>><<link "Implants">><<set $clubAdsImplanted = 1>><<goto "Club Advertisement">><</link>> | <<else>>Implants | <</if>>
+<<if $clubAdsImplanted != -1>><<link "All natural">><<set $clubAdsImplanted = -1>><<goto "Club Advertisement">><</link>> | <<else>>All natural | <</if>>
+<<if $clubAdsImplanted != 0>><<link "Variety">><<set $clubAdsImplanted = 0>><<goto "Club Advertisement">><</link>><<else>>Variety<</if>>
+<br>
+
+Body mods:
+<<if $clubAdsModded != 1>><<link "Modded">><<set $clubAdsModded = 1>><<goto "Club Advertisement">><</link>> | <<else>>Modded | <</if>>
+<<if $clubAdsModded != -1>><<link "Unmodded">><<set $clubAdsModded = -1>><<goto "Club Advertisement">><</link>> | <<else>>Unmodded | <</if>>
+<<if $clubAdsModded != 0>><<link "Variety">><<set $clubAdsModded = 0>><<goto "Club Advertisement">><</link>><<else>>Variety<</if>>
+<br>
+
+Age:
+<<if $clubAdsOld != 1>><<link "MILF">><<set $clubAdsOld = 1>><<goto "Club Advertisement">><</link>> | <<else>>MILF | <</if>>
+<<if $clubAdsOld != -1>><<link "Young">><<set $clubAdsOld = -1>><<goto "Club Advertisement">><</link>> | <<else>>Young | <</if>>
+<<if $clubAdsOld != 0>><<link "Variety">><<set $clubAdsOld = 0>><<goto "Club Advertisement">><</link>> <<else>>Variety<</if>>
+<br>
+
+<<if $seeDicks != 0>>
+	Genitalia:
+	<<if $clubAdsXX != 1>><<link "Pussies">><<set $clubAdsXX = 1>><<goto "Club Advertisement">><</link>> | <<else>>Pussies | <</if>>
+	<<if $clubAdsXX != -1>><<link "Dicks">><<set $clubAdsXX = -1>><<goto "Club Advertisement">><</link>> | <<else>>Dicks | <</if>>
+	<<if $clubAdsXX != 0>><<link "Variety">><<set $clubAdsXX = 0>><<goto "Club Advertisement">><</link>> <<else>>Variety<</if>>
+	<br>
+<</if>>

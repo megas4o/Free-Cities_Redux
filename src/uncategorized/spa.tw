@@ -1,0 +1,78 @@
+:: Spa [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Spa", $showEncyclopedia = 1, $encyclopedia = "Spa", $spaSlaves = $SpaiIDs.length>>
+
+<<if $spaName != "the Spa">>
+	<<set $spaNameCaps = $spaName.replace("the ", "The ")>>
+<</if>>
+
+<<spaDescriptionFS>>
+
+<<if $spaSlaves > 3>>
+	It's busy in here. Slaves are relaxing in the warm water, splashing around or just floating. Here and there some of the more sex-starved are in the early stages of intercourse, but most prefer to take time off from it all.
+<<elseif $spaSlaves > 0>>
+	It's sparsely populated; though the few slaves here have little company they like having the water to themselves.
+<<elseif $Attendant != 0>>
+	$Attendant.slaveName is alone here, and has nothing to do but keep the place (and her own soft, wet body) spotlessly clean.
+<<else>>
+	It's empty and quiet. [[Decommission the Spa|Main][$spa = 0, $spaDecoration = "standard", $spaUpgrade = 0]]
+<</if>>
+
+<<set _Tmult0 = Math.trunc($spa*1000*$upgradeMultiplierArcology)>>
+<br>$spaNameCaps has rooms to house slaves while they recuperate here. They can support $spa slaves.
+[[Expand the spa|Spa][$cash -= _Tmult0, $spa += 5]] //Costs ¤_Tmult0//
+
+<br>
+<<if $spaUpgrade == 1>>
+	$spaNameCaps has been upgraded with state of the art temperature treatment options, from hot and cold mineral water pools to baking saunas and dense steam rooms.
+<<else>>
+	<<set _Tmult1 = Math.trunc($spa*1000*$upgradeMultiplierArcology)>>
+	$spaNameCaps is a standard spa. [[Upgrade the spa with saunas, steam rooms, and mineral water baths|Spa][$cash -= _Tmult1, $spaUpgrade = 1]] //Costs ¤_Tmult1//
+<</if>>
+
+<br><br>
+<<if $Attendant != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<<else>>
+	You do not have a slave serving as a spa Attendant. [[Appoint one|Attendant Select]]
+<</if>>
+
+
+<br><br>
+<<if ($spa <= $spaSlaves)>>
+	''$spaNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $spaSlaves)>>
+	<<link "''Let an obedient slave rest in $spaName''">>
+		<<set $leaveSpa = 0>>
+		<<replace #spaComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $spaSlaves > 0>>
+	 | <<link "''Prise a slave out of the spa''">>
+		<<set $leaveSpa = 1>>
+		<<replace #spaComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//The spa is empty at the moment.<br>//
+<</if>>
+
+<span id="spaComingGoing">
+<<if $leaveSpa == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+<<unset $Flag>>
+
+<br><br>Rename $spaName: <<textbox "$spaName" $spaName "Spa">> //Use a noun or similar short phrase//

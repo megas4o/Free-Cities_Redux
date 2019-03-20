@@ -1,0 +1,49 @@
+:: P snatch and grab
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Random Nonindividual Event">>
+
+<<set $PSnatch = 0>>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> forwards a discreet message from the leader of your mercenaries.
+<br><br>
+"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I've just become aware of a... business opportunity through some old friends. There's an unregistered lab doing illegal gene therapy work. At least two agencies are onto them, which is how I heard of it. Word is, they're packing up and moving out. I believe me and my people can appropriate that shipment. Catch is, to make this work I need to pay some serious bribes, and I need to pay them today. We'll cut you in as an equal partner for ¤10000 cash, right now. One share should come to one of the lab rats, more or less. Are you in or out?"
+<<if $assistant == 1>>
+	<br><br>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>>'s $assistantAppearance avatar appears on your desk next to the message.
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		"I vote yes. Even though whatever that lab is producing can't possibly be as interesting as me," she says haughtily, and twirls a strand of tentacle hair.
+	<<case "shemale">>
+		"I vote yes," she says sweetly. "Whatever they're doing, it's probably interesting. I'd love to fuck something interesting."
+	<<case "amazon">>
+		"I vote yes!" she shouts. "Whatever they're doing, their girls are probably valuable. And everything's more fun if you loot it instead of buying it."
+	<<case "businesswoman">>
+		"I vote yes," she says. "The likelihood that the lab is producing something valuable is overwhelming. The potential profits are," and she pauses to fan herself, "exciting."
+	<<case "goddess">>
+		"I vote yes," she says. "Whatever is in that lab deserves some loving attention and... more variety is always appreciated."
+	<<case "schoolgirl">>
+		"I vote yeah," she says. "I just wanna see what that lab is doing. Could be cool!"
+	<<default>>
+		"I would suggest agreement," she says. "Even if the prize does not appeal to you personally, she's likely to be quite valuable. Selling her could net you quite a profit."
+	<</switch>>
+<</if>>
+
+<</nobr>>\
+
+<span id="result">
+<<link "Bankroll the snatch and grab">>
+	<<replace "#result">>
+	You receive no response whatsoever. Twenty minutes later, however, a liaison VTOL aircraft the mercenaries sometimes hire arrives, loads a party of armed men and women, and leaves.
+	<<set $cash -= 10000>>
+	<<set $PSnatch = 1>>
+	<</replace>>
+<</link>>
+<<link "Politely decline">>
+	<<replace "#result">>
+	You receive no response whatsoever. That's how it is with professionals: the offer was never made, you never declined, and no further discussion is necessary or desired.
+	<</replace>>
+<</link>>
+</span>

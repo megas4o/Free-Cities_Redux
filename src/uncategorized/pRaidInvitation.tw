@@ -1,0 +1,48 @@
+:: P raid invitation
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Random Nonindividual Event">>
+
+<<set $PRaid = 0>>
+<<set $PRraidTarget = 0>>
+
+<</nobr>>\
+\
+The former country whose citizens launched the ultimately futile attack on the arcology has continued to degenerate. After a series of civil disturbances and minor natural disasters, the nearest major city is being abandoned by its few remaining residents. A regional warlord is threatening the area, so they are streaming in small parties towards another city that is not under his shadow.
+
+The citizens of $arcologies[0].name view their discomfiture without much pity. These people almost certainly would have abused them just as much as they are now in danger of being abused themselves, had the attack on the Free City been a success. There would be little to no criticism if you and your mercenary contingent were to take this unique opportunity to corral one of the refugee groups. They are refugees, after all; no one will miss them.
+\
+<span id="result">
+Fund a quick raid on the refugees with ¤5000, targeting:
+&nbsp;&nbsp;&nbsp;&nbsp;<<link "Ex-soldiers">>
+	<<replace "#result">>
+	Your mercenaries probably would have been enthusiastic even before the recent combat, but now they're positively eager. The split agreed upon is that they keep the proceeds from the sale of anything that isn't sex slave material, while you keep anything that is.
+	<<set $cash -= 5000>>
+	<<set $PRaid = 1>>
+	<<set $PRraidTarget = 1>>
+	<</replace>>
+<</link>>
+&nbsp;&nbsp;&nbsp;&nbsp;<<link "Healthy civilians">>
+	<<replace "#result">>
+	Your mercenaries probably would have been enthusiastic even before the recent combat, but now they're positively eager. The split agreed upon is that they keep the proceeds from the sale of anything that isn't sex slave material, while you keep anything that is.
+	<<set $cash -= 5000>>
+	<<set $PRaid = 1>>
+	<<set $PRraidTarget = 2>>
+	<</replace>>
+<</link>>
+&nbsp;&nbsp;&nbsp;&nbsp;<<link "The largest possible group of slaves">>
+	<<replace "#result">>
+	Your mercenaries probably would have been enthusiastic even before the recent combat, but now they're positively eager. The split agreed upon is that they keep the proceeds from the sale of anything that isn't sex slave material, while you keep anything that is.
+	<<set $cash -= 5000>>
+	<<set $PRaid = 1>>
+	<<set $PRraidTarget = 3>>
+	<</replace>>
+<</link>>
+<<link "Let them go">>
+	<<replace "#result">>
+	Some of the refugees make it to safety. Some do not.
+	<</replace>>
+<</link>>
+</span>

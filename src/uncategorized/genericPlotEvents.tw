@@ -1,0 +1,763 @@
+:: Generic Plot Events [nobr]
+
+/* GENERIC PLOT EVENTS */
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event", $returnTo = "Random Nonindividual Event">>
+
+<<switch $Event>>
+<<case "bad curatives">>
+
+<<set $activeSlave = 0>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $slaves[$i].curatives > 1>>
+	<<set $slaves[$i].health -= random(1,2)>>
+	<<set $activeSlave = $slaves[$i]>>
+	<<slavePaid $activeSlave 500>>
+	<</if>>
+<</for>>
+<<if $activeSlave == 0>>
+	<<goto "Random Nonindividual Event">>
+<</if>>
+
+Early one morning, you hear convulsive dry heaving coming from one of the bathrooms. On investigation, it seems that $activeSlave.slaveName woke up feeling terribly nauseous. She's in no danger, but you've hardly checked her over before more slaves stagger in. Every one of your slaves on curatives has been struck by the mysterious malady and has @@.red;sickened.@@
+<br><br>
+It doesn't take much investigation before you find other slaveowners reporting the same thing. Elementary detective work fingers a particular drug supplier as the culprit, and before long the unfortunate Pharmaceutical concern is drowning under a rain of harsh public comment and harsher private contract warfare. As the day wears on, the poor slaves feel a bit better, but begin to report discomfort in their breasts. Apparently the problem has to do with contamination of the curative production line with A-HGH production reactants.
+<br><br>
+The firm promptly pays @@.yellowgreen;fair compensation@@ for the minor damage to your slaves' health. However, you're left with the matter of the boobs to deal with. Over the week, all your slaves on curatives experience at least a little @@.lime;breast growth,@@ and some gain several cup sizes.
+
+<<case "strip club closing">>
+
+It's been a good few weeks, getting settled in as owner of $arcologies[0].name. The power of being overlord of this great building and everyone in it is incredible, but so is the responsibility. It's a good thing you have ample opportunities for stress relief. You're going to need them after today. There's a nasty disturbance on a business level of the arcology. Normally, the arcology's public safety drones would suppress this kind of nonsense, but $assistantName program is suggesting that you resolve the dispute.
+<br><br>
+As you step off the elevator, you hear female shouting. Apparently one of $arcologies[0].name's few remaining strip joints has closed. It was a topless bar and strip club all in one, but the owner is packing up his things. He's explaining to a crowd of his angry former employees that he can't make ends meet. The price of a slave whore is barely higher than that of a lapdance from a free stripper; it's not surprising. It looks like the girls are on the verge of trashing the place.
+
+<<case "strip club aftermath">>
+
+<<set $contractCost = 1000>>
+<<include "Generate New Slave">>
+<<if $PStrip == 1>>
+	<<set $activeSlave.origin = "She offered herself to you as a slave to escape the hard life of a free whore.">>
+	<<set $activeSlave.career = "a prostitute">>
+	<<set $activeSlave.devotion = 20>>
+	<<set $activeSlave.trust = 5>>
+	<<set $activeSlave.health -= 50>>
+	<<set $activeSlave.anus = 2>>
+	<<if $activeSlave.dick == 0>>
+		<<set $activeSlave.vagina = 2>>
+		<<set $activeSlave.vaginalSkill = 15>>
+	<</if>>
+	<<set $activeSlave.oralSkill = 15>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 15>>
+	<<set $activeSlave.addict = 2>>
+	<<set $activeSlave.slaveCost = $contractCost>>
+	<<slaveCost $activeSlave>>
+	One day, you walk by the commercial space where the strip club that closed was located. It's now advertised as a massage parlor, but the real merchandise on offer is obvious. You can see a bored-looking, half-dressed masseuse rubbing a client, but the sounds of someone having hard sex are filtering out from the back room, and the pricing sheet lists more orifices than massage options.
+	<br><br>
+	As you pass, a tired-looking streetwalker walking by wearing ripped jeans and a torn top offers herself to you. She's halfway through her clumsy come-on before she curses and rushes over to kneel at your feet. As she does, she shrieks, "You own this arcology! You - you offered to enslave us strippers when the old place closed down! Please, please, can I accept? I'm sorry I didn't earlier. I'm sorry. I'll fucking do anything! Please!"
+	<br><br>
+	//Enslaving her will cost ¤<<print $contractCost>>. Alternatively, you could sell her. Less costs, this will bring in  ¤<<print $slaveCost>>.//
+	<br><br>
+	<<set $saleDescription = 0>>
+	<<include "Long Slave Description">>
+<<elseif $PStrip == 2>>
+	<<set $activeSlave.origin = "She offered herself to you, impressed by your handling of her employment situation.">>
+	<<set $activeSlave.career = "a prostitute">>
+	<<set $activeSlave.devotion = 45>>
+	<<set $activeSlave.trust = 25>>
+	<<set $activeSlave.health = 20>>
+	<<set $activeSlave.anus = 2>>
+	<<if $activeSlave.dick == 0>>
+		<<set $activeSlave.vagina = 2>>
+		<<set $activeSlave.vaginalSkill = 35>>
+	<</if>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 35>>
+	<<set $activeSlave.whoreSkill = 35>>
+	<<set $activeSlave.boobs += 600>>
+	<<set $activeSlave.boobsImplant = 600>>
+	<<set $activeSlave.lipsPiercing = 1>>
+	<<set $activeSlave.earPiercing = 1>>
+	<<set $activeSlave.nosePiercing = 1>>
+	<<set $activeSlave.eyebrowPiercing = 1>>
+	<<set $activeSlave.navelPiercing = 1>>
+	<<set $activeSlave.nipplesPiercing = 1>>
+	<<set $activeSlave.clitPiercing = 1>>
+	<<set $activeSlave.hStyle = "strip">>
+	<<slaveCost $activeSlave>>
+	One day, you walk by the commercial space where the strip club that closed was located. It's now advertised as a massage parlor, and indeed, you can see a couple of competent-looking, modestly dressed masseuses seeing to clients. The only chink in the old world decorum is the pretty sign detailing pricing, which lists not only various massages but the masseuses' hands, breasts, mouths, pussies, and anuses.
+	<br><br>
+	As you pass, a pretty streetwalker walking by wearing an attractive club girl outfit sidles up to you. She's halfway through her first flirty come-on before she recognizes you. She gasps and says, "You own this arcology! <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I was a stripper here! Thank you so much for helping us. That money set most of us up pretty well." She hefts her chest. "It bought me new boobs, that's for sure. So, um," she bites her lip in indecision, "I hear -" she hesitates and then the words come out in a rush. "I hear your girls do really well. I've seen them, they look good. Can I come?" You arch an eyebrow and begin to ask whether she knows what that means. "Yep," she interrupts. "I'll be your sex slave."
+	<br><br>
+	//Enslaving her will cost ¤<<print $contractCost>>. Alternatively, you could sell her. Less costs, this will bring in  ¤<<print $slaveCost>>.//
+	<br><br>
+	<<set $saleDescription = 0>>
+	<<include "Long Slave Description">>
+<<else>>
+	One day, you walk by the commercial space where the strip club that closed was located. The girls you set up in cheap housing tried to run the place as a worker-owned strip bar for a while, but as you suspected, they were obliged to start whoring in short order. With the price of sex driven so low by slave competition, there's hardly any profit in bodies patrons can't even touch. The girls here might be prostitutes now, but they're still free and they're surviving.
+	<br><br>
+	As you pass, a pretty bottle blonde comes running out. "Hey," she calls, "you're the owner! You set us up with this place!" You ask her how they're doing. "Well," she says, smiling ruefully, "turning tricks ain't easy, you know. But we get by. Those rooms you set up for us are nice and cheap, even if we're packed in there like sorority girls." She winks. "Hey, I don't suppose you've fucked a free woman lately? I'll give you an Arcology Tour, on the house. Least I can do."
+<</if>>
+
+<<case "militia">>
+
+The outside world continues to deteriorate. The Free Cities are a popular target for old world demagogues looking for a convenient scapegoat for the restive populate to hate. The Free Cities were originally founded without much thought towards how they might be defended, should it come to that. But recently, the leading citizens have begun to worry that there might one day be barbarians at the gates. It has been suggested that citizens of means should form a militia.
+<br><br>
+This is a less ludicrous suggestion than it might sound. Your arcology's security drones alone could form a formidable means of defense if adapted for that purpose. However, it's not likely that the anarchic Free Cities are going to ever make this anything more than a polite suggestion.
+<br><br>
+''This is a unique opportunity.'' Without this security scare, it's unlikely you could convince any of your free-spirited tenants to even stay near lethally armed drones.
+
+<<case "shoot invitation">>
+
+<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> usually delays message delivery when you're relieving your sexual needs with your property, but messages from other arcology owners have a special priority. This one is a brief but rather well-spoken audio invitation from one of your more notoriously wealthy peers.
+<br><br>
+"A week from today, I will be hosting a novel sporting event for the well-to-do. A new tradition, if it's as diverting as I hope. If you wish to take part in a very exclusive contest of marksmanship, exhibitionism, and grace under pressure, buy in. Five thousand. And, believe me, you have a fine chance to come out ahead."
+
+<<case "shoot result">>
+
+You are delivered to your host's arcology by hired VTOL limousine. His arcology is flared at the top, to allow a flat space occupied by a classic Georgian mansion surrounded by lawns. After a brief reception for the handful of well-heeled attendees, the host calls for your attention. "Ladies and gentlemen," he says, "I would like to celebrate here today the return of many things which should not have been allowed to lapse."
+<br><br>
+He leads the party towards a broad lawn with a long table along one side, and indicates the handsome single-barrel shotguns lined up on the table. He continues, "In a few moments, some really choice livestock are going to be led up onto this lawn. They have been told that if they can run from one side to the other, they'll be freed." He winks. "Those guns are loaded with taser slugs, of course. Whatever you drop and fuck, you get to take home."
+<br><br>
+The crowd of nude slaves led up to the lawn and chained to rings along one edge all have pale skin - the better to show impacts, perhaps. But besides that, they are extremely varied, and all physically extraordinary in some way. After you and your fellow partiers are ready, your host fires an old-fashioned revolver in the air and the chained slaves are all released at once. You could easily hit any of them, but you only have one shot.
+
+<<case "aid invitation">>
+
+<<set $seed = []>>
+<<if ($seeDicks <= 75)>>
+	<<set $seed.push("convent")>>
+	<<set $seed.push("school")>>
+	<<set $seed.push("housewives")>>
+	<<set $seed.push("maternity")>>
+<</if>>
+<<if ($seeDicks >= 25)>>
+	<<set $seed.push("conversion")>>
+<</if>>
+<<set $PAidTarget = $seed.random()>>
+<<set $seed = 0>>
+A small old world country near the arcology is experiencing serious unrest. Its corrupt government is doing an even poorer job than most of addressing chronic joblessness and general malaise. Thus far, it's been a fertile source of people in poverty for slavers to target, and little else. Lately, though, it's been showing signs worse may be to come. You've instructed $assistantName to flag communications from the area; there's always a possibility that business opportunities may arise from the benighted country, and the situation is becoming so unstable it's prudent to keep a personal eye on it anyway. You receive just such a call from
+<<if $PAidTarget == "convent">>
+	the leader of a female-oriented religious retreat
+<<elseif $PAidTarget == "school">>
+	the principal of a preparatory school for girls
+<<elseif $PAidTarget == "housewives">>
+	the queen bee of a small group of suburban housewives
+<<elseif $PAidTarget == "maternity">>
+	the maternity ward of a hospital
+<<elseif $PAidTarget == "conversion">>
+	the owner of a religious sexual orientation therapy camp
+<</if>>
+in the capital city.
+<br><br>
+They are deeply worried by the situation. There have been large riots over the past week, and yesterday they became seriously violent. The unrest is targeting better-off citizens, including the caller. Though most
+<<if $PAidTarget == "convent">>
+	of the nuns have already left, the leader and a few of her women
+<<elseif $PAidTarget == "school">>
+	of the students have already made it out, the principal and a few students
+<<elseif $PAidTarget == "housewives">>
+	of them have taken flights out, the leader and a few of them
+<<elseif $PAidTarget == "maternity">>
+	of the patients have already left, several of the most pregnant
+<<elseif $PAidTarget == "conversion">>
+	of the camp's inmates have already left, a few of them and the owner
+<</if>>
+are now stuck in the area and are running out of options as the riots lock down transportation. They beg you to help evacuate them, and promise to pay you once they're out.
+
+<<case "aid result">>
+
+<<set $PAid = 0>>
+<<set $nationHate += 2>>
+You watch on the feeds from your VTOL craft as it settles onto the roof of the
+<<if $PAidTarget == "convent">>
+	convent whose remaining women
+<<elseif $PAidTarget == "school">>
+	girls' school whose remaining students and principal
+<<elseif $PAidTarget == "housewives">>
+	mansion of the leader of the group of housewives
+<<elseif $PAidTarget == "maternity">>
+	maternity ward whose remaining patients
+<<elseif $PAidTarget == "conversion">>
+	religious sexual orientation therapy camp whose inmates and owner
+<</if>>
+you promised to rescue. Its side doors retract, allowing the escapees to hustle aboard with their bundles of personal possessions. Once they're on board and strapped into their seats, the turbofans howl and the craft peels smoothly off the roof, the hot jetwash setting it alight. Once it transitions fully into level flight, the true plan goes into operation. At a carefully selected moment, injectors concealed within each seat lance into the passengers' buttocks, knocking them out. It works flawlessly, the drugs precisely calibrated to each body based on the weight added to the VTOL as each climbed aboard. This avoids the potential for over- or under-dosage present when using gas or darts to subdue groups. In perfect unison, the passengers slump against the harnesses holding them against the seats.
+<br><br>
+When the aircraft lands at your penthouse pad, the would-be escapees are still unconscious. This makes putting them through enslavement physically laborious, though it does cut down on the usual whining; fortunately, you reserved the credits necessary to obscure their questionably legitimate enslavement. By the time they awake, they'll be indistinguishable from any other new slave in the arcology. The possibility remains, however that rumor of the incident will leak out. Your VTOL bird's entry and exit from the capital city was likely noticed and remarked upon.
+<br><br>
+<<set _newSlaves = []>>
+<<if $PAidTarget == "convent">>
+	In any case, you've enslaved a fine group. The leader is on the older side, but not unattractive. Her girls are younger, and probably have all sorts of delightful repressed tendencies to be manipulated.
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.origin = "She was the head of a religious community of women you enslaved.">>
+	<<set $activeSlave.career = "a nun">>
+	<<set $activeSlave.devotion = -20>>
+	<<set $activeSlave.trust = random(-90,-75)>>
+	<<set $activeSlave.health = random(-10,10)>>
+	<<set $activeSlave.face = 15>>
+	<<set $activeSlave.anus to 0>>
+	<<set $activeSlave.vagina to 0>>
+	<<set $activeSlave.weight to random(20,100)>>
+	<<set $activeSlave.attrXX to random(60,90)>>
+	<<set $activeSlave.attrXY to random(10,50)>>
+	<<set $activeSlave.energy to random(60,80)>>
+	<<set $activeSlave.vaginalSkill = 0>>
+	<<set $activeSlave.oralSkill = 35>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.pubicHStyle = "bushy">>
+	<<set $activeSlave.fetish = "dom">>
+	<<set $activeSlave.age = random(30,42)>>
+	<<set $activeSlave.behavioralFlaw = "devout">>
+	<<set $activeSlave.sexualFlaw = "repressed">>
+	<<set $activeSlave.sexualQuirk = "perverted">>
+	<<set $activeSlave.slaveCost = 2500>>
+	<<set _newSlaves.push($activeSlave)>>
+	<<for $i = 0; $i < 3; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She was an initiate in a religious community of women you enslaved.">>
+		<<set $activeSlave.career = "a nun">>
+		<<set $activeSlave.devotion = random(-90,-75)>>
+		<<set $activeSlave.trust = -20>>
+		<<set $activeSlave.health = random(-10,10)>>
+		<<set $activeSlave.anus = 0>>
+		<<set $activeSlave.vagina = 0>>
+		<<set $activeSlave.weight = random(-20,-100)>>
+		<<set $activeSlave.attrXX = random(10,50)>>
+		<<set $activeSlave.attrXY = random(10,50)>>
+		<<set $activeSlave.energy = random(5,20)>>
+		<<set $activeSlave.vaginalSkill = 0>>
+		<<set $activeSlave.oralSkill = 15>>
+		<<set $activeSlave.analSkill = 0>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 0>>
+		<<set $activeSlave.pubicHStyle = "bushy">>
+		<<set $activeSlave.age = random(18,24)>>
+		<<set $activeSlave.behavioralFlaw = "devout">>
+		<<set $activeSlave.sexualFlaw = "repressed">>
+		<<set $activeSlave.slaveCost = 2500>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+<<elseif $PAidTarget == "school">>
+	In any case, you've enslaved a fine group. The principal is on the older side, and seems to have paid unusually close attention to her appearance, for the female principal of a girls' school. And for whatever reason, the school's uniform skirt seems to have been rather short in back.
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.origin = "She was the principal of a girls' school whose remnants you enslaved. A strap-on and a large quantity of personal lubricant was found in her possession when she was enslaved.">>
+	<<set $activeSlave.intelligence = random(1,2)>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	<<set $activeSlave.career = "a principal">>
+	<<set $activeSlave.devotion = -20>>
+	<<set $activeSlave.trust = random(-90,-75)>>
+	<<set $activeSlave.health = random(-10,10)>>
+	<<set $activeSlave.anus = 1>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.weight = random(20,80)>>
+	<<set $activeSlave.attrXX = random(60,90)>>
+	<<set $activeSlave.attrXY = random(10,50)>>
+	<<set $activeSlave.energy = random(60,80)>>
+	<<set $activeSlave.vaginalSkill = 15>>
+	<<set $activeSlave.oralSkill = 15>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 15>>
+	<<set $activeSlave.pubicHStyle = "waxed">>
+	<<set $activeSlave.age = random(26,42)>>
+	<<set $activeSlave.fetish = "dom">>
+	<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy", "hates men", "hates men", "liberated")>>
+	<<set $activeSlave.sexualFlaw = "shamefast">>
+	<<set $activeSlave.slaveCost = 2500>>
+	<<set _newSlaves.push($activeSlave)>>
+	<<for $i = 0; $i < 3; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She was a student at a girls' school whose remnants you enslaved.">>
+		<<set $activeSlave.career = "a student">>
+		<<set $activeSlave.devotion = random(-90,-75)>>
+		<<set $activeSlave.trust = -20>>
+		<<set $activeSlave.health = random(-10,10)>>
+		<<set $activeSlave.anus = 1>>
+		<<set $activeSlave.vagina = random(0, 0, 1)>>
+		<<set $activeSlave.weight = random(-50,0)>>
+		<<set $activeSlave.attrXX = 70>>
+		<<set $activeSlave.attrXY = random(10,70)>>
+		<<set $activeSlave.energy = random(50,70)>>
+		<<set $activeSlave.vaginalSkill = 0>>
+		<<set $activeSlave.oralSkill = 0>>
+		<<set $activeSlave.analSkill = 15>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 0>>
+		<<set $activeSlave.age = 18>>
+		<<set $activeSlave.fetish = "buttslut">>
+		<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy", "anorexic")>>
+		<<set $activeSlave.sexualFlaw = either("shamefast", "idealistic", "hates anal")>>
+		<<set $activeSlave.slaveCost = 25000>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+<<elseif $PAidTarget == "maternity">>
+	In any case, you've enslaved a fine group. The expectant mothers vary widely; the only thing they have in common is their gravid bellies. None of them is in really serious condition, either, and they should bear the transition to slave life reasonably well despite their pregnancies.
+	<<for $i = 0; $i < 4; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She was an expectant mother you enslaved when you evacuated her from a threatened old world hospital.">>
+		<<set $activeSlave.career = "a housewife">>
+		<<set $activeSlave.devotion = random(-90,-75)>>
+		<<set $activeSlave.trust = -20>>
+		<<set $activeSlave.preg = random(28,35)>>
+		<<set $activeSlave.health = random(-10,10)>>
+		<<set $activeSlave.vagina = random(1,3)>>
+		<<set $activeSlave.boobs += 100*random(0,2)>>
+		<<set $activeSlave.lactation = 1>>
+		<<set $activeSlave.nipples = either("cute", "puffy", "partially inverted", "inverted")>>
+		<<set $activeSlave.age = random(20,39)>>
+		<<set $activeSlave.slaveCost = 2500>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+<<elseif $PAidTarget == "conversion">>
+	In any case, you've enslaved a fine group. Certain religious groups persist in the hilarious delusion that it's possible to alter sexual orientation through prayer. In your experience, hormones, drugs, and compliance training are far more effective.
+	<<include "Generate XY Slave">>
+	<<set $activeSlave.origin = "She was the owner of a religious orientation conversion therapy camp whose remnants you enslaved.">>
+	<<set $activeSlave.career = "a business owner">>
+	<<set $activeSlave.devotion = -20>>
+	<<set $activeSlave.trust = random(-90,-75)>>
+	<<set $activeSlave.health = random(-10,10)>>
+	<<set $activeSlave.anus = random(2,3)>>
+	<<set $activeSlave.weight = random(20,80)>>
+	<<set $activeSlave.attrXX = random(10,50)>>
+	<<set $activeSlave.attrXY = 90>>
+	<<set $activeSlave.energy = random(30,80)>>
+	<<set $activeSlave.oralSkill = random(50,100)>>
+	<<set $activeSlave.analSkill = random(50,100)>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = random(15,40)>>
+	<<set $activeSlave.pubicHStyle = "waxed">>
+	<<set $activeSlave.age = random(26,42)>>
+	<<set $activeSlave.fetish = either("submissive", "cumslut", "buttslut")>>
+	<<set $activeSlave.fetishStrength = random(1,2)>>
+	<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy", "hates women", "odd", "liberated")>>
+	<<set $activeSlave.sexualFlaw = either("repressed", "shamefast")>>
+	<<set $activeSlave.slaveCost = 2500>>
+	<<set _newSlaves.push($activeSlave)>>
+	<<for $i = 0; $i < 3; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She was an inmate at a religious orientation conversion therapy camp whose remnants you enslaved.">>
+		<<set $activeSlave.career = "a student">>
+		<<set $activeSlave.devotion = random(-90,-75)>>
+		<<set $activeSlave.trust = -20>>
+		<<set $activeSlave.health = random(-10,10)>>
+		<<set $activeSlave.anus = 1>>
+		<<set $activeSlave.weight = random(-50,0)>>
+		<<set $activeSlave.attrXX = random(10,50)>>
+		<<set $activeSlave.attrXY = random(60,90)>>
+		<<set $activeSlave.energy = random(30,70)>>
+		<<set $activeSlave.oralSkill = random(15,40)>>
+		<<set $activeSlave.analSkill = random(15,40)>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 0>>
+		<<set $activeSlave.age = 18>>
+		<<set $activeSlave.fetish = "buttslut">>
+		<<set $activeSlave.behavioralFlaw = either("bitchy", "odd", "anorexic", "devout")>>
+		<<set $activeSlave.sexualFlaw = either("shamefast", "repressed", "apathetic")>>
+		<<set $activeSlave.slaveCost = 2500>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+<<else>>
+	In any case, you've enslaved a fine group. The women seem to have banded together when they were left to fend for themselves in their suburban neighborhood. They're older than many slaves, but they seem to have had rich husbands; they're conventionally pretty, and have lived soft lives that have left them healthy.
+	<<for $i = 0; $i < 4; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She was a wealthy housewife who you enslaved as she fled societal collapse.">>
+		<<set $activeSlave.career = "a housewife">>
+		<<set $activeSlave.devotion = -20>>
+		<<set $activeSlave.trust = random(-10,10)>>
+		<<set $activeSlave.health = random(30,50)>>
+		<<set $activeSlave.anus = 1>>
+		<<set $activeSlave.vagina = random(1,2)>>
+		<<set $activeSlave.weight = random(-20,20)>>
+		<<set $activeSlave.boobs += 100*random(0,3)>>
+		<<set $activeSlave.butt += random(0,2)>>
+		<<set $activeSlave.attrXX = random(10,50)>>
+		<<set $activeSlave.attrXY = random(60,90)>>
+		<<set $activeSlave.energy = random(20,80)>>
+		<<set $activeSlave.vaginalSkill = 15>>
+		<<set $activeSlave.oralSkill = 15>>
+		<<set $activeSlave.analSkill = 0>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 15>>
+		<<set $activeSlave.age = random(26,42)>>
+		<<set $activeSlave.behavioralFlaw = either("arrogant", "bitchy", "anorexic", "liberated")>>
+		<<set $activeSlave.sexualFlaw = either("shamefast", "idealistic", "hates anal", "hates oral", "apathetic")>>
+		<<set $activeSlave.slaveCost = 2500>>
+		<<set _newSlaves.push($activeSlave)>>
+	<</for>>
+<</if>>
+
+<<case "arcology naming">>
+
+As a society free of the encumbrance of governmental oversight, the arcologies of the Free Cities are places where societal evolution and corporate expansion can occur rapidly.
+
+Even so, the incredible speed with which the arcology has improved under your tenure as compared to that of your predecessor, after you obtained ownership through <<if $PC.rumor == "wealth">>a leveraged buyout,<<elseif $PC.rumor == "diligence">>hard work and competence,<<elseif $PC.rumor == "force">>some episodes of violence,<<elseif $PC.rumor == "social engineering">>the creative use of psychology,<<elseif $PC.rumor == "luck">>an incredible opportunity,<</if>> is nothing short of astonishing. Other arcologies have taken many years to develop along anything but strictly conservative lines, and you are not the only arcology owner with a background <<if $PC.career == "wealth">>of substantial wealth.<<elseif $PC.career == "capitalist">>in business.<<elseif $PC.career == "mercenary">>in the world of private contracting.<<elseif $PC.career == "slaver">>as a slavebreaker.<<elseif $PC.career == "engineer">>in arcology engineering.<<elseif $PC.career == "medicine">>in medicine and surgery.<<elseif $PC.career == "celebrity">>in the public sphere.<<else>>in the Free Cities.<</if>> It occurs to you that the arcology's growing role as a place where those with the means to do so can live in the society you have created, enjoying themselves and their lives to the fullest while subjugating others, should be commemorated.
+<br><br>
+As any slaveowner with half a mind in the Free Cities knows, there is power in words, and in what they represent. Master. Slave. These two words alone, more than any others, define the arcologies that have taken up the mantle of leading the world forward in these dark times. The time has come to add a new term to the lexicon of the Free Cities - a name. No longer will your arcology be known only as $arcologies[0].name, a bland and uninspiring name if ever there was one.
+<br><br>
+From this day forward, the arcology shall be known as: <<textbox "$arcologies[0].name" $arcologies[0].name>>
+
+<<case "slave food">>
+
+A screen opposite your desk springs to life, <<if $assistant == 0>>showing your personal assistant's symbol, indicating that it has a complex subject to report. When you instruct it to continue, it displays<<else>>and $assistantName's avatar appears on it seated, indicating that she has something complex to bring up. When you tell her to continue, she reviews<</if>> medical research that's just been published, on the long term effects of the liquid diet your slaves eat. The current generation of slaves is the first, and new discoveries about the effects of years of modern slavery are made all the time. Apparently, consuming state of the art slave food causes slow atrophy of slaves' digestive tracts. The slaves' ability to digest the slave food does not seem to be affected; the atrophy is the body's natural reaction to never facing digestive challenge, and once it reaches the point where the remaining digestive capacity is necessary for liquid slave food, it stops. The only negative effect known is difficulty readjusting to normal food, becoming more extreme the longer the slave food diet was followed.
+<br><br>"In conclusion,"
+<<if $assistant == 0>>
+	your assistant recites, "no impact on slaves who fully adapt to slave food is likely, as long as they remain slaves. If they were to be freed, they would have to either continue obtaining liquid slave food, or go through a difficult or even impossible dietary transition." It pauses. "This information is likely to remain at the level of a rumor among the slave population, unless it is openly admitted."
+<<else>>
+	she says, "your slaves who stay on slave food long enough to need it will be totally fine, as long as they stay slaves. If they're ever freed, though, they have to keep eating slave food, or somehow switch. And that's never been tried."
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		The monstergirl bares her fangs and becomes very erect. "They're stuck," she says. "They're fuckslaves forever." She pauses.
+	<<case "shemale">>
+		The shemale starts to stroke herself. "Their assholes are going to be nice and clean and fuckable forever," she says, starting to cum.
+	<<case "amazon">>
+		The amazon looks pleased. "They're changing to fit their place," she says.
+	<<case "businesswoman">>
+		The businesswoman fans herself, looking rather hot under the collar. "Another way they're bound to you," she says breathily.
+	<<case "goddess">>
+		The goddess beams. "It's wonderful," she says radiantly. "Their place is here, with us." She pauses.
+	<<case "schoolgirl">>
+		The schoolgirl snickers cruelly. "Suck dick or starve," she sniggers.
+	<<default>>
+		Her symbol rotates slowly.
+	<</switch>>
+	"The truth will get out, but it'll be nothing more than a rumor among the slaves unless you let it be known yourself."
+<</if>>
+
+<<default>>
+	ERROR: bad event
+<</switch>>
+
+<br><br>
+
+<span id="result">
+<<switch $Event>>
+<<case "bad curatives">>
+
+<<link "Free breast growth is acceptable">>
+	<<replace "#result">>
+	Since you're not displeased with the breast expansion, you accept the health compensation and even make discreet inquiries to see of the effect can perhaps be replicated. Unfortunately, it seems that the result that occurred was as much due to luck as anything else. The process cannot be safely marketed.
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].curatives > 1>>
+		<<set $slaves[$i].boobs += 100*random(1,10)>>
+		<</if>>
+	<</for>>
+	<</replace>>
+<</link>>
+<br><<link "Demand further compensation">>
+	<<replace "#result">>
+	You muster all the contractual remedies available to you and join the crowd of slaveowners laying into the hapless manufacturer. Of course, with so many attackers, there is as much infighting between them as conflict with the helpless enemy, since everyone knows the business will go bankrupt before everyone gets paid. Nevertheless you @@.yellowgreen;approximately double@@ the money you make out of the situation.
+	<<set $cash += 500*$slaves.length>>
+	<</replace>>
+<</link>>
+<br><<link "Force surgical repairs">>
+	<<replace "#result">>
+	The hapless manufacturer eventually goes bankrupt. However, you do manage to force surgical repair of the breast expansion before they do. At the manager's expense, your slaves move through a top-flight surgeon's care and are reduced to their former sizes.
+	<</replace>>
+<</link>>
+
+<<case "strip club closing">>
+
+<<set $PStrip = 1>>
+<<link "Offer to take them in">>
+	<<replace "#result">>
+	The now-unemployed strippers are not impressed by your offer to take them in. "What," one of them says, "be one of your shivering little cunts? You'd have us signing ourselves into slavery inside two weeks. Fuck off, we'll take the streets." Under the nonlethal riot cannons of the security drones, they file off, muttering mutinously. Unfortunately, you don't have any pretense to enslave or imprison them.
+	<<set $nextButton = "Continue">>
+	<</replace>>
+<</link>>
+<br><<link "Offer them severance pay">>
+	<<replace "#result">>
+	You have a word with them, stepping closer and speaking quietly to defuse the situation. You tell them you're aware that they're in a difficult place, but you also explain that the Free Cities are a new and changing place. No one can rely on the old way of doing things any more. You offer to pay each of them a small stipend to help tide them over until they find other employment. They're surprised at your munificence but @@.green;accept it with gratitude.@@
+	<<set $nextButton = "Continue">>
+	<<set $rep += 500>>
+	<<set $cash -= 1000>>
+	<<set $PStrip = 2>>
+	<</replace>>
+<</link>> //This will cost ¤1000//
+<br><<link "Offer to set them up independently">>
+	<<replace "#result">>
+	You offer a way out of their situation. They, you suggest, can keep working in the now-vacant shop if they work together to pay the rent. They can move into a couple of vacant rooms nearby that you can easily have set up as a bunkhouse. You'll collect a little more rent, and they'll have a second chance. They @@.green;accept it with gratitude.@@ It's quite likely they'll either fail or have to accept being whores rather than strippers, but that's not your concern. @@.green;Your arcology's prosperity has increased.@@
+	<<set $nextButton = "Continue">>
+	<<set $arcologies[0].prosperity += 1>>
+	<<set $cash -= 500>>
+	<<set $PStrip = 3>>
+	<</replace>>
+<</link>> //This will cost ¤500//
+
+<<case "strip club aftermath">>
+
+<<if $PStrip != 3>>
+	<<if $cash >= $contractCost>>
+	<<link "Enslave her">>
+		<<set $cash -= $contractCost>>
+		<<set $activeSlave.slaveCost = $contractCost>>
+		<<replace "#result">>
+		<<if $PStrip == 1>>
+			She sobs with gratitude as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. The medical scan discloses that her aphrodisiac addiction is very new: she will probably be able to kick the habit in short order if you decide to withhold further doses.
+		<<else>>
+			She smiles with gratitude as the biometric scanners scrupulously record her every particular as belonging not to a person but to a piece of human property. She's seen what Free Cities life is, and she seems to have come to the conclusion that being a slave in the penthouse is better than being a free whore on the lower levels.
+		<</if>>
+		<<include "New Slave Intro">>
+		<</replace>>
+	<</link>>
+	<<else>>
+		//You lack the necessary funds to enslave her.//
+	<</if>>
+<<else>>
+	<<link "Take an Arcology Tour">>
+		<<replace "#result">>
+		The cubicle she takes you back into is small, but clean and well-kept. She gives you a kiss on the cheek. "That's not part of the Arcology Tour. Sorry. Here's the start of the real tour." <<if $PC.dick == 1>>She sucks you to full mast while shucking off her skimpy clothing<<if $PC.vagina == 1>>, giggling appreciatively at your pussy and lavishing attention on it with her hands<</if>>. Then she turns around and slides you into her pussy with the ease of long practice. After a good long standing fuck, she begs you to "finish the tour" in her ass and then "pay the tour guide" by coming in her mouth.<<else>>She giggles. "Tour's a little different for a lady like you, Ma'am. Here," she says, and starts to make out with you, pressing you back down onto a bench. She lavishes expert oral attention on your pussy in a series of clever positions that offer every part of her body to you in turn for you to grope, squeeze, and penetrate with your fingers.<</if>> Afterward, as she's hurrying back into her clothes, she says, "We've got the money you paid to set those rooms up, @@.yellowgreen;here it is.@@ And we're doing pretty good, so we could use a little more working space. We'd like the vacant space next door. We'll furnish it, if you'll let us have it?" @@.green;$arcologies[0].name's prosperity has increased.@@
+		<<set $arcologies[0].prosperity += 2>>
+		<<set $space -= 1>>
+		<<set $cash += 500>>
+		<</replace>>
+	<</link>>
+	<br><<link "Politely decline">>
+		<<replace "#result">>
+		"Aw," she says, "you're no fun. Well anyway, we've got the money you paid to set those rooms up, @@.yellowgreen;here it is.@@ And we're doing pretty good, so we could use a little more working space. We'd like the vacant space next door. We'll furnish it, if you'll let us have it?" @@.green;$arcologies[0].name's prosperity has increased.@@
+		<<set $arcologies[0].prosperity += 2>>
+		<<set $space -= 1>>
+		<<set $cash += 500>>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<case "militia">>
+
+<<set $personalArms = 0>>
+<<if $arcologyUpgrade.drones == 1>>
+<<link "Arm yourself and your drones">>
+	<<replace "#result">>
+	In a time of uncertainty, the public adores people who protect them. So, in addition to publicly procuring yourself the latest weapons and armor, you update the arcology's drone systems. The security drones' riot cannons can be replaced for easy maintenance, so it's rather easy to provide them with alternate, lethal weaponry that they can switch to if it becomes necessary. $arcologies[0].name becomes known as one of the best-protected in the Free Cities. @@.green;Your reputation has greatly improved.@@
+	<<set $nextButton = "Continue">>
+	<<set $rep += 1500>>
+	<<set $cash -= 5000>>
+	<<set $personalArms = 3>>
+	<</replace>>
+<</link>> //This will cost ¤5000//
+<br>
+<</if>>
+<<link "Arm yourself">>
+	<<replace "#result">>
+	In a time of uncertainty, the public looks up to people who project strength. So, you purchase yourself some of the latest armor and weapons, and make sure they are visible in a glass-walled cabinet in your office. Many of your wealthier tenants follow suit. A few of them even emulate your example and practice using these implements once a week. @@.green;Your reputation has improved.@@
+	<<set $nextButton = "Continue">>
+	<<set $rep += 500>>
+	<<set $cash -= 2000>> //This will cost ¤2000//
+	<<set $personalArms = 1>>
+	<</replace>>
+<</link>> //This will cost ¤2000//
+<br><<link "Ignore this foolishness">>
+	<<replace "#result">>
+	No doubt this panicky fad will pass. You ignore the controversy. In a few days, the subject of a militia passes from the public mind.
+	<<set $nextButton = "Continue">>
+	<<set $personalArms = 0>>
+	<</replace>>
+<</link>>
+
+<<case "shoot invitation">>
+
+<<set $PShoot = 0>>
+<<link "Buy in">>
+	<<replace "#result">>
+	You receive a brief but elegant confirmation. It looks like you've RSVP'd.
+	<<set $cash -= 5000>>
+	<<set $PShoot = 1>>
+	<</replace>>
+<</link>>
+<br><<link "Politely decline">>
+	<<replace "#result">>
+	You decline the invitation.
+	<</replace>>
+<</link>>
+
+<<case "shoot result">>
+
+<<set $PShoot = 0>>
+<<link "Hit the muscular slave about to successfully cross the lawn">>
+	<<replace "#result">>
+	You decide to stop the athletic slave girl about to win her freedom, and place your taser slug in her muscular buttock. She goes stiff and skids across the grass with a growl. Your taser slug is linked to $assistantName, who hits her again whenever she tries to continue running. Fury glints from her eyes, but she apparently knows how to pick her battles. By the time you approach her, she's already bent over, presenting herself, and from the oily sheen on her privates, it looks like she even managed to get some lube somewhere to make the experience a little easier. It is a strange thing, respecting a slave, but she rises even higher in your estimation as you fuck her on the grass. She does her best to please you, having clearly decided to do her best given her situation. She's sexually inexpert, but clearly smart enough to know when to submit.
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.origin = "You won her at a shotgun match against other arcology owners.">>
+	<<set $activeSlave.lips = random(5,25)>>
+	<<set $activeSlave.anus = 1>>
+	<<set $activeSlave.vaginalSkill = 15>>
+	<<set $activeSlave.oralSkill = 15>>
+	<<set $activeSlave.analSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.vaginalCount += 1>>
+	<<set $vaginalTotal += 1>>
+	<<set $activeSlave.devotion = 25>>
+	<<set $activeSlave.trust = 5>>
+	<<set $activeSlave.oldDevotion = 25>>
+	<<set $activeSlave.face = 0>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.preg = -1>>
+	<<set $activeSlave.muscles = 50>>
+	<<set $activeSlave.weight = 0>>
+	<<set $activeSlave.health = 80>>
+	<<set $activeSlave.boobs = 400>>
+	<<set $activeSlave.butt = 2>>
+	<<set $activeSlave.age = 28>>
+	<<set $activeSlave.height = random(165,175)>>
+	<<set $activeSlave.waist = 0>>
+	<<set $activeSlave.fetish = "none">>
+	<<set $activeSlave.behavioralFlaw = "arrogant">>
+	<<set $activeSlave.sexualFlaw = "idealistic">>
+	<<set $activeSlave.slaveCost = 5000>>
+	<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</replace>>
+<</link>>
+<br><<link "Hit the plush older slave lagging behind">>
+	<<replace "#result">>
+	You decide to drop the luscious specimen in the rear, and place your taser slug in her huge buttock. She goes stiff and slumps to the grass in defeat. Your taser slug is linked to $assistantName, who hits her again whenever she tries to rise. Meanwhile, an athletic slave has successfully crossed the lawn, and is sobbing with joy as her manumission forms are completed. Disbelief and anger fills your supine prize's eyes, and she's spitting with rage by the time you reach her. It's a comical sight, since her gyrations only serve to display her magnificent breasts and broad butt. She must have been recently enslaved, and is new enough to slavery that you are obliged to taze her twice more before she presents her holes. The impression of newness to slavery despite her age is reinforced by her gratifyingly tight pussy, which is so nice that you confine yourself entirely to it despite the appealing sight of what is almost certainly a virgin butthole.
+	<<include "Generate XX Slave">>
+	<<set $activeSlave.origin = "You won her at a shotgun match against other arcology owners.">>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.vaginalSkill = 15>>
+	<<set $activeSlave.oralSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.vaginalCount += 1>>
+	<<set $vaginalTotal += 1>>
+	<<set $activeSlave.devotion = -60>>
+	<<set $activeSlave.trust = -40>>
+	<<set $activeSlave.oldDevotion = -60>>
+	<<set $activeSlave.face = 15>>
+	<<set $activeSlave.ovaries = 1>>
+	<<set $activeSlave.preg = -1>>
+	<<set $activeSlave.anus = 0>>
+	<<set $activeSlave.analSkill = 0>>
+	<<set $activeSlave.muscles = 20>>
+	<<set $activeSlave.weight = 0>>
+	<<set $activeSlave.health = 30>>
+	<<if $activeSlave.lips < 10>><<set $activeSlave.lips += 10>><</if>>
+	<<set $activeSlave.boobs = 1000>>
+	<<set $activeSlave.butt = 6>>
+	<<set $activeSlave.age = 42>>
+	<<set $activeSlave.height = random(165,175)>>
+	<<set $activeSlave.waist = -15>>
+	<<set $activeSlave.fetish = "none">>
+	<<set $activeSlave.behavioralFlaw = "bitchy">>
+	<<set $activeSlave.sexualFlaw = "hates anal">>
+	<<set $activeSlave.slaveCost = 5000>>
+	<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</replace>>
+<</link>>
+<br><<link "Hit the slave with the tits, pussy and impressive dick">>
+	<<replace "#result">>
+	You decide to drop the really rare specimen, and place your taser slug in her leg. She goes stiff and slumps to the grass, squealing with pain since the taser robbed her ability to break her fall, leading her to land on nearly a foot of flaccid cock. Your taser slug is linked to $assistantName, who hits her again whenever she tries to rise. Meanwhile, an athletic slave has successfully crossed the lawn, and is sobbing with joy as her manumission forms are completed. Apathy fills your supine prize's eyes, and she simply lies face down and quiescent. She obeys orders to roll over so you can see what you've gotten, however. She's clearly a work of long and careful hormonal treatment. She has no implants, but sports big breasts, feminine hips, a nice butt, plush lips, and a huge dick. When you fuck her pussy and then her anus, she even gets a massive erection, showing that she isn't even on hormone treatment to maintain this unusual set of attributes.
+	<<include "Generate XY Slave">>
+	<<set $activeSlave.origin = "You won her at a shotgun match against other arcology owners.">>
+	<<set $activeSlave.vaginalSkill = 15>>
+	<<set $activeSlave.oralSkill = 15>>
+	<<set $activeSlave.whoreSkill = 0>>
+	<<set $activeSlave.entertainSkill = 0>>
+	<<set $activeSlave.analCount += 1>>
+	<<set $analTotal += 1>>
+	<<set $activeSlave.vaginalCount += 1>>
+	<<set $vaginalTotal += 1>>
+	<<set $activeSlave.devotion = 25>>
+	<<set $activeSlave.trust = 5>>
+	<<set $activeSlave.oldDevotion = 25>>
+	<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+	<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum = $activeSlave.balls>><</if>>
+	<<set $activeSlave.vagina = 1>>
+	<<set $activeSlave.ovaries = 0>>
+	<<set $activeSlave.preg = -2>>
+	<<set $activeSlave.dick = 6>>
+	<<set $activeSlave.balls = 3>>
+	<<set $activeSlave.face = 0>>
+	<<set $activeSlave.clit = 0>>
+	<<set $activeSlave.preg = -2>>
+	<<set $activeSlave.anus = 2>>
+	<<set $activeSlave.analSkill = 35>>
+	<<set $activeSlave.muscles = 0>>
+	<<set $activeSlave.weight = 0>>
+	<<set $activeSlave.health = 30>>
+	<<if $activeSlave.lips < 10>><<set $activeSlave.lips += 10>><</if>>
+	<<set $activeSlave.boobs = 800>>
+	<<set $activeSlave.butt = 4>>
+	<<set $activeSlave.age = 24>>
+	<<set $activeSlave.height = random(165,175)>>
+	<<set $activeSlave.waist = -15>>
+	<<set $activeSlave.fetish = "none">>
+	<<set $activeSlave.sexualFlaw = "none">>
+	<<set $activeSlave.behavioralFlaw = "odd">>
+	<<set $activeSlave.slaveCost = 5000>>
+	<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</replace>>
+<</link>>
+
+<<case "aid invitation">>
+
+<<set $PAid = 0>>
+<<link "Agree">>
+	<<replace "#result">>
+	You dispatch your personal VTOL bird immediately. It lands on the roof of the building they're sheltering in, and brings them across the closest border and into a more functional country. You receive a call expressing their heartfelt thanks and promising to @@.green;spread the word@@ about how you helped them escape, and a wire transfer of their @@.yellowgreen;payment@@ for the airlift.
+	<<set $cash += 2000>>
+	<<set $rep += 100>>
+	<</replace>>
+<</link>>
+<br><<link "Do it for free">>
+	<<replace "#result">>
+	You dispatch your personal VTOL bird immediately. It lands on the roof of the building they're sheltering in, and brings them across the closest border and into a more functional country. You receive a call expressing their heartfelt thanks, and when you refuse their payment for the airlift, they tearfully promise to tell the story of how you @@.green;extended charity@@ to those in need, belying the rumors about slaveowners.
+	<<set $rep += 250>>
+	<</replace>>
+<</link>>
+<br><<link "Airlift them into slavery">>
+	<<replace "#result">>
+	You send your personal VTOL bird to the shop for some immediate and very expensive modifications to its cargo and passenger area. Since this will take several days, you stall the supplicants. Their situation isn't truly dire yet, and they can wait. They are extremely grateful, though they would be less hopeful if they knew the true nature of the aircraft coming to retrieve them.
+	<<set $PAid = 1>>
+	<<set $cash -= 10000>>
+	<</replace>>
+<</link>> //This will cost ¤10000//
+
+<<case "aid result">>
+
+<<set $PAid = 0>>
+<<link "Sell your captures immediately">>
+	<<replace "#result">>
+	<<for _i = 0; _i < _newSlaves.length; _i++>>
+		<<slaveCost _newSlaves[_i]>>
+		<<set $cash += $slaveCost>>
+	<</for>>
+	Prisoners @@.green;sold.@@
+	<</replace>>
+<</link>>
+<br><<link "Enslave them all">>
+	<<replace "#result">>
+	<<for _i = 0; _i < _newSlaves.length; _i++>>
+		<<AddSlave _newSlaves[_i]>> /* skip New Slave Intro - TODO: use Bulk Slave Intro */
+		<<set _newSlaves[_i].slaveCost = 0>>
+	<</for>>
+	You simply enslave all of the escapees yourself. These slaves will more than make up for the costs you expended, in the long run.
+	<</replace>>
+<</link>>
+
+<<case "arcology naming">>
+
+<<link "Hurrah!">>
+	<<replace "#result">>
+	Your citizens enthusiastically respond to your naming of the arcology as $arcologies[0].name. They are proud to finally have a real name for their home. Other Free Cities take note, and some take up their own names as well, another indication of the Cities' collective ascension over the Old World.
+	<<set $nextButton = "Continue">>
+	<</replace>>
+<</link>> // Click to confirm your arcology's name, for now and ever! Or until you decide to change it again while managing your arcology.//
+
+<<case "slave food">>
+
+<<set $revealFoodEffects = 0>>
+<<link "Conceal the effects from your slaves">>
+	<<replace "#result">>
+	Your slaves don't need to know that every drop of food they drink is making the light of any eventual freedom they may someday enjoy dimmer and dimmer. Slaves talk to each other all the time, and rumors fly around in such profusion that the truth often gets lost among them. The cruel irony of the symptoms the research discovered is that they're impossible for the slaves to notice so long as they continue to eat the slave food.
+	<</replace>>
+<</link>>
+<br><<link "Admit the truth to your slaves">>
+	<<replace "#result">>
+	Your new slaves already receive a simple explanation of the way the slave food works as part of their training. You simply append a statement to the effect that the slaves' bodies will adapt to the slave food, slowly making it difficult and eventually impossible for them to eat anything else. There is no immediate reaction, but the news begins to filter out among the slaves. They'll react to the newly revealed nature of their food in accordance with their individual attitudes.
+	<<set $revealFoodEffects = 1>>
+	<</replace>>
+<</link>>
+
+<</switch>>
+</span>

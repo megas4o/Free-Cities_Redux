@@ -1,0 +1,679 @@
+:: Wardrobe Use [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Slave Interact">>
+
+<<set $showEncyclopedia = 1>>
+<<set $encyclopedia = "The Wardrobe">>
+
+<h1>The Wardrobe</h1>
+
+//$activeSlave.slaveName <<if $activeSlave.amp != 1>>stands on<<else>>has been placed on a cushion atop<</if>> a small platform surrounded by mirrors and an array of clothing options. $pronounCap is awaiting your fashion choices.//
+
+<br><br>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+<<if $imageChoice == 1>>
+    <div class="imageRef lrgVector"><<SlaveArt $activeSlave 2 0>></div>
+<<else>>
+    <div class="imageRef lrgRender"><<SlaveArt $activeSlave 2 0>></div>
+<</if>>
+<</if>>
+/* 000-250-006 */
+
+<<if $activeSlave.fuckdoll == 0>> /* begin fuckdoll check */
+
+<h2>Clothing</h2>
+
+<span id="clothingDescription">//<<ClothingDescription>>//</span>
+
+<<link "Let her choose">>
+	<<set $activeSlave.clothes = "choosing her own clothes",$activeSlave.choosesOwnClothes = 1>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">>//<<ClothingDescription>>//<</replace>>
+<</link>>
+
+
+<<if $activeSlave.ID == $Bodyguard.ID>>
+	//As your bodyguard, she <<bodyguardAccessoryDescription>>//
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Nice://
+<<link "Bangles">>
+	<<set $activeSlave.clothes = "slutty jewelry",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Bodysuit">>
+	<<set $activeSlave.clothes = "a comfortable bodysuit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Cheerleader outfit">>
+	<<set $activeSlave.clothes = "a cheerleader outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Clubslut netting">>
+	<<set $activeSlave.clothes = "clubslut netting",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Cutoffs and a t-shirt">>
+	<<set $activeSlave.clothes = "cutoffs and a t-shirt",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Fallen nun">>
+	<<set $activeSlave.clothes = "a fallen nuns habit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Haltertop dress">>
+	<<set $activeSlave.clothes = "a halter top dress",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Hijab and abaya">>
+	<<set $activeSlave.clothes = "a hijab and abaya",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Latex catsuit">>
+	<<set $activeSlave.clothes = "a latex catsuit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Leotard">>
+	<<set $activeSlave.clothes = "a leotard",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Maid (nice)">>
+	<<set $activeSlave.clothes = "a nice maid outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Maid (slutty)">>
+	<<set $activeSlave.clothes = "a slutty maid outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Military uniform">>
+	<<set $activeSlave.clothes = "a military uniform",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Mini dress">>
+	<<set $activeSlave.clothes = "a mini dress",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Nice lingerie">>
+	<<set $activeSlave.clothes = "attractive lingerie",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Nurse (nice)">>
+	<<set $activeSlave.clothes = "a nice nurse outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Nurse (slutty)">>
+	<<set $activeSlave.clothes = "a slutty nurse outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Schoolgirl">>
+	<<set $activeSlave.clothes = "a schoolgirl outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Silken ballgown">>
+	<<set $activeSlave.clothes = "a ball gown",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Skimpy battledress">>
+	<<set $activeSlave.clothes = "battledress",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Slave gown">>
+	<<set $activeSlave.clothes = "a slave gown",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Slutty outfit">>
+	<<set $activeSlave.clothes = "a slutty outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "String bikini">>
+	<<set $activeSlave.clothes = "a string bikini",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Succubus costume">>
+	<<set $activeSlave.clothes = "a succubus outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Suit (nice)">>
+	<<set $activeSlave.clothes = "nice business attire",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Suit (slutty)">>
+	<<set $activeSlave.clothes = "slutty business attire",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+
+<<if ($arcologies[0].FSGenderFundamentalist != "unset") || ($cheatMode == 1) || ($clothesBoughtBunny == 1)>>
+	| //FS// <<link "Bunny outfit">>
+	<<set $activeSlave.clothes = "a bunny outfit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist != "unset") || ($cheatMode == 1) || ($clothesBoughtOil == 1)>>
+	| //FS// <<link "Body oil">>
+		<<set $activeSlave.clothes = "body oil",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSDegradationist != "unset") || ($cheatMode == 1) || ($clothesBoughtChains == 1)>>
+	| //FS// <<link "Chains">>
+		<<set $activeSlave.clothes = "chains",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist != "unset") || ($cheatMode == 1) || ($clothesBoughtHabit == 1)>>
+	| //FS// <<link "Chattel habit">>
+		<<set $activeSlave.clothes = "a chattel habit",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSPaternalist != "unset") || ($cheatMode == 1) || ($clothesBoughtConservative == 1)>>
+	| //FS// <<link "Conservative clothing">>
+		<<set $activeSlave.clothes = "conservative clothing",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSArabianRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtHarem == 1)>>
+	| //FS// <<link "Harem gauze">>
+		<<set $activeSlave.clothes = "harem gauze",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSAztecRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtHuipil == 1)>>
+	| //FS// <<link "Huipil">>
+		<<set $activeSlave.clothes = "a huipil",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSEdoRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtKimono == 1)>>
+	| //FS// <<link "Kimono">>
+		<<set $activeSlave.clothes = "a kimono",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSChineseRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtQipao == 1)>>
+	| //FS// <<link "Slutty qipao">>
+		<<set $activeSlave.clothes = "a slutty qipao",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtToga == 1)>>
+	| //FS// <<link "Toga">>
+		<<set $activeSlave.clothes = "a toga",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSPastoralist != "unset") || ($cheatMode == 1) || ($clothesBoughtWestern == 1)>>
+	| //FS// <<link "Western clothing">>
+		<<set $activeSlave.clothes = "Western clothing",$activeSlave.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeSlave.clothes<</replace>>
+		<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Harsh://
+<<link "Go naked">>
+	<<set $activeSlave.clothes = "no clothing", $activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Penitent nun">>
+	<<set $activeSlave.clothes = "a penitent nuns habit",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Restrictive latex">>
+	<<set $activeSlave.clothes = "restrictive latex",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Shibari ropes">>
+	<<set $activeSlave.clothes = "shibari ropes",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+| <<link "Uncomfortable straps">>
+	<<set $activeSlave.clothes = "uncomfortable straps",$activeSlave.choosesOwnClothes = 0>>
+	<<replace "#clothes">>$activeSlave.clothes<</replace>>
+	<<replace "#clothingDescription">><br>//<<ClothingDescription>>//<</replace>>
+<</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Color://
+
+<<if ($seeImages == 1) && ($imageChoice == 1)>>
+	/* prepare display of currently selected color. */
+	/* TODO: update currently selected color upon outfit select */
+	/* _clothingBaseColor is set by display (Art_Vector_Set_Colour_Shoe_), but not all outfits define a color. */
+	/* _skinColour is used as fallback default (set by Art_Vector_Set_Colour_Skin_). */
+	<<set _clothingBaseColor = _skinColour >>
+	<<if def _outfitBaseColour>>
+		/* set default color predefined by choice of outfit */
+		<<set _clothingBaseColor = _outfitBaseColour>>
+	<</if>>
+	<<if def $activeSlave.clothingBaseColor>>
+		/* regard current user selection */
+		<<set _clothingBaseColor = $activeSlave.clothingBaseColor>>
+	<</if>>
+	/* Display an HTML5 color picker */
+	/* This is hackish due to direct accessment of SugarCube internal data structure. Improvements are welcome. */
+	<<print '<input type="color" value="'+_clothingBaseColor+'" onInput="SugarCube.State.variables.activeSlave.clothingBaseColor = event.target.value;">'>>
+	<<link "use default color">>
+		<<run delete $activeSlave.clothingBaseColor >>
+		/* reload passage to display everything correctly */
+		<<goto "Wardrobe Use">>
+	<</link>>
+	<br>
+	//Note: Only latex outfits support a custom color.//
+	<<unset _clothingBaseColor>> /* clean up temporary variable */
+<</if>>
+
+<br>
+
+<h2>Collar</h2>
+
+<span id="collarDescription">//<<collarDescription>>//</span>
+
+<<if $activeSlave.collar != "none">>
+	<<link "Remove">>
+		<<set $activeSlave.collar = "none">>
+		<<replace "#collar">>$activeSlave.collar<</replace>>
+		<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+	<</link>>
+<<else>>
+	//Her neck is bare at the moment.//<br>
+<</if>>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;//Nice://
+<<link "Stylish leather">>
+	<<set $activeSlave.collar = "stylish leather">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+| <<link "Satin choker">>
+	<<set $activeSlave.collar = "satin choker">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+| <<link "Heavy gold">>
+	<<set $activeSlave.collar = "heavy gold">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+| <<link "Pretty jewelry">>
+	<<set $activeSlave.collar = "pretty jewelry">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+<<if ($seeAge != 0)>>
+	| <<link "Nice retirement counter">>
+		<<set $activeSlave.collar = "nice retirement counter">>
+		<<replace "#collar">>$activeSlave.collar<</replace>>
+	<</link>>
+<</if>>
+| <<link "Cowbell">>
+	<<set $activeSlave.collar = "leather with cowbell">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+<<if ($arcologies[0].FSGenderFundamentalist != "unset") || ($cheatMode == 1) || ($clothesBoughtBunny == 1)>>
+	| //FS// <<link "Bowtie collar">>
+		<<set $activeSlave.collar = "bowtie">>
+		<<replace "#collar">>$activeSlave.collar<</replace>>
+		<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if ($arcologies[0].FSEgyptianRevivalist != "unset") || ($cheatMode == 1) || ($clothesBoughtEgypt == 1)>>
+	| //FS// <<link "Ancient Egyptian">>
+	<<set $activeSlave.collar = "ancient Egyptian">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+	<</link>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Harsh://
+	<<link "Tight steel">>
+	<<set $activeSlave.collar = "tight steel">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+<<if ($seeAge != 0)>>
+	| <<link "Cruel retirement counter">>
+		<<set $activeSlave.collar = "cruel retirement counter">>
+		<<replace "#collar">>$activeSlave.collar<</replace>>
+		<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>	<</link>>
+<</if>>
+| <<link "Uncomfortable leather">>
+	<<set $activeSlave.collar = "uncomfortable leather">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+| <<link "Shock punishment">>
+	<<set $activeSlave.collar = "shock punishment">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+| <<link "Dildo gag">>
+	<<set $activeSlave.collar = "dildo gag">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+<<if $toysBoughtGags == 1 && $activeSlave.oralSkill > 0>>
+	| <<link "Massive dildo gag">>
+		<<set $activeSlave.collar = "massive dildo gag">>
+		<<replace "#collar">>$activeSlave.collar<</replace>>
+		<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+	<</link>>
+<</if>>
+| <<link "Ball gag">>
+	<<set $activeSlave.collar = "ball gag">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+| <<link "Bit gag">>
+	<<set $activeSlave.collar = "bit gag">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+| <<link "Neck corset">>
+	<<set $activeSlave.collar = "neck corset">>
+	<<replace "#collar">>$activeSlave.collar<</replace>>
+	<<replace "#collarDescription">><br>//<<collarDescription>>//<</replace>>
+<</link>>
+
+<br>
+
+<<if $activeSlave.amp != 1>>
+	<h2>Shoes</h2>
+
+	<span id="shoeDescription">//$pronounCap is wearing<<footwearDescription>><<heelDescription>>//</span>
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+	<<link "Go barefoot">>
+		<<set $activeSlave.shoes = "none">>
+		<<replace "#shoes">>$activeSlave.shoes<</replace>>
+		<<replace "#shoeDescription">><br>//$pronounCap is wearing<<footwearDescription>><<heelDescription>>//<</replace>>
+	<</link>>
+	| <<link "Flats">>
+		<<set $activeSlave.shoes = "flats">>
+		<<replace "#shoes">>$activeSlave.shoes<</replace>>
+		<<replace "#shoeDescription">><br>//$pronounCap is wearing<<footwearDescription>><<heelDescription>>//<</replace>>
+	<</link>>
+	| <<link "Heels">>
+		<<set $activeSlave.shoes = "heels">>
+		<<replace "#shoes">>$activeSlave.shoes<</replace>>
+		<<replace "#shoeDescription">><br>//$pronounCap is wearing<<footwearDescription>><<heelDescription>>//<</replace>>
+	<</link>>
+	| <<link "Thigh boots">>
+		<<set $activeSlave.shoes = "boots">>
+		<<replace "#shoes">>$activeSlave.shoes<</replace>>
+		<<replace "#shoeDescription">><br>//$pronounCap is wearing<<footwearDescription>><<heelDescription>>//<</replace>>
+	<</link>>
+	| <<link "Painfully extreme heels">>
+		<<set $activeSlave.shoes = "extreme heels">>
+		<<replace "#shoes">>$activeSlave.shoes<</replace>>
+		<<replace "#shoeDescription">><br>//$pronounCap is wearing<<footwearDescription>><<heelDescription>>//<</replace>>
+	<</link>>
+<</if>>
+
+<<if ($seeImages == 1) && ($imageChoice == 1)>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Color://
+
+	/* prepare display of currently selected color. */
+	/* _shoeColour is always set by display (Art_Vector_Set_Colour_Shoe_) */
+	/* TODO: update currently selected color upon shoe select */
+	<<if def $activeSlave.clothingBaseColor>>
+		/* regard current user selection */
+		<<set _shoeColour = $activeSlave.clothingBaseColor>>
+	<</if>>
+	/* Display an HTML5 color picker */
+	/* This is hackish due to direct accessment of SugarCube internal data structure. Improvements are welcome. */
+	<<print '<input type="color" value="'+_shoeColour+'" onInput="SugarCube.State.variables.activeSlave.shoeColor = event.target.value;">'>>
+	<<link "use default color">>
+		<<run delete $activeSlave.shoeColor >>
+		/* reload passage to display everything correctly */
+		<<goto "Wardrobe Use">>
+	<</link>>
+<</if>>
+
+
+<h2>Torso Accessory</h2>
+
+//<<waistDescription>><<pregnancyDescription>>//
+
+<span id="bellyAccessoryDescription">//<<if $activeSlave.bellyAccessory != "none">><br><</if>><<clothingCorsetDescription>><<CorsetPiercingDescription>>//</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<<link "None">>
+	<<set $activeSlave.bellyAccessory = "none">>
+	<<replace "#bellyAccessory">>$activeSlave.bellyAccessory<</replace>>
+	<<replace "#bellyAccessoryDescription">>//<<clothingCorsetDescription>><<CorsetPiercingDescription>>//<</replace>>
+<</link>>
+| <<link "Tight corset">>
+	<<set $activeSlave.bellyAccessory = "a corset">>
+	<<replace "#bellyAccessory">>$activeSlave.bellyAccessory<</replace>>
+	<<replace "#bellyAccessoryDescription">><br>//<<clothingCorsetDescription>><<CorsetPiercingDescription>>//<</replace>>
+<</link>>
+| <<link "Extreme corset">>
+	<<set $activeSlave.bellyAccessory = "an extreme corset">>
+	<<replace "#bellyAccessory">>$activeSlave.bellyAccessory<</replace>>
+	<<replace "#bellyAccessoryDescription">><br>//<<clothingCorsetDescription>><<CorsetPiercingDescription>>//<</replace>>
+<</link>>
+<<if $clothesBoughtBelly == 1 || $cheatMode == 1 && $activeSlave.preg <= 10>>
+	| <<link "1st Trimester belly">>
+		<<set $activeSlave.bellyAccessory = "a small empathy belly">>
+		<<replace "#bellyAccessory">>$activeSlave.bellyAccessory<</replace>>
+		<<replace "#bellyAccessoryDescription">><br>//<<clothingCorsetDescription>><<CorsetPiercingDescription>>//<</replace>>
+	<</link>>
+	| <<link "2nd Trimester belly">>
+		<<set $activeSlave.bellyAccessory = "a medium empathy belly">>
+		<<replace "#bellyAccessory">>$activeSlave.bellyAccessory<</replace>>
+		<<replace "#bellyAccessoryDescription">><br>//<<clothingCorsetDescription>><<CorsetPiercingDescription>>//<</replace>>
+	<</link>>
+	| <<link "3rd Trimester belly">>
+		<<set $activeSlave.bellyAccessory = "a large empathy belly">>
+		<<replace "#bellyAccessory">>$activeSlave.bellyAccessory<</replace>>
+		<<replace "#bellyAccessoryDescription">><br>//<<clothingCorsetDescription>><<CorsetPiercingDescription>>//<</replace>>
+	<</link>>
+	| <<link "3rd Trimester twins belly">>
+		<<set $activeSlave.bellyAccessory = "a huge empathy belly">>
+		<<replace "#bellyAccessory">>$activeSlave.bellyAccessory<</replace>>
+		<<replace "#bellyAccessoryDescription">><br>//<<clothingCorsetDescription>><<CorsetPiercingDescription>>//<</replace>>
+	<</link>>
+<</if>>
+
+<<if $activeSlave.preg > 0>>
+	//Extreme corsets will endanger the life within her.//
+<</if>>
+
+<<if $activeSlave.vagina > -1>>
+	<h2>Vaginal Accessory</h2>
+	<span id="vaginalAccessoryDescription"><<if $activeSlave.vaginalAccessory == "none">>//Her vagina is empty of toys.//<</if>>//<<vaginalAccessoryDescription>>//</span>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<link "None">>
+		<<set $activeSlave.vaginalAccessory = "none">>
+		<<replace "#vaginalAccessoryDescription">>//Her vagina is empty of toys.<<vaginalAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+	| <<link "Dildo">>
+		<<set $activeSlave.vaginalAccessory = "dildo">>
+		<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+	<<if $toysBoughtDildos == 1>>
+		| <<link "Long dildo">>
+			<<set $activeSlave.vaginalAccessory = "long dildo">>
+			<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+			<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+		<</link>>
+	<</if>>
+	| <<link "Large dildo">>
+		<<set $activeSlave.vaginalAccessory = "large dildo">>
+		<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+	<<if $toysBoughtDildos == 1>>
+		| <<link "Large and long dildo">>
+			<<set $activeSlave.vaginalAccessory = "long, large dildo">>
+			<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+			<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+		<</link>>
+	<</if>>
+	<<if $activeSlave.vagina >= 2>>
+		| <<link "Huge dildo">>
+			<<set $activeSlave.vaginalAccessory = "huge dildo">>
+			<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+			<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+		<</link>>
+		<<if $toysBoughtDildos == 1>>
+			| <<link "Huge and long dildo">>
+				<<set $activeSlave.vaginalAccessory = "long, huge dildo">>
+				<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+				<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+			<</link>>
+		<</if>>
+	<</if>>
+	| <<link "Chastity belt">>
+		<<set $activeSlave.vaginalAccessory = "chastity belt">>
+		<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+	| <<link "Anal chastity belt">>
+		<<set $activeSlave.vaginalAccessory = "anal chastity">>
+		<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+
+	| <<link "Combined chastity belt">>
+		<<set $activeSlave.vaginalAccessory = "combined chastity">>
+		<<replace "#vaginalAccessoryDescription">>//<<vaginalAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+<</if>>
+
+<<if $activeSlave.dick > 0>>
+	<h2>Dick Accessory</h2>
+	<span id="dickAccessoryDescription"><<if ($activeSlave.dickAccessory == "none") || ($activeSlave.dickAccessory == "anal chastity")>>//Her cock is unadorned.//<</if>>//<<dickAccessoryDescription>>//</span>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<link "None">>
+		<<set $activeSlave.dickAccessory = "none">>
+		<<replace "#dickAccessoryDescription">>//Her cock is unadorned.<<dickAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+	| <<link "Chastity cage">>
+		<<set $activeSlave.dickAccessory = "chastity">>
+		<<replace "#dickAccessoryDescription">>//<<dickAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+	| <<link "Anal chastity belt">>
+		<<set $activeSlave.dickAccessory = "anal chastity">>
+		<<replace "#dickAccessoryDescription">>//Her cock is unadorned.<<dickAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+	| <<link "Combined chastity belt">>
+		<<set $activeSlave.dickAccessory = "combined chastity">>
+		<<replace "#dickAccessoryDescription">>//<<dickAccessoryDescription>>//<</replace>>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+<</if>>
+
+<h2>Anal Accessory</h2>
+
+<span id="buttplugDescription">//<<buttplugDescription>>//</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<<link "None">>
+	<<set $activeSlave.buttplug = "none">>
+	<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+<</link>>
+| <<link "Normal">>
+	<<set $activeSlave.buttplug = "plug">>
+	<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+<</link>>
+<<if $toysBoughtButtPlugs == 1>>
+	| <<link "Long">>
+		<<set $activeSlave.buttplug = "long plug">>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+<</if>>
+| <<link "Large">>
+	<<set $activeSlave.buttplug = "large plug">>
+	<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+<</link>>
+<<if $toysBoughtButtPlugs == 1>>
+	| <<link "Long and large">>
+		<<set $activeSlave.buttplug = "long, large plug">>
+		<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+	<</link>>
+<</if>>
+<<if $activeSlave.anus >= 2>>| <<link "Huge">>
+	<<set $activeSlave.buttplug = "huge plug">>
+	<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+<</link>><</if>>
+<<if $toysBoughtButtPlugs == 1>>
+	<<if $activeSlave.anus >= 2>>
+		| <<link "Long and huge">>
+			<<set $activeSlave.buttplug = "long, huge plug">>
+			<<replace "#buttplugDescription">>//<<buttplugDescription>>//<</replace>>
+		<</link>>
+	<</if>>
+<</if>>
+<<if $toysBoughtButtPlugTails == 1 && $activeSlave.buttplug != "none">>
+	&nbsp;&nbsp;&nbsp;&nbsp;Anal accessory attachment: ''<span id="buttplugAttach">$activeSlave.buttplugAttachment</span>.''
+	<<link "None">><<set $activeSlave.buttplugAttachment = "none">><<replace "#buttplugAttach">>$activeSlave.buttplugAttachment<</replace>><</link>>
+	<<if $toysBoughtButtPlugTails == 1>> | <<link "Tail">><<set $activeSlave.buttplugAttachment = "tail">><<replace "#buttplugAttach">>$activeSlave.buttplugAttachment<</replace>><</link>><</if>>
+<</if>>
+
+<br><br>
+
+<<link "''//Update//''">>
+	<<goto "Wardrobe Use">>
+<</link>>
+all descriptions to show what she is currently wearing?
+
+<</if>>
+
+<<if $activeSlave.fuckdoll == 1>>
+	//<<ClothingDescription>>//
+	<br><br> There are no changes you can make to her at this time.
+<</if>> /* CLOSES FUCKDOLL CHECK */
+
+<br><br>

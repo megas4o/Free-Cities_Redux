@@ -1,0 +1,2633 @@
+:: misc widgets [nobr widget]
+
+/* TODO: Modularize. */
+
+/%
+ Call as <<UpdateNextButton>>
+ Allows for dynamic updating of the next button in the storyCaption (left side-bar) for events that disable the button until user makes a selection
+%/
+<<widget "UpdateNextButton">>
+	<<replace "#nextButton">>
+		<strong><<link "$nextButton">> /* must use link so spacebar shortcut will work */
+			<<if $nextButton != " ">> /* but no effect if nextButton is set to a blank space */
+				<<set $ui = "main">>
+				<<goto $nextLink>>
+			<</if>>
+		<</link>></strong>
+		<<if $nextButton != " ">>@@.cyan;[Space]@@<</if>>
+	<</replace>>
+<</widget>>
+
+/%
+ Call as <<AssayedSlaveAvailable>>
+ Checks $assayedSlave for availability, e.g. not strapped to a machine or distant.
+%/
+<<widget "AssayedSlaveAvailable">>
+<<if $assayedSlave.assignment == "be your agent">>
+	<<set $assayedSlaveAvailable = 0>>
+<<elseif $assayedSlave.assignment == "live with your agent">>
+	<<set $assayedSlaveAvailable = 0>>
+<<elseif ($assayedSlave.assignment == "work in the dairy") && ($dairyRestraintsSetting >= 2)>>
+	<<set $assayedSlaveAvailable = 0>>
+<<else>>
+	<<set $assayedSlaveAvailable = 1>>
+<</if>>
+<</widget>>
+
+/%
+ Call as <<AnalVCheck 10>> or <<AnalVCheck>>
+ $arg[0] is how many times to increment the Anal counts.
+ if $arg[0] is left undefined it will assume it to be 1.
+%/
+<<widget "AnalVCheck">>
+<<if canDoAnal($activeSlave) && ($activeSlave.anus == 0)>>
+	@@.lime;This breaks in $activeSlave.slaveName's virgin ass.@@
+	<<if ($activeSlave.devotion > 50)>>
+		Since it's her first time, you gently ease yourself into her butthole and gradually increase the intensity of your thrusts. Before long she's moaning loudly as you continue working away at her butthole. She thinks of losing her anal virginity to you as a @@.hotpink;connection@@ with her beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. She looks forward to having her asshole fucked by you again.
+		<<set $activeSlave.devotion += 4>>
+	<<elseif ($activeSlave.devotion > 20)>>
+		Since it's her first time, you gently ease yourself into her butthole and gradually increase the intensity of your thrusts. Her moans become louder and louder as you continue working away at her butthole. She accepts the pain and humiliation of anal sex as part of her sexual servitude, though she hopes that her next time will be less painful.
+	<<elseif ($activeSlave.devotion >= -20)>>
+		You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.gold;fears@@ her next anal sex, remembering the pain of losing her anal virginity. She dreads having her ass violated by you again.
+		<<set $activeSlave.trust -= 5>>
+	<<else>>
+		You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.mediumorchid;hates@@ and @@.gold;fears@@ you for violating her virgin butt. She dreads having her ass fucked by you again.
+		<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+	<</if>>
+	<<set $activeSlave.anus = 1>>
+<</if>>
+<<if canDoAnal($activeSlave)>>
+	<<if $args[0]>>
+		<<set $analTotal += $args[0],
+		$activeSlave.analCount += $args[0]>>
+	<<else>>
+		<<set $analTotal++,
+		$activeSlave.analCount++>>
+	<</if>>
+<</if>>
+<</widget>>
+
+/%
+ Call as <<VaginalVCheck 10>> or <<VaginalVCheck>>
+ $arg[0] is how many times to increment the Vaginal counts.
+ if $arg[0] is left undefined it will assume it to be 1.
+ This also checks for a valid Vagina/Accessory, though most code I've seen does this already, you
+ never know when someone might use the routine and forget to do such.
+%/
+<<widget "VaginalVCheck">>
+<<if canDoVaginal($activeSlave)>>
+	<<if ($activeSlave.vagina == 0)>>
+		@@.lime;This breaks in $activeSlave.slaveName's virgin pussy.@@
+		<<if ($activeSlave.devotion > 20)>>
+			You ease yourself into her pussy, since it's her first time, then gradually speed up your thrusts while she slowly learns to move her hips along with you. She moans loudly. @@.hotpink;She enjoys losing her cherry to you.@@ She looks forward to having her pussy fucked by you again.
+			<<set $activeSlave.devotion += 4>>
+		<<elseif ($activeSlave.devotion < -20)>>
+			You force yourself into her pussy. She sobs and cries with disgust while you continue working her fuck hole. She @@.mediumorchid;hates@@ and @@.gold;fears@@ you for taking her virginity.
+			<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+		<<else>>
+			You ease yourself into her pussy, since it's her first time, then gradually speed up your thrusts while she slowly learns to move her hips along with you. She accepts losing her virginity to her owner and she looks forward to having her pussy fucked by you again.
+		<</if>>
+		<<set $activeSlave.vagina = 1>>
+	<</if>>
+	<<if $args[0]>>
+		<<set $vaginalTotal += $args[0],
+		$activeSlave.vaginalCount += $args[0]>>
+	<<else>>
+		<<set $vaginalTotal++,
+		$activeSlave.vaginalCount++>>
+	<</if>>
+<</if>>
+<</widget>>
+
+/%
+ Call as <<BothVCheck 10 5>> or <<BothVCheck>>
+ $arg[0] is how many times to increment the Anal counts, if there is no Vagina available.
+ $arg[1] is how many times to increment both holes counts (usually it is half of Anal).
+ In both cases if left undefined it will assume it to be 1.
+ This also checks for a valid Vagina/Accessory, though most code I've seen does this already, you
+ never know when someone might use the routine and forget to do such.
+%/
+<<widget "BothVCheck">>
+<<if canDoVaginal($activeSlave)>>
+	<<if ($activeSlave.vagina == 0)>>
+		<<if canDoAnal($activeSlave) && ($activeSlave.anus == 0)>>
+			@@.lime;This breaks in $activeSlave.slaveName's virgin holes.@@
+			<<if ($activeSlave.devotion > 50)>>
+				As it's her first time, you ease yourself into her pussy before gradually working your way into her ass and alternate between the two holes while she moans. @@.hotpink;She's so devoted she enjoys being fucked in both holes for the first time.@@ She looks forward to having her holes fucked by you again.
+				<<set $activeSlave.devotion += 4>>
+			<<elseif ($activeSlave.devotion <= 20)>>
+				You force yourself into her pussy before working your way into her ass. She sobs and cries with disgust while you alternate between the two holes. She @@.mediumorchid;hates@@ losing her virginity and anal virginity in one @@.gold;brutal@@ incident. She dreads having her holes violated by you again.
+				<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+			<<else>>
+				As it's her first time, you ease yourself into her pussy before gradually working your way into her ass and alternate between the two holes while she moans. She accepts being fucked in both holes for the first time. She looks forward to having her holes fucked by you again.
+			<</if>>
+			<<set $activeSlave.anus = 1>>
+		<<elseif canDoAnal($activeSlave)>>
+			@@.lime;This breaks in $activeSlave.slaveName's virgin pussy.@@
+			<<set $activeSlave.vagina++>>
+			<<if ($activeSlave.devotion > 20)>>
+				As it's her first time, you ease yourself into her pussy and gradually speed up your thrusts while she slowly learns to move her hips along with you. She moans loudly. @@.hotpink;She enjoys losing her cherry to you.@@ She looks forward to having her pussy fucked by you again.
+				<<set $activeSlave.devotion += 4>>
+			<<elseif ($activeSlave.devotion < -20)>>
+				You force yourself into her pussy. She sobs and cries with disgust while you continue working her fuck hole. She @@.mediumorchid;hates@@ and @@.gold;fears@@ you for taking her virginity. She dreads having her pussy violated by you again.
+				<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+			<<else>>
+				As it's her first time, you ease yourself into her pussy before gradually increasing the intensity of your thrusts while she softly moans. She accepts losing her virginity to her owner and she looks forward to having her pussy fucked by you again.
+			<</if>>
+		<</if>>
+		<<set $activeSlave.vagina = 1>>
+	<<elseif canDoAnal($activeSlave) && ($activeSlave.anus == 0)>>
+		@@.lime;This breaks in $activeSlave.slaveName's virgin ass.@@
+		<<if ($activeSlave.devotion > 50)>>
+			As it's her first time, you ease yourself into her butthole and gradually speed up your thrusts while she slowly learns to move her hips along with you. She moans loudly. She thinks of losing her anal virginity to you as a @@.hotpink;connection@@ with her beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. She looks forward to having her asshole fucked by you again.
+			<<set $activeSlave.devotion += 4>>
+		<<elseif ($activeSlave.devotion > 20)>>
+			As it's her first time, you ease yourself into her butthole and gradually increase the intensity of your thrusts. She accepts the pain and humiliation of anal sex as part of her sexual servitude, though she hopes that her next time will be less painful.
+		<<elseif ($activeSlave.devotion >= -20)>>
+			You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.gold;fears@@ her next anal sex, remembering the pain of losing her anal virginity. She dreads having her ass violated by you again.
+			<<set $activeSlave.trust -= 5>>
+		<<else>>
+			You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.mediumorchid;hates@@ and @@.gold;fears@@ you for violating her virgin butt. She dreads having her ass fucked by you again.
+			<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+		<</if>>
+		<<set $activeSlave.anus = 1>>
+	<</if>>
+	<<if canDoAnal($activeSlave)>>
+		<<if $args[1]>>
+			<<set $vaginalTotal += $args[1], $analTotal += $args[1], $activeSlave.vaginalCount += $args[1], $activeSlave.analCount += $args[1]>>
+		<<else>>
+			<<set $vaginalTotal++, $analTotal++, $activeSlave.vaginalCount++, $activeSlave.analCount++>>
+		<</if>>
+	<<else>>
+		<<if $args[1]>>
+			<<set $vaginalTotal += $args[1], $activeSlave.vaginalCount += $args[1]>>
+		<<else>>
+			<<set $vaginalTotal++, $activeSlave.vaginalCount++>>
+		<</if>>
+	<</if>>
+<<elseif canDoAnal($activeSlave)>>
+	<<if ($activeSlave.anus == 0)>>
+		@@.lime;This breaks in $activeSlave.slaveName's virgin ass.@@
+		<<if ($activeSlave.devotion > 50)>>
+			As it's her first time, you ease yourself into her butthole and gradually speed up your thrusts while she slowly learns to move her hips along with you. She moans loudly. She thinks of losing her anal virginity to you as a @@.hotpink;connection@@ with her beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. She looks forward to having her asshole fucked by you again.
+			<<set $activeSlave.devotion += 4>>
+		<<elseif ($activeSlave.devotion > 20)>>
+			As it's her first time, you ease yourself into her butthole and gradually increase the intensity of your thrusts. She accepts the pain and humiliation of anal sex as part of her sexual servitude, though she hopes that her next time will be less painful.
+		<<elseif ($activeSlave.devotion >= -20)>>
+			You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.gold;fears@@ her next anal sex, remembering the pain of losing her anal virginity. She dreads having her ass violated by you again.
+			<<set $activeSlave.trust -= 5>>
+		<<else>>
+			You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.mediumorchid;hates@@ and @@.gold;fears@@ you for violating her virgin butt. She dreads having her ass fucked by you again.
+			<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+		<</if>>
+		<<set $activeSlave.anus = 1>>
+	<</if>>
+	<<if $args[0]>>
+		<<set $analTotal += $args[0],
+		$activeSlave.analCount += $args[0]>>
+	<<else>>
+		<<set $analTotal++,
+		$activeSlave.analCount++>>
+	<</if>>
+<</if>>
+<</widget>>
+
+/%
+ Call as <<SimpleVCheck 5>> or <<SimpleVCheck>>
+ $arg[0] is how many times to increment either the Vaginal or the Anal counts, if there is no Vagina available.
+ If left undefined it will assume it to be 1.
+%/
+<<widget "SimpleVCheck">>
+<<if canDoVaginal($activeSlave)>>
+	<<if ($activeSlave.vagina == 0)>>
+		@@.lime;This breaks in $activeSlave.slaveName's virgin pussy.@@
+		<<if ($activeSlave.devotion > 20)>>
+			As it's her first time, you ease yourself into her pussy and gradually speed up your thrusts while she slowly learns to move her hips along with you. Her moans become louder and louder. @@.hotpink;She enjoys losing her cherry to you.@@ She looks forward to having her pussy fucked by you again.
+			<<set $activeSlave.devotion += 4>>
+		<<elseif ($activeSlave.devotion < -20)>>
+			You force yourself into her pussy. She sobs and cries with disgust while you continue working her fuck hole. She @@.mediumorchid;hates@@ and @@.gold;fears@@ you for taking her virginity.She dreads having her pussy fucked by you again.
+			<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+		<<else>>
+			As it's her first time, you ease yourself into her pussy and gradually speed up your thrusts while she slowly learns to move her hips along with you. She accepts losing her virginity to her owner. She looks forward to having her pussy fucked by you again.
+		<</if>>
+		<<set $activeSlave.vagina = 1>>
+	<</if>>
+	<<if $args[0]>>
+		<<set $vaginalTotal += $args[0],
+		$activeSlave.vaginalCount += $args[0]>>
+	<<else>>
+		<<set $vaginalTotal++,
+		$activeSlave.vaginalCount++>>
+	<</if>>
+<<elseif canDoAnal($activeSlave)>>
+	<<if ($activeSlave.anus == 0)>>
+		@@.lime;This breaks in $activeSlave.slaveName's virgin ass.@@
+		<<if ($activeSlave.devotion > 50)>>
+			As it's her first time, you gently ease yourself into her butthole and gradually increase the intensity of your thrusts. Before long she's moaning loudly as you continue working away at her butthole. She thinks of losing her anal virginity to you as a @@.hotpink;connection@@ with her beloved <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. She looks forward to having her asshole fucked by you again.
+			<<set $activeSlave.devotion += 4>>
+		<<elseif ($activeSlave.devotion > 20)>>
+			As it's her first time, you gently ease yourself into her butthole and gradually increase the intensity of your thrusts. Before long she's moaning loudly as you continue working away at her butthole. She accepts the pain and humiliation of anal sex as part of her sexual servitude. She looks forward to having her asshole fucked by you again.
+		<<elseif ($activeSlave.devotion >= -20)>>
+			You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.gold;fears@@ her next anal sex, remembering the pain of losing her anal virginity. She dreads having her ass fucked by you again.
+			<<set $activeSlave.trust -= 5>>
+		<<else>>
+			You force yourself into her butthole. She sobs and cries with disgust while you continue thrusting into her ass. She @@.mediumorchid;hates@@ and @@.gold;fears@@ you for violating her virgin butt. She dreads having her ass fucked by you again.
+			<<set $activeSlave.trust -= 5, $activeSlave.devotion -= 5>>
+		<</if>>
+		<<set $activeSlave.anus = 1>>
+	<</if>>
+	<<if $args[0]>>
+		<<set $analTotal += $args[0],
+		$activeSlave.analCount += $args[0]>>
+	<<else>>
+		<<set $analTotal++,
+		$activeSlave.analCount++>>
+	<</if>>
+<</if>>
+<</widget>>
+
+/%
+ Call as <<PartnerVCheck 10 5>> or <<PartnerVCheck>>
+ Before calling this widget, set $partner to the index of the partner in the $slaves array
+ $arg[0] is how many times to increment the Anal counts, if there is no Vagina available.
+ $arg[1] is how many times to increment both holes counts (usually it is half of Anal).
+ In both cases if left undefined it will assume it to be 1.
+ This also checks for a valid Vagina/Accessory, though most code I've seen does this already, you
+ never know when someone might use the routine and forget to do such.
+%/
+<<widget "PartnerVCheck">>
+
+<<if $partner < 0 || $partner >= $slaves.length>>
+	@@.red;PartnerVCheck called with invalid partner '$partner' from passage <<print passage()>>@@
+<<elseif canDoVaginal($slaves[$partner])>>
+	<<if ($slaves[$partner].vagina == 0)>>
+		<<if canDoAnal($slaves[$partner]) && ($slaves[$partner].anus == 0)>>
+			Since it's $slaves[$partner].slaveName's first time, you take your time and gently ease yourself into her pussy before gradually working your way into her butthole, alternating between her holes. @@.lime;This breaks in $slaves[$partner].slaveName's virgin holes.
+			<<set $slaves[$partner].vagina++, $slaves[$partner].anus++>>
+		<<else>>
+			Since it's $slaves[$partner].slaveName's first time, you take your time and gently ease yourself into her pussy before gradually increasing the intensity of your thrusts. @@.lime;This breaks in $slaves[$partner].slaveName's virgin pussy.
+			<<set $slaves[$partner].vagina++>>
+		<</if>>
+	<<elseif canDoAnal($slaves[$partner]) && ($slaves[$partner].anus == 0)>>
+		Since it's $slaves[$partner].slaveName's first time, you take your time and gently ease yourself into her butthole before gradually increasing the intensity of your thrusts into her ass. @@.lime;This breaks in $slaves[$partner].slaveName's virgin ass.
+		<<set $slaves[$partner].anus++>>
+	<</if>>
+	<<if canDoAnal($slaves[$partner])>>
+		<<if $args[1]>>
+			<<set $vaginalTotal += $args[1], $analTotal += $args[1], $slaves[$partner].vaginalCount += $args[1], $slaves[$partner].analCount += $args[1]>>
+		<<else>>
+			<<set $vaginalTotal++, $analTotal++, $slaves[$partner].vaginalCount++, $slaves[$partner].analCount++>>
+		<</if>>
+	<<else>>
+		<<if $args[1]>>
+			<<set $vaginalTotal += $args[1], $slaves[$partner].vaginalCount += $args[1]>>
+		<<else>>
+			<<set $vaginalTotal++, $slaves[$partner].vaginalCount++>>
+		<</if>>
+	<</if>>
+<<elseif canDoAnal($slaves[$partner])>>
+	<<if ($slaves[$partner].anus == 0)>>
+		Since it's $slaves[$partner].slaveName's first time, you take your time and gently ease yourself into her butthole before gradually increasing the intensity of your thrusts into her ass. This breaks in $slaves[$partner].slaveName's virgin ass.
+		<<set $slaves[$partner].anus++>>
+	<</if>>
+	<<if $args[0]>>
+		<<set $analTotal += $args[0],
+		$slaves[$partner].analCount += $args[0]>>
+	<<else>>
+		<<set $analTotal++,
+		$slaves[$partner].analCount++>>
+	<</if>>
+<</if>>
+@@
+<</widget>>
+
+/%
+ Call as <<SlaveInteractImpreg>>
+%/
+<<widget "SlaveInteractImpreg">>
+<<replace #impreg>>
+	<<if ((canGetPregnant($activeSlave)) && ($activeSlave.clothes != "a Fuckdoll suit"))>>
+		<<if ($PC.dick != 0)>>
+		| <<link "Impregnate her yourself">><<replace "#miniscene">><<include "FPCImpreg">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><<SlaveInteractImpreg>><<SlaveInteractFertility>><</link>>
+		<</if>>
+		| [[Use another slave to impregnate her|FSlaveImpreg]]
+	<</if>>
+	<</replace>>
+<</widget>>
+
+/%
+ Call as <<SlaveInteractFertility>>
+%/
+<<widget "SlaveInteractFertility">>
+<<replace #fertilityblock>>
+	<<if ($activeSlave.preg < -1) || ($activeSlave.ovaries == 0)>>
+		//She is sterile//
+	<<elseif ($activeSlave.preg >= -1) && ($activeSlave.ovaries != 0)>>
+	__Contraception__: <span id="fertility"><strong><<if $activeSlave.preg == -1>><<print "using contraceptives">><<elseif $activeSlave.preg == 0>><<print "fertile">><<elseif $activeSlave.preg < 4>><<print "may be pregnant">><<else>><<print $activeSlave.preg>><<print " weeks pregnant">><</if>></strong></span>.
+	<<if ($activeSlave.preg == 0) && ($activeSlave.clothes != "a Fuckdoll suit")>>
+		<<link "Use contraceptives">><<set $activeSlave.preg = -1>><<SlaveInteractImpreg>><<SlaveInteractFertility>><</link>>
+	<<elseif ($activeSlave.preg == -1) && ($activeSlave.clothes != "a Fuckdoll suit")>>
+		<<link "Let her get pregnant">><<set $activeSlave.preg = 0>><<SlaveInteractImpreg>><<SlaveInteractFertility>><</link>>
+		<</if>>
+	<</if>>
+	<<if ($activeSlave.preg == 0) && ($activeSlave.clothes == "a Fuckdoll suit")>>
+		<<link "Use contraceptives">><<set $activeSlave.preg = -1>><<SlaveInteractFertility>><</link>>
+	<<elseif ($activeSlave.preg == -1) && ($activeSlave.clothes == "a Fuckdoll suit")>>
+		<<link "Let her get pregnant">><<set $activeSlave.preg = 0>><<SlaveInteractFertility>><</link>>
+	<<elseif ($activeSlave.preg > 0)>>
+		[[Abort her pregnancy|Abort]]
+	<</if>>
+<</replace>>
+<</widget>>
+/%
+ Call as <<SlaveInteractSexOption>>
+%/
+<<widget "SlaveInteractSexOption">>
+<<replace #sexoption>>
+	<<if ($activeSlave.vagina > -1)>>
+		<<if canDoVaginal($activeSlave)>>
+		<<link "Fuck her">><<replace "#miniscene">><<include "FVagina">><br><</replace>><<SlaveInteractFertility>><</link>>
+		<<if canDoAnal($activeSlave)>>
+			| <<link "Use her holes">><<replace "#miniscene">><<include "FButt">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><<SlaveInteractFertility>><</link>>
+		<</if>>
+		<<else>>
+		//Remove her chastity belt if you wish to fuck her//
+		<</if>>
+	<</if>>
+<</replace>>
+<</widget>>
+/%
+ Call as <<SlaveInteractAnalSexOption>>
+%/
+<<widget "SlaveInteractAnalSexOption">>
+<<replace #analsexoption>>
+	<<if canDoAnal($activeSlave)>>
+		| <<link "Fuck her ass">><<replace "#miniscene">><<include "FAnus">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><</link>>
+	<<else>>
+		| //Remove her chastity belt if you wish to fuck her ass//
+	<</if>>
+<</replace>>
+<</widget>>
+/%
+ Call as <<SlaveInteractAnalGropeOption>>
+%/
+<<widget "SlaveInteractAnalGropeOption">>
+<<replace #analgropeoption>>
+	<<if canDoAnal($activeSlave)>>
+		| <<link "Grope her butt">><<replace "#miniscene">><<include "FondleButt">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><</link>>
+	<</if>>
+<</replace>>
+<</widget>>
+/%
+ Call as <<SlaveInteractGropeOption>>
+%/
+<<widget "SlaveInteractGropeOption">>
+<<replace #gropeoption>>
+	<<if ($activeSlave.vagina > -1)>>
+		<<if canDoVaginal($activeSlave)>>
+		| <<link "Grope her pussy">><<replace "#miniscene">><<include "FondleVagina">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><</link>>
+		<</if>>
+	<</if>>
+<</replace>>
+<</widget>>
+/%
+ Call as <<SlaveInteractDickGropeOption>>
+%/
+<<widget "SlaveInteractDickGropeOption">>
+<<replace #dickgropeoption>>
+	<<if ($activeSlave.dick >0)>>
+		<<if ($activeSlave.dickAccessory != "chastity") && ($activeSlave.dickAccessory != "combined chastity")>>
+		| <<link "Grope her dick">><<replace "#miniscene">><<include "FondleDick">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><</link>>
+		<<else>>
+		| //Remove her dick chastity belt if you wish to play with her cock//
+		<</if>>
+	<</if>>
+<</replace>>
+<</widget>>
+/%
+ Call as <<agentLeadership>>
+ Must be within $arcologies[$i] for loop
+%/
+<<widget "agentLeadership">>
+<<set $agentBonus = 0>>
+<<for _j = 0; _j < $leaders.length; _j++>>
+	<<if $arcologies[$i].leaderID == $leaders[_j].ID>>
+		<<set $agentBonus = $leaders[_j].intelligence>>
+		<<set $agentBonus += $leaders[_j].intelligenceImplant>>
+		<<if $leaders[_j].age > 35>>
+			<<set $agentBonus += 1>>
+		<</if>>
+		<<if $leaders[_j].career == "an arcology owner">>
+			<<set $agentBonus += 1>>
+		<<elseif setup.HGCareers.includes($leaders[_j].career)>>
+			<<set $agentBonus += 1>>
+		<</if>>
+		<<if $leaders[_j].fetishStrength > 95>>
+		<<if ($leaders[_j].fetish == "dom") || ($leaders[_j].fetish == "sadist")>>
+			<<set $agentBonus += 1>>
+		<<elseif ($leaders[_j].fetish == "submissive") || ($leaders[_j].fetish == "masochist")>>
+			<<set $agentBonus -= 1>>
+		<</if>>
+		<</if>>
+		<<if $leaders[_j].energy > 95>>
+			<<set $agentBonus += 1>>
+		<</if>>
+	<<break>>
+	<</if>>
+<</for>>
+<<if $agentBonus > random(0,5)>>
+	<<set $agentBonus = 1>>
+<<else>>
+	<<set $agentBonus = 0>>
+<</if>>
+<</widget>>
+
+/%
+ Call as <<PCTitle>>
+%/
+<<widget "PCTitle">>
+
+<<set $PCTitle = $PC.name>>
+<<if $PC.surname>><<set $PCTitle += " " + $PC.surname>><</if>>
+<<set $titles = []>>
+
+<<if $cheater == 1>>
+	<<set $PCTitle = ($PCTitle + " the Cheater")>>
+<<elseif $rep > 18000>>
+	<<set $PCTitle = ($PCTitle + " the Great")>>
+<<elseif $rep > 17000>>
+	<<set $PCTitle = ("the exalted " + $PCTitle)>>
+<<elseif $rep > 16000>>
+	<<set $PCTitle = ("the illustrious " + $PCTitle)>>
+<<elseif $rep > 15000>>
+	<<set $PCTitle = ("the prestigious " + $PCTitle)>>
+<<elseif $rep > 14000>>
+	<<set $PCTitle = ("the renowned " + $PCTitle)>>
+<<elseif $rep > 13000>>
+	<<set $PCTitle = ("the famed " + $PCTitle)>>
+<<elseif $rep > 12000>>
+	<<set $PCTitle = ("the celebrated " + $PCTitle)>>
+<<elseif $rep > 11000>>
+	<<set $PCTitle = ("the honored " + $PCTitle)>>
+<<elseif $rep > 10000>>
+	<<set $PCTitle = ("the acclaimed " + $PCTitle)>>
+<<elseif $rep > 9000>>
+	<<set $PCTitle = ("the eminent " + $PCTitle)>>
+<<elseif $rep > 8250>>
+	<<set $PCTitle = ("the prominent " + $PCTitle)>>
+<<elseif $rep > 7500>>
+	<<set $PCTitle = ("the distinguished " + $PCTitle)>>
+<<elseif $rep > 6750>>
+	<<set $PCTitle = ("the admired " + $PCTitle)>>
+<<elseif $rep > 6000>>
+	<<set $PCTitle = ("the esteemed " + $PCTitle)>>
+<<elseif $rep > 5250>>
+	<<set $PCTitle = ("the respected " + $PCTitle)>>
+<<elseif $rep > 4500>>
+	<<set $PCTitle = ("the known " + $PCTitle)>>
+<<elseif $rep > 3750>>
+	<<set $PCTitle = ("the recognized " + $PCTitle)>>
+<<elseif $rep > 3000>>
+	<<set $PCTitle = ("the rumored " + $PCTitle)>>
+<</if>>
+
+<<set $PCTitle = ($PCTitle + ", ")>>
+
+<<if $PC.name == "FC Dev">>
+	<<set $titles.push("the Creator")>>
+<</if>>
+
+<<if $plot == 1>>
+	<<if $invasionVictory == 3>>
+	<<if $PC.title == 1>>
+		<<set $titles.push("Hero of the City")>>
+	<<else>>
+		<<set $titles.push("Heroine of the City")>>
+	<</if>>
+	<<elseif $invasionVictory == 2>>
+	<<set $titles.push("Defender of the City")>>
+	<</if>>
+	<<if $daughtersVictory == 3>>
+	<<set $titles.push("Destroyer of the Daughters")>>
+	<<elseif $daughtersVictory == 2>>
+	<<if $PC.title == 1>>
+		<<set $titles.push("Victor over the Daughters")>>
+	<<else>>
+		<<set $titles.push("Victrix over the Daughters")>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $mercenaries >= 5>>
+	<<if $mercenariesTitle == "Evocati">>
+	<<set $seed = $mercenariesTitle>>
+	<<set $seed = ("Princeps of the " + $seed)>>
+	<<set $titles.push($seed)>>
+	<<elseif $mercenariesTitle == "Knights">>
+	<<set $seed = $mercenariesTitle>>
+	<<if $PC.title == 1>>
+		<<set $seed = ("Lord Commander of the " + $seed)>>
+	<<else>>
+		<<set $seed = ("Lady Commander of the " + $seed)>>
+	<</if>>
+	<<set $titles.push($seed)>>
+	<<elseif $mercenariesTitle == "Immortals">>
+	<<set $seed = $mercenariesTitle>>
+	<<set $seed = ("Tyrant of the " + $seed)>>
+	<<set $titles.push($seed)>>
+	<<else>>
+	<<set $seed = $mercenariesTitle>>
+	<<set $seed = ("Commander of the " + $seed)>>
+	<<set $titles.push($seed)>>
+	<</if>>
+<<elseif $mercenaries >= 1>>
+	<<set $titles.push("Commander of the Mercenaries")>>
+<</if>>
+
+<<if $dispensary == 1>>
+	<<if $PC.title == 1>>
+		<<set $titles.push("Pharmacologos")>>
+	<<else>>
+		<<set $titles.push("Pharmacologes")>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSupremacist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Grand Champion of the Blood")>>
+<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Champion of the Blood")>>
+<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Defender of the Blood")>>
+<</if>>
+
+<<if $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Grand Overseer of the Inferior Race")>>
+<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Overseer of the Inferior Race")>>
+<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Subduer of the Inferior Race")>>
+<</if>>
+
+<<if $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Buttfucker of All Slaves")>>
+<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Sodomizer of the Traps")>>
+<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.3>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Penetrator of the Sissies")>>
+	<<else>>
+	<<set $titles.push("Penetratrix of the Sissies")>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.9>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Father to the City")>>
+	<<else>>
+	<<set $titles.push("Mother to the City")>>
+	<</if>>
+<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Defender of Women")>>
+<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Restorer of Morals")>>
+<</if>>
+
+<<if $arcologies[0].FSPaternalist >= $FSLockinLevel*0.9>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Protector to All Slaves")>>
+	<<else>>
+	<<set $titles.push("Protectrix to All Slaves")>>
+	<</if>>
+<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.6>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Benefactor of Slaves")>>
+	<<else>>
+	<<set $titles.push("Benefactrix of Slaves")>>
+	<</if>>
+<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Pursuer of Justice")>>
+<</if>>
+
+<<if $arcologies[0].FSDegradationist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Holder of the Rod and the Lash")>>
+<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Subduer of Slaves")>>
+<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Pursuer of Justice")>>
+<</if>>
+
+<<if $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("the Purifier of the Breasts")>>
+<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("the Discerning")>>
+<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("the Tasteful")>>
+<</if>>
+
+<<if $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("the Expander of the Breasts")>>
+<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("the Expander")>>
+<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.3>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("the Implantor")>>
+	<<else>>
+	<<set $titles.push("the Implantrix")>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPastoralist >= $FSLockinLevel*0.9>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("the Master of Stock")>>
+	<<else>>
+	<<set $titles.push("the Mistress of Stock")>>
+	<</if>>
+<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("the Rancher")>>
+<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("the Farmer")>>
+<</if>>
+
+<<if $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("beloved of Brodin")>>
+<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.6>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("he of the godlike Body")>>
+	<<else>>
+	<<set $titles.push("she of the godlike Body")>>
+	<</if>>
+<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("advancer of Gains")>>
+<</if>>
+
+<<if $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Grand Preserver of MILFS")>>
+<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Fucker of MILFS")>>
+<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.3>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("he of the notorious MILF preference")>>
+	<<else>>
+	<<set $titles.push("she of the notorious MILF preference")>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Keeper of the Magnificent Young Harem")>>
+<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Keeper of Virgins")>>
+<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("the Virginbreaker")>>
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionistLaw == 1>>
+	<<set $titles.push("the Prophet")>>
+<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Keeper of the Blade and Chalice")>>
+<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Champion of the Faith")>>
+<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("the Holy")>>
+<</if>>
+
+<<if $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("First Consul")>>
+<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Aedile")>>
+<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Quaestor")>>
+<</if>>
+
+<<if $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.9>>
+	<<set $titles.push("Tlatcani")>>
+<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Cihuacoatl")>>
+<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Tlatoani")>>
+<</if>>
+
+<<if $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.9>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("the Living God")>>
+	<<else>>
+	<<set $titles.push("the Living Goddess")>>
+	<</if>>
+<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Pharaoh")>>
+<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.3>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Prince of the Nile")>>
+	<<else>>
+	<<set $titles.push("Princess of the Nile")>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.9>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Emperor and Descendant of Amaterasu")>>
+	<<else>>
+	<<set $titles.push("Amaterasu Reborn")>>
+	<</if>>
+<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.6>>
+	<<set $titles.push("Shogun")>>
+<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Daimyo")>>
+<</if>>
+
+<<if $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.9>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Caliph")>>
+	<<else>>
+	<<set $titles.push("Handmaiden of Allah")>>
+	<</if>>
+<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.6>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Sultan")>>
+	<<else>>
+	<<set $titles.push("Sultana")>>
+	<</if>>
+<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.3>>
+	<<set $titles.push("Beloved of Allah")>>
+<</if>>
+
+<<if $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.9>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Emperor and Holder of the Mandate of Heaven")>>
+	<<else>>
+	<<set $titles.push("Empress and Holder of the Mandate of Heaven")>>
+	<</if>>
+<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.6>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Emperor")>>
+	<<else>>
+	<<set $titles.push("Empress")>>
+	<</if>>
+<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.3>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Governor of the Province")>>
+	<<else>>
+	<<set $titles.push("Governess of the Province")>>
+	<</if>>
+<</if>>
+
+<<if $brothelSlaves >= 15>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Procurator of the Brothel")>>
+	<<else>>
+	<<set $titles.push("Procuratrix of the Brothel")>>
+	<</if>>
+<</if>>
+<<if $clubSlaves >= 15>>
+	<<set $titles.push("First on the Club")>>
+<</if>>
+<<if $dairySlaves >= 15>>
+	<<set $titles.push("Keeper of the Cattle")>>
+<</if>>
+<<if $cumSlaves >= 15>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Extractor of the Ejaculate")>>
+	<<else>>
+	<<set $titles.push("Extractrix of the Ejaculate")>>
+	<</if>>
+<</if>>
+<<if $servantsQuartersSlaves >= 15>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Director of the Servants")>>
+	<<else>>
+	<<set $titles.push("Directrix of the Servants")>>
+	<</if>>
+<</if>>
+<<if $schoolroomSlaves >= 10>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Educator of the Slaves")>>
+	<<else>>
+	<<set $titles.push("Educatrix of the Slaves")>>
+	<</if>>
+<</if>>
+<<if $spaSlaves >= 10>>
+	<<set $titles.push("Order of the Bath")>>
+<</if>>
+<<if $arcadeSlaves >= 15>>
+	<<set $titles.push("Comptroller of the Arcade")>>
+<</if>>
+
+<<set $schoolsPresent = []>>
+<<set $schoolsPerfected = []>>
+<<if $TSS.schoolProsperity >= 10>>
+	<<set $schoolsPerfected.push("The Slave School")>>
+<<elseif $TSS.schoolPresent == 1>>
+	<<set $schoolsPresent.push("The Slave School")>>
+<</if>>
+<<if $GRI.schoolProsperity >= 10>>
+	<<set $schoolsPerfected.push("The Growth Research Institute")>>
+<<elseif $GRI.schoolPresent == 1>>
+	<<set $schoolsPresent.push("The Growth Research Institute")>>
+<</if>>
+<<if $SCP.schoolProsperity >= 10>>
+	<<set $schoolsPerfected.push("St. Claver Preparatory")>>
+<<elseif $SCP.schoolPresent == 1>>
+	<<set $schoolsPresent.push("St. Claver Preparatory")>>
+<</if>>
+<<if $LDE.schoolProsperity >= 10>>
+	<<set $schoolsPerfected.push("L'Ecole des Enculees")>>
+<<elseif $LDE.schoolPresent == 1>>
+	<<set $schoolsPresent.push("L'Ecole des Enculees")>>
+<</if>>
+<<if $TGA.schoolProsperity >= 10>>
+	<<set $schoolsPerfected.push("The Gymnasium-Academy")>>
+<<elseif $TGA.schoolPresent == 1>>
+	<<set $schoolsPresent.push("The Gymnasium-Academy")>>
+<</if>>
+<<if $schoolsPerfected.length > 0>>
+	<<if $PC.title == 1>>
+	<<set $schoolTitle = "Benefactor of ">>
+	<<else>>
+	<<set $schoolTitle = "Benefactrix of ">>
+	<</if>>
+	<<for _mwi = 0; _mwi < $schoolsPerfected.length; _mwi++>>
+		<<set $seed = $schoolsPerfected[_mwi]>>
+		<<set $schoolTitle = ($schoolTitle + $seed)>>
+		<<if _mwi < $schoolsPerfected.length-2>>
+			<<set $schoolTitle = ($schoolTitle + ", ")>>
+		<<elseif _mwi == $schoolsPerfected.length-2>>
+			<<if $schoolsPerfected.length > 2>>
+			<<set $schoolTitle = ($schoolTitle + ", and ")>>
+			<<else>>
+			<<set $schoolTitle = ($schoolTitle + " and ")>>
+			<</if>>
+		<</if>>
+	<</for>>
+	<<set $titles.push($schoolTitle)>>
+<</if>>
+<<if $schoolsPresent.length > 0>>
+	<<set $schoolTitle = "Supporter of ">>
+	<<for _mwi = 0; _mwi < $schoolsPresent.length; _mwi++>>
+	<<set $seed = $schoolsPresent[_mwi]>>
+	<<set $schoolTitle = ($schoolTitle + $seed)>>
+	<<if _mwi < $schoolsPresent.length-2>>
+		<<set $schoolTitle = ($schoolTitle + ", ")>>
+	<<elseif _mwi == $schoolsPresent.length-2>>
+		<<if $schoolsPresent.length > 2>>
+		<<set $schoolTitle = ($schoolTitle + ", and ")>>
+		<<else>>
+		<<set $schoolTitle = ($schoolTitle + " and ")>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<set $titles.push($schoolTitle)>>
+<</if>>
+<<if $TFS.schoolProsperity >= 10>>
+	<<set $titles.push("Honorary Sibling of the Futanari Sisters")>>
+<<elseif $TFS.schoolPresent == 1>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Protector of the Futanari Sisters")>>
+	<<else>>
+	<<set $titles.push("Protectrix of the Futanari Sisters")>>
+	<</if>>
+<</if>>
+
+<<if $slaves.length > 50>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Master of Slaves")>>
+	<<else>>
+	<<set $titles.push("Mistress of Slaves")>>
+	<</if>>
+<<elseif $slaves.length > 40>>
+	<<set $titles.push("Holder of Slaves")>>
+<<elseif $slaves.length > 30>>
+	<<set $titles.push("Keeper of Slaves")>>
+<<elseif $slaves.length > 20>>
+	<<set $titles.push("Manager of Slaves")>>
+<<elseif $slaves.length > 10>>
+	<<set $titles.push("owner of slaves")>>
+<</if>>
+
+<<if $corpValue > 500000>>
+	<<set $titles.push("Corporate Titan")>>
+<<elseif $corpValue > 250000>>
+	<<set $titles.push("corporate innovator")>>
+<<elseif $corpValue > 100000>>
+	<<set $titles.push("corporate founder")>>
+<<elseif $corpValue > 0>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("noted corporate businessman")>>
+	<<else>>
+	<<set $titles.push("noted corporate businesswoman")>>
+	<</if>>
+<</if>>
+
+<<if $titles.length > 0>>
+	<<set $titles.push("and ")>>
+<</if>>
+
+<<if $rep > 18000>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("unquestioned Master of the Arcology")>>
+	<<else>>
+	<<set $titles.push("unquestioned Mistress of the Arcology")>>
+	<</if>>
+<<elseif $rep > 15000>>
+	<<if $PC.title == 1>>
+	<<set $titles.push("Lord of the Arcology")>>
+	<<else>>
+	<<set $titles.push("Lady of the Arcology")>>
+	<</if>>
+<<elseif $rep > 12000>>
+	<<set $titles.push("Ruler of the Arcology")>>
+<<elseif $rep > 9000>>
+	<<set $titles.push("chief officer of the arcology")>>
+<<else>>
+	<<set $titles.push("owner of the arcology")>>
+<</if>>
+
+<<for _mwi = 0; _mwi < $titles.length; _mwi++>>
+	<<set $seed = $titles[_mwi]>>
+	<<set $PCTitle = ($PCTitle + $seed)>>
+	<<if _mwi < $titles.length-2>>
+	<<set $PCTitle = ($PCTitle + ", ")>>
+	<</if>>
+<</for>>
+
+<</widget>>
+
+/%
+ Call as <<MenialPopCap>>
+ Applies the menial popcap without asking.
+%/
+<<widget "MenialPopCap">>
+
+<<set $PopCap = 500>>
+<<for _mwi = 20; _mwi < $sectors.length; _mwi++>>
+	<<if $sectors[_mwi].type == "Pens">>
+		<<set $PopCap += 500>>
+	<</if>>
+<</for>>
+<<set _OverMenialCap = ($helots+$fuckdolls+$menialBioreactors)-$PopCap>>
+<<if _OverMenialCap > 0>>
+	<<set _Price = Math.trunc(($slaveCostFactor*1000)/100)*100>>
+	<<set _Price = Math.clamp(_Price, 500, 1500)>>
+	<<if $helots > 0>>
+		<<if $helots > _OverMenialCap>>
+			<<set $cash += _OverMenialCap*_Price, $menialDemandFactor -= _OverMenialCap,
+			$helots -= _OverMenialCap, _OverMenialCap = 0>>
+			You don't have enough room for all your menials and are obliged to sell some.
+		<<else>>
+			<<set $cash += $helots*_Price, $menialDemandFactor -= $helots,
+			_OverMenialCap -= $helots, $helots = 0>>
+			You don't have enough room for your menials and are obliged to sell them.
+		<</if>>
+	<</if>>
+	<<if (_OverMenialCap > 0) && ($fuckdolls > 0)>>
+		<<if $fuckdolls > _OverMenialCap>>
+			<<set $cash += _OverMenialCap*(_Price*2), $menialDemandFactor -= _OverMenialCap,
+			$fuckdolls -= _OverMenialCap, _OverMenialCap = 0>>
+			You don't have enough room for all your fuckdolls and are obliged to sell some.
+		<<else>>
+			<<set $cash += $fuckdolls*(_Price*2), $menialDemandFactor -= $fuckdolls,
+			_OverMenialCap -= $fuckdolls, $fuckdolls = 0>>
+			You don't have enough room for your fuckdolls and are obliged to sell them.
+		<</if>>
+	<</if>>
+	<<if (_OverMenialCap > 0) && ($menialBioreactors > 0)>>
+		<<set $cash += _OverMenialCap*(_Price-100), $menialDemandFactor -= _OverMenialCap,
+		$menialBioreactors -= _OverMenialCap>>
+		You don't have enough room for all your menial bioreactors and are obliged to sell some.
+	<</if>>
+<</if>>
+
+<</widget>>
+
+/%
+ Call as <<OralSkillIncrease>>
+ $args[0]: Slave.
+ $skillIncrease: Amount of increase.
+%/
+<<widget "OralSkillIncrease">>
+
+<<SlavePronouns $args[0]>>
+<<if $args[0].oralSkill <= 10>>
+	<<if $args[0].oralSkill+$skillIncrease > 10>>
+		@@.green;$pronounCap now has basic knowledge about oral sex,@@ and can at least suck a dick without constant gagging.
+	<</if>>
+<<elseif $args[0].oralSkill <= 30>>
+	<<if $args[0].oralSkill+$skillIncrease > 30>>
+		@@.green;$pronounCap now has some oral skills,@@ and can reliably bring dicks and pussies to climax with her mouth.
+	<</if>>
+<<elseif $args[0].oralSkill <= 60>>
+	<<if $args[0].oralSkill+$skillIncrease > 60>>
+		@@.green;$pronounCap is now an oral expert,@@ and has a delightfully experienced tongue.
+	<</if>>
+<<elseif $args[0].oralSkill < 100>>
+	<<if $args[0].oralSkill+$skillIncrease >= 100>>
+		@@.green;$pronounCap has mastered oral sex,@@ and can learn nothing more about sucking dick or eating pussy.
+	<</if>>
+<</if>>
+<<set $args[0].oralSkill += $skillIncrease>>
+
+<</widget>>
+
+/%
+ Call as <<VaginalSkillIncrease>>
+ $args[0]: Slave.
+ $skillIncrease: Amount of increase.
+%/
+<<widget "VaginalSkillIncrease">>
+
+<<SlavePronouns $args[0]>>
+<<if $args[0].vaginalSkill <= 10>>
+	<<if $args[0].vaginalSkill+$skillIncrease > 10>>
+		@@.green;$pronounCap now has basic knowledge about vaginal sex,@@ and can avoid some of the common pitfalls and turnoffs.
+	<</if>>
+<<elseif $args[0].vaginalSkill <= 30>>
+	<<if $args[0].vaginalSkill+$skillIncrease > 30>>
+		@@.green;$pronounCap now has some vaginal sex skills,@@ and can do more than just lie there and take it.
+	<</if>>
+<<elseif $args[0].vaginalSkill <= 60>>
+	<<if $args[0].vaginalSkill+$skillIncrease > 60>>
+		@@.green;$pronounCap is now a vaginal sex expert,@@ and has the muscular control to massage anything that's inside her.
+	<</if>>
+<<elseif $args[0].vaginalSkill < 100>>
+	<<if $args[0].vaginalSkill+$skillIncrease >= 100>>
+		@@.green;$pronounCap has mastered vaginal sex,@@ and can learn nothing more about tribbing or taking dick.
+	<</if>>
+<</if>>
+<<set $args[0].vaginalSkill += $skillIncrease>>
+
+<</widget>>
+
+/%
+ Call as <<AnalSkillIncrease>>
+ $args[0]: Slave.
+ $skillIncrease: Amount of increase.
+%/
+<<widget "AnalSkillIncrease">>
+
+<<SlavePronouns $args[0]>>
+<<if $args[0].analSkill <= 10>>
+	<<if $args[0].analSkill+$skillIncrease > 10>>
+		@@.green;$pronounCap now has basic knowledge about anal sex,@@ and can accept penetration of her anus without danger.
+	<</if>>
+<<elseif $args[0].analSkill <= 30>>
+	<<if $args[0].analSkill+$skillIncrease > 30>>
+		@@.green;$pronounCap now has some anal sex skills,@@ and needs less preparation before taking rough penetration.
+	<</if>>
+<<elseif $args[0].analSkill <= 60>>
+	<<if $args[0].analSkill+$skillIncrease > 60>>
+		@@.green;$pronounCap is now an anal sex expert,@@ and knows how to use her sphincter to please.
+	<</if>>
+<<elseif $args[0].analSkill < 100>>
+	<<if $args[0].analSkill+$skillIncrease >= 100>>
+		@@.green;$pronounCap has mastered anal sex,@@ and can learn nothing more about taking it up the ass.
+	<</if>>
+<</if>>
+<<set $args[0].analSkill += $skillIncrease>>
+
+<</widget>>
+
+/%
+ Call as <<WhoreSkillIncrease>>
+ $args[0]: Slave.
+ $skillIncrease: Amount of increase.
+%/
+<<widget "WhoreSkillIncrease">>
+
+<<SlavePronouns $args[0]>>
+<<if $args[0].whoreSkill <= 10>>
+	<<if $args[0].whoreSkill+$skillIncrease > 10>>
+		@@.green;$pronounCap now has basic knowledge about how to whore,@@ and can avoid some potentially dangerous situations.
+	<</if>>
+<<elseif $args[0].whoreSkill <= 30>>
+	<<if $args[0].whoreSkill+$skillIncrease > 30>>
+		@@.green;$pronounCap now has some skill as a whore,@@ and knows how to sell her body at a good price.
+	<</if>>
+<<elseif $args[0].whoreSkill <= 60>>
+	<<if $args[0].whoreSkill+$skillIncrease > 60>>
+		@@.green;$pronounCap is now an expert whore,@@ and can often make clients forget that $pronoun's a prostitute they're paying for.
+	<</if>>
+<<elseif $args[0].whoreSkill < 100>>
+	<<if $args[0].whoreSkill+$skillIncrease >= 100>>
+		@@.green;$pronounCap is now a masterful whore,@@ and can learn nothing more about prostitution.
+	<</if>>
+<</if>>
+<<set $args[0].whoreSkill += $skillIncrease>>
+
+<</widget>>
+
+/%
+ Call as <<EntertainSkillIncrease>>
+ $args[0]: Slave.
+ $skillIncrease: Amount of increase.
+%/
+<<widget "EntertainSkillIncrease">>
+
+<<SlavePronouns $args[0]>>
+<<if $args[0].entertainSkill <= 10>>
+	<<if $args[0].entertainSkill+$skillIncrease > 10>>
+		@@.green;$pronounCap now has basic knowledge about how to be entertaining,@@ and can usually avoid serious faux pas.
+	<</if>>
+<<elseif $args[0].entertainSkill <= 30>>
+	<<if $args[0].entertainSkill+$skillIncrease > 30>>
+		@@.green;$pronounCap now has some skill as an entertainer,@@ and can flirt, dance, and strip acceptably.
+	<</if>>
+<<elseif $args[0].entertainSkill <= 60>>
+	<<if $args[0].entertainSkill+$skillIncrease > 60>>
+		@@.green;$pronounCap is now an expert entertainer,@@ and can flirt engagingly, dance alluringly, and strip arousingly.
+	<</if>>
+<<elseif $args[0].entertainSkill < 100>>
+	<<if $args[0].entertainSkill+$skillIncrease >= 100>>
+		@@.green;$pronounCap is now a masterful entertainer,@@ and can learn nothing more about flirting, dancing, or stripping.
+	<</if>>
+<</if>>
+<<set $args[0].entertainSkill += $skillIncrease>>
+
+<</widget>>
+
+/%
+ Call as <<FaceIncrease>>
+ $args[0]: Slave.
+ $args[1]: Amount of increase.
+%/
+<<widget "FaceIncrease">>
+
+<<SlavePronouns $args[0]>>
+<<if $args[0].face <= -95>>
+	@@.green;$possessiveCap face is no longer horrifying,@@ and is now merely ugly.
+<<elseif $args[0].face <= -40>>
+	<<if $args[0].face+$args[1] > -40>>
+		@@.green;$possessiveCap face is no longer ugly,@@ and is now merely unattractive.
+	<</if>>
+<<elseif $args[0].face <= -10>>
+	<<if $args[0].face+$args[1] > -10>>
+		@@.green;$possessiveCap face is no longer unattractive,@@ and is now somewhat tolerable.
+	<</if>>
+<<elseif $args[0].face <= 10>>
+	<<if $args[0].face+$args[1] > 10>>
+		@@.green;$possessiveCap face is now decently attractive,@@ rather than merely tolerable.
+	<</if>>
+<<elseif $args[0].face <= 40>>
+	<<if $args[0].face+$args[1] > 40>>
+		@@.green;$possessiveCap face is now quite beautiful,@@ rather than merely pretty.
+	<</if>>
+<<elseif $args[0].face <= 95>>
+	<<if $args[0].face+$args[1] > 95>>
+		@@.green;$possessiveCap face is now perfect.@@ It's difficult to imagine how it could be any more beautiful.
+	<</if>>
+<</if>>
+<<set $args[0].face = Math.clamp($args[0].face+$args[1],-100,100)>>
+<<if $args[0].face > 95>><<set $args[0].face = 100>><</if>>
+
+<</widget>>
+
+/%
+ Call as <<AddSlave>>
+ $args[0]: Slave.
+%/
+<<widget "AddSlave">>
+
+<<switch $args[0].eyeColor>>
+<<case "milky white" "implant">><<set $args[0].origEye = either("blue", "green", "brown", "hazel", "light blue", "light green", "dark green", "dark blue")>>
+<<default>><<set $args[0].origEye = $args[0].eyeColor>>
+<</switch>>
+<<set $args[0].origHColor = $args[0].hColor>>
+<<set $args[0].pubicHColor = $args[0].hColor>>
+
+<<if $args[0].dick > 0>>
+	<<if $args[0].balls > 0>>
+	<<if $args[0].devotion <= 50>>
+	<<if ($args[0].fetish != "buttslut") || ($args[0].fetishKnown != 1)>>
+	<<if $args[0].sexualFlaw != "hates women">>
+	<<set $REFeminizationCheckinIDs.push($args[0].ID)>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $args[0].age > 35>>
+	<<if $args[0].face < 40>>
+	<<if $args[0].analSkill <= 30>>
+	<<set $REMILFCheckinIDs.push($args[0].ID)>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $args[0].attrXY <= 60>>
+	<<if $args[0].attrXX > 60>>
+		<<set $REOrientationCheckinIDs.push($args[0].ID)>>
+	<</if>>
+<</if>>
+<<if $args[0].face < -10>>
+	<<set $REUglyCheckinIDs.push($args[0].ID)>>
+<</if>>
+<<if $args[0].anus < 2>>
+	<<set $REButtholeCheckinIDs.push($args[0].ID)>>
+<</if>>
+<<if $args[0].boobs < 800>>
+	<<set $REReductionCheckinIDs.push($args[0].ID)>>
+<</if>>
+
+<<set $slaves.push($args[0]), $slavesOriginal.push($args[0])>>
+
+/* add to facilities array if needed */
+<<if $args[0].assignment != "rest">>
+	<<assignJob $args[0] $args[0].assignment>>
+<</if>>
+
+/** do not run the Rules Assistant before adding the new slave to the slaves list! **/
+<<if $ui != "start">>
+<<if $universalRulesNewSlavesRA == 1>>
+<<if $rulesAssistantAuto != 0>>
+	<<silently>>
+	<<CheckAutoRulesActivate $args[0]>>
+	<<DefaultRules $args[0]>>
+	<</silently>>
+<</if>>
+<</if>>
+<</if>>
+
+<</widget>>
+
+/%
+ Call as <<Enunciate>>
+ $args[0]: Slave.
+%/
+<<widget "Enunciate">>
+	<<if SlaveStatsChecker.checkForLisp($args[0])>>
+		<<if def $PC.customTitleLisp>><<set $titleEnunciate = $PC.customTitleLisp>><<elseif $PC.title != 0>><<set $titleEnunciate = "Mathter">><<else>><<set $titleEnunciate = "Mithtreth">><</if>>
+		<<if def $args[0].customTitleLisp && $args[0].customTitleLisp != "">>
+			<<set $titleEnunciate = $args[0].customTitleLisp>>
+		<</if>>
+		<<set $sayEnunciate = "lisp">>
+		<<set $sEnunciate = "th">>
+		<<set $SEnunciate = "Th">>
+		<<set $ssEnunciate = "th">>
+		<<set $cEnunciate = "th">>
+		<<set $zEnunciate = "th">>
+	<<else>>
+		<<if def $PC.customTitle>><<set $titleEnunciate = $PC.customTitle>><<elseif $PC.title != 0>><<set $titleEnunciate = "Master">><<else>><<set $titleEnunciate = "Mistress">><</if>>
+		<<if def $args[0].customTitle && $args[0].customTitle != "">>
+			<<set $titleEnunciate = $args[0].customTitle>>
+		<</if>>
+		<<if def $PC.customTitle>><<set $writtenTitle = $PC.customTitle>><<elseif $PC.title != 0>><<set $writtenTitle = "Master">><<else>><<set $writtenTitle = "Mistress">><</if>>
+		<<if def $args[0].customTitle && $args[0].customTitle != "" && $args[0].rudeTitle == 0>>
+			<<set $writtenTitle = $args[0].customTitle>>
+		<</if>>
+		<<set $sayEnunciate = "say">>
+		<<set $sEnunciate = "s">>
+		<<set $SEnunciate = "S">>
+		<<set $ssEnunciate = "ss">>
+		<<set $cEnunciate = "c">>
+		<<set $zEnunciate = "z">>
+	<</if>>
+<</widget>>
+<<widget "Master">><<if def $args[0]>><<Enunciate $args[0]>><<elseif ndef $titleEnunciate>><<Enunciate $activeSlave>><</if>>$titleEnunciate<</widget>>
+<<widget "WrittenMaster">><<if def $args[0]>><<Enunciate $args[0]>><<elseif ndef $titleEnunciate>><<Enunciate $activeSlave>><</if>>$writtenTitle<</widget>>
+<<widget "say">><<if def $args[0] && $sayEnunciate != "lisp">>$args[0]<<else>>$sayEnunciate<</if>><</widget>>
+<<widget "s">>$sEnunciate<</widget>>
+<<widget "S">>$SEnunciate<</widget>>
+<<widget "ss">>$ssEnunciate<</widget>>
+<<widget "c">>$cEnunciate<</widget>>
+<<widget "z">>$zEnunciate<</widget>>
+
+/%
+ Call as <<SoftenBehavioralFlaw>>
+ $args[0]: Slave.
+%/
+<<widget "SoftenBehavioralFlaw">>
+	<<switch $args[0].behavioralFlaw>>
+	<<case "arrogant">>
+		<<set $args[0].behavioralQuirk = "confident">>
+	<<case "bitchy">>
+		<<set $args[0].behavioralQuirk = "cutting">>
+	<<case "odd">>
+		<<set $args[0].behavioralQuirk = "funny">>
+	<<case "hates men">>
+		<<set $args[0].behavioralQuirk = "adores women">>
+	<<case "hates women">>
+		<<set $args[0].behavioralQuirk = "adores men">>
+	<<case "gluttonous">>
+		<<set $args[0].behavioralQuirk = "fitness">>
+	<<case "anorexic">>
+		<<set $args[0].behavioralQuirk = "insecure">>
+	<<case "devout">>
+		<<set $args[0].behavioralQuirk = "sinful">>
+	<<case "liberated">>
+		<<set $args[0].behavioralQuirk = "advocate">>
+	<</switch>>
+	<<set $args[0].behavioralFlaw = "none">>
+<</widget>>
+
+/%
+ Call as <<SoftenSexualFlaw>>
+ $args[0]: Slave.
+%/
+<<widget "SoftenSexualFlaw">>
+	<<switch $args[0].sexualFlaw>>
+	<<case "hates oral">>
+		<<set $args[0].sexualQuirk = "gagfuck queen">>
+	<<case "hates anal">>
+		<<set $args[0].sexualQuirk = "painal queen">>
+	<<case "hates penetration">>
+		<<set $args[0].sexualQuirk = "strugglefuck queen">>
+	<<case "shamefast">>
+		<<set $args[0].sexualQuirk = "tease">>
+	<<case "idealistic">>
+		<<set $args[0].sexualQuirk = "romantic">>
+	<<case "repressed">>
+		<<set $args[0].sexualQuirk = "perverted">>
+	<<case "apathetic">>
+		<<set $args[0].sexualQuirk = "caring">>
+	<<case "crude">>
+		<<set $args[0].sexualQuirk = "unflinching">>
+	<<case "judgemental">>
+		<<set $args[0].sexualQuirk = "size queen">>
+	<</switch>>
+	<<set $args[0].sexualFlaw = "none">>
+<</widget>>
+
+/%
+ Call as <<EventFetish>>
+ $args[0]: Slave.
+ $args[1]: Fetish.
+%/
+<<widget "EventFetish">>
+
+<<if $args[0].fetish == $args[1]>>
+This experience
+<<if $args[0].fetishKnown == 1>>
+	<<if $args[0].fetishStrength > 95>>
+		@@.lightsalmon;<<switch $args[0].fetish>>
+		<<case "submissive">>deepens her sexual need to submit.
+		<<case "cumslut">>increases her appetite for oral sex.
+		<<case "humiliation">>makes her even more eager to be humiliated.
+		<<case "buttslut">>encourages her to focus on anal sex.
+		<<case "boobs">>focuses her sexuality on her breasts and nipples.
+		<<case "sadist">>titillates the sadistic part of her.
+		<<case "masochist">>helps conflate pain and sexual pleasure for her.
+		<<case "dom">>strengthens her desire to top other slaves.
+		<<case "pregnancy">>further confuses lust and pregnancy in her mind.
+		<<default>>ERROR: bad fetish
+		<</switch>>@@
+		<<set $args[0].fetishStrength += 10>>
+	<<else>>
+		is @@.hotpink;especially enjoyable for her,@@ since
+		<<switch $args[0].fetish>>
+		<<case "submissive">>she's an utterly submissive little slut.
+		<<case "cumslut">>her <<if $args[0].vagina > -1>>clit<<else>>frenulum<</if>> might as well be located in her throat.
+		<<case "humiliation">>she has a hopeless need to be humiliated and degraded.
+		<<case "buttslut">>she's completely in love with having her ass fucked.
+		<<case "boobs">>she loves breast play more than any other kind of sex.
+		<<case "sadist">>nothing is as titillating to her as another slave's pain can be.
+		<<case "masochist">>she loves pain more than she likes pleasure.
+		<<case "dom">>she lives for the times she's allowed to fuck someone.
+		<<case "pregnancy">>all her deepest sexual desires involve <<if $args[0].vagina > -1>>pregnancy<<else>>impregnation<</if>>.
+		<<default>>ERROR: bad fetish
+		<</switch>>
+		<<set $args[0].devotion += 3>>
+	<</if>>
+<<else>>
+	was surprisingly appealing for her, revealing that she's a
+	@@.lightsalmon;<<switch $args[0].fetish>>
+	<<case "submissive">>sexual submissive!
+	<<case "humiliation">>humiliation slut!
+	<<case "boobs">>slut for breast play!
+	<<case "pregnancy">>pregslut!
+	<<default>>$args[0]!
+	<</switch>>@@
+	<<set $args[0].fetishKnown = 1>>
+<</if>>
+<</if>>
+
+<</widget>>
+
+/%
+ Call as <<SlaveSort [$slaves]>>
+ $args[0]: array to sort
+%/
+<<widget "SlaveSort">>
+<<if passage() == "Main">>
+	<<switch $sortSlavesBy>>
+	<<case "name">>
+		<<if ($sortSlavesOrder == "ascending")>>
+			<<set $args[0] = $args[0].sort(function(a, b){if(a.slaveName < b.slaveName) return -1; if(a.slaveName > b.slaveName) return 1; return 0;})>>
+		<<else>>
+			<<set $args[0] = $args[0].sort(function(a, b){if(a.slaveName > b.slaveName) return -1; if(a.slaveName < b.slaveName) return 1; return 0;})>>
+		<</if>>
+	<<case "assignment">>
+		<<if ($sortSlavesOrder == "ascending")>>
+			<<set $args[0] = $args[0].sort(function(a, b){if(a.assignment < b.assignment) return -1; if(a.assignment > b.assignment) return 1; return 0;})>>
+		<<else>>
+			<<set $args[0] = $args[0].sort(function(a, b){if(a.assignment > b.assignment) return -1; if(a.assignment < b.assignment) return 1; return 0;})>>
+		<</if>>
+	<<case "seniority">>
+		<<if ($sortSlavesOrder == "ascending")>>
+			<<set $args[0] = $args[0].sort(function(a, b){return b.weekAcquired-a.weekAcquired})>>
+		<<else>>
+			<<set $args[0] = $args[0].sort(function(a, b){return a.weekAcquired-b.weekAcquired})>>
+		<</if>>
+	<<case "age">>
+		<<if ($sortSlavesOrder == "ascending")>>
+			<<set $args[0] = $args[0].sort(function(a, b){return a.age-b.age})>>
+		<<else>>
+			<<set $args[0] = $args[0].sort(function(a, b){return b.age-a.age})>>
+		<</if>>
+	<<default>>
+		<<if ($sortSlavesOrder == "ascending")>>
+			<<set $args[0] = $args[0].sort(function(a, b){return a.devotion-b.devotion})>>
+		<<else>>
+			<<set $args[0] = $args[0].sort(function(a, b){return b.devotion-a.devotion})>>
+		<</if>>
+	<</switch>>
+<<else>>
+	<<set $slaveIndices = {}>>
+	<<set $slaves.forEach(function(s, i) { $slaveIndices[s.ID] = i; })>>
+	<<set filterInPlace($args[0], function(s) { return $slaveIndices[s] !== undefined; })>>
+	<<set $args[0].sort(function(a, b) { return $slaveIndices[a] - $slaveIndices[b]; })>>
+<</if>>
+<</widget>>
+
+/%
+ Call as <<FSChange>>
+ $args[0]: FS.
+ $args[1]: Magnitude.
+%/
+<<widget "FSChange">>
+
+<<switch $args[0]>>
+<<case "Supremacist">>
+	<<if $arcologies[0].FSSupremacist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSSupremacist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSSupremacist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "Subjugationist">>
+	<<if $arcologies[0].FSSubjugationist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSSubjugationist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSSubjugationist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "GenderRadicalist">>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSGenderRadicalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSGenderRadicalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "GenderFundamentalist">>
+	<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSGenderFundamentalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSGenderFundamentalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "Paternalist">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSPaternalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSPaternalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "Degradationist">>
+	<<if $arcologies[0].FSDegradationist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSDegradationist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSDegradationist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "AssetExpansionist">>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSAssetExpansionist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSAssetExpansionist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "SlimnessEnthusiast">>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSSlimnessEnthusiast/$FSLockinLevel)>>
+		<<set $arcologies[0].FSSlimnessEnthusiast += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "TransformationFetishist">>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSTransformationFetishist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSTransformationFetishist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "BodyPurist">>
+	<<if $arcologies[0].FSBodyPurist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSBodyPurist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSBodyPurist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "MaturityPreferentialist">>
+	<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSMaturityPreferentialist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSMaturityPreferentialist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "YouthPreferentialist">>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSYouthPreferentialist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSYouthPreferentialist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "Pastoralist">>
+	<<if $arcologies[0].FSPastoralist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSPastoralist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSPastoralist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "PhysicalIdealist">>
+	<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSPhysicalIdealist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSPhysicalIdealist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "ChattelReligionist">>
+	<<if $arcologies[0].FSChattelReligionist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSChattelReligionist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSChattelReligionist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "RomanRevivalist">>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSRomanRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSRomanRevivalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "AztecRevivalist">>
+  <<if $activeArcology.FSAztecRevivalist != "unset">>
+  	<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSAztecRevivalist/$FSLockinLevel)>>
+  	<<set $arcologies[0].FSAztecRevivalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+  <</if>>
+<<case "EgyptianRevivalist">>
+	<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSEgyptianRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSEgyptianRevivalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "EdoRevivalist">>
+	<<if $arcologies[0].FSEdoRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSEdoRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSEdoRevivalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "ArabianRevivalist">>
+	<<if $arcologies[0].FSArabianRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSArabianRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSArabianRevivalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<case "ChineseRevivalist">>
+	<<if $arcologies[0].FSChineseRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSChineseRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSChineseRevivalist += 0.05*$args[1]*$FSSingleSlaveRep>>
+	<</if>>
+<<default>>
+	@@.red;ERROR: bad FS reference $args[0]@@
+<</switch>>
+
+<</widget>>
+
+/%
+ Call as <<FSChangePorn>>
+ $args[0]: FS.
+ $args[1]: Magnitude.
+%/
+<<widget "FSChangePorn">>
+
+<<switch $args[0]>>
+<<case "Supremacist">>
+	<<if $arcologies[0].FSSupremacist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSSupremacist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSSupremacist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "Subjugationist">>
+	<<if $arcologies[0].FSSubjugationist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSSubjugationist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSSubjugationist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "GenderRadicalist">>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSGenderRadicalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSGenderRadicalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "GenderFundamentalist">>
+	<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSGenderFundamentalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSGenderFundamentalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "Paternalist">>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSPaternalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSPaternalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "Degradationist">>
+	<<if $arcologies[0].FSDegradationist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSDegradationist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSDegradationist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "AssetExpansionist">>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSAssetExpansionist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSAssetExpansionist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "SlimnessEnthusiast">>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSSlimnessEnthusiast/$FSLockinLevel)>>
+		<<set $arcologies[0].FSSlimnessEnthusiast += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "TransformationFetishist">>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSTransformationFetishist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSTransformationFetishist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "BodyPurist">>
+	<<if $arcologies[0].FSBodyPurist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSBodyPurist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSBodyPurist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "MaturityPreferentialist">>
+	<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSMaturityPreferentialist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSMaturityPreferentialist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "YouthPreferentialist">>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSYouthPreferentialist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSYouthPreferentialist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "Pastoralist">>
+	<<if $arcologies[0].FSPastoralist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSPastoralist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSPastoralist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "PhysicalIdealist">>
+	<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSPhysicalIdealist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSPhysicalIdealist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "ChattelReligionist">>
+	<<if $arcologies[0].FSChattelReligionist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSChattelReligionist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSChattelReligionist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "RomanRevivalist">>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSRomanRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSRomanRevivalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "AztecRevivalist">>
+  <<if $activeArcology.FSAztecRevivalist != "unset">>
+  	<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSAztecRevivalist/$FSLockinLevel)>>
+  	<<set $arcologies[0].FSAztecRevivalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+  <</if>>
+<<case "EgyptianRevivalist">>
+	<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSEgyptianRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSEgyptianRevivalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "EdoRevivalist">>
+	<<if $arcologies[0].FSEdoRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSEdoRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSEdoRevivalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "ArabianRevivalist">>
+	<<if $arcologies[0].FSArabianRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSArabianRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSArabianRevivalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<case "ChineseRevivalist">>
+	<<if $arcologies[0].FSChineseRevivalist != "unset">>
+		<<set $rep += $args[1]*$FSSingleSlaveRep*($arcologies[0].FSChineseRevivalist/$FSLockinLevel)>>
+		<<set $arcologies[0].FSChineseRevivalist += 0.05*$args[1]*$FSSingleSlaveRep*$pornFameBonus>>
+	<</if>>
+<<default>>
+	@@.red;ERROR: bad FS reference $args[0]@@
+<</switch>>
+
+<</widget>>
+
+<<widget "ClearFacilityDecorations">>
+/* Called when a FS is abandoned or failed out of. */
+
+<<if $brothel > 0>>
+<<if $brothelDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($brothelDecoration == "Supremacist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($brothelDecoration == "Subjugationist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($brothelDecoration == "Gender Radicalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($brothelDecoration == "Gender Fundamentalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($brothelDecoration == "Paternalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($brothelDecoration == "Body Purist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($brothelDecoration == "Transformation Fetishist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($brothelDecoration == "Youth Preferentialist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($brothelDecoration == "Maturity Preferentialist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($brothelDecoration == "Slimness Enthusiast")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($brothelDecoration == "Asset Expansionist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($brothelDecoration == "Pastoralist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($brothelDecoration == "Physical Idealist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($brothelDecoration == "Chattel Religionist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($brothelDecoration == "Degradationist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($brothelDecoration == "Roman Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($brothelDecoration == "Egyptian Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($brothelDecoration == "Edo Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($brothelDecoration == "Arabian Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($brothelDecoration == "Chinese Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $club > 0>>
+<<if $clubDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($clubDecoration == "Supremacist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($clubDecoration == "Subjugationist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($clubDecoration == "Gender Radicalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($clubDecoration == "Gender Fundamentalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($clubDecoration == "Paternalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($clubDecoration == "Body Purist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($clubDecoration == "Transformation Fetishist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($clubDecoration == "Youth Preferentialist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($clubDecoration == "Maturity Preferentialist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($clubDecoration == "Slimness Enthusiast")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($clubDecoration == "Asset Expansionist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($clubDecoration == "Pastoralist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($clubDecoration == "Physical Idealist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($clubDecoration == "Chattel Religionist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($clubDecoration == "Degradationist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($clubDecoration == "Roman Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($clubDecoration == "Egyptian Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($clubDecoration == "Edo Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($clubDecoration == "Arabian Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($clubDecoration == "Chinese Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $dairy > 0>>
+<<if $dairyDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($dairyDecoration == "Supremacist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($dairyDecoration == "Subjugationist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($dairyDecoration == "Gender Radicalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($dairyDecoration == "Gender Fundamentalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($dairyDecoration == "Paternalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($dairyDecoration == "Body Purist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($dairyDecoration == "Transformation Fetishist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($dairyDecoration == "Youth Preferentialist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($dairyDecoration == "Maturity Preferentialist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($dairyDecoration == "Slimness Enthusiast")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($dairyDecoration == "Asset Expansionist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($dairyDecoration == "Pastoralist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($dairyDecoration == "Physical Idealist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($dairyDecoration == "Chattel Religionist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($dairyDecoration == "Degradationist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($dairyDecoration == "Roman Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($dairyDecoration == "Egyptian Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($dairyDecoration == "Edo Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($dairyDecoration == "Arabian Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($dairyDecoration == "Chinese Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $spa > 0>>
+<<if $spaDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($spaDecoration == "Supremacist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($spaDecoration == "Subjugationist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($spaDecoration == "Gender Radicalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($spaDecoration == "Gender Fundamentalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($spaDecoration == "Paternalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($spaDecoration == "Body Purist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($spaDecoration == "Transformation Fetishist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($spaDecoration == "Youth Preferentialist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($spaDecoration == "Maturity Preferentialist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($spaDecoration == "Slimness Enthusiast")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($spaDecoration == "Asset Expansionist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($spaDecoration == "Pastoralist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($spaDecoration == "Physical Idealist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($spaDecoration == "Chattel Religionist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($spaDecoration == "Degradationist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($spaDecoration == "Roman Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($spaDecoration == "Egyptian Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($spaDecoration == "Edo Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($spaDecoration == "Arabian Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($spaDecoration == "Chinese Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $clinic > 0>>
+<<if $clinicDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($clinicDecoration == "Supremacist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($clinicDecoration == "Subjugationist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($clinicDecoration == "Gender Radicalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($clinicDecoration == "Gender Fundamentalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($clinicDecoration == "Paternalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($clinicDecoration == "Body Purist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($clinicDecoration == "Transformation Fetishist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($clinicDecoration == "Youth Preferentialist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($clinicDecoration == "Maturity Preferentialist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($clinicDecoration == "Slimness Enthusiast")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($clinicDecoration == "Asset Expansionist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($clinicDecoration == "Pastoralist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($clinicDecoration == "Physical Idealist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($clinicDecoration == "Chattel Religionist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($clinicDecoration == "Degradationist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($clinicDecoration == "Roman Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($clinicDecoration == "Egyptian Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($clinicDecoration == "Edo Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($clinicDecoration == "Arabian Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($clinicDecoration == "Chinese Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $schoolroom > 0>>
+<<if $schoolroomDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($schoolroomDecoration == "Supremacist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($schoolroomDecoration == "Subjugationist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($schoolroomDecoration == "Gender Radicalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($schoolroomDecoration == "Gender Fundamentalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($schoolroomDecoration == "Paternalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($schoolroomDecoration == "Body Purist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($schoolroomDecoration == "Transformation Fetishist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($schoolroomDecoration == "Youth Preferentialist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($schoolroomDecoration == "Maturity Preferentialist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($schoolroomDecoration == "Slimness Enthusiast")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($schoolroomDecoration == "Asset Expansionist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($schoolroomDecoration == "Pastoralist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($schoolroomDecoration == "Physical Idealist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($schoolroomDecoration == "Chattel Religionist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($schoolroomDecoration == "Degradationist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($schoolroomDecoration == "Roman Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($schoolroomDecoration == "Egyptian Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($schoolroomDecoration == "Edo Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($schoolroomDecoration == "Arabian Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($schoolroomDecoration == "Chinese Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $cellblock > 0>>
+<<if $cellblockDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($cellblockDecoration == "Supremacist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($cellblockDecoration == "Subjugationist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($cellblockDecoration == "Gender Radicalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($cellblockDecoration == "Gender Fundamentalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($cellblockDecoration == "Paternalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($cellblockDecoration == "Body Purist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($cellblockDecoration == "Transformation Fetishist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($cellblockDecoration == "Youth Preferentialist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($cellblockDecoration == "Maturity Preferentialist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($cellblockDecoration == "Slimness Enthusiast")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($cellblockDecoration == "Asset Expansionist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($cellblockDecoration == "Pastoralist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($cellblockDecoration == "Physical Idealist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($cellblockDecoration == "Chattel Religionist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($cellblockDecoration == "Degradationist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($cellblockDecoration == "Roman Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($cellblockDecoration == "Egyptian Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($cellblockDecoration == "Edo Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($cellblockDecoration == "Arabian Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($cellblockDecoration == "Chinese Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $servantsQuarters > 0>>
+<<if $servantsQuartersDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($servantsQuartersDecoration == "Supremacist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($servantsQuartersDecoration == "Subjugationist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($servantsQuartersDecoration == "Gender Radicalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($servantsQuartersDecoration == "Gender Fundamentalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($servantsQuartersDecoration == "Paternalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($servantsQuartersDecoration == "Body Purist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($servantsQuartersDecoration == "Transformation Fetishist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($servantsQuartersDecoration == "Youth Preferentialist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($servantsQuartersDecoration == "Maturity Preferentialist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($servantsQuartersDecoration == "Slimness Enthusiast")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($servantsQuartersDecoration == "Asset Expansionist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($servantsQuartersDecoration == "Pastoralist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($servantsQuartersDecoration == "Physical Idealist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($servantsQuartersDecoration == "Chattel Religionist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($servantsQuartersDecoration == "Degradationist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($servantsQuartersDecoration == "Roman Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($servantsQuartersDecoration == "Egyptian Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($servantsQuartersDecoration == "Edo Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($servantsQuartersDecoration == "Arabian Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($servantsQuartersDecoration == "Chinese Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $arcade > 0>>
+<<if $arcadeDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($arcadeDecoration == "Supremacist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($arcadeDecoration == "Subjugationist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($arcadeDecoration == "Gender Radicalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($arcadeDecoration == "Gender Fundamentalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($arcadeDecoration == "Paternalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($arcadeDecoration == "Body Purist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($arcadeDecoration == "Transformation Fetishist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($arcadeDecoration == "Youth Preferentialist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($arcadeDecoration == "Maturity Preferentialist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($arcadeDecoration == "Slimness Enthusiast")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($arcadeDecoration == "Asset Expansionist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($arcadeDecoration == "Pastoralist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($arcadeDecoration == "Physical Idealist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($arcadeDecoration == "Chattel Religionist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($arcadeDecoration == "Degradationist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($arcadeDecoration == "Roman Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($arcadeDecoration == "Egyptian Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($arcadeDecoration == "Edo Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($arcadeDecoration == "Arabian Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($arcadeDecoration == "Chinese Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $masterSuite > 0>>
+<<if $masterSuiteDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($masterSuiteDecoration == "Supremacist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($masterSuiteDecoration == "Subjugationist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($masterSuiteDecoration == "Gender Radicalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($masterSuiteDecoration == "Gender Fundamentalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($masterSuiteDecoration == "Paternalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($masterSuiteDecoration == "Body Purist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($masterSuiteDecoration == "Transformation Fetishist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($masterSuiteDecoration == "Youth Preferentialist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($masterSuiteDecoration == "Maturity Preferentialist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($masterSuiteDecoration == "Slimness Enthusiast")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($masterSuiteDecoration == "Asset Expansionist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($masterSuiteDecoration == "Pastoralist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($masterSuiteDecoration == "Physical Idealist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($masterSuiteDecoration == "Chattel Religionist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($masterSuiteDecoration == "Degradationist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($masterSuiteDecoration == "Roman Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($masterSuiteDecoration == "Egyptian Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($masterSuiteDecoration == "Edo Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($masterSuiteDecoration == "Arabian Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($masterSuiteDecoration == "Chinese Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<</if>>
+<</if>>
+<</if>>
+
+<</widget>>
+
+/%
+ Call as <<SlaveInteractFucktoy>>
+%/
+<<widget "SlaveInteractFucktoy">>
+
+<<replace #fucktoypref>>
+	<<if ($activeSlave.assignment == "please you") || ($activeSlave.assignment == "serve in the master suite") || ($activeSlave.assignment == "be your Concubine")>>
+		__Fucktoy use preference__: <strong><span id="hole">$activeSlave.toyHole</span></strong>.
+		  <<link "Mouth">><<set $activeSlave.toyHole = "mouth">><<replace "#hole">>$activeSlave.toyHole<</replace>><</link>>
+		| <<link "Tits">><<set $activeSlave.toyHole = "boobs">><<replace "#hole">>$activeSlave.toyHole<</replace>><</link>>
+		<<if ($activeSlave.vagina > 0) && canDoVaginal($activeSlave)>>
+		| <<link "Pussy">><<set $activeSlave.toyHole = "pussy">><<replace "#hole">>$activeSlave.toyHole<</replace>><</link>>
+		<<elseif ($activeSlave.vagina == 0)>>
+		| //Take her virginity before giving her pussy special attention//
+		<</if>>
+		<<if ($activeSlave.anus > 0) && canDoAnal($activeSlave)>>
+		| <<link "Ass">><<set $activeSlave.toyHole = "ass">><<replace "#hole">>$activeSlave.toyHole<</replace>><</link>>
+		<<else>>
+		| //Take her anal virginity before giving her ass special attention//
+		<</if>>
+		| <<link "No Preference">><<set $activeSlave.toyHole = "all her holes">><<replace "#hole">>$activeSlave.toyHole<</replace>><</link>>
+		<br>
+	<</if>>
+<</replace>>
+
+<</widget>>
+
+/*
+ Call as <<SetPregType>>
+ $args[0]: Slave.
+*/
+<<widget "SetPregType">>
+	<<if $args[0].pregType == 0>>
+		<<if ($args[0].drugs == "fertility drugs")>>
+			<<if (($masterSuitePregnancyFertilitySupplements == 1) && (($args[0].assignment == "serve in the master suite") || ($args[0].assignment == "be your Concubine")))>>
+				<<if ($args[0].hormones == 2)>>
+					<<set $args[0].pregType = random(2,5)>>
+				<<else>>
+					<<set $args[0].pregType = either(1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4)>>
+				<</if>>
+			<<else>>
+				<<if ($args[0].hormones == 2)>>
+					<<set $args[0].pregType = random(1,5)>>
+				<<else>>
+					<<set $args[0].pregType = either(1, 1, 1, 1, 2, 2, 2, 3, 3, 4)>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<set $args[0].pregType = either(1, 1, 1, 1, 1, 1, 1, 1, 1, 2)>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+/*
+ Call as <<KnockMeUp>>
+ Penetrative ability and ability to become pregnant must be checked outside of this.
+ $args[0] is the target to get pregnant.
+ $args[1] is the % chance to concieve.
+ $args[2] is the ID of her sire or 0 if undefined.
+*/
+<<widget "KnockMeUp">>
+	<<if random(0,99) < $args[1]>>
+		<<set $args[0].preg = 1>>
+		<<set $args[0].pregSource = $args[2] || 0>>
+		<<SetPregType $args[0]>>
+	<</if>>
+<</widget>>
+
+<<widget "PlayerName">>$PC.name<<if $PC.surname>> $PC.surname<</if>><</widget>>
+
+<<widget "SlaveFullName">>$args[0].slaveName<<if $args[0].slaveSurname>> $args[0].slaveSurname<</if>><</widget>>
+
+<<widget "PoliteRudeTitle">><<if $args[0].intelligence < -2>><<Master>><<elseif $args[0].intelligence > 1>><<if $PC.title > 0>>Ma<<s>>ther<<else>>Mi<<s>>tre<<ss>><</if>><<elseif $args[0].trust > 0>>$PC.name<<else>><<if $PC.surname>>$PC.surname<<else>>$PC.name<</if>><</if>><</widget>>
+
+/*
+ Call as <<EventNameLink>>
+ $args[0]: Slave.
+*/
+<<widget "EventNameLink">>
+	<<set _name = $args[0].slaveName>>
+	<<if $args[0].slaveSurname>><<set _name += " " + $args[0].slaveSurname>><</if>>
+	<span id="name"><<print "[[_name|Long Slave Description][$nextLink = passage(), $eventDescription = 1]]">></span>
+<</widget>>
+
+/*
+ Call as <<EventNameDelink>>
+ $args[0]: Slave.
+*/
+<<widget "EventNameDelink">>
+	<<replace "#name">>
+		<<SlaveFullName $args[0]>>
+	<</replace>>
+<</widget>>
+
+/*
+ Call as <<DegradingName $slave>> where $slave is any slave object
+  $args[0]: Slave
+ */
+<<widget "DegradingName">>
+<<if $args[0].fuckdoll > 0>>
+	<<set $args[0].slaveName = "Fuckdoll No. " + random(1000,9999), $args[0].slaveSurname = 0>>
+<<elseif ($args[0].assignment == "work in the dairy") && ($dairyRestraintsSetting >= 2)>>
+	<<set $args[0].slaveName = "Bioreactor No. " + random(1000,9999), $args[0].slaveSurname = 0>>
+<<else>>
+
+<<set _names = []>>
+
+<<if ($seeRace == 1)>>
+<<if ($args[0].race == "white")>>
+	<<set _names.push("White", "Pale")>>
+<<elseif ($args[0].race == "asian")>>
+	<<set _names.push("Asian", "Yellow")>>
+<<elseif ($args[0].race == "latina")>>
+	<<set _names.push("Latina", "Brown")>>
+<<elseif ($args[0].race == "black")>>
+	<<set _names.push("Black", "Dark")>>
+<<elseif ($args[0].race == "pacific islander")>>
+	<<set _names.push("Islander", "Sea")>>
+<<elseif ($args[0].race == "malay")>>
+	<<set _names.push("Spice", "Cinnamon", "Pinoy")>>
+<<elseif ($args[0].race == "southern european")>>
+	<<set _names.push("Mediterranean", "Olive")>>
+<<elseif ($args[0].race == "amerindian")>>
+	<<set _names.push("Indian", "Reservation")>>
+<<elseif ($args[0].race == "semitic")>>
+	<<set _names.push("Semitic")>>
+<<elseif ($args[0].race == "middle eastern")>>
+	<<set _names.push("Arab", "Sand")>>
+<<elseif ($args[0].race == "indo-aryan")>>
+	<<set _names.push("Indian", "Brown")>>
+<<elseif ($args[0].race == "mixed race")>>
+	<<set _names.push("Mulatto", "Mutt")>>
+<</if>>
+<</if>>
+
+<<set _names.push($args[0].hColor)>>
+
+<<if ($args[0].eyes == -2)>>
+	<<set _names.push("Blind", "Sightless", "Eyeless")>>
+<</if>>
+
+<<if ($args[0].boobs < 500) && ($args[0].butt < 3)>>
+	<<set _names.push("Girly", "Thin", "Slim")>>
+<</if>>
+<<if ($args[0].anus > 2) || ($args[0].vagina > 2)>>
+	<<set _names.push("Gaping", "Slit", "Wideopen", "Hallway")>>
+<</if>>
+<<if ($args[0].weight > 30)>>
+	<<set _names.push("Fat", "Chubby", "Whale")>>
+<<elseif ($args[0].weight <= -30)>>
+	<<set _names.push("Skinny", "Bony", "Rail")>>
+<</if>>
+<<if ($args[0].muscles > 30)>>
+	<<set _names.push("Ripped", "Strong", "Huge", "Muscles")>>
+<</if>>
+<<if ($args[0].fetish == "buttslut") && ($args[0].fetishKnown == 1)>>
+	<<set _names.push("Anal", "Sodomy")>>
+<</if>>
+<<if ($args[0].fetish == "cumslut") && ($args[0].fetishKnown == 1)>>
+	<<set _names.push("Cum", "Dicksuck", "Sucker")>>
+<</if>>
+<<if ($args[0].fetish == "humiliation") && ($args[0].fetishKnown == 1)>>
+	<<set _names.push("Rape")>>
+<</if>>
+<<if ($args[0].fetish == "masochist") && ($args[0].fetishKnown == 1)>>
+	<<set _names.push("Pain", "Rape", "Struggle")>>
+<</if>>
+<<if ($args[0].fetish == "pregnancy") && ($args[0].fetishKnown == 1)>>
+	<<set _names.push("Fertile")>>
+<</if>>
+<<if (($args[0].boobs*$args[0].lactation) > 1000)>>
+	<<set _names.push("Creamy", "Milky")>>
+<</if>>
+<<if ($args[0].oralSkill <= 30) && ($args[0].analSkill <= 30)>>
+	<<set _names.push("Cheap", "Gutter", "Fail")>>
+<</if>>
+<<if ($args[0].nipples != "tiny") && ($args[0].nipples != "cute")>>
+	<<set _names.push("Pointy", "Titclit")>>
+<</if>>
+<<if ($args[0].age > 35)>>
+	<<set _names.push("Mature")>>
+<</if>>
+<<if ($args[0].age < 25)>>
+	<<set _names.push("Young", "Girly", "Thin")>>
+<</if>>
+<<if ($args[0].amp == 1)>>
+	<<set _names.push("Stumpy")>>
+<</if>>
+<<if ($args[0].boobsImplant > 1000) || ($args[0].buttImplant > 3)>>
+	<<set _names.push("Fake", "Plastic", "Silicone")>>
+<</if>>
+<<if ($args[0].preg > 5)>>
+	<<set _names.push("Preg")>>
+<</if>>
+<<if ($args[0].dick > 4)>>
+	<<set _names.push("Hung", "Dangle")>>
+<</if>>
+<<if ($args[0].dick > 0) && ($args[0].balls == 0)>>
+	<<set _names.push("Soft", "Gelded", "Cut")>>
+<</if>>
+<<if ($args[0].dick > 0) && ($args[0].balls > 0)>>
+	<<set _names.push("Hard", "Stiff", "Erect")>>
+<</if>>
+<<if ($args[0].dick == 1)>>
+	<<set _names.push("Tiny", "Micro")>>
+<</if>>
+<<if ($args[0].height >= 185)>>
+	<<set _names.push("Top", "Tall")>>
+<</if>>
+<<if ($args[0].height < 150)>>
+	<<set _names.push("Tiny", "Stumpy")>>
+<</if>>
+<<if ($args[0].whoreSkill > 95)>>
+	<<set _names.push("Street", "Money")>>
+<</if>>
+<<if ($args[0].entertainSkill > 95)>>
+	<<set _names.push("Easy", "Club")>>
+<</if>>
+<<if ($args[0].oralSkill > 95)>>
+	<<set _names.push("Suck")>>
+<</if>>
+<<if ($args[0].intelligence > 1)>>
+	<<set _names.push("Smart", "Bright", "Clever")>>
+	<<if ($args[0].intelligenceImplant == 1)>>
+		<<set _names.push("Nerdy", "College", "Graduate")>>
+	<</if>>
+<<elseif ($args[0].intelligence < -1)>>
+	<<set _names.push("Dumb", "Stupid", "Retarded", "Cretin")>>
+<</if>>
+<<if ($args[0].vagina == 1) && ($args[0].vaginalSkill <= 10)>>
+	<<set _names.push("Tight", "New", "Fresh")>>
+<</if>>
+<<if ($args[0].devotion < -75)>>
+	<<set _names.push("Angry", "Caged", "Biter")>>
+<<elseif ($args[0].devotion < -50)>>
+	<<set _names.push("Cell", "Cuffs")>>
+<<elseif ($args[0].devotion < -20)>>
+	<<set _names.push("Bag", "Box")>>
+<<elseif ($args[0].devotion <= 20)>>
+	<<set _names.push("Whiner", "Sad")>>
+<</if>>
+<<if ($args[0].trust < -50)>>
+	<<set _names.push("Screaming")>>
+<<elseif ($args[0].trust < -20)>>
+	<<set _names.push("Crying")>>
+<<elseif ($args[0].trust < 20)>>
+	<<set _names.push("Begging")>>
+<</if>>
+
+<<set _suffixes = []>>
+
+<<if $args[0].dick == 0>>
+	<<if $args[0].vagina == -1>> /* NULLS */
+		<<set _suffixes.push("Null")>>
+	<<else>> /* FEMALES */
+		<<if $args[0].age < 25>>
+			<<set _suffixes.push("Girl")>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $args[0].vagina != -1>>
+		<<set _suffixes.push("Futa")>>
+	<<else>>
+		<<if $args[0].balls > 0>>
+			<<if ($args[0].boobs > 300) && ($args[0].butt > 2)>> /* SHEMALES: cock & balls, T&A above minimum */
+				<<set _suffixes.push("Shemale")>>
+			<<else>>
+				<<if ($args[0].shoulders < 1) && ($args[0].muscles <= 30)>>
+					<<if ($args[0].faceShape == "masculine") || ($args[0].faceShape == "androgynous")>> /* SISSIES: feminine shoulders or muscles, masculine faces */
+						<<set _suffixes.push("Sissy")>>
+					<<else>> /* TRAPS: feminine shoulders or muscles, feminine faces */
+						<<set _suffixes.push("Trap")>>
+					<</if>>
+				<<else>> /* BITCHES: masculine shoulders or muscles */
+					<<set _suffixes.push("Bitch")>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if $args[0].age > 35>>
+				<<set _suffixes.push("DickMILF")>>
+			<<elseif $args[0].age >= 25>>
+				<<set _suffixes.push("Dickslave")>>
+			<<else>>
+				<<set _suffixes.push("Dickgirl")>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if ($args[0].anus > 0)>>
+	<<set _suffixes.push("Butt", "Anus", "Backdoor", "Butthole", "Asshole")>>
+<</if>>
+<<if ($args[0].vagina > 0)>>
+	<<set _suffixes.push("Cunt", "Pussy", "Vagina")>>
+<</if>>
+<<if ($args[0].boobs < 500) && ($args[0].butt < 3) && ($args[0].dick > 0)>>
+	<<set _suffixes.push("Trap", "Sissy", "Bottom", "Bitch")>>
+<</if>>
+<<if ($args[0].energy > 95)>>
+	<<set _suffixes.push("Fuck", "Nympho", "Fuckaddict", "Sexaddict")>>
+<</if>>
+<<if ($args[0].fetish == "humiliation") && ($args[0].fetishKnown == 1)>>
+	<<set _suffixes.push("Rapebait", "Showgirl")>>
+<</if>>
+<<if ($args[0].fetish == "submissive") && ($args[0].fetishKnown == 1)>>
+	<<set _suffixes.push("Bottom", "Rapebait", "Fuckee")>>
+<</if>>
+<<if ($args[0].fetish == "dom") && ($args[0].fetishKnown == 1)>>
+	<<set _suffixes.push("Top", "Dom", "Fucker")>>
+<</if>>
+<<if ($args[0].fetish == "pregnancy") && ($args[0].fetishKnown == 1)>>
+	<<set _suffixes.push("Breeder", "Mommy")>>
+<</if>>
+<<if ($args[0].fetish == "boobs") && ($args[0].fetishKnown == 1)>>
+	<<set _suffixes.push("Titty", "Boob", "Boobie", "Tit")>>
+<</if>>
+<<if (($args[0].boobs*$args[0].lactation) > 1000)>>
+	<<set _suffixes.push("Cow")>>
+<</if>>
+<<if $args[0].births >= 5>>
+	<<set _suffixes.push("Broodmother")>>
+<</if>>
+<<if $args[0].births >= 2>>
+	<<set _suffixes.push("Breeder")>>
+<</if>>
+<<if ($args[0].nipples != "tiny") && ($args[0].nipples != "cute")>>
+	<<set _suffixes.push("Nipples")>>
+<</if>>
+<<if ($args[0].areolae > 2)>>
+	<<set _suffixes.push("Headlights", "Areolas")>>
+<</if>>
+<<if ($args[0].lips > 40)>>
+	<<set _suffixes.push("Lips", "Pillows")>>
+<</if>>
+<<if ($args[0].labia > 1)>>
+	<<set _suffixes.push("Flower", "Lips", "Curtains")>>
+<</if>>
+<<if ($args[0].age > 35)>>
+	<<set _suffixes.push("Cougar", "MILF")>>
+<</if>>
+<<if ($args[0].amp == 1)>>
+	<<set _suffixes.push("Stumpy")>>
+<</if>>
+<<if ($args[0].preg > 5)>>
+	<<set _suffixes.push("Belly", "Mommy")>>
+<</if>>
+<<if ($args[0].dick > 4)>>
+	<<set _suffixes.push("Cock", "Dick")>>
+<</if>>
+<<if ($args[0].dick == 1)>>
+	<<set _suffixes.push("Bitch")>>
+<</if>>
+<<if ($args[0].boobs >= 800)>>
+	<<set _suffixes.push("Boob", "Boobs", "Titty")>>
+<</if>>
+<<if ($args[0].butt > 5)>>
+	<<set _suffixes.push("Ass", "Butt", "Bottom")>>
+<</if>>
+<<if ($args[0].vagina == 0)>>
+	<<set _suffixes.push("Virgin")>>
+<</if>>
+<<if ($args[0].height >= 185)>>
+	<<set _suffixes.push("Tower")>>
+<</if>>
+<<if ($args[0].height < 150)>>
+	<<set _suffixes.push("Shortstack", "Stumpy")>>
+<</if>>
+<<if ($args[0].whoreSkill > 95)>>
+	<<set _suffixes.push("Whore")>>
+<</if>>
+<<if ($args[0].entertainSkill > 95)>>
+	<<set _suffixes.push("Slut")>>
+<</if>>
+<<if ($args[0].oralSkill > 95)>>
+	<<set _suffixes.push("Throat")>>
+<</if>>
+<<if ($args[0].vaginalSkill > 95)>>
+	<<set _suffixes.push("Pussy", "Kegel", "Channel")>>
+<</if>>
+<<if ($args[0].analSkill > 95)>>
+	<<set _suffixes.push("Asspussy", "Sphincter")>>
+<</if>>
+<<if ($args[0].anus == 1)>>
+	<<set _suffixes.push("Tightbutt", "Tightass")>>
+<</if>>
+<<if $args[0].devotion > 50>>
+	<<set _names.push("Prize")>>
+	<<if ($args[0].age > 35)>>
+		<<set _suffixes.push("Queen")>>
+	<<elseif ($args[0].age < 25)>>
+		<<set _names.push("Princess")>>
+	<</if>>
+<</if>>
+<<if ($args[0].trust < -50)>>
+	<<set _suffixes.push("Sobber")>>
+<<elseif ($args[0].trust < -20)>>
+	<<set _suffixes.push("Weeper", "Tears", "Meat", "Thing")>>
+<</if>>
+
+<<if ($args[0].assignment == "guard you")>>
+	<<set $args[0].slaveName = either("Guard", "Battle")>>
+<<elseif ($args[0].assignment == "recruit girls")>>
+	<<set $args[0].slaveName = either("Cam", "Recruiter")>>
+<<elseif ($args[0].assignment == "be the Madam")>>
+	<<set $args[0].slaveName = either("Pimp", "Madam")>>
+<<elseif ($args[0].assignment == "be the DJ")>>
+	<<set $args[0].slaveName = either("Bass", "Booth")>>
+<<elseif ($args[0].assignment == "be the Milkmaid") && $cumSlaves > 3>>
+	<<set $args[0].slaveName = either("Milker", "Fucker")>>
+<<elseif ($args[0].assignment == "be the Milkmaid")>>
+	<<set $args[0].slaveName = either("Farm", "Dairy")>>
+<<elseif ($args[0].assignment == "be your Head Girl")>>
+	<<set $args[0].slaveName = either("Chief", "Head")>>
+<<elseif ($args[0].assignment == "be the Schoolteacher")>>
+	<<set $args[0].slaveName = either("Teacher", "Classroom")>>
+<<elseif ($args[0].assignment == "be the Attendant")>>
+	<<set $args[0].slaveName = either("Spa", "Bath")>>
+<<elseif ($args[0].assignment == "be the Wardeness")>>
+	<<set $args[0].slaveName = either("Jail", "Prison")>>
+<<elseif ($args[0].assignment == "be your concubine")>>
+	<<set $args[0].slaveName = either("Bed", "Master")>>
+<<else>>
+	<<set $args[0].slaveName = _names.random()>>
+<</if>>
+
+<<set _surname = _suffixes.random()>>
+<<if _surname == $args[0].slaveName.toLowerCase()>>
+	<<DegradingName $args[0]>>
+<</if>>
+<<set $args[0].slaveSurname = _surname>>
+
+<</if>>
+<</widget>>
+
+<<widget "CreateSimpleTabs">>
+
+	<head>
+	<style>
+
+	div.tab {
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: transparent;
+	}
+
+	div.tab button {
+		background-color: inherit;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		transition: 0.3s;
+		font-size: 19px;
+	}
+
+	div.tab button:hover {
+		background-color: #444;
+	}
+
+	div.tab button.active {
+		background-color: #777;
+	}
+
+	.tabcontent {
+		display: none;
+		padding: 6px 12px;
+		-webkit-animation: fadeEffect 1s;
+		animation: fadeEffect 1s;
+	}
+
+	@-webkit-keyframes fadeEffect {
+		from {opacity: 0;}
+		to {opacity: 1;}
+	}
+
+	@keyframes fadeEffect {
+		from {opacity: 0;}
+		to {opacity: 1;}
+	}
+	</style>
+	</head>
+
+<</widget>>

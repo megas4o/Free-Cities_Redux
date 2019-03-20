@@ -1,0 +1,527 @@
+:: piercing description widgets [widget nobr]
+
+<<widget "earPiercingDescription">>
+	<<if $activeSlave.earPiercing > 0>>
+		<<if $activeSlave.earPiercing == 1>>
+			Her earlobes are conventionally pierced.
+		<<else>>
+			Her ears are heavily pierced, with multiple lobe piercings and a row of helix piercings.
+		<</if>>
+		<<if ($activeSlave.assignment == "get milked") || ($activeSlave.assignment == "work in the dairy")>>
+		She has a plastic livestock tag in one ear to help identify her for milking.
+		<<else>>
+			<<switch $activeSlave.clothes>>
+			<<case "attractive lingerie" "attractive lingerie for a pregnant woman">>
+				She's wearing pretty, womanly earrings.
+			<<case "a succubus outfit">>
+				She's wearing pentagram earrings.
+			<<case "a fallen nuns habit">>
+				Her earrings mimic tiny crowns of thorns.
+			<<case "a chattel habit">>
+				She's wearing golden earrings in the shape of saintly nudes.
+			<<case "a penitent nuns habit">>
+				Her earrings mimic tiny crowns of thorns.
+			<<case "a string bikini" "cutoffs and a t-shirt">>
+				She's wearing girly earrings.
+			<<case "a schoolgirl outfit">>
+				She's wearing girlish earrings.
+			<<case "a kimono">>
+				She's wearing gorgeous enamelled earrings made to look like tiny koi.
+			<<case "a slave gown" "a halter top dress" "a ball gown" "a maternity dress">>
+				She's wearing lovely diamond earrings; the stones are cut in an alluring, feminine style.
+			<<case "slutty business attire">>
+				She's wearing lovely diamond earrings; the stones are cut in a gaudy, nouveau riche style.
+			<<case "nice business attire">>
+				She's wearing lovely diamond earrings; the stones are cut in an assertive, unsubtle style.
+			<<case "a slutty maid outfit">>
+				She's wearing big hoop earrings inappropriate for a real maid.
+			<<case "a nice maid outfit">>
+				She's wearing conservative earrings like those a free maid could afford.
+			<<case "harem gauze">>
+				She's wearing broad gold earrings in faux-Arabian style.
+			<<case "a bunny outfit">>
+				She's wearing earrings in the shape of a stylized rabbit's head.
+			<<case "slutty jewelry">>
+				She's wearing gold earrings in the shape of a pair of
+				<<if ($activeSlave.dick > 0) && ($activeSlave.balls == 0)>>
+					limp dicks.
+				<<elseif ($activeSlave.dick > 0)>>
+					erect cocks.
+				<<elseif ($activeSlave.oralSkill >= 100)>>
+					tongues.
+				<<elseif ($activeSlave.boobs > 1000)>>
+					heavy breasts.
+				<<else>>
+					female bottoms.
+				<</if>>
+			<</switch>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "nosePiercingDescription">>
+	<<if $activeSlave.nosePiercing == 1>>
+		$pronounCap has simple studs in her nose.
+	<<elseif $activeSlave.nosePiercing == 2>>
+		$pronounCap has nasal studs and a large septum ring.
+		<<if ($activeSlave.clothes is "slutty jewelry") && ($activeSlave.earPiercing > 0)>>
+			Her bangles include a light chain from her nose ring to her ear piercings on one side.
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "eyebrowPiercingDescription">>
+	<<if $activeSlave.eyebrowPiercing == 1>>
+		She has a simple stud in one eyebrow.
+	<<elseif $activeSlave.eyebrowPiercing == 2>>
+		She has multiple eyebrow rings.
+	<</if>>
+<</widget>>
+
+<<widget "lipsPiercingDescription">>
+	<<if $activeSlave.lipsPiercing == 1>>
+		$pronounCap has a simple lip piercing.
+	<<elseif $activeSlave.lipsPiercing == 2>>
+		$possessiveCap lips are heavily pierced.
+	<</if>>
+<</widget>>
+
+<<widget "tonguePiercingDescription">>
+	<<if $activeSlave.tonguePiercing == 1>>
+		$possessiveCap tongue bears a single stud, so oral sex with $possessive is a bit more fun.
+	<<elseif $activeSlave.tonguePiercing == 2>>
+		$possessiveCap tongue bears a row of studs, offering thorough stimulation to anyone $pronoun blows.
+	<</if>>
+	<<if canTalk($activeSlave)>>
+	<<if $activeSlave.lips <= 70>>
+	<<if $activeSlave.lipsPiercing == 2>>
+		$pronounCap can barely enunciate past $possessive piercings; '<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>' comes out as '<<if def $PC.customTitleLisp>>$PC.customTitleLisp<<elseif $PC.title != 0>>Mathter<<else>>Mithtreth<</if>>.'
+	<</if>>
+	<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "nipplesPiercingDescription">>
+
+<<if ($activeSlave.skin == "tanned") || ($activeSlave.skin == "fair")>>
+	<<if ($activeSlave.preg > 10 || ($activeSlave.births > 0 && $activeSlave.lactation > 0))>>
+		<<set $seed = "dark brown">>
+	<<else>>
+		<<set $seed = "pink">>
+	<</if>>
+<<elseif ($activeSlave.skin == "pale") || ($activeSlave.race == "white")>>
+	<<if ($activeSlave.preg > 10 || ($activeSlave.births > 0 && $activeSlave.lactation > 0))>>
+		<<set $seed = "brown">>
+	<<else>>
+		<<set $seed = "pink">>
+	<</if>>
+<<elseif ($activeSlave.skin == "brown") || ($activeSlave.race == "black")>>
+	<<if ($activeSlave.preg > 10 || ($activeSlave.births > 0 && $activeSlave.lactation > 0))>>
+		<<set $seed = "black">>
+	<<else>>
+		<<set $seed = "dark brown">>
+	<</if>>
+<<else>>
+	<<if ($activeSlave.preg > 10 || ($activeSlave.births > 0 && $activeSlave.lactation > 0))>>
+		<<set $seed = "dark brown">>
+	<<else>>
+		<<set $seed = "brown">>
+	<</if>>
+<</if>>
+
+<<if $activeSlave.fuckdoll > 0>>
+	<<if $activeSlave.nipplesPiercing > 0>>
+		Its nipple piercings help secure the suit material to its breasts.
+	<</if>>
+<<else>>
+	<<if $activeSlave.nipplesPiercing == 1>>
+		$possessiveCap $seed nipples have a simple piercing, which keeps them a little harder than they would normally be.
+	<<elseif $activeSlave.nipplesPiercing == 2>>
+		$possessiveCap $seed nipples are heavily pierced with several rings and studs, and there is a chain between them.
+		<<if ($activeSlave.boobShape == "saggy") && ($activeSlave.boobs > 2500)>>
+			It's been shortened to take advantage of the way $possessive tits sag, and holds $possessive $seed nipples almost together, producing cleavage that runs from $possessive $seed nipples all the way up to $possessive sternum.
+		<<else>>
+			The constant tugging keeps $possessive $seed nipples erect.
+		<</if>>
+	<</if>>
+	<<if $activeSlave.nipplesPiercing > 0>>
+		<<switch $activeSlave.clothes>>
+		<<case "attractive lingerie">>
+		The piercings are a girly color, to complement $possessive lingerie.
+		<<case "a succubus outfit">>
+		The piercings are severe steel, as befits a sex demon.
+		<<case "uncomfortable straps">>
+		Each nipple bears a horizontal bar that is held forward of the steel ring that's part of $possessive outfit, constantly tugging them outward.
+		<<case "restrictive latex">>
+		The piercings are tantalizingly visible under the latex.
+		<<case "a fallen nuns habit">>
+		A tiny ebon cross on a short chain dangles from each piercing.
+		<<case "a chattel habit">>
+		A tiny golden cock and balls dangles from each piercing.
+		<<case "a string bikini">>
+		The piercings are a pastel color, to complement $possessive bikini.
+		<<case "a schoolgirl outfit">>
+		<<if ($activeSlave.boobs <= 2000)>>
+		The piercings are tantalizingly visible under the thin material.
+		<</if>>
+		<<case "battledress">>
+		The piercings are tantalizingly visible under $possessive tank top.
+		<<case "nice business attire">>
+		One side of each piercing peeks over the edge of $possessive blouse.
+		<<case "a comfortable bodysuit">>
+		The piercings are tantalizingly visible under the tight bodysuit.
+		<<case "a latex catsuit">>
+		The piercings are tantalizingly visible under the tight latex catsuit.
+		<<case "a mini dress">>
+		The piercings are tantalizingly visible under the tight mini dress.
+		<<case "a slutty maid outfit">>
+		One side of each piercing peeks over the edge of $possessive lacy top.
+		<<case "harem gauze">>
+		The piercings are tantalizingly visible under the gauze.
+		<</switch>>
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "areolaePiercingDescription">>
+	<<if $activeSlave.fuckdoll == 0>>
+		<<if $activeSlave.areolaePiercing > 0>>
+		<<switch $activeSlave.areolae>>
+		<<case 1>>
+			$possessiveCap areolae form large, lovely circles of $seed	skin around each nipple.
+			$pronounCap has stud piercings around their borders, enhancing the contrast.
+		<<case 2>>
+			$possessiveCap areolae are unusually wide, eye-catching circles of $seed skin around each nipple.
+			$pronounCap has stud piercings around their borders, enhancing the contrast.
+		<<case 3>>
+			$possessiveCap $seed areolae are unnaturally broad, covering much of the <<if $activeSlave.boobShape == "saggy">>bottom<<else>>front<</if>> of each breast.
+			$pronounCap has many stud piercings around their edges, forming a metal border between $seed nipple and breast.
+		<<case 4>>
+			$possessiveCap huge $seed areolae are heart-shaped, an obvious surgical alteration.
+			<<if $activeSlave.boobShape == "saggy">>$possessiveCap motherly boobs point downward, though, leaving only the curved top of each heart visible.<</if>>
+			Their borders are defined by stud piercings with pink stones.
+		<<case 5>>
+			$possessiveCap huge $seed areolae are star-shaped, an obvious surgical alteration.
+			<<if $activeSlave.boobShape == "saggy">>$possessiveCap motherly boobs point downward, though, leaving only the pointed top of each star visible.<</if>>
+			Their borders are defined by shiny stud piercings.
+		<<default>>
+			$pronounCap has stud piercings in circles around the edges of $possessive minimal $seed areolae.
+			$possessiveCap $activeSlave.nipples nipples are surrounded by a minimal $seed areolae.
+		<</switch>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "navelPiercingDescription">>
+	<<if $activeSlave.fuckdoll == 0>>
+		<<if setup.fakeBellies.includes($bellyAccessory)>>
+			<<if $activeSlave.navelPiercing == 1>>
+				$possessiveCap fake navel bears a simple stud.
+			<<elseif $activeSlave.navelPiercing == 2>>
+				$possessiveCap fake navel is pierced with a big ring.
+				<<if ($activeSlave.clothes == "slutty jewelry")>>
+					It has a length of gilded chain dangling from it.
+				<<else>>
+					It has a short length of chain dangling from it.
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if $activeSlave.navelPiercing == 1>>
+				$possessiveCap navel bears a simple stud.
+			<<elseif $activeSlave.navelPiercing == 2>>
+				$possessiveCap navel is pierced with a big ring.
+				<<if ($activeSlave.clothes == "slutty jewelry")>>
+					It has a length of gilded chain dangling from it.
+				<<else>>
+					It has a short length of chain dangling from it.
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $activeSlave.navelPiercing > 0>>
+			<<if $activeSlave.preg > 20>>
+				<<if $activeSlave.navelPiercing == 1>>
+					$possessiveCap popped navel bears a simple stud.
+				<<elseif $activeSlave.navelPiercing == 2>>
+					$possessiveCap popped navel is pierced with a big ring.
+				<</if>>
+				It's eye-catching, since most of her piercings are hidden by the suit.
+			<<else>>
+				$possessiveCap navel piercing runs through the suit's material.
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "clitPiercingDescription">>
+	<<if ($activeSlave.clitPiercing == 1) && ($activeSlave.vagina != -1)>>
+		$pronounCap has a simple clitoral stud.
+	<<elseif ($activeSlave.clitPiercing == 2) && ($activeSlave.vagina != -1)>>
+		$pronounCap has a big ring in $possessive clit.
+		<<if ($activeSlave.clothes == "slutty jewelry")>>
+			Since $pronoun's wearing slutty bangles $pronoun has a short length of light chain dangling from $possessive clit ring; it constantly stimulates $possessive pussylips.
+		<</if>>
+	<<elseif ($activeSlave.clitPiercing > 2) && ($activeSlave.vagina != -1) && ($activeSlave.dick == 0)>>
+		$pronounCap has a smart piercing in $possessive clit.
+	<<elseif ($activeSlave.clitPiercing == 1)>>
+		$pronounCap has a simple dickhead stud.
+	<<elseif ($activeSlave.clitPiercing == 2)>>
+		$pronounCap has a big ring in $possessive dickhead.
+		<<if ($activeSlave.clothes == "slutty jewelry")>>
+			Since $pronoun's wearing slutty bangles $pronoun has a short length of light chain dangling from $possessive dickhead piercing; as $pronoun moves it tugs lightly at $possessive cock.
+		<</if>>
+	<<elseif ($activeSlave.clitPiercing > 2)>>
+		$pronounCap has a smart frenulum piercing.
+	<</if>>
+	<<if $activeSlave.fuckdoll > 0>>It anchors the suit's material.<</if>>
+<</widget>>
+
+<<widget "vaginaPiercingDescription">>
+	<<if ($activeSlave.vagina != -1)>>
+	<<if $activeSlave.vaginaPiercing > 0>>
+		$pronounCap has a
+		<<if ($activeSlave.vaginaPiercing == 1)>>
+			simple row of studs
+		<<else>>
+			row of big rings
+		<</if>>
+		down $possessive labia<<if $activeSlave.fuckdoll > 0>>, which are looped into the edge of the suit's material as it stops around her vulva<</if>>.
+	<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "dickPiercingDescription">>
+	<<if ($activeSlave.dick != 0)>>
+	<<if ($activeSlave.dickPiercing == 1)>>
+		$pronounCap has a row of studs down $possessive shaft.
+	<<elseif ($activeSlave.dickPiercing == 2)>>
+		$pronounCap has a row of heavy rings down $possessive shaft.
+	<</if>>
+	<<if ($activeSlave.scrotum != 0)>>
+		<<if ($activeSlave.dickPiercing == 1)>>
+		$pronounCap has a couple of studs in $possessive ballsack.
+		<<elseif ($activeSlave.dickPiercing == 2)>>
+		$pronounCap has a row of rings down the center of $possessive ballsack, all the way from the base of $possessive shaft to $possessive perineum.
+		<</if>>
+	<<else>>
+		<<if ($activeSlave.dickPiercing == 1)>>
+		$pronounCap has a couple of studs beneath the base of $possessive dick.
+		<<elseif ($activeSlave.dickPiercing == 2)>>
+		$pronounCap has a row of rings all the way from the base of $possessive shaft to $possessive perineum.
+		<</if>>
+	<</if>>
+	<</if>>
+
+	<<if $activeSlave.fuckdoll > 0>>
+	<<if $activeSlave.dickPiercing > 0>>
+	Every one of them runs through the suit's material, securing it to the Fuckdoll's member.
+	<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "anusPiercingDescription">>
+	<<if ($activeSlave.vagina > -1)>>
+		<<if ($activeSlave.anusPiercing == 1)>>
+			$pronounCap has a simple piercing between $possessive pussy and $possessive asshole<<if $activeSlave.fuckdoll > 0>> which helps keep the strip of material <<if $activeSlave.vagina > -1>>between its holes<<else>>below its rear hole<</if>> in place<</if>>.
+		<<elseif ($activeSlave.anusPiercing == 2)>>
+			$pronounCap has a big ring between $possessive pussy and $possessive asshole<<if $activeSlave.fuckdoll > 0>>, which helps keep the strip of material <<if $activeSlave.vagina > -1>>between its holes<<else>>below its rear hole<</if>> in place,<</if>> and studs in all around $possessive anus.
+		<</if>>
+	<<else>>
+		<<if ($activeSlave.anusPiercing == 1)>>
+			$pronounCap has a simple perianal piercing between the base of $possessive dick and $possessive girly butthole<<if $activeSlave.fuckdoll > 0>> which helps keep the strip of material <<if $activeSlave.vagina > -1>>between its holes<<else>>below its rear hole<</if>> in place<</if>>.
+		<<elseif ($activeSlave.anusPiercing == 2)>>
+			$pronounCap has a big ring between the base of $possessive dick and $possessive girly butthole, which has studs all around it.
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "CorsetPiercingDescription">>
+
+<<if $activeSlave.corsetPiercing > 0>>
+<<if $activeSlave.fuckdoll == 0>>
+
+$pronounCap has a corset piercing, a ladder of steel rings running up each side of $possessive back:
+<<if ($activeSlave.bellyAccessory == "a corset") || ($activeSlave.bellyAccessory == "an extreme corset")>>
+	these are looped through special lugs in the back of $possessive actual corset, making it almost a part of $possessive body.
+	<<if $activeSlave.devotion > 50>>
+		$pronounCap couldn't remove it, even if $pronoun wanted to.
+	<<elseif $activeSlave.devotion >= -20>>
+		$pronounCap couldn't remove it, even if $pronoun were inclined to try.
+	<<else>>
+		Any attempt to remove it will cause intense pain.
+	<</if>>
+<<else>>
+<<switch $activeSlave.clothes>>
+
+<<case "conservative clothing" "slutty business attire" "nice business attire" "a schoolgirl outfit">>
+	$possessive blouse hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "chains">>
+	they're laced together with steel cable, tightly enough that they're tugging at $possessive skin.
+
+<<case "Western clothing">>
+	$possessive shirt hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a toga">>
+	$possessive toga hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a huipil">>
+	$possessive huipil hides them partially, so the leather straps that pull on $possessive's skin are clearly evident.
+
+<<case "a slutty qipao">>
+	$possessive qipao hides them completely, but they're laced tightly with silk cord, so $pronoun's aware they're there.
+
+<<case "uncomfortable straps">>
+	they're laced together with a leather cord, tightly enough that they're tugging at $possessive skin.
+
+<<case "shibari ropes">>
+	they're laced together as part of $possessive bindings.
+
+<<case "restrictive latex" "a latex catsuit">>
+	these are clipped into the latex covering them, making it almost a part of $possessive body.
+	<<if $activeSlave.devotion > 50>>
+		$pronounCap couldn't remove it, even if $pronoun wanted to.
+	<<elseif $activeSlave.devotion >= -20>>
+		$pronounCap couldn't remove it, even if $pronoun were inclined to try.
+	<<else>>
+		Any attempt to remove it will cause intense pain.
+	<</if>>
+
+<<case "a military uniform">>
+	$possessive tunic hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a nice nurse outfit">>
+	$possessive scrubs hide them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a mini dress">>
+	these are clipped into the mini dress covering them, making it almost a part of $possessive body.
+ 	 <<if $activeSlave.devotion > 50>>
+		$pronounCap couldn't remove it, even if $pronoun wanted to.
+	<<elseif $activeSlave.devotion >= -20>>
+		$pronounCap couldn't remove it, even if $pronoun were inclined to try.
+	<<else>>
+		Any attempt to remove it will cause intense pain.
+	<</if>>
+
+<<case "attractive lingerie">>
+	they're laced together with a lacy ribbon finished off with a bow.
+
+<<case "a succubus outfit">>
+	they're laced into $possessive succubus corset, making it a part of $object.
+
+<<case "a fallen nuns habit">>
+	they're laced together with cord, tightly enough that $pronoun is forced to arch $possessive back or suffer. $pronounCap spends most of $possessive time involuntarily presenting $possessive bottom to relieve the tugging.
+
+<<case "a chattel habit">>
+	$possessive white habit hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a penitent nuns habit">>
+	$possessive habit hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a string bikini">>
+	the back of $possessive string top loops into them and runs down through them to become $possessive bottom, such as it is.
+
+<<case "a cheerleader outfit">>
+	they're laced together with a simple ribbon, but the effect makes it clear that this is one kinky cheerleader.
+
+<<case "clubslut netting">>
+	these are clipped into the netting covering them, making it almost a part of $possessive body.
+	<<if $activeSlave.devotion > 50>>
+		$pronounCap couldn't remove it, even if $pronoun wanted to.
+	<<elseif $activeSlave.devotion >= -20>>
+		$pronounCap couldn't remove it, even if $pronoun were inclined to try.
+	<<else>>
+		Any attempt to remove it will cause intense pain.
+	<</if>>
+
+<<case "cutoffs and a t-shirt">>
+	they're laced together with a simple ribbon, but the effect makes it clear that this is one kinky girl.
+
+<<case "a slutty outfit">>
+	they're laced together with a simple ribbon, tightly enough that $pronoun's aware they're there.
+
+<<case "a slave gown">>
+	they're revealed by the swooping back of $possessive gown and laced up with matching silk ribbon.
+
+<<case "a comfortable bodysuit">>
+	these are clipped into the bodysuit covering them, making it almost a part of $possessive body.
+	<<if $activeSlave.devotion > 50>>
+		$pronounCap couldn't remove it, even if $pronoun wanted to.
+	<<elseif $activeSlave.devotion >= -20>>
+		$pronounCap couldn't remove it, even if $pronoun were inclined to try.
+	<<else>>
+		Any attempt to remove it will cause intense pain.
+	<</if>>
+
+<<case "a leotard">>
+	these are clipped into the leotard covering them, making it almost a part of $possessive body.
+	<<if $activeSlave.devotion > 50>>
+		$pronounCap couldn't remove it, even if $pronoun wanted to.
+	<<elseif $activeSlave.devotion >= -20>>
+		$pronounCap couldn't remove it, even if $pronoun were inclined to try.
+	<<else>>
+		Any attempt to remove it will cause intense pain.
+	<</if>>
+
+<<case "a bunny outfit">>
+	$possessive teddy hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a slutty maid outfit">>
+	$possessive dress has an open back to reveal them and the black ribbon that laces them tightly together.
+
+<<case "a nice maid outfit">>
+	$possessive dress hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a slutty nurse outfit">>
+	$possessive jacket hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a kimono">>
+	$possessive kimono hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "a hijab and abaya">>
+	$possessive abaya hides them completely, but they're laced tightly, so $pronoun's aware they're there.
+
+<<case "battledress">>
+	they're laced together with paracord.
+
+<<case "harem gauze">>
+	they're laced up with a light golden chain that glints through $possessive filmy clothing.
+
+<<case "slutty jewelry">>
+	they're laced up with a light golden chain that begins and ends in other parts of $possessive glinting bonds.
+
+<<default>>
+	they're laced up with a ribbon, tightly enough to keep $possessive aware they're there.
+
+<</switch>>
+<</if>>
+
+<</if>>
+<</if>>
+
+<</widget>>
+
+<<widget "chastityPiercingDescription">>
+	<<if ($activeSlave.clitPiercing > 0)>>
+	<<if ($activeSlave.nipplesPiercing > 0)>>
+	<<if ($activeSlave.dickAccessory != "chastity") && ($activeSlave.dickAccessory != "combined chastity")>>
+	<<if ($activeSlave.dick > 4)>>
+	<<if ($activeSlave.boobs > 1000)>>
+	<<if ($activeSlave.balls > 0)>>
+	<<if ($activeSlave.hormones <= 0)>>
+	<<if ($activeSlave.devotion > 20)>>
+	<<if ($activeSlave.energy > 90)>>
+		$possessiveCap very special body allows $object to wear an incredibly lewd piece of jewelry: a thin golden chain that runs from nipple to nipple, through $possessive pierced cockhead. The chain is short, and any motion at all tugs at $possessive nipples and penis.
+		<<if $activeSlave.amp != 1>>
+			The stimulation is almost unbearable, and the mere act of walking sometimes causes $object to cum.
+		<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</widget>>

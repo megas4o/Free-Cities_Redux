@@ -1,0 +1,218 @@
+:: Cost widgets [nobr widget]
+
+<<widget "SlaveExpenses">>
+	<<set $individualCosts = 0>>
+	<<if ($activeSlave.assignment != "work in the dairy" || $dairyRestraintsSetting < 2) && ($activeSlave.assignment != "be confined in the arcade")>>
+		<<if $activeSlave.livingRules == "luxurious">>
+			<<if $activeSlave.relationship >= 4>>
+				<br>Living expenses: ¤<<print ($rulesCost*3)>>
+				<<set $individualCosts -= ($rulesCost*3)>>
+			<<else>>
+				<br>Living expenses: ¤<<print ($rulesCost*4)>>
+				<<set $individualCosts -= ($rulesCost*4)>>
+			<</if>>
+		<<elseif $activeSlave.livingRules == "normal">>
+			<br>Living expenses: ¤<<print ($rulesCost*2)>>
+			<<set $individualCosts -= ($rulesCost*2)>>
+		<<else>>
+			<br>Living expenses: ¤<<print ($rulesCost)>>
+			<<set $individualCosts -= $rulesCost>>
+		<</if>>
+	<<else>>
+		<br>Living expenses: ¤<<print ($rulesCost*.75)>>
+		<<set $individualCosts -= ($rulesCost*.75)>>
+	<</if>>
+	<br>Basic slave food cost: ¤<<print $foodCost*4>>
+	<<set $individualCosts -= $foodCost*4>>
+	<<switch $activeSlave.diet>>
+		<<case "fattening" "muscle building">>
+			<br>Heavy diet: ¤<<print $foodCost>>
+			<<set $individualCosts -= $foodCost>>
+		<<case "restricted" "slimming">>
+			<br>Light diet: //reduced by// ¤<<print $foodCost>>
+			<<set $individualCosts += $foodCost>>
+	<</switch>>
+	<<if $activeSlave.weight > 50>>
+		<br>Caloric adjustment for heavy weight: ¤<<print $foodCost>>
+		<<set $individualCosts -= $foodCost>>
+	<<elseif $activeSlave.weight < -50>>
+		<br>Caloric adjustment for light weight: //reduced by// ¤<<print $foodCost>>
+		<<set $individualCosts += $foodCost>>
+	<</if>>
+	<<if $activeSlave.lactation > 0>>
+		<br>Food to support
+		<<if $activeSlave.lactation > 1>>heavy<<else>>natural<</if>> lactation from
+		<<if Math.trunc($activeSlave.boobs/10000) > 2>>absurd udders<<elseif Math.trunc($activeSlave.boobs/10000) > 1>>enormous boobs<<else>>reasonable breasts<</if>>:
+		¤<<print $foodCost*$activeSlave.lactation*(1+Math.trunc($activeSlave.boobs/10000))>>
+		<<set $individualCosts -= $foodCost*$activeSlave.lactation*(1+Math.trunc($activeSlave.boobs/10000))>>
+	<</if>>
+	<<if $activeSlave.preg > 5>>
+		<<if $activeSlave.assignment == "work in the dairy" && $dairyFeedersSetting > 0>>
+			<br>Extra feeding costs to support pregnancy are covered by dairy feeders.
+		<<elseif ($activeSlave.assignment == "serve in the master suite" || $activeSlave.assignment == "be your concubine") && $masterSuiteUpgradePregnancy == 1>>
+			<br>Extra feeding costs to support pregnancy are covered by $masterSuiteName luxuries.
+		<<else>>
+			<br>Extra feeding to support pregnancy: ¤<<print $foodCost*$activeSlave.pregType>>
+			<<set $individualCosts -= $foodCost*$activeSlave.pregType>>
+		<</if>>
+	<</if>>
+	<<if $boobAccessibility != 1>>
+	<<if ($activeSlave.boobs > 20000)>>
+	<<if ($activeSlave.assignment != "work in the dairy" || $dairyRestraintsSetting < 2) && ($activeSlave.assignment != "be confined in the arcade")>>
+		<br>Increased living expenses due to inconveniently huge boobs: ¤50
+		<<set $individualCosts -= 50>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<<if !canSee($activeSlave) && ($activeSlave.assignment != "work in the dairy" || $dairyRestraintsSetting < 2) && ($activeSlave.assignment != "be confined in the arcade")>>
+		<br>Increased living expenses due to lack of sight: ¤50
+		<<set $individualCosts -= 50>>
+	<<elseif $activeSlave.eyes <= -1>>
+		<br>Increased living expenses due to poor vision: ¤25
+		<<set $individualCosts -= 25>>
+	<<elseif ($activeSlave.eyewear == "blurring glasses") || ($activeSlave.eyewear == "blurring contacts")>>
+		<br>Increased living expenses due to blurred vision: ¤25
+		<<set $individualCosts -= 25>>
+	<</if>>
+	<<if ($activeSlave.assignment != "work in the dairy" || $dairyRestraintsSetting < 2) && ($activeSlave.assignment != "be confined in the arcade")>>
+	<<if ($activeSlave.amp != 0)>>
+	  <<if ($activeSlave.amp == 1)>>
+		<br>Increased living expenses due to limblessness: ¤$rulesCost
+		<<set $individualCosts -= $rulesCost>>
+	  <<else>>
+		<br>Increased living expenses due to prosthetics: ¤<<print $rulesCost/2>>
+		<<set $individualCosts -= $rulesCost/2>>
+	  <</if>>
+	<<elseif !canWalk($activeSlave)>>
+	  <br>Increased living expenses due to immobility: ¤<<print $rulesCost>>
+	  <<set $individualCosts -= $rulesCost>>
+	<</if>>
+	<</if>>
+	<<if $activeSlave.boobs > 10000>>
+	<<if $activeSlave.boobsImplantType == 1>>
+		<br>Maintenance cost for oversized string implants: ¤50
+		<<set $individualCosts -= 50>>
+	<</if>>
+	<</if>>
+	<<if $activeSlave.butt > 10>>
+	<<if $activeSlave.buttImplantType == 1>>
+		<br>Maintenance cost for oversized string implants: ¤50
+		<<set $individualCosts -= 50>>
+	<</if>>
+	<</if>>
+	<<if $activeSlave.preg > 25>>
+	<<if $activeSlave.universalRulesBirthing == 1>>
+	<<if ($activeSlave.assignment != "work in the dairy" || $dairyRestraintsSetting < 2)>>
+		<br>Coverage cost for daily pregnancy scanning: ¤50
+		<<set $individualCosts -= 50>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<<if $CitizenRetirement == 1>>
+	<br>Retirement account payments: ¤250
+	<<set $individualCosts -= 250>>
+	<</if>>
+	<<if ($activeSlave.drugs != "no drugs")>>
+		<<if $activeSlave.drugs == "intensive breast injections" || $activeSlave.drugs == "intensive butt injections" || $activeSlave.drugs == "intensive penis enhancement" || $activeSlave.drugs == "intensive testicle enhancement">>
+			<br>Intensive drugs: ¤<<print $drugsCost*5>>
+			<<set $individualCosts -= $drugsCost*5>>
+		<<else>>
+			<br>Standard drugs: ¤<<print $drugsCost*2>>
+			<<set $individualCosts -= $drugsCost*2>>
+		<</if>>
+	<</if>>
+	<<if $activeSlave.curatives == 1 && $activeSlave.assignmentVisible != 1>>
+	<<elseif $activeSlave.curatives > 0>>
+		<br>Health drugs: ¤<<print $drugsCost+($activeSlave.curatives*$drugsCost)>>
+		<<set $individualCosts -= $drugsCost+($activeSlave.curatives*$drugsCost)>>
+	<</if>>
+	<<if ($activeSlave.aphrodisiacs > 0)>>
+		<br>Aphrodisiacs: ¤<<print ($drugsCost*$activeSlave.aphrodisiacs)>>
+		<<set $individualCosts -= $drugsCost*$activeSlave.aphrodisiacs>>
+	<</if>>
+	<<if ($activeSlave.hormones != 0)>>
+		<br>Hormones: ¤<<print (Math.trunc($drugsCost*Math.abs($activeSlave.hormones)*0.5))>>
+		<<set $individualCosts -= Math.trunc($drugsCost*Math.abs($activeSlave.hormones)*0.5)>>
+	<</if>>
+	<<if ($activeSlave.preg == -1) && isFertile($activeSlave)>>
+		<br>Contraceptives: ¤<<print (Math.trunc($drugsCost*0.5))>>
+		<<set $individualCosts -= Math.trunc($drugsCost*0.5)>>
+	<</if>>
+	<<if ($studio == 1)>>
+	<<if ($activeSlave.pornFameSpending > 0)>>
+		<br>Publicity: ¤$activeSlave.pornFameSpending
+		<<set $individualCosts -= $activeSlave.pornFameSpending>>
+	<</if>>
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;__Expense__: @@.red;¤<<print ($individualCosts)>>@@
+	<<if $assistantPower > 0>>
+		<<if $activeSlave.grossCashLastWeek > 0>>
+			<br>Income: @@.yellowgreen;¤<<print $activeSlave.grossCashLastWeek>>@@
+			<<set _total = ($individualCosts + Math.trunc($activeSlave.grossCashLastWeek))>>
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;__Total__:
+			<<if _total > 0>>
+				@@.yellowgreen;¤<<print (_total)>>@@
+			<<else>>
+				@@.red;¤<<print (_total)>>@@
+			<</if>>
+		<</if>>
+	<</if>>
+
+	//<br>
+	<<if $activeSlave.origin != 0>>
+		$activeSlave.origin<br>
+	<</if>>
+	<<if $activeSlave.slaveCost > 0>>
+		You bought her for: ¤$activeSlave.slaveCost.
+		<<set _Cost = $activeSlave.slaveCost>>
+	<<elseif $activeSlave.slaveCost == 0>>
+		You spent nothing to aquire her.
+		<<set _Cost = $activeSlave.slaveCost>>
+	<<else>>
+		You have no record of how much <<if $activeSlave.origin != 0>>this<<else>>she originally<</if>> cost.
+		<<set _Cost = 0>>
+	<</if>>
+
+
+	<<if $assistantPower > 0>>
+		<<if $activeSlave.lifetimeCost < 0>>
+			<br>In her <<if $activeSlave.weekAcquired > 0>>$activeSlave.weekAcquired weeks<<else>>time<</if>> with you, she has cost @@.red;¤$activeSlave.lifetimeCost@@.
+			<<set _Expense = $activeSlave.lifetimeCost>>
+		<<else>>
+			<br>You have no record of her costing you any ¤.
+			<<set _Expense = 0>>
+		<</if>>
+
+		<<if $activeSlave.lifetimeIncome > 0>>
+			<br>In her <<if $activeSlave.weekAcquired > 0>>$activeSlave.weekAcquired weeks<<else>>time<</if>> with you, she has earned @@.yellowgreen;¤$activeSlave.lifetimeIncome@@.
+			<<set _Income = $activeSlave.lifetimeIncome>>
+		<<else>>
+			<br>You have no record of her making you any ¤.
+			<<set _Income = 0>>
+		<</if>>
+
+		<br>Overall,
+		<<if (_Cost + _Expense + _Income) > 0>>
+			you have made ¤@@.yellowgreen;<<print (_Cost + _Expense + _Income)>>@@ net from her labors.
+		<<elseif (_Cost + _Expense + _Income) == 0>>
+			she is even in cost and income.
+		<<else>>
+			she has cost you ¤@@.red;<<print (_Cost + _Expense + _Income)>>@@.
+		<</if>>
+	<</if>>
+<</widget>>
+
+
+/* Call as <<slavePaid X Y>>, where X is the way slave is called ($activeSlave, $slave[$i]) and Y is the amount of money a slave should make for an action. Y can be a negative number */
+<<widget "slavePaid">>
+
+<<set $cash += $args[1]>>
+<<if $args[1] > 0>>
+	<<set $args[0].grossCashLastWeek += $args[1]>>
+	<<set $args[0].lifetimeIncome += $args[1]>>
+<<elseif $args[1] < 0>>
+	/* No weekly cost record yet */
+	<<set $args[0].lifetimeCost -= $args[1]>>
+<</if>>
+
+<</widget>>

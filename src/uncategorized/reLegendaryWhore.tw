@@ -1,0 +1,77 @@
+:: RE legendary whore [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check", $activeSlave = ($legendaryFacility == 1) ? $slaves.find(function(s) { return s.ID == $legendaryWhoreID; }) : $eventSlave>>
+
+<<if (ndef $activeSlave)>> /* not found - reset variable and stop event */
+	<<set $legendaryWhoreID = 0>>
+	<<goto "RIE Eligibility Check">>
+<<else>>
+
+<<set $activeSlave.devotion += 4>>
+
+The Free Cities red light areas are so overcharged with cheap and easy sex that the fashion in whores is comically unstable. This week, <<EventNameLink $activeSlave>> is in vogue. So many customers are interested in renting her body that it's necessary to assign other girls to take some of the load off her by diverting less important customers away from her.
+
+<br><br>
+
+This is a rare opportunity. Such popularity and fame is here today, and gone tomorrow. It might be possible, with a serious investment of funds in publicity, to really fix her in the public mind as a whore of note. There's no guarantee of success, but if you are successful, her value will increase a great deal.
+
+<br><br>
+
+<span id="result">
+<<link "Just capitalize on her popularity as it is">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<replace "#result">>
+	You decide to limit your advantage on her temporary popularity to a little marketing and some minor price increases. You've made some unexpected @@.yellowgreen;profits,@@ and gained a little @@.green;notoriety.@@
+	<<slavePaid $activeSlave 1000>>
+	<<set $rep += 100>>
+	<</replace>>
+<</link>>
+<br><<link "Invest ¤5000 in her notoriety">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<if random(1,100) > 50>>
+		<<replace "#result">>
+		You buy media coverage of her, invest in an ad campaign, and even arrange for persons of influence and taste to sample and review her many delights. Your efforts are a success. Her current extreme popularity will fade in time, but you have managed to arrange for her a permanent place as a @@.green;notorious and very popular prostitute.@@ As her owner, your reputation has @@.green;also increased.@@
+		<<slavePaid $activeSlave -5000>>
+		<<set $rep += 100>>
+		<<set $activeSlave.prestige = Math.min(3, $activeSlave.prestige + 1)>>
+		<<set $activeSlave.prestigeDesc = "She is a famed Free Cities whore, and commands top prices.">>
+		<<set $desc = "a framed pornographic advertisement for " + $activeSlave.slaveName + " from the week she became a famous whore">>
+		<<set $trinkets.push($desc)>>
+		<</replace>>
+	<<else>>
+		<<replace "#result">>
+		You buy media coverage of her, invest in an ad campaign, and even arrange for persons of influence and taste to sample and review her many delights. Unfortunately, popularity remains an art, not a science; though you do your best, the public mind's fancy eludes your grasp. As her owner, your reputation has @@.green;increased,@@ but in a week she'll be forgotten.
+		<<slavePaid $activeSlave -5000>>
+		<<set $rep += 100>>
+		<</replace>>
+	<</if>>
+<</link>>
+<br><<link "Lavish ¤10000 on her fame">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<if random(1,100) > 10>>
+		<<replace "#result">>
+		You buy prime media coverage of her, invest in a lavish ad campaign, and even arrange for persons of great influence and fine taste to sample and review her many delights. Your efforts are a success. Her current extreme popularity will fade in time, but you have managed to arrange for her a permanent place as a @@.green;notorious and very popular prostitute.@@ As her owner, your reputation has @@.green;also increased.@@
+		<<slavePaid $activeSlave -10000>>
+		<<set $rep += 200>>
+		<<set $activeSlave.prestige = Math.min(3, $activeSlave.prestige + 1)>>
+		<<set $activeSlave.prestigeDesc = "She is a famed Free Cities whore, and commands top prices.">>
+		<<set $desc = "a framed pornographic advertisement for " + $activeSlave.slaveName + " from the week she became a famous whore">>
+		<<set $trinkets.push($desc)>>
+		<</replace>>
+	<<else>>
+		<<replace "#result">>
+		You buy prime media coverage of her, invest in a lavish ad campaign, and even arrange for persons of great influence and fine taste to sample and review her many delights. Unfortunately, popularity remains an art, not a science; though you do your best, the public mind's fancy eludes your grasp. As her owner, your reputation has @@.green;increased,@@ but in a week she'll be forgotten.
+		<<slavePaid $activeSlave -10000>>
+		<<set $rep += 200>>
+		<</replace>>
+	<</if>>
+<</link>>
+</span>
+
+<</if>> /* closes validity check */

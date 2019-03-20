@@ -1,0 +1,115 @@
+:: P bioreactor perfected [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event", $bioreactorsAnnounced = 1>>
+
+<<set $activeSlave = $slaves.find(function(s) { return s.assignment == "work in the dairy" && s.boobs > 48000 && (s.balls == 0 || s.balls >= 10) && s.fetish == "mindbroken"; })>>
+
+<<if (ndef $activeSlave)>>
+	<<goto "Random Nonindividual Event">>
+<<else>>
+
+When you need peace and quiet to work through a difficult problem, you sometimes take a few minutes to pace through $dairyName. The massive, gently swaying breasts are always an encouraging sight, and the faint, rhythmic sounds of machine milking, machine feeding, and machine sodomy have a stimulating effect on one's thought processes. When you reach the end of the row of machines for the first time today, you turn to walk back again, and then notice that $assistantName's
+<<if $assistant == 0>>
+	symbol is visible on a screen across from the last cow in the row from you, glowing gently to get your attention.
+<<else>>
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		monstergirl avatar is visible on a screen across from the last cow in the row from you, waving cheerfully for your attention with one of her hands and a couple of her hair-tentacles.
+	<<case "shemale">>
+		shemale avatar is visible on a screen across from the last cow in the row from you, waving for your attention. (Her bouncy waving makes her ever-erect cock wave too.)
+	<<case "amazon">>
+		amazon avatar is visible on a screen across from the last cow in the row from you, jumping up and down for your attention.
+	<<case "businesswoman">>
+		businesswoman avatar is visible on a screen across from the last cow in the row from you, waving politely for your attention and pointing to a tablet in her hand.
+	<<case "goddess">>
+		goddess avatar is visible on a screen across from the last cow in the row from you, waving demurely for your attention and holding up one of her dribbling breasts.
+	<<case "schoolgirl">>
+		schoolgirl avatar is visible on a screen across from the last cow in the row from you, waving cutely for your attention and pointing to a tablet in her hand.
+	<<default>>
+		symbol is visible on a screen across from the last cow in the row from you, spinning and glowing gently to get your attention.
+	<</switch>>
+<</if>>
+<br><br>
+<<if $assistant == 0>>
+	<<if $PC.title == 1>>"Sir,"<<else>>"Madam,"<</if>> it says, "I have a matter for your attention, concerning this slave."
+<<else>>
+	<<if $PC.title == 1>>"Sir,"<<else>>"Ma'am,"<</if>> she says, "I'd like to ask you something about this slave."
+<</if>>
+You stop and consider the cow, from her titanic breasts to her <<if ($activeSlave.balls >= 10) && ($activeSlave.scrotum > 0)>>swollen balls<<elseif $activeSlave.vagina > -1>>slavering cunt<<else>>distended stomach<</if>> to her dildo-filled anus.
+<<if $assistant == 0>>
+	"This slave is permanently dependent on her milking machine," it continues. "She cannot be removed without uneconomical expenditures, and is unlikely to be useful elsewhere.
+	Additionally, there is nothing more that can be done to make her breasts any bigger<<if $activeSlave.balls >= 10>> or her testicles any more productive<<elseif $activeSlave.ovaries == 1>> or her womb any more productive<</if>>. Her development is essentially final, and that status can be made official. She could be redesignated as equipment. Other than her designation, this would make little difference: The machine would be slightly less cautious with her drugs, future intubations, and such, and she would be removed from the slave lists."
+<<else>>
+	"She's never leaving here, not without surgery. And even then, she's forgotten almost everything, and she won't be getting it back."
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		The monstergirl positions herself on the screen to create an optical illusion that makes it look like she's gently petting the slave's shoulders. She looks meditative.
+	<<case "shemale">>
+		The shemale positions herself on the screen to create an optical illusion that makes it look like she's gently petting the slave's shoulders. She looks uncharacteristically meditative.
+	<<case "amazon">>
+		The amazon positions herself on the screen to create an optical illusion that makes it look like she's gently petting the slave's shoulders. She looks meditative.
+	<<case "businesswoman">>
+		The businesswoman positions herself on the screen to create an optical illusion that makes it look like she's gently petting the slave's shoulders. She looks meditative.
+	<<case "goddess">>
+		The goddess positions herself on the screen to create an optical illusion that makes it look like she's gently caressing the slave's shoulders. She looks meditative.
+	<<case "schoolgirl">>
+		The schoolgirl positions herself on the screen to create an optical illusion that makes it look like she's gently petting the slave's shoulders. She looks uncharacteristically meditative.
+	<<default>>
+		The symbol on the screen dissolves down to create a gentle backlight behind the slave.
+	<</switch>>
+	"She's beautiful, isn't she? Perfect. There's nothing more that can be done, to make her udders any bigger<<if $activeSlave.balls >= 10>> or her balls any more productive<<elseif $activeSlave.ovaries == 1>> or her womb any more productive<</if>>. She's complete, and she's part of this machine now, and that's all she'll ever be. I can make that status official, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. I'd redesignate her as equipment. It wouldn't change much, other than a designation. I'd just be a little less cautious with her drugs, future intubations, things like that. But for slave purposes, she'd be gone. Just a part of $dairyName, forever. Or, until she wears out in <<if $activeSlave.age > 38>>a few years<<elseif $activeSlave.age > 30>>a decade or so<<else>>a couple of decades<</if>>."
+<</if>>
+
+<br><br>
+
+<span id="result">
+<<link "Do it, and do it to all maximized dairy slaves">>
+	<<replace "#result">>
+		Your assistant pauses, and then says, "Redesignation complete, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>. This milking machine has been equipped with biological components. This combination is projected to produce approximately <<if $activeSlave.balls > 0>><<print 1000*Math.trunc((3*52*(45-$activeSlave.age))/1000)>> liters of cum,<</if>>
+		<<if $activeSlave.ovaries == 1>><<print 100*Math.trunc((52*(45-$activeSlave.age))/100)>> liters of vaginal secretions, <<print 5*(45-$activeSlave.age)>> slaves,<</if>>
+		and <<print 1000*Math.trunc((300*52*(45-$activeSlave.age))/1000)>> liters of milk over a <<print 45-$activeSlave.age>> year period before its biological components must be replaced."
+		<<if $assistant > 0>>
+			<<switch $assistantAppearance>>
+			<<case "monstergirl">>
+				Her avatar watches the new equipment with almost motherly affection, her tentacle hair writhing obscurely.
+			<<case "shemale">>
+				Her avatar sits down and produces a glass of milk. She drains it in one long chug, and then begins to jerk off.
+			<<case "amazon">>
+				Her avatar sits down with a clatter of bone ornaments, produces a skin of milk, and takes a long pull.
+			<<case "businesswoman">>
+				Her avatar stands on the screen, watching the new equipment with an air of satisfaction.
+			<<case "goddess">>
+				Her avatar sits down, kneading her milky tits in empathy, a hint of simulated jealousy in the way she watches the new equipment.
+			<<case "schoolgirl">>
+				Her avatar sits down, watching the new equipment with an air of embarrassment. The schoolgirl blushes, and begins to masturbate.
+			<<default>>
+				Her avatar symbol returns to gentle spinning, doing so in synchronicity with the undulations of the new equipment's breasts.
+			<</switch>>
+		<</if>>
+		"Future redesignations can always be disabled from $dairyName interface."
+		<<if ($activeSlave.ovaries == 1)>>
+		<<if ($activeSlave.balls == 0)>>
+			<<set $bioreactorsXX += 1>>
+		<<else>>
+			<<set $bioreactorsHerm += 1>>
+		<</if>>
+		<<else>>
+		<<if ($activeSlave.balls == 0)>>
+			<<set $bioreactorsBarren += 1>>
+		<<else>>
+			<<set $bioreactorsXY += 1>>
+		<</if>>
+		<</if>>
+		<<include "Remove activeSlave">>
+		<<set $createBioreactors = 1>>
+	<</replace>>
+<</link>>
+<br><<link "No, leave her as she is">>
+	<<replace "#result">>
+		"Yes, <<if $PC.title == 1>>Sir<<else>>Ma'am<</if>>," your assistant confirms. "This option will remain accessible from $dairyName control interface, if you reconsider."
+	<</replace>>
+<</link>>
+</span>
+
+<</if>> /* closes validity check */
+

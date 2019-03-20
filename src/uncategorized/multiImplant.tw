@@ -1,0 +1,180 @@
+:: Multiple Organ Implant [nobr]
+
+You head down to your <<if $surgeryUpgrade == 1>>heavily upgraded and customized remote surgery<<else>>remote surgery<</if>> and start having the slaves with <<if ($organsCompleted > 0) && ($limbsCompleted > 0)>>organs or limbs <<elseif ($organsCompleted > 1)>>organs <<elseif ($limbsCompleted > 1)>>sets of limbs <</if>>that are ready be sent down.
+
+<<for _i = 0; _i < $slaves.length; _i++>>
+	<<if ($organs.length == 0) && ($limbs.length == 0)>><<break>><</if>>
+	<<for _o = 0; _o < $organs.length; _o++>>
+		<<if ($organs[_o].ID == $slaves[_i].ID) && ($organs[_o].weeksToCompletion == 0)>>
+			<<set $activeSlave = $slaves[_i]>>
+			
+			<<switch $organs[_o].type>>
+			<<case "penis">>
+				<<if $activeSlave.dick == 0>>
+					<<set $cash -= $surgeryCost>>
+					<<set $activeSlave.prostate = 1>>
+					<<set $activeSlave.dick to 2>>
+					<<set $activeSlave.clit to 0>>
+					<<set $activeSlave.foreskin to $activeSlave.dick>>
+					<<set $activeSlave.health -= 20>>
+					<<set $surgeryType = "addDick">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+					
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<case "testicles">>
+				<<if ($activeSlave.dick >= 0) && ($activeSlave.balls == 0)>>
+					<<set $cash -= $surgeryCost>>
+					<<set $activeSlave.prostate = 1>>
+					<<set $activeSlave.balls to 2>>
+					<<set $activeSlave.scrotum to 2>>
+					<<set $activeSlave.health -= 20>>
+					<<set $surgeryType = "addBalls">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+					
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<case "scrotum">>
+				<<if ($activeSlave.scrotum == 0) && ($activeSlave.balls >= 0)>>
+					<<set $cash -= $surgeryCost>>
+					<<set $activeSlave.scrotum to $activeSlave.balls>>
+					<<set $activeSlave.health -= 10>>
+					<<set $surgeryType = "addScrotum">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+					
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<case "foreskin">>
+				<<if ($activeSlave.foreskin == 0) && ($activeSlave.penis >= 0)>>
+					<<set $cash -= $surgeryCost>>
+					<<set $activeSlave.foreskin to $activeSlave.penis>>
+					<<set $activeSlave.health -= 10>>
+					<<set $surgeryType = "addForeskin">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+					
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<case "ovaries">>
+				<<if ($activeSlave.ovaries == 0) && ($activeSlave.vagina >= 0)>>
+					<<set $cash -= $surgeryCost>>
+					<<set $activeSlave.ovaries to 1>>
+					<<set $activeSlave.preg to 0>>
+					<<set $activeSlave.health -= 20>>
+					<<set $surgeryType = "addOvaries">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<case "prostate">>
+				<<if ($activeSlave.prostate == 0)>>
+					<<set $cash -= $surgeryCost>>
+					<<set $activeSlave.prostate = 1>>
+					<<set $activeSlave.health -= 20>>
+					<<set $surgeryType = "addProstate">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+					
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<case "eyes">>
+				<<if ($activeSlave.eyes == -2) && ($activeSlave.origEye != "implant")>>
+					<<set $cash -= $surgeryCost>>
+					<<set $activeSlave.eyes to 1>>
+					<<set $activeSlave.eyeColor = "pale pink">>
+					/* no way to salvage original eye color */
+					<<set $activeSlave.health -= 20>>
+					<<set $surgeryType = "unblind">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+					
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<case "voicebox">>
+				<<if ($activeSlave.voice == 0)>>
+					<<set $cash -= $surgeryCost>>
+					
+					<<if ($activeSlave.ovaries + $activeSlave.hormones) > 1>>
+						<<set $activeSlave.voice = 3>>
+					<<elseif ($activeSlave.balls > 0) || ($activeSlave.hormones < 0)>>
+						<<set $activeSlave.voice = 1>>
+					<<else>>
+						<<set $activeSlave.voice = 2>>
+					<</if>>
+					<<set $activeSlave.health -= 10>>
+					<<set $surgeryType = "restoreVoice">>
+					<br><hr>
+					<<include "Surgery Degradation">>
+				
+					<<set $organs.deleteAt(_o)>>
+				<</if>>
+			<<default>>
+				Error: OrganType: $organs[_o].type not known.
+			<</switch>>
+			
+			<<set $slaves[_i] = $activeSlave>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<if $slaves[_i].amp != 0>>
+	<<for _l = 0; _l < $limbs.length; _l++>>
+		<<if ($limbs[_l].ID == $slaves[_i].ID) && ($limbs[_l].weeksToCompletion == 0)>>
+			<<set $activeSlave = $slaves[_i]>>
+
+			<<switch $limbs[_l].type>>
+			<<case "simple">>
+				<<set $activeSlave.amp = -1>>
+				<<set $surgeryType = "basicPLimbs">>
+			<<case "sex">>
+				<<set $activeSlave.amp = -2>>
+				<<set $surgeryType = "sexPLimbs">>
+			<<case "beauty">>
+				<<set $activeSlave.amp = -3>>
+				<<set $surgeryType = "beautyPLimbs">>
+			<<case "combat">>
+				<<set $activeSlave.amp = -4>>
+				<<set $surgeryType = "combatPLimbs">>
+			<<case "cyber">>
+				<<set $activeSlave.amp = -5>>
+				<<set $surgeryType = "cyberPLimbs">>
+			<</switch>>
+			
+			<<set $cash -= $surgeryCost>>
+			<<set $activeSlave.health -= 10>>
+			<br><hr>
+			<<include "Surgery Degradation">>
+			<<set $limbs.deleteAt(_l)>>
+
+			<<set $slaves[_i] = $activeSlave>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<</if>>
+		
+<</for>>
+
+/* This needs to be down here to over-ride any Surgery Degradation calls */
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Main">>
+
+/* Clean-up */
+<<set $organsCompleted = 0>>
+<<for _i = 0; _i < $organs.length; _i++>>
+	<<if $organs[_i].weeksToCompletion == 0>>
+		<<set $organsCompleted++>>
+	<</if>>
+<</for>>
+
+<<set $limbsCompleted = 0>>
+<<for _i = 0; _i < $limbs.length; _i++>>
+	<<if $limbs[_i].weeksToCompletion == 0>>
+		<<set $limbsCompleted++>>
+	<</if>>
+<</for>>
+
+
+

@@ -1,0 +1,82 @@
+:: Art_Vector_Belly_ [nobr]
+
+<<set _showNavelPiercings = $showBodyMods == 1 && _artSlave.clothes != "restrictive latex" && _artSlave.clothes != "a latex catsuit">>
+
+<<if _artSlave.belly > 0>>
+	<<if _artSlave.belly >= 100000>>
+		<<include Art_Vector_Belly_Massive>>
+	<<elseif _artSlave.belly >= 75000>>
+		<<include Art_Vector_Belly_Giant>>
+	<<elseif _artSlave.belly >= 50000>>
+		<<include Art_Vector_Belly_Huge>>
+	<<elseif _artSlave.belly >= 30000>>
+		<<include Art_Vector_Belly_Big>>
+	<<elseif _artSlave.belly >= 10000>>
+		<<include Art_Vector_Belly>>
+	<<elseif _artSlave.belly >= 1500>>
+		<<include Art_Vector_Belly_Small>>
+<</if>>
+
+	
+	/* shiny clothings */
+	<<if $seeVectorArtHighlights == 1>>
+		<<if _artSlave.fuckdoll != 0 || _artSlave.clothes == "restrictive latex" || _artSlave.clothes == "a latex catsuit" || _artSlave.clothes == "body oil">>
+			<<include Art_Vector_Belly_Outfit_Shine>>
+		<</if>>
+	<</if>>
+	
+	/* belly piercings */
+	<<if _showNavelPiercings >>
+		<<if _artSlave.navelPiercing >= 1>>
+			<<include Art_Vector_Belly_Piercing>>
+		<</if>>
+		<<if _artSlave.navelPiercing == 2>>
+			<<include Art_Vector_Belly_Piercing_Heavy>>
+		<</if>>
+	<</if>>
+<<else>>
+
+	/* flat midriff piercings */
+	<<if _showNavelPiercings >>
+		<<if _artSlave.navelPiercing >= 1>>
+			<<include Art_Vector_Navel_Piercing>>
+		<</if>>
+		<<if _artSlave.navelPiercing == 2>>
+			<<include Art_Vector_Navel_Piercing_Heavy>>
+		<</if>>
+	<</if>>
+<</if>>
+
+
+
+/* Torso Accessories */
+<<if _artSlave.bellyAccessory == "a corset" && _torsoSize == "Normal">>
+	<<include Art_Vector_Corsetnormal>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "a corset" && _torsoSize == "Hourglass">>
+	<<include Art_Vector_Corsethourglass>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "a corset" && _torsoSize == "Unnatural">>
+	<<include Art_Vector_Corsetunnatural>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "an extreme corset" && _torsoSize == "Normal">>
+	<<include Art_Vector_Corsetnormal>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "an extreme corset" && _torsoSize == "Hourglass">>
+	<<include Art_Vector_Corsethourglass>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "an extreme corset" && _torsoSize == "Unnatural">>
+	<<include Art_Vector_Corsetunnatural>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "a small empathy belly">>
+	<<include Art_Vector_Smallbelly>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "a medium empathy belly">>
+	<<include Art_Vector_Mediumbelly>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "a large empathy belly">>
+	<<include Art_Vector_Largebelly>>
+<</if>>
+<<if _artSlave.bellyAccessory  == "a huge empathy belly">>
+	<<include Art_Vector_Hugebelly>>
+<</if>>

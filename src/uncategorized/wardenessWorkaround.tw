@@ -1,0 +1,13 @@
+:: Wardeness Workaround [silently]
+
+<<if $Wardeness != 0>>
+	<<removeJob $Wardeness "be the Wardeness">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the Wardeness">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Wardeness = $slaves[$i]>>
+<</if>>
+
+<<goto "Cellblock">>
+

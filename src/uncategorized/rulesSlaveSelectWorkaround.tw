@@ -1,0 +1,15 @@
+:: Rules Slave Select Workaround
+
+<<nobr>>
+<<set $nextButton = "Continue", $nextLink = "Rules Slave Select">>
+
+<<if !ruleSlaveSelected($activeSlave, $currentRule)>>
+	<<set $currentRule.selectedSlaves.push($activeSlave.ID)>>
+	<<if ruleSlaveExcluded($activeSlave, $currentRule)>>
+		<<set $currentRule.excludedSlaves.delete($activeSlave.ID)>>
+	<</if>>
+<</if>>
+
+<<goto "Rules Slave Select">>
+<</nobr>>
+

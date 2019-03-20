@@ -1,0 +1,68 @@
+:: Pit [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Pit", $showEncyclopedia = 1, $encyclopedia = "Pit", _DL = $fighterIDs.length, _SL = $slaves.length>>
+
+<<if $pitName != "the Pit">>
+	<<set $pitNameCaps = $pitName.replace("the ", "The ")>>
+<</if>>
+
+$pitNameCaps is clean and ready,
+<<if _DL > 2>>
+	with a pool of slaves assigned to fight in the week's bout.
+<<elseif _DL == 1>>
+	but only one slave is assigned to the week's bout.
+<<elseif _DL > 0>>
+	with slaves assigned to the week's bout.
+<<else>>
+	but no slaves are assigned to fight.
+	<<link "Decommission the pit">>
+		<<set $pit = 0>>
+		<<for _i = 0; _i < $sectors.length; _i++>>
+		<<if $sectors[_i].type == "Pit">>
+			<<set $sectors[_i].type = "Markets">><<break>>
+		<</if>>
+		<</for>>
+		<<goto "Main">>
+	<</link>>
+<</if>>
+
+//<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, slaves assigned here can continue their usual duties.//
+
+<br><br>
+<<if $pitAudience == "none">>
+	Fights here are strictly private. [[Open them for free|Pit][$pitAudience = "free"]] | [[Open them and charge admission|Pit][$pitAudience = "paid"]]
+<<elseif $pitAudience == "free">>
+	Fights here are free and open to the public. [[Close them|Pit][$pitAudience = "none"]] | [[Charge admission|Pit][$pitAudience = "paid"]]
+<<else>>
+	Admission is charged to the fights here. [[Close them|Pit][$pitAudience = "none"]] | [[Stop charging|Pit][$pitAudience = "free"]]
+<</if>>
+
+<<if $dojo != 0>>
+<<if $pitBG == 0>>
+	Two fighters will be selected from the pool at random. [[Guarantee your Bodyguard a slot|Pit][$pitBG = 1]]
+<<else>>
+	Your Bodyguard will fight a slave selected from the pool at random. [[Make both slots random|Pit][$pitBG = 0]]
+<</if>>
+<</if>>
+
+<br>
+<<if $pitLethal == 1>>
+	Fighters will be armed with swords, and fights will be to the death. [[Nonlethal|Pit][$pitLethal = 0]]
+<<else>>
+	Fighters will use their fists and feet, and fights will be to submission. [[Lethal|Pit][$pitLethal = 1]]
+<</if>>
+
+<<if _DL > 0>>
+	<br><br>''Cancel a slave's fight:''
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+
+<<if (_SL > _DL)>>
+	<br><br>''Select a slave to fight:''
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<</if>>
+<<unset $Flag>>
+
+<br><br>Rename $pitName: <<textbox "$pitName" $pitName "Pit">> //Use a noun or similar short phrase//

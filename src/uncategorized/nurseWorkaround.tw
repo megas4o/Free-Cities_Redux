@@ -1,0 +1,13 @@
+:: Nurse Workaround [silently]
+
+<<if $Nurse != 0>>
+	<<removeJob $Nurse "be the Nurse">>
+<</if>>
+<<if $i > -1>>
+	<<assignJob $slaves[$i] "be the Nurse">>
+	<<set $slaves[$i].livingRules = "luxurious">>
+	<<set $Nurse = $slaves[$i]>>
+<</if>>
+
+<<goto "Clinic">>
+

@@ -1,0 +1,64 @@
+:: Art_Vector_Chastity_Belt_ [nobr]
+
+/* note: penile chastity is handled by penis display */
+
+<<set _chastityAnal = _artSlave.dickAccessory == "anal chastity" || _artSlave.dickAccessory == "combined chastity" || _artSlave.vaginalAccessory == "anal chastity" || _artSlave.vaginalAccessory == "combined chastity">>
+
+<<set _chastityVaginal = _artSlave.vaginalAccessory == "chastity belt" || _artSlave.vaginalAccessory == "combined chastity">>
+
+<<if _artSlave.clothes != "a latex catsuit" >>
+
+  <<if _chastityAnal>>
+    <<include Art_Vector_Chastity_Anus>>
+  <</if>>
+
+  <<if _chastityVaginal>>
+    <<include Art_Vector_Chastity_Vagina>>
+  <</if>>
+
+  <<if _chastityAnal || _chastityVaginal >>
+    <<include Art_Vector_Chastity_Base>>
+  <</if>>
+
+<</if>>
+
+/* shows vaginal accessories in-game when selected; vaginal accessory art disabled on the outfits below */
+<<if _artSlave.vaginalAccessory == "dildo" && _artSlave.clothes != "a cheerleader outfit" && _artSlave.clothes != "a hijab and abaya" && _artSlave.clothes != "cutoffs and a t-shirt" && _artSlave.clothes != "a halter top dress" && _artSlave.clothes != "a mini dress" && _artSlave.clothes != "a leotard" && _artSlave.clothes != "a nice maid outfit" && _artSlave.clothes != "a slutty maid outfit" && _artSlave.clothes != "a military uniform" && _artSlave.clothes != "a nice nurse outfit" && _artSlave.clothes != "a schoolgirl outfit" && _artSlave.clothes != "a scalemail bikini" && _artSlave.clothes != "a slutty nurse outfit" && _artSlave.clothes != "a ball gown" && _artSlave.clothes != "battledress" && _artSlave.clothes != "spats and a tank top" && _artSlave.clothes != "nice business attire" && _artSlave.clothes != "slutty business attire" && _artSlave.clothes != "a bunny outfit" && _artSlave.clothes != "conservative clothing" && _artSlave.clothes != "a huipil" && _artSlave.clothes != "a kimono" && _artSlave.clothes != "a slave gown" && _artSlave.clothes != "stretch pants and a crop-top" && _artSlave.clothes != "a maternity dress" && _artSlave.clothes != "a slutty qipao" && _artSlave.clothes != "a toga" && _artSlave.clothes != "Western clothing" && _artSlave.clothes != "faceless cybersuit" && _artSlave.clothes != "half-face cybersuit">>
+	<<include Art_Vector_Dildo_Short>>
+<</if>>
+<<if _artSlave.vaginalAccessory == "long dildo" && _artSlave.clothes != "a cheerleader outfit" && _artSlave.clothes != "a hijab and abaya" && _artSlave.clothes != "cutoffs and a t-shirt" && _artSlave.clothes != "a halter top dress" && _artSlave.clothes != "a mini dress" && _artSlave.clothes != "a leotard" && _artSlave.clothes != "a nice maid outfit" && _artSlave.clothes != "a slutty maid outfit" && _artSlave.clothes != "a military uniform" && _artSlave.clothes != "a nice nurse outfit" && _artSlave.clothes != "a schoolgirl outfit" && _artSlave.clothes != "a scalemail bikini" && _artSlave.clothes != "a slutty nurse outfit" && _artSlave.clothes != "a ball gown" && _artSlave.clothes != "battledress" && _artSlave.clothes != "spats and a tank top" && _artSlave.clothes != "nice business attire" && _artSlave.clothes != "slutty business attire" && _artSlave.clothes != "a bunny outfit" && _artSlave.clothes != "conservative clothing" && _artSlave.clothes != "a huipil" && _artSlave.clothes != "a kimono" && _artSlave.clothes != "a slave gown" && _artSlave.clothes != "stretch pants and a crop-top" && _artSlave.clothes != "a maternity dress" && _artSlave.clothes != "a slutty qipao" && _artSlave.clothes != "a toga" && _artSlave.clothes != "Western Clothing" && _artSlave.clothes != "faceless cybersuit" && _artSlave.clothes != "half-face cybersuit">>
+	<<include Art_Vector_Dildo_Long>>
+<</if>>
+/* additional outfits disabled due to the art breaking with the larger accessories */
+<<if _artSlave.vaginalAccessory == "large dildo" && _artSlave.clothes != "a cheerleader outfit" && _artSlave.clothes != "a hijab and abaya" && _artSlave.clothes != "cutoffs and a t-shirt" && _artSlave.clothes != "a halter top dress" && _artSlave.clothes != "a mini dress" && _artSlave.clothes != "a leotard" && _artSlave.clothes != "a nice maid outfit" && _artSlave.clothes != "a slutty maid outfit" && _artSlave.clothes != "a military uniform" && _artSlave.clothes != "a nice nurse outfit" && _artSlave.clothes != "a schoolgirl outfit" && _artSlave.clothes != "a scalemail bikini" && _artSlave.clothes != "a slutty nurse outfit" && _artSlave.clothes != "a ball gown" && _artSlave.clothes != "battledress" && _artSlave.clothes != "spats and a tank top" && _artSlave.clothes != "nice business attire" && _artSlave.clothes != "slutty business attire" && _artSlave.clothes != "a bunny outfit" && _artSlave.clothes != "conservative clothing" && _artSlave.clothes != "a huipil" && _artSlave.clothes != "a kimono" && _artSlave.clothes != "a slave gown" && _artSlave.clothes != "stretch pants and a crop-top" && _artSlave.clothes != "a maternity dress" && _artSlave.clothes != "a slutty qipao" && _artSlave.clothes != "a toga" && _artSlave.clothes != "Western Clothing" && _artSlave.clothes != "faceless cybersuit" && _artSlave.clothes != "half-face cybersuit" && _artSlave.clothes != "a comfortable bodysuit" && _artSlave.clothes != "a string bikini" && _artSlave.clothes != "attractive lingerie for a pregnant woman" && _artSlave.clothes != "restrictive latex">>
+	<<include Art_Vector_Dildo_Large>>
+<</if>>
+<<if _artSlave.vaginalAccessory == "long, large dildo" && _artSlave.clothes != "a cheerleader outfit" && _artSlave.clothes != "a hijab and abaya" && _artSlave.clothes != "cutoffs and a t-shirt" && _artSlave.clothes != "a halter top dress" && _artSlave.clothes != "a mini dress" && _artSlave.clothes != "a leotard" && _artSlave.clothes != "a nice maid outfit" && _artSlave.clothes != "a slutty maid outfit" && _artSlave.clothes != "a military uniform" && _artSlave.clothes != "a nice nurse outfit" && _artSlave.clothes != "a schoolgirl outfit" && _artSlave.clothes != "a scalemail bikini" && _artSlave.clothes != "a slutty nurse outfit" && _artSlave.clothes != "a ball gown" && _artSlave.clothes != "battledress" && _artSlave.clothes != "spats and a tank top" && _artSlave.clothes != "nice business attire" && _artSlave.clothes != "slutty business attire" && _artSlave.clothes != "a bunny outfit" && _artSlave.clothes != "conservative clothing" && _artSlave.clothes != "a huipil" && _artSlave.clothes != "a kimono" && _artSlave.clothes != "a slave gown" && _artSlave.clothes != "stretch pants and a crop-top" && _artSlave.clothes != "a maternity dress" && _artSlave.clothes != "a slutty qipao" && _artSlave.clothes != "a toga" && _artSlave.clothes != "Western Clothing" && _artSlave.clothes != "faceless cybersuit" && _artSlave.clothes != "half-face cybersuit" && _artSlave.clothes != "a comfortable bodysuit" && _artSlave.clothes != "a string bikini" && _artSlave.clothes != "attractive lingerie for a pregnant woman" && _artSlave.clothes != "restrictive latex">>
+	<<include Art_Vector_Dildo_Large_Long>>
+<</if>>
+<<if _artSlave.vaginalAccessory == "huge dildo" && _artSlave.clothes != "a cheerleader outfit" && _artSlave.clothes != "a hijab and abaya" && _artSlave.clothes != "cutoffs and a t-shirt" && _artSlave.clothes != "a halter top dress" && _artSlave.clothes != "a mini dress" && _artSlave.clothes != "a leotard" && _artSlave.clothes != "a nice maid outfit" && _artSlave.clothes != "a slutty maid outfit" && _artSlave.clothes != "a military uniform" && _artSlave.clothes != "a nice nurse outfit" && _artSlave.clothes != "a schoolgirl outfit" && _artSlave.clothes != "a scalemail bikini" && _artSlave.clothes != "a slutty nurse outfit" && _artSlave.clothes != "a ball gown" && _artSlave.clothes != "battledress" && _artSlave.clothes != "spats and a tank top" && _artSlave.clothes != "nice business attire" && _artSlave.clothes != "slutty business attire" && _artSlave.clothes != "a bunny outfit" && _artSlave.clothes != "conservative clothing" && _artSlave.clothes != "a huipil" && _artSlave.clothes != "a kimono" && _artSlave.clothes != "a slave gown" && _artSlave.clothes != "stretch pants and a crop-top" && _artSlave.clothes != "a maternity dress" && _artSlave.clothes != "a slutty qipao" && _artSlave.clothes != "a toga" && _artSlave.clothes != "Western Clothing" && _artSlave.clothes != "faceless cybersuit" && _artSlave.clothes != "half-face cybersuit" && _artSlave.clothes != "a comfortable bodysuit" && _artSlave.clothes != "a string bikini" && _artSlave.clothes != "attractive lingerie for a pregnant woman" && _artSlave.clothes != "restrictive latex">>
+	<<include Art_Vector_Dildo_Huge>>
+<</if>>
+<<if _artSlave.vaginalAccessory == "long, huge dildo" && _artSlave.clothes != "a cheerleader outfit" && _artSlave.clothes != "a hijab and abaya" && _artSlave.clothes != "cutoffs and a t-shirt" && _artSlave.clothes != "a halter top dress" && _artSlave.clothes != "a mini dress" && _artSlave.clothes != "a leotard" && _artSlave.clothes != "a nice maid outfit" && _artSlave.clothes != "a slutty maid outfit" && _artSlave.clothes != "a military uniform" && _artSlave.clothes != "a nice nurse outfit" && _artSlave.clothes != "a schoolgirl outfit" && _artSlave.clothes != "a scalemail bikini" && _artSlave.clothes != "a slutty nurse outfit" && _artSlave.clothes != "a ball gown" && _artSlave.clothes != "battledress" && _artSlave.clothes != "spats and a tank top" && _artSlave.clothes != "nice business attire" && _artSlave.clothes != "slutty business attire" && _artSlave.clothes != "a bunny outfit" && _artSlave.clothes != "conservative clothing" && _artSlave.clothes != "a huipil" && _artSlave.clothes != "a kimono" && _artSlave.clothes != "a slave gown" && _artSlave.clothes != "stretch pants and a crop-top" && _artSlave.clothes != "a maternity dress" && _artSlave.clothes != "a slutty qipao" && _artSlave.clothes != "a toga" && _artSlave.clothes != "Western Clothing" && _artSlave.clothes != "faceless cybersuit" && _artSlave.clothes != "half-face cybersuit" && _artSlave.clothes != "a comfortable bodysuit" && _artSlave.clothes != "a string bikini" && _artSlave.clothes != "attractive lingerie for a pregnant woman" && _artSlave.clothes != "restrictive latex">>
+	<<include Art_Vector_Dildo_Huge_Long>>
+<</if>>
+
+/* Anal Accessories */
+<<if _artSlave.buttplug == "long plug">>
+	<<include Art_Vector_Plug_Long>>
+<</if>>
+<<if _artSlave.buttplug == "large plug">>
+	<<include Art_Vector_Plug_Large>>
+<</if>>
+<<if _artSlave.buttplug == "long, large plug">>
+	<<include Art_Vector_Plug_Large_Long>>
+<</if>>
+<<if _artSlave.buttplug == "huge plug">>
+	<<include Art_Vector_Plug_Huge>>
+<</if>>
+<<if _artSlave.buttplug == "long, huge plug">>
+	<<include Art_Vector_Plug_Huge_Long>>
+<</if>>
+<<if _artSlave.buttplugAttachment == "tail">>
+	<<include Art_Vector_Plug_Tail>>
+<</if>>

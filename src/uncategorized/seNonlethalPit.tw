@@ -1,0 +1,618 @@
+:: SE nonlethal pit
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Scheduled Event">>
+<<set $returnTo = "Scheduled Event">>
+<<set $pitFought = 1>>
+
+<<set $fighterOne = 0>>
+<<set $fighterTwo = 0>>
+<<if $pitBG == 0>>
+	<<set $fighterOne = $fighterIDs.random()>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].ID == $fighterOne)>>
+		<<set $fighterOne = $slaves[$i]>>
+		<<break>>
+	<</if>>
+	<</for>>
+<<else>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].ID == $Bodyguard.ID)>>
+		<<set $fighterOne = $slaves[$i]>>
+		<<break>>
+	<</if>>
+	<</for>>
+<</if>>
+<<set $fighterIDs = $fighterIDs.shuffle()>>
+<<for $i = 0; $i < $fighterIDs.length; $i++>>
+	<<if ($fighterIDs[$i] != $fighterOne.ID)>>
+		<<set $fighterTwo = $fighterIDs[$i]>>
+		<<break>>
+	<</if>>
+<</for>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].ID == $fighterTwo)>>
+		<<set $fighterTwo = $slaves[$i]>>
+		<<break>>
+	<</if>>
+<</for>>
+<<if ($fighterOne == 0) || ($fighterTwo == 0)>>
+	<<goto "Nonrandom Event">>
+<</if>>
+
+<</nobr>>\
+\
+<<nobr>>
+
+This week's pit fight is between $fighterOne.slaveName and $fighterTwo.slaveName. <<if $pitAudience == "none">>You are alone above $pitName, left to watch them square off in private.<<elseif $pitAudience == "free">>Your guests line the rim of $pitName, joking and betting.<<else>>The attendees line the rim of $pitName, betting and arguing.<</if>>
+
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	They @@.green;strongly approve@@ of your hosting combat between slaves; this advances ideas from antiquity about what public events should be.
+	<<set $rep += 10*$FSSingleSlaveRep*($arcologies[0].FSRomanRevivalist/$FSLockinLevel)>>
+	<<set $arcologies[0].FSRomanRevivalist += 0.2*$FSSingleSlaveRep>>
+<</if>>
+
+You review the rules - the combatants are wearing light gloves, and the fight will be nonlethal, with you as the judge. The winner will have the right to do anything she wishes to the loser, and earn two complete days of rest. You take a moment to look over your girls before giving the word.
+
+<</nobr>>
+
+<<nobr>>
+
+<<Deadliness $fighterOne>>
+<<set $fighterOneDeadliness = $deadliness>>
+
+<<if $fighterOneDeadliness > 5>>
+	$fighterOne.slaveName seems very confident, even eager to win a break.
+<<elseif $fighterOneDeadliness > 3>>
+	$fighterOne.slaveName seems nervous, but steels herself to fight for time off.
+<<elseif $fighterOneDeadliness > 1>>
+	$fighterOne.slaveName seems hesitant and unsure.
+<<else>>
+	$fighterOne.slaveName is obviously terrified, and might flee if there were a way out of the pit.
+<</if>>
+
+<<if $fighterOne.combatSkill > 0>>
+	Her stance is obviously well-practiced.
+<</if>>
+
+<<if $fighterOne.muscles > 95>>
+	Her huge muscles are an intimidating sight, but may hinder her flexibility.
+<<elseif $fighterOne.muscles > 30>>
+	Her muscles are a trim and powerful sight.
+<</if>>
+
+<<if $fighterOne.height >= 170>>
+	Her height gives her a reach advantage with her fists and feet.
+<</if>>
+
+<<if $fighterOne.health > 50>>
+	Her shining health makes her a better fighter.
+<</if>>
+
+<<if $fighterOne.weight > 10>>
+	Her heavy weight is an impediment as a pit fighter.
+<</if>>
+
+<<if $fighterOne.weight < -10>>
+	Her light weight is an impediment as a pit fighter.
+<</if>>
+
+<<if $fighterOne.health < -50>>
+	Her poor health makes her a weaker combatant.
+<</if>>
+
+<<if $fighterOne.preg > 10>>
+	Her advanced pregnancy makes her much less effective.
+<</if>>
+
+<<if not canSee($fighterOne)>>
+	Her lack of eyesight means certain defeat.
+<<elseif ($fighterOne.eyes == -1 && ($fighterOne.eyewear != "corrective glasses" || $fighterOne.eyewear != "corrective contacts")) || ($fighterOne.eyes == 1 && ($fighterOne.eyewear == "blurring glasses" || $fighterOne.eyewear == "blurring contacts"))>>
+	Her poor eyesight makes her a weaker fighter.
+<</if>>
+
+<<if $fighterOne.amp < 0>>
+	The pit lights gleam on her P-Limbs.
+	<<if $fighterOne.amp == -4>>
+		Though their integral weapons are disabled, her upgraded prosthetics are almost as fast as natural limbs, and they can hit much, much harder.
+	<<elseif $fighterOne.amp == -5>>
+		Her advanced cybernetic limbs are faster than natural limbs, and their force is amplified, so that they can become potent weapons.
+	<</if>>
+<</if>>
+
+<<if $fighterOne.devotion <= 20>>
+<<if $fighterOne.trust < -20>>
+	She is unwilling to fight, but she knows the punishment for refusing to do so will be even worse.
+<</if>>
+<</if>>
+
+<</nobr>>
+
+<<nobr>>
+
+<<Deadliness $fighterTwo>>
+<<set $fighterTwoDeadliness = $deadliness>>
+
+<<if $fighterTwoDeadliness > 5>>
+	$fighterTwo.slaveName seems very confident, even eager to win a break.
+<<elseif $fighterTwoDeadliness > 3>>
+	$fighterTwo.slaveName seems nervous, but steels herself to fight for time off.
+<<elseif $fighterTwoDeadliness > 1>>
+	$fighterTwo.slaveName seems hesitant and unsure.
+<<else>>
+	$fighterTwo.slaveName is obviously terrified, and might flee if there were a way out of the pit.
+<</if>>
+
+<<if $fighterTwo.combatSkill > 0>>
+	Her stance is obviously well-practiced.
+<</if>>
+
+<<if $fighterTwo.muscles > 95>>
+	Her huge muscles are an intimidating sight, but may hinder her flexibility.
+<<elseif $fighterTwo.muscles > 30>>
+	Her muscles are a trim and powerful sight.
+<</if>>
+
+<<if $fighterTwo.height >= 170>>
+	Her height gives her a reach advantage with her fists and feet.
+<</if>>
+
+<<if $fighterTwo.health > 50>>
+	Her shining health makes her a better fighter.
+<</if>>
+
+<<if $fighterTwo.weight > 10>>
+	Her heavy weight is an impediment as a pit fighter.
+<</if>>
+
+<<if $fighterTwo.weight < -10>>
+	Her light weight is an impediment as a pit fighter.
+<</if>>
+
+<<if $fighterTwo.health < -50>>
+	Her poor health makes her a weaker combatant.
+<</if>>
+
+<<if $fighterTwo.preg > 10>>
+	Her advanced pregnancy makes her much less effective.
+<</if>>
+
+<<if not canSee($fighterTwo)>>
+	Her lack of eyesight means certain defeat.
+<<elseif ($fighterTwo.eyes == -1 && ($fighterTwo.eyewear != "corrective glasses" || $fighterTwo.eyewear != "corrective contacts")) || ($fighterTwo.eyes == 1 && ($fighterTwo.eyewear == "blurring glasses" || $fighterTwo.eyewear == "blurring contacts"))>>
+	Her poor eyesight makes her a weaker fighter.
+<</if>>
+
+<<if $fighterTwo.amp < 0>>
+	The pit lights gleam on her P-Limbs.
+	<<if $fighterTwo.amp == -4>>
+		Though their integral weapons are disabled, her upgraded prosthetics are almost as fast as natural limbs, and they can hit much, much harder.
+	<<elseif $fighterTwo.amp == -5>>
+		Her advanced cybernetic limbs are faster than natural limbs, and their force is amplified, so that they can become potent weapons.
+	<</if>>
+<</if>>
+
+<<if $fighterTwo.devotion <= 20>>
+<<if $fighterTwo.trust < -20>>
+	She is unwilling to fight, but she knows the punishment for refusing to do so will be even worse.
+<</if>>
+<</if>>
+
+<</nobr>>
+
+<<nobr>>
+
+<<if $fighterTwoDeadliness > $fighterOneDeadliness>>
+	<<set _winner = $fighterTwo>>
+	<<set _winnerDeadliness = $fighterTwoDeadliness>>
+	<<set _loser = $fighterOne>>
+	<<set _loserDeadliness = $fighterOneDeadliness>>
+<<elseif $fighterTwoDeadliness < $fighterOneDeadliness>>
+	<<set _loser = $fighterTwo>>
+	<<set _loserDeadliness = $fighterTwoDeadliness>>
+	<<set _winner = $fighterOne>>
+	<<set _winnerDeadliness = $fighterOneDeadliness>>
+<<elseif random(1,100) > 50>>
+	<<set _winner = $fighterTwo>>
+	<<set _winnerDeadliness = $fighterTwoDeadliness>>
+	<<set _loser = $fighterOne>>
+	<<set _loserDeadliness = $fighterOneDeadliness>>
+<<else>>
+	<<set _loser = $fighterTwo>>
+	<<set _loserDeadliness = $fighterTwoDeadliness>>
+	<<set _winner = $fighterOne>>
+	<<set _winnerDeadliness = $fighterOneDeadliness>>
+<</if>>
+
+<<if !canSee(_winner) && !canSee(_loser)>>
+	_winner.slaveName and _loser.slaveName are both blind making the fight a staredown. Neither slave wants to make the first move, especially with the drowning cacophony coming from the jeering crowd. Slowly, _winner.slaveName moves forward, waving feeling for her opponent before she herself gets found. _loser.slaveName's hand meets _winner.slaveName's and the two move to grab eachother in a headlock. The two slaves violently thrash against each other, suffering more and more strikes as the struggle goes on. Eventually, _loser.slaveName can take no more and releases her grip on _winner.slaveName neck. It takes a moment for _winner.slaveName to stop wrestling the submitting _loser.slaveName and accepting her victory.
+	<<if $pitAudience == "paid">>
+		The audience is surprised by the sudden wrestling match, and your @@.yellowgreen;cut of the betting@@ is modest.
+		<<slavePaid _winner 500>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;surprised@@ by the impromptu wrestling match.
+		<<set $rep += 50>>
+	<</if>>
+<<elseif (_winnerDeadliness > _loserDeadliness+1) && (_winner.amp == -4)>>
+	Upon your word the two combatants approach each other. _winner.slaveName keeps her artificial limbs up in a protective position. _loser.slaveName probes her with some light blows, puzzled by this ironclad defense. Gradually, she hits harder and harder, her opponent grunting under the impacts but holding steady. Finally, _loser.slaveName overcommits to a body blow, and _winner.slaveName grips her forearm. That is the end. The augmented grip is effectively unbreakable, and _winner.slaveName uses it to pull her opponent in and grab her neck with the other hand, using it to exert just the right amount of pressure to choke her out harmlessly. Though the fight was short,
+	<<if $pitAudience == "paid">>
+		the audience is quite impressed by the display, and your @@.yellowgreen;cut of the betting@@ is quite good.
+		<<slavePaid _winner 2000>>
+	<<elseif $pitAudience == "free">>
+		the audience is @@.green;very impressed@@ by the display.
+		<<set $rep += 100>>
+	<<else>>
+		it was a good test of the slave's enhancements.
+	<</if>>
+<<elseif (_winnerDeadliness > _loserDeadliness+1) && (_winner.amp == -5)>>
+	Upon your word the two combatants approach each other. _winner.slaveName keeps her advanced cybernetic limbs up in a protective position. _loser.slaveName probes her with some light blows, puzzled by this ironclad defense. Gradually, she hits harder and harder, her opponent grunting under the impacts but holding steady. Finally, _loser.slaveName tires, gets off balance, and _winner.slaveName manages to grab her forearm. _winner.slaveName's limbs emit an electric shock that temporarily incapacitates her opponent. _winner.slaveName uses her grip to pull her stunned opponent in and grab her neck with the other hand, using it to exert just the right amount of pressure to choke her out harmlessly. Though the fight was short,
+	<<if $pitAudience == "paid">>
+		the audience is quite impressed by the display, and your @@.yellowgreen;cut of the betting@@ is quite good.
+		<<slavePaid _winner 2000>>
+	<<elseif $pitAudience == "free">>
+		the audience is @@.green;very impressed@@ by the display.
+		<<set $rep += 100>>
+	<<else>>
+		it was a good test of the slave's enhancements.
+	<</if>>
+<<elseif !canSee(_winner)>>
+	_winner.slaveName centers herself and hones in on _loser.slaveName's rapid breath. She readies herself, knowing she has a single chance to win. With heavy steps, _loser.slaveName rushes her, fully prepared to tackle the helpless combatant. _winner.slaveName gambles everything on a single high punch, a strike that slams _loser.slaveName's undefended neck. _loser.slaveName falls to the ground before the panicking _winner.slaveName, who quickly pins the coughing loser.
+	<<if $pitAudience == "paid">>
+		The audience is awestruck by the blind girl's triumph, and your @@.yellowgreen;cut of the betting@@ is enormous.
+		<<slavePaid _winner 4000>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;awestruck@@ by the blind girl's triumph.
+		<<set $rep += 200>>
+	<</if>>
+<<elseif !canSee(_loser)>>
+	_winner.slaveName grins at _loser.slaveName's random swings and poor form. She centers in on her favorite part of _loser.slaveName's body before rushing between her strikes and tackling her to the ground. _loser.slaveName lays there, helpless to stop _winner.slaveName from molesting her.
+	<<if $pitAudience == "paid">>
+		The audience found the fight embarrassing, and your @@.yellowgreen;cut of the betting@@ is pitiful.
+		<<slavePaid _winner 40>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.red;annoyed@@ by this lack of a fight.
+		<<set $rep -= 20>>
+	<</if>>
+<<elseif (_winnerDeadliness > _loserDeadliness+3)>>
+	<<if (_winner.combatSkill > 0)>>
+		_winner.slaveName wants to win, and she opens the fight with a furious attack. _loser.slaveName manages to get her forearms up, blocking a few blows, but by doing so leaves her abdomen open and obscures her vision enough that she is unprepared for the following kidney strike, which brings her gasping to one knee. _winner.slaveName lets her rise just a little before delivering a calculated hard right that sends _loser.slaveName to the mat.
+		<<if $pitAudience == "paid">>
+			The audience is not very impressed by this execution, and your @@.yellowgreen;cut of the betting@@ is unimpressive.
+			<<slavePaid _winner 500>>
+		<<elseif $pitAudience == "free">>
+			The audience is @@.green;not very impressed@@ by this execution.
+			<<set $rep += 25>>
+		<</if>>
+	<<else>>
+		_winner.slaveName wants to win and is confident she will, but she isn't particularly sure about how to do so. She fights cautiously, mostly hitting _loser.slaveName from afar. Slowly, the rain of blows begins to tell, opening _loser.slaveName's lip, giving her a bloody nose, and bruising her face. Realizing she has to do something, _loser.slaveName makes a desperate counterattack, @@.red;dripping blood@@ as she goes. As she does she manages to get her face in the way of another of _winner.slaveName's inexpert strikes and goes down hard. She makes to rise, but _winner.slaveName decides the fight by the simple expedient of kicking her in the crotch.
+		<<set _loser.health -= 10>>
+		<<if $pitAudience == "paid">>
+			The audience is reasonably impressed by the beating, and your @@.yellowgreen;cut of the betting@@ is reasonable.
+			<<slavePaid _winner 100>>
+		<<elseif $pitAudience == "free">>
+			The audience is @@.green;reasonably impressed@@ by the beating.
+			<<set $rep += 50>>
+		<</if>>
+	<</if>>
+<<elseif (_winner.combatSkill > 0) && (_loser.combatSkill > 0)>>
+	Upon your word the two combatants approach each other warily, both knowing the other is reasonably competent. Before long they are trading expert blows. _winner.slaveName is getting the worst of it, so she decides to change the nature of the fight. After three tries she manages to bring _loser.slaveName to the ground, suffering a @@.red;broken nose@@ as she does. _loser.slaveName tries to break the imperfect hold but only earns herself an elbow to the face. She's furious and _winner.slaveName is obliged to wrench her arm @@.red;to the point of damage@@ before she allows herself to go limp.
+	<<set _loser.health -= 10>>
+	<<set _winner.health -= 10>>
+	<<if $pitAudience == "paid">>
+		The audience is quite impressed by the expert fight, and your @@.yellowgreen;cut of the betting@@ is quite good.
+		<<slavePaid _winner 2000>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;very impressed@@ by the expert fight.
+		<<set $rep += 100>>
+	<</if>>
+<<elseif (_winner.height-_loser.height >= 10)>>
+	_winner.slaveName realizes that _loser.slaveName's wingspan gives her a huge reach advantage. She bores straight in, taking a hit or two but coming on regardless. _loser.slaveName understands her opponent's intention and backs off, but the pit is small and there isn't much room to retreat. When her back hits a padded wall, _winner.slaveName manages to land a light hit to her stomach that leaves _loser.slaveName winded enough that a hard kick to the side of her knee goes undefended. It causes @@.red;considerable damage,@@ dropping her and ending the fight.
+	<<set _loser.health -= 10>>
+	<<if $pitAudience == "paid">>
+		The audience is reasonably impressed by the takedown, and your @@.yellowgreen;cut of the betting@@ is reasonable.
+		<<slavePaid _winner 1000>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;reasonably impressed@@ by the takedown.
+		<<set $rep += 50>>
+	<</if>>
+<<elseif (_loser.eyebrowPiercing > 0)>>
+	The fight starts slowly, with the girls trading jabs. Just as the spectators are getting bored, _loser.slaveName takes a glancing blow to the eyebrow. Her piercing catches on _winner.slaveName's glove and tears out. _loser.slaveName goes after her tormentor in fury, streaming blood, the piercing forgotten on the mat. Any tendency _winner.slaveName might have had to feel badly about this is extinguished by the assault, and soon _winner.slaveName is even willing to follow up on the success by targeting pierced body parts. The fight ends with poor _loser.slaveName writhing in pain on the mat, @@.red;leaking blood@@ from several terribly shredded areas.
+	<<set _loser.health -= 10, _loser.eyebrowPiercing = 0>>
+	<<if $pitAudience == "paid">>
+		The audience is reasonably impressed by the gory spectacle, and your @@.yellowgreen;cut of the betting@@ is reasonable.
+		<<slavePaid _winner 1000>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;reasonably impressed@@ by the gory spectacle.
+		<<set $rep += 50>>
+	<</if>>
+<<elseif (_winner.muscles > 30)>>
+	_winner.slaveName is so massively muscular that she's actually impeded by her size. _loser.slaveName is properly afraid of her strength, though, so she tries to stay away as much as she can. The pit isn't large, however, and eventually _winner.slaveName manages to lay a hand on her. She pulls her down, and then it's all over but the beating. _loser.slaveName rains blows on her huge oppressor, but all _winner.slaveName has to do is hold on with one arm and deliver damage with the other. By the time she gives up and goes limp, _loser.slaveName has collected @@.red;many minor injuries.@@
+	<<set _loser.health -= 10>>
+	<<if $pitAudience == "paid">>
+		The audience is reasonably impressed by the show of strength, and your @@.yellowgreen;cut of the betting@@ is reasonable.
+		<<slavePaid _winner 1000>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;reasonably impressed@@ by the show of strength.
+		<<set $rep += 50>>
+	<</if>>
+<<elseif (_loser.boobs > 1200)>>
+	_winner.slaveName wants to win badly enough that she takes an extremely simple shortcut to victory. The instant the fight starts, she hits _loser.slaveName right in her huge tits, as hard as she can. This is a sucker punch of the worst kind; _loser.slaveName's boobs are so big that she has no real chance of defending them. She gasps with pain and wraps her arms around her aching bosom, giving _winner.slaveName a clear opening to deliver a free and easy blow to the jaw that sends the poor top-heavy slave to the mat. Any chance of _loser.slaveName rising is extinguished by her breasts; it takes her so long to muster an attempt to get up that _winner.slaveName can rain hits on her while she does.
+	<<if $pitAudience == "paid">>
+		The audience is not very impressed by this easy win, and your @@.yellowgreen;cut of the betting@@ is unimpressive.
+		<<slavePaid _winner 500>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;not very impressed@@ by this easy win.
+		<<set $rep += 25>>
+	<</if>>
+<<elseif (_loser.dick > 0)>>
+	_winner.slaveName wants to win badly enough that she takes an extremely brutal shortcut to victory. The instant the fight starts, she furiously goes for _loser.slaveName's face. _loser.slaveName defends herself with her arms, at which point _winner.slaveName delivers a mighty kick to the dick. _loser.slaveName goes down like a marionette with cut strings, her mouth soundlessly opening and closing and tears leaking from her closed eyes. _winner.slaveName winds up to kick her again but hesitates, wondering whether it's even necessary.
+	<<if $pitAudience == "paid">>
+		The audience is not very impressed by this easy win, and your @@.yellowgreen;cut of the betting@@ is unimpressive.
+		<<slavePaid _winner 500>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;not very impressed@@ by this easy win.
+		<<set $rep += 25>>
+	<</if>>
+<<else>>
+	_winner.slaveName wants to win badly enough that she takes an extremely unpleasant shortcut to victory. The instant the fight starts, she furiously goes for _loser.slaveName's eyes, hands forming claws. _loser.slaveName defends herself with her arms, at which point _winner.slaveName delivers a mighty cunt punt. _loser.slaveName goes straight down, her mouth soundlessly opening and closing and tears leaking from her closed eyes while her hands desperately shield her outraged pussy. _winner.slaveName follows her down and puts the unresisting girl's head in a simple lock.
+	<<if $pitAudience == "paid">>
+		The audience is not very impressed by this easy win, and your @@.yellowgreen;cut of the betting@@ is unimpressive.
+		<<slavePaid _winner 500>>
+	<<elseif $pitAudience == "free">>
+		The audience is @@.green;not very impressed@@ by this easy win.
+		<<set $rep += 25>>
+	<</if>>
+<</if>>
+
+<</nobr>>
+
+<<nobr>>
+
+You throw the victor's strap-on down to _winner.slaveName.
+
+<<if (_winner.dick > 0) && canAchieveErection(_winner)>>
+	She has no need of it, only taking a moment to pump her dick a few times to get it to rock hardness.
+<<elseif (_winner.dick > 0)>>
+	She needs it, since her soft dick won't be raping anything.
+<</if>>
+
+<<set _winner.penetrativeCount += 1>>
+<<set $penetrativeTotal += 1>>
+
+<<if (_loser.vagina < 0) && (_loser.anus == 0)>>
+	She respects _loser.slaveName's anal virginity, and hauls the loser to her knees for a facefuck.
+	<<set _loser.oralCount += 1>>
+	<<set $oralTotal += 1>>
+<<elseif (_loser.vagina == 0) && (_loser.anus == 0)>>
+	She respects _loser.slaveName's virgin holes, and hauls the loser to her knees for a facefuck.
+	<<set _loser.oralCount += 1>>
+	<<set $oralTotal += 1>>
+<<elseif (_loser.vagina <= 0) && canDoAnal(_loser)>>
+	She shoves _loser.slaveName's face into the mat, spreads her buttocks, and spits on her asshole before penetrating it roughly.
+	<<set _loser.analCount += 1>>
+	<<set $analTotal += 1>>
+<<elseif canDoVaginal(_loser)>>
+	She pushes _loser.slaveName's back down onto the mat, forces her legs apart, and penetrates the loser's cunt.
+	<<set _loser.vaginalCount += 1>>
+	<<set $vaginalTotal += 1>>
+	<<if canAchieveErection(_winner) && canImpreg(_loser, _winner)>>
+		<<if canTalk(_loser) == false>>_loser.slaveName tries to gesture a protest before _winner.slaveName fills her fertile pussy with cum, but _winner.slaveName grabs her hands and pins them to keep her from complaining.<<else>>_loser.slaveName starts to scream a protest to stop _winner.slaveName raping her pregnant, but _winner.slaveName grinds her face into the mat to shut her up.<</if>>
+		<<if random(1,100) > 50>>
+			<<set (_loser.preg = 1)>>
+			<<set (_loser.pregSource = _winner.ID)>>
+		<</if>>
+	<</if>>
+<<else>>
+	She considers her options briefly, then hauls the loser to her knees for a facefuck.
+	<<set _loser.oralCount += 1>>
+	<<set $oralTotal += 1>>
+<</if>>
+
+<<if (_loser.sexualFlaw == "malicious")>>
+	winner.slaveName lives to torment and violate slave girls. She uses _loser.slaveName for her @@.hotpink;pleasure@@, slapping her viciously, pinching her until she draws blood, and showing off for the spectators. The audience @@.green;greatly enjoys@@ the depraved spectacle.
+	<<set _loser.devotion += 2>>
+<<elseif (_loser.sexualFlaw == "abusive")>>
+	winner.slaveName lives to abuse and violate slave girls. She uses _loser.slaveName for her @@.hotpink;pleasure@@, raping her mercilessly, striking her until she turns a deep reddish-purple, and showing off for the spectators. The audience @@.green;greatly enjoys@@ the depraved spectacle.
+	<<set _loser.devotion += 2>>
+<<elseif (_winner.energy > 95)>>
+	_winner.slaveName doesn't have to feign willingness to rape a slave girl. She uses _loser.slaveName for her @@.hotpink;pleasure@@, groping her, kissing her unwilling mouth, and showing off for the spectators. The audience @@.green;greatly enjoys@@ the depraved spectacle.
+	<<set _winner.devotion += 1>>
+	<<set $rep += 50>>
+<<elseif (_winner.fetish == "sadist") && (_winner.fetishStrength > 60)>>
+	_winner.slaveName doesn't have to feign willingness abuse and violate a slave girl. She uses _loser.slaveName for her @@.hotpink;pleasure@@, slapping her cruelly, pinching her until she draws blood, and showing off for the spectators. The audience @@.green;greatly enjoys@@ the depraved spectacle.
+	<<set _winner.devotion += 1>>
+	<<set $rep += 50>>
+<<elseif (_winner.devotion > 75)>>
+	_winner.slaveName is so broken to slavery that she @@.hotpink;enjoys@@ winning the fight and raping _loser.slaveName. The audience @@.green;greatly enjoys@@ the depraved spectacle.
+	<<set _winner.devotion += 1>>
+	<<set $rep += 50>>
+<<elseif (_winner.devotion > 20)>>
+	_winner.slaveName understands her role and thoroughly rapes _loser.slaveName. The audience @@.green;enjoys@@ the spectacle.
+	<<set $rep += 25>>
+<<else>>
+	_winner.slaveName is unenthusiastic and just thrusts mechanically, to avoid being punished. She @@.mediumorchid;resents@@ having to fight and fuck. The audience barely pays attention.
+	<<set _winner.devotion -= 2>>
+<</if>>
+<<if (_winner.rivalry > 0) && (_loser.ID == _winner.rivalryTarget)>>
+	She @@.hotpink;relishes@@ the chance to abuse _loser.slaveName, whom she dislikes.
+	<<set _winner.devotion += 5>>
+<<elseif (_winner.relationship >= 0) && (_loser.ID == _winner.relationshipTarget) && (_winner.devotion >= 20)>>
+	She accepts having to abuse _loser.slaveName, and plans to make it up to her later.
+<<elseif (_winner.relationship >= 0) && (_loser.ID == _winner.relationshipTarget)>>
+	She @@.mediumorchid;hates@@ having to abuse _loser.slaveName.
+	<<set _winner.devotion -= 10>>
+<<elseif _winner.mother == _loser.ID>>
+	<<if _winner.devotion >= 20>>
+		She accepts having to abuse her mother, _loser.slaveName, and plans to make it up to her later.
+	<<else>>
+		She @@.mediumorchid;hates@@ having to abuse her mother, _loser.slaveName.
+		<<set _winner.devotion -= 10>>
+	<</if>>
+<<elseif _winner.father == _loser.ID>>
+	<<if _winner.devotion >= 20>>
+		She accepts having to abuse her sire, _loser.slaveName, and plans to make it up to her later.
+	<<else>>
+		She @@.mediumorchid;hates@@ having to abuse her sire, _loser.slaveName.
+		<<set _winner.devotion -= 10>>
+	<</if>>
+<<elseif _loser.mother == _winner.ID || _loser.father == _winner.ID>>
+	<<if _winner.devotion >= 20>>
+		She accepts having to abuse her daughter, _loser.slaveName, and plans to make it up to her later.
+	<<else>>
+		She @@.mediumorchid;hates@@ having to abuse her daughter, _loser.slaveName.
+		<<set _winner.devotion -= 10>>
+	<</if>>
+<<elseif _winner.sisters > 0>>
+	<<switch areSisters(_winner, _loser)>>
+	<<case 1>>
+		<<if _winner.devotion >= 20>>
+			She accepts having to abuse her twin sister, _loser.slaveName, and plans to make it up to her later.
+		<<else>>
+			She @@.mediumorchid;hates@@ having to abuse her twin sister, _loser.slaveName.
+			<<set _winner.devotion -= 10>>
+		<</if>>
+	<<case 2>>
+		<<if _winner.devotion >= 20>>
+			She accepts having to abuse her sister, _loser.slaveName, and plans to make it up to her later.
+		<<else>>
+			She @@.mediumorchid;hates@@ having to abuse her sister, _loser.slaveName.
+			<<set _winner.devotion -= 10>>
+		<</if>>
+	<<case 3>>
+		<<if _winner.devotion >= 20>>
+			She accepts having to abuse her half-sister, _loser.slaveName, and plans to make it up to her later.
+		<<else>>
+			She @@.mediumorchid;hates@@ having to abuse her half-sister, _loser.slaveName.
+			<<set _winner.devotion -= 10>>
+		<</if>>
+	<</switch>>
+<<elseif (_winner.relation != 0) && (_loser.ID is _winner.relationTarget) && (_winner.devotion >= 20)>>
+	She accepts having to abuse _loser.slaveName, and plans to make it up to her later.
+<<elseif (_winner.relation != 0) && (_loser.ID is _winner.relationTarget)>>
+	She @@.mediumorchid;hates@@ having to abuse _loser.slaveName.
+	<<set _winner.devotion -= 10>>
+<</if>>
+
+<<if (_loser.sexualFlaw == "self hating")>>
+	_loser.slaveName feels she @@.hotpink;deserved this.@@
+	<<set _loser.devotion += 5>>
+<<elseif (_loser.fetish == "masochist") && (_loser.fetishKnown == 1) && (_loser.fetishStrength > 60)>>
+	_loser.slaveName @@.hotpink;gets off@@ on being beaten and molested.
+	<<set _loser.devotion += 5>>
+<<elseif (_loser.fetish == "humiliation") && (_loser.fetishKnown == 1) && (_loser.fetishStrength > 60)>>
+	_loser.slaveName @@.hotpink;enjoys@@ the humiliation of being openly beaten and raped.
+	<<set _loser.devotion += 5>>
+<<elseif (_loser.devotion <= 50)>>
+	_loser.slaveName @@.mediumorchid;resents@@ being beaten and molested and @@.gold;fears@@ that it will happen again.
+	<<set _loser.devotion -= 10>>
+	<<set _loser.trust -= 10>>
+<</if>>
+<<if (_loser.rivalry > 0) && (_winner.ID == _loser.rivalryTarget)>>
+	She is @@.mediumorchid;embarrassed@@ by losing to and being raped by _winner.slaveName, whom she dislikes, and @@.gold;fears@@ that it will happen again.
+	<<set _loser.devotion -= 10>>
+	<<set _loser.trust -= 10>>
+<<elseif (_loser.relationship >= 0) && (_winner.ID == _loser.relationshipTarget) && (_loser.devotion >= 4)>>
+	She accepts _winner.slaveName having to rape her.
+<<elseif (_loser.relationship >= 0) && (_winner.ID == _loser.relationshipTarget)>>
+	She @@.mediumorchid;hates@@ having to accept rape from _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+	<<set _loser.trust -= 10>>
+	<<set _loser.devotion -= 10>>
+<<elseif _loser.mother == _winner.ID>>
+	<<if _loser.devotion >= 20>>
+		She accepts her mother, _winner.slaveName, having to rape her, but she @@.gold;fears@@ that it will happen again.
+		<<set _loser.trust -= 10>>
+	<<else>>
+		She @@.mediumorchid;hates@@ having to accept rape from her own mother, _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+		<<set _loser.devotion -= 10>>
+		<<set _loser.trust -= 10>>
+	<</if>>
+<<elseif _loser.father == _winner.ID>>
+	<<if _loser.devotion >= 20>>
+		She accepts her sire, _winner.slaveName, having to rape her, but she @@.gold;fears@@ that it will happen again.
+		<<set _loser.trust -= 10>>
+	<<else>>
+		She @@.mediumorchid;hates@@ having to accept rape from her own sire, _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+		<<set _loser.devotion -= 10>>
+		<<set _loser.trust -= 10>>
+	<</if>>
+<<elseif _winner.mother == _loser.ID || _winner.father == _loser.ID>>
+	<<if _loser.devotion >= 20>>
+		She accepts her daughter, _winner.slaveName, having to rape her, but she @@.gold;fears@@ that it will happen again.
+		<<set _loser.trust -= 10>>
+	<<else>>
+		She @@.mediumorchid;hates@@ having to accept rape from her own daughter, _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+		<<set _loser.devotion -= 10>>
+		<<set _loser.trust -= 10>>
+	<</if>>
+<<elseif _loser.sisters > 0>>
+	<<switch areSisters(_winner, _loser)>>
+	<<case 1>>
+		<<if _loser.devotion >= 20>>
+			She accepts her twin sister, _winner.slaveName, having to rape her, but she @@.gold;fears@@ that it will happen again.
+			<<set _loser.trust -= 10>>
+		<<else>>
+			She @@.mediumorchid;hates@@ having to accept rape from her own twin, _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+			<<set _loser.devotion -= 10>>
+			<<set _loser.trust -= 10>>
+		<</if>>
+	<<case 2>>
+		<<if _loser.devotion >= 20>>
+			She accepts her sister, _winner.slaveName, having to rape her, but she @@.gold;fears@@ that it will happen again.
+			<<set _loser.trust -= 10>>
+		<<else>>
+			She @@.mediumorchid;hates@@ having to accept rape from her own sister, _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+			<<set _loser.devotion -= 10>>
+			<<set _loser.trust -= 10>>
+		<</if>>
+	<<case 3>>
+		<<if _loser.devotion >= 20>>
+			She accepts her half-sister, _winner.slaveName, having to rape her, but she @@.gold;fears@@ that it will happen again.
+			<<set _loser.trust -= 10>>
+		<<else>>
+			She @@.mediumorchid;hates@@ having to accept rape from her own half-sister, _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+			<<set _loser.devotion -= 10>>
+			<<set _loser.trust -= 10>>
+		<</if>>
+	<</switch>>
+<<elseif (_loser.relation != 0) && (_winner.ID is _loser.relationTarget) && (_loser.devotion >= 20)>>
+	She accepts _winner.slaveName having to rape her, but she @@.gold;fears@@ that it will happen again.
+	<<set _loser.trust -= 10>>
+<<elseif (_loser.relation != 0) && (_winner.ID == _loser.relationTarget)>>
+	She @@.mediumorchid;hates@@ having to accept rape from _winner.slaveName, and @@.gold;fears@@ that it will happen again.
+	<<set _loser.devotion -= 10>>
+	<<set _loser.trust -= 10>>
+<</if>>
+
+<<if (_loser.fetish != "masochist") && (_loser.fetish != "humiliation") && (_loser.sexualFlaw != "self-hating")>>
+<<if (_loser.relationship != 0)>>
+<<if (_loser.relationship <= 4)>>
+<<if (_loser.relationshipTarget == _winner.ID)>>
+	Fighting and rape have @@.lightsalmon;damaged@@ the relationship between the slaves.
+	<<set _loser.relationship -= 1>>
+	<<set _winner.relationship -= 1>>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if (_winner.combatSkill == 0)>>
+<<if random(1,100) < (20+_winner.devotion)>>
+	With experience in $pitName, _winner.slaveName has @@.green;learned basic combat skills.@@
+	<<set _winner.combatSkill += 1>>
+<</if>>
+<</if>>
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+<<if _winner.ID == $slaves[$i].ID>>
+<<set $slaves[$i] = _winner>>
+<</if>>
+<</for>>
+<<for $i = 0; $i < $slaves.length; $i++>>
+<<if _loser.ID == $slaves[$i].ID>>
+<<set $slaves[$i] = _loser>>
+<</if>>
+<</for>>
+
+<</nobr>>\

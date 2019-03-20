@@ -1,0 +1,138 @@
+:: Bulk Slave Generate [nobr]
+
+<<set $newSlaves = [], $returnTo = "Main", $newSlavesDone = 0, $spent = 0, $newSlaveIndex = 0>>
+
+<<if ndef $numSlaves>>
+	<<set $numSlaves = 5>>
+<</if>>
+<<if ndef $numArcology>>
+	<<set $numArcology = 1>>
+<</if>>
+
+/* Discount calculation.  Gives 5% on top of slave school discount */
+<<set $discount = 475>>
+<<switch $slaveMarket>>
+<<case "TSS">>
+	<<if $TSS.schoolUpgrade != 0>>
+		<<set $discount = 375>>
+	<</if>>
+
+<<case "GRI">>
+	<<if $GRI.schoolUpgrade != 0>>
+		<<set $discount = 375>>
+	<</if>>
+
+<<case "SCP">>
+	<<if $SCP.schoolUpgrade != 0>>
+		<<set $discount = 375>>
+	<</if>>
+
+<<case "LDE">>
+	<<if $LDE.schoolUpgrade != 0>>
+		<<set $discount = 375>>
+	<</if>>
+
+<<case "TGA">>
+	<<if $TGA.schoolUpgrade != 0>>
+		<<set $discount = 375>>
+	<</if>>
+
+<<case "TFS">>
+	<<if $TFS.schoolUpgrade != 0>>
+		<<set $discount = 300>>
+	<<else>>
+		<<set $discount = 380>>
+	<</if>>
+
+<<case "corporate">>
+	<<if $publicShares <= $personalShares*0.2>>
+		<<set $discount = 350>>
+	<<elseif $publicShares <= $personalShares*0.5>>
+		<<set $discount = 400>>
+	<<else>>
+		<<set $discount = 450>>
+	<</if>>
+
+<<case "neighbor">>
+	<<set $activeArcology = $arcologies[0]>>
+	<<if $numArcology >= $arcologies.length>>
+		<<set $numArcology = 1>>
+	<</if>>
+	<<set $targetArcology = $arcologies[$numArcology]>>
+	<<include "Arcology Opinion">>
+	<<set $opinion = Math.trunc($opinion/20)>>
+	<<set $opinion = Math.clamp($opinion, -10, 10)>>
+	<<set $discount -= ($opinion * 25)>>
+
+<</switch>>
+
+/* Determine if Law Compliance effects must be applied to this transaction */
+<<switch $slaveMarket>>
+<<case "indentures">> /* these markets are exempt from law compliance */
+	<<set $applyLaw = 0>>
+<<default>> /* all other markets are not exempt: corporate, hunters, kidnappers, neighbor, raiders, trainers, TSS, GRI, SCP, LDE, TGA, TFS */
+	<<set $applyLaw = 1>>
+<</switch>>
+
+<<for _i = 0; _i < $numSlaves; _i++>>
+	<<silently>>
+		<<GenerateMarketSlave $slaveMarket $numArcology>>
+	<</silently>>
+	<<set $slavesSeen += 1>>
+	<<if $applyLaw == 0>>
+		<<slaveCost $activeSlave>>
+	<<else>>
+		<<set _backup = $activeSlave>> /* backup newly generated slave */
+		<<silently>>
+			<<include "Law Compliance">> /* includes CheckForGingering - slave stats may change, affecting price */
+		<</silently>>
+		<<slaveCost $activeSlave>>
+		<<RemoveGingering>> /* remove gingered state, if applied, so we can apply it again later */
+		<<set $activeSlave = _backup>> /* restore backup so we can apply Law Compliance again later */
+	<</if>>
+
+	/* Adjust $slaveCost according to $slavesSeen */
+	<<if $slavesSeen > $slaveMarketLimit>>
+		<<set $slaveCost += $slaveCost*(($slavesSeen-$slaveMarketLimit)*0.1)>>
+		<<if $introType == "inStock">>
+			<<break>>
+		<</if>>
+	<</if>>
+
+	/* Apply discount modifier */
+	<<set $slaveCost = $discount*Math.trunc($slaveCost/500)>>
+
+	/* Charge the Player for the slave, or break out if cannot afford */
+	<<if $cash < $slaveCost>>
+		<<set _i = $numSlaves>>
+		<<break>>
+	<<else>>
+		<<set $cash -= $slaveCost>>
+		<<set $newSlaves.push($activeSlave)>>
+		<<set $spent += $slaveCost>>
+	<</if>>
+<</for>>
+
+/* Max Buy clean-up */
+<<if $numSlaves == 9999>>
+	<<set $numSlaves = $newSlaves.length>>
+<</if>>
+
+/* increment Slave school purchase counts if needed */
+<<switch $slaveMarket>>
+<<case "TSS">>
+	<<set $TSS.studentsBought += $newSlaves.length>>
+<<case "GRI">>
+	<<set $GRI.studentsBought += $newSlaves.length>>
+<<case "SCP">>
+	<<set $SCP.studentsBought += $newSlaves.length>>
+<<case "LDE">>
+	<<set $LDE.studentsBought += $newSlaves.length>>
+<<case "TGA">>
+	<<set $TGA.studentsBought += $newSlaves.length>>
+<<case "TFS">>
+	<<set $TFS.studentsBought += $newSlaves.length>>
+<</switch>>
+
+<<goto "Bulk Slave Intro">>
+

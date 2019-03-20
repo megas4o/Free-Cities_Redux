@@ -1,0 +1,249 @@
+:: FSlaveImpreg Consummate [nobr]
+
+The first necessary step is to prepare the donatrix.
+
+<<set $activeSlave.penetrativeCount += 1, $penetrativeTotal += 1, $activeSlave.analCount += 1, $analTotal += 1>>
+
+<<if ($impregnatrix.fetish == "pregnancy") && ($impregnatrix.fetishKnown == 1) && ($impregnatrix.fetishStrength > 60) && ($impregnatrix.devotion >= -20)>>
+	This is very easy, since $impregnatrix.slaveName has an impregnation fetish.
+	<<if $impregnatrix.preg > 0>>
+	  She's pregnant, and as far as she's concerned, everyone should be pregnant. She's @@.hotpink;happy to spread the love.@@
+	<<elseif isFertile($impregnatrix)>>
+	  She'd love to get pregnant herself, but as far as she's concerned, putting a baby in someone else is the @@.hotpink;next best thing.@@
+	<<else>>
+	  She's been deeply unhappy that there's no prospect of her ever being able to carry a child, and this is the @@.hotpink;next best thing@@ for her.
+	<</if>>
+	<<set  $impregnatrix.devotion += 4>>
+	<<if ($impregnatrix.preg == -3)>>Her member remains limp despite the prospect of getting another slave pregnant, but a direct injection of vasodilators quickly fixes that for this special occasion.
+	<<else>>Her member springs instantly to attention at the prospect of getting another slave pregnant.
+	<</if>>
+
+<<elseif ($impregnatrix.attrXX > 65) && ($impregnatrix.attrKnown == 1) && ($impregnatrix.devotion >= -20)>>
+	Since $impregnatrix.slaveName likes sticking her cock in girls, she doesn't take much convincing.
+	<<if ($impregnatrix.preg == -3)>>Her member remains limp despite the prospect of pussy, but a direct injection of vasodilators quickly fixes that for this special occasion.
+	<<else>>Her member springs instantly to attention at the prospect of pussy.
+	<</if>>
+
+<<elseif ($impregnatrix.devotion > 50)>>
+	Since $impregnatrix.slaveName is devoted to you, she'll eagerly fuck anything you tell her to fuck.
+	<<if ($impregnatrix.preg == -3)>>She accepts a direct injection of vasodilators to counteract the hormones keeping her soft,
+	<<else>>She quickly gets herself hard,
+	<</if>>
+	only a certain confusion in her look betraying that she realizes how special an occasion this is.
+
+<<elseif ($impregnatrix.devotion > 20)>>
+	Since $impregnatrix.slaveName is obedient, she'll fuck anything you tell her to fuck.
+	<<if ($impregnatrix.preg == -3)>>She accepts a direct injection of vasodilators to counteract the hormones keeping her soft,
+	<<else>>She hurriedly gets herself hard,
+	<</if>>
+	only a slight hesitation betraying her realization that this is a special occasion.
+
+<<elseif ($impregnatrix.devotion >= -20)>>
+	Since $impregnatrix.slaveName does not resist your will, she should comply reasonably well.
+	<<if ($impregnatrix.preg == -3)>>She accepts a direct injection of vasodilators to counteract the hormones keeping her soft,
+	<<else>>She has to work to get herself hard despite her doubts,
+	<</if>>
+	fear and disgust showing on her face as she absorbs the perversion of the natural order of things she's about to experience.
+
+<<else>>
+	Since $impregnatrix.slaveName is unlikely to comply willingly, you simply restrain her and administer a massive dose of vasodilators, directly where they will do the most good. $impregnatrix.slaveName writhes with the pain of the injection, which is compounded as she springs agonizingly erect.
+
+<</if>>
+
+<br><br>
+
+Next, you see to $activeSlave.slaveName.
+
+<<set $activeSlave.vaginalCount += 1>>
+<<set $vaginalTotal += 1>>
+
+<<if ($activeSlave.fetish == "pregnancy") && ($activeSlave.fetishStrength > 60) && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60) && ($activeSlave.vagina == 0)>>
+	She cries with joy and presents her virgin pussy to $impregnatrix.slaveName for fertilization. @@.hotpink;She is grateful@@ for this fulfillment of her fondest wish and naturally @@.lime;will break in her pussy.@@
+	<<set $activeSlave.vagina = 1>>
+	<<set  $activeSlave.devotion += 10>>
+<<elseif ($activeSlave.fetish == "pregnancy") && ($activeSlave.fetishStrength > 60) && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60)>>
+	She cries with joy and presents her fertile pussy to $impregnatrix.slaveName for breeding. @@.hotpink;She is grateful@@ for this fulfillment of her fondest wish.
+	<<set  $activeSlave.devotion += 4>>
+
+<<elseif  ($activeSlave.devotion > 20) && ($activeSlave.vagina == 0)>>
+	She accepts your orders without comment and presents her virgin pussy to $impregnatrix.slaveName for fertilization. She gasps in shock when she feels her hot seed. @@.hotpink;She is broken to slavery@@ by this application of her body, which naturally @@.lime;will break in her pussy.@@
+	<<set $activeSlave.vagina = 1>>
+	<<set  $activeSlave.devotion += 10>>
+<<elseif ($activeSlave.devotion >= -20) && ($activeSlave.vagina == 0)>>
+	She is clearly unhappy at the idea of losing her pearl of great price to $impregnatrix.slaveName; this probably isn't what she imagined her first real sex would be like. Worse, she knows she's fertile and realizes she'll likely get pregnant. Nevertheless, @@.hotpink;she is broken to slavery@@ by this application of her body, which naturally @@.lime;will break in her pussy.@@
+	<<set $activeSlave.vagina = 1>>
+	<<set  $activeSlave.devotion += 4>>
+<<elseif ($activeSlave.vagina == 0)>>
+	As you anticipated, she refuses to give $impregnatrix.slaveName her virginity. You restrain her despite her @@.mediumorchid;horrified tears@@ and @@.gold;frightened begging.@@ Naturally, this cruel tableau @@.lime;will break in her pussy.@@
+	<<set  $activeSlave.devotion -= 5>>
+	<<set  $activeSlave.trust -= 5>>
+	<<set $activeSlave.vagina = 1>>
+
+<<elseif ($activeSlave.amp == 1)>>
+	You set her limbless torso up for $impregnatrix.slaveName.
+<<elseif canWalk($activeSlave) == -2>>
+	You set her up for $impregnatrix.slaveName, face down so the weight of her tits pins her helplessly in place.
+<<elseif ($activeSlave.fetish == "submissive") && ($activeSlave.fetishStrength > 60) && ($activeSlave.fetishStrength > 60) && ($activeSlave.fetishKnown == 1)>>
+	She is accustomed to submit to you, but as a natural submissive she doesn't have much trouble submitting to $impregnatrix.slaveName's seed instead.
+<<elseif  $activeSlave.devotion < -20>>
+	She tries to refuse, so you restrain her despite her resistance to the idea of being made a breeder.
+<<elseif  $activeSlave.devotion <= 20>>
+	She obeys your orders reluctantly, arranging herself for vaginal sex despite her obvious hesitation to be made a breeder.
+<<elseif  $activeSlave.devotion < 10>>
+	She obeys your orders, arranging herself for vaginal sex despite her slight hesitation at the idea of being made a breeder.
+<<else>>
+	She happily obeys your orders, getting ready to serve <<if def $PC.customTitle>>her $PC.customTitle by making you<<elseif $PC.title != 0>>her Master by making him<<else>>her Mistress by making her<</if>> another slave.
+<</if>>
+
+<<if random(1,100) > 50>>
+	<<set $activeSlave.preg = 1, $activeSlave.pregSource = $impregnatrix.ID>>
+	<<SetPregType $activeSlave>>
+<</if>>
+
+<br><br>
+
+<<if ($activeSlave.devotion < -20) && ($impregnatrix.devotion < -20)>>
+	Since you have two restrained slaves, it's up to you to do all the work. You put $activeSlave.slaveName on the couch with her pussy available, and then maneuver $impregnatrix.slaveName's dick into place. The two slaves make no further moves until you deal $impregnatrix.slaveName a terrific swat across the ass and promise to give her more of the same until she gets going. After watching them mechanically go at it for a while, you stop $impregnatrix.slaveName, insert an electrostimulator up her rectum, and administer a shock to her <<if $impregnatrix.prostate != 0>>prostate<<else>>internals<</if>> that forces her to empty her nuts into $activeSlave.slaveName. Both slaves @@.mediumorchid;resent@@ what you made them do and @@.gold;fear you@@ as a result.
+	<<set  $activeSlave.devotion -= 5>>
+	<<set  $impregnatrix.devotion -= 5>>
+	<<set  $activeSlave.trust -= 5>>
+	<<set  $impregnatrix.trust -= 5>>
+	<<if ($impregnatrix.anus == 0)>>
+		$impregnatrix.slaveName would have been reluctant to @@.lime;lose her anal virginity@@ in any case, but being assraped by a metal probe that shocked her into orgasm so that she would impregnate another slave is @@.mediumorchid;a special level@@ of violation for her.
+		<<set  $impregnatrix.devotion -= 5>>
+		<<set  $impregnatrix.anus = 1>>
+	<</if>>
+
+<<elseif ($impregnatrix.devotion < -20)>>
+	Since your semen donatrix is restrained, you order $activeSlave.slaveName to present herself on the couch, and then maneuver $impregnatrix.slaveName's dick into place. $activeSlave.slaveName does her best to hump herself against the unwilling cock until you deal $impregnatrix.slaveName a terrific swat across the ass and promise to give her more of the same until she gets going. After watching her mechanically fuck for a while, you stop her, push an electrostimulator up her butt, and administer a shock to her <<if $impregnatrix.prostate != 0>>prostate<<else>>internals<</if>> that forces her to empty her nuts into $activeSlave.slaveName. She @@.mediumorchid;resents@@ what you made her do and @@.gold;fears you@@ as a result. Though $activeSlave.slaveName accepts the situation, she looks into $impregnatrix.slaveName's eyes with obvious apology.
+	<<set  $impregnatrix.devotion -= 5>>
+	<<set  $impregnatrix.trust -= 5>>
+	<<if ($impregnatrix.anus == 0)>>
+		$impregnatrix.slaveName would have been reluctant to @@.lime;lose her anal virginity@@ in any case, but being assraped by a metal probe that shocked her into orgasm so that she would impregnate another slave is @@.mediumorchid;a special level@@ of violation for her.
+		<<set  $impregnatrix.devotion -= 5>>
+		<<set  $impregnatrix.anus = 1>>
+	<</if>>
+
+<<elseif ($impregnatrix.fetish == "pregnancy") && ($impregnatrix.fetishStrength > 60) && ($impregnatrix.devotion > 20) && ($activeSlave.devotion < -20)>>
+	You arrange $activeSlave.slaveName on the couch with her fertile pussy defenseless and available, and then tell the randy $impregnatrix.slaveName that it's all hers. The slave life has so affected $impregnatrix.slaveName that she is quite eager to rape another slave pregnant to fulfill her desire to reproduce. She finishes with indecent speed and looks almost disappointed until you tell her to take her time and be thorough. By the end of the day $activeSlave.slaveName's cunt is dripping cum, to her @@.gold;horror@@ and @@.mediumorchid;resentment,@@ while $impregnatrix.slaveName is lying next to her on the couch in a state of obvious @@.hotpink;satiation and bliss.@@ $impregnatrix.slaveName kisses $activeSlave.slaveName's stomach and expresses the hope that she'll produce a good new slave.
+	<<set  $activeSlave.devotion -= 5>>
+	<<set  $activeSlave.trust -= 5>>
+	<<set  $impregnatrix.devotion += 4>>
+
+<<elseif ($impregnatrix.energy > 95) && ($impregnatrix.devotion > 20) && ($activeSlave.devotion < -20)>>
+	You arrange $activeSlave.slaveName on the couch with her fertile pussy defenseless and available, and then tell the randy $impregnatrix.slaveName that it's all hers. The slave life has so affected $impregnatrix.slaveName that she is quite eager to rape another slave pregnant, just for the perverted novelty of the act. She blows her load with indecent speed and looks crushed until you tell her to take her time and be thorough. By the end of the day $activeSlave.slaveName's cunt is dripping cum, to her @@.gold;horror@@ and @@.mediumorchid;resentment,@@ while $impregnatrix.slaveName is lying next to her on the couch in a state of obvious @@.hotpink;satiation and bliss.@@ $impregnatrix.slaveName kisses $activeSlave.slaveName's stomach and expresses the hope that you'll let her do this again sometime.
+	<<set  $activeSlave.devotion -= 5>>
+	<<set  $activeSlave.trust -= 5>>
+	<<set  $impregnatrix.devotion += 4>>
+
+<<elseif ($activeSlave.devotion <= 20) || ($impregnatrix.devotion <= 20)>>
+	You order $activeSlave.slaveName onto the couch and tell $impregnatrix.slaveName to get on with it. They fuck mechanically, gazing with roiling emotions into each others' eyes. They do seem to come to some sort of a nonverbal understanding on the necessity of getting it done, and there is no real unhappiness in either of them when they finish and disentangle themselves, with $impregnatrix.slaveName's rapidly softening dick slipping easily out of $activeSlave.slaveName's cum-filled pussy.
+
+<<elseif ($activeSlave.devotion <= 50) || ($impregnatrix.devotion <= 50)>>
+	You order $activeSlave.slaveName and $impregnatrix.slaveName to get on with it. They fuck mechanically at first, gazing with roiling emotions into each others' eyes. Eventually, they begin to enjoy the extreme intimacy of the act, finding between themselves a hint of a life before slavery, when men and women had sex within the bonds of marriage for the purpose of procreation. They finish and resume life as slaves, the light of this intimacy diminishing, softening with $impregnatrix.slaveName's dick and dripping away with the contents of $activeSlave.slaveName's cum-filled pussy.
+
+<<else>>
+	The parents-to-be need little encouragement. They embrace happily and turn eagerly to the business of vanilla sex in the missionary position. They take their time, humping slowly and gazing into each others' eyes. After a little while, though, $activeSlave.slaveName looks over $impregnatrix.slaveName's shoulder to where you're sitting, the invitation clear in her eyes. As soon as you stand to come over, they roll over without being ordered to present $activeSlave.slaveName's butthole. You and $impregnatrix.slaveName double penetrate the mother-to-be gently until she climaxes, clenching you to orgasm in turn with her spasms. Pulling out, you offer <<if $PC.dick ==1>>yourself<<else>>your strap-on<</if>> to $activeSlave.slaveName's gasping mouth so she can <<if $PC.dick ==1>>suck you hard again<<else>>lube the phallus with some saliva<</if>> as she continues riding cock. Once <<if $PC.dick ==1>>stiff<<else>>the strap-on is nice and wet<</if>>, you flip them again so that $impregnatrix.slaveName is back on top and switch to her ass instead, stimulating<<if $impregnatrix.prostate != 0>> her prostate<</if>> with a good assfuck until she blows her load into $activeSlave.slaveName's fertile cunt. The two of them collapse into an exhausted, @@.hotpink;happy@@ pile of slave flesh with three loads inside them.
+	<<set  $activeSlave.devotion += 4>>
+	<<set  $impregnatrix.devotion += 4>>
+	<<if ($impregnatrix.anus == 0)>>
+		$impregnatrix.slaveName will certainly remember this @@.hotpink;very special@@ day for many reasons, including taking her @@.lime;first buttfuck@@ as she inseminated $activeSlave.slaveName.
+		<<set  $impregnatrix.devotion += 4>>
+		<<set  $impregnatrix.anus = 1>>
+	<</if>>
+	<<if ($activeSlave.anus == 0)>>
+		$activeSlave.slaveName has been used as a slave in a truly thorough way today: she has @@.hotpink;accepted@@ both her @@.lime;first anal@@ and insemination by $impregnatrix.slaveName.
+		<<set  $activeSlave.devotion += 4>>
+		<<set  $activeSlave.anus = 1>>
+	<</if>>
+
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+	Society @@.green;approves@@ of your breeding your slaves; this advances the ideal of a durable, self propagating race of slaves.
+	<<set $rep += $FSSingleSlaveRep*($arcologies[0].FSGenderFundamentalist/$FSLockinLevel)>>
+	<<set $arcologies[0].FSGenderFundamentalist += 0.05*$FSSingleSlaveRep>>
+<</if>>
+
+<br><br>
+
+You prepare the necessary file on their possible offspring. Upon birth, it will be remanded to a slave orphanage to be raised to the age of 18 and then sold, but its likely appearance and traits are already worth noting.
+
+$activeSlave.slaveName and $impregnatrix.slaveName are likely to produce
+
+<<if ($seeRace == 1)>>
+
+<<if ($activeSlave.race == "white") && ($impregnatrix.race == "white")>>
+	a pure white,
+<<elseif ($activeSlave.race == "asian") && ($impregnatrix.race == "asian")>>
+	an asian,
+<<elseif ($activeSlave.race == "latina") && ($impregnatrix.race == "latina")>>
+	a latina,
+<<elseif ($activeSlave.race == "black") && ($impregnatrix.race == "black")>>
+	a black,
+<<elseif ($activeSlave.race == "arab") && ($impregnatrix.race == "arab")>>
+	a pure Middle Eastern,
+<<elseif ($activeSlave.race == "white") && ($impregnatrix.race == "black")>>
+	a mulatto,
+<<elseif ($activeSlave.race == "black") && ($impregnatrix.race == "white")>>
+	a mulatto,
+<<elseif ($activeSlave.race == "white") && ($impregnatrix.race == "latina")>>
+	a mestizo,
+<<elseif ($activeSlave.race == "latina") && ($impregnatrix.race == "white")>>
+	a mestizo,
+<<elseif ($activeSlave.race == "asian") && ($impregnatrix.race == "black")>>
+	an afro-asian,
+<<elseif ($activeSlave.race == "black") && ($impregnatrix.race == "asian")>>
+	an afro-asian,
+<<elseif ($activeSlave.race == "arab") && ($impregnatrix.race == "black")>>
+	an afro-arab,
+<<elseif ($activeSlave.race == "black") && ($impregnatrix.race == "arab")>>
+	an afro-arab,
+<<elseif ($activeSlave.race == "amerindian") && ($impregnatrix.race == "white")>>
+	a mestizo,
+<<elseif ($activeSlave.race == "white") && ($impregnatrix.race == "amerindian")>>
+	a mestizo,
+<<elseif ($activeSlave.race == $impregnatrix.race)>>
+	an ethnically pure,
+<<else>>
+	mixed ethnicity,
+<</if>>
+
+<</if>>
+
+<<if (($activeSlave.intelligence+$impregnatrix.intelligence) > 3)>>
+	brilliant,
+<<elseif (($activeSlave.intelligence+$impregnatrix.intelligence) > 1)>>
+	smart,
+<<elseif (($activeSlave.intelligence+$impregnatrix.intelligence) < -3)>>
+	cretinous,
+<<elseif (($activeSlave.intelligence+$impregnatrix.intelligence) < -1)>>
+	stupid,
+<</if>>
+
+<<if (($activeSlave.height+$impregnatrix.height) > 185)>>
+	tall,
+<<elseif (($activeSlave.height+$impregnatrix.height) < 160)>>
+	short,
+<<else>>
+	middle height,
+<</if>>
+
+<<if (($activeSlave.boobs+$impregnatrix.boobs-$activeSlave.boobsImplant-$impregnatrix.boobsImplant) > 1500)>>
+	big-titted
+<<elseif (($activeSlave.boobs+$impregnatrix.boobs-$activeSlave.boobsImplant-$impregnatrix.boobsImplant) < 700)>>
+	flat-chested
+<<else>>
+	moderately-breasted
+<</if>>
+
+<<if (($activeSlave.butt+$impregnatrix.butt-$activeSlave.buttImplant-$impregnatrix.buttImplant) > 9)>>
+	slave with a huge ass.
+<<elseif (($activeSlave.butt+$impregnatrix.butt-$activeSlave.buttImplant-$impregnatrix.buttImplant) < 5)>>
+	slave with a flat ass.
+<<else>>
+	slave with a decent ass.
+<</if>>
+
+<<set $slaves[$i] = $impregnatrix>> /* save changes -- $i is already set to the index of the impregnatrix by fSlaveImpreg */
+

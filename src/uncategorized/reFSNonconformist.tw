@@ -1,0 +1,243 @@
+:: RE FS nonconformist [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+<<set $returnTo = "RIE Eligibility Check">>
+
+<<set $FSNonconformist = $FSNonconformistEvents.random()>>
+
+A deputation of your citizens arrive at your penthouse and ask to see you. They're among the best members of the society you're building, uniformly wealthy, influential, and deeply
+<<if $FSNonconformist == "Pastoralist">>
+	committed to making the future of the arcology a creamy one. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time planning milk orgies,
+<<elseif $FSNonconformist == "Supremacist">>
+	committed to the ascendancy of the $arcologies[0].FSSupremacistRace race. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time eagerly debating revisionist histories,
+<<elseif $FSNonconformist == "Subjugationist">>
+	involved in the subjugation of the $arcologies[0].FSSubjugationistRace race. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time competing to come up with ever more extreme ways to degrade mongrels,
+<<elseif $FSNonconformist == "Gender Radicalist">>
+	committed to the redefinition of gender around power. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time cheerfully sodomizing their slaves,
+<<elseif $FSNonconformist == "Gender Fundamentalist">>
+	committed to traditional gender roles. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time basking in the attentions of their women,
+<<elseif $FSNonconformist == "Paternalist">>
+	committed to slave advancement. They're looking quite grim, an unusual mood for a group of oligarchs whose various projects to improve the lives of their chattel makes them quite self-assured,
+<<elseif $FSNonconformist == "Degradationist">>
+	committed to the comprehensive degradation of slaves. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time cheerfully raping their slaves,
+<<elseif $FSNonconformist == "Body Purist">>
+	committed to body purism. They're looking quite grim, an unusual mood for a group of oligarchs whose various projects to improve the health of their chattel make them quite self-righteous,
+<<elseif $FSNonconformist == "Transformation Fetishist">>
+	committed to extreme transformation. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time obsessing over improvements to their favorite slaves,
+<<elseif $FSNonconformist == "Slimness Enthusiast">>
+	addicted to slim female bodies. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time cavorting with their harems,
+<<elseif $FSNonconformist == "Asset Expansionist">>
+	addicted to tits and ass. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time having sex with their grandiosely endowed girls,
+<<elseif $FSNonconformist == "Youth Preferentialist">>
+	committed to the fashion for young girls. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time enjoying their slaves' fresh bodies,
+<<elseif $FSNonconformist == "Maturity Preferentialist">>
+	committed to the fashion for mature slavies. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time enjoying their slaves' experience,
+<<elseif $FSNonconformist == "Physical Idealist">>
+	involved in physical idealism. They're looking quite grim, an unusual mood for a group of oligarchs more inclined to spend their time lifting, tanning, and giving each other fist-bumps and bro-nods,
+<<elseif $FSNonconformist == "Chattel Religionist">>
+	committed to the new faith. They're looking quite grim, an unusual mood for a group of oligarchs who occupy favored places in a new religious hierarchy that affords them ample pleasure,
+<<elseif $FSNonconformist == "Roman Revivalist">>
+	involved in your Revivalist vision. They're looking quite grim, an unusual mood for a group of oligarchs who compete with each other to project the upper-class Roman virtues of stoicism and self-possession,
+<<elseif $FSNonconformist == "Aztec Revivalist">>
+	involved in your Revivalist vision. They're looking quite grim, an unusual mood for a group of oligarchs who compete with each other to project the bloody virtues of their proud society,
+<<elseif $FSNonconformist == "Edo Revivalist">>
+	involved in your Revivalist vision. They're looking quite grim, an unusual mood for a group of oligarchs who compete with each other to project the traditional Japanese virtue of stoicism,
+<<elseif $FSNonconformist == "Arabian Revivalist">>
+	involved in your Revivalist vision. They're looking quite grim, an unusual mood for a group of oligarchs who do their best to embody the confidence of the early Caliphate,
+<<elseif $FSNonconformist == "Chinese Revivalist">>
+	involved in your Revivalist vision. They're looking quite grim, an unusual mood for a group of oligarchs who do their best to project complete confidence that the arcology possesses the Mandate of Heaven,
+<<else>>
+	involved in your Revivalist vision. They're looking quite grim, an unusual mood for a group of oligarchs who partake of your serene confidence that your arcology is coming into a place as stable and long-lived as that of Ancient Egypt,
+<</if>>
+so you hear them out. Apparently, they're here about a peer, a fellow citizen with money and power who does not support your vision for the arcology's future. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> helpfully supplies a biography, but you were previously aware of the situation.
+<br><br>
+The nonconformist
+<<if $FSNonconformist == "Pastoralist">>
+	has long been a vocal skeptic of the tastefulness of grown citizens drinking milk from slaves' breasts. Unfortunately, it seems that they've now edged over into open revolt against pastoralism. They're planning to publish an exposee that purports to reveal abuses in the human milk industry.
+<<elseif $FSNonconformist == "Supremacist">>
+	is a hardline egalitarianist who believes that all men are created equal, even if some then become slaves. They themselves are $arcologies[0].FSSubjugationistRace, and they insist on flaunting their $arcologies[0].FSSupremacistRace slaves. Unfortunately, it seems that they've now edged over into open revolt against $arcologies[0].FSSupremacistRace supremacism. After a brutal but deserved public punishment of a $arcologies[0].FSSubjugationistRace slave by one of the group of concerned citizens, the nonconformist is planning on visiting the same horrors on one of their $arcologies[0].FSSupremacistRace slaves, on a very weak pretext.
+<<elseif $FSNonconformist == "Subjugationist">>
+	is a hardline egalitarianist who believes that all men are created equal, even if some then become slaves. They themselves are $arcologies[0].FSSubjugationistRace, and they insist on flaunting their non-$arcologies[0].FSSubjugationistRace slaves. Unfortunately, it seems that they've now edged over into open revolt against $arcologies[0].FSSubjugationistRace inferiority. After a brutal but deserved public punishment of a $arcologies[0].FSSubjugationistRace slave by one of the group of concerned citizens, the nonconformist is planning on visiting the same horrors on one of their non-$arcologies[0].FSSubjugationistRace slaves, on a very weak pretext.
+<<elseif $FSNonconformist == "Gender Radicalist">>
+	has never been quiet about their belief that slaves with dicks are not girls. Unfortunately, it seems that they've now edged over into open revolt against gender radicalism. They've purchased a highly feminized slave one of the group of concerned citizens sold to a third party, and are rumored to be returning the slave to her natural state. The oligarchs are worried that they plan to publicize this project, or worse, possibly even free the slave.
+<<elseif $FSNonconformist == "Gender Fundamentalist">>
+	has never been quiet about their belief that anything with an asshole counts as a slave girl. Unfortunately, it seems that they've now edged over into open revolt against gender traditionalism. They've been accumulating a number of sexually skilled slaves with dicks, and the oligarchs are worried that some sort of public event involving free sex with these slaves is planned to sway lower class opinion.
+<<elseif $FSNonconformist == "Paternalist">>
+	has never been shy about their belief that true trust between slave and master is impossible. Unfortunately, it seems that they've now edged over into open revolt against paternalism. They're rumored to run a household in which slaves are required to beat miscreants without mercy or be savaged themselves. There are indications that they may intend to make these spectacles public.
+<<elseif $FSNonconformist == "Degradationist">>
+	has never been shy about their belief that slaves are people too, and should be treated with respect. Unfortunately, it seems that they've now edged over into open revolt against degradationism. They're rumored to allow their slaves to decline sex. This perversion is bad enough, but the oligarchs are concerned that they may intend to take this practice public, setting favored slaves up with their own apartments and livelihoods.
+<<elseif $FSNonconformist == "Body Purist">>
+	has always been known for their harem of implant-filled silicone dolls. Unfortunately, it seems that they've now edged over into open revolt against body purism. They've purchased a wonderfully healthy and pure slave one of the group of concerned citizens sold to a third party, and it's rumored that the slave has been outfitted with cutting-edge gradually expanding breast implants with no effective maximum size. The oligarchs are disgusted and mortified lest this project become public.
+<<elseif $FSNonconformist == "Transformation Fetishist">>
+	has always been known for their harem of natural girls. Unfortunately, it seems that they've now edged over into open revolt against transformation. They've purchased a heavily implanted slave one of the group of concerned citizens sold to a third party, and it's rumored that the slave is being painstakingly returned to her natural, implant-free appearance. The oligarchs are concerned that the nonconformist may be planning some sort of public reveal of her naturalist makeover.
+<<elseif $FSNonconformist == "Slimness Enthusiast">>
+	has always been known for their harem of disgusting hambeasts. Unfortunately, it seems that they've now edged over into open revolt against the fashion for slimness. They've purchased a notoriously graceful slave one of the group of concerned citizens sold to a third party, and it's rumored that the slave is being force fed in private as preparation for some kind of insulting public reveal. The oligarchs are mortally offended without even seeing the final product.
+<<elseif $FSNonconformist == "Asset Expansionist">>
+	has always been known for their harem of disgusting beanpoles. Unfortunately, it seems that they've now edged over into open revolt against the fashion for big tits. They've purchased a slave with famously magnificent boobs one of the group of concerned citizens sold to a third party, and it's rumored that the slave has undergone a radical breast reduction as preparation for some kind of insulting public reveal. The oligarchs are mortally offended without even seeing the final product.
+<<elseif $FSNonconformist == "Youth Preferentialist">>
+	has never missed an opportunity to share their belief that a mature woman who knows her way around a dick is a better fuck than a virgin. Unfortunately, it seems that they've now edged over into open revolt against the fashion for youth and freshness. They're holed up in their luxurious apartments, preparing a large number of older, sexually experienced slaves for something big. The oligarchs suspect that some sort of event involving free sex may be planned to sway lower class opinion.
+<<elseif $FSNonconformist == "Maturity Preferentialist">>
+	has never missed an opportunity to share their belief that a fresh girl is infinitely preferable to an old whore. Unfortunately, it seems that they've now edged over into open revolt against the fashion for maturity and experience. They're holed up in their luxurious apartments, preparing a large number of virgin slaves for something big. The oligarchs suspect that some sort of event involving free sex may be planned to sway lower class opinion.
+<<elseif $FSNonconformist == "Physical Idealist">>
+	rarely misses a chance to lecture on the perils of toxic masculinity and excessive public standards of beauty. Unfortunately, it seems that they've now edged over into open revolt against the Valhalla of physical perfection the arcology is rapidly becoming. They're rumored to be preparing a manifesto on beauty at any size, along with the necessary funds to bribe neutral third parties into going along.
+<<elseif $FSNonconformist == "Chattel Religionist">>
+	originally moved to the Free Cities to get away from religion entirely, and has never missed a chance to register disdain for the new faith. Unfortunately, it seems that they've now edged over into open heresy. Typically, they're going about it in a hypocritical way. It's rumored that they've engaged the services of a charismatic itinerant preacher of one of the more popular old world faiths, and intend to bring him to the arcology to inveigh against the chattel religion.
+<<elseif $FSNonconformist == "Roman Revivalist">>
+	has been a longtime skeptic of historical revivalism, publicly deploring it as a childish game of dress-up. This never got much traction, since Rome has become quite fashionable here. Frustrated, they're rumored to be planning a change of approach. Despairing of getting the population to give up the Roman project, they're going to set up a competing Gaulish Revivalism. The quixotic effort is almost certainly doomed to fail, but the oligarchs fear it will be a distraction.
+<<elseif $FSNonconformist == "Aztec Revivalist">>
+	has been a longtime skeptic of historical revivalism, publicly deploring it as a childish game of dress-up. This never got much traction, since Aztec has become quite fashionable here. Frustrated, they're rumored to be planning a change of approach. Despairing of getting the population to give up the Aztec project, they're going to set up a competing Spanish Revivalism. The quixotic effort is almost certainly doomed to fail, but the oligarchs fear it will be a distraction.
+<<elseif $FSNonconformist == "Edo Revivalist">>
+	has been a longtime skeptic of historical revivalism, publicly deploring it as a childish game of dress-up. This never got much traction, since Edo Japan has become quite fashionable here. Frustrated, they're rumored to be planning a change of approach. Despairing of getting the population to give up the Japanese project, they're going to set up a competing Korean Revivalism. The quixotic effort is almost certainly doomed to fail, but the oligarchs fear it will be a distraction.
+<<elseif $FSNonconformist == "Arabian Revivalist">>
+	has been a longtime skeptic of historical revivalism, publicly deploring it as a childish game of dress-up. This never got much traction, since the golden age of the Caliphate has become quite fashionable here. Frustrated, they're rumored to be planning a change of approach. Despairing of getting the population to give up the Arabian project, they're going to set up a competing Byzantine Revivalism. The quixotic effort is almost certainly doomed to fail, but the oligarchs fear it will be a distraction.
+<<elseif $FSNonconformist == "Chinese Revivalist">>
+	has been a longtime skeptic of historical revivalism, publicly deploring it as a childish game of dress-up. This never got much traction, since ancient China has become quite fashionable here. Frustrated, they're rumored to be planning a change of approach. Despairing of getting the population to give up the imperial project, they're going to set up a competing Mongol Revivalism. The quixotic effort is almost certainly doomed to fail, but the oligarchs fear it will be a distraction.
+<<else>>
+	has been a longtime skeptic of historical revivalism, publicly deploring it as a childish game of dress-up. This never got much traction, since the land of the Pharaohs has become quite fashionable here. Frustrated, they're rumored to be planning a change of approach. Despairing of getting the population to give up the Egyptian project, they're going to set up a competing Ancient Greek Revivalism. The quixotic effort is almost certainly doomed to fail, but the oligarchs fear it will be a distraction.
+<</if>>
+Faced with such a threat, the citizens naturally came to you. They ask you, as leader of the arcology, to both prevent the plan and get the nonconformist to move out.
+<br><br>
+The nonconformist is far too prominent and prosperous to make this an easy dilemma to resolve. Your societal goals are at stake, as is your reputation among some of your best citizens, but the nonconformist has significant sway in the arcology's economy. Merely forcing them out of the arcology would damage its prosperity, and more decisive action could have more serious consequences still.
+<br><br>
+
+<span id="result">
+<<link "Ignore the situation">>
+	<<set $rep -= 250>>
+	<<replace "#result">><<nobr>>
+	You communicate polite concern, but offer no specific plans. The prominent citizens go away muttering, @@.red;very disappointed@@ that you are not taking their concerns seriously. The nonconformist
+	<<if $FSNonconformist == "Pastoralist">>
+		publishes the exposee, @@.red;setting back adoption@@ of pastoralism.
+		<<set $arcologies[0].FSPastoralist -= 10>>
+	<<elseif $FSNonconformist == "Supremacist">>
+		publicly flogs one of their $arcologies[0].FSSupremacistRace slaves halfway to exsanguination, @@.red;setting back acceptance@@ of $arcologies[0].FSSupremacistRace supremacy.
+		<<set $arcologies[0].FSSupremacist -= 10>>
+	<<elseif $FSNonconformist == "Subjugationist">>
+		publicly flogs one of their $arcologies[0].FSSupremacistRace slaves halfway to exsanguination, @@.red;setting back acceptance@@ of $arcologies[0].FSSubjugationistRace inferiority.
+		<<set $arcologies[0].FSSubjugationist -= 10>>
+	<<elseif $FSNonconformist == "Gender Radicalist">>
+		reveals the defeminized slave and then frees her, completing her return to maleness according to Gender Radicalism's own tenets, @@.red;setting back acceptance@@ of the society model.
+		<<set $arcologies[0].FSGenderRadicalist -= 10>>
+	<<elseif $FSNonconformist == "Gender Fundamentalist">>
+		hosts a huge public party in a lower-class area of the arcology, staffing it with a large number of slaves with dicks. They're so filled with aphrodisiacs that they orgasm constantly when citizens use their asses. This @@.red;setts back acceptance@@ of gender traditionalism.
+		<<set $arcologies[0].FSGenderFundamentalist -= 10>>
+	<<elseif $FSNonconformist == "Paternalist">>
+		begins requiring his slaves to beat each other in public for the entertainment of passersby, @@.red;setting back acceptance@@ of paternalism.
+		<<set $arcologies[0].FSPaternalist -= 10>>
+	<<elseif $FSNonconformist == "Degradationist">>
+		begins building independent little lives for a few of their best slaves, @@.red;setting back acceptance@@ of degradationism.
+		<<set $arcologies[0].FSDegradationist -= 10>>
+	<<elseif $FSNonconformist == "Body Purist">>
+		is soon accompanied around the arcology by a slave with ten-liter breast implants, @@.red;setting back acceptance@@ of body purism.
+		<<set $arcologies[0].FSBodyPurist -= 10>>
+	<<elseif $FSNonconformist == "Transformation Fetishist">>
+		is soon accompanied around the arcology by the successfully made-over slave, whose transformation they never tire of extolling. This @@.red;setting back acceptance@@ of transformation.
+		<<set $arcologies[0].FSTransformationFetishist -= 10>>
+	<<elseif $FSNonconformist == "Slimness Enthusiast">>
+		soon reveals their little project. The once-beautiful slave is now so fat she can scarcely walk; the unanswered insult @@.red;sets back the fashion@@ for slim slaves.
+		<<set $arcologies[0].FSSlimnessEnthusiast -= 10>>
+	<<elseif $FSNonconformist == "Asset Expansionist">>
+		soon reveals their little project. A pair of the arcology's finest tits are gone forever; the unanswered insult @@.red;sets back the fashion@@ for stacked slaves.
+		<<set $arcologies[0].FSAssetExpansionist -= 10>>
+	<<elseif $FSNonconformist == "Youth Preferentialist">>
+		hosts a huge public party in a lower-class area of the arcology, staffing it with a large number of older slaves. They're so filled with aphrodisiacs that they eagerly fuck anyone who shows the slightest interest. This @@.red;dims the fashion@@ for fresh slaves.
+		<<set $arcologies[0].FSYouthPreferentialist -= 10>>
+	<<elseif $FSNonconformist == "Maturity Preferentialist">>
+		hosts a huge public party in a lower-class area of the arcology, staffing it with a large number of young slaves. They're virgins, though not for very long. This @@.red;dims the fashion@@ for mature slaves.
+		<<set $arcologies[0].FSMaturityPreferentialist -= 10>>
+	<<elseif $FSNonconformist == "Physical Idealist">>
+		publishes their screed, and spreads money around to ensure its widespread dissemination. This @@.red;sets back acceptance@@ of physical idealism.
+		<<set $arcologies[0].FSPhysicalIdealist -= 10>>
+	<<elseif $FSNonconformist == "Chattel Religionist">>
+		brings in their pet dissenting preacher, whose clever invectives @@.red;set back acceptance@@ of the new religion.
+		<<set $arcologies[0].FSChattelReligionist -= 10>>
+	<<elseif $FSNonconformist == "Roman Revivalist">>
+		offers their Gaulish Revivalism alternative with great fanfare. It fizzles out within a week, mostly because its main backer is privately against all revivalism, but during that time it serves as a focal point for many citizens who are privately impatient with Roman revivalism. This imbroglio @@.red;sets back acceptance@@ of your revivalist project.
+		<<set $arcologies[0].FSRomanRevivalist -= 10>>
+	<<elseif $FSNonconformist == "Aztec Revivalist">>
+		offers their Spanish Revivalism alternative with great fanfare. It fizzles out within a week, mostly because its main backer is privately against all revivalism, but during that time it serves as a focal point for many citizens who are privately impatient with Aztec revivalism. This imbroglio @@.red;sets back acceptance@@ of your revivalist project.
+		<<set $arcologies[0].FSAztecRevivalist -= 10>>
+	<<elseif $FSNonconformist == "Edo Revivalist">>
+		offers their Korean Revivalism alternative with great fanfare. It fizzles out within a week, mostly because its main backer is privately against all revivalism, but during that time it serves as a focal point for many citizens who are privately impatient with Edo revivalism. This imbroglio @@.red;sets back acceptance@@ of your revivalist project.
+		<<set $arcologies[0].FSEdoRevivalist -= 10>>
+	<<elseif $FSNonconformist == "Arabian Revivalist">>
+		offers their Byzantine Revivalism alternative with great fanfare. It fizzles out within a week, mostly because its main backer is privately against all revivalism, but during that time it serves as a focal point for many citizens who are privately impatient with Arabian revivalism. This imbroglio @@.red;sets back acceptance@@ of your revivalist project.
+		<<set $arcologies[0].FSArabianRevivalist -= 10>>
+	<<elseif $FSNonconformist == "Chinese Revivalist">>
+		offers their Mongol Revivalism alternative with great fanfare. It fizzles out within a week, mostly because its main backer is privately against all revivalism, but during that time it serves as a focal point for many citizens who are privately impatient with Chinese revivalism. This imbroglio @@.red;sets back acceptance@@ of your revivalist project.
+		<<set $arcologies[0].FSChineseRevivalist -= 10>>
+	<<else>>
+		offers their Ancient Greek Revivalism alternative with great fanfare. It fizzles out within a week, mostly because its main backer is privately against all revivalism, but during that time it serves as a focal point for many citizens who are privately impatient with Roman revivalism. This imbroglio @@.red;sets back acceptance@@ of your revivalist project.
+		<<set $arcologies[0].FSEgyptianRevivalist -= 10>>
+	<</if>>
+	<</nobr>><</replace>>
+<</link>>
+<br><<link "Throw the nonconformist out of the arcology">>
+	<<set $arcologies[0].prosperity -= 10>>
+	<<replace "#result">>
+	You agree with the prominent citizens, and promise to apply all of your considerable contractual and business power to get the nonconformist out of the arcology before they can put their plan into action. You manage it, but only just. Opinion on your actions is mixed: the oligarchs who came to you are pleased you satisfied their requests, but your maneuvers were offensive to the general preference for freedom. The impact on the arcology's economy on the other hand is entirely negative, since the sudden loss of a major player within the arcology's business field @@.red;damages its prosperity.@@
+	<</replace>>
+<</link>>
+<<if $cash > 10000>>
+<br><<link "Quickly manage a nuanced response">>
+	<<set $cash -= 10000>>
+	<<replace "#result">><<nobr>>
+	You promise to deal with the situation. The prominent citizens trust you enough to leave the problem in your hands, and they are not disappointed. The nonconformist
+	<<if $FSNonconformist == "Pastoralist">>
+		publishes the exposee, but finds it effectively defused by a nuanced pro-dairy campaign leveraging your dominance of the arcology's media.
+	<<elseif $FSNonconformist == "Supremacist">>
+		is intent on publicly flogging the unfortunate $arcologies[0].FSSupremacistRace slave, but quickly finds that you've manipulated their contracts with you to forbid such displays. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Subjugationist">>
+		is intent on publicly flogging the unfortunate $arcologies[0].FSSupremacistRace slave, but quickly finds that you've manipulated their contracts with you to forbid such displays. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Gender Radicalist">>
+		finds that you've manipulated their contracts with you to forbid them from showing off nonconforming slaves within the arcology. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Gender Fundamentalist">>
+		hosts a huge public party in a lower-class area of the arcology, staffing it with a large number of slaves with dicks. However, they're surprised by an unexpected lack of interest in the event, which is only explained when they find that you've organized a much superior event featuring real girls in the main plaza, at the same time.
+	<<elseif $FSNonconformist == "Paternalist">>
+		finds that you've manipulated their contracts with you to forbid them from displaying public slave beatings within the arcology. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Degradationist">>
+		discovers that you've hastily set up subtle clauses within the rental contracts that make it all but inevitable that girls sent out on their own would be confiscated. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Body Purist">>
+		finds that a mysterious actor has raised serious safety concerns about the new implant technology, causing a minor public outcry against them. The altered slave is not publicly displayed.
+	<<elseif $FSNonconformist == "Transformation Fetishist">>
+		finds that you've manipulated their contracts with you to forbid them from showing off nonconforming slaves within the arcology. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Slimness Enthusiast">>
+		finds that you've manipulated their contracts with you to forbid them from showing off fatbodied slaves within the arcology. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Asset Expansionist">>
+		finds that you've manipulated their contracts with you to forbid them from showing off ruined slaves within the arcology. Frustrated, they subside for now.
+	<<elseif $FSNonconformist == "Youth Preferentialist">>
+		hosts a huge public party in a lower-class area of the arcology, staffing it with a large number of older slaves. However, they're surprised by an unexpected lack of interest in the event, which is only explained when they find that you've organized a much superior event featuring fresh virgins in the main plaza, at the same time.
+	<<elseif $FSNonconformist == "Maturity Preferentialist">>
+		hosts a huge public party in a lower-class area of the arcology, staffing it with a large number of young slaves. However, they're surprised by an unexpected lack of interest in the event, which is only explained when they find that you've organized a much superior event featuring famous MILF whores in the main plaza, at the same time.
+	<<elseif $FSNonconformist == "Physical Idealist">>
+		publishes their screed, and soon receives a challenge from you to a brief public debate. They offer a brief rant, to which you respond by removing your suit jacket and flexing, which almost pops the seams of your formal shirt. The public loses interest in the manifesto in the amusement.
+	<<elseif $FSNonconformist == "Chattel Religionist">>
+		brings in their pet dissenting preacher, who finds himself caught in a duel from the pulpit with a noted cleric of the slave religion, brought in from outside the arcology on short notice. The debate receives a great deal of attention, and is generally agreed to have been a close-fought draw.
+	<<elseif $FSNonconformist == "Roman Revivalist">>
+		offers their Gaulish Revivalism alternative with fanfare, but fanfare is something that the Romans could certainly manage. The nasty little attempt is forgotten in a day of public gladiatorial combat, chariot racing, and giveaways for the poorer citizens.
+	<<elseif $FSNonconformist == "Aztec Revivalist">>
+		offers their Spanish Revivalism alternative with fanfare, but fanfare is something that the Aztecs would never acknowledge. The nasty little attempt does nothing after a day of prayer, bloodletting and slave sacrifice.
+	<<elseif $FSNonconformist == "Edo Revivalist">>
+		offers their Korean Revivalism alternative with fanfare, but fanfare is inelegant next to Edo revivalism. The nasty little attempt has its day, but looks gauche next to the stately grace of your project.
+	<<elseif $FSNonconformist == "Arabian Revivalist">>
+		offers their Byzantine Revivalism alternative with fanfare, but jihad may be waged with diplomacy as much as with the sword. The nasty little attempt founders on the growing conservatism of the arcology, whose citizens rally to you as their proper leader.
+	<<elseif $FSNonconformist == "Chinese Revivalist">>
+		offers their Mongol Revivalism alternative with fanfare, but judicious strengthening of your imperial authority sees it off without trouble. The influence of Confucian ideas is spreading through your arcology, making it resistant to radical departures.
+	<<else>>
+		offers their Ancient Greek Revivalism alternative with fanfare, but fanfare is something that the Egyptians could certainly manage. The nasty little attempt is barely noticed over the perfume and noise of a long and beautiful festival.
+	<</if>>
+	The oligarchy is pleased by how you managed to defuse the situation without causing a spectacle. They're disappointed that you permitted their nonconforming peer to remain in the arcology's upper echelons for the time being, but they accept your solution to the problem.
+	<</nobr>><</replace>>
+<</link>> //This will cost ¤10000//
+<<else>>
+//You lack the necessary ready cash to manage a nuanced solution//
+<</if>>
+<<if $PC.rumor == "force">>
+<br><<link "Leverage your reputation with some credible threats">>
+	<<set $rep += 100>>
+	<<replace "#result">>
+	Resolving the situation takes you one call. Exactly what happened to your predecessor as owner of the arcology has never become publicly known, but your method of replacing them is rumored to have been somewhat ballistic in nature. It doesn't take much inflection in your voice to communicate threat, and the nonconformist hastily promises to abandon their plans and be less annoying in the future. The oligarchs are somewhat frightened by the rapidity with which you sorted things out, but they can't argue with the results and their @@.green;respect for you deepens.@@
+	<</replace>>
+<</link>>
+<</if>>
+</span>

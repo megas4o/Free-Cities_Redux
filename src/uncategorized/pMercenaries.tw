@@ -1,0 +1,41 @@
+:: P mercenaries [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Random Nonindividual Event", $mercenaries = 0, $mercenariesTitle = "mercenaries">>
+
+Another wave of security hysteria is sweeping the Free Cities. And this time, it's not based on rumor and alarmism. On the other side of the globe, a Free City was sacked by an old world army today. The Free City's handful of high-technology defenders and multitude of drones caused heavy casualties among the attackers, but eventually sheer weight of numbers wore them down.
+
+<br><br>
+
+Your Free City is on good terms with the nations that border it, unlike the unfortunate sacked city, which was next to a nation suffering total collapse and looking for a convenient target. However, there's no telling how long this will last. The situation in the small, troubled country close to the arcology you've been monitoring grows worse by the day<<if $nationHate > 0>>, and if rumor of your enslavement of some of their vulnerable citizens got out, its people may have cause to hate you.<</if>>
+
+<br><br>
+
+The budgetary difficulty many old world countries are in has resulted in unemployed soldiers looking for mercenary work. You could easily hire some of them to protect the arcology and fight in the militia if necessary. ''This is a unique opportunity.'' Without this security scare, it's unlikely you could convince any of your free-spirited tenants to even stay near a permanent armed presence.
+
+<br><br>
+
+<span id="result">
+<<link "Quarter a squad in the arcology">>
+	<<replace "#result">>
+	You hire some reputable mercenaries, kit them in excellent gear, and quarter them in $arcologies[0].name. The sight of armed men on patrol has @@.red;offended some of the more free-spirited citizens@@ of $arcologies[0].name.
+	<<set $rep -= 500>>
+	<<set $cash -= 5000>>
+	<<set $mercenaries = 1>>
+	<</replace>>
+<</link>> <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤5000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤5000 and incur significant upkeep costs//<</if>>
+<br><<link "Install a full platoon">>
+	<<replace "#result">>
+	You hire a full platoon of reputable mercenaries and a veteran officer to command them, kit them in excellent gear, and quarter them in $arcologies[0].name. The sight of many armed men on patrol has @@.red;deeply offended some of the more free-spirited citizens@@ of $arcologies[0].name.
+	<<set $rep -= 1000>>
+	<<set $cash -= 10000>>
+	<<set $mercenaries = 3>>
+	<</replace>>
+<</link>> <<if ($PC.warfare >= 100) || ($PC.career == "arcology owner")>>//This will cost ¤10000 and some upkeep, @@.springgreen;reduced by your mercenary contacts@@//<<else>>//This will cost ¤10000 and incur significant upkeep costs//<</if>>
+<br><<link "Do not quarter troops in your arcology">>
+	<<replace "#result">>
+	Having armed men on permanent watch is a step too far. $arcologies[0].name's security systems are formidable and will have to serve.
+	<<set $mercenaries = 0>>
+	<</replace>>
+<</link>>
+</span>
+

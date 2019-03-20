@@ -1,0 +1,108 @@
+:: Corporate Market [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+You're in your corporation's flagship slave market.
+
+
+The corporation pays you only nominal rent for this space, but will offer you a discount on slaves here based on your shares in it. Additionally, having the corporation's premiere products sold here in $arcologies[0].name will associate them with you, allowing your reputation to improve the corporate brand. A pretty
+<<if $surgicalUpgradeGenitalia == "futanari">>futanari<<elseif $captureUpgradeGender == "XY">><<if $surgicalUpgradeGenitalia == "gelded">>clipped<<else>>shemale<</if>><</if>>
+sales<<if $captureUpgradeAge == "old">>woman<<else>>girl<</if>> in a slutty suit greets you properly. She's a corporate slave chosen for loyalty and intelligence, and to physically represent the brand.
+<<if $drugUpgradeInjectionTwo == "supermassive">>
+	She has awe-inspiring breasts which her suit jacket helps support; even so, their bottoms reach past her navel.
+<<elseif $drugUpgradeInjectionTwo == "pastoral">>
+	She has gigantic, milk-swollen breasts almost spilling out of her suit.
+<<elseif $surgicalUpgradeImplants == "absurd">>
+	She has enormous fake tits that ride inhumanly high on her chest.
+<<elseif $drugUpgradeInjectionOne == "huge">>
+	She has huge tits and a nice broad butt which her tight skirt hugs closely.
+<<elseif $surgicalUpgradeImplants == "applied">>
+	She has nice fake bimbo tits and a silicone bubble butt.
+<<elseif $drugUpgradeInjectionOne == "tasteful">>
+	She's nice and curvy, with nice breasts and a lovely ass.
+<</if>>
+<<if $surgicalUpgradeCosmetics == "applied">>Her face is flawless.<</if>>
+<<if ($captureUpgradeRace != "unselected") && ($captureUpgradeRace != "none")>>
+	She's $captureUpgradeRace, of course<<if $trainingUpgradeAccent == "accents">>, and has a cute accent<</if>>.
+<</if>>
+<<if $drugUpgradeHormones == "XX">>
+	Her voice is soft and feminine, and she bats her eyes at you.
+<<elseif $drugUpgradeHormones == "XY">>
+	She has a deep voice, and speaks assertively.
+<</if>>
+<<if $generalUpgradeMuscle == "toned">>
+	Her hot body is perfectly toned under her suit.
+<<elseif $generalUpgradeMuscle == "ripped">>
+	Her suit is specially tailored to flatter her visible musculature.
+<</if>>
+Of course, you know all about the corporation, but sales<<if $captureUpgradeAge == "old">>women<<else>>girls<</if>> here have standing orders to treat you like any other customer, so you can review the market properly. The slave turns to <<if $surgicalUpgradeGenitalia != "fucknugget">>a multimedia presentation on<<else>>a rack of<</if>> your corporation's slaves.
+
+<br><br>
+
+She explains that the corporation captures many people, so it only retains and trains those that fit its product lines.
+
+<<GenerateMarketSlave "corporate">>
+<br><br>
+
+Her presentation done, the
+<<if $surgicalUpgradeGenitalia == "futanari">>futanari<<elseif $captureUpgradeGender == "XY">><<if $surgicalUpgradeGenitalia == "gelded">>clipped<<else>>shemale<</if>><</if>>
+sales<<if $captureUpgradeAge == "old">>woman<<else>>girl<</if>> directs you to the inventory interface that will allow you to peruse the corporation's slaves, and moves over to stand next to it, ready to answer any questions.
+<<if $PC.dick == 1>>
+	She positions herself facing away from you and hikes up her skirt to bare her
+	<<if $drugUpgradeInjectionTwo == "supermassive" || $drugUpgradeInjectionTwo == "pastoral">>gigantic ass<<elseif $surgicalUpgradeImplants != "none">>fake ass<<elseif $drugUpgradeInjectionOne != "huge">>big butt<<else>>cute butt<</if>>
+	and cocks her hips<<if $surgicalUpgradeGenitalia == "gelded">>, keeping her soft cock demurely out of sight<</if>>, if you feel like <<if $captureUpgradeGender == "XY" && $surgicalUpgradeGenitalia != "futanari">>sodomizing<<else>>fucking<</if>> her
+<<else>>
+	She gets down on her knees right there, making her mouth available if you feel like riding her face
+<</if>>
+while you browse.
+<span id="result">
+<<link "Use her">>
+	<<replace "#result">>
+		<<if $PC.dick == 1>>
+			Her <<if $captureUpgradeGender == "XY" && $surgicalUpgradeGenitalia != "futanari">>asshole is thoughtfully pre-lubed, and your cock slides easily up it<<else>>pussy is nice and wet, and your cock slides inside her easily<</if>> as you consider the slaves on offer. She's well trained, and uses her <<if $captureUpgradeGender == "XY" && $surgicalUpgradeGenitalia != "futanari">>sphincter<<else>>womanly muscles<</if>> to please your member expertly as she ruts herself gently back against you, doing almost all the work. When you orgasm, she retains the load carefully, keeping your cum inside her and away from her nice clothes.
+		<<else>>
+			She's very well trained, and does all the work. Once you move in and straddle her, she gets right down to it, or in this case, up to it. Her clever tongue runs gently along your labia to build anticipation before starting a delightful dance around and then atop your clitoris. You orgasm in no time at all, a climax which she carefully prolongs by kissing you full on the pussy in just the right way, only breaking the oral embrace when you've ridden it as far as you'll go.
+		<</if>>
+	<</replace>>
+<</link>>
+</span>
+
+<br><br>
+
+<<slaveCost $activeSlave>>
+<<if $slavesSeen > $slaveMarketLimit>><<set $slaveCost += $slaveCost*(($slavesSeen-$slaveMarketLimit)*0.1)>><</if>>
+
+<<if $publicShares <= $personalShares*0.2>>
+	Your commanding share of the corporation allows you to purchase its slaves at a very steep discount.
+	<<set $slaveCost *= 0.7>>
+<<elseif $publicShares <= $personalShares*0.5>>
+	Your large share of the corporation permits you to purchase its slaves at a steep discount.
+	<<set $slaveCost *= 0.8>>
+<<else>>
+	Your shares of the corporation come with a decent discount on its slaves.
+	<<set $slaveCost *= 0.9>>
+<</if>>
+
+<<set $slaveCost = 500*Math.trunc($slaveCost/500)>>
+The offered price is ¤<<print $slaveCost>>.<<if $slavesSeen > $slaveMarketLimit>> You have cast such a wide net for slaves this week that it is becoming more expensive to find more for sale. Your reputation helps determine your reach within the slave market.<</if>>
+<br>
+<<if $cash >= $slaveCost>>
+	[[Buy her slave contract|New Slave Intro][$cash -= $slaveCost,$activeSlave.slaveCost = $slaveCost,$nextButton = "Continue",$nextLink = "AS Dump",$returnTo = "Main"]]
+<<else>>
+	//You lack the necessary funds to buy this slave.//
+<</if>>
+<br>
+[[Decline to purchase her and check out another slave|Corporate Market][$slavesSeen += 1]]
+
+<br><br>
+<<set $saleDescription = 1, $applyLaw = 1>><<include "Long Slave Description">>
+
+<br><br>
+
+<<link "End corporate slave sales here and return this sector to standard markets">>
+	<<set $corpMarket = 0>>
+	<<for _i = 0; _i < $sectors.length; _i++>>
+		<<if $sectors[_i].type == "CorporateMarket">><<set $sectors[_i].type = "Markets">><<break>><</if>>
+	<</for>>
+	<<goto "Main">>
+<</link>>

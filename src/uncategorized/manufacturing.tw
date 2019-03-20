@@ -1,0 +1,59 @@
+:: Manufacturing [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+This is a space in the arcology's service areas,
+<<switch $sectors[$AS].type>>
+<<case "Manufacturing">>
+	rented to a variety of tenants for manufacturing purposes. You control this part of the arcology and all these producers pay you rent.
+<<case "Sweatshops">>
+	designed for labor intensive manufacturing by menial slaves.
+<<default>>ERROR: bad sector type
+<</switch>>
+<<if $sectors[$AS].type == "Manufacturing">><<SectorSell>><</if>>
+<br>
+<<set _buildingCost = Math.trunc(10000*$upgradeMultiplierArcology)>>
+
+<<if $sectors[$AS].type == "Sweatshops">>
+<<if $helots > 0>>
+	<br><br>
+	You own $helots menial slaves. All your sweatshops together can use only <<print $Sweatshops*500>>,
+	<<if $helots > $Sweatshops*500>>
+		the remainder is assigned to various odd-jobs in the arcology.
+	<<elseif $helots == $Sweatshops*500>>
+		and your menials are fully staffing them.
+	<<else>>
+		leaving space for <<print $Sweatshops*500-$helots>> more.
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $dairy == 0>>
+	<br>
+	[[Construct a dairy to milk slaves on an industrial scale|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $dairy = 5, $sectors[$AS].type = "Dairy"]]
+	//Costs ¤<<print _buildingCost>> and will incur upkeep costs//
+<</if>>
+
+<<if $mercenaries>>
+<<if $barracks != 1>>
+	<br>
+	[[Build a barracks to properly house your mercenaries|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $barracks = 1, $sectors[$AS].type = "Barracks"]]
+	//Costs ¤<<print _buildingCost>> but will reduce mercenary upkeep//
+<</if>>
+<</if>>
+
+<br>
+[[Convert to pens to increase the number of menial slaves you can house|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $sectors[$AS].type = "Pens"]]
+//Costs ¤<<print _buildingCost>>//
+
+<<if $sectors[$AS].type != "Sweatshops">>
+	<br>
+	[[Convert these facilities to use the labor of menial slaves|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $sectors[$AS].type = "Sweatshops"]]
+	//Costs ¤<<print _buildingCost>>//
+<</if>>
+
+<<if $sectors[$AS].type != "Manufacturing">>
+	<br>
+	[[Return this sector to standard manufacturing|Main][$cash -= _buildingCost, $lastWeeksFinances.expensesArcologyImprovement += _buildingCost, $sectors[$AS].type = "Manufacturing"]]
+	//Costs ¤<<print _buildingCost>>//
+<</if>>

@@ -1,0 +1,78 @@
+:: P school suggestion [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+
+<<set $schoolSuggestion = 1>>
+
+You entertain your most prominent citizens on a regular basis; it's expected, it's good business, and it's occasionally interesting. You're fashionably late again tonight, but these affairs are usually informal, and your knot of guests start without you with no offense given or taken. They know you're busy, they respect you for it, and they know you'll make an appearance if and when you can. The drinks will be just as good either way.
+
+<br><br>
+
+When you do appear, you get an even greater acclamation than usual. It seems your best citizens have discovered that they're unanimous in the belief that the arcology would benefit if a reputable slave school opened a branch campus here. Now they're deep in debate over which of the prominent schools is the best, and it's turned into a friendly but spirited dispute over the schools' merits.
+
+<<if $seeDicks != 100>>
+<br><br>
+"The Slave School for me," says a portly man with a thriving slave breaking business down in the markets. "Their girls are pretty, skilled, and innocent, without any of that weird crap the other schools go in for. Besides, all that special stuff drives up the prices. TSS girls are cheap for what you get. When you're tired of one, just buy another." He turns to his friend and business partner, a much thinner man. "Though I'm sure you disagree with me."
+<br><br>
+"Of course I do, we've been having this debate every day for ten years." The thin man laughs. "Hasn't hurt our company, though. Anyway, I'm a GRI man. It's much harder to change a girl's body than it is to train her mind. The Growth Research Institute might sell their girls with no training and some nasty flaws, but you can fix those faster than you can grow a well-trained skinny girl's tits out to //here//," and he gestures far out in front of his own chest.
+<br><br>
+An older woman standing across from him sniffs. "St. Claver's knows how to do both. They train them right, and if they aren't perfectly made, well, that's what plastic surgery is for." She favors the group with a sharp smile. "The best part is that between the silicone and their, ahem, strict training, they're all the same. Once you get used to their girls, you can always rely on them to give you more of what you like."
+<</if>>
+<<if $seeDicks != 0>>
+<br><br>
+"That's what I like about L'Ecole," her neighbor puts in. "Bad French, I know: Le Eycole Dess Encoolees." Less articulate than the others, he makes a vague motion down near his waist, as though he were fucking something, and then stops himself. "Anyway. If you like butts, they're the best. You can train slaves for years and not get them as eager to take it up the ass as that place makes 'em. Their girls come as soon as you stick it in 'em."
+<br><br>
+"Eugh." His neighbor rolls his eyes. "If your taste is a bit more refined, the Gymnasium-Academy makes their, ha, //girls// more well-rounded than just that. Not that they aren't delightfully entertaining when it comes to that, either. But they're also fit, well-trained, and even skilled at martial arts. They're perfect if you like hot young things all ready to be your bodyguard."
+<br><br>
+The unusually competent young heiress standing next to him snickers. "If you're going to bring up refinement, um, hello, the Futanari Sisters. I have four futas in my apartment having sex with each other right now. How do I know? Because they're always having sex with each other. They never stop." Her eyes take on a faraway look and she pauses. "Um, haha, I know what I'm doing later."
+<</if>>
+
+<br><br>
+The older gentleman who seems to have been acting as unofficial moderator before you came in turns to you. "In any case, <<if $PC.title == 1>>sir<<else>>madam<</if>>, we agreed before you came in. We'd like to get together and pay half the cost of encouraging a slave school to set up a branch campus here, if you'd be willing to pay the other half and choose which. I think ¤10000 from you would cover it." He looks around the group. "Before we started this little debate, we all agreed to chip in regardless of which you chose."
+
+<br><br>
+<span id="result">
+<<if $seeDicks != 100>>
+<<link "The Slave School">>
+	<<replace "#result">>
+		You thank your leading citizens and announce your decision: you'll be contacting The Slave School about opening a branch campus here, immediately.
+		<<set $TSS.schoolPresent = 1, $cash -= 10000>>
+	<</replace>>
+<</link>>
+<br><<link "The Growth Research Institute">>
+	<<replace "#result">>
+		You thank your leading citizens and announce your decision: you'll be contacting the Growth Research Institute about opening a branch campus here, immediately.
+		<<set $GRI.schoolPresent = 1, $cash -= 10000>>
+	<</replace>>
+<</link>>
+<br><<link "St. Claver Preparatory">>
+	<<replace "#result">>
+		You thank your leading citizens and announce your decision: you'll be contacting St. Claver Preparatory about opening a branch campus here, immediately.
+		<<set $SCP.schoolPresent = 1, $cash -= 10000>>
+	<</replace>>
+<</link>>
+<</if>>
+<<if $seeDicks != 0>>
+<<if $seeDicks != 100>><br><</if>>
+<<link "L'Ecole des Enculees">>
+	<<replace "#result">>
+		You thank your leading citizens and announce your decision: you'll be contacting L'Ecole des Enculees about opening a branch campus here, immediately.
+		<<set $LDE.schoolPresent = 1, $cash -= 10000>>
+	<</replace>>
+<</link>>
+<br><<link "The Gymnasium-Academy">>
+	<<replace "#result">>
+		You thank your leading citizens and announce your decision: you'll be contacting the Gymnasium-Academy about opening a branch campus here, immediately.
+		<<set $TGA.schoolPresent = 1, $cash -= 10000>>
+	<</replace>>
+<</link>>
+<br><<link "The Futanari Sisters">>
+	<<replace "#result">>
+		You thank your leading citizens and announce your decision: you'll be contacting the Futanari Sisters about moving a harem of futas here, immediately.
+		<<set $TFS.schoolPresent = 1, $cash -= 10000>>
+	<</replace>>
+<</link>>
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Selecting a school will cost ¤10000 and add minor upkeep costs//
+</span>

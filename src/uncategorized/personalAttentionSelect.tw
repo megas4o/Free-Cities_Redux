@@ -1,0 +1,292 @@
+:: Personal Attention Select [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main">>
+
+[[Focus on business|Main][$personalAttention = "business", $personalAttentionChanged = 1]]
+<<if $HeadGirl != 0>>
+	<br>[[Support your Head Girl|Main][$personalAttention = "HG", $personalAttentionChanged = 1]]
+<</if>>
+<br>[[Have as much sex with your slaves as possible|Main][$personalAttention = "sex", $personalAttentionChanged = 1]]<br><br>
+
+<<if $PC.career == "capitalist">>
+	//You are a master trader.//
+	<<elseif $PC.trading > 60>>
+		//You are an expert trader.//
+<<else>>
+	<<if $PC.trading > 30>>
+		//You have some skill as a trader.//
+	<<elseif $PC.trading > 10>>
+		//You have basic knowledge as a trader.//
+	<</if>>
+	<<if $personalAttention == "trading">>
+		You are training in venture capitalism.
+	<<else>>
+		[[Hire a merchant to train you in commerce|Main][$personalAttention = "trading", $personalAttentionChanged = 1]]
+	<</if>>
+<</if>><br>
+<<if $PC.career == "mercenary">>
+	//You are a master tactician.//
+	<<elseif $PC.warfare > 60>>
+		//You are an expert tactician.//
+<<else>>
+	<<if $PC.warfare > 30>>
+		//You have some skill as a tactician.//
+	<<elseif $PC.warfare > 10>>
+		//You have basic knowledge as a tactician.//
+	<</if>>
+	<<if $personalAttention == "warfare">>
+		You are training in tactics.
+	<<else>>
+		[[Hire a mercenary to train you in warfare|Main][$personalAttention = "warfare", $personalAttentionChanged = 1]]
+	<</if>>
+<</if>><br>
+<<if $PC.career == "slaver">>
+	//You are a master slaver.//
+	<<elseif $PC.slaving > 60>>
+		//You are an expert slaver.//
+<<else>>
+	<<if $PC.slaving > 30>>
+		//You have some skill as a slaver.//
+	<<elseif $PC.slaving > 10>>
+		//You have basic knowledge as a slaver.//
+	<</if>>
+	<<if $personalAttention == "slaving">>
+		You are training in slaving.
+	<<else>>
+		[[Hire a slaver to train you in slaving|Main][$personalAttention = "slaving", $personalAttentionChanged = 1]]
+	<</if>>
+<</if>><br>
+<<if $PC.career == "engineer">>
+	//You are a master arcology engineer.//
+	<<elseif $PC.engineering > 60>>
+		//You are an expert arcology engineer.//
+<<else>>
+	<<if $PC.engineering > 30>>
+		//You have some skill as an arcology engineer.//
+	<<elseif $PC.engineering > 10>>
+		//You have basic knowledge as an arcology engineer.//
+	<</if>>
+	<<if $personalAttention == "engineering">>
+		You are training in arcology engineering.
+	<<else>>
+		[[Hire an engineer to train you in engineering|Main][$personalAttention = "engineering", $personalAttentionChanged = 1]]
+	<</if>>
+<</if>><br>
+<<if $PC.career == "medicine">>
+	//You are a master surgeon.//
+	<<elseif $PC.medicine > 60>>
+		//You are an expert surgeon.//
+<<else>>
+	<<if $PC.medicine > 30>>
+		//You have some skill as a surgeon.//
+	<<elseif $PC.medicine > 10>>
+		//You have basic knowledge as a surgeon.//
+	<</if>>
+	<<if $personalAttention == "medicine">>
+		You are training in slave surgery.
+	<<else>>
+		[[Hire a doctor to train you in medicine|Main][$personalAttention = "medicine", $personalAttentionChanged = 1]]
+	<</if>>
+<</if>>
+<br>//Training will cost ¤10000 per week.//<br><br>
+
+<<if ($personalAttentionChanged == 1)>>
+<<if ($activeSlave.health < -20)>>
+	<<set $trainingRegimen = "look after her">>
+	<<set $personalAttentionChanged = 0>>
+<<elseif ($activeSlave.behavioralFlaw != "none")>>
+	<<if ($activeSlave.devotion >= -20)>>
+	<<set $trainingRegimen = "soften her behavioral flaw">>
+	<<set $personalAttentionChanged = 0>>
+	<<else>>
+	<<set $trainingRegimen = "fix her behavioral flaw">>
+	<<set $personalAttentionChanged = 0>>
+	<</if>>
+<<elseif ($activeSlave.sexualFlaw != "none")>>
+	<<if ($activeSlave.devotion >= -20)>>
+	<<set $trainingRegimen = "soften her sexual flaw">>
+	<<set $personalAttentionChanged = 0>>
+	<<else>>
+	<<set $trainingRegimen = "fix her sexual flaw">>
+	<<set $personalAttentionChanged = 0>>
+	<</if>>
+<<elseif ($activeSlave.fetishKnown != 1)>>
+	<<set $trainingRegimen = "explore her sexuality">>
+	<<set $personalAttentionChanged = 0>>
+<<elseif ($activeSlave.devotion <= 20) && ($activeSlave.trust > -20)>>
+	<<set $trainingRegimen = "break her will">>
+	<<set $personalAttentionChanged = 0>>
+<<else>>
+	<<set $trainingRegimen = "build her devotion">>
+	<<set $personalAttentionChanged = 0>>
+<</if>>
+<</if>>
+
+<<set _assignment = 0>>
+<<for _i = 0;_i < $slaves.length;_i++>>
+<<if $personalAttention == $slaves[_i].ID>>
+	You will give ''__@@.pink;$slaves[_i].slaveName@@__'' your personal attention this week.
+	<<set $activeSlave = $slaves[_i]>>
+	<<set _assignment = 1>>
+	<<break>>
+<</if>>
+<</for>>
+<<if _assignment == 0>>
+	You have not selected a slave for your personal attention.
+<<else>>
+
+Your training will seek to <span id="training"><strong>$trainingRegimen</strong></span>.<span id="cost"></span>
+
+<br>Change training objective:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<if ($activeSlave.devotion <= 20) && ($activeSlave.trust > -20)>>
+	<<link "Break her will">><<set $trainingRegimen = "break her will">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+	| <<link "Use enhanced breaking techniques">><<set $trainingRegimen = "harshly break her will">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<<else>>
+	<<link "Build her devotion">><<set $trainingRegimen = "build her devotion">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<if $activeSlave.fetishKnown == 0 || $activeSlave.attrKnown == 0>>
+	<<link "Explore her sexuality and fetishes">><<set $trainingRegimen = "explore her sexuality">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<<else>>
+	//You already understand her sexuality//
+<</if>>
+
+<<if ($activeSlave.behavioralFlaw != "none")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<link "Remove her behavioral flaw">><<set $trainingRegimen = "fix her behavioral flaw">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+	<<if ($activeSlave.devotion < -20)>>
+		 | //She must be broken before her flaws can be softened//
+	<<else>>
+		 | <<link "Soften her behavioral flaw">><<set $trainingRegimen = "soften her behavioral flaw">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+	<</if>>
+<</if>>
+
+<<if ($activeSlave.sexualFlaw != "none")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<link "Remove her sexual flaw">><<set $trainingRegimen = "fix her sexual flaw">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+	<<if ($activeSlave.devotion < -20)>>
+		<<if ($activeSlave.behavioralFlaw == "none")>>
+		 | //She must be broken before her flaws can be softened//
+		<</if>>
+	<<elseif ["cum addict", "anal addict", "attention whore", "breast growth", "abusive", "malicious", "self hating", "neglectful", "breeder"].includes($activeSlave.sexualFlaw)>>
+		 | //Paraphilias cannot be softened//
+	<<else>>
+		 | <<link "Soften her sexual flaw">><<set $trainingRegimen = "soften her sexual flaw">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+	<</if>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<if ($activeSlave.analSkill >= 100) && ($activeSlave.oralSkill >= 100) && ($activeSlave.vaginalSkill >= 100) && ($activeSlave.whoreSkill > 0) && ($activeSlave.entertainSkill > 0)>>
+	//She knows all the skills you can teach//
+<<elseif ($activeSlave.analSkill >= 100) && ($activeSlave.oralSkill >= 100) && ($activeSlave.whoreSkill > 0) && ($activeSlave.entertainSkill > 0) && ($activeSlave.vagina == -1) && ($activeSlave.balls == 0)>>
+	//She knows all the skills you can teach a gelded slave//
+<<elseif ($activeSlave.analSkill >= 100) && ($activeSlave.oralSkill >= 100) && ($activeSlave.whoreSkill > 0) && ($activeSlave.entertainSkill > 0) && ($activeSlave.vagina == -1)>>
+	//She knows all the skills you can teach a shemale slave//
+<<elseif ($activeSlave.analSkill >= 100) && ($activeSlave.oralSkill >= 100) && ($activeSlave.whoreSkill > 0) && ($activeSlave.entertainSkill > 0) && ($activeSlave.vaginalAccessory == "chastity belt")>>
+	//She knows all the skills you can teach while she's wearing a chastity belt//
+<<elseif ($activeSlave.devotion <= 20) && ($activeSlave.trust > -20)>>
+	//She's too disobedient to learn sex skills//
+<<else>>
+	<<link "Teach her">><<set $trainingRegimen = "learn skills">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Care for her">><<set $trainingRegimen = "look after her">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+Induce a flaw:
+<<if $activeSlave.behavioralQuirk != "confident" && $activeSlave.behavioralFlaw != "arrogant">>
+	<<link "Arrogance">><<set $trainingRegimen = "induce arrogance">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "cutting" && $activeSlave.behavioralFlaw != "bitchy">>
+	| <<link "Bitchiness">><<set $trainingRegimen = "induce bitchiness">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "funny" && $activeSlave.behavioralFlaw != "odd">>
+	| <<link "Odd behavior">><<set $trainingRegimen = "induce odd behavior">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "adores women" && $activeSlave.behavioralFlaw != "hates men">>
+	| <<link "Hatred of men">><<set $trainingRegimen = "induce hatred of men">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "adores men" && $activeSlave.behavioralFlaw != "hates women">>
+	| <<link "Hatred of women">><<set $trainingRegimen = "induce hatred of women">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "fitness" && $activeSlave.behavioralFlaw != "gluttonous">>
+	| <<link "Gluttony">><<set $trainingRegimen = "induce gluttony">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "insecure" && $activeSlave.behavioralFlaw != "anorexic">>
+	| <<link "Anorexia">><<set $trainingRegimen = "induce anorexia">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "sinful" && $activeSlave.behavioralFlaw != "devout">>
+	| <<link "Religious devotion">><<set $trainingRegimen = "induce religious devotion">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.behavioralQuirk != "advocate" && $activeSlave.behavioralFlaw != "liberated">>
+	| <<link "Liberation">><<set $trainingRegimen = "induce liberation">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "gagfuck queen" && $activeSlave.sexualFlaw != "hates oral">>
+	| <<link "Hatred of oral">><<set $trainingRegimen = "induce hatred of oral">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "confipainal queendent" && $activeSlave.sexualFlaw != "hates anal">>
+	| <<link "Hatred of anal">><<set $trainingRegimen = "induce hatred of anal">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "strugglefuck queen" && $activeSlave.sexualFlaw != "hates penetration">>
+	| <<link "Hatred of penetration">><<set $trainingRegimen = "induce hatred of penetration">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "tease" && $activeSlave.sexualFlaw != "shamefast">>
+	| <<link "Shame">><<set $trainingRegimen = "induce shame">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "romantic" && $activeSlave.sexualFlaw != "idealistic">>
+	| <<link "Sexual idealism">><<set $trainingRegimen = "induce sexual idealism">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "perverted" && $activeSlave.sexualFlaw != "repressed">>
+	| <<link "Sexual repression">><<set $trainingRegimen = "induce sexual repression">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "caring" && $activeSlave.sexualFlaw != "apathetic">>
+	| <<link "Sexual apathy">><<set $trainingRegimen = "induce sexual apathy">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "unflinching" && $activeSlave.sexualFlaw != "crude">>
+	| <<link "Crudity">><<set $trainingRegimen = "induce crudity">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.sexualQuirk != "size queen" && $activeSlave.sexualFlaw != "judgemental">>
+	| <<link "Judgment">><<set $trainingRegimen = "induce judgement">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetishStrength > 95>>
+<<if $activeSlave.fetish == "cumslut" && $activeSlave.sexualFlaw != "cum addict">>
+	| <<link "Cum addiction">><<set $trainingRegimen = "induce cum addiction">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "buttslut" && $activeSlave.sexualFlaw != "anal addict">>
+	| <<link "Anal addiction">><<set $trainingRegimen = "induce anal addiction">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "humiliation" && $activeSlave.sexualFlaw != "attention whore">>
+	| <<link "Attention whoring">><<set $trainingRegimen = "induce attention whoring">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "boobs" && $activeSlave.sexualFlaw != "breast growth">>
+	| <<link "Breast growth obsession">><<set $trainingRegimen = "induce breast growth obsession">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "dom" && $activeSlave.sexualFlaw != "abusive">>
+	| <<link "Abusiveness">><<set $trainingRegimen = "induce abusiveness">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "sadist" && $activeSlave.sexualFlaw != "malicious">>
+	| <<link "Maliciousness">><<set $trainingRegimen = "induce maliciousness">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "masochist" && $activeSlave.sexualFlaw != "self hatred">>
+	| <<link "Self hatred">><<set $trainingRegimen = "induce self hatred">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "submissive" && $activeSlave.sexualFlaw != "neglectful">>
+	| <<link "Sexual self neglect">><<set $trainingRegimen = "induce sexual self neglect">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<if $activeSlave.fetish == "pregnancy" && $activeSlave.sexualFlaw != "breeder">>
+	| <<link "Breeding obsession">><<set $trainingRegimen = "induce breeding obsession">><<replace "#training">><strong>$trainingRegimen</strong><</replace>><</link>>
+<</if>>
+<<else>>
+	| //Paraphilias can only be induced from a strong fetish//
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//Inducing flaws is difficult and bad for slaves' obedience.//
+
+<</if>> /* CLOSES NO SLAVE SELECTED */
+
+<br><br>__Select a slave to train:__
+<<include "Slave Summary">>
+
+<br>

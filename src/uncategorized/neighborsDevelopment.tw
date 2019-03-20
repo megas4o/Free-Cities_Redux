@@ -1,0 +1,2219 @@
+:: Neighbors Development [nobr]
+
+<<set $averageProsperity = 0>>
+<<for $i = 0; $i < $arcologies.length; $i++>>
+	<<if $arcologies[$i].prosperity < 10>>
+		<<set $arcologies[$i].prosperity = 10>>
+	<</if>>
+	<<set $averageProsperity += $arcologies[$i].prosperity>>
+<</for>>
+<<set $averageProsperity = $averageProsperity/$arcologies.length>>
+
+<<set _corpBonus = Math.trunc($corpProfit*0.05)>>
+
+__Arcologies in the Free City__
+
+<<for $i = 0; $i < $arcologies.length; $i++>>
+
+<br>
+''$arcologies[$i].name'', your <<if $arcologies[$i].direction == 0>>arcology<<else>>neighbor to the $arcologies[$i].direction<</if>>,
+
+/* PROSPERITY */
+
+<<if $arcologies[$i].direction != 0>>
+<<if $arcologies[$i].prosperity > 300>>
+	<<set $arcologies[$i].prosperity = 300>>
+<<else>>
+	<<switch $arcologies[$i].government>>
+	<<case "elected officials">>
+		<<set $arcologies[$i].prosperity += random(-1,1)>>
+	<<case "a corporation" "an oligarchy">>
+		<<set $arcologies[$i].prosperity += random(-1,2)>>
+	<<case "a committee" "your trustees">>
+		<<set $arcologies[$i].prosperity += random(0,2)>>
+	<<case "an individual">>
+		<<set $arcologies[$i].prosperity += random(0,3)>>
+	<<case "your agent">>
+		<<set $arcologies[$i].prosperity += random(0,3)>>
+		<<agentLeadership>>
+		<<set $arcologies[$i].prosperity += $agentBonus>>
+	<<default>>
+		<<set $arcologies[$i].prosperity += random(-1,1)>>
+	<</switch>>
+<</if>>
+<</if>>
+
+<<if $arcologies[$i].honeymoon > 0>>
+	<<set $arcologies[$i].honeymoon -= 1>>
+<</if>>
+
+<<if $arcologies[$i].government == "your agent">>
+<<for _k = 0; _k < $leaders.length; _k++>>
+<<if $leaders[_k].ID == $arcologies[$i].leaderID>>
+	is being run by your agent @@.pink;$leaders[_k].slaveName.@@
+	<<if $leaders[_k].assignment != "be your agent">>
+		<<assignJob $leaders[_k] "be your agent">>
+	<</if>>
+	<<if $agentBonus > 0>>@@.green;She does an excellent job this week.@@<</if>>
+	The arcology
+<</if>>
+<</for>>
+<<elseif $arcologies[$i].government == "your trustees">>
+	is being run by @@.mediumseagreen;your trustees@@. The arcology
+<</if>>
+
+<<if $arcologies[$i].direction == 0>>
+  <<set _error = 5>>
+<<else>>
+  <<set _error = 10>>
+<</if>>
+<<set _error -= 2*$assistantPower>>
+has an estimated GSP of @@.yellowgreen;¤<<print Math.trunc((0.1*$arcologies[$i].prosperity*random(100-_error,100+_error))/100)>>m,@@
+
+<<if ($arcologies[$i].rival == 1) && ($arcologies[$i].government != "an individual")>>
+	undergoing some internal turmoil. @@.yellow;It undergoes a change of government.@@ A power struggle is won by a single individual, leaving the arcology ruled like yours is.
+	<<set $arcologies[$i].government = "an individual">>
+	<<set $arcologies[$i].honeymoon += 10>>
+<<elseif ($arcologies[$i].ownership != 0) && ($arcologies[$i].ownership < $arcologies[$i].PCminority) && ($arcologies[$i].direction != 0) && ($arcologies[$i].rival != 1)>>
+	undergoing a leadership struggle in which you are deeply concerned, since you now own more of it than its current leadership.
+	<<if random(0,10) < $arcologies[$i].PCminority - $arcologies[$i].ownership>>
+	  @@.yellow;You successfully execute a hostile takeover and now control the arcology.@@ Trustees from among its leading citizens will exercise local control at your direction until you make other arrangements.
+	  <<set $arcologies[$i].honeymoon += 10>>
+	  <<set $arcologies[$i].ownership = 0>>
+	  <<set $arcologies[$i].government = "your trustees">>
+	<<else>>
+	  The current leadership has not yet exhausted its legalistic recourses, and retains control for the moment, causing considerable disruption.
+	  <<set $arcologies[$i].prosperity -= 3>>
+	<</if>>
+<<elseif ($arcologies[$i].ownership == 0) && ($arcologies[$i].PCminority > 0) && ($arcologies[$i].minority > $arcologies[$i].PCminority)>>
+	undergoing a leadership struggle in which you are deeply concerned, since your ownership share has diminished to a dangerously low point.
+	<<if random(0,10) < $arcologies[$i].minority - $arcologies[$i].PCminority>>
+	  @@.yellow;It undergoes a change of government.@@
+	  <<set $arcologies[$i].honeymoon += 10>>
+	  <<set $arcologies[$i].ownership = $arcologies[$i].minority>>
+	  <<set $arcologies[$i].minority = 0>>
+	  <<switch $arcologies[$i].government>>
+	  <<case "your trustees">>
+		<<if random(0,2) == 0>>
+		  Its leading citizens form a corporation to run the arcology more efficiently.
+		  <<set $arcologies[$i].government = "a corporation">>
+		<<else>>
+		  A power struggle is won by a single individual, leaving the arcology ruled like yours is.
+		  <<set $arcologies[$i].government = 1>>
+		<</if>>
+	  <<default>>
+		<<if random(0,2) == 0>>
+		  The failed individual who led it is run out and replaced by direct democracy.
+		  <<set $arcologies[$i].government = "direct democracy">>
+		<<else>>
+		  The failed individual who led it is bought out by a corporation.
+		  <<set $arcologies[$i].government = "a corporation">>
+		<</if>>
+	  <</switch>>
+	<<else>>
+	  The arcology is paralyzed by dissention over how to respond.
+	  <<set $arcologies[$i].prosperity -= 3>>
+	<</if>>
+<<elseif ($arcologies[$i].ownership != 0) && (($arcologies[$i].ownership < $arcologies[$i].minority) || ($arcologies[$i].ownership < 10)) && ($arcologies[$i].direction != 0) && ($arcologies[$i].rival != 1)>>
+	undergoing a leadership struggle, since its current government owns less of it than its largest rival for control.
+	<<if random(0,10) < $arcologies[$i].minority - $arcologies[$i].ownership>>
+	  @@.yellow;It undergoes a change of government.@@
+	  <<set $arcologies[$i].honeymoon += 10>>
+	  <<set $arcologies[$i].ownership = $arcologies[$i].minority>>
+	  <<set $arcologies[$i].minority = 0>>
+	  <<switch $arcologies[$i].government>>
+	  <<case "elected officials">>
+		<<if random(0,2) == 0>>
+		  Its elected officials surrender power to a small group of leading citizens.
+		  <<set $arcologies[$i].government = "an oligarchy">>
+		<<else>>
+		  Its elected officials are forced to give way to a committee of public safety.
+		  <<set $arcologies[$i].government = "a committee">>
+		<</if>>
+	  <<case "a committee">>
+		<<if random(0,2) == 0>>
+		  Its ruling committee forms it into a corporation in the hope this will spur growth.
+		  <<set $arcologies[$i].government = "a corporation">>
+		<<else>>
+		  A power struggle within its ruling committee leaves only a few leading citizens in power.
+		  <<set $arcologies[$i].government = "an oligarchy">>
+		<</if>>
+	  <<case "an oligarchy">>
+		<<if random(0,2) == 0>>
+		  Its leading citizens form a corporation to run the arcology more efficiently.
+		  <<set $arcologies[$i].government = "a corporation">>
+		<<else>>
+		  A power struggle is won by a single individual, leaving the arcology ruled like yours is.
+		  <<set $arcologies[$i].government = 1>>
+		<</if>>
+	  <<case "an individual">>
+		<<if random(0,2) == 0>>
+		  The failed individual who led it is run out and replaced by direct democracy.
+		  <<set $arcologies[$i].government = "direct democracy">>
+		<<else>>
+		  The failed individual who led it is bought out by a corporation.
+		  <<set $arcologies[$i].government = "a corporation">>
+		<</if>>
+	  <<case "a corporation">>
+		<<if random(0,2) == 0>>
+		  A power struggle within the corporation that runs it is won by a single person.
+		  <<set $arcologies[$i].government = "an individual">>
+		<<else>>
+		  The corporation that runs it collapses and is replaced by an oligarchy of rich shareholders.
+		  <<set $arcologies[$i].government = "an oligarchy">>
+		<</if>>
+	  <<default>>
+		Its direct democracy votes to empower some elected officials in the hope they can lead the arcology out of its problems.
+		<<set $arcologies[$i].government = "elected officials">>
+	  <</switch>>
+	  <<set $desc = []>>
+	  <<if $arcologies[$i].FSSubjugationist != "unset">>
+		<<if $arcologies[$i].FSSubjugationist < random(10,150)>>
+		  <<set $desc.push("Racial Subjugationism")>>
+		  <<set $arcologies[$i].FSSubjugationist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSSubjugationist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSSupremacist != "unset">>
+		<<if $arcologies[$i].FSSupremacist < random(10,150)>>
+		  <<set $desc.push("Racial Supremacy")>>
+		  <<set $arcologies[$i].FSSupremacist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSSupremacist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSGenderRadicalist != "unset">>
+		<<if $arcologies[$i].FSGenderRadicalist < random(10,150)>>
+		  <<set $desc.push("Gender Radicalism")>>
+		  <<set $arcologies[$i].FSGenderRadicalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSGenderRadicalist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSGenderFundamentalist != "unset">>
+		<<if $arcologies[$i].FSGenderFundamentalist < random(10,150)>>
+		  <<set $desc.push("Gender Fundamentalism")>>
+		  <<set $arcologies[$i].FSGenderFundamentalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSGenderFundamentalist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSPaternalist != "unset">>
+		<<if $arcologies[$i].FSPaternalist < random(10,150)>>
+		  <<set $desc.push("Paternalism")>>
+		  <<set $arcologies[$i].FSPaternalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSPaternalist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSDegradationist != "unset">>
+		<<if $arcologies[$i].FSDegradationist < random(10,150)>>
+		  <<set $desc.push("Degradationism")>>
+		  <<set $arcologies[$i].FSDegradationist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSDegradationist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSBodyPurist != "unset">>
+		<<if $arcologies[$i].FSBodyPurist < random(10,150)>>
+		  <<set $desc.push("Body Purism")>>
+		  <<set $arcologies[$i].FSBodyPurist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSBodyPurist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSTransformationFetishist != "unset">>
+		<<if $arcologies[$i].FSTransformationFetishist < random(10,150)>>
+		  <<set $desc.push("Transformation Fetishism")>>
+		  <<set $arcologies[$i].FSTransformationFetishist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSTransformationFetishist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSYouthPreferentialist != "unset">>
+		<<if $arcologies[$i].FSYouthPreferentialist < random(10,150)>>
+		  <<set $desc.push("Youth Preferentialism")>>
+		  <<set $arcologies[$i].FSYouthPreferentialist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSYouthPreferentialist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSMaturityPreferentialist != "unset">>
+		<<if $arcologies[$i].FSMaturityPreferentialist < random(10,150)>>
+		  <<set $desc.push("Maturity Preferentialism")>>
+		  <<set $arcologies[$i].FSMaturityPreferentialist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSMaturityPreferentialist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSSlimnessEnthusiast != "unset">>
+		<<if $arcologies[$i].FSSlimnessEnthusiast < random(10,150)>>
+		  <<set $desc.push("Slimness Enthusiasm")>>
+		  <<set $arcologies[$i].FSSlimnessEnthusiast = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSSlimnessEnthusiast -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSAssetExpansionist != "unset">>
+		<<if $arcologies[$i].FSAssetExpansionist < random(10,150)>>
+		  <<set $desc.push("Asset Expansionism")>>
+		  <<set $arcologies[$i].FSAssetExpansionist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSAssetExpansionist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSPastoralist != "unset">>
+		<<if $arcologies[$i].FSPastoralist < random(10,150)>>
+		  <<set $desc.push("Pastoralism")>>
+		  <<set $arcologies[$i].FSPastoralist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSPastoralist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSPhysicalIdealist != "unset">>
+		<<if $arcologies[$i].FSPhysicalIdealist < random(10,150)>>
+		  <<set $desc.push("Physical Idealism")>>
+		  <<set $arcologies[$i].FSPhysicalIdealist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSPhysicalIdealist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSChattelReligionist != "unset">>
+		<<if $arcologies[$i].FSChattelReligionist < random(10,150)>>
+		  <<set $desc.push("Chattel Religionism")>>
+		  <<set $arcologies[$i].FSChattelReligionist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSChattelReligionist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $arcologies[$i].FSRomanRevivalist != "unset">>
+		<<if $arcologies[$i].FSRomanRevivalist < random(10,150)>>
+		  <<set $desc.push("Roman Revivalism")>>
+		  <<set $arcologies[$i].FSRomanRevivalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSRomanRevivalist -= 10>>
+		<</if>>
+		<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+		<<if $arcologies[$i].FSAztecRevivalist < random(10,150)>>
+		  <<set $desc.push("Aztec Revivalism")>>
+		  <<set $arcologies[$i].FSAztecRevivalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSAztecRevivalist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+		<<if $arcologies[$i].FSEgyptianRevivalist < random(10,150)>>
+		  <<set $desc.push("Egyptian Revivalism")>>
+		  <<set $arcologies[$i].FSEgyptianRevivalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSEgyptianRevivalist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+		<<if $arcologies[$i].FSEdoRevivalist < random(10,150)>>
+		  <<set $desc.push("Edo Revivalism")>>
+		  <<set $arcologies[$i].FSEdoRevivalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSEdoRevivalist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+		<<if $arcologies[$i].FSArabianRevivalist < random(10,150)>>
+		  <<set $desc.push("Arabian Revivalism")>>
+		  <<set $arcologies[$i].FSArabianRevivalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSArabianRevivalist -= 10>>
+		<</if>>
+	  <<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+		<<if $arcologies[$i].FSChineseRevivalist < random(10,150)>>
+		  <<set $desc.push("Chinese Revivalism")>>
+		  <<set $arcologies[$i].FSChineseRevivalist = "unset">>
+		<<else>>
+		  <<set $arcologies[$i].FSChineseRevivalist -= 10>>
+		<</if>>
+	  <</if>>
+	  <<if $desc.length == 0>>
+	  <<elseif $desc.length > 2>>
+		Its citizens take the opportunity to make radical social changes, purging the $desc[0],
+		<<for _k = 1; _k < $desc.length; _k++>>
+		<<if _k < $desc.length-1>>
+		  $desc[_k],
+		<<else>>
+		  and $desc[_k] favored by the old government.
+		<</if>>
+		<</for>>
+	  <<elseif $desc.length == 2>>
+		Its citizens take the opportunity to make social changes, discarding the  $desc[0] and $desc[1] favored by the old government.
+	  <<else>>
+		Its citizens take the opportunity to make social change and abandon the $desc[0] favored by the old government.
+	  <</if>>
+	<<else>>
+	  The arcology is paralyzed by internal dissention over how to respond.
+	  <<set $arcologies[$i].prosperity -= 3>>
+	<</if>>
+<<elseif $arcologies[$i].prosperity >= 300>>
+	at the maximum possible prosperity.
+<<elseif $arcologies[$i].prosperity > $averageProsperity + 10>>
+	much more prosperous than the rest of the Free City, limiting its economic development.
+	<<set $arcologies[$i].prosperity -= 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $rivalSet == 0>>
+	<<if $rivalryFS != 0>>
+	  <<set $arcologies[$i].rival = 1>>
+	  <<set $rivalSet = 1>>
+	<</if>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].prosperity >= $averageProsperity - 10>>
+	about as prosperous as the rest of the Free City.
+<<else>>
+  <<if ($arcologies[$i].honeymoon > 0)>>
+	far behind the rest of the Free City, making it a good investment and spurring its economic development. It remains in the honeymoon period after its recent change of government, suppressing dissention and further encouraging growth.
+	<<set $arcologies[$i].prosperity += 2>>
+	<<if ($arcologies[$i].ownership != 0) && ($arcologies[$i].ownership < 40)>>
+		<<set $arcologies[$i].ownership += 1>>
+	<</if>>
+  <<else>>
+	not as prosperous as the rest of the Free City, spurring its economic development.
+	<<set $arcologies[$i].prosperity += 1>>
+  <</if>>
+<</if>>
+
+/* NATURAL CHANGES TO MINORITY SHARE */
+<<if ($arcologies[$i].government == "your agent") || ($arcologies[$i].government == "your trustees")>>
+	<<set $arcologies[$i].ownership = 0>>
+<</if>>
+<<set _owned = $arcologies[$i].minority+$arcologies[$i].ownership+$arcologies[$i].PCminority>>
+<<if $arcologies[$i].minority < 10>>
+	<<set $arcologies[$i].minority = 0>>
+<<elseif $arcologies[$i].minority < $arcologies[$i].PCminority>>
+	<<set $arcologies[$i].minority = 0>>
+<<elseif _owned >= 95>>
+	<<set $arcologies[$i].minority -= random(3,5)>>
+<<elseif $arcologies[$i].minority > (100 - _owned)*5>>
+	<<set $arcologies[$i].minority -= random(3,5)>>
+<<elseif $arcologies[$i].minority < (100 - _owned)*4>>
+	<<if $arcologies[$i].minority < 10>>
+		<<if $arcologies[$i].ownership + $arcologies[$i].PCminority <= 90>>
+			<<set $arcologies[$i].minority = 10>>
+		<</if>>
+	<<else>>
+		<<if $arcologies[$i].ownership + $arcologies[$i].PCminority <= 98>>
+		<<if $arcologies[$i].prosperity < random(0,300)>>
+			<<set $arcologies[$i].minority += random(0,2)>>
+		<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].direction != 0>>
+
+/* AI ARCOLOGY SHARE BUYING AND SELLING */
+<<if $arcologies[$i].government != "your agent">>
+<<if $arcologies[$i].government != "your trustees">>
+<<if $arcologies[$i].minority + $arcologies[$i].ownership + $arcologies[$i].PCminority < 100>>
+	<<set _prosperityDiff = $arcologies[$i].prosperity-$averageProsperity>>
+	<<if _prosperityDiff > random(-10,50)>>
+		Its leadership acquires an increased share of its ownership.
+		<<set $arcologies[$i].ownership += 1>>
+		<<set $arcologies[$i].prosperity -= 5>>
+		This places its government in control of approximately <<print Math.trunc(($arcologies[$i].ownership*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>% of the arcology<<if $arcologies[$i].minority > 0>>, against its most prominent competition, with a <<print Math.trunc(($arcologies[$i].minority*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>% share<</if>>.
+	<<elseif _prosperityDiff < random(-50,10)>>
+		<<if $arcologies[$i].ownership > 0>>
+			Its leadership sells off some of its ownership to stay afloat.
+			<<set $arcologies[$i].ownership -= 1>>
+			<<set $arcologies[$i].prosperity += 5>>
+			This leaves its government in control of approximately <<print Math.trunc(($arcologies[$i].ownership*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>% of the arcology<<if $arcologies[$i].minority > 0>>, against its most prominent competition, with a <<print Math.trunc(($arcologies[$i].minority*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>% share<</if>>.
+		<</if>>
+	<</if>>
+	<<if $arcologies[$i].minority+$arcologies[$i].ownership > 100>>
+		<<set $arcologies[$i].minority = 100-$arcologies[$i].ownership>>
+	<</if>>
+<<else>>
+	<<if (($arcologies[$i].ownership + $arcologies[$i].PCminority) >= 99) && ($arcologies[$i].rival != 1)>>
+		<<set $arcologies[$i].ownership = 98 - $arcologies[$i].PCminority>>
+	<<else>>
+		<<set $arcologies[$i].minority = Math.clamp(98 - $arcologies[$i].ownership - $arcologies[$i].PCminority, 0, 98)>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+/* AI ARCOLOGY RENTS TO PC */
+
+<<if $arcologies[$i].PCminority > 0>>
+	<<set $rents = ($arcologies[$i].prosperity*$arcologies[$i].PCminority*2)+random(1,100)>>
+	<<set $cash += $rents>>
+	This week, you made @@.yellowgreen;¤$rents@@ from your holdings in this arcology.
+<</if>>
+
+/* AI ARCOLOGY RENAMING */
+<<for $j = 0; $j < $arcologies.length; $j++>>
+<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+<<if $arcologies[$i].name == $arcologies[$j].name>>
+	<<set $arcologies[$i].name = "Arcology X-"+($i < 4 ? $i : $i + 1)>> /* X-4 is reserved for player's arcology, so X-1 is available */
+	It resumes its original name, ''$arcologies[$i].name'', since the arcology to the $arcologies[$i].direction of yours is also named $arcologies[$j].name.
+	<<break>>
+<</if>>
+<</if>>
+<</for>>
+
+<</if>>
+
+/* ECONOMIC WARFARE */
+
+<<for $j = 0; $j < $arcologies.length; $j++>>
+  <<if $arcologies[$i].direction == $arcologies[$j].embargoTarget>>
+	<<set $arcologies[$i].prosperity -= $arcologies[$j].embargo*2>>
+	<<if $arcologies[$j].direction != 0>>
+	  <<set $arcologies[$j].prosperity -= $arcologies[$j].embargo*2>>
+	<</if>>
+	$arcologies[$i].name targets $arcologies[$j].name for economic warfare.
+  <</if>>
+<</for>>
+
+/* FUTURE SOCIETY PROGRESS */
+
+<<set _societiesAdopted = 0>>
+<<switch $arcologies[$i].government>>
+<<case "elected officials">>
+	<<set $efficiency = random(-2,2)>>
+<<case "a committee">>
+	<<set $efficiency = random(-1,2)>>
+<<case "an oligarchy" "your trustees">>
+	<<set $efficiency = random(-1,3)>>
+<<case "an individual">>
+	<<set $efficiency = random(-1,5)>>
+<<case "your agent">>
+	<<set $efficiency = random(-1,5)>>
+	<<if $arcologies[$i].prosperity < 300>><<set $arcologies[$i].prosperity += $agentBonus>><</if>>
+<<case "a corporation">>
+	<<set $efficiency = random(1,2)>>
+<<default>>
+	<<set $efficiency = random(-3,3)>>
+<</switch>>
+
+<<if $arcologies[$i].rival == 1>>
+	<<set $efficiency += random(0,2)>>
+<</if>>
+
+<<set _FSCrossThresh = 5>>
+<<if $arcologies[$i].direction == 0>>
+	<<set _FSCrossThresh -= $CulturalOpenness*5>>
+<</if>>
+<<if $arcologies[$i].ownership >= 100>>
+	<<set _FSCrossThresh += 5>>
+<</if>>
+
+<<if $arcologies[$i].FSSupremacist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSSupremacist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if ($arcologies[$j].FSSupremacist > $arcologies[$i].FSSupremacist + _FSCrossThresh) && ($arcologies[$j].FSSupremacistRace == $arcologies[$i].FSSupremacistRace)>>
+			<<if $showNeighborDetails != 0>>Racial Supremacy for $arcologies[$i].FSSupremacistRace people in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSSupremacist += 1>>
+		<<elseif ($arcologies[$j].FSSubjugationist > $arcologies[$i].FSSupremacist + _FSCrossThresh) && ($arcologies[$j].FSSubjugationist == $arcologies[$i].FSSupremacistRace)>>
+		<<if $showNeighborDetails != 0>>Development of $arcologies[$i].FSSupremacistRace Supremacy in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Subjugationist society.<</if>>
+		<<set $arcologies[$i].FSSupremacist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSSupremacist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSSupremacist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSSupremacist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Racial Supremacy for $arcologies[$i].FSSupremacistRace people has reached stability and acceptance there. The arcology has been renamed
+		<<switch $arcologies[$i].FSSupremacistRace>>
+		<<case "white">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistWhite.random()>>
+		<<case "asian">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistAsian.random()>>
+		<<case "latina">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistLatina.random()>>
+		<<case "middle eastern">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistMiddleEastern.random()>>
+		<<case "black">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistBlack.random()>>
+		<<case "indo-aryan">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistIndoAryan.random()>>
+		<<case "pacific islander">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistPacificIslander.random()>>
+		<<case "malay">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistMalay.random()>>
+		<<case "amerindian">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistAmerindian.random()>>
+		<<case "southern european">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistSouthernEuropean.random()>>
+		<<case "semitic">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistSemitic.random()>>
+		<<default>>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSupremacistMixedRace.random()>>
+		<</switch>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSSupremacist < 0>>
+		$arcologies[$i].name has given up on $arcologies[$i].FSSupremacistRace Supremacy.
+		<<set $arcologies[$i].FSSupremacist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $captureUpgradeRace != "unselected">>
+	<<if $captureUpgradeRace != "none">>
+	<<if $captureUpgradeRace != $arcologies[$i].FSSupremacistRace>>
+		It's a good market for your corporation's racially inferior slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSSupremacist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSSubjugationist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSSubjugationist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if ($arcologies[$j].FSSubjugationist > $arcologies[$i].FSSubjugationist + _FSCrossThresh) && ($arcologies[$j].FSSubjugationistRace == $arcologies[$i].FSSubjugationistRace)>>
+		<<if $showNeighborDetails != 0>>Racial Subjugationism of $arcologies[$i].FSSubjugationistRace people in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSSubjugationist += 1>>
+		<<elseif ($arcologies[$j].FSSupremacist > $arcologies[$i].FSSubjugationist + _FSCrossThresh) && ($arcologies[$j].FSSupremacist == $arcologies[$i].FSSubjugationistRace)>>
+		<<if $showNeighborDetails != 0>>Development of $arcologies[$i].FSSubjugationistRace Supremacy in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Supremacist society.<</if>>
+		<<set $arcologies[$i].FSSubjugationist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSSubjugationist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSSubjugationist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSSubjugationist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Racial Subjugationism of $arcologies[$i].FSSubjugationistRace people has reached stability and acceptance there. The arcology has been renamed
+		<<switch $arcologies[$i].FSSubjugationistRace>>
+		<<case "white">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistWhite.random()>>
+		<<case "asian">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistAsian.random()>>
+		<<case "latina">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistLatina.random()>>
+		<<case "middle eastern">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistMiddleEastern.random()>>
+		<<case "black">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistBlack.random()>>
+		<<case "indo-aryan">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistIndoAryan.random()>>
+		<<case "pacific islander">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistPacificIslander.random()>>
+		<<case "malay">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistMalay.random()>>
+		<<case "amerindian">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistAmerindian.random()>>
+		<<case "southern european">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistSouthernEuropean.random()>>
+		<<case "semitic">>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistSemitic.random()>>
+		<<default>>
+			<<set $arcologies[$i].name = setup.ArcologyNamesSubjugationistMixedRace.random()>>
+		<</switch>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSSubjugationist < 0>>
+		$arcologies[$i].name has given up on $arcologies[$i].FSSubjugationistRace Subjugationism.
+		<<set $arcologies[$i].FSSubjugationist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $captureUpgradeRace == $arcologies[$i].FSSubjugationistRace>>
+		It's a good market for your corporation's $arcologies[$i].FSSubjugationistRace slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSSubjugationist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSGenderRadicalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSGenderRadicalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSGenderRadicalist > $arcologies[$i].FSGenderRadicalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Gender Radicalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSGenderRadicalist += 1>>
+		<<elseif $arcologies[$j].FSGenderFundamentalist > $arcologies[$i].FSGenderRadicalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Gender Radicalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Gender Fundamentalist society.<</if>>
+		<<set $arcologies[$i].FSGenderRadicalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSGenderRadicalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSGenderRadicalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSGenderRadicalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Gender Radicalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesGenderRadicalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSGenderRadicalist < 0>>
+		$arcologies[$i].name has given up on Gender Radicalism.
+		<<set $arcologies[$i].FSGenderRadicalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $drugUpgradeHormones != "unselected">>
+	<<if $drugUpgradeHormones != "none">>
+		It's a good market for your corporation's hormonally treated slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSGenderRadicalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+	<<if $surgicalUpgradeGenitalia == "futanari">>
+		It's a good market for your corporation's beautiful futanari, improving sales and helping social progress.
+		<<set $arcologies[$i].FSGenderRadicalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<<elseif $surgicalUpgradeGenitalia == "gelded">>
+		It's a good market for your corporation's clipped buttsluts, improving sales and helping social progress.
+		<<set $arcologies[$i].FSGenderRadicalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<<if ($captureUpgradeGender == "XY") || ($seeDicks == 100)>>
+		It's a good market for your corporation's feminized slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSGenderRadicalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSGenderFundamentalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSGenderFundamentalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSGenderFundamentalist > $arcologies[$i].FSGenderFundamentalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Gender Fundamentalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSGenderFundamentalist += 1>>
+		<<elseif $arcologies[$j].FSGenderRadicalist > $arcologies[$i].FSGenderFundamentalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Gender Fundamentalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Gender Radicalist society.<</if>>
+		<<set $arcologies[$i].FSGenderFundamentalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSGenderFundamentalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSGenderFundamentalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSGenderFundamentalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Gender Fundamentalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesGenderFundamentalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSGenderFundamentalist < 0>>
+		$arcologies[$i].name has given up on Gender Fundamentalism.
+		<<set $arcologies[$i].FSGenderFundamentalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if ($captureUpgradeGender == "XX") || ($seeDicks == 0)>>
+		It's a good market for your corporation's enslaved females, improving sales and helping social progress.
+		<<set $arcologies[$i].FSGenderFundamentalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSPaternalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSPaternalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSPaternalist > $arcologies[$i].FSPaternalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Paternalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSPaternalist += 1>>
+		<<elseif $arcologies[$j].FSDegradationist > $arcologies[$i].FSPaternalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Paternalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Degradationist society.<</if>>
+		<<set $arcologies[$i].FSPaternalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSPaternalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSPaternalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSPaternalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Paternalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesPaternalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSPaternalist < 0>>
+		$arcologies[$i].name has given up on Paternalism.
+		<<set $arcologies[$i].FSPaternalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $generalUpgradeBreaking == "care">>
+		It's a good market for your corporation's well-treated companions, improving sales and helping social progress.
+		<<set $arcologies[$i].FSPaternalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<<if $surgicalUpgradeCosmetics == "applied">>
+		It's a good market for your corporation's meticulously beautified ladies, improving sales and helping social progress.
+		<<set $arcologies[$i].FSPaternalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSDegradationist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSDegradationist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSDegradationist > $arcologies[$i].FSDegradationist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Degradationism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSDegradationist += 1>>
+		<<elseif $arcologies[$j].FSPaternalist > $arcologies[$i].FSDegradationist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Degradationism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Paternalist society.<</if>>
+		<<set $arcologies[$i].FSDegradationist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSDegradationist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSDegradationist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSDegradationist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Degradationism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesDegradationist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSDegradationist < 0>>
+		$arcologies[$i].name has given up on Degradationism.
+		<<set $arcologies[$i].FSDegradationist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $generalUpgradeBreaking == "brutality">>
+		It's a good market for your corporation's thoroughly terrified slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSDegradationist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<<if $entrapmentUpgradeIntelligence == "stupid">>
+		It's a good market for your corporation's idiotic sluts, improving sales and helping social progress.
+		<<set $arcologies[$i].FSDegradationist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<<elseif $surgicalUpgradeGenitalia == "fucknugget">>
+		It's a good market for your corporation's ex-human sex toys, improving sales and helping social progress.
+		<<set $arcologies[$i].FSTransformationFetishist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSBodyPurist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSBodyPurist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSBodyPurist > $arcologies[$i].FSBodyPurist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Body Purism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSBodyPurist += 1>>
+		<<elseif $arcologies[$j].FSTransformationFetishist > $arcologies[$i].FSBodyPurist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Body Purism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Transformation Fetishist society.<</if>>
+		<<set $arcologies[$i].FSBodyPurist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSBodyPurist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSBodyPurist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSBodyPurist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Body Purism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesBodyPurist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSBodyPurist < 0>>
+		$arcologies[$i].name has given up on Body Purism.
+		<<set $arcologies[$i].FSBodyPurist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if ($surgicalUpgradeImplants == "unselected") || ($surgicalUpgradeImplants == "none")>>
+	<<if $surgicalUpgradeGenitalia != "fucknugget">>
+		It's a good market for your corporation's implant-free slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSBodyPurist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSTransformationFetishist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSTransformationFetishist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSTransformationFetishist > $arcologies[$i].FSTransformationFetishist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Transformation Fetishism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSTransformationFetishist += 1>>
+		<<elseif $arcologies[$j].FSBodyPurist > $arcologies[$i].FSTransformationFetishist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Transformation Fetishism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Body Purist society.<</if>>
+		<<set $arcologies[$i].FSTransformationFetishist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSTransformationFetishist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSTransformationFetishist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSTransformationFetishist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Transformation Fetishism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesTransformationFetishist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSTransformationFetishist < 0>>
+		$arcologies[$i].name has given up on Transformation Fetishism.
+		<<set $arcologies[$i].FSTransformationFetishist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $surgicalUpgradeImplants == "applied">>
+		It's a good market for your corporation's implanted slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSTransformationFetishist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<<elseif $surgicalUpgradeImplants == "absurd">>
+		It's an excellent market for your corporation's absurdly implanted slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSTransformationFetishist += 2>>
+		<<set $corpCash += _corpBonus*2>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSYouthPreferentialist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSYouthPreferentialist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSYouthPreferentialist > $arcologies[$i].FSYouthPreferentialist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Youth Preferentialism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSYouthPreferentialist += 1>>
+		<<elseif $arcologies[$j].FSMaturityPreferentialist > $arcologies[$i].FSYouthPreferentialist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Youth Preferentialism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Maturity Preferentialist society.<</if>>
+		<<set $arcologies[$i].FSYouthPreferentialist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSYouthPreferentialist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSYouthPreferentialist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSYouthPreferentialist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Youth Preferentialism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesYouthPreferentialist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSYouthPreferentialist < 0>>
+		$arcologies[$i].name has given up on Youth Preferentialism.
+		<<set $arcologies[$i].FSYouthPreferentialist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $captureUpgradeAge == "young">>
+		It's a good market for your corporation's young slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSYouthPreferentialist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSMaturityPreferentialist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSMaturityPreferentialist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSMaturityPreferentialist > $arcologies[$i].FSMaturityPreferentialist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Maturity Preferentialism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSMaturityPreferentialist += 1>>
+		<<elseif $arcologies[$j].FSYouthPreferentialist > $arcologies[$i].FSMaturityPreferentialist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Maturity Preferentialism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Youth Preferentialist society.<</if>>
+		<<set $arcologies[$i].FSMaturityPreferentialist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSMaturityPreferentialist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSMaturityPreferentialist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSMaturityPreferentialist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Maturity Preferentialism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesMaturityPreferentialist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSMaturityPreferentialist < 0>>
+		$arcologies[$i].name has given up on Maturity Preferentialism.
+		<<set $arcologies[$i].FSMaturityPreferentialist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $captureUpgradeAge == "old">>
+		It's a good market for your corporation's enslaved MILFs, improving sales and helping social progress.
+		<<set $arcologies[$i].FSMaturityPreferentialist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSSlimnessEnthusiast != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSSlimnessEnthusiast += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSSlimnessEnthusiast > $arcologies[$i].FSSlimnessEnthusiast + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Slimness Enthusiasm in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSSlimnessEnthusiast += 1>>
+		<<elseif $arcologies[$j].FSAssetExpansionist > $arcologies[$i].FSSlimnessEnthusiast + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Slimness Enthusiasm in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Asset Expansionist society.<</if>>
+		<<set $arcologies[$i].FSSlimnessEnthusiast -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSSlimnessEnthusiast >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSSlimnessEnthusiast - $FSLockinLevel>>
+		<<set $arcologies[$i].FSSlimnessEnthusiast = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Slimness Enthusiasm has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesSlimnessEnthusiast.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSSlimnessEnthusiast < 0>>
+		$arcologies[$i].name has given up on Slimness Enthusiasm.
+		<<set $arcologies[$i].FSSlimnessEnthusiast = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $drugUpgradeInjectionOne != "huge">>
+	<<if $drugUpgradeInjectionOne != "tasteful">>
+	<<if $drugUpgradeInjectionTwo != "supermassive">>
+	<<if $drugUpgradeInjectionTwo != "pastoral">>
+	<<if $generalUpgradeWeight == "attractive">>
+		It's a good market for your corporation's trim slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSSlimnessEnthusiast += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSAssetExpansionist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSAssetExpansionist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSAssetExpansionist > $arcologies[$i].FSAssetExpansionist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Asset Expansionism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSAssetExpansionist += 1>>
+		<<elseif $arcologies[$j].FSSlimnessEnthusiast > $arcologies[$i].FSAssetExpansionist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Asset Expansionism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Slimness Enthusiast society.<</if>>
+		<<set $arcologies[$i].FSAssetExpansionist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSAssetExpansionist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSAssetExpansionist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSAssetExpansionist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Asset Expansionism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesAssetExpansionist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSAssetExpansionist < 0>>
+		$arcologies[$i].name has given up on Asset Expansionism.
+		<<set $arcologies[$i].FSAssetExpansionist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $drugUpgradeInjectionTwo == "supermassive">>
+		It's an excellent market for your corporation's world-class tits and ass, improving sales and helping social progress.
+		<<set $arcologies[$i].FSAssetExpansionist += 2>>
+		<<set $corpCash += _corpBonus*2>>
+	<<elseif $drugUpgradeInjectionTwo == "pastoral">>
+		It's a good market for your corporation's hugely endowed cows, improving sales and helping social progress.
+		<<set $arcologies[$i].FSAssetExpansionist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<<elseif $drugUpgradeInjectionOne == "huge">>
+		It's a good market for your corporation's stacked slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSAssetExpansionist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSPastoralist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSPastoralist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSPastoralist > $arcologies[$i].FSPastoralist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Pastoralism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSPastoralist += 1>>
+		<<elseif $arcologies[$j].FSPhysicalIdealist > $arcologies[$i].FSPastoralist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Asset Expansionism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Physical Idealist society.<</if>>
+		<<set $arcologies[$i].FSPastoralist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSPastoralist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSPastoralist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSPastoralist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Pastoralism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesPastoralist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSPastoralist < 0>>
+		$arcologies[$i].name has given up on Pastoralism.
+		<<set $arcologies[$i].FSPastoralist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $drugUpgradeInjectionTwo == "pastoral">>
+		It's an excellent market for your corporation's world-class milk producers, improving sales and helping social progress.
+		<<set $arcologies[$i].FSPastoralist += 2>>
+		<<set $corpCash += _corpBonus*2>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSPhysicalIdealist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSPhysicalIdealist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSPhysicalIdealist > $arcologies[$i].FSPhysicalIdealist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Physical Idealism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSPhysicalIdealist += 1>>
+		<<elseif $arcologies[$j].FSPastoralist > $arcologies[$i].FSPhysicalIdealist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Asset Expansionism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Pastoralist society.<</if>>
+		<<set $arcologies[$i].FSPhysicalIdealist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSPhysicalIdealist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSPhysicalIdealist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSPhysicalIdealist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Physical Idealism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesPhysicalIdealist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSPhysicalIdealist < 0>>
+		$arcologies[$i].name has given up on Physical Idealism.
+		<<set $arcologies[$i].FSPhysicalIdealist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $generalUpgradeMuscle == "ripped">>
+		It's an excellent market for your corporation's ripped chicks, improving sales and helping social progress.
+		<<set $arcologies[$i].FSPhysicalIdealist += 2>>
+		<<set $corpCash += _corpBonus*2>>
+	<<elseif $generalUpgradeMuscle == "toned">>
+		It's a good market for your corporation's toned ladies, improving sales and helping social progress.
+		<<set $arcologies[$i].FSPhysicalIdealist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSChattelReligionist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSChattelReligionist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSChattelReligionist > $arcologies[$i].FSChattelReligionist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Chattel Religionism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSChattelReligionist += 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSChattelReligionist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSChattelReligionist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSChattelReligionist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Chattel Religionism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesChattelReligionist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSChattelReligionist < 0>>
+		$arcologies[$i].name has given up on Chattel Religionism.
+		<<set $arcologies[$i].FSChattelReligionist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $trainingUpgradeSexEd == "highly skilled">>
+		It's an excellent market for your corporation's holy sex slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSChattelReligionist += 2>>
+		<<set $corpCash += _corpBonus*2>>
+	<<elseif $trainingUpgradeSexEd == "competence">>
+		It's a good market for your corporation's aspiring sexual acolytes, improving sales and helping social progress.
+		<<set $arcologies[$i].FSChattelReligionist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $arcologies[$i].FSRomanRevivalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSRomanRevivalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSRomanRevivalist > $arcologies[$i].FSRomanRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Roman Revivalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSRomanRevivalist += 1>>
+		<<elseif $arcologies[$j].FSAztecRevivalist > $arcologies[$i].FSRomanRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Roman Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Aztec Revivalist society.<</if>>
+		<<set $arcologies[$i].FSRomanRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSChineseRevivalist > $arcologies[$i].FSRomanRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Roman Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Chinese Revivalist society.<</if>>
+		<<set $arcologies[$i].FSRomanRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEgyptianRevivalist > $arcologies[$i].FSRomanRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Roman Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Egyptian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSRomanRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEdoRevivalist > $arcologies[$i].FSRomanRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Roman Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Edo Revivalist society.<</if>>
+		<<set $arcologies[$i].FSRomanRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSArabianRevivalist > $arcologies[$i].FSRomanRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Roman Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Arabian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSRomanRevivalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSRomanRevivalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSRomanRevivalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSRomanRevivalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Roman Revivalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesRomanRevivalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSRomanRevivalist < 0>>
+		$arcologies[$i].name has given up on Roman Revivalism.
+		<<set $arcologies[$i].FSRomanRevivalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $trainingUpgradeEducation == "basic">>
+		It's a good market for your corporation's properly educated slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSRomanRevivalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSAztecRevivalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSAztecRevivalist > $arcologies[$i].FSAztecRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Aztec Revivalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSAztecRevivalist += 1>>
+		<<elseif $arcologies[$j].FSEgyptianRevivalist > $arcologies[$i].FSAztecRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Aztec Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Egyptian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSAztecRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSRomanRevivalist > $arcologies[$i].FSAztecRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Aztec Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Roman Revivalist society.<</if>>
+		<<set $arcologies[$i].FSAztecRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSChineseRevivalist > $arcologies[$i].FSAztecRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Aztec Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Chinese Revivalist society.<</if>>
+		<<set $arcologies[$i].FSAztecRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEdoRevivalist > $arcologies[$i].FSAztecRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Aztec Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Edo Revivalist society.<</if>>
+		<<set $arcologies[$i].FSAztecRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSArabianRevivalist > $arcologies[$i].FSAztecRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Aztec Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Arabian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSAztecRevivalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSAztecRevivalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSAztecRevivalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSAztecRevivalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Aztec Revivalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesAztecRevivalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSAztecRevivalist < 0>>
+		$arcologies[$i].name has given up on Aztec Revivalism.
+		<<set $arcologies[$i].FSAztecRevivalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $trainingUpgradeAccent == "accents">>
+		It's a good market for your corporation's lovely mix of slave accents, improving sales and helping social progress.
+		<<set $arcologies[$i].FSAztecRevivalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSEgyptianRevivalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSEgyptianRevivalist > $arcologies[$i].FSEgyptianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Egyptian Revivalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSEgyptianRevivalist += 1>>
+		<<elseif $arcologies[$j].FSRomanRevivalist > $arcologies[$i].FSEgyptianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Egyptian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Roman Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSAztecRevivalist > $arcologies[$i].FSEgyptianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Egyptian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Aztec Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEgyptianRevivalist > $arcologies[$i].FSEgyptianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Egyptian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Chinese Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEdoRevivalist > $arcologies[$i].FSEgyptianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Egyptian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Edo Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSArabianRevivalist > $arcologies[$i].FSEgyptianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Egyptian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Arabian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSEgyptianRevivalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSEgyptianRevivalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSEgyptianRevivalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Egyptian Revivalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesEgyptianRevivalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist < 0>>
+		$arcologies[$i].name has given up on Egyptian Revivalism.
+		<<set $arcologies[$i].FSEgyptianRevivalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $trainingUpgradeAccent == "accents">>
+		It's a good market for your corporation's lovely mix of slave accents, improving sales and helping social progress.
+		<<set $arcologies[$i].FSEgyptianRevivalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSEdoRevivalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSEdoRevivalist > $arcologies[$i].FSEdoRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Edo Revivalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSEdoRevivalist += 1>>
+		<<elseif $arcologies[$j].FSRomanRevivalist > $arcologies[$i].FSEdoRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Edo Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Roman Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEdoRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSAztecRevivalist > $arcologies[$i].FSEdoRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Edo Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Aztec Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEdoRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEgyptianRevivalist > $arcologies[$i].FSEdoRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Edo Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Egyptian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEdoRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSChineseRevivalist > $arcologies[$i].FSEdoRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Edo Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Chinese Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEdoRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSArabianRevivalist > $arcologies[$i].FSEdoRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Edo Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Arabian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSEdoRevivalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSEdoRevivalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSEdoRevivalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSEdoRevivalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Edo Revivalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesEdoRevivalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSEdoRevivalist < 0>>
+		$arcologies[$i].name has given up on Edo Revivalism.
+		<<set $arcologies[$i].FSEdoRevivalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $trainingUpgradeAccent == "eliminate">>
+		It's a good market for your corporation's linguistically perfect slaves, improving sales and helping social progress.
+		<<set $arcologies[$i].FSEdoRevivalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSArabianRevivalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSArabianRevivalist > $arcologies[$i].FSArabianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Arabian Revivalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSArabianRevivalist += 1>>
+		<<elseif $arcologies[$j].FSRomanRevivalist > $arcologies[$i].FSArabianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Arabian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Roman Revivalist society.<</if>>
+		<<set $arcologies[$i].FSArabianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSAztecRevivalist > $arcologies[$i].FSArabianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Arabian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Aztec Revivalist society.<</if>>
+		<<set $arcologies[$i].FSArabianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEgyptianRevivalist > $arcologies[$i].FSArabianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Arabian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Egyptian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSArabianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEdoRevivalist > $arcologies[$i].FSArabianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Arabian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Edo Revivalist society.<</if>>
+		<<set $arcologies[$i].FSArabianRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSChineseRevivalist > $arcologies[$i].FSArabianRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Arabian Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Chinese Revivalist society.<</if>>
+		<<set $arcologies[$i].FSArabianRevivalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSArabianRevivalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSArabianRevivalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSArabianRevivalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Arabian Revivalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesArabianRevivalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSArabianRevivalist < 0>>
+		$arcologies[$i].name has given up on Arabian Revivalism.
+		<<set $arcologies[$i].FSArabianRevivalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $entrapmentUpgradeDevotionTwo == "devotion">>
+		It's an excellent market for your corporation's harem-ready devotees, improving sales and helping social progress.
+		<<set $arcologies[$i].FSArabianRevivalist += 2>>
+		<<set $corpCash += _corpBonus*2>>
+	<<elseif $entrapmentUpgradeDevotionOne == "obedience">>
+		It's a good market for your corporation's properly broken girls, improving sales and helping social progress.
+		<<set $arcologies[$i].FSArabianRevivalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+	<<set _societiesAdopted += 1>>
+	<<if $arcologies[$i].direction != 0>>
+	<<set $arcologies[$i].FSChineseRevivalist += $efficiency>>
+	<</if>>
+	<<for $j = 0; $j < $arcologies.length; $j++>>
+	<<if $arcologies[$i].direction != $arcologies[$j].direction>>
+		<<if $arcologies[$j].FSChineseRevivalist > $arcologies[$i].FSChineseRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Chinese Revivalism in $arcologies[$i].name is influenced by $arcologies[$j].name's more advanced society.<</if>>
+		<<set $arcologies[$i].FSChineseRevivalist += 1>>
+		<<elseif $arcologies[$j].FSRomanRevivalist > $arcologies[$i].FSChineseRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Chinese Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Roman Revivalist society.<</if>>
+		<<set $arcologies[$i].FSChineseRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSAztecRevivalist > $arcologies[$i].FSChineseRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Chinese Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Aztec Revivalist society.<</if>>
+		<<set $arcologies[$i].FSChineseRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEgyptianRevivalist > $arcologies[$i].FSChineseRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Chinese Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Egyptian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSChineseRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSEdoRevivalist > $arcologies[$i].FSChineseRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Chinese Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Edo Revivalist society.<</if>>
+		<<set $arcologies[$i].FSChineseRevivalist -= 1>>
+		<<elseif $arcologies[$j].FSArabianRevivalist > $arcologies[$i].FSChineseRevivalist + _FSCrossThresh>>
+		<<if $showNeighborDetails != 0>>Development of Chinese Revivalism in $arcologies[$i].name is slowed by contact with $arcologies[$j].name's more advanced Arabian Revivalist society.<</if>>
+		<<set $arcologies[$i].FSChineseRevivalist -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<if $arcologies[$i].direction != 0>>
+	<<if $arcologies[$i].FSChineseRevivalist >= $FSLockinLevel>>
+		<<set $arcologies[$i].influenceBonus += $arcologies[$i].FSChineseRevivalist - $FSLockinLevel>>
+		<<set $arcologies[$i].FSChineseRevivalist = $FSLockinLevel>>
+		<<set $toSearch = $arcologies[$i].name>>
+		<<if ($toSearch.indexOf("Arcology") != -1) && (random(0,2) == 0)>>
+		Chinese Revivalism has reached stability and acceptance there. The arcology has been renamed
+		<<set $arcologies[$i].name = setup.ArcologyNamesChineseRevivalist.random()>>
+		''$arcologies[$i].name'' to mark the occasion.
+		<</if>>
+	<<elseif $arcologies[$i].FSChineseRevivalist < 0>>
+		$arcologies[$i].name has given up on Chinese Revivalism.
+		<<set $arcologies[$i].FSChineseRevivalist = "unset">>
+	<</if>>
+	<</if>>
+	<<if $corpIncorporated == 1>>
+	<<if $entrapmentUpgradeIntelligence == "intelligent">>
+		It's a good market for your corporation's intelligent head girl prospects, improving sales and helping social progress.
+		<<set $arcologies[$i].FSChineseRevivalist += 1>>
+		<<set $corpCash += _corpBonus>>
+	<</if>>
+	<</if>>
+<</if>>
+
+/* FUTURE SOCIETY ADOPTION */
+
+<<if $arcologies[$i].direction != 0>>
+<<if _societiesAdopted < 4>>
+<<if _societiesAdopted < ($arcologies[$i].prosperity/25)+($week/25)-3>>
+
+<<include "Neighbors FS Adoption">>
+
+<</if>>
+<</if>>
+<</if>> /* CLOSES FUTURE SOCIETY ADOPTION */
+
+/* INFLUENCE RECEPTION */
+
+<<for $j = 0; $j < $arcologies.length; $j++>>
+<<if $arcologies[$j].direction != $arcologies[$i].direction>>
+<<if $arcologies[$j].influenceTarget == $arcologies[$i].direction>>
+
+<<set $arcologies[$j].influenceBonus = Math.clamp($arcologies[$j].influenceBonus, 0, $FSLockinLevel)>>
+<<set $appliedInfluenceBonus = Math.trunc($arcologies[$j].influenceBonus*0.1)>>
+<<set $arcologies[$j].influenceBonus -= $appliedInfluenceBonus*2>>
+<<if $CulturalOpenness == 1>>
+	<<if ($arcologies[$i].direction == 0) || ($arcologies[$j].direction == 0)>>
+		<<set $appliedInfluenceBonus *= 2>>
+	<</if>>
+<<elseif $CulturalOpenness == -1>>
+	<<if ($arcologies[$i].direction == 0) || ($arcologies[$j].direction == 0)>>
+		<<set $appliedInfluenceBonus /= 2>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].ownership >= 100>>
+	<<set $appliedInfluenceBonus /= 2>>
+<</if>>
+<<set $desc = []>>
+<<set _alignment = 0>>
+
+<<if $arcologies[$j].FSSubjugationist > 60>>
+	<<if ($arcologies[$i].FSSubjugationist != "unset")>>
+	<<if ($arcologies[$j].FSSubjugationistRace == $arcologies[$i].FSSubjugationistRace)>>
+			<<set $arcologies[$i].FSSubjugationist += Math.trunc(($arcologies[$j].FSSubjugationist-60)/4)+$appliedInfluenceBonus>>
+		<<if $arcologies[$i].FSSubjugationist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+		<<set $desc.push("helping to advance its racially aligned Subjugationism")>>
+	<<else>>
+			<<set $arcologies[$i].FSSubjugationist -= Math.trunc(($arcologies[$j].FSSubjugationist-60)/4)+$appliedInfluenceBonus>>
+		<<set $desc.push("attacking its incompatible Subjugationism")>>
+	<</if>>
+	<<elseif ($arcologies[$i].FSSupremacist != "unset") && ($arcologies[$j].FSSubjugationistRace == $arcologies[$i].FSSupremacistRace)>>
+		<<set $arcologies[$i].FSSupremacist -= Math.trunc(($arcologies[$j].FSSubjugationist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its opposing Supremacism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSSupremacist > 60>>
+	<<if ($arcologies[$i].FSSupremacist != "unset")>>
+	<<if ($arcologies[$j].FSSupremacistRace == $arcologies[$i].FSSupremacistRace)>>
+			<<set $arcologies[$i].FSSupremacist += Math.trunc(($arcologies[$j].FSSupremacist-60)/4)+$appliedInfluenceBonus>>
+		<<if $arcologies[$i].FSSupremacist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+		<<set $desc.push("helping to advance its racially aligned Supremacism")>>
+		<<else>>
+			<<set $arcologies[$i].FSSupremacist -= Math.trunc(($arcologies[$j].FSSupremacist-60)/4)+$appliedInfluenceBonus>>
+		<<set $desc.push("attacking its incompatible Supremacism")>>
+	<</if>>
+	<<elseif ($arcologies[$i].FSSubjugationist != "unset") && ($arcologies[$j].FSSupremacistRace == $arcologies[$i].FSSubjugationistRace)>>
+		<<set $arcologies[$i].FSSubjugationist -= Math.trunc(($arcologies[$j].FSSupremacist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its opposing Subjugationism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSGenderRadicalist > 60>>
+	<<if $arcologies[$i].FSGenderRadicalist != "unset">>
+		<<set $arcologies[$i].FSGenderRadicalist += Math.trunc(($arcologies[$j].FSGenderRadicalist-60)/4)+$appliedInfluenceBonus>>
+		<<if $arcologies[$i].FSGenderRadicalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Gender Radicalism")>>
+	<<elseif $arcologies[$i].FSGenderFundamentalist != "unset">>
+		<<set $arcologies[$i].FSGenderFundamentalist -= Math.trunc(($arcologies[$j].FSGenderRadicalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Gender Fundamentalism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSGenderFundamentalist > 60>>
+	<<if $arcologies[$i].FSGenderFundamentalist != "unset">>
+		<<set $arcologies[$i].FSGenderFundamentalist += Math.trunc(($arcologies[$j].FSGenderFundamentalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSGenderFundamentalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Gender Fundamentalism")>>
+	<<elseif $arcologies[$i].FSGenderRadicalist != "unset">>
+		<<set $arcologies[$i].FSGenderRadicalist -= Math.trunc(($arcologies[$j].FSGenderFundamentalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Gender Radicalism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSPaternalist > 60>>
+	<<if $arcologies[$i].FSPaternalist != "unset">>
+		<<set $arcologies[$i].FSPaternalist += Math.trunc(($arcologies[$j].FSPaternalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSPaternalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Paternalism")>>
+	<<elseif $arcologies[$i].FSDegradationist != "unset">>
+		<<set $arcologies[$i].FSDegradationist -= Math.trunc(($arcologies[$j].FSPaternalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Degradationism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSDegradationist > 60>>
+	<<if $arcologies[$i].FSDegradationist != "unset">>
+		<<set $arcologies[$i].FSDegradationist += Math.trunc(($arcologies[$j].FSDegradationist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSDegradationist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Degradationism")>>
+	<<elseif $arcologies[$i].FSPaternalist != "unset">>
+		<<set $arcologies[$i].FSPaternalist -= Math.trunc(($arcologies[$j].FSDegradationist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Paternalism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSBodyPurist > 60>>
+	<<if $arcologies[$i].FSBodyPurist != "unset">>
+		<<set $arcologies[$i].FSBodyPurist += Math.trunc(($arcologies[$j].FSBodyPurist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSBodyPurist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Body Purism")>>
+	<<elseif $arcologies[$i].FSTransformationFetishist != "unset">>
+		<<set $arcologies[$i].FSTransformationFetishist -= Math.trunc(($arcologies[$j].FSBodyPurist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Transformation Fetishism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSTransformationFetishist > 60>>
+	<<if $arcologies[$i].FSTransformationFetishist != "unset">>
+		<<set $arcologies[$i].FSTransformationFetishist += Math.trunc(($arcologies[$j].FSTransformationFetishist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSTransformationFetishist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Transformation Fetishism")>>
+	<<elseif $arcologies[$i].FSBodyPurist != "unset">>
+		<<set $arcologies[$i].FSBodyPurist -= Math.trunc(($arcologies[$j].FSTransformationFetishist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Body Purism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSYouthPreferentialist > 60>>
+	<<if $arcologies[$i].FSYouthPreferentialist != "unset">>
+		<<set $arcologies[$i].FSYouthPreferentialist += Math.trunc(($arcologies[$j].FSYouthPreferentialist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSYouthPreferentialist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Youth Preferentialism")>>
+	<<elseif $arcologies[$i].FSMaturityPreferentialist != "unset">>
+		<<set $arcologies[$i].FSMaturityPreferentialist -= Math.trunc(($arcologies[$j].FSYouthPreferentialist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Maturity Preferentialism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSMaturityPreferentialist > 60>>
+	<<if $arcologies[$i].FSMaturityPreferentialist != "unset">>
+		<<set $arcologies[$i].FSMaturityPreferentialist += Math.trunc(($arcologies[$j].FSMaturityPreferentialist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSMaturityPreferentialist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Maturity Preferentialism")>>
+	<<elseif $arcologies[$i].FSYouthPreferentialist != "unset">>
+		<<set $arcologies[$i].FSYouthPreferentialist -= Math.trunc(($arcologies[$j].FSMaturityPreferentialist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Youth Preferentialism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSSlimnessEnthusiast > 60>>
+	<<if $arcologies[$i].FSSlimnessEnthusiast != "unset">>
+		<<set $arcologies[$i].FSSlimnessEnthusiast += Math.trunc(($arcologies[$j].FSSlimnessEnthusiast-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSSlimnessEnthusiast > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Slimness Enthusiasm")>>
+	<<elseif $arcologies[$i].FSAssetExpansionist != "unset">>
+		<<set $arcologies[$i].FSAssetExpansionist -= Math.trunc(($arcologies[$j].FSSlimnessEnthusiast-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Asset Expansionism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSAssetExpansionist > 60>>
+	<<if $arcologies[$i].FSAssetExpansionist != "unset">>
+		<<set $arcologies[$i].FSAssetExpansionist += Math.trunc(($arcologies[$j].FSAssetExpansionist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSAssetExpansionist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Asset Expansionism")>>
+	<<elseif $arcologies[$i].FSSlimnessEnthusiast != "unset">>
+		<<set $arcologies[$i].FSSlimnessEnthusiast -= Math.trunc(($arcologies[$j].FSAssetExpansionist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Slimness Enthusiasm")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSPastoralist > 60>>
+	<<if $arcologies[$i].FSPastoralist != "unset">>
+		<<set $arcologies[$i].FSPastoralist += Math.trunc(($arcologies[$j].FSPastoralist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSPastoralist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Pastoralism")>>
+	<<elseif $arcologies[$i].FSPhysicalIdealist != "unset">>
+		<<set $arcologies[$i].FSPhysicalIdealist -= Math.trunc(($arcologies[$j].FSPastoralist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Physical Idealism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSPhysicalIdealist > 60>>
+	<<if $arcologies[$i].FSPhysicalIdealist != "unset">>
+		<<set $arcologies[$i].FSPhysicalIdealist += Math.trunc(($arcologies[$j].FSPhysicalIdealist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSPhysicalIdealist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Physical Idealism")>>
+	<<elseif $arcologies[$i].FSPastoralist != "unset">>
+		<<set $arcologies[$i].FSPastoralist -= Math.trunc(($arcologies[$j].FSPhysicalIdealist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its Pastoralism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSChattelReligionist > 60>>
+	<<if $arcologies[$i].FSChattelReligionist != "unset">>
+		<<set $arcologies[$i].FSChattelReligionist += Math.trunc(($arcologies[$j].FSChattelReligionist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSChattelReligionist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Chattel Religionism")>>
+	<</if>>
+<</if>>
+<<if $arcologies[$j].FSRomanRevivalist > 60>>
+	<<if $arcologies[$i].FSRomanRevivalist != "unset">>
+		<<set $arcologies[$i].FSRomanRevivalist += Math.trunc(($arcologies[$j].FSRomanRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSRomanRevivalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Roman Revivalism")>>
+	<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+		<<set $arcologies[$i].FSAztecRevivalist -= Math.trunc(($arcologies[$j].FSRomanRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= Math.trunc(($arcologies[$j].FSRomanRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+		<<set $arcologies[$i].FSEdoRevivalist -= Math.trunc(($arcologies[$j].FSRomanRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+		<<set $arcologies[$i].FSArabianRevivalist -= Math.trunc(($arcologies[$j].FSRomanRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+		<<set $arcologies[$i].FSChineseRevivalist -= Math.trunc(($arcologies[$j].FSRomanRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSAztecRevivalist > 60>>
+	<<if $arcologies[$i].FSAztecRevivalist != "unset">>
+		<<set $arcologies[$i].FSAztecRevivalist += Math.trunc(($arcologies[$j].FSAztecRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSAztecRevivalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Aztec Revivalism")>>
+	<<elseif $arcologies[$i].FSRomanRevivalist != "unset">>
+		<<set $arcologies[$i].FSRomanRevivalist -= Math.trunc(($arcologies[$j].FSAztecRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= Math.trunc(($arcologies[$j].FSAztecRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+		<<set $arcologies[$i].FSEdoRevivalist -= Math.trunc(($arcologies[$j].FSAztecRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+		<<set $arcologies[$i].FSArabianRevivalist -= Math.trunc(($arcologies[$j].FSAztecRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+		<<set $arcologies[$i].FSChineseRevivalist -= Math.trunc(($arcologies[$j].FSAztecRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSEgyptianRevivalist > 60>>
+	<<if $arcologies[$i].FSEgyptianRevivalist != "unset">>
+		<<set $arcologies[$i].FSEgyptianRevivalist += Math.trunc(($arcologies[$j].FSEgyptianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSEgyptianRevivalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Egyptian Revivalism")>>
+	<<elseif $arcologies[$i].FSRomanRevivalist != "unset">>
+		<<set $arcologies[$i].FSRomanRevivalist -= Math.trunc(($arcologies[$j].FSEgyptianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+		<<set $arcologies[$i].FSAztecRevivalist -= Math.trunc(($arcologies[$j].FSEgyptianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+		<<set $arcologies[$i].FSEdoRevivalist -= Math.trunc(($arcologies[$j].FSEgyptianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+		<<set $arcologies[$i].FSArabianRevivalist -= Math.trunc(($arcologies[$j].FSEgyptianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+		<<set $arcologies[$i].FSChineseRevivalist -= Math.trunc(($arcologies[$j].FSEgyptianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSEdoRevivalist > 60>>
+	<<if $arcologies[$i].FSEdoRevivalist != "unset">>
+		<<set $arcologies[$i].FSEdoRevivalist += Math.trunc(($arcologies[$j].FSEdoRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSEdoRevivalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Edo Revivalism")>>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= Math.trunc(($arcologies[$j].FSEdoRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSRomanRevivalist != "unset">>
+		<<set $arcologies[$i].FSRomanRevivalist -= Math.trunc(($arcologies[$j].FSEdoRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+		<<set $arcologies[$i].FSAztecRevivalist -= Math.trunc(($arcologies[$j].FSEdoRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+		<<set $arcologies[$i].FSArabianRevivalist -= Math.trunc(($arcologies[$j].FSEdoRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+		<<set $arcologies[$i].FSChineseRevivalist -= Math.trunc(($arcologies[$j].FSEdoRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSArabianRevivalist > 60>>
+	<<if $arcologies[$i].FSArabianRevivalist != "unset">>
+		<<set $arcologies[$i].FSArabianRevivalist += Math.trunc(($arcologies[$j].FSArabianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSArabianRevivalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Arabian Revivalism")>>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= Math.trunc(($arcologies[$j].FSArabianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+		<<set $arcologies[$i].FSEdoRevivalist -= Math.trunc(($arcologies[$j].FSArabianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSRomanRevivalist != "unset">>
+		<<set $arcologies[$i].FSRomanRevivalist -= Math.trunc(($arcologies[$j].FSArabianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+		<<set $arcologies[$i].FSAztecRevivalist -= Math.trunc(($arcologies[$j].FSArabianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+		<<set $arcologies[$i].FSChineseRevivalist -= Math.trunc(($arcologies[$j].FSArabianRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<</if>>
+<<elseif $arcologies[$j].FSChineseRevivalist > 60>>
+	<<if $arcologies[$i].FSChineseRevivalist != "unset">>
+		<<set $arcologies[$i].FSChineseRevivalist += Math.trunc(($arcologies[$j].FSChineseRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<if $arcologies[$i].FSChineseRevivalist > $FSLockinLevel>><<set _alignment += 1>><</if>>
+	<<set $desc.push("helping to advance its Chinese Revivalism")>>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+		<<set $arcologies[$i].FSEgyptianRevivalist -= Math.trunc(($arcologies[$j].FSChineseRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+		<<set $arcologies[$i].FSEdoRevivalist -= Math.trunc(($arcologies[$j].FSChineseRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+		<<set $arcologies[$i].FSArabianRevivalist -= Math.trunc(($arcologies[$j].FSChineseRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSRomanRevivalist != "unset">>
+		<<set $arcologies[$i].FSRomanRevivalist -= Math.trunc(($arcologies[$j].FSChineseRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+		<<set $arcologies[$i].FSAztecRevivalist -= Math.trunc(($arcologies[$j].FSChineseRevivalist-60)/4)+$appliedInfluenceBonus>>
+	<<set $desc.push("attacking its incompatible Revivalism")>>
+	<</if>>
+<</if>>
+
+<<if $desc.length == 0>>
+  ''$arcologies[$j].name'' attempts to influence it, but has no significant impacts.
+<<elseif $desc.length > 2>>
+  ''$arcologies[$j].name'''s mature culture influences $arcologies[$i].name's $desc[0],
+  <<for _k = 1; _k < $desc.length; _k++>>
+  <<if _k < $desc.length-1>>
+	$desc[_k],
+  <<else>>
+	and $desc[_k].
+  <</if>>
+  <</for>>
+<<elseif $desc.length == 2>>
+  ''$arcologies[$j].name'''s culture influences $arcologies[$i].name's $desc[0] and $desc[1].
+<<else>>
+  ''$arcologies[$j].name'''s culture is beginning to influence $arcologies[$i].name's $desc[0].
+<</if>>
+
+<<if $appliedInfluenceBonus < 0>>
+<<if $appliedInfluenceBonus < 5>>
+	$arcologies[$j].name is societally advanced, giving it extra influence.
+<<else>>
+	$arcologies[$j].name is societally fanatical, lending it great influence.
+<</if>>
+<</if>>
+<<if $arcologies[$i].ownership >= 100>>
+	<<if $appliedInfluenceBonus < 0>>However, <</if>>$arcologies[$i].name is under completely unified control, making it resistant to change.
+<</if>>
+
+<<if $arcologies[$j].direction != 0>>
+	<<if $desc.length == 0>>
+	''$arcologies[$j].name'' is not satisfied with the impact its directed influence is having, and withdraws it with the intention of targeting it elsewhere.
+	<<set $arcologies[$j].influenceTarget = -1>>
+	<<elseif _alignment >= 4>>
+	''$arcologies[$j].name'' is satisfied that its influence has brought $arcologies[$i].name into alignment, and withdraws its direct influence with the intention of targeting it elsewhere.
+	<<set $arcologies[$j].influenceTarget = -1>>
+	<</if>>
+<</if>>
+
+<</if>>
+<</if>>
+<</for>> /* CLOSES INFLUENCE RECEPTION */
+
+/* INFLUENCE INITIATION */
+
+<<if $arcologies[$i].direction != 0>>
+<<if $arcologies[$i].influenceTarget == -1>>
+
+<<set _influential = 0>> /* CHECK IF INFLUENTIAL */
+<<if $arcologies[$i].FSSubjugationist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSSupremacist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSGenderRadicalist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSGenderFundamentalist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSPaternalist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSDegradationist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSBodyPurist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSTransformationFetishist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSYouthPreferentialist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSMaturityPreferentialist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSSlimnessEnthusiast > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSAssetExpansionist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSPastoralist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSPhysicalIdealist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSChattelReligionist > 60>>
+	<<set _influential = 1>>
+<</if>>
+<<if $arcologies[$i].FSRomanRevivalist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSAztecRevivalist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSEgyptianRevivalist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSEdoRevivalist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSArabianRevivalist > 60>>
+	<<set _influential = 1>>
+<<elseif $arcologies[$i].FSChineseRevivalist > 60>>
+	<<set _influential = 1>>
+<</if>>
+
+<<if _influential == 1>> /* SELECT AN ARCOLOGY TO INFLUENCE */
+
+<<set _eligibleTargets = []>>
+<<for $j = 0; $j < $arcologies.length; $j++>>
+<<if $arcologies[$j].direction != $arcologies[$i].direction>>
+<<if ($arcologies[$i].government != "your trustees" && $arcologies[$i].government != "your agent") || ($arcologies[$j].direction != 0)>>
+
+<<if $arcologies[$i].FSSubjugationist != "unset">>
+	<<if $arcologies[$j].FSSubjugationist != "unset">>
+	<<if $arcologies[$j].FSSubjugationistRace == $arcologies[$i].FSSubjugationistRace>>
+		<<if $arcologies[$j].FSSubjugationist < $FSLockinLevel>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+		<</if>>
+	<<else>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSSupremacist != "unset">>
+	<<if $arcologies[$j].FSSupremacistRace == $arcologies[$i].FSSubjugationistRace>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSSupremacist != "unset">>
+	<<if $arcologies[$j].FSSupremacist != "unset">>
+	<<if $arcologies[$j].FSSupremacistRace == $arcologies[$i].FSSupremacistRace>>
+		<<if $arcologies[$j].FSSupremacist < $FSLockinLevel>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+		<</if>>
+	<<else>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSSubjugationist != "unset">>
+	<<if $arcologies[$j].FSSubjugationistRace == $arcologies[$i].FSSupremacistRace>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSGenderRadicalist != "unset">>
+	<<if $arcologies[$j].FSGenderRadicalist != "unset">>
+	<<if $arcologies[$j].FSGenderRadicalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSGenderFundamentalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSGenderFundamentalist != "unset">>
+	<<if $arcologies[$j].FSGenderFundamentalist != "unset">>
+	<<if $arcologies[$j].FSGenderFundamentalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSGenderRadicalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSPaternalist != "unset">>
+	<<if $arcologies[$j].FSPaternalist != "unset">>
+	<<if $arcologies[$j].FSPaternalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSDegradationist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSDegradationist != "unset">>
+	<<if $arcologies[$j].FSDegradationist != "unset">>
+	<<if $arcologies[$j].FSDegradationist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSPaternalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSBodyPurist != "unset">>
+	<<if $arcologies[$j].FSBodyPurist != "unset">>
+	<<if $arcologies[$j].FSBodyPurist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSTransformationFetishist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSTransformationFetishist != "unset">>
+	<<if $arcologies[$j].FSTransformationFetishist != "unset">>
+	<<if $arcologies[$j].FSTransformationFetishist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSBodyPurist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSYouthPreferentialist != "unset">>
+	<<if $arcologies[$j].FSYouthPreferentialist != "unset">>
+	<<if $arcologies[$j].FSYouthPreferentialist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSMaturityPreferentialist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSMaturityPreferentialist != "unset">>
+	<<if $arcologies[$j].FSMaturityPreferentialist != "unset">>
+	<<if $arcologies[$j].FSMaturityPreferentialist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSYouthPreferentialist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSSlimnessEnthusiast != "unset">>
+	<<if $arcologies[$j].FSSlimnessEnthusiast != "unset">>
+	<<if $arcologies[$j].FSSlimnessEnthusiast < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSAssetExpansionist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSAssetExpansionist != "unset">>
+	<<if $arcologies[$j].FSAssetExpansionist != "unset">>
+	<<if $arcologies[$j].FSAssetExpansionist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSSlimnessEnthusiast != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSPastoralist != "unset">>
+	<<if $arcologies[$j].FSPastoralist != "unset">>
+	<<if $arcologies[$j].FSPastoralist < $FSLockinLevel>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSPhysicalIdealist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSPhysicalIdealist != "unset">>
+	<<if $arcologies[$j].FSPhysicalIdealist != "unset">>
+	<<if $arcologies[$j].FSPhysicalIdealist < $FSLockinLevel>>
+		<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSPastoralist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSChattelReligionist != "unset">>
+	<<if $arcologies[$j].FSChattelReligionist != "unset">>
+	<<if $arcologies[$j].FSChattelReligionist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $arcologies[$i].FSRomanRevivalist != "unset">>
+	<<if $arcologies[$j].FSRomanRevivalist != "unset">>
+	<<if $arcologies[$j].FSRomanRevivalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSAztecRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSEgyptianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSEdoRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSArabianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSChineseRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSAztecRevivalist != "unset">>
+	<<if $arcologies[$j].FSAztecRevivalist != "unset">>
+	<<if $arcologies[$j].FSAztecRevivalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSRomanRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSEgyptianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSEdoRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSArabianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSChineseRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSEgyptianRevivalist != "unset">>
+	<<if $arcologies[$j].FSEgyptianRevivalist != "unset">>
+	<<if $arcologies[$j].FSEgyptianRevivalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSRomanRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSAztecRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSEdoRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSArabianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSChineseRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSEdoRevivalist != "unset">>
+	<<if $arcologies[$j].FSEdoRevivalist != "unset">>
+	<<if $arcologies[$j].FSEdoRevivalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSEgyptianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSRomanRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSAztecRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSArabianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSChineseRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSArabianRevivalist != "unset">>
+	<<if $arcologies[$j].FSArabianRevivalist != "unset">>
+	<<if $arcologies[$j].FSArabianRevivalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSEgyptianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSEdoRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSRomanRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSAztecRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSChineseRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<<elseif $arcologies[$i].FSChineseRevivalist != "unset">>
+	<<if $arcologies[$j].FSChineseRevivalist != "unset">>
+	<<if $arcologies[$j].FSChineseRevivalist < $FSLockinLevel>>
+			<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+	<<elseif $arcologies[$j].FSEgyptianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSEdoRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSArabianRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSRomanRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<<elseif $arcologies[$j].FSAztecRevivalist != "unset">>
+	<<set _eligibleTargets.push($arcologies[$j].direction)>>
+	<</if>>
+<</if>>
+
+<</if>>
+<</if>>
+<</for>>
+
+<<if _eligibleTargets.length > 0>>
+	<<set $arcologies[$i].influenceTarget = _eligibleTargets.random()>>
+<</if>>
+
+<</if>> /* CLOSES SELECT AN ARCOLOGY TO INFLUENCE */
+
+<</if>>
+<</if>> /* CLOSES INFLUENCE INITIATION */
+
+<br>
+<</for>>
+
+/* PEACEKEEPERS */
+
+<<if $plot>>
+<<if (def $peacekeepers) and ($peacekeepers != 0) >>
+	<br><br>
+	<<if $peacekeepers.strength >= 50>>
+		<<set _prisoners = Math.trunc($peacekeepers.attitude/10)+random(0,10)>>
+		General $peacekeepers.generalName's little empire near the arcology
+		<<if $peacekeepers.attitude >= 100>>
+			offers _prisoners menial slaves as tribute; having the area as an avowed client state @@.green;improves your reputation.@@
+			<<set $rep += 100, $peacekeepers.attitude = 100>>
+		<<else>>
+			delivers _prisoners to you in payment for your past support.
+		<</if>>
+		<<set $helots += _prisoners>>
+	<<elseif $peacekeepers.strength < 0>>
+		@@.yellow;The peacekeeping force led by General $peacekeepers.generalName in the troubled area near the Free City has been withdrawn.@@
+		<<if $peacekeepers.undermining>>
+			Your misinformation campaign against it in the old world media was successful. Before long, everyone in the Free City is confident that you're somehow responsible, @@.green;greatly improving your reputation.@@
+			<<set $rep += 2000, $peacekeepers = 0>>
+		<<else>>
+			The cost was ultimately too high. The time when old world countries could afford to waste billions on military adventurism is gone. It will not return.
+		<</if>>
+	<<else>>
+		There's a peacekeeping force led by General $peacekeepers.generalName in the troubled area near the Free City.
+		<<if $peacekeepers.undermining>>
+			You're paying for an media misinformation campaign in the old world country that sent him. It
+			<<set $peacekeepers.strength -= $peacekeepers.undermining/10000>>
+			<<if $peacekeepers.strength < 10>>
+				has had a significant impact; one of the nation's two major political parties now favors withdrawing the peacekeepers.
+			<<else>>
+				has not had a significant impact yet; only a few fringe figures are arguing against the mission.
+			<</if>>
+		<</if>>
+		Unfortunately, the presence of so much old world military power near the Free City causes @@.red;public concern.@@
+		<<set $rep -= 100>>
+	<</if>>
+<</if>>
+<</if>>

@@ -1,0 +1,28 @@
+:: Place In Line
+
+<<silently>>
+
+<<set $slavesInLine = []>>
+
+<<if ($activeSlave.assignmentVisible == 1)>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].assignmentVisible == 1)>>
+		<<set $slavesInLine.push($slaves[$i])>>
+	<</if>>
+	<</for>>
+<<else>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].assignment == $activeSlave.assignment)>>
+		<<set $slavesInLine.push($slaves[$i])>>
+	<</if>>
+	<</for>>
+<</if>>
+
+<<for $i = 0; $i < $slavesInLine.length; $i++>>
+	<<if ($slavesInLine[$i].ID == $activeSlave.ID)>>
+	<<set $place = $i>>
+	<<break>>
+	<</if>>
+<</for>>
+
+<</silently>>

@@ -1,0 +1,117 @@
+:: PE pit fight
+<<nobr>>
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Random Nonindividual Event">>
+
+<<set $activeSlave = $Bodyguard>>
+
+<<Deadliness $activeSlave>>
+
+<<set $PPit = 0>>
+
+<</nobr>>\
+\
+<<nobr>>
+
+It's time for the fight. It will take place in a back room of a well respected club. There is a ring set into the floor, and space for a handful of spectators, but the setup is quite Spartan. The sport is just getting off the ground. <<EventNameLink $activeSlave>> is first to walk into the ring. She's stark naked and is carrying a simple single-edged straight sword, identical to the one her opponent will be using. The fight will be fair.
+
+<</nobr>>
+
+<<nobr>>
+
+Across the ring, her opponent's owner nods civilly to you and examines $activeSlave.slaveName.
+
+<<if $activeSlave.combatSkill > 0>>
+	Her combat skills greatly increase her deadliness.
+<</if>>
+
+<<if $activeSlave.muscles > 95>>
+	Her huge muscles are an intimidating sight, but may hinder her flexibility.
+<<elseif $activeSlave.muscles > 30>>
+	Her muscles are a trim and powerful sight.
+<</if>>
+
+<<if $activeSlave.height >= 170>>
+	Her height gives her a reach advantage with her sword.
+<</if>>
+
+<<if $activeSlave.health > 50>>
+	Her shining health makes her a better combatant.
+<</if>>
+
+<<if $activeSlave.weight > 10>>
+	Her heavy weight is an impediment as a pit fighter.
+<<elseif $activeSlave.weight < -10>>
+	Her light weight is an impediment as a pit fighter.
+<</if>>
+
+<<if $activeSlave.health < -50>>
+	Her poor health makes her a weaker combatant.
+<</if>>
+
+<<if $activeSlave.preg > 10>>
+	Her advanced pregnancy makes her less effective.
+<</if>>
+
+<<if $deadliness > 5>>
+	$activeSlave.slaveName seems supremely confident, even eager to please you.
+<<elseif $deadliness > 3>>
+	$activeSlave.slaveName seems nervous, but steels herself to fight for you.
+<<elseif $deadliness > 1>>
+	$activeSlave.slaveName seems terrified, and barely controls herself.
+<<else>>
+	$activeSlave.slaveName is obviously terrified, and might flee if there were a way out of the pit.
+<</if>>
+
+Finally, her opponent enters as well.
+
+<<set $seed = random(1,100)>>
+<<if $seed > 80>>
+	She is a huge, muscular Amazon filled with confidence.
+	<<set $opponent = 5>>
+<<elseif $seed > 60>>
+	She is a short but muscular shemale, trying to look confident.
+	<<set $opponent = 4>>
+<<elseif $seed > 40>>
+	She is a tall, thin woman covered in ropy muscle, trying to hide her terror.
+	<<set $opponent = 3>>
+<<elseif $seed > 20>>
+	She is a decent-looking slave, physically fit but obviously scared.
+	<<set $opponent = 2>>
+<<else>>
+	She is an average looking slave, so frightened there's urine running down her leg. She must have annoyed her master to earn this.
+	<<set $opponent = 1>>
+<</if>>
+
+The umpire announces gravely that the fight is to the death and rings a bell.
+
+<</nobr>>
+
+<<nobr>>
+
+<<if $deadliness > ($opponent + 1)>>
+	$activeSlave.slaveName senses that she is greatly superior, and decides to make a quick end before her opponent can try something foolish. She feints high and stabs low; her enemy just manages to parry the low stab, but is so much weaker that $activeSlave.slaveName simply overpowers her, so that she falls onto her back with the force of the clash. $activeSlave.slaveName takes one step forward and runs her sword through the prostrate slave's heart. This victory has @@.green;won you some renown@@ and @@.yellowgreen;a sum of money@@ from each of the spectators.
+	<<set $rep += 500>>
+	<<slavePaid $activeSlave 5000>>
+	<<set $activeSlave.pitKills += 1>>
+	<<set $pitKillsTotal += 1>>
+<<elseif $deadliness > ($opponent)>>
+	The combat is long and exhausting. $activeSlave.slaveName and her opponent are closely matched in terms of skill, so neither takes foolish risks and a protracted, bloody fight results as both slaves take horrible but non-lifethreatening cuts. Finally, $activeSlave.slaveName's superior physical condition wins out and her opponent falls from exhaustion and blood loss. $activeSlave.slaveName stumbles over to open her throat. This victory has @@.green;won you some renown@@ and @@.yellowgreen;a sum of money@@ from each of the spectators, though $activeSlave.slaveName is @@.red;badly hurt.@@
+	<<set $rep += 500>>
+	<<slavePaid $activeSlave 5000>>
+	<<set $activeSlave.health = -50>>
+	<<set $activeSlave.pitKills += 1>>
+	<<set $pitKillsTotal += 1>>
+<<elseif $deadliness > ($opponent-1)>>
+	The combat is long and exhausting. $activeSlave.slaveName and her opponent are closely matched in terms of skill, so neither takes foolish risks and a protracted, bloody fight results as both slaves take horrible but non-lifethreatening cuts. Finally, $activeSlave.slaveName's inferior physical condition fails her and she falls from exhaustion and blood loss. As she slumps she catches your eye with a look of apology. Her opponent stumbles over to open her throat. $activeSlave.slaveName @@.red;has been killed.@@
+	<<set $activeSlave.health -= 1000>>
+<<else>>
+	$activeSlave.slaveName is outmatched from the start. In the first pass, her opponent moves beyond her, opening a long gash in her thigh as she goes. Thus injured, $activeSlave.slaveName fails to block a slash that severs her Achilles tendon on the other side. On her knees, she barely manages to ward off one more blow before the second one opens her belly. $activeSlave.slaveName @@.red;has been killed.@@
+	<<set $activeSlave.health -= 1000>>
+<</if>>
+
+<<if $activeSlave.health < -90>>
+	<<include "Remove activeSlave">>
+<</if>>
+
+<</nobr>>\

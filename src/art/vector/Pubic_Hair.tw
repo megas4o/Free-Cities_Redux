@@ -1,0 +1,33 @@
+:: Art_Vector_Pubic_Hair_ [nobr]
+
+<<if _artSlave.fuckdoll != 0 || _artSlave.clothes != "a latex catsuit">>
+
+  <<if $showBodyMods == 1>>
+    <<if _artSlave.vaginaTat == "rude words">>
+      <<if _artSlave.dick != 0>>
+        <<set _art_pussy_tattoo_text to "Useless" >>
+      <<else>>
+        <<set _art_pussy_tattoo_text to "Fucktoy" >>
+      <</if>>
+      <<include Art_Vector_Pussy_Tattoo>>
+    <</if>>
+  <</if>>
+
+  <<switch _artSlave.pubicHStyle>>
+    <<case "strip" "in a strip">>
+      <<include Art_Vector_Pubic_Hair_Strip >>
+    <<case "bush" "bushy in the front and neat in the rear">>
+      <<include Art_Vector_Pubic_Hair_Bush >>
+    <<case "neat">>
+      <<include Art_Vector_Pubic_Hair_Neat >>
+    <<case "bushy">>
+      <<include Art_Vector_Pubic_Hair_Bushy >>
+    <<case "very bushy">>
+      <<include Art_Vector_Pubic_Hair_Very_Bushy >>
+    <<case "waxed">>
+      /* no hair to display */
+    <<default>>
+      /* pubic hair style not supported - don't display anything*/
+  <</switch>>
+
+<</if>>

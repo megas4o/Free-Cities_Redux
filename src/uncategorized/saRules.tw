@@ -1,0 +1,818 @@
+:: SA rules [nobr]
+
+<<if $slaves[$i].fuckdoll == 0>>
+She
+<<if $slaves[$i].fetish == "mindbroken">>
+	is mentally broken so none of the rules have any impact.
+<<else>>
+
+<<if $slaves[$i].devotion < -50>>
+	is so unhappy that she has little interest in getting off<<if ($slaves[$i].releaseRules != "permissive")>>, making the rule restricting her sexual outlets superfluous<</if>>.
+<<elseif $slaves[$i].energy <= 20>>
+	is frigid and has little interest in getting off<<if ($slaves[$i].releaseRules != "permissive")>>, making the rule restricting her sexual outlets superfluous<</if>>.	
+<<elseif $slaves[$i].need < $slaves[$i].energy*0.5>>
+	<<if ($slaves[$i].devotion <= 20)>>
+		gets off at work despite her reluctance, @@.hotpink;habituating her to sexual slavery.@@
+		<<set $slaves[$i].devotion += 1>>
+		<<if ($slaves[$i].trust > -20) && ($slaves[$i].devotion <= 20)>>
+			She hates herself for climaxing, and knows the mild aphrodisiacs in the food are forcing her arousal, @@.gold;frightening her.@@
+			<<set $slaves[$i].trust -= 1>>
+		<</if>>
+	<<elseif ($slaves[$i].releaseRules != "permissive")>>
+		gets off at work, so being forbidden to masturbate doesn't affect her seriously.
+	<<else>>
+		gets off at work, so she doesn't feel the need to masturbate frequently.
+	<</if>>
+<<else>>
+	<<if ($slaves[$i].releaseRules == "restrictive")>>
+		<<if ($slaves[$i].devotion <= 20) && ($slaves[$i].trust > -20)>>
+			refuses to come to you for sexual release, and is @@.gold;severely punished@@ for illicit masturbation.
+			<<set $slaves[$i].trust -= 2>>
+		<<elseif ($slaves[$i].devotion < 50)>>
+			<<if $slaves[$i].devotion <= 20>>
+				occasionally comes to you to beg for sexual release.
+			<<else>>
+				doesn't mind having to come to you to beg for sexual release.
+			<</if>>
+			<<if $freeSexualEnergy > 0>>
+				<<if $freeSexualEnergy == 3>>
+					You have surplus sexual energy to burn, even when she doesn't ask, and she <<if $slaves[$i].devotion <= 20>>@@.hotpink;hates herself@@ for how often she gets off on you relieving your needs with her body<<else>>@@.hotpink;gets used to being a sex slave@@ every time she climaxes as you use her<</if>>.
+					<<set $slaves[$i].devotion += 2, $slaves[$i].need = 0>>
+				<<elseif $freeSexualEnergy == 2>>
+					You have surplus sexual energy to fuck her whenever she forces herself to ask, and she is @@.hotpink;sexually dependent@@ on you.
+					<<set $slaves[$i].devotion += 1, $slaves[$i].need -= 40>>
+				<<else>>
+					You have little surplus sexual energy, and occasionally, she asks in vain.
+					<<set $slaves[$i].need -= 20>>
+				<</if>>
+			<<else>>
+				You have no surplus sexual energy, and she asks in vain, @@.golden;reducing her trust@@ in you.
+				<<set $slaves[$i].trust -= 1>>
+			<</if>>
+		<<else>> /* $slaves[$i].devotion >= 50 */
+			willingly begs you to
+			<<if ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetishStrength > 60)>>
+			<<switch $slaves[$i].fetish>>
+			<<case "submissive">>
+				hold her down and fuck her
+			<<case "cumslut">>
+				<<if $PC.dick == 1>>
+					cum in her mouth
+				<<else>>
+					use your strap-on on her mouth
+				<</if>>
+			<<case "humiliation">>
+				use her in public
+			<<case "buttslut">>
+				fuck her butt
+			<<case "boobs">>
+				fondle her breasts
+			<<case "sadist">>
+				let her help you abuse other slaves
+			<<case "masochist">>
+				hurt her
+			<<case "dom">>
+				let her help you use other slaves
+			<<default>>
+				fuck her
+			<</switch>>
+			<<else>>
+			fuck her
+			<</if>>
+			every chance she gets.
+			<<if $freeSexualEnergy > 0>>
+				<<if $freeSexualEnergy == 3>>
+					You have surplus sexual energy to burn, even when she doesn't ask, and she finds @@.mediumaquamarine;complete sexual satisfaction@@ from you.
+					<<set $slaves[$i].trust += 2, $slaves[$i].need = 0>>
+				<<elseif $freeSexualEnergy == 2>>
+					You have surplus sexual energy to fuck her whenever she asks, and she is @@.mediumaquamarine;sexually reliant@@ on you.
+					<<set $slaves[$i].trust += 1, $slaves[$i].need -= 40>>
+				<<else>>
+					You have little surplus sexual energy, and sometimes she asks in vain.
+					<<set $slaves[$i].need -= 20>>
+				<</if>>
+			<<else>>
+				You have no surplus sexual energy, and she asks in vain, @@.golden;reducing her trust@@ in you.
+				<<set $slaves[$i].trust -= 1>>
+			<</if>>
+		<</if>> /* closes $slaves[$i].devotion >= 50 */
+		<<if $slaves[$i].fetishKnown == 0>>
+		<<if $slaves[$i].devotion > 20 || $slaves[$i].trust <= -20>>
+			<<if $freeSexualEnergy > 0>>
+			<<if $freeSexualEnergy > random(0,5)>>
+				<<set $slaves[$i].fetishKnown = 1>>
+				You discover that she really likes it when you
+				<<switch $slaves[$i].fetish>>
+				<<case "submissive">>
+				hold her down and fuck her; @@.pink;she's a submissive!@@
+				<<case "cumslut">>
+				<<if $PC.dick == 1>>
+					cum in her mouth; @@.pink;she's a cumslut!@@
+				<<else>>
+					use your strap-on in her mouth; @@.pink;she's a cumslut!@@
+				<</if>>
+				<<case "humiliation">>
+				use her in public; @@.pink;she's a humiliation fetishist!@@
+				<<case "buttslut">>
+					<<if canDoAnal($slaves[$i])>>fuck her butt<<else>>tease her anus<</if>>; @@.pink;she's an anal slut!@@
+				<<case "boobs">>
+				fondle her breasts; @@.pink;she's a boob fetishist!@@
+				<<case "sadist">>
+				let her help you abuse other slaves; @@.pink;she's a sadist!@@
+				<<case "masochist">>
+				hurt her; @@.pink;she's a masochist!@@
+				<<case "dom">>
+				let her help you use other slaves; @@.pink;she's dominant!@@
+				<<case "pregnancy">>
+				<<if $PC.dick == 1>>
+					come <<if canDoVaginal($slaves[$i])>>inside<<else>>on<</if>> her; @@.pink;she's a pregnancy fetishist!@@
+				<<else>>
+					talk dirty and call her a heifer; @@.pink;she's a pregnancy fetishist!@@
+				<</if>>
+				<<default>>
+				fuck her; @@.pink;she's got a normal sexuality.@@
+				<</switch>>
+			<</if>>
+			<</if>> /* closes fetishKnown == 0 */
+		<</if>>
+		<</if>>
+		<<if $slaves[$i].drugs == "testicle enhancement">>
+		<<if $slaves[$i].balls > 0>>
+		<<if ($slaves[$i].devotion > 20) || ($slaves[$i].trust < -20)>>
+		<<if $slaves[$i].hormones > 0>>
+			She can't seem to get enough cum out of her terribly swollen balls in one orgasm to relieve the pressure: her poor soft dick produces slow, anemic ejaculations, no matter how backed up she is. This forces her to come to you for release many times a day, and she @@.mediumaquamarine;is desperately reliant@@
+			<<if $slaves[$i].anus > 0 && canDoAnal($slaves[$i])>>
+			on your <<if $PC.dick == 0>>strap-on<<else>>penis<</if>> inside her ass as a source of relief.
+			<<else>>
+			on you for relief.
+			<</if>>
+			<<set $slaves[$i].trust += 2>>
+		<<else>>
+			Her terribly swollen balls force her to come to you for release several times a day, and she @@.mediumaquamarine;learns to rely@@
+			<<if $slaves[$i].anus > 0 && canDoAnal($slaves[$i])>>
+			on your <<if $PC.dick == 0>>strap-on<<else>>penis<</if>> inside her ass as a source of relief.
+			<<else>>
+			on you for relief.
+			<</if>>
+			<<set $slaves[$i].trust += 1>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+	<<else>> /* releaseRules not restrictive */
+		<<if ($universalRulesConsent == 0)>>
+			<<if ($slaves[$i].devotion <= 20) && ($slaves[$i].trust > -20)>>
+				<<if ($slaves[$i].releaseRules == "permissive")>>
+					masturbates whenever she can find a private moment to take care of the urges induced by the food, @@.mediumaquamarine;slightly reducing her fear@@ of you.
+					<<set $slaves[$i].trust += 1, $slaves[$i].need = 0>>
+				<<else>>
+					refuses to use other slaves to get off, and is @@.gold;severely punished@@ for illicit masturbation.
+					<<set $slaves[$i].trust -= 2>>
+				<</if>>
+			<<elseif ($slaves[$i].devotion <= 20)>>
+				<<if ($slaves[$i].releaseRules == "permissive")>>
+					prefers to masturbate rather than demanding sex from other slaves, @@.mediumaquamarine;slightly reducing her fear@@ of you.
+					<<set $slaves[$i].trust += 1, $slaves[$i].need = 0>>
+				<<else>>
+					is forced to demand sex from other slaves by the urges induced by the food, and @@.hotpink;hates herself@@ for it.
+					<<set $slaves[$i].devotion += 1, $slaves[$i].need = 0>>
+				<</if>>
+			<<elseif ($slaves[$i].devotion < 50)>>
+				@@.hotpink;accepts the need@@ to
+				<<set $slaves[$i].devotion += 1, $slaves[$i].need = 0>>
+			<<else>>
+				happily @@.mediumaquamarine;avails herself@@ of your permission to
+				<<set $slaves[$i].trust += 1, $slaves[$i].need = 0>>
+			<</if>>
+			<<if $slaves[$i].devotion > 20>>
+				<<if ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetishStrength > 60)>>
+					<<if ($slaves[$i].fetish == "submissive")>>
+						demand that other slaves fuck her.
+						<<if $averageDick > 4>>
+							<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3 && canDoAnal($slaves[$i])>>
+							<<if ($slaves[$i].anus*40)-($averageDick*5) < random(1,100)>>
+							@@.lime;Her asshole is loosened@@ during sex with other slaves, since most of the cocks she demands a dominating buttfuck from are very large.
+							<<set $slaves[$i].anus += 1>>
+							<</if>>
+							<</if>>
+							<<if $averageDick > 5>>
+							<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+							<<if ($slaves[$i].vagina*40)-($averageDick*5) < random(1,100)>>
+								Since most of the slaves she demands a pounding from are extremely hung, @@.lime;her cunt gets stretched out.@@
+								<<set $slaves[$i].vagina += 1>>
+							<</if>>
+							<</if>>
+							<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].fetish == "cumslut")>>
+						suck or be sucked by any slave she fancies.
+					<<elseif ($slaves[$i].fetish == "humiliation")>>
+						demand that other slaves let her fuck them in public.
+						<<if $slaves[$i].assignmentVisible>>
+						<<if !$slaves[$i].rivalry>>
+							<<SlaveSort $RapeableIDs>>
+							<<for _dI = 0; _dI < $RapeableIDs.length; _dI++>>
+								<<set _j = $slaveIndices[$RapeableIDs[_dI]]>>
+								<<if !$slaves[_j].rivalry>>
+								<<if $slaves[_j].assignmentVisible || $slaves[_j].assignment == $slaves[$i].assignment>>
+								<<if $slaves[_j].devotion < 20>>
+								<<if $slaves[_j].trust < -20>>
+									Craving a rush, she repeatedly forces a reluctant <<SlaveFullName $slaves[_j]>> to have sex with her in public. $slaves[_j].slaveName resents this, and $slaves[$i].slaveName's ongoing sexual abuse @@.lightsalmon;starts a rivalry@@ between them.
+									<<set $slaves[$i].rivalry = 1, $slaves[_j].rivalry = 1, $slaves[$i].rivalryTarget = $slaves[_j].ID, $slaves[_j].rivalryTarget = $slaves[$i].ID>>
+									<<break>>
+								<</if>>
+								<</if>>
+								<</if>>
+								<</if>>
+							<</for>>
+						<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].fetish == "buttslut") && canDoAnal($slaves[$i])>>
+						demand that other slaves penetrate her anus.
+						<<if $averageDick > 4>>
+							<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3 && canDoAnal($slaves[$i])>>
+							<<if ($slaves[$i].anus*30)-($averageDick*5) < random(1,100)>>
+							Since most of the slaves she demands anal sex from are extremely hung, @@.lime;her asshole gets stretched out.@@
+							<<set $slaves[$i].anus += 1>>
+							<</if>>
+							<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].fetish == "boobs")>>
+						demand that other slaves massage her breasts.
+					<<elseif ($slaves[$i].fetish == "sadist")>>
+						force the most reluctant slaves to let her fuck them.
+						<<if $slaves[$i].assignmentVisible>>
+						<<if !$slaves[$i].rivalry>>
+							<<SlaveSort $RapeableIDs>>
+							<<for _dI = 0; _dI < $RapeableIDs.length; _dI++>>
+								<<set _j = $slaveIndices[$RapeableIDs[_dI]]>>
+								<<if !$slaves[_j].rivalry>>
+								<<if $slaves[_j].assignmentVisible || $slaves[_j].assignment == $slaves[$i].assignment>>
+								<<if $slaves[_j].devotion <= 50>>
+								<<if $slaves[_j].sexualFlaw != "none">>
+									She focuses on <<SlaveFullName $slaves[_j]>>, who has a sexual flaw $slaves[$i].slaveName can exploit. She sadistically
+									<<if $slaves[_j].sexualFlaw == "hates oral">>
+										rapes the poor slave's face<<if !canAchieveErection($slaves[$i])>> with her fingers<</if>>. $slaves[_j].slaveName hates oral
+									<<elseif $slaves[_j].sexualFlaw == "hates penetration" && canDoVaginal($slaves[_j])>>
+										rapes the poor slave's pussy<<if !canAchieveErection($slaves[$i])>> with her fingers<</if>>. $slaves[_j].slaveName hates penetration
+									<<elseif ($slaves[_j].sexualFlaw == "hates anal" || $slaves[_j].sexualFlaw == "hates penetration") && canDoAnal($slaves[_j])>>
+										rapes the poor slave's ass<<if !canAchieveErection($slaves[$i])>> with her fingers<</if>>. $slaves[_j].slaveName hates anal
+									<<elseif $slaves[_j].sexualFlaw == "shamefast">>
+										rapes the poor slave in public. $slaves[_j].slaveName is terribly shamefast
+									<<elseif $slaves[_j].sexualFlaw == "idealistic">>
+										rapes the poor slave every time she catches her being romantic. $slaves[_j].slaveName is still idealistic
+									<<else>>
+										rapes the poor slave every chance she gets,
+									<</if>>
+									and the sexual abuse @@.lightsalmon;starts a rivalry@@ between them.
+									<<set $slaves[$i].rivalry = 1, $slaves[_j].rivalry = 1, $slaves[$i].rivalryTarget = $slaves[_j].ID, $slaves[_j].rivalryTarget = $slaves[$i].ID>>
+									<<break>>
+								<</if>>
+								<</if>>
+								<</if>>
+								<</if>>
+							<</for>>
+						<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].fetish == "masochist")>>
+						demand that other slaves hurt her.
+						<<if $averageDick > 4>>
+							<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3 && canDoAnal($slaves[$i])>>
+							<<if ($slaves[$i].anus*30)-($averageDick*5) < random(1,100)>>
+							@@.lime;Her asshole is loosened@@ during sex with hung slaves, since she often relies on painal to address her needs.
+							<<set $slaves[$i].anus += 1>>
+							<</if>>
+							<</if>>
+							<<if $averageDick > 5>>
+							<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+							<<if ($slaves[$i].vagina*30)-($averageDick*5) < random(1,100)>>
+								Since she usually demands that hung slaves fuck her hard enough to make her pussy hurt, @@.lime;her cunt gets stretched out.@@
+								<<set $slaves[$i].vagina += 1>>
+							<</if>>
+							<</if>>
+							<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].fetish == "dom")>>
+						force other slaves to submit to her.
+						<<if $slaves[$i].assignmentVisible>>
+						<<if !$slaves[$i].rivalry>>
+							<<SlaveSort $RapeableIDs>>
+							<<for _dI = 0; _dI < $RapeableIDs.length; _dI++>>
+								<<set _j = $slaveIndices[$RapeableIDs[_dI]]>>
+								<<if !$slaves[_j].rivalry>>
+								<<if $slaves[_j].assignmentVisible || $slaves[_j].assignment == $slaves[$i].assignment>>
+								<<if $slaves[_j].devotion < 20>>
+								<<if $slaves[_j].trust < -20>>
+									She repeatedly rapes a reluctant <<SlaveFullName $slaves[_j]>>; she can't seem to keep her hands off the poor slave, who can't avoid her. Not surprisingly, $slaves[_j].slaveName resents this, and $slaves[$i].slaveName's ongoing sexual abuse @@.lightsalmon;starts a rivalry@@ between them.
+									<<set $slaves[$i].rivalry = 1, $slaves[_j].rivalry = 1, $slaves[$i].rivalryTarget = $slaves[_j].ID, $slaves[_j].rivalryTarget = $slaves[$i].ID>>
+									<<break>>
+								<</if>>
+								<</if>>
+								<</if>>
+								<</if>>
+							<</for>>
+						<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].fetish == "pregnancy")>>
+						demand that other slaves indulge her pregnancy fetish.
+						<<if $averageDick > 5>>
+							<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+							<<if ($slaves[$i].vagina*40)-($averageDick*5) < random(1,100)>>
+								Since she constantly demands to be fucked deeply to get her womb filled with cum, @@.lime;her cunt gets stretched out.@@
+								<<set $slaves[$i].vagina += 1>>
+							<</if>>
+							<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].energy > 95)>>
+						demand that your other slaves satisfy her formidable appetites.
+						<<if $averageDick > 4>>
+							<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3 && canDoAnal($slaves[$i])>>
+							<<if ($slaves[$i].anus*30)-($averageDick*5) < random(1,100)>>
+							@@.lime;Her asshole is loosened@@ during sex with well endowed slaves, since she's so addicted to sex all her holes see heavy traffic.
+							<<set $slaves[$i].anus += 1>>
+							<</if>>
+							<</if>>
+							<<if $averageDick > 5>>
+							<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+							<<if ($slaves[$i].vagina*30)-($averageDick*5) < random(1,100)>>
+								She indulges in non-stop sex with your well endowed slaves, so much so that @@.lime;her cunt gets stretched out.@@
+								<<set $slaves[$i].vagina += 1>>
+							<</if>>
+							<</if>>
+							<</if>>
+						<</if>>
+					<<else>>
+						demand that other slaves have sex with her.
+					<</if>>
+				<<else>>
+					demand that other slaves have sex with her.
+				<</if>> /* closes ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetishStrength > 60) */
+				<<if ($slaves[$i].fetishKnown == 0)>>
+					<<if (random(1,2) == 1)>>
+					<<set $slaves[$i].fetishKnown = 1>>
+					You discover that she really likes it when other girls
+					<<if ($slaves[$i].fetish == "submissive")>>
+						hold her down and fuck her; @@.pink;she's a submissive!@@
+					<<elseif ($slaves[$i].fetish == "cumslut")>>
+						cum in her mouth; @@.pink;she's a cumslut!@@
+					<<elseif ($slaves[$i].fetish == "humiliation")>>
+						use her in public; @@.pink;she's a humiliation fetishist!@@
+					<<elseif ($slaves[$i].fetish == "buttslut")>>
+						<<if ($slaves[$i].anus > 0)>>
+							<<if canDoAnal($slaves[$i])>>fuck her butt<<else>>tease her anus<</if>>;
+						<<else>>
+						tease her virgin anus;
+						<</if>>
+						@@.pink;she's an anal slut!@@
+					<<elseif ($slaves[$i].fetish == "boobs")>>
+						fondle her breasts; @@.pink;she's a boob fetishist!@@
+					<<elseif ($slaves[$i].fetish == "sadist")>>
+						let her help you abuse other slaves; @@.pink;she's a sadist!@@
+					<<elseif ($slaves[$i].fetish == "masochist")>>
+						hurt her; @@.pink;she's a masochist!@@
+					<<elseif ($slaves[$i].fetish == "dom")>>
+						let her help you use other slaves; @@.pink;she's dominant!@@
+					<<elseif ($slaves[$i].fetish == "pregnancy")>>
+						come <<if canDoVaginal($slaves[$i])>>inside<<else>>on<</if>> her; @@.pink;she's a pregnancy fetishist!@@
+					<<else>>
+						fuck her; @@.pink;she's got a normal sexuality.@@
+					<</if>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<<else>> /* universalRulesConsent is not zero */
+			<<if ($slaves[$i].devotion <= 20) && ($slaves[$i].trust > -20)>>
+				<<if ($slaves[$i].releaseRules == "permissive")>>
+					prefers to masturbate rather than asking other slaves for sex, @@.mediumaquamarine;slightly reducing her fear@@ of you.
+					<<set $slaves[$i].trust += 1, $slaves[$i].need = 0>>
+				<<else>>
+					refuses to ask other slaves for sex, and is @@.gold;severely punished@@ for illicit masturbation.
+					<<set $slaves[$i].trust -= 2>>
+				<</if>>
+			<<elseif ($slaves[$i].devotion <= 20)>>
+				<<if ($slaves[$i].releaseRules == "permissive")>>
+					prefers to masturbate rather than trading sex with other slaves, @@.mediumaquamarine;slightly reducing her fear@@ of you.
+					<<set $slaves[$i].trust += 1, $slaves[$i].need = 0>>
+				<<else>>
+					is forced to swap sex with other slaves by the urges induced by the food, and @@.hotpink;hates herself@@ for it.
+					<<set $slaves[$i].devotion += 1, $slaves[$i].need *= 0.5>>
+				<</if>>
+			<<elseif ($slaves[$i].devotion < 50)>>
+				@@.hotpink;accepts having to ask@@ other slaves for sex,
+				<<set $slaves[$i].devotion += 1, $slaves[$i].need = 0>>
+			<<else>>
+				@@.mediumaquamarine;relies@@ on your other slaves for mutual satisfaction,
+				<<set $slaves[$i].trust += 1, $slaves[$i].need = 0>>
+			<</if>>
+			<<if $slaves[$i].devotion > 20>>
+				<<if ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetishStrength > 60)>>
+					<<if ($slaves[$i].fetish == "submissive")>>
+					usually pairing off with a more dominant slave.
+					<<if $averageDick > 4>>
+						<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3 && canDoAnal($slaves[$i])>>
+						<<if ($slaves[$i].anus*40)-($averageDick*5) < random(1,100)>>
+						@@.lime;Her asshole is loosened@@ during sex with other slaves, since most of the cocks she lets dominate her backdoor are very large.
+						<<set $slaves[$i].anus += 1>>
+						<</if>>
+						<</if>>
+						<<if $averageDick > 5>>
+						<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+						<<if ($slaves[$i].vagina*40)-($averageDick*5) < random(1,100)>>
+							Since most of the slaves she takes a pounding from are extremely hung, @@.lime;her cunt gets stretched out.@@
+							<<set $slaves[$i].vagina += 1>>
+						<</if>>
+						<</if>>
+						<</if>>
+					<</if>>
+					<<elseif ($slaves[$i].fetish == "cumslut")>>
+					and is popular for her willingness to give oral.
+					<<elseif ($slaves[$i].fetish == "humiliation")>>
+					usually asking them to fuck out in the open.
+					<<elseif ($slaves[$i].fetish == "buttslut")>>
+					looking after anyone who will
+					<<if ($slaves[$i].anus > 0)>>
+						<<if canDoAnal($slaves[$i])>>penetrate<<else>>tease<</if>> her ass
+					<<else>>
+						tease her virgin anus
+					<</if>>
+					in return.
+					<<if $averageDick > 4>>
+						<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3>>
+						<<if ($slaves[$i].anus*30)-($averageDick*5) < random(1,100)>>
+						Since most of the slaves she enjoys anal sex with are extremely hung, @@.lime;her asshole gets stretched out.@@
+						<<set $slaves[$i].anus += 1>>
+						<</if>>
+						<</if>>
+					<</if>>
+					<<elseif ($slaves[$i].fetish == "boobs")>>
+					seeing to anyone who will show her breasts some love.
+					<<elseif ($slaves[$i].fetish == "sadist")>>
+					usually pairing off with a masochistic slave willing to accept her abuse.
+					<<elseif ($slaves[$i].fetish == "masochist")>>
+					usually pairing off with an abusive slave.
+					<<if $averageDick > 4>>
+						<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3 && canDoAnal($slaves[$i])>>
+						<<if ($slaves[$i].anus*30)-($averageDick*5) < random(1,100)>>
+						@@.lime;Her asshole is loosened@@, since she begs hung slaves to fuck her butt until she cries.
+						<<set $slaves[$i].anus += 1>>
+						<</if>>
+						<</if>>
+						<<if $averageDick > 5>>
+						<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+						<<if ($slaves[$i].vagina*30)-($averageDick*5) < random(1,100)>>
+							Since she eagerly begs hung slaves to fuck her until she cries, @@.lime;her cunt gets stretched out.@@
+							<<set $slaves[$i].vagina += 1>>
+						<</if>>
+						<</if>>
+						<</if>>
+					<</if>>
+					<<elseif ($slaves[$i].fetish == "dom")>>
+					usually pairing off with a submissive bitch.
+					<<elseif ($slaves[$i].fetish == "pregnancy")>>
+					doing her best to pair off with any pregnant slaves.
+					<<if $averageDick > 5>>
+						<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+						<<if ($slaves[$i].vagina*40)-($averageDick*5) < random(1,100)>>
+							She also takes cock whenever she can, begging to be fucked deeply to get her womb filled with cum, so @@.lime;her cunt gets stretched out.@@
+							<<set $slaves[$i].vagina += 1>>
+						<</if>>
+						<</if>>
+					<</if>>
+					<<elseif ($slaves[$i].energy > 95)>>
+					and has to give out a lot of favors to get enough attention for herself.
+					<<if $averageDick > 4>>
+						<<if $slaves[$i].anus > 0 && $slaves[$i].anus < 3 && canDoAnal($slaves[$i])>>
+						<<if ($slaves[$i].anus*30)-($averageDick*5) < random(1,100)>>
+						@@.lime;Her asshole is loosened@@ during sex with well endowed slaves, since she's so addicted to sex all her holes see heavy traffic.
+						<<set $slaves[$i].anus += 1>>
+						<</if>>
+						<</if>>
+						<<if $averageDick > 5>>
+						<<if $slaves[$i].vagina > 0 && $slaves[$i].vagina < 3 && canDoVaginal($slaves[$i])>>
+						<<if ($slaves[$i].vagina*30)-($averageDick*5) < random(1,100)>>
+							She indulges in non-stop sex with your well endowed slaves, so much so that @@.lime;her cunt gets stretched out.@@
+							<<set $slaves[$i].vagina += 1>>
+						<</if>>
+						<</if>>
+						<</if>>
+					<</if>>
+					<<else>>
+					doing her best to get off and move on.
+					<</if>>
+				<<else>>
+					doing her best to get off and move on.
+				<</if>> /* closes ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetishStrength > 60) */
+				<<if ($slaves[$i].fetishKnown == 0)>>
+					<<if (random(1,2) == 1)>>
+					<<set $slaves[$i].fetishKnown = 1>>
+					However, one of her partners
+					<<if ($slaves[$i].fetish == "submissive")>>
+						holds her down, and she loves it; @@.pink;she's a submissive!@@
+					<<elseif ($slaves[$i].fetish == "cumslut")>>
+						finally has to push her away to get her to stop sucking; @@.pink;she's a cumslut!@@
+					<<elseif ($slaves[$i].fetish == "humiliation")>>
+						fucks her in public, and she loves it; @@.pink;she's a humiliation fetishist!@@
+					<<elseif ($slaves[$i].fetish == "buttslut")>>
+						<<if ($slaves[$i].anus > 0)>>
+							<<if canDoAnal($slaves[$i])>>fucks her butt<<else>>teases her anus<</if>>, and she loves it;
+						<<else>>
+						teases her virgin anus, and she loves it;
+						<</if>>
+						@@.pink;she's an anal slut!@@
+					<<elseif ($slaves[$i].fetish == "boobs")>>
+						fondles her breasts, and she loves it; @@.pink;she's a boob fetishist!@@
+					<<elseif ($slaves[$i].fetish == "sadist")>>
+						asks $slaves[$i].slaveName to hit her, which $slaves[$i].slaveName enjoys doing; @@.pink;she's a sadist!@@
+					<<elseif ($slaves[$i].fetish == "masochist")>>
+						hits $slaves[$i].slaveName while fucking her, which only makes her hornier; @@.pink;she's a masochist!@@
+					<<elseif ($slaves[$i].fetish == "dom")>>
+						asks $slaves[$i].slaveName to make her $slaves[$i].slaveName's bitch, which $slaves[$i].slaveName manages like a natural; @@.pink;she's dominant!@@
+					<<elseif ($slaves[$i].fetish == "pregnancy")>>
+						pretends to get her pregnant, which she really enjoys; @@.pink;she's a pregnancy fetishist!@@
+					<<elseif ($slaves[$i].energy > 95)>>
+						discovers that she cannot be satisfied; @@.pink;she's a nympho!@@
+					<<else>>
+						discovers that she isn't terribly exciting; @@.pink;she's got a normal sexuality.@@
+					<</if>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>> /* closes universalRulesConsent */
+		<<if ($slaves[$i].devotion > 20) || ($slaves[$i].trust < -20)>>
+		<<if $slaves[$i].balls > 0>>
+		<<if $slaves[$i].drugs == "testicle enhancement">>
+			<<if $slaves[$i].hormones > 0>>
+				She can't seem to get enough cum out of her terribly swollen balls in one orgasm to get relieve the pressure: her poor soft dick produces slow, anemic ejaculations, no matter how backed up she is. She is very reliant on your other girls to help her, which @@.mediumaquamarine;habituates her@@ to slave sex.
+			<<else>>
+				Her terribly swollen balls force her to rely on other slaves for release several times a day, and jetting cum into and onto your other girls @@.mediumaquamarine;habituates her@@ to slave sex.
+			<</if>>
+			<<set $slaves[$i].trust += 1>>
+		<</if>>
+		<</if>>
+		<</if>>
+	<</if>> /* closes releaseRules not restrictive */
+<</if>>
+
+<<if ($slaves[$i].devotion <= 20)>>
+	<<if $slaves[$i].voice == 0>>
+		Living as a mute @@.hotpink;molds her@@ to your will.
+		<<set $slaves[$i].devotion += 1>>
+	<<elseif $slaves[$i].lips > 95>>
+		Being unable to speak through her facepussy @@.hotpink;molds her@@ to your will.
+		<<set $slaves[$i].devotion += 1>>
+	<<elseif $slaves[$i].speechRules == "restrictive">>
+		Living under enforced silence @@.hotpink;molds her@@ to your will.
+		<<set $slaves[$i].devotion += 1>>
+	<</if>>
+<</if>>
+
+<<if $roomsPopulation > $rooms>>
+<<if $slaves[$i].livingRules == "luxurious">>
+	There are @@.yellow;too many slaves for the penthouse's individual rooms,@@ so she moves out into the dormitory.
+	<<set $slaves[$i].livingRules = "normal">>
+	<<set $dormitoryPopulation += 1>>
+	<<if $slaves[$i].relationship >= 4>><<set $roomsPopulation -= 0.5>><<else>><<set $roomsPopulation -= 1>><</if>>
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].devotion <= 20)>>
+	<<if ($slaves[$i].livingRules == "spare")>>
+	The spare living conditions @@.hotpink;get her used@@ to the routine of
+	<<if ($slaves[$i].trust > 20)>>
+		slavery and @@.gold;keep her aware of her lowly place.@@
+		<<set $slaves[$i].trust -= 1>>
+	<<else>>
+		slavery.
+	<</if>>
+	<<set $slaves[$i].devotion += 1>>
+	<<elseif ($slaves[$i].livingRules == "normal")>>
+	The reasonable living conditions allow her to @@.mediumaquamarine;feel self-reliant.@@
+	<<set $slaves[$i].trust += 1>>
+	<<else>>
+	The luxurious living conditions encourage her to @@.mediumaquamarine;feel respectable.@@
+	<<set $slaves[$i].trust += 2>>
+	<</if>>
+<<else>>
+	<<if ($slaves[$i].ID == $HeadGirl.ID) && ($HGSuite == 1)>>
+	She is @@.hotpink;very happy@@ with her suite and @@.mediumaquamarine;trusts@@ you a bit more for providing it.
+	<<set $slaves[$i].devotion += 1>>
+	<<set $slaves[$i].trust += 1>>
+	<<elseif ($slaves[$i].livingRules == "luxurious")>>
+	She is @@.hotpink;very happy@@ with her little room and @@.mediumaquamarine;trusts@@ you a bit more for providing it.
+	<<set $slaves[$i].devotion += 1>>
+	<<set $slaves[$i].trust += 1>>
+	<<elseif ($slaves[$i].livingRules == "normal")>>
+	She likes her personal space in the dormitory.
+	<<elseif ($slaves[$i].trust > 8)>>
+	The spare living conditions @@.gold;remind her not to get too comfortable@@ with her life.
+	<<set $slaves[$i].trust -= 2>>
+	<<elseif ($slaves[$i].trust > 2)>>
+	The spare living conditions @@.gold;keep her aware of her place.@@
+	<<set $slaves[$i].trust -= 1>>
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].livingRules != "luxurious">>
+<<if $dormitoryPopulation > $dormitory>>
+	<<set $seed = $dormitoryPopulation - $dormitory>>
+	The slave dormitory is
+	<<if $seed <= 5>>
+		@@.yellow;somewhat overcrowded.@@ The mild inconvenience
+		<<if $slaves[$i].trust > 20>>
+			@@.gold;reduces her trust@@ in you a little.
+			<<set $slaves[$i].trust -= 2>>
+		<<else>>
+			@@.mediumorchid;lowers you@@ a little in her opinion.
+			<<set $slaves[$i].devotion -= 2>>
+		<</if>>
+	<<elseif $seed <= 10>>
+		@@.yellow;badly overcrowded.@@ The constant difficulties
+		<<if $slaves[$i].trust > 20>>
+			@@.gold;reduces her trust@@ in you
+			<<set $slaves[$i].trust -= 3>>
+		<<else>>
+			@@.mediumorchid;lowers you@@ in her opinion
+			<<set $slaves[$i].devotion -= 3>>
+		<</if>>
+		and is @@.red;not good for her,@@ since it's difficult to rest there.
+		<<set $slaves[$i].health -= 2>>
+	<<else>>
+		@@.yellow;extremely overcrowded.@@ The unpleasant situation
+		<<if $slaves[$i].trust > 20>>
+			seriously @@.gold;reduces her trust@@ in you
+			<<set $slaves[$i].trust -= 5>>
+		<<else>>
+			seriously @@.mediumorchid;lowers you@@ in her opinion
+			<<set $slaves[$i].devotion -= 5>>
+		<</if>>
+		and is @@.red;bad for her health.@@
+		<<set $slaves[$i].health -= 4>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($universalRulesConsent == 0)>>
+	<<if ($slaves[$i].devotion <= 20)>>
+		<<if ($slaves[$i].trust > -10)>>
+			Under the rules, she finds herself constantly molested by other slaves, and lives her life constantly @@.gold;afraid.@@
+			<<set $slaves[$i].trust -= 2>>
+		<<else>>
+			Under the rules, she finds herself constantly molested by other slaves, but she's already in such constant terror it doesn't seriously affect her.
+		<</if>>
+	<<elseif ($slaves[$i].releaseRules != "restrictive")>>
+		<<if ($slaves[$i].energy > 95)>>
+			Under the rules, she's allowed to demand that other slaves to get her off, and she @@.hotpink;adores@@ you for providing plentiful outlets for her nymphomania.
+			<<set $slaves[$i].devotion += 1>>
+		<<elseif ($slaves[$i].fetishKnown == 1) && ($slaves[$i].fetishStrength > 60)>>
+			<<if ($slaves[$i].fetish == "sadist")>>
+				Under the rules, she's allowed to sexually abuse other slaves, and she @@.hotpink;adores@@ you for providing a whole penthouse of girls for her to rape.
+				<<set $slaves[$i].devotion += 1>>
+			<<elseif ($slaves[$i].fetish == "dom")>>
+				Under the rules, she's allowed to force other slaves to have sex with her, and she @@.hotpink;adores@@ you for providing a whole penthouse of girls for her to dominate.
+				<<set $slaves[$i].devotion += 1>>
+			<</if>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if ($slaves[$i].devotion <= 20) && ($slaves[$i].devotion >= -20)>>
+	Since she's low in the slave hierarchy, @@.mediumaquamarine;she knows@@ that the rule that slaves must get consent before having sex with her are all that protect her from abuse.
+	<<set $slaves[$i].trust += 1>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].attrKnown == 0)>>
+	<<if ($release == 1)>>
+	<<set $slaves[$i].attrKnown = 1>>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> monitors her as she gets off, analyzing her sexuality. It seems she is
+	<<if $slaves[$i].attrXY <= 5>>
+		@@.red;disgusted by men@@
+	<<elseif $slaves[$i].attrXY <= 15>>
+		@@.red;turned off by men@@
+	<<elseif $slaves[$i].attrXY <= 35>>
+		@@.red;not attracted to men@@
+	<<elseif $slaves[$i].attrXY <= 65>>
+		indifferent to men
+	<<elseif $slaves[$i].attrXY <= 85>>
+		@@.green;attracted to men@@
+	<<elseif $slaves[$i].attrXY <= 95>>
+		@@.green;aroused by men@@
+	<<else>>
+		@@.green;passionate about men@@
+	<</if>>
+	and
+	<<if $slaves[$i].attrXX <= 5>>
+		@@.red;disgusted by women.@@
+	<<elseif $slaves[$i].attrXX <= 15>>
+		@@.red;turned off by women.@@
+	<<elseif $slaves[$i].attrXX <= 35>>
+		@@.red;not attracted to women.@@
+	<<elseif $slaves[$i].attrXX <= 65>>
+		indifferent to women.
+	<<elseif $slaves[$i].attrXX <= 85>>
+		@@.green;attracted to women.@@
+	<<elseif $slaves[$i].attrXX <= 95>>
+		@@.green;aroused by women.@@
+	<<else>>
+		@@.green;passionate about women.@@
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].devotion > 50>>
+	She does her best for you, so she frequently deserves a reward and never needs to be punished.
+	<<set _punishments = 0>>
+	<<set _rewards = 3>>
+<<elseif $slaves[$i].devotion > 20>>
+	She's obedient out of acceptance of her place, so she often deserves a reward and rarely needs to be punished.
+	<<set _punishments = 1>>
+	<<set _rewards = 2>>
+<<elseif $slaves[$i].devotion >= -20>>
+	<<if $slaves[$i].trust < -20>>
+		She's obedient out of fear, so she only rarely deserves a reward and sometimes needs to be punished.
+		<<set _punishments = 1>>
+		<<set _rewards = 1>>
+	<<else>>
+		She's too trusting for obedience and often needs to be punished.
+		<<set _punishments = 2>>
+		<<set _rewards = 0>>
+	<</if>>
+<<else>>
+	<<if $slaves[$i].trust < -50>>
+		She's only obedient out of terror, so she sometimes needs to be punished.
+		<<set _punishments = 1>>
+		<<set _rewards = 0>>
+	<<else>>
+		She hates you too much to obey, so she needs constant punishment.
+		<<set _punishments = 3>>
+		<<set _rewards = 0>>
+	<</if>>
+<</if>>
+
+<<if _rewards > 0>>
+	<<switch $slaves[$i].standardReward>>
+	<<case "relaxation">>
+		She's given free time, which she
+		<<if $spa != 0>>
+			usually spends in $spaName<<if $Attendant != 0>> enjoying $Attendant.slaveName's care<</if>>.
+		<<else>>
+			usually spends relaxing in the slave quarters.
+		<</if>>
+		<<if $slaves[$i].relationship > 0>>
+			She often asks to save these breaks so she can spend them with her <<if $slaves[$i].relationship == 1>>friend<<elseif $slaves[$i].relationship == 2>>best friend<<elseif $slaves[$i].relationship == 3>>friend with benefits<<elseif $slaves[$i].relationship == 4>>sweetheart<<else>>wife<</if>>.
+		<</if>>
+		<<if $slaves[$i].health < 90>>These breaks are @@.green;good for her.@@<</if>>
+		<<set $slaves[$i].health += _rewards>>
+	<<case "drugs">>
+		She's @@.hotpink;rewarded@@ with hits of mild recreational drugs, which @@.red;isn't healthy,@@ but helps bind her to you strongly.
+		<<set $slaves[$i].health -= _rewards>>
+		<<set $slaves[$i].devotion += _rewards*2>>
+	<<case "orgasm">>
+		She's @@.hotpink;rewarded@@ with
+		<<if $slaves[$i].clitPiercing >= 3>>
+			sustained orgasm from her <<if $slaves[$i].dick == 0>>clit<<else>>dick<</if>> piercing,
+		<<elseif $activeSlave.releaseRules == "sapphic">>
+			immediate sex with any nearby slave,
+		<<else>>
+			a quick climax from a vibrator,
+		<</if>>
+		@@.green;boosting her libido.@@
+		<<if $slaves[$i].energy < 98>><<set $slaves[$i].energy += _rewards>><</if>>
+		<<set $slaves[$i].devotion += _rewards>>
+	<<default>>
+		She's @@.hotpink;rewarded@@
+		<<if (_punishments > 0) && ($slaves[$i].standardReward == "situational")>>
+			and @@.gold;punished@@
+		<</if>>
+		situationally, letting her develop normally.
+		<<set $slaves[$i].devotion += _rewards>>
+	<</switch>>
+<</if>>
+<<if _punishments > 0>>
+	<<switch $slaves[$i].standardPunishment>>
+	<<case "confinement">>
+		When she disobeys, she's
+		<<if $cellblock != 0>>
+			@@.gold;put in $cellblockName@@<<if $Wardeness != 0>>, where she can experience $Wardeness.slaveName's tender mercies<</if>>.
+		<<else>>
+			@@.gold;shut up in a box@@ until she behaves.
+		<</if>>
+		<<set $slaves[$i].trust -= _punishments>>
+	<<case "whipping">>
+		When she disobeys, she's @@.gold;whipped,@@ not hard enough to mark her, but hard enough to @@.red;hurt,@@ breaking her quickly.
+		<<set $slaves[$i].health -= _punishments>>
+		<<set $slaves[$i].trust -= 2*_punishments>>
+	<<case "chastity">>
+		When she disobeys, she's @@.gold;denied@@ her next orgasm, @@.red;reducing her libido@@ but breaking her to @@.hotpink;sexual obedience.@@
+		<<if $slaves[$i].energy > 2>><<set $slaves[$i].energy -= 2*_punishments>><</if>>
+		<<set $slaves[$i].devotion += _punishments>>
+		<<set $slaves[$i].trust -= _punishments>>
+	<<default>>
+		<<if (_rewards == 0) || ($slaves[$i].standardReward != "situational")>>
+			When she disobeys, she's @@.gold;punished@@ situationally, letting her develop normally.
+		<</if>>
+		<<set $slaves[$i].trust -= _punishments>>
+	<</switch>>
+<</if>>
+
+<</if>> /*Closes mindbreak exemption*/
+<</if>> /*Closes fuckdoll exemption*/

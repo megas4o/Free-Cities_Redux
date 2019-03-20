@@ -1,0 +1,349 @@
+:: PE concubine interview
+
+<<nobr>>
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "RIE Eligibility Check", $activeSlave = $Concubine, $oldRep = $rep>>
+
+<</nobr>>\
+\
+You receive an official communication from a popular talk show hosted in one of the old world's still-thriving first world countries. Your fame has become known even in the old world, and they'd like to interview <<EventNameLink $activeSlave>> about you. They frankly warn you that you'll have no right to review the interview and no ability to control what she says, and that they'll be asking about anything the interviewer thinks is juicy. This could be great for your reputation, but it could be hazardous, too.
+\
+<span id="result">
+<<link "Decline">>
+	<<replace "#name">>\
+	$activeSlave.slaveName\
+	<</replace>>\
+	<<replace "#result">>
+	You decline. The media representative of the show is understanding. "I'll be sure to contact you if we ever have another opening," she says. "You're pretty interesting, you know."
+	<</replace>>
+<</link>>
+<<link "Accept">>
+	<<replace "#name">>\
+	$activeSlave.slaveName\
+	<</replace>>\
+	<<replace "#result">>
+	<<nobr>>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	The show is broadcast live; you head out onto a balcony to watch it on a big screen. It's been impossible to hide, and many of your citizens have taken a proprietary attitude towards your fame: they see your success as their success, too, and want to see $activeSlave.slaveName do well. The show introduction plays, introducing the host, a swishy, rail-thin gentleman with impeccable sartorial style and a close-cropped salt-and-pepper beard. He reviews who you are, giving equal time to your accomplishments and the inevitable criticisms from old world antislavery activists, and then calls $activeSlave.slaveName out.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	She strides out
+	<<if $activeSlave.clothes == "none">>
+		in magnificent nudity. It's a shock to old world values, no doubt, but the titillation should counterbalance that.
+	<<else>>
+		resplendent in $activeSlave.clothes.
+	<</if>>
+	<<if $activeSlave.entertainSkill >= 60>>
+		She's @@.green;graceful and sensual,@@ and entirely at home.
+		<<set $rep += 100>>
+	<<elseif $activeSlave.entertainSkill <= 30>>
+		She's @@.red;clumsy and nervous,@@ but does her best to rally.
+		<<set $rep -= 100>>
+	<<else>>
+		She manages her entrance reasonably well, and conceals any nervousness.
+	<</if>>
+	<<if $activeSlave.face > 95>>
+		"Oh my God," exclaims the host reverently. "Honey, @@.green;you are gorgeous.@@" He turns to the camera. "Isn't she just gorgeous?"
+		<<set $rep += 100>>
+	<<elseif $activeSlave.face <= 10>>
+		There is a distinct lack of response from the host; perhaps he was @@.red;expecting her to be prettier.@@
+		<<set $rep -= 100>>
+	<<else>>
+		The host gives her a perfunctory compliment on her beauty.
+	<</if>>
+	They seat themselves in comfortable leather chairs and the interview begins in earnest.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	The host asks her some soft, nonjudgemental questions about her life and how she became your slave. Then he hits her: "So, $activeSlave.slaveName. Tell us about $PC.name."
+	<<if $activeSlave.devotion > 95>>
+		<<if SlaveStatsChecker.checkForLisp($activeSlave)>>
+		@@.green;Without a moment's hesitation,@@ she lisps, "I love <<if $PC.title != 0>>him. He'th tho handthome, and," she manages to blush prettily, "he'th tho good to me."<<else>>her. The'th tho pretty, and," she manages to blush cutely, "the'th tho good to me."<</if>>
+		<<else>>
+		@@.green;Without a moment's hesitation,@@ she proclaims, "I love <<if $PC.title != 0>>him. He's so handsome, and," she manages to blush prettily, "he's so good to me."<<else>>her. She's so pretty, and," she manages to blush cutely, "she's so good to me."<</if>>
+		<</if>>
+		<<set $rep += 100>>
+	<<elseif $activeSlave.devotion <= 60>>
+		She struggles for an instant and then says @@.red;unconvincingly@@ that she loves you.
+		<<set $rep -= 100>>
+	<<else>>
+		She recovers quickly and responds that she loves you.
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	The host glances at the camera. "Wow." He presses on. "But you're <<if $PC.title != 0>>his<<else>>her<</if>> slave, $activeSlave.slaveName. <<if $PC.title != 0>>He<<else>>She<</if>> owns you. Isn't that hard for you?"
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	She shakes her head.
+	<<if $activeSlave.trust > 95>>
+		<<if SlaveStatsChecker.checkForLisp($activeSlave)>>
+		@@.green;She responds confidently,@@ "My life with <<if $PC.title != 0>>him<<else>>her<</if>> ith very different from anything you might find here in the old world. But I'm happy with <<if $PC.title != 0>>him<<else>>her<</if>>, and there'th no one I'd rather be with, ath a thlave or not."
+		<<else>>
+		@@.green;She responds confidently,@@ "My life with <<if $PC.title != 0>>him<<else>>her<</if>> is very different from anything you might find here in the old world. But I'm happy with <<if $PC.title != 0>>him<<else>>her<</if>>, and there's no one I'd rather be with, as a slave or not."
+		<</if>>
+		<<set $rep += 100>>
+	<<elseif $activeSlave.trust < 60>>
+		She explains that it isn't hard to trust someone like you, but this @@.red;falls a little flat.@@
+		<<set $rep -= 100>>
+	<<else>>
+		She explains earnestly that it isn't hard to trust someone like you, and explains some of the blander details about life as your slave.
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	The interview winds on, gradually descending into prurient territory. $activeSlave.slaveName answers readily, giving everyone watching quite a window into an oversexed slave society.
+	<<if $activeSlave.intelligence > 0>>
+		<<if $PC.title == 0>>
+		She's clever enough to @@.green;shock and titillate@@ at the same time; in response to a probing question about whether she has any plans for the rest of the night, she
+		<<if SlaveStatsChecker.checkForLisp($activeSlave)>>
+			lisps, "Of courthe my <<Master>> maketh the planth. But I hope I can get back to the arcology early." She shifts suggestively in her chair. "I'm looking forward to getting fucked tonight."
+		<<else>>
+			says, "Of course my <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>> makes the plans. But I hope I can get back to the arcology early." She shifts suggestively in her chair. "I'm looking forward to getting fucked tonight."
+		<</if>>
+		<<set $rep += 100>>
+		<</if>>
+		The host, taken off guard, laughs in surprise and says he envies you that. He asks a follow up question that hints at her sexual preferences without coming straight out and asking how she likes it.
+		<<if $activeSlave.intelligenceImplant + $activeSlave.entertainSkill >= 100>>
+		She has enough knowledge of the old world to be able to answer without going too far, and @@.green;subtly alludes@@ to how much she enjoys
+		<<if ($activeSlave.fetish == "submissive")>>
+			submitting to you in bed.
+		<<elseif ($activeSlave.fetish == "cumslut")>>
+			<<if $PC.dick == 0>>
+			eating you out.
+			<<else>>
+			sucking you off.
+			<</if>>
+		<<elseif ($activeSlave.fetish == "humiliation")>>
+			it when you show her off in public.
+		<<elseif ($activeSlave.fetish == "buttslut")>>
+			anal sex.
+		<<elseif ($activeSlave.fetish == "boobs")>>
+			anything that involves her breasts.
+		<<elseif ($activeSlave.fetish == "sadist")>>
+			it whenever you share a reluctant girl with her.
+		<<elseif ($activeSlave.fetish == "masochist")>>
+			a good spanking.
+		<<elseif ($activeSlave.fetish == "dom")>>
+			sharing a submissive girl with you.
+		<<elseif ($activeSlave.fetish == "pregnancy")>>
+			<<if $activeSlave.preg > 0>>
+			sex while pregnant.
+			<<elseif $activeSlave.vagina > 0>>
+			bareback.
+			<<else>>
+			sharing a pregnant girl with you.
+			<</if>>
+		<<elseif ($activeSlave.energy > 95)>>
+			sex, regardless of what kind it is.
+		<<else>>
+			sex in the missionary position.
+		<</if>>
+		<<set $rep += 100>>
+		<<else>>
+		Her answer betrays how much she's forgotten about the old world: she mildly shocks the studio audience by describing
+		<<if ($activeSlave.fetish == "submissive")>>
+			how good it feels when you hold her down and fuck her
+		<<elseif ($activeSlave.fetish == "cumslut")>>
+			<<if $PC.dick == 0>>
+			how much fun sucking your cock is
+			<<else>>
+			how much fun polishing your pearl is
+			<</if>>
+		<<elseif ($activeSlave.fetish == "humiliation")>>
+			how hot it is to get fucked in public
+		<<elseif ($activeSlave.fetish == "buttslut")>>
+			how much she loves the feeling of you stretching her anal ring
+		<<elseif ($activeSlave.fetish == "boobs")>>
+			how much she loves having her nipples tugged
+		<<elseif ($activeSlave.fetish == "sadist")>>
+			how much she loves molesting other slaves with you
+		<<elseif ($activeSlave.fetish == "masochist")>>
+			how good it feels to be forced
+		<<elseif ($activeSlave.fetish == "dom")>>
+			how much she loves holding other slaves down for you
+		<<elseif ($activeSlave.fetish == "pregnancy")>>
+			<<if $activeSlave.preg > 0>>
+			how good anal feels while pregnant
+			<<elseif $activeSlave.vagina > 0>>
+			how good cum feels inside her
+			<<else>>
+			how much fun it is to fuck pregnant slaves
+			<</if>>
+		<<elseif ($activeSlave.energy > 95)>>
+			the average number of sexual encounters she has in a week
+		<<else>>
+			her sex life with you
+		<</if>>
+		in a matter-of-fact tone of voice.
+		<</if>>
+		<<if $activeSlave.intelligence > 1>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		Only because you know her so well are you able to perceive the instant of cold calculation before she makes a @@.green;perfect tactical decision@@ and turns directly to the camera.
+		<<if SlaveStatsChecker.checkForLisp($activeSlave)>>
+			"Whatever you want," she says confidently, "You can find it in a Free Citieth arcology like my <<Master>>'th. Where I live, there'th
+			<<if $arcologies[0].FSPaternalist > 0>>
+			wonderful opportunitieth for everyone,
+			<</if>>
+			<<if $arcologies[0].FSAssetExpansionist > 0>>
+			boobth the thize of beach ballth,
+			<</if>>
+			<<if $arcologies[0].FSBodyPurist == "unset">>
+			gorgeouth tattooth and piercingth,
+			<</if>>
+			<<if $arcologies[0].FSTransformationFetishist > 0>>
+			new atheth every day,
+			<</if>>
+			<<if $arcologies[0].FSPastoralist > 0>>
+			milk thtraight from the nipple,
+			<</if>>
+			<<if $arcologies[0].FSPhysicalIdealist > 0>>
+			the motht incredible oiled-up muthcleth,
+			<</if>>
+			<<if $arcologies[0].FSRomanRevivalist > 0>>
+			Rome come again,
+			<</if>>
+			<<if $arcologies[0].FSAztecRevivalist > 0>>
+			Blood empire reborn,
+			<</if>>
+			<<if $arcologies[0].FSEgyptianRevivalist > 0>>
+			the land of the Pharaohth reborn,
+			<</if>>
+			<<if $arcologies[0].FSGenderRadicalist > 0>>
+			more ath than you can pothibly fuck,
+			<</if>>
+			<<if $arcologies[0].FSGenderFundamentalist > 0>>
+			tho much puthy it's unbelievable,
+			<</if>>
+			<<if $arcologies[0].FSChattelReligionist > 0>>
+			a fulfilling thexual and thpiritual life,
+			<</if>>
+			<<if $arcologies[0].FSDegradationist > 0>>
+			bitcheth you can jutht hold down and uthe,
+			<</if>>
+			<<if $arcologies[0].FSSupremacist > 0>>
+			$arcologies[0].FSSupremacistRace power,
+			<</if>>
+			<<if $arcologies[0].FSSubjugationist > 0>>
+			$arcologies[0].FSSubjugationist girlth to cater to your whim,
+			<</if>>
+			girlth in pretty drethes and girlth in thtring bikinith and girlth who haven't worn clotheth in yearth,
+			<<if ($seeDicks != 0) && ($arcologies[0].FSGenderFundamentalist == "unset")>>
+			girlth with huge dickth you can athfuck until they cum bucketth,
+			girlth with thoft dickth and no ballth,
+			<</if>>
+			<<if ($seeDicks != 0) && ($arcologies[0].FSGenderFundamentalist == "unset")>>
+			girlth with dickth the thize of clith and girlth with clith the thize of dickth,
+			<</if>>
+			<<if $seeDicks != 100>>
+			young girlth on their firtht pregnancy,
+			MILFth on their tenth,
+			<</if>>
+			lipth, tongueth,
+			<<if $arcologies[0].FSSlimnessEnthusiast == "unset">>
+			huge breathth and plush atheth,
+			<</if>>
+			<<if $arcologies[0].FSAssetExpansionist == "unset">>
+			pert titth and cute butth,
+			<</if>>
+			and more. I wouldn't trade it for anything."
+		<<else>>
+			"Whatever you want," she says confidently, "You can find it in a Free Cities arcology like my <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>'s. Where I live, there's
+			<<if $arcologies[0].FSPaternalist > 0>>
+			wonderful opportunities for everyone,
+			<</if>>
+			<<if $arcologies[0].FSAssetExpansionist > 0>>
+			boobs the size of beach balls,
+			<</if>>
+			<<if $arcologies[0].FSBodyPurist == "unset">>
+			gorgeous tattoos and piercings,
+			<</if>>
+			<<if $arcologies[0].FSTransformationFetishist > 0>>
+			new assets every day,
+			<</if>>
+			<<if $arcologies[0].FSPastoralist > 0>>
+			milk straight from the nipple,
+			<</if>>
+			<<if $arcologies[0].FSPhysicalIdealist > 0>>
+			the most incredible oiled-up muscles,
+			<</if>>
+			<<if $arcologies[0].FSRomanRevivalist > 0>>
+			Rome come again,
+			<</if>>
+			<<if $arcologies[0].FSAztecRevivalist > 0>>
+			Blood empire reborn,
+			<</if>>
+			<<if $arcologies[0].FSEgyptianRevivalist > 0>>
+			the land of the Pharaohs reborn,
+			<</if>>
+			<<if $arcologies[0].FSGenderRadicalist > 0>>
+			more ass than you can possibly fuck,
+			<</if>>
+			<<if $arcologies[0].FSGenderFundamentalist > 0>>
+			so much pussy it's unbelievable,
+			<</if>>
+			<<if $arcologies[0].FSChattelReligionist > 0>>
+			a fulfilling sexual and spiritual life,
+			<</if>>
+			<<if $arcologies[0].FSDegradationist > 0>>
+			bitches you can just hold down and use,
+			<</if>>
+			<<if $arcologies[0].FSSupremacist > 0>>
+			$arcologies[0].FSSupremacistRace power,
+			<</if>>
+			<<if $arcologies[0].FSSubjugationist > 0>>
+			$arcologies[0].FSSubjugationistRace girls to cater to your whim,
+			<</if>>
+			girls in pretty dresses and girls in string bikinis and girls who haven't worn clothes in years,
+			<<if $seeDicks != 0>>
+			girls with huge dicks you can assfuck until they cum buckets,
+			girls with soft dicks and no balls,
+			<</if>>
+			<<if $seeDicks != 0>>
+			girls with dicks the size of clits and girls with clits the size of dicks,
+			<</if>>
+			<<if $seeDicks != 100>>
+			young girls on their first pregnancy,
+			MILFs on their tenth,
+			<</if>>
+			lips, tongues,
+			<<if $arcologies[0].FSSlimnessEnthusiast == "unset">>
+			huge breasts and plush asses,
+			<</if>>
+			<<if $arcologies[0].FSAssetExpansionist == "unset">>
+			pert tits and cute butts,
+			<</if>>
+			and more. I wouldn't trade it for anything."
+		<</if>>
+		<<set $rep += 300>>
+		The host politely regains control of his show, but there's a cautious respect in the rest of his questions.
+		<</if>>
+	<</if>>
+	<<if $activeSlave.intelligenceImplant == 1>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<<if $PC.title == 0>>
+		$activeSlave.slaveName even manages to @@.green;respond well@@ to a probing question about your gender.
+		<<if $PC.dick == 0>>
+			<<if SlaveStatsChecker.checkForLisp($activeSlave)>>
+			She lisps, "You have to underthtand that all that nonthenthe about men and women meanth leth to uth in the Free Citieth. My Mithtreth ith a thuthethful and powerful woman. We jutht pay the right amount of attention to the thucceth and the power." She quirks a corner of her mouth. "I know //I// do."
+			<<else>>
+			She explains, "You have to understand that all that nonsense about men and women means less to us in the Free Cities. My Mistress is a successful and powerful woman. We just pay the right amount of attention to the success and the power." She quirks a corner of her mouth. "I know //I// do."
+			<</if>>
+		<<else>>
+			<<if SlaveStatsChecker.checkForLisp($activeSlave)>>
+			She lisps, "You have to underthtand that all that nonthenthe about men and women meanth leth to uth in the Free Citieth. My Mithtreth ith a thuthethful and powerful woman." She quirks a corner of her mouth. "And the hath a //wonderful// cock."
+			<<else>>
+			She explains, "You have to understand that all that nonsense about men and women means less to us in the Free Cities. My Mistress is a successful and powerful woman." She quirks a corner of her mouth. "And she has a //wonderful// cock."
+			<</if>>
+		<</if>>
+		<<set $rep += 100>>
+		<</if>>
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	At the conclusion, the host
+	<<if $rep - $oldRep > 200>>
+		seems @@.green;impressed@@ and says sincerely,
+		<<set $rep += 100>>
+	<<elseif $rep - $oldRep < 0>>
+		seems @@.red;unimpressed@@ and says mockingly,
+		<<set $rep -= 100>>
+	<<else>>
+		says jokingly,
+	<</if>>
+	"My dear it's been a pleasure. If all Free Cities girls are like you I might have to look into immigrating. Ladies and gentlemen, good night!"
+	<</nobr>>
+	<</replace>>
+<</link>>
+</span>

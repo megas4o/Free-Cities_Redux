@@ -1,0 +1,664 @@
+:: init Nationalities [silently]
+
+/*PC qualities application*/
+
+<<set $upgradeMultiplierArcology = 1>>
+<<set $upgradeMultiplierMedicine = 1>>
+
+<<if $PC.career == "wealth">>
+	<<set $trinkets.push("a collection of diplomas from expensive schools")>>
+	<<set $cash += 10000>>
+<<elseif $PC.career == "capitalist">>
+	<<set $trinkets.push("a framed low denomination piece of paper money from your native country")>>
+<<elseif $PC.career == "mercenary">>
+	<<set $trinkets.push("a battered old assault rifle")>>
+<<elseif $PC.career == "slaver">>
+	<<set $trinkets.push("a framed picture of a slave with her sale price scrawled across the bottom")>>
+<<elseif $PC.career == "engineer">>
+	<<set $trinkets.push("an artist's impression of an early arcology design")>>
+	<<set $arcologyUpgrade.drones = 1, $arcologyUpgrade.hydro = 1>>
+	<<set $upgradeMultiplierArcology = 0.6>>
+<<elseif $PC.career == "medicine">>
+	<<set $trinkets.push("a framed postsurgical x-ray")>>
+	<<set $surgeryCost = Math.trunc($surgeryCost/2)>>
+	<<set $upgradeMultiplierMedicine = 0.8>>
+<<elseif $PC.career == "celebrity">>
+	<<set $trinkets.push("a framed copy of the first news story featuring yourself")>>
+	<<set $rep += 4000>>
+<<elseif $PC.career == "arcology owner">>
+	<<set $trinkets.push("a miniature model of your first arcology")>>
+	<<set $upgradeMultiplierArcology = 0.8>>
+	<<set $rep += 2000>>
+<</if>>
+
+<<if $PC.rumor == "wealth">>
+	<<set $cash += 10000>>
+<<elseif $PC.rumor == "social engineering">>
+	<<set $FSAnnounced = 1>>
+	<<set $FSCredits = 1>>
+<<elseif $PC.rumor == "luck">>
+	<<set $rep += 4000>>
+<</if>>
+
+<<if $PC.age == 3>>
+	<<set $rep += 2000>>
+<<elseif $PC.age == 1>>
+	<<if $rep >= 2000>>
+	<<set $rep -= 2000>>
+	<<else>>
+	<<set $rep = 0>>
+	<</if>>
+<</if>>
+
+/* SET HEROES */
+
+<<set $heroSlaves = []>>
+<<BaseSlave>>
+<<set $baseHeroSlave = clone($activeSlave)>>
+
+<<if ($seeDicks > 0) && ($seeDicks < 100)>>
+	<<include "D Slaves Database">>
+	<<include "DD Slaves Database">>
+	<<include "DF Slaves Database">>
+<<elseif $seeDicks == 100>>
+	<<include "DD Slaves Database">>
+<<else>>
+	<<include "D Slaves Database">>
+	<<include "DF Slaves Database">>
+<</if>>
+
+<<set $customSlave = clone($activeSlave)>>
+<<set $customSlave.slaveName: "custom", $customSlave.birthName: "custom", $customSlave.skin: 0, $customSlave.boobs = 500>>
+<<set $activeSlave = 0>>
+
+/*Nationalities Setup*/
+
+<<set $nationalities = []>>
+
+<<if $terrain == "oceanic">>
+	<<set $nationalities = clone(setup.baseNationalities)>>
+	<<set $arcologies[0].FSSupremacistRace = "white">>
+	<<set $arcologies[0].FSSubjugationistRace = "middle eastern">>
+<<else>>
+	<<switch $continent>>
+	<<case "North America">>
+		<<set $arcologies[0].FSSupremacistRace = "white">>
+		<<set $arcologies[0].FSSubjugationistRace = "black">>
+		<<set $nationalities.push("American", "American", "American", "American")>>
+		<<set $nationalities.push("Mexican", "Mexican")>>
+		<<set $nationalities.push("Canadian")>>
+		<<set $nationalities.push("Haitian")>>
+		<<set $nationalities.push("Cuban")>>
+		<<set $nationalities.push("Puerto Rican")>>
+		<<set $nationalities.push("Jamaican")>>
+		<<set $nationalities.push("Guatemalan")>>
+		<<set $nationalities.push("Bermudian")>>
+		<<set $nationalities.push("Greenlandic")>>
+		<<set $nationalities.push("Belizean")>>
+		<<set $nationalities.push("Grenadian")>>
+		<<set $nationalities.push("Honduran")>>
+		<<set $nationalities.push("Costa Rican")>>
+		<<set $nationalities.push("Salvadoran")>>
+		<<set $nationalities.push("Nicaraguan")>>
+		<<set $nationalities.push("Panamanian")>>
+		<<set $nationalities.push("Bahamian")>>
+		<<set $nationalities.push("Barbadian")>>
+		<<set $nationalities.push("Dominiquais")>>
+		<<set $nationalities.push("Trinidadian")>>
+		<<set $nationalities.push("Kittitian")>>
+		<<set $nationalities.push("Antiguan")>>
+		<<set $nationalities.push("Dominican")>>
+		<<set $nationalities.push("Saint Lucian")>>
+		<<set $nationalities.push("Aruban")>>
+		<<set $nationalities.push("Vincentian")>>
+	<<case "South America">>
+		<<set $arcologies[0].FSSupremacistRace = "latina">>
+		<<set $arcologies[0].FSSubjugationistRace = "black">>
+		<<set $nationalities.push("Brazilian", "Brazilian", "Brazilian", "Brazilian")>>
+		<<set $nationalities.push("Argentinian", "Argentinian")>>
+		<<set $nationalities.push("Colombian", "Colombian")>>
+		<<set $nationalities.push("Peruvian")>>
+		<<set $nationalities.push("Venezuelan")>>
+		<<set $nationalities.push("Bolivian")>>
+		<<set $nationalities.push("Chilean")>>
+		<<set $nationalities.push("Uruguayan")>>
+		<<set $nationalities.push("Ecuadorian")>>
+		<<set $nationalities.push("French Guianan")>>
+		<<set $nationalities.push("Guyanese")>>
+		<<set $nationalities.push("Paraguayan")>>
+		<<set $nationalities.push("Surinamese")>>
+	<<case "the Middle East">>
+		<<set $arcologies[0].FSSupremacistRace = "middle eastern">>
+		<<set $arcologies[0].FSSubjugationistRace = "asian">>
+		<<set $nationalities.push("Egyptian", "Egyptian", "Egyptian")>>
+		<<set $nationalities.push("Iranian", "Iranian")>>
+		<<set $nationalities.push("Saudi", "Saudi")>>
+		<<set $nationalities.push("Turkish", "Turkish")>>
+		<<set $nationalities.push("Lebanese")>>
+		<<set $nationalities.push("Emirati")>>
+		<<set $nationalities.push("Jordanian")>>
+		<<set $nationalities.push("Omani")>>
+		<<set $nationalities.push("Israeli")>>
+		<<set $nationalities.push("Armenian")>>
+		<<set $nationalities.push("Iraqi")>>
+		<<set $nationalities.push("Afghan")>>
+		<<set $nationalities.push("Yemeni")>>
+		<<set $nationalities.push("Syrian")>>
+		<<set $nationalities.push("Azerbaijani")>>
+		<<set $nationalities.push("Bahraini")>>
+		<<set $nationalities.push("Cypriot")>>
+		<<set $nationalities.push("Georgian")>>
+		<<set $nationalities.push("Kuwaiti")>>
+		<<set $nationalities.push("Qatari")>>
+		<<set $nationalities.push("Palestinian")>>
+		<<set $nationalities.push("Kurdish")>>
+	<<case "Africa">>
+		<<set $arcologies[0].FSSupremacistRace = "black">>
+		<<set $arcologies[0].FSSubjugationistRace = "white">>
+		<<set $nationalities.push("Nigerian", "Nigerian", "Nigerian")>>
+		<<set $nationalities.push("South African", "South African", "South African")>>
+		<<set $nationalities.push("Algerian", "Algerian")>>
+		<<set $nationalities.push("Zairian", "Zairian")>>
+		<<set $nationalities.push("Ethiopian", "Ethiopian")>>
+		<<set $nationalities.push("Kenyan", "Kenyan")>>
+		<<set $nationalities.push("Sudanese", "Sudanese")>>
+		<<set $nationalities.push("Moroccan")>>
+		<<set $nationalities.push("Ghanan")>>
+		<<set $nationalities.push("Tunisian")>>
+		<<set $nationalities.push("Malian")>>
+		<<set $nationalities.push("Libyan")>>
+		<<set $nationalities.push("Zimbabwean")>>
+		<<set $nationalities.push("Tanzanian")>>
+		<<set $nationalities.push("Ugandan")>>
+		<<set $nationalities.push("Cameroonian")>>
+		<<set $nationalities.push("Gabonese")>>
+		<<set $nationalities.push("Djiboutian")>>
+		<<set $nationalities.push("Zambian")>>
+		<<set $nationalities.push("Malagasy")>>
+		<<set $nationalities.push("Nigerien")>>
+		<<set $nationalities.push("Burundian")>>
+		<<set $nationalities.push("Seychellois")>>
+		<<set $nationalities.push("Equatoguinean")>>
+		<<set $nationalities.push("Bissau-Guinean")>>
+		<<set $nationalities.push("Chadian")>>
+		<<set $nationalities.push("Comorian")>>
+		<<set $nationalities.push("Ivorian")>>
+		<<set $nationalities.push("Mauritanian")>>
+		<<set $nationalities.push("Mauritian")>>
+		<<set $nationalities.push("Mosotho")>>
+		<<set $nationalities.push("Sierra Leonean")>>
+		<<set $nationalities.push("Swazi")>>
+		<<set $nationalities.push("Angolan")>>
+		<<set $nationalities.push("Sahrawi")>>
+		<<set $nationalities.push("Burkinabé")>>
+		<<set $nationalities.push("Cape Verdean")>>
+		<<set $nationalities.push("Motswana")>>
+		<<set $nationalities.push("Somali")>>
+		<<set $nationalities.push("Rwandan")>>
+		<<set $nationalities.push("São Toméan")>>
+		<<set $nationalities.push("Beninese")>>
+		<<set $nationalities.push("Central African")>>
+		<<set $nationalities.push("Gambian")>>
+		<<set $nationalities.push("Senegalese")>>
+		<<set $nationalities.push("Togolese")>>
+		<<set $nationalities.push("Eritrean")>>
+		<<set $nationalities.push("Guinean")>>
+		<<set $nationalities.push("Malawian")>>
+		<<set $nationalities.push("Congolese")>>
+		<<set $nationalities.push("Liberian")>>
+		<<set $nationalities.push("Mozambican")>>
+		<<set $nationalities.push("Namibian")>>
+		<<set $nationalities.push("South Sudanese")>>
+	<<case "Asia">>
+		<<set $arcologies[0].FSSupremacistRace = "asian">>
+		<<set $arcologies[0].FSSubjugationistRace = "indo-aryan">>
+		<<set $nationalities.push("Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese")>>
+		<<set $nationalities.push("Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian")>>
+		<<set $nationalities.push("Indonesian", "Indonesian", "Indonesian")>>
+		<<set $nationalities.push("Bangladeshi", "Bangladeshi", "Bangladeshi")>>
+		<<set $nationalities.push("Thai", "Thai")>>
+		<<set $nationalities.push("Vietnamese", "Vietnamese")>>
+		<<set $nationalities.push("Korean", "Korean")>>
+		<<set $nationalities.push("Pakistani", "Pakistani")>>
+		<<set $nationalities.push("Filipina", "Filipina")>>
+		<<set $nationalities.push("Japanese", "Japanese")>>
+		<<set $nationalities.push("Burmese", "Burmese")>>
+		<<set $nationalities.push("Malaysian", "Malaysian")>>
+		<<set $nationalities.push("Uzbek")>>
+		<<set $nationalities.push("Nepalese")>>
+		<<set $nationalities.push("Kazakh")>>
+		<<set $nationalities.push("Cambodian")>>
+		<<set $nationalities.push("Bruneian")>>
+		<<set $nationalities.push("Singaporean")>>
+		<<set $nationalities.push("Laotian")>>
+		<<set $nationalities.push("Mongolian")>>
+		<<set $nationalities.push("Taiwanese")>>
+		<<set $nationalities.push("Maldivian")>>
+		<<set $nationalities.push("Bhutanese")>>
+		<<set $nationalities.push("East Timorese")>>
+		<<set $nationalities.push("Kyrgyz")>>
+		<<set $nationalities.push("Sri Lankan")>>
+		<<set $nationalities.push("Tajik")>>
+		<<set $nationalities.push("Turkmen")>>
+		<<set $nationalities.push("Tibetan")>>
+	<<case "Europe">>
+		<<set $arcologies[0].FSSupremacistRace = "white">>
+		<<set $arcologies[0].FSSubjugationistRace = "middle eastern">>
+		<<set $nationalities.push("Russian", "Russian", "Russian", "Russian")>>
+		<<set $nationalities.push("German", "German", "German")>>
+		<<set $nationalities.push("Ukrainian", "Ukrainian")>>
+		<<set $nationalities.push("French", "French")>>
+		<<set $nationalities.push("Italian", "Italian")>>
+		<<set $nationalities.push("Spanish", "Spanish")>>
+		<<set $nationalities.push("British", "British")>>
+		<<set $nationalities.push("Polish", "Polish")>>
+		<<set $nationalities.push("Swedish")>>
+		<<set $nationalities.push("Romanian")>>
+		<<set $nationalities.push("Lithuanian")>>
+		<<set $nationalities.push("Irish")>>
+		<<set $nationalities.push("Icelandic")>>
+		<<set $nationalities.push("Finnish")>>
+		<<set $nationalities.push("Greek")>>
+		<<set $nationalities.push("Belgian")>>
+		<<set $nationalities.push("Danish")>>
+		<<set $nationalities.push("Czech")>>
+		<<set $nationalities.push("Serbian")>>
+		<<set $nationalities.push("Slovak")>>
+		<<set $nationalities.push("Norwegian")>>
+		<<set $nationalities.push("Dutch")>>
+		<<set $nationalities.push("Austrian")>>
+		<<set $nationalities.push("Swiss")>>
+		<<set $nationalities.push("Portuguese")>>
+		<<set $nationalities.push("Hungarian")>>
+		<<set $nationalities.push("Estonian")>>
+		<<set $nationalities.push("Sammarinese")>>
+		<<set $nationalities.push("Monégasque")>>
+		<<set $nationalities.push("Montenegrin")>>
+		<<set $nationalities.push("Albanian")>>
+		<<set $nationalities.push("Bosnian")>>
+		<<set $nationalities.push("Croatian")>>
+		<<set $nationalities.push("Kosovan")>>
+		<<set $nationalities.push("Macedonian")>>
+		<<set $nationalities.push("Maltese")>>
+		<<set $nationalities.push("Andorran")>>
+		<<set $nationalities.push("Bulgarian")>>
+		<<set $nationalities.push("Luxembourgian")>>
+		<<set $nationalities.push("Moldovan")>>
+		<<set $nationalities.push("a Liechtensteiner")>>
+		<<set $nationalities.push("Scottish")>>
+		<<set $nationalities.push("Vatican")>>
+		<<set $nationalities.push("Belarusian")>>
+		<<set $nationalities.push("Latvian")>>
+		<<set $nationalities.push("Slovene")>>
+		<<set $nationalities.push("Catalan")>>
+	<<case "Australia">>
+		<<set $arcologies[0].FSSupremacistRace = "white">>
+		<<set $arcologies[0].FSSubjugationistRace = "asian">>
+		<<set $nationalities.push("Australian", "Australian", "Australian")>>
+		<<set $nationalities.push("a New Zealander")>>
+		<<set $nationalities.push("Marshallese")>>
+		<<set $nationalities.push("Tuvaluan")>>
+		<<set $nationalities.push("I-Kiribati")>>
+		<<set $nationalities.push("Nauruan")>>
+		<<set $nationalities.push("Micronesian")>>
+		<<set $nationalities.push("Palauan")>>
+		<<set $nationalities.push("Papua New Guinean")>>
+		<<set $nationalities.push("a Cook Islander")>>
+		<<set $nationalities.push("Fijian")>>
+		<<set $nationalities.push("Ni-Vanuatu")>>
+		<<set $nationalities.push("Niuean")>>
+		<<set $nationalities.push("Samoan")>>
+		<<set $nationalities.push("a Solomon Islander")>>
+		<<set $nationalities.push("Tongan")>>
+		<<set $nationalities.push("French Polynesian")>>
+	<</switch>>
+<</if>>
+
+<<if $internationalTrade != 0>>
+	<<set $nationalities = clone(setup.baseNationalities)>>
+	<<if $internationalVariety == 0>>
+		<<set $nationalities.push("Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese", "Chinese")>>
+		<<set $nationalities.push("Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian", "Indian")>>
+		<<set $nationalities.push("American", "American", "American", "American")>>
+		<<set $nationalities.push("Indonesian", "Indonesian", "Indonesian", "Indonesian")>>
+		<<set $nationalities.push("Bangladeshi", "Bangladeshi", "Bangladeshi")>>
+		<<set $nationalities.push("Russian", "Russian", "Russian")>>
+		<<set $nationalities.push("Nigerian", "Nigerian", "Nigerian")>>
+		<<set $nationalities.push("South African", "South African", "South African")>>
+		<<set $nationalities.push("Brazilian", "Brazilian", "Brazilian")>>
+		<<set $nationalities.push("Mexican", "Mexican", "Mexican")>>
+		<<set $nationalities.push("Argentinian", "Argentinian")>>
+		<<set $nationalities.push("Egyptian", "Egyptian")>>
+		<<set $nationalities.push("Pakistani", "Pakistani")>>
+		<<set $nationalities.push("Filipina", "Filipina")>>
+		<<set $nationalities.push("Vietnamese", "Vietnamese")>>
+		<<set $nationalities.push("Iranian", "Iranian")>>
+		<<set $nationalities.push("Korean", "Korean")>>
+		<<set $nationalities.push("Japanese", "Japanese")>>
+		<<set $nationalities.push("Thai", "Thai")>>
+		<<set $nationalities.push("Turkish", "Turkish")>>
+		<<set $nationalities.push("Ethiopian", "Ethiopian")>>
+		<<set $nationalities.push("Kenyan", "Kenyan")>>
+		<<set $nationalities.push("Zairian", "Zairian")>>
+		<<set $nationalities.push("Colombian", "Colombian")>>
+		<<set $nationalities.push("Venezuelan", "Venezuelan")>>
+		<<set $nationalities.push("German", "German")>>
+		<<set $nationalities.push("French", "French")>>
+		<<set $nationalities.push("British", "British")>>
+		<<set $nationalities.push("Italian", "Italian")>>
+		<<set $nationalities.push("Spanish", "Spanish")>>
+		<<set $nationalities.push("Ukrainian", "Ukrainian")>>
+		<<set $nationalities.push("Polish", "Polish")>>
+		<<set $nationalities.push("Burmese", "Burmese")>>
+		<<set $nationalities.push("Algerian", "Algerian")>>
+		<<set $nationalities.push("Sudanese", "Sudanese")>>
+		<<set $nationalities.push("Malaysian", "Malaysian")>>
+		<<set $nationalities.push("Lebanese")>>
+		<<set $nationalities.push("Tunisian")>>
+		<<set $nationalities.push("Emirati")>>
+		<<set $nationalities.push("Libyan")>>
+		<<set $nationalities.push("Jordanian")>>
+		<<set $nationalities.push("Omani")>>
+		<<set $nationalities.push("Malian")>>
+		<<set $nationalities.push("Iraqi")>>
+		<<set $nationalities.push("Uzbek")>>
+		<<set $nationalities.push("Nepalese")>>
+		<<set $nationalities.push("Afghan")>>
+		<<set $nationalities.push("Yemeni")>>
+		<<set $nationalities.push("Saudi")>>
+		<<set $nationalities.push("Australian")>>
+		<<set $nationalities.push("Ghanan")>>
+		<<set $nationalities.push("Canadian")>>
+		<<set $nationalities.push("Peruvian")>>
+		<<set $nationalities.push("Chilean")>>
+		<<set $nationalities.push("Guatemalan")>>
+		<<set $nationalities.push("a New Zealander")>>
+		<<set $nationalities.push("Irish")>>
+		<<set $nationalities.push("Icelandic")>>
+		<<set $nationalities.push("Finnish")>>
+		<<set $nationalities.push("Israeli")>>
+		<<set $nationalities.push("Armenian")>>
+		<<set $nationalities.push("Greek")>>
+		<<set $nationalities.push("Moroccan")>>
+		<<set $nationalities.push("Zimbabwean")>>
+		<<set $nationalities.push("Tanzanian")>>
+		<<set $nationalities.push("Ugandan")>>
+		<<set $nationalities.push("Romanian")>>
+		<<set $nationalities.push("Swedish")>>
+		<<set $nationalities.push("Belgian")>>
+		<<set $nationalities.push("Danish")>>
+		<<set $nationalities.push("Czech")>>
+		<<set $nationalities.push("Serbian")>>
+		<<set $nationalities.push("Slovak")>>
+		<<set $nationalities.push("Norwegian")>>
+		<<set $nationalities.push("Dutch")>>
+		<<set $nationalities.push("Austrian")>>
+		<<set $nationalities.push("Swiss")>>
+		<<set $nationalities.push("Portuguese")>>
+		<<set $nationalities.push("Hungarian")>>
+		<<set $nationalities.push("Estonian")>>
+		<<set $nationalities.push("Lithuanian")>>
+		<<set $nationalities.push("Bolivian")>>
+		<<set $nationalities.push("Haitian")>>
+		<<set $nationalities.push("Puerto Rican")>>
+		<<set $nationalities.push("Jamaican")>>
+		<<set $nationalities.push("Cuban")>>
+		<<set $nationalities.push("Kazakh")>>
+		<<set $nationalities.push("Sammarinese")>>
+		<<set $nationalities.push("Marshallese")>>
+		<<set $nationalities.push("Syrian")>>
+		<<set $nationalities.push("Bermudian")>>
+		<<set $nationalities.push("Uruguayan")>>
+		<<set $nationalities.push("Monégasque")>>
+		<<set $nationalities.push("Montenegrin")>>
+		<<set $nationalities.push("Cambodian")>>
+		<<set $nationalities.push("Cameroonian")>>
+		<<set $nationalities.push("Gabonese")>>
+		<<set $nationalities.push("Djiboutian")>>
+		<<set $nationalities.push("Greenlandic")>>
+		<<set $nationalities.push("Tuvaluan")>>
+		<<set $nationalities.push("Zambian")>>
+		<<set $nationalities.push("Albanian")>>
+		<<set $nationalities.push("Bruneian")>>
+		<<set $nationalities.push("Singaporean")>>
+		<<set $nationalities.push("Laotian")>>
+		<<set $nationalities.push("Mongolian")>>
+		<<set $nationalities.push("Taiwanese")>>
+		<<set $nationalities.push("Belizean")>>
+		<<set $nationalities.push("Grenadian")>>
+		<<set $nationalities.push("I-Kiribati")>>
+		<<set $nationalities.push("Malagasy")>>
+		<<set $nationalities.push("Maldivian")>>
+		<<set $nationalities.push("Bosnian")>>
+		<<set $nationalities.push("Croatian")>>
+		<<set $nationalities.push("Kosovan")>>
+		<<set $nationalities.push("Macedonian")>>
+		<<set $nationalities.push("Honduran")>>
+		<<set $nationalities.push("Maltese")>>
+		<<set $nationalities.push("Nauruan")>>
+		<<set $nationalities.push("Micronesian")>>
+		<<set $nationalities.push("Costa Rican")>>
+		<<set $nationalities.push("Salvadoran")>>
+		<<set $nationalities.push("Nicaraguan")>>
+		<<set $nationalities.push("Panamanian")>>
+		<<set $nationalities.push("Nigerien")>>
+		<<set $nationalities.push("Andorran")>>
+		<<set $nationalities.push("Bulgarian")>>
+		<<set $nationalities.push("Luxembourgian")>>
+		<<set $nationalities.push("Moldovan")>>
+		<<set $nationalities.push("Bahamian")>>
+		<<set $nationalities.push("Barbadian")>>
+		<<set $nationalities.push("Dominiquais")>>
+		<<set $nationalities.push("Trinidadian")>>
+		<<set $nationalities.push("Palauan")>>
+		<<set $nationalities.push("Papua New Guinean")>>
+		<<set $nationalities.push("Kittitian")>>
+		<<set $nationalities.push("Ecuadorian")>>
+		<<set $nationalities.push("French Guianan")>>
+		<<set $nationalities.push("Guyanese")>>
+		<<set $nationalities.push("Paraguayan")>>
+		<<set $nationalities.push("Surinamese")>>
+		<<set $nationalities.push("Bhutanese")>>
+		<<set $nationalities.push("East Timorese")>>
+		<<set $nationalities.push("Kyrgyz")>>
+		<<set $nationalities.push("Sri Lankan")>>
+		<<set $nationalities.push("a Liechtensteiner")>>
+		<<set $nationalities.push("Scottish")>>
+		<<set $nationalities.push("Vatican")>>
+		<<set $nationalities.push("Belarusian")>>
+		<<set $nationalities.push("Burundian")>>
+		<<set $nationalities.push("Latvian")>>
+		<<set $nationalities.push("Seychellois")>>
+		<<set $nationalities.push("Slovene")>>
+		<<set $nationalities.push("Antiguan")>>
+		<<set $nationalities.push("Dominican")>>
+		<<set $nationalities.push("Saint Lucian")>>
+		<<set $nationalities.push("Aruban")>>
+		<<set $nationalities.push("Azerbaijani")>>
+		<<set $nationalities.push("Bahraini")>>
+		<<set $nationalities.push("Cypriot")>>
+		<<set $nationalities.push("Georgian")>>
+		<<set $nationalities.push("Kuwaiti")>>
+		<<set $nationalities.push("Qatari")>>
+		<<set $nationalities.push("Tajik")>>
+		<<set $nationalities.push("Turkmen")>>
+		<<set $nationalities.push("Vincentian")>>
+		<<set $nationalities.push("a Cook Islander")>>
+		<<set $nationalities.push("Fijian")>>
+		<<set $nationalities.push("Ni-Vanuatu")>>
+		<<set $nationalities.push("Niuean")>>
+		<<set $nationalities.push("Palestinian")>>
+		<<set $nationalities.push("Samoan")>>
+		<<set $nationalities.push("a Solomon Islander")>>
+		<<set $nationalities.push("Tongan")>>
+		<<set $nationalities.push("Catalan")>>
+		<<set $nationalities.push("Equatoguinean")>>
+		<<set $nationalities.push("French Polynesian")>>
+		<<set $nationalities.push("Kurdish")>>
+		<<set $nationalities.push("Tibetan")>>
+		<<set $nationalities.push("Bissau-Guinean")>>
+		<<set $nationalities.push("Chadian")>>
+		<<set $nationalities.push("Comorian")>>
+		<<set $nationalities.push("Ivorian")>>
+		<<set $nationalities.push("Mauritanian")>>
+		<<set $nationalities.push("Mauritian")>>
+		<<set $nationalities.push("Mosotho")>>
+		<<set $nationalities.push("Sierra Leonean")>>
+		<<set $nationalities.push("Swazi")>>
+		<<set $nationalities.push("Angolan")>>
+		<<set $nationalities.push("Sahrawi")>>
+		<<set $nationalities.push("Burkinabé")>>
+		<<set $nationalities.push("Cape Verdean")>>
+		<<set $nationalities.push("Motswana")>>
+		<<set $nationalities.push("Somali")>>
+		<<set $nationalities.push("Rwandan")>>
+		<<set $nationalities.push("São Toméan")>>
+		<<set $nationalities.push("Beninese")>>
+		<<set $nationalities.push("Central African")>>
+		<<set $nationalities.push("Gambian")>>
+		<<set $nationalities.push("Senegalese")>>
+		<<set $nationalities.push("Togolese")>>
+		<<set $nationalities.push("Eritrean")>>
+		<<set $nationalities.push("Guinean")>>
+		<<set $nationalities.push("Malawian")>>
+		<<set $nationalities.push("Congolese")>>
+		<<set $nationalities.push("Liberian")>>
+		<<set $nationalities.push("Mozambican")>>
+		<<set $nationalities.push("Namibian")>>
+		<<set $nationalities.push("South Sudanese")>>
+	<</if>>
+<</if>>
+
+<<set $customSlave.nationality = $nationalities.random()>>
+
+/* SET STARTING CONDITIONS */
+
+<<set $minimumSlaveCost = 3000>>
+<<set $enduringRep = $rep>>
+
+<<set $arcologies = []>>
+<<set $leaders = []>>
+
+<<set _seed = ["east", "north", "northeast", "northwest", "south", "southeast", "southwest", "west"]>>
+<<set _govtypes = ["a committee", "a corporation", "an individual", "an oligarchy", "direct democracy", "elected officials"]>>
+
+<<set $neighboringArcologies = Math.clamp($neighboringArcologies, 0, 8)>>
+<<for $i = 0; $i <= $neighboringArcologies; $i++>>
+	<<set $activeArcology = {name: "Arcology X-", direction: "north", government: "an individual", leaderID: 0, honeymoon: 0, prosperity: 50, ownership: 50, minority: 20, PCminority: 0, demandFactor: 0, FSSupremacist: "unset", FSSupremacistRace: 0, FSSubjugationist: "unset", FSSubjugationistRace: 0, FSGenderRadicalist: "unset", FSGenderFundamentalist: "unset", FSPaternalist: "unset", FSDegradationist: "unset", FSBodyPurist: "unset", FSTransformationFetishist: "unset", FSYouthPreferentialist: "unset", FSMaturityPreferentialist: "unset", FSSlimnessEnthusiast: "unset", FSAssetExpansionist: "unset", FSPastoralist: "unset", FSPhysicalIdealist: "unset", FSChattelReligionist: "unset", FSRomanRevivalist: "unset", FSAztecRevivalist: "unset", FSEgyptianRevivalist: "unset", FSEdoRevivalist: "unset", FSArabianRevivalist: "unset", FSChineseRevivalist: "unset", FSNull: "unset", embargo: 1, embargoTarget: -1, influenceTarget: -1, influenceBonus: 0, rival: 0}>>
+	<<if $i == 0>>
+		<<set $activeArcology.direction = 0>>
+		<<set $activeArcology.name = "Arcology X-4">>
+		<<set $activeArcology.FSSupremacistDecoration = 20, $activeArcology.FSSubjugationistDecoration = 20, $activeArcology.FSGenderRadicalistDecoration = 20, $activeArcology.FSGenderFundamentalistDecoration = 20, $activeArcology.FSPaternalistDecoration = 20, $activeArcology.FSDegradationistDecoration = 20, $activeArcology.FSBodyPuristDecoration = 20, $activeArcology.FSTransformationFetishistDecoration = 20, $activeArcology.FSYouthPreferentialistDecoration = 20, $activeArcology.FSMaturityPreferentialistDecoration = 20, $activeArcology.FSSlimnessEnthusiastDecoration = 20, $activeArcology.FSAssetExpansionistDecoration = 20, $activeArcology.FSPastoralistDecoration = 20, $activeArcology.FSPhysicalIdealistDecoration = 20, $activeArcology.FSChattelReligionistDecoration = 20, $activeArcology.FSRomanRevivalistDecoration = 20, $activeArcology.FSAztecRevivalistDecoration = 20, $activeArcology.FSEgyptianRevivalistDecoration = 20, $activeArcology.FSEdoRevivalistDecoration = 20, $activeArcology.FSArabianRevivalistDecoration = 20, $activeArcology.FSChineseRevivalistDecoration = 20>>
+		<<if $targetArcology.type != "New">>
+			<<set $FSAnnounced = 1>>
+			<<set $activeArcology.name = $targetArcology.name, $activeArcology.prosperity = $targetArcology.prosperity, $ACitizens += $targetArcology.citizens*500>>
+			<<set _decoration = $targetArcology.FSProgress + 10>>
+			<<switch $targetArcology.type>>
+			<<case "Supremacist">>
+				<<set $activeArcology.FSSupremacist = $targetArcology.FSProgress, $activeArcology.FSSupremacistDecoration = _decoration, $activeArcology.FSSupremacistRace = $targetArcology.race>>
+			<<case "Subjugationist">>
+				<<set $activeArcology.FSSubjugationist = $targetArcology.FSProgress, $activeArcology.FSSubjugationistDecoration = _decoration, $activeArcology.FSSubjugationistRace = $targetArcology.race>>
+			<<case "GenderRadicalist">>
+				<<set $activeArcology.FSGenderRadicalist = $targetArcology.FSProgress, $activeArcology.FSGenderRadicalistDecoration = _decoration>>
+			<<case "GenderFundamentalist">>
+				<<set $activeArcology.FSGenderFundamentalist = $targetArcology.FSProgress, $activeArcology.FSGenderFundamentalistDecoration = _decoration>>
+			<<case "Paternalist">>
+				<<set $activeArcology.FSPaternalist = $targetArcology.FSProgress, $activeArcology.FSPaternalistDecoration = _decoration>>
+			<<case "Degradationist">>
+				<<set $activeArcology.FSDegradationist = $targetArcology.FSProgress, $activeArcology.FSDegradationistDecoration = _decoration>>
+			<<case "AssetExpansionist">>
+				<<set $activeArcology.FSAssetExpansionist = $targetArcology.FSProgress, $activeArcology.FSAssetExpansionistDecoration = _decoration>>
+			<<case "SlimnessEnthusiast">>
+				<<set $activeArcology.FSSlimnessEnthusiast = $targetArcology.FSProgress, $activeArcology.FSSlimnessEnthusiastDecoration = _decoration>>
+			<<case "TransformationFetishist">>
+				<<set $activeArcology.FSTransformationFetishist = $targetArcology.FSProgress, $activeArcology.FSTransformationFetishistDecoration = _decoration>>
+			<<case "BodyPurist">>
+				<<set $activeArcology.FSBodyPurist = $targetArcology.FSProgress, $activeArcology.FSBodyPuristDecoration = _decoration>>
+			<<case "MaturityPreferentialist">>
+				<<set $activeArcology.FSMaturityPreferentialist = $targetArcology.FSProgress, $activeArcology.FSMaturityPreferentialistDecoration = _decoration>>
+			<<case "YouthPreferentialist">>
+				<<set $activeArcology.FSYouthPreferentialist = $targetArcology.FSProgress, $activeArcology.FSYouthPreferentialistDecoration = _decoration>>
+			<<case "Pastoralist">>
+				<<set $activeArcology.FSPastoralist = $targetArcology.FSProgress, $activeArcology.FSPastoralistDecoration = _decoration>>
+			<<case "PhysicalIdealist">>
+				<<set $activeArcology.FSPhysicalIdealist = $targetArcology.FSProgress, $activeArcology.FSPhysicalIdealistDecoration = _decoration>>
+			<<case "ChattelReligionist">>
+				<<set $activeArcology.FSChattelReligionist = $targetArcology.FSProgress, $activeArcology.FSChattelReligionistDecoration = _decoration>>
+			<<case "RomanRevivalist">>
+				<<set $activeArcology.FSRomanRevivalist = $targetArcology.FSProgress, $activeArcology.FSRomanRevivalistDecoration = _decoration>>
+			<<case "AztecRevivalist">>
+				<<set $activeArcology.FSAztecRevivalist = $targetArcology.FSProgress, $activeArcology.FSAztecRevivalistDecoration = _decoration>>
+			<<case "EgyptianRevivalist">>
+				<<set $activeArcology.FSEgyptianRevivalist = $targetArcology.FSProgress, $activeArcology.FSEgyptianRevivalistDecoration = _decoration>>
+			<<case "EdoRevivalist">>
+				<<set $activeArcology.FSEdoRevivalist = $targetArcology.FSProgress, $activeArcology.FSEdoRevivalistDecoration = _decoration>>
+			<<case "ArabianRevivalist">>
+				<<set $activeArcology.FSArabianRevivalist = $targetArcology.FSProgress, $activeArcology.FSArabianRevivalistDecoration = _decoration>>
+			<<case "ChineseRevivalist">>
+				<<set $activeArcology.FSChineseRevivalist = $targetArcology.FSProgress, $activeArcology.FSChineseRevivalistDecoration = _decoration>>
+			<<default>>
+				<<set $activeArcology.FSNull = 20>>
+			<</switch>>
+			<<if $PC.rumor == "social engineering">>
+				<<set $FSGotRepCreditOne = 1>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $i < 4>> /* X-4 is reserved for player's arcology, so X-1 is available */
+			<<set $activeArcology.name = $activeArcology.name+($i)>>
+		<<else>>
+			<<set $activeArcology.name = $activeArcology.name+($i+1)>>
+		<</if>>
+		<<set $activeArcology.direction = _seed.pluck()>>
+		<<set $activeArcology.government = _govtypes.random()>>
+		<<set $activeArcology.prosperity += random(-20,20)>>
+		<<set $activeArcology.ownership += random(-10,0)>>
+		<<set $activeArcology.minority += random(-5,5)>>
+	<</if>>
+	<<set $arcologies.push($activeArcology)>>
+<</for>>
+
+<<set $arcologies[0].FSSupremacistLawME = 0>>
+<<set $arcologies[0].FSSupremacistSMR = 0>>
+<<set $arcologies[0].FSSubjugationistLawME = 0>>
+<<set $arcologies[0].FSSubjugationistSMR = 0>>
+<<set $arcologies[0].FSGenderRadicalistLawFuta = 0>>
+<<set $arcologies[0].FSGenderRadicalistLawBeauty = 0>>
+<<set $arcologies[0].FSGenderFundamentalistLawBimbo = 0>>
+<<set $arcologies[0].FSGenderFundamentalistSMR = 0>>
+<<set $arcologies[0].FSGenderFundamentalistLawBeauty = 0>>
+<<set $arcologies[0].FSPaternalistLaw = 0>>
+<<set $arcologies[0].FSPaternalistSMR = 0>>
+<<set $arcologies[0].FSDegradationistLaw = 0>>
+<<set $arcologies[0].FSDegradationistSMR = 0>>
+<<set $arcologies[0].FSBodyPuristLaw = 0>>
+<<set $arcologies[0].FSBodyPuristSMR = 0>>
+<<set $arcologies[0].FSTransformationFetishistLaw = 0>>
+<<set $arcologies[0].FSTransformationFetishistSMR = 0>>
+<<set $arcologies[0].FSYouthPreferentialistLaw = 0>>
+<<set $arcologies[0].FSYouthPreferentialistSMR = 0>>
+<<set $arcologies[0].FSMaturityPreferentialistLaw = 0>>
+<<set $arcologies[0].FSMaturityPreferentialistSMR = 0>>
+<<set $arcologies[0].FSSlimnessEnthusiastSMR = 0>>
+<<set $arcologies[0].FSAssetExpansionistSMR = 0>>
+<<set $arcologies[0].FSPastoralistLaw = 0>>
+<<set $arcologies[0].FSPastoralistSMR = 0>>
+<<set $arcologies[0].FSPhysicalIdealistSMR = 0>>
+<<set $arcologies[0].FSChattelReligionistLaw = 0>>
+<<set $arcologies[0].FSChattelReligionistSMR = 0>>
+<<set $arcologies[0].FSChattelReligionistCreed = 0>>
+<<set $arcologies[0].FSRomanRevivalistLaw = 0>>
+<<set $arcologies[0].FSRomanRevivalistSMR = 0>>
+<<set $arcologies[0].FSAztecRevivalistLaw = 0>>
+<<set $arcologies[0].FSAztecRevivalistSMR = 0>>
+<<set $arcologies[0].FSEgyptianRevivalistLaw = 0>>
+<<set $arcologies[0].FSEgyptianRevivalistSMR = 0>>
+<<set $arcologies[0].FSEdoRevivalistLaw = 0>>
+<<set $arcologies[0].FSEdoRevivalistSMR = 0>>
+<<set $arcologies[0].FSArabianRevivalistLaw = 0>>
+<<set $arcologies[0].FSArabianRevivalistSMR = 0>>
+<<set $arcologies[0].FSChineseRevivalistLaw = 0>>
+<<set $arcologies[0].FSChineseRevivalistSMR = 0>>
+
+<<set $showStartingGirlsExplanation = 1>>
+<<goto "Starting Girls">>

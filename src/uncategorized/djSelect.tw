@@ -1,0 +1,14 @@
+:: DJ Select [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Club", $showEncyclopedia = 1>><<set $encyclopedia = "DJ">>
+
+<<if ($DJ != 0)>>
+	''__@@.pink;$DJ.slaveName@@__'' is serving as your DJ.<br><br>She will headline entertainment in $clubName.
+<<else>>
+	You have not selected a DJ.
+<</if>>
+
+<br><br>''Appoint a DJ from your devoted slaves:''
+<<include "Slave Summary">>
+
+<br><br>[[None|DJ Workaround][$i = -1]]

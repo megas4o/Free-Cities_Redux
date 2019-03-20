@@ -1,0 +1,35 @@
+:: Agent Retrieve [silently]
+
+<<set _SL = $slaves.length, _ID = $activeArcology.leaderID, _LL = $leaders.length>>
+
+<<for _i = 0; _i < _SL; _i++>>
+	<<if $slaves[_i].ID == _ID>>
+		<<if $slaves[_i].relationshipTarget > 0>>
+			<<for _j = 0; _j < _SL; _j++>>
+				<<if $slaves[_j].ID == $slaves[_i].relationshipTarget && $slaves[_j].assignment == "live with your agent">>
+					<<if $slaves[$j].preg > 35>>
+						<<set $slaves[$j].birthsTotal += $slaves[$j].pregType, $slaves[$j].preg = 0, $slaves[$j].pregSource = 0, $slaves[$j].pregType = 0>>
+					<</if>>
+					<<removeJob $slaves[_j] "live with your agent">>
+					<<break>>
+				<</if>>
+			<</for>>
+			<<if $slaves[$i].preg > 35>>
+				<<set $slaves[$i].birthsTotal += $slaves[$i].pregType, $slaves[$i].preg = 0, $slaves[$i].pregSource = 0, $slaves[$i].pregType = 0>>
+			<</if>>
+		<</if>>
+		<<removeJob $slaves[_i] "be your agent">>
+		<<break>>
+	<</if>>
+<</for>>
+
+<<set $activeArcology.leaderID = 0, $activeArcology.government = "your trustees">>
+
+<<for _i = 0;_i < _LL;_i++>>
+	<<if _ID == $leaders[_i].ID>>
+		<<set _dump = $leaders.deleteAt(_i)>>
+		<<break>>
+	<</if>>
+<</for>>
+
+<<goto "Neighbor Interact">>

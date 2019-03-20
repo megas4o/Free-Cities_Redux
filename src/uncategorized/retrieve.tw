@@ -1,0 +1,12 @@
+:: Retrieve [silently]
+
+<<switch $returnTo>>
+<<case "Pit">>
+	<<set $fighterIDs.delete($slaves[$i].ID)>>
+<<case "Coursing Association">>
+	<<set $Lurcher = 0>>
+<<default>>
+	<<removeJob $slaves[$i] $slaves[$i].assignment>>
+<</switch>>
+
+<<goto $returnTo>>

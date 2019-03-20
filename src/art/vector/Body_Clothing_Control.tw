@@ -1,0 +1,100 @@
+:: Art_Vector_Body_Clothing_Control_ [nobr]
+
+<<set _eyeBallColor = "#ffffff">>
+
+<<if _artSlave.eyeColor neq "">>
+	<<if _artSlave.eyeColor.split(" ").length > 1>>
+		<<set _eyeLens = _artSlave.eyeColor.split(" ")[0]>>
+		
+		<<if _eyeLens == "demonic">>
+			<<set _eyeBallColor = _eyeColor>>
+		<<elseif _eyeLens == "devilish">>
+			<<set _eyeBallColor = "#000000">>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<set _muscles_value = _artSlave.muscles + 101>>
+<<set _art_muscle_visibility = 0.910239*Math.log(0.02*_muscles_value) >>
+
+<<set _showEyes = 1>>
+<<set _showLips = 1>>
+<<set _showMouth = 1>>
+<<set _showPubic = 1>>
+<<set _showPussy = _artSlave.vagina >= 0>>
+<<set _showArmHair = 1>>
+<<set _showHair = _artSlave.hStyle != "shaved">>
+<<set _showBoobs = 1>>
+<<set _showNipples = 1>>
+<<set _showArmHighlight = 0>>
+<<set _showTorsoHighlight = 0>>
+<<set _showLegHighlight = 0>>
+<<set _showBoobsHighlight = 0>>
+<<set _showEyesHighlight = 1>>
+<<set _showHeadHighlight = 1>>
+<<set _showBellyPiercings = 1>>
+<<set _showNipplePiercings = 1>>
+<<set _chastityAnal = _artSlave.dickAccessory == "anal chastity" || _artSlave.dickAccessory == "combined chastity" || _artSlave.vaginalAccessory == "anal chastity" || _artSlave.vaginalAccessory == "combined chastity" >>
+
+<<set _chastityVaginal = _artSlave.vaginalAccessory == "chastity belt" || _artSlave.vaginalAccessory == "combined chastity">>
+
+<<if _artSlave.fuckdoll > 0>>
+	<<set _showEyes = 0>>
+	<<set _showPubic = 0>>
+	<<set _showArmHair = 0>>
+	<<set _showHair = 0>>	
+	<<set _showArmHighlight = 1>>
+	<<set _showTorsoHighlight = 1>>
+	<<set _showBoobsHighlight = 1>>
+	<<set _showLegHighlight = 1>>
+	<<set _showHeadHighlight = 1>>
+<</if>>
+
+<<if _artSlave.clothes == "a nice maid outfit">>
+	<<set _showPubic = 0>>
+	<<set _showBoobs = 0>>
+	<<set _showBellyPiercings = 0>>
+	<<set _showNipplePiercings = 0>>
+	<<set _showNipples = 0>>
+<</if>>
+
+<<if _artSlave.clothes == "a slutty maid outfit">>
+	<<set _showBellyPiercings = 0>>
+<</if>>
+
+<<if _artSlave.clothes == "restrictive latex">>
+	<<set _showEyes = 0>>
+	<<set _showPubic = 0>>
+	<<set _showArmHair = 0>>
+	<<set _showHair = 0>>
+	<<set _showArmHighlight = 1>>
+	<<set _showTorsoHighlight = 1>>
+	<<set _showLegHighlight = 1>>
+	<<set _showHeadHighlight = 1>>
+	<<set _showBellyPiercings = 0>>
+<</if>>
+
+<<if _artSlave.clothes == "a latex catsuit">>
+	<<set _showPubic = 0>>
+	<<set _showArmHair = 0>>
+	<<set _showArmHighlight = 1>>
+	<<set _showTorsoHighlight = 1>>
+	<<set _showLegHighlight = 1>>
+	<<set _showBoobsHighlight = 1>>
+	<<set _showHeadHighlight = 1>>
+	<<set _showBellyPiercings = 0>>
+	<<set _showNipplePiercings = 0>>
+	<<set _chastityAnal = 0>>
+	<<set _chastityVaginal = 0>>
+<</if>>
+
+<<if $showBodyMods == 0>>
+	<<set _showNipplePiercings = 0>>
+<</if>>
+
+<<if $seeVectorArtHighlights == 1>>
+	<<set _showArmHighlight = 0>>
+	<<set _showTorsoHighlight = 0>>
+	<<set _showLegHighlight = 0>>
+	<<set _showBoobsHighlight = 0>>
+<</if>>

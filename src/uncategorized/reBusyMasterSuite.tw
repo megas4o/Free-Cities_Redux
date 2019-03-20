@@ -1,0 +1,139 @@
+:: RE busy master suite [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check">>
+
+<<set _msAnalVirginIdx = [], _msIdx = [], $slaves.forEach(function(s, index, array) { if (s.fuckdoll == 0 && s.assignment == "serve in the master suite") {if (s.anus == 0) _msAnalVirginIdx.push(index); else _msIdx.push(index);} })>>
+
+<<if _msIdx.length < 3>>
+	<<goto "RIE Eligibility Check">>
+<<else>>
+
+You have an extended meeting with a prominent citizen planned, from the start of business in the morning until you're done. That's likely to be in the late evening, since he's probably going to get into technical business proposals, and $Concubine.slaveName knows it. She is surprised, therefore, when a minor business emergency calls your would-be interlocutor away, canceling the meeting and sending you home hours earlier than you'd planned. She <<if canTalk($Concubine)>>giggles helplessly<<else>>signs humorously<</if>> at the surprise when you walk into your suite. Apparently, she decided to while away the hours until you got back by having some truly grandiose group sex with all the slave girls you have in the suite.
+
+<br><br>
+
+She had to turn to greet you as you entered, since she was facing away from the entry, and the reason why is rather obvious. Up near the opposite wall, <<print $slaves[_msIdx[0]].slaveName>> is on the floor with her face down and her ass up.
+
+<<for $i = 0; $i < _msIdx.length-2; $i++>> /* after the loop, $i will be _msIdx.length - 1, the last eligible slave */
+	<<print $slaves[_msIdx[$i]].slaveName>>'s
+	<<if $slaves[_msIdx[$i]].anus > 2>>
+		asspussy
+	<<elseif $slaves[_msIdx[$i]].anus > 1>>
+		asshole
+	<<else>>
+		tight butt
+	<</if>>
+	is
+	<<if canPenetrate($slaves[_msIdx[$i+1]].dick)>>
+		filled by <<print $slaves[_msIdx[$i+1]].slaveName>>'s
+		<<if $slaves[_msIdx[$i+1]].dick > 3>>
+			painfully big
+		<<else>>
+			hard
+		<</if>>
+		dick,
+	<<else>>
+		filled by a
+		<<if $slaves[_msIdx[$i]].anus > 2>>
+			huge
+		<<elseif $slaves[_msIdx[$i]].anus > 1>>
+			big
+		<<else>>
+			moderate
+		<</if>>
+		strap-on worn by <<print $slaves[_msIdx[$i+1]].slaveName>>,
+	<</if>>
+	<<if $slaves[_msIdx[$i+1]].boobs > 4000>>
+		whose tits are so unreasonably large they're resting on <<print $slaves[_msIdx[$i]].slaveName>>'s <<print $slaves[_msIdx[$i]].skin>> back.
+	<<elseif $slaves[_msIdx[$i+1]].butt > 4>>
+		well cushioned by <<print $slaves[_msIdx[$i]].slaveName>>'s huge ass.
+	<<elseif $slaves[_msIdx[$i+1]].nipples == "huge">>
+		who is bending to rub her enormous hard nipples across <<print $slaves[_msIdx[$i]].slaveName>>'s <<print $slaves[_msIdx[$i]].skin>> back.
+	<<elseif $slaves[_msIdx[$i+1]].lips > 40>>
+		who is bending forward to nibble along <<print $slaves[_msIdx[$i]].slaveName>>'s <<print $slaves[_msIdx[$i]].skin>> neck.
+	<<elseif $slaves[_msIdx[$i+1]].amp != 1>>
+		who is reaching around to grope <<print $slaves[_msIdx[$i]].slaveName>>'s <<print $slaves[_msIdx[$i]].skin>> chest.
+	<<else>>
+		who is propped up against <<print $slaves[_msIdx[$i]].slaveName>>'s <<print $slaves[_msIdx[$i]].skin>> butt.
+	<</if>>
+<</for>>
+
+Finally, <<print $slaves[_msIdx[$i]].slaveName>>'s
+<<if $slaves[_msIdx[$i]].anus > 2>>
+	asspussy
+<<elseif $slaves[_msIdx[$i]].anus > 1>>
+	asshole
+<<else>>
+	tight butt
+<</if>>
+is
+<<if canPenetrate($Concubine)>>
+	filled by $Concubine.slaveName's
+	<<if $Concubine.dick > 3>>
+		painfully big
+	<<else>>
+		hard
+	<</if>>
+	dick,
+<<else>>
+	filled by a
+	<<if $slaves[_msIdx[$i]].anus > 2>>
+		huge
+	<<elseif $slaves[_msIdx[$i]].anus > 1>>
+		big
+	<<else>>
+		moderate
+	<</if>>
+	strap-on worn by $Concubine.slaveName,
+<</if>>
+who has paused her thrusting to issue a peremptory order to the slaves to stay where they are, before turning to greet you cheerfully.
+<<if _msAnalVirginIdx.length > 2>>
+	<<set _lastAnalVirgin = _msAnalVirginIdx.pop(), _otherNames = _msAnalVirginIdx.map(function(idx) { return $slaves[idx].slaveName; }).join(", ")>>
+	<<print _otherNames>> and <<print $slaves[_lastAnalVirgin].slaveName>> are anal virgins, so $Concubine.slaveName has them busy lying under slaves who aren't, offering what oral stimulation they can manage.
+<<elseif _msAnalVirginIdx.length == 2>>
+	<<print $slaves[_msAnalVirginIdx[0]].slaveName>> and <<print $slaves[_msAnalVirginIdx[1]].slaveName>> are anal virgins, so $Concubine.slaveName has them busy lying under slaves who aren't, offering what oral stimulation they can manage.
+<<elseif _msAnalVirginIdx.length > 0>>
+	<<print $slaves[_msAnalVirginIdx[0]].slaveName>> is an anal virgin, so $Concubine.slaveName has her busy lying under slaves who aren't, offering what oral stimulation she can manage.
+<</if>>
+
+<br><br>
+
+/* $slaves[_msIdx[$i]] is still the last slave in the chain */
+
+<span id="result">
+<<link "Slide in behind the concubine">>
+	<<replace "#result">>
+	$Concubine.slaveName anticipates you, and is already sliding herself partway out of <<print $slaves[_msIdx[$i]].slaveName>> and cocking her hips to spread her <<if ($Concubine.butt > 5)>>huge<<elseif ($Concubine.butt > 2)>>healthy<<else>>trim<</if>> buttocks as wide as she can without disentangling herself from the anal train. Up on the bed she's at just the right height, and she winks her <<if ($Concubine.anus > 2)>>loose anus<<elseif ($Concubine.anus > 1)>>asshole<<else>>tight little asshole<</if>> invitingly<<if canTalk($Concubine)>>, laughing at the sheer decadence of it<</if>>. <<if ($PC.dick == 0)>>You pull on a strap-on and push it<<else>>You push yourself<</if>> home with some force, your concubine's extreme state of arousal leaving her ass very relaxed and welcoming; the thrust shoves her forward to hilt herself in <<print $slaves[_msIdx[$i]].slaveName>>, and so on down the line, producing more giggling, some squealing, and much scrabbling for balance. It takes a while to find the rhythm, and while you wait for the inevitable tangles to be fixed you decide to challenge yourself. You reach around and <<if ($Concubine.boobs > 1000)>>heft $Concubine.slaveName's heavy boobs<<elseif ($Concubine.boobs > 300)>>tease $Concubine.slaveName's healthy breasts<<else>>massage $Concubine.slaveName's flat chest<</if>>, nibbling her $Concubine.skin neck, and generally torturing her with stimulation until she climaxes to her beloved <<if $PC.title == 1>>master<<else>>mistress<</if>>. When she does, you extract yourself and pull her unceremoniously off <<print $slaves[_msIdx[$i]].slaveName>>, replacing her up <<print $slaves[_msIdx[$i]].slaveName>>'s butt. You work your way down the line, orgasm by orgasm, delaying your own climax until the exhausted <<print $slaves[_msIdx[0]].slaveName>> manages an anal orgasm by heroic efforts, and you're done. As you roll off her, panting, there is scattered applause and much congratulation from your harem of @@.mediumaquamarine;trusting buttslaves.@@
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].ID == $Concubine.ID>>
+			<<set $slaves[$i].trust += 1, $slaves[$i].analCount += 1, $analTotal += 1>>
+		<<elseif $slaves[$i].assignment == "serve in the master suite">>
+			<<if $slaves[$i].anus > 0>>
+				<<set $slaves[$i].trust += 1, $slaves[$i].analCount += 1, $analTotal += 1>>
+			<<else>>
+				<<set $slaves[$i].trust += 1, $slaves[$i].oralCount += 1, $oralTotal += 1>>
+			<</if>>
+		<</if>>
+	<</for>>
+	<</replace>>
+<</link>>
+<br><<link "Slide in up at the head of the bed for some oral">>
+	<<replace "#result">>
+	<<print $slaves[_msIdx[0]].slaveName>>'s <<print $slaves[_msIdx[0]].eyeColor>> eyes widen when you push her upright for a moment and slide in under her, but she wraps her <<if ($slaves[_msIdx[0]].lips > 70)>> dick sucking<<elseif ($slaves[_msIdx[0]].lips > 20)>> pretty<</if>> lips around your <<if ($PC.dick == 0)>>clit<<else>>cock<<if $PC.vagina == 1>> and starts stroking your pussy<</if>><</if>> eagerly enough, even as <<print $slaves[_msIdx[1]].slaveName>> goes back to sodomizing her. The anal train is fairly gentle, since anything too fast would disintegrate the gymnastic arrangement, but <<print $slaves[_msIdx[0]].slaveName>> is still getting enough of a buttfuck that she whimpers quietly into your <<if ($PC.vagina == 1)>>pussy<<else>>dick<</if>>, a nice feeling. The blowjob is <<if ($slaves[_msIdx[0]].oralSkill >= 100)>>masterful, despite the distraction<<elseif ($slaves[_msIdx[0]].oralSkill > 10)>>serviceable, despite the distraction<<else>>only mediocre, but serviceable enough<</if>>, so you let her work for a while before gently shoving her off the side of the bed and telling her to get to the back of the line. The slaves all shuffle forward awkwardly, and inadvertently block your view so that you hear rather than see <<print $slaves[_msIdx[0]].slaveName>> penetrate your concubine $Concubine.slaveName's <<if ($Concubine.anus > 2)>>loose butt<<elseif ($Concubine.anus > 1)>>butt<<else>>tight little butt<</if>>, down near the foot of the bed. You climax, on occasion, but are enjoying yourself so immensely that you let the slaves continue the rotation until you're entirely spent, and they're entirely exhausted. You reach for a tablet to get some work done, in the center of a pile of sweaty, tired girls, all of whom are resting with at least one body part in contact with their @@.hotpink;beloved@@ <<if $PC.title == 1>>master<<else>>mistress<</if>>.
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].ID == $Concubine.ID>>
+			<<set $slaves[$i].trust += 1, $slaves[$i].analCount += 1, $analTotal += 1, $slaves[$i].oralCount += 1, $oralTotal += 1>>
+		<<elseif $slaves[$i].assignment == "serve in the master suite">>
+			<<if $slaves[$i].anus > 0>>
+				<<set $slaves[$i].devotion += 1, $slaves[$i].analCount += 1, $analTotal += 1, $slaves[$i].oralCount += 1, $oralTotal += 1>>
+			<<else>>
+				<<set $slaves[$i].devotion += 1, $slaves[$i].oralCount += 2, $oralTotal += 2>>
+			<</if>>
+		<</if>>
+	<</for>>
+	<</replace>>
+<</link>>
+</span>
+
+<</if>> /* closes eligibility check */
+

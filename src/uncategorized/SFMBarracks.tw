@@ -1,0 +1,294 @@
+:: SFM Barracks
+
+<<nobr>>
+<<set $nextButton = "Back to Main">>
+<<set $nextLink = "Main">>
+<<set $returnTo = "Barracks">>
+//The $securityForceName barracks is located in the arcology's lower levels, occupying unneeded warehouse space. It is not accessible to the general citizenry, but your personal elevator has express service to it. As you step off, two soldiers in combat armour manning the entry checkpoint tense and raise their weapons, before nodding respectfully and stepping aside, allowing their patron entry. The barracks is cavernous, containing areas for the soldiers to sleep and keep their belongings, areas for the storage and maintenance of their weapons and equipment, and common areas for them to amuse themselves, since they rarely mix with your citizens on the upper levels. You survey the facilities.//<</nobr>>
+
+<div style="margin-left:2em"><<nobr>><<if $securityForceArcologyUpgrades == 0>>
+	The barracks is currently quite basic, consisting of little more than a dormitory, armoury, a processing facility for human spoils, and a common area, sectioned off by stacks of empty supply crates. The cavernous space, however, is ripe for expansion.
+<<elseif $securityForceArcologyUpgrades == 1>>
+	The barracks has become more permanent, expanding into free space, erecting permanent dividers, and sectioning off an area for use as a garage and vehicle maintenance bay.
+<<elseif $securityForceArcologyUpgrades == 2>>
+	The barracks has added a facility for the storage, maintenance, and deployment of armed combat drones, and added storage facilities for the soldiers to store their personal spoils in.
+<<elseif $securityForceArcologyUpgrades == 3>>
+	The barracks has added additional support personnel and equipment, allowing the potential procurement of heavier infantry armour, fighting vehicles, and combat drones.
+<<elseif $securityForceArcologyUpgrades == 4>>
+	The barracks has expanded tremendously, adding an aerial control facility and express elevator connecting to a ring of launch pads and hangars built around the arcology's upper levels. Additional facilities have been added for soldier recreation, and spartan quarters for live-in slaves, both menial and service, have been installed.
+<<elseif $securityForceArcologyUpgrades == 5>>
+	The barracks has (mostly) taken on the appearance of a professional military installation, with clearly delineated soldier and logistical areas, dedicated support and recreation facilities, and advanced command and control apparatus. As a final measure, heavy, long range, electromagnetic railgun artillery pieces have been installed in casemates along the aerial launch pads, giving the $securityForceName an immense superiority in local firepower.
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForcePersonnel < 100>>
+	The barracks' large dormitories are sparsely occupied, the few members of the $securityForceName residing within them concentrating together in a corner. The hundreds of empty beds and lockers visible herald the future.
+<<elseif $securityForcePersonnel < 300>>
+	The barracks' large dormitories are lightly occupied, with the $securityForcePersonnel members of the $securityForceName starting to spread out across them.
+<<elseif $securityForcePersonnel < 500>>
+	The barracks' large dormitories are moderately occupied, though the $securityForcePersonnel members of the $securityForceName residing within have a considerable amount of extra room.
+<<elseif $securityForcePersonnel < 700>>
+	The barracks' large dormitories are well-occupied, and the $securityForcePersonnel members of the $securityForceName within have started to form small cliques based on section and row.
+<<elseif $securityForcePersonnel < 1000>>
+	The barracks' large dormitories are near capacity, and the $securityForcePersonnel members of the $securityForceName often barter their personal loot, whether it be monetary or human, for the choicest bunks.
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForceInfantryPower == 0>>
+	The armoury is well-stocked with high-quality personal weapons and light armour, but contains little in the way of exceptional armament.
+<<elseif $securityForceInfantryPower == 1>>
+	The armoury has large stocks of the absolute latest personal weapons and light armour, and has added first-generation exo-suits to improve soldier lethality.
+<<elseif $securityForceInfantryPower == 2>>
+	The armoury has acquired advanced tactical helmets and second-generation exo-suits to further improve soldier lethality.
+<<elseif $securityForceInfantryPower == 3>>
+	The armoury has replaced deployed exo-suits with basic enclosed combat armour suits, and has further begun to deploy early electromagnetic (coilgun) weaponry.
+<<elseif $securityForceInfantryPower == 4>>
+	The armoury has begun to equip the soldiers with more advanced combat armour suits, and has expanded its inventory of electromagnetic weaponry.
+<<elseif $securityForceInfantryPower == 5>>
+	The armoury has acquired heavy weapon attachments for its combat armour suits, and has further sourced advanced electromagnetic weaponry (miniaturized railguns) for the soldiers, ensuring that the infantry of the $securityForceName is perhaps the most well-equipped in the world.
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForceVehiclePower == 0>>
+	The garage contains basic, unarmoured vehicles for use by the soldiers, primarily high-end civilian vehicles with jury-rigged crew-served weapons.
+<<elseif $securityForceVehiclePower == 1>>
+	The garage has replaced its technical fleet with armed military utility vehicles. It has also sourced customized, high-volume slave transports for better securing human spoils.
+<<elseif $securityForceVehiclePower == 2>>
+	The garage has added a number of light infantry fighting vehicles to its fleet, and acquired more slave transports to keep up with demand.
+<<elseif $securityForceVehiclePower == 3>>
+	The garage has acquired improved infantry fighting vehicles, and has also added some mobile artillery and other support vehicles.
+<<elseif $securityForceVehiclePower == 4>>
+	The garage has acquired some heavier armoured vehicles to augment the infantry fighting vehicles and expanded their inventory of artillery and support vehicles.
+<<elseif $securityForceVehiclePower == 5>>
+	The garage has replaced both its armoured and support vehicles with the most advanced variants possible, making the mobile unit of the $securityForceName far superior to anything in the arcology's immediate area.
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForceAircraftPower == 0>>
+	The aerial fleet primarily consists of light transport VTOLs equipped with non-lethal weaponry.
+<<elseif $securityForceAircraftPower == 1>>
+	The aerial fleet's light transport VTOLs have been upgraded with additional fire-power and lethal weaponry.
+<<elseif $securityForceAircraftPower == 2>>
+	The aerial fleet's VTOLs have been upgraded to higher-capacity variants with heavier weaponry.
+<<elseif $securityForceAircraftPower == 3>>
+	The aerial fleet's medium transport VTOLs have been upgraded with enhanced armour and customized cargo compartments to better transport captured stock.
+<<elseif $securityForceAircraftPower == 4>>
+	The aerial fleet has acquired specialized attack VTOLs to complement and escort its advanced transport fleet, as well as to provide close air support.
+<<elseif $securityForceAircraftPower == 5>>
+	The aerial fleet has upgraded its attack VTOLs for enhanced lethality, and further improved the armour and armament of its transport VTOLs, ensuring that the airfleet of the $securityForceName is amongst the most capable still in operation in the area.
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForceDronePower == 0>>
+	The drone bay contains a small number of 're-purposed' non-military drones from the arcology's original contingent.
+<<elseif $securityForceDronePower == 1>>
+	The drone bay has replaced the security drones with basic, lightly-armoured military combat models possessing integrated small arms.
+<<elseif $securityForceDronePower == 2>>
+	The drone bay has replaced its basic military drones with more advanced models and added a number of support drones carrying heavy weaponry to its fleet.
+<<elseif $securityForceDronePower == 3>>
+	The drone bay has acquired even more advanced models of both the standard combat drones and the heavy support drones, and expanded its numbers of both.
+<<elseif $securityForceDronePower == 4>>
+	The drone bay has acted to upgrade both the standard and support models of drones to carry basic electromagnetic weaponry, improving their overall combat effectiveness.
+<<elseif $securityForceDronePower == 5>>
+	The drone bay has improved the electromagnetic armament of the drones, mounting both miniaturized and heavy railguns on them, and has further sourced numerous other models of drones for uses as diverse as reconnaissance, independent slave capture, and combat swarming tactics.
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForceStimulantPower == 0>>
+	The stimulant lab is providing the soldiers with standard ephedrine-based stimulants.
+<<elseif $securityForceStimulantPower == 1>>
+	The stimulant lab has improved the formula of the ephedrine-based stimulants, concentrating them and increasing both their potency, and the effectiveness of the soldiers under their influence.
+<<elseif $securityForceStimulantPower == 2>>
+	The stimulant lab has replaced the soldiers' stimulants with methamphetamine-based variants, greatly increasing their alertness and aggressiveness when under their influence.
+<<elseif $securityForceStimulantPower == 3>>
+	The stimulant lab has improved and concentrated the methamphetamine-based stimulants, and has also begun providing soldiers with phenylcyclidine-based dissociatives, allowing the soldiers to excuse their actions in the field and reducing any reluctance to follow severe orders.
+<<elseif $securityForceStimulantPower == 4>>
+	The stimulant lab has further refined the formulas of the methamphetamine-based stimulants and phenylcyclidine-based dissociatives, and has also begun providing tryptamine-based psychedelics to the soldiers, allowing them to avoid traumatic stress in the field.
+<<elseif $securityForceStimulantPower == 5>>
+	The stimulant lab has maximally refined the formulas of the methamphetamine-based stimulants, phenylcyclidine-based dissociatives, and tryptamine-based psychedelics, increasing their effectiveness in all aspects and ensuring that the soldiers of the $securityForceName go into combat wired, aggressive, and euphoric (if needed).
+<</if>><</nobr>></div>
+//You continue towards the common area, the soldiers you pass nodding respectfully, saluting, or giving slight bows, as they please, to you. You pass the briefing areas, and can see the officers and sergeants of the force conferring over planning tables and display screens regarding their upcoming deployments.//
+
+<div style="margin-left:2em"><<nobr>><<if $securityForceFocus == "recruit">>
+	The commanders are viewing lists of potential recruits for the $securityForceName, mercenaries and Old World soldiers who might be receptive to an offer of employment and residence within the arcology.
+<<elseif $securityForceFocus is "secure">>
+	The commanders are reviewing maps of trade routes to the arcology as well as those nearby merchant hubs, arranging their future deployments to best protect them and encourage business and trade.
+<<elseif $securityForceFocus is "raiding">>
+	The commanders are reviewing maps of settlements and locations reported to have choice concentrations of material loot and potential slave stock, in preparation for their coming raids.
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForceRulesOfEngagement == "hold">>
+	There are posted (and very strict) guidelines for the use of force against non-citizens residents, forbidding the use of heavy weapons or indiscriminate fire.
+<<elseif $securityForceRulesOfEngagement == "limited">>
+	There are some guidelines posted regarding the use of force against non-citizens, forbidding general indiscriminate fire.
+<<elseif $securityForceRulesOfEngagement == "free">>
+	Guidelines regarding the use of force are completely absent from the deployment information screens. A note affixed to the screen, probably from a soldier, says: "Pop 'em if you see 'em - better than target practice!" Another one affixed to that, from the Colonel, says: "Don't shoot the pretty ones, you fucking morons, or I'll kill you myself. They're worth good money. Or they're good for fun - do you idiots really want to have to fuck month-old stock?"
+<</if>><</nobr>></div>
+<div style="margin-left:2em"><<nobr>><<if $securityForceAccountability == "strict">>
+	On several screens, there are prominent warnings regarding the severe disciplinary procedures that will be taken against soldiers who commit crimes while on deployment.
+<<elseif $securityForceAccountability == "some">>
+	On several screens, there are some minor warnings regarding the mild disciplinary procedures that may be taken against soldiers who commit especially severe crimes while on deployment.
+<<elseif $securityForceAccountability == "none">>
+	There are no warnings or information regarding disciplinary procedures on any of the screens. Near one of them, a waste basket has been dragged over and a soldier has posted a note above it that says: "For Old World Complaints and Warrants."
+<</if>><</nobr>></div>
+//You arrive at the barracks' common area, a nest of bars, pleasure dens, public spaces, and other facilities catering to the soldiers' needs and giving them somewhere to spend their free time, since they do not mingle with your citizens on the higher levels or exit the arcology except on deployment. It is well-occupied by the soldiers not currently tasked with duties, and they respectfully move out of your way as you approach, clearing a path for you to move forward.//
+
+<div style="margin-left:2em"><<nobr>><<if $securityForceDepravity <= 0.3>>
+	The amenities are staffed by menial slaves, captured by the soldiers on their excursions. They are wearing plain jumpsuits and slim identification collars to set them apart from the soldiers, and look resigned but not fearful. The soldiers themselves socialize at the bars, in small groups around tables, and in the gambling parlours. Many of them can be seen entering or leaving the dens occupied by the sexual slaves they have acquired. Laughter from the carousing soldiers can be heard at all times. Small groups of slaves move freely between the plaza and their basic accommodations attached to the barracks.
+<<elseif $securityForceDepravity <= 0.6>>
+	The amenities are staffed by menial slaves, captured by the soldiers on their excursions. They are topless, wearing only utilitarian pants and leather collars to set them apart from the soldiers, and occasionally shoot fearful looks at the soldiers. The soldiers themselves socialize at the bars, or in large groups around tables, leering at and groping slaves of interest as they pass by. Many of them can be seen entering or leaving the dens occupied by the sexual slaves they have acquired, and often emerge only partially dressed, sometimes pulling half-naked slaves out with them.
+<<elseif $securityForceDepravity <= 0.9>>
+	The amenities are staffed by menial slaves, captured by the soldiers on their excursions. They are topless, wearing only utilitarian shorts and steel collars to set them apart from the soldiers, and often shoot fearful looks at the soldiers. The soldiers themselves socialize at the bars, or in large groups around tables, leering at and heavily groping slaves of interest as they pass by. Many of them can be seen entering or leaving the dens occupied by the sexual slaves they have acquired, and often emerge stark naked, sometimes pulling naked slaves out with them for one last servicing in public. A few soldiers stagger around in drunken hazes or drugged-out stupors.
+<<elseif $securityForceDepravity <= 1.2>>
+	The amenities are staffed by menial slaves, captured by the soldiers on their excursions. They are topless, wearing only a single undergarment and heavy steel collars to set them apart from the soldiers, and often shoot fearful looks at the soldiers. The soldiers occupy themselves primarily with sex, pulling slaves onto benches and fucking them hard in public. Many soldiers stagger around or lie passed out from drug and alcohol abuse.
+<<elseif $securityForceDepravity >= 1.5>>
+	The amenities are staffed by menial slaves, captured by the soldiers on their excursions. To a one, they are naked, and are wearing heavy shock collars to force obedience. Most are wild-eyed with fear or dull-eyed from mental collapse, and many others bear marks of abuse. Few of the slaves are here long-term, the depraved pleasures of the soldiers resulting in enormous turnover and loss of 'damaged' stock. The extreme libations of the soldiers are ever-present. Drunken soldiers stagger around everywhere, beating slaves too slow to get out of their way. Others lie sprawled out on the ground, rendered senseless from heavy drug abuse. Some walk around naked, and hold slaves down on the benches scattered around, raping or sodomizing them with their cocks or their personal strap-ons as they desire. In alcoves, some soldier-lover pairs fuck loudly, moaning in pleasure.
+	<<if random(1,100) > 50>>
+		Off to the side, a group of soldiers brutally gangbang a very young slave girl, with one soldier buried balls-deep in her ass, another brutally sawing a barbed strap-on in and out of her pussy, and a third with his cock forced deep down her throat. The slave girl struggles and gags, desperate for breath or relief.
+	<<elseif random(1,100) > 50>>
+		Off to the side, a group of soldiers cackle amongst themselves as they take turns beating a very young slave girl with heavy batons. Sickening crunches can be heard from the screaming slave.
+	<<elseif random(1,100) > 75>>
+		Off to the side, still more soldiers crowd around an above-ground pit built from empty crates, gambling on slave gladiator fights. There's a drunken cheer as one of the fighters, a very young slave girl, straddles another one and smashes her face in with a blood-slick ammo crate. As she stands, shaking from fear and adrenaline, one of the soldiers laughs and throws a small incendiary grenade at her, changing the cheers to curses as the other soldiers jump away from the flaming, screeching slave.
+	<<else>>
+		Screams and cries of pain can be heard echoing around the area as the soldiers have their fun with their property.
+	<</if>>
+
+<<else>>
+	The amenities are staffed by menial slaves, captured by the soldiers on their excursions.
+<</if>><</nobr>></div>
+//In the middle of the common area is a pile of supply crates with a pavilion on top - the Colonel's personal throne and open quarters, the result of her preferring to live an extreme lifestyle amongst her soldiers rather than in her empty quarters on the upper levels. It's draped with the 'flag' of the $securityForceName, one of her inventions, and immense quantities of alcohol and hard drugs are sprawled around, along with clothes, electronic devices, and huge amounts of cash, jewels, and precious metals looted from the outside world.//
+
+<div style="margin-left:2em"><<nobr>><<if random(1,100) > 50>>
+	The Colonel raises a hand in greeting and nods as you approach. She is sprawled on a couch, wearing only her combat suit tank top and fingerless gloves. She's holding a near-empty bottle of strong liquor in her hand, and you can see a naked slave girl kneeling on the floor between her legs. The Colonel has her legs wrapped tightly around the girl's head, forcing the girl to service her if she wants to breathe. The Colonel is close to her climax, and suddenly tenses her lower body, gripping the girl ever tighter and throwing her head back in ecstasy as she orgasms. She lets out a long breath and releases the girl, giving her a hard smack and shouting at her to fuck off.<br><br> The Colonel finishes off her bottle and tosses it over her shoulder, leaning back on the couch and spreading her legs wide. You look down briefly, falling into your habits of inspection. Her pussy is completely devoid of hair, with heavy labia and a very large, and hard, clit. Beads of moisture are visible, the result of her excitation, and you can tell from long experience that she would be tight as a vise. You return your gaze to her face to find her smirking at you. "Like what you see, boss?" She waves her hand at the plaza around her. "So do they. But you're not here for pussy. You're here to talk business. So, what's up?"
+<<elseif random(1,100) > 50>>
+	The Colonel is in no condition, initially, to greet you. She's naked except for one sock, giving you a very good view of her muscled, taut body, and is lying half on her couch and half on the table in front of it, face down in a drugged-out stupor in the middle of a wide variety of powders and pills. Perhaps sensing your approach, her head suddenly shoots up, and she looks at you with unfocused, bloodshot eyes. "Sorry, boss," she slurs, wiping her face and weakly holding up a hand. "Hold on a second, I need something to help me out here. Long fucking night." She struggles to sit on the couch, and then bends over the table, loudly snorting up some of the white powder on it. "Ahhh, fuck," she says, breathing heavily.<br><br> She shakes her head powerfully and then looks at you, her eyes once again alert and piercing. "That's better," she says, leaning back on the couch and giving you another good view of her assets. "So, boss," she begins, "what brings you down here to our little clubhouse? I trust you're happy with how we've been handling things out there?" You nod. "Good, good," she laughs. "I have to say, its nice to have a place like this, to have some top-end gear, and to be able to have fun out there without worrying about anyone coming back on us. Good fucking times." She laughs again. "So - I'm assuming you want something?"
+<<elseif random(1,100) > 70 && $securityForceDepravity >= 1.5>>
+	The Colonel, relaxing on her couch stark naked, greets you with a raised hand. Between her tightly clenched legs is the head of a slave girl being forced to eat her out. "Hey, boss, what's -" she breaks off as a flash of pain crosses her features. "Fucking bitch!" she exclaims, pulling her legs away and punching the slave girl in the face. She pushes the girl to the ground, straddles her and begins hitting, and you hear one crunch after another as the Colonel's powerful blows shatter the girl's face. She hisses from between clenched teeth, each word accompanied by a brutal punch. "How. Many. Fucking. Times. Have. I. Told. You. To. Watch. Your. Fucking. Teeth. On. My. Fucking. Clit!" She leans back and breaths heavily, before leaning back down and gripping the girl's neck with her powerful hands. Wordlessly, she grips tightly, and the girl begins struggling mightily for breath. Eventually her struggles weaken, and then finally, end.<br><br> The Colonel relaxes her grip and wipes her brow, clearing away the sweat from her exertion, before rising from the girl's body, relaxing back on the couch and putting her feet up on the table. "Sorry about that boss," she says, shrugging. "So many of these bitches we pick up from the outside don't understand that they have to behave." She shakes her head in frustration. "Now I need to find another one. But that's not your problem, you're here to talk business. So, what's up?"
+<<else>>
+	The Colonel, stripped to the waist, is reviewing the particulars of her unit on a tablet as you approach. She raises a hand in greeting. "Hey boss," she says, noticing you looking at her chest. She laughs. "Nice, aren't they? But they're not for you, or for them." She throws a thumb at the plaza around her. "You're down here for a reason, though. What can I do for you?"
+<</if>><</nobr>></div>
+	<<nobr>><<if $securityForceGiftToken == 0>>
+		<span id="result">
+			<<link "Ask the Colonel for some extra cash">><br>
+			<<replace "#result">>
+				<<if random(1,100) > 50>>
+					<<if random(1,100) > 50>>
+						The Colonel nods. "Sure boss," she says, "we had a bit of a haul this week. One of my sergeants convinced a woman to tell us where she had hidden her shit. Cut her up pretty bad, but she told us. Bunch of nice jewellery, I kept a nice piece for myself." She picks up a tablet on the table, tapping a few commands on it. "@@.green;There's your cut.@@"
+					<<else>>
+						The Colonel smiles widely. "Sure boss," she says, "we pulled in some good shit this week. One of the boys found a real nice family hiding in a basement. 18-year old triplets. Brought in a good bit of cash." She picks up a tablet on the table, tapping a few commands on it. "@@.green;There's your cut.@@"
+					<</if>>
+				<<else>>
+					The Colonel picks up a tablet. "Sure boss," she says, "we had a nice score this week. Looters fucked up and left a bunch of nice shit behind." She taps a few commands on the tablet. "@@.green;There's your cut.@@"
+				<</if>>
+			<<set $securityForceGiftToken = 1>>
+			<<set $cash += 2500>>
+			<</replace>>
+			<</link>><br>
+			<<link "Ask the Colonel to put in a good word for you with her contacts">><br>
+			<<replace "#result">>
+				<<if random(1,100) > 50>>
+					<<if random(1,100) > 50>>
+						The Colonel nods. "Sure boss," she says, "I still know a lot of people out there. They know my word means something. I'll tell them that yours does as well." She picks up a tablet on the table, tapping a few commands on it. "I just put the word out, boss. Your @@.green;reputation should be a bit better@@ now."
+					<<else>>
+						The Colonel smiles widely. "Sure boss," she says, "I can put in a good word for you with some of my contacts out there. A lot of them know other big shots in the Cities." She picks up a tablet on the table, tapping a few commands on it. "I just put the word out, boss. Your @@.green;reputation should be a bit better@@ now."
+					<</if>>
+				<<else>>
+					The Colonel picks up a tablet. "Sure boss," she says, "I can talk you up a bit. This new gig has impressed a lot of people, they'll definitely listen when I speak." She taps a few commands on the tablet. "I just put the word out, boss. Your @@.green;reputation should be a bit better@@ now."
+				<</if>>
+				<<set $securityForceGiftToken = 1>>
+				<<set $rep += 250>>
+			<</replace>>
+			<</link>><br>
+			<<link "Ask the Colonel to use her contacts to help the arcology's business community">><br>
+			<<replace "#result">>
+				<<if random(1,100) > 50>>
+					<<if random(1,100) > 50>>
+						The Colonel nods. "Sure boss," she says, "I can convince some of my contacts to run their business through the markets here rather than another of the Cities." She picks up a tablet on the table, tapping a few commands on it. "@@.green;There should be a small increase in prosperity,@@ boss."
+					<<else>>
+						The Colonel smiles widely. "Sure boss," she says, "I can make sure that our suppliers only run their goods through the markets here, rather than one of the markets out there." She picks up a tablet on the table, tapping a few commands on it. "@@.green;There should be a small increase in prosperity,@@ boss."
+					<</if>>
+				<<else>>
+					The Colonel picks up a tablet. "Sure boss," she says, "I can make sure that the soldiers only use the escrow services here for their business." She taps a few commands on the tablet. "@@.green;There should be a small increase in prosperity,@@ boss."
+				<</if>>
+				<<set $securityForceGiftToken = 1>>
+				<<set $arcologies[0].prosperity += 2>>
+			<</replace>>
+			<</link>><br>
+		</span>
+	<<else>>
+		//The Colonel has already provided you with extra tribute this week.//
+	<</if>><</nobr>>
+
+	<<nobr>><<if $securityForceInfantryPower+$securityForceVehiclePower+$securityForceDronePower+$securityForceAircraftPower+$securityForceStimulantPower+$securityForceArcologyUpgrades >= 30>>
+		//The $securityForceName is fully equipped and upgraded - nothing else can be done.//
+	<<elseif $securityForceUpgradeToken == 0>>
+	<span id="result2">
+		<<if $securityForceInfantryPower < 5 && $securityForceUpgradeToken == 0>>
+			<<link "Ask the Colonel to improve the infantry equipment">>
+				<<replace "#result2">>
+					"Sure, boss." she says, nodding. "The boys'll like having some new guns and armour to help them out there." She laughs. "Don't think the poor bastards they'll be shooting will thank you though." She picks up a tablet and taps a few commands on it. "I'll get right on it."
+					<<set $securityForceUpgradeToken = 1>>
+					<<set $securityForceInfantryPower += 1>>
+					<<set $cash -= 40000>>
+				<</replace>>
+			<</link>> // Costs ¤40000 //<br>
+		<<elseif $securityForceInfantryPower == 5>>
+			//The $securityForceName armoury is fully upgraded.//<br>
+		<</if>>
+		<<if $securityForceVehiclePower < 5 && $securityForceArcologyUpgrades >= 1 && $securityForceUpgradeToken == 0>>
+			<<link "Ask the Colonel to improve the vehicle fleet">>
+				<<replace "#result2">>
+					"Sure, boss." she says, nodding. "Some new wheels should help a lot." She laughs. "The scum out there don't seem to like it when we roll up on them in something better than their piece of shit junkers." She picks up a tablet and taps a few commands on it. "I'll get right on it."
+					<<set $securityForceUpgradeToken = 1>>
+					<<set $securityForceVehiclePower += 1>>
+					<<set $cash -= 60000>>
+				<</replace>>
+			<</link>> // Costs ¤60000 //<br>
+		<<elseif $securityForceVehiclePower == 5>>
+			//The $securityForceName vehicle fleet is fully upgraded.//<br>
+		<<else>>
+			//More barracks infrastructure upgrades are needed before the vehicle fleet can be expanded.//<br>
+		<</if>>
+		<<if $securityForceDronePower < 5 && $securityForceArcologyUpgrades >= 2 && $securityForceUpgradeToken == 0>>
+			<<link "Ask the Colonel to improve the drone fleet">>
+				<<replace "#result2">>
+					"Sure, boss." she says, nodding. "Some new drones would be nice." She laughs. "The poor bastards out there shit themselves when they see combat drones fly over the horizon." She picks up a tablet and taps a few commands on it. "I'll get right on it."
+					<<set $securityForceUpgradeToken = 1>>
+					<<set $securityForceDronePower += 1>>
+					<<set $cash -= 45000>>
+				<</replace>>
+			<</link>> // Costs ¤45000 //<br>
+		<<elseif $securityForceDronePower == 5>>
+			//The $securityForceName drone fleet is fully upgraded.//<br>
+		<<else>>
+			//More barracks infrastructure upgrades are needed before the drone fleet can be expanded.//<br>
+		<</if>>
+		<<if $securityForceAircraftPower < 5 && $securityForceArcologyUpgrades >= 4 && $securityForceUpgradeToken == 0>>
+			<<link "Ask the Colonel to improve the air fleet">>
+				<<replace "#result2">>
+					"Sure, boss." she says, nodding. "Some new VTOLs would be great." She laughs. "They're the real multiplier over the scum out there. Not much a looter gang can do against air support." She picks up a tablet and taps a few commands on it. "I'll get right on it."
+					<<set $securityForceUpgradeToken = 1>>
+					<<set $securityForceAircraftPower += 1>>
+					<<set $cash -= 70000>>
+				<</replace>>
+			<</link>> // Costs ¤70000 //<br>
+		<<elseif $securityForceAircraftPower == 5>>
+			//The $securityForceName air fleet is fully upgraded.//<br>
+		<<else>>
+			//More barracks infrastructure upgrades are needed before the air fleet can be expanded.//<br>
+		<</if>>
+		<<if $securityForceStimulantPower < 5 && $securityForceUpgradeToken == 0>>
+			<<link "Ask the Colonel to improve combat stimulants">>
+				<<replace "#result2">>
+					"Sure, boss." she says, nodding. "The boys are going to like hearing that they'll be getting new stims. Some of them can't get enough." She laughs, sweeping her arm at a corner of the throne, where dozens of empty stimulant injectors are piled. "I might be one of them. Either way, the fucks out there aren't going to like us once we're on the new juice." She picks up a tablet and taps a few commands on it. "I'll get right on it."
+					<<set $securityForceUpgradeToken = 1>>
+					<<set $securityForceStimulantPower += 1>>
+					<<set $cash -= 40000>>
+				<</replace>>
+			<</link>> // Costs ¤40000 //<br>
+		<<elseif $securityForceStimulantPower == 5>>
+			//The $securityForceName stimulant lab is fully upgraded.//<br>
+		<</if>>
+		<<if $securityForceArcologyUpgrades < 5 && $securityForceUpgradeToken == 0>>
+			<<link "Ask the Colonel to improve barracks infrastructure">>
+				<<replace "#result2">>
+					"Sure, boss." she says, nodding. "Expanding the facilities here should help us support more cool shit." She laughs, picks up a tablet, and taps a few commands on it. "I'll get right on it."
+					<<set $securityForceUpgradeToken = 1>>
+					<<set $securityForceArcologyUpgrades += 1>>
+					<<set $cash -= 100000>>
+				<</replace>>
+			<</link>> // Costs ¤100000 //<br>
+		<<elseif $securityForceVehiclePower == 5>>
+			//The $securityForceName has fully upgraded the arcology to support its activities.//<br>
+		<</if>>
+	</span>
+	<<else>>
+		//The Colonel is working to improve the $securityForceName this week.//<br>
+	<</if>><</nobr>>

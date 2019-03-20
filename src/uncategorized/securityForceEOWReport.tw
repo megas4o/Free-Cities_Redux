@@ -1,0 +1,199 @@
+:: Security Force EOW Report
+
+<<silently>>
+/* Manpower Fluctuation Calculations - loss from attrition, random casualties, etc. Baseline is ~3%/week. Heavier for raiding/slaving, reduced for securing trade. Maxes out between 900-1000, though never exactly that. If over 1000 for some reason, set to 985-995. If under 100, cannot fluctuate further negatively. */
+
+	/* Check for too many troopers, set to mid 900s if so */
+	<<if $securityForcePersonnel > 1000>>
+		<<set $securityForcePersonnel = random(965,995)>>
+	<</if>>
+
+	/* Force attrition, scales with size of force, increases when raiding and decreases when training. Securing trade is the 'neutral state', though attrition still of course happens */
+	<<if $securityForcePersonnel < 100>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(2,5)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(2,5)>> <<else>> <<set $securityForcePersonnel += random(2,5)>> <</if>>
+	<<elseif $securityForcePersonnel < 200>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-4,0)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-8,-4)>> <<else>> <<set $securityForcePersonnel += random(-6,-2)>> <</if>>
+	<<elseif $securityForcePersonnel < 300>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-6,-2)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-10,-6)>> <<else>> <<set $securityForcePersonnel += random(-8,-4)>> <</if>>
+	<<elseif $securityForcePersonnel < 400>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-8,-4)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-12,-8)>> <<else>> <<set $securityForcePersonnel += random(-10,-6)>> <</if>>
+	<<elseif $securityForcePersonnel < 500>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-12,-8)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-16,-12)>> <<else>> <<set $securityForcePersonnel += random(-14,-10)>> <</if>>
+	<<elseif $securityForcePersonnel < 600>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-14,-12)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-18,-16)>> <<else>> <<set $securityForcePersonnel += random(-16,-14)>> <</if>>
+	<<elseif $securityForcePersonnel < 700>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-16,-14)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-20,-18)>> <<else>> <<set $securityForcePersonnel += random(-18,-16)>> <</if>>
+	<<elseif $securityForcePersonnel < 800>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-20,-16)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-24,-20)>> <<else>> <<set $securityForcePersonnel += random(-22,-18)>> <</if>>
+	<<elseif $securityForcePersonnel < 900>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-24,-20)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-28,-24)>> <<else>> <<set $securityForcePersonnel += random(-26,-22)>> <</if>>
+	<<elseif $securityForcePersonnel < 1000>>
+		<<if $securityForceFocus == "recruit">> <<set $securityForcePersonnel += random(-28,-24)>> <<elseif $securityForceFocus == "raiding">> <<set $securityForcePersonnel += random(-32,-28)>> <<else>> <<set $securityForcePersonnel += random(-30,-26)>> <</if>>
+	<<else>>
+		<<set $securityForcePersonnel += random(-1,1)>>
+	<</if>>
+
+/* Recruitment Calculations. Base of 10/week, so can get to about 250 personnel without upgrades/rep changes. Increases with reputation, either positive (I get to work for a solid private force!) or negative (I get to shoot people and take their shit, and nobody cares!). Increases with cumulative upgrade sum (a better equipped force is more attractive for recruits). Infantry upgrades are worth twice as much (I get crazy combat armour, for free?). */
+
+	/* Universal recruitment base */
+	<<set $securityForceRecruit = 10>>
+
+	/* Extra recruitment from upgrades, up to an extra 5 per upgrade track (10 for infantry), to a sum of an extra 30/week at full upgrades. */
+	<<if $securityForceInfantryPower > 0>>
+		<<set $securityForceRecruit += ($securityForceInfantryPower*2)>> <</if>>
+	<<if $securityForceVehiclePower > 0>>
+		<<set $securityForceRecruit += ($securityForceVehiclePower)>> <</if>>
+	<<if $securityForceAircraftPower > 0>>
+		<<set $securityForceRecruit += ($securityForceAircraftPower)>> <</if>>
+	<<if $securityForceDronePower > 0>>
+		<<set $securityForceRecruit += ($securityForceDronePower)>> <</if>>
+	<<if $securityForceStimulantPower > 0>>
+		<<set $securityForceRecruit += ($securityForceStimulantPower)>> <</if>>
+
+	/* If focus is recruit/train, 80% of the above is added to the personnel total of the SF. Else, 25% (which will, at medium/high personnel levels, not wholly counteract attrition, needing some recruitment every so often to keep the total high). */
+	<<if $securityForceFocus == "recruit">>
+		<<set $securityForceRecruit += (Math.trunc($securityForceRecruit*0.8))>>
+	<<elseif $securityForceFocus == "secure">>
+		<<set $securityForceRecruit += (Math.trunc($securityForceRecruit*0.25))>>
+	<<elseif $securityForceFocus == "raiding">>
+		<<set $securityForceRecruit += (Math.trunc($securityForceRecruit*0.25))>>
+	<</if>>
+
+	/* Final addition of recruits to force personnel pool */
+	<<set $securityForcePersonnel += ($securityForceRecruit)>>
+
+	/* Final Check to ensure not over 1000 members. If so, set it to the mid/high 900s. Recruitment will be wasteful at this point. */
+	<<if $securityForcePersonnel > 1000>>
+		<<set $securityForcePersonnel = random(965,995)>>
+	<</if>>
+
+/* Trade Protection Calculations. Protecting trade is a reputation/prosperity builder and provides a few event triggers. Base rep build of 2.5%/week. Each upgrade adds 0.25%, drones are twice as powerful (swarms to patrol smaller routes while the troops secure the major ones, etc.), to reach a theoretical max of 5% rep boost per week from that (before subsequent modifiers and calculations at EOW). Personnel gates apply a further 0.5% modifier per gate. Prosperity builds at the same rate (adds an extra 5% prosperity per week along the same guidelines as rep using the same logic), and is then applied to the prosperity if the result would be less than/equal to the current prosperity cap. Positive reputation applies a significant positive multiplier (lets go trade with the nice people!), negative reputation applies a significant negative multiplier (trade routes are safe, yeah, but you know, they, uh, murder people for their jewelry and then enslave their children). */
+
+	/* Base rep/prosperity gain */
+	<<set $securityForceTrade = 0.025>>
+
+	/* Extra rep/prosperity from upgrades, an extra 0.25% per upgrade. Drones worth twice as much. */
+	<<if $securityForceInfantryPower > 0>>
+		<<set $securityForceTrade += (0.0025*($securityForceInfantryPower))>> <</if>>
+	<<if $securityForceVehiclePower > 0>>
+		<<set $securityForceTrade += (0.0025*($securityForceVehiclePower))>> <</if>>
+	<<if $securityForceAircraftPower > 0>>
+		<<set $securityForceTrade += (0.0025*($securityForceAircraftPower))>> <</if>>
+	<<if $securityForceDronePower > 0>>
+		<<set $securityForceTrade += (0.005*($securityForceDronePower))>> <</if>>
+	<<if $securityForceStimulantPower > 0>>
+		<<set $securityForceTrade += (0.0025*($securityForceStimulantPower))>> <</if>>
+
+	/* Manpower effects - extra 0.5% per 100-gate in terms of manpower. Kicks in at over 200, since some of the SF is on overhead, logistics, repairs, rest, etc. */
+	<<if $securityForcePersonnel > 200>>
+		<<set $securityForceTrade += (0.005*Math.trunc($securityForcePersonnel/100))>>
+	<</if>>
+
+	/* If focus is secure trade, 80% of the above is added to the players rep/prosperity. Else, 25%. */
+	<<if $securityForceFocus == "secure">>
+		<<set $rep += (Math.trunc($rep*($securityForceTrade*0.8)))>>
+		<<set $arcologies[0].prosperity = (Math.trunc($arcologies[0].prosperity*(($securityForceTrade*0.8)+1)))>>
+	<<elseif $securityForceFocus == "recruit">>
+		<<set $rep += (Math.trunc($rep*($securityForceTrade*0.25)))>>
+		<<set $arcologies[0].prosperity = (Math.trunc($arcologies[0].prosperity*(($securityForceTrade*0.25)+1)))>>
+	<<elseif $securityForceFocus == "raiding">>
+		<<set $rep += (Math.trunc($rep*($securityForceTrade*0.25)))>>
+		<<set $arcologies[0].prosperity = (Math.trunc($arcologies[0].prosperity*(($securityForceTrade*0.25)+1)))>>
+	<</if>>
+
+	/* If the rep or prosperity is now above the cap, set it to the cap. */
+	<<if $rep > 20000>>
+		<<set $rep = 20000>>
+	<</if>>
+	<<if $arcologies[0].prosperity > $AProsperityCap>>
+		<<set $arcologies[0].prosperity = $AProsperityCap>>
+	<</if>>
+
+
+/* Raiding/Slaving Calculations. This brings in cash and activates event triggers. Base raiding brings in 7500/week, but this scales significantly with personnel and upgrades.   */
+
+	/* Base raiding take, zero the summative variables */
+	<<set $securityForceBooty = 7500>>
+	<<set $securityForceIncome = 0>>
+	<<set $securityForceMissionEfficiency = 1>>
+
+	/* Impact of manpower on raiding. An extra 2500/100-gate, kicking in at over 200 personnel */
+	<<if $securityForcePersonnel > 200>>
+		<<set $securityForceBooty = ($securityForceBooty+(2500*Math.trunc($securityForcePersonnel/100)))>>
+	<</if>>
+
+	/* Raiding Efficiency Modifier Calculations - 4% per force upgrade (20% per tree), up to 25% final multiplier (after upgrade considerations) for stims. With all upgrades, total of 225% increase after all other raiding calculations (drugs make them better at everything, but especially much better at raiding - much easier to murder and pillage when you're fucked out of your mind on a mix of meth, pcp, and lsd). */
+	<<if $securityForceInfantryPower != 0>>
+		<<set $securityForceMissionEfficiency = ($securityForceMissionEfficiency+($securityForceInfantryPower*0.04))>> <</if>>
+	<<if $securityForceVehiclePower != 0>>
+		<<set $securityForceMissionEfficiency = ($securityForceMissionEfficiency+($securityForceVehiclePower*0.04))>> <</if>>
+	<<if $securityForceAircraftPower != 0>>
+		<<set $securityForceMissionEfficiency = ($securityForceMissionEfficiency+($securityForceAircraftPower*0.04))>> <</if>>
+	<<if $securityForceDronePower != 0>>
+		<<set $securityForceMissionEfficiency = ($securityForceMissionEfficiency+($securityForceDronePower*0.04))>> <</if>>
+	<<if $securityForceStimulantPower != 0>>
+		<<set $securityForceMissionEfficiency = ($securityForceMissionEfficiency*(1+($securityForceStimulantPower*0.05)))>> <</if>>
+
+	/* Apply the efficiency boost to the booty. Lets hope that meth made them better at ripping out some poor bastard's gold teeth */
+	<<set $securityForceBooty = ($securityForceBooty*$securityForceMissionEfficiency)>>
+
+	/* Check to see if total booty is over 15k. This is the 'profitability point' of the SF. It has no upkeep, but unless you get over 15k, the colonel uses the entire take to keep the force together. Still very profitable at higher levels though (Who thought having a 1000-man private military dedicated to slamming meth and pillaging the world would be profitable? It's quite crazy tbh). Technically the booty calcs should be affected if the force is recruiting/securing (less income from raids), but that would be frustrating for the player at high levels of development - we still want them to feel like they're getting the cash. Uses a flag for the eventual description. */
+	<<if $securityForceBooty > 15000>>
+		<<set $securityForceProfitable = 1>>
+
+		/* Finally, add dat cash to the bank. C.R.E.A.M. */
+		<<if $securityForceFocus == "raiding">>
+			<<set $securityForceIncome = Math.trunc(($securityForceBooty*0.80))>>
+			<<set $cash = ($cash+$securityForceIncome)>>
+		<<elseif $securityForceFocus == "recruit">>
+			<<set $securityForceIncome = Math.trunc(($securityForceBooty*0.25))>>
+			<<set $cash = ($cash+$securityForceIncome)>>
+		<<elseif $securityForceFocus == "secure">>
+			<<set $securityForceIncome = Math.trunc(($securityForceBooty*0.25))>>
+			<<set $cash = ($cash+$securityForceIncome)>>
+		<</if>>
+	<<else>>
+		<<set $securityForceProfitable = 0>>
+	<</if>>
+
+/* Depravity calculations - hidden stat representing how violent/hedonistic/etc the SF is. Rises with raiding/free fire/low accountability, lowers with reduced settings (though much slower since its easier to go criminal then it is to go straight afterward, etc. Middle options have no effect. Each setting is independent of the others. */
+
+	<<if $securityForceFocus == "raiding">>
+		<<set $securityForceDepravity += 0.05>>
+	<<elseif $securityForceFocus == "secure">>
+		<<set $securityForceDepravity -= 0.02>>
+	<</if>>
+
+	<<if $securityForceRulesOfEngagement == "free">>
+		<<set $securityForceDepravity += 0.05>>
+	<<elseif $securityForceRulesOfEngagement == "hold">>
+		<<set $securityForceDepravity -= 0.02>>
+	<</if>>
+
+	<<if $securityForceAccountability == "none">>
+		<<set $securityForceDepravity += 0.05>>
+	<<elseif $securityForceAccountability == "strict">>
+		<<set $securityForceDepravity -= 0.02>>
+	<</if>>
+
+/* Reset the token counters for speaking to the Colonel in the barracks */
+	<<set $securityForceUpgradeToken = 0>>
+	<<set $securityForceGiftToken = 0>>
+
+/* Take all the above and display the EOW text and control panel. */
+	<</silently>>
+	__Status and Activities of the $securityForceName __:
+	This week, the $securityForceName, $securityForcePersonnel strong, focused on <<if $securityForceFocus == "recruit">>recruiting and training more personnel. Smaller parties ventured out to protect the arcology's trade routes and strike targets of opportunity.<<elseif $securityForceFocus == "secure">>securing the trade routes between the arcology and the surrounding area. Smaller parties ventured out to strike targets of opportunity and process new recruits.
+	<<elseif $securityForceFocus == "raiding">>locating and striking targets of opportunity, capturing both material loot and new slaves. Smaller parties secured the most important of the arcology's trade routes and processed new recruits. <</if>> These activities have, overall, @@.green;improved@@ your arcology's prosperity. <<if $securityForceProfitable == 1>>The goods procured by the $securityForceName this week, after accounting for the spoils retained by individual soldiers, were @@.green;more than sufficient@@ to cover expenses. Excess material and human assets totalling @@.yellowgreen;¤$securityForceIncome@@ (after liquidation) were transferred to your accounts. <<else>>The goods procured by the security force were, after accounting for the spoils retained by individual soldiers, @@.red;barely enough@@ to cover expenses. More growth will be needed to ensure profitability.<</if>> The $securityForceName managed to recruit $securityForceRecruit new soldiers this week, and your reputation has @@.green;improved@@ through the improvement of trade security.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Your instructions to the Colonel://
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deployment focus: <span id="focus"><<if $securityForceFocus == "recruit">>''Recruiting and Training''<<elseif $securityForceFocus == "secure">>''Securing Trade Routes''<<else>>''Raiding and Slaving''<</if>></span>.&nbsp;&nbsp; <<link "Recruit and Train">><<set $securityForceFocus = "recruit">><<replace "#focus">>''Recruiting and Training''<</replace>><</link>> | <<link "Secure Trade Routes">><<set $securityForceFocus = "secure">><<replace "#focus">>''Securing Trade Routes''<</replace>><</link>> | <<link "Raiding and Slaving">><<set $securityForceFocus = "raiding">><<replace "#focus">>''Raiding and Slaving''<</replace>><</link>>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rules of Engagement: <span id="roe"><<if $securityForceRulesOfEngagement == "hold">>''Hold Fire''<<elseif $securityForceRulesOfEngagement == "limited">>''Limited Fire''<<else>>''Free Fire''<</if>></span>.&nbsp;&nbsp; <<link "Hold Fire">><<set $securityForceRulesOfEngagement = "hold">><<replace "#roe">>''Hold Fire''<</replace>><</link>> | <<link "Limited Fire">><<set $securityForceRulesOfEngagement = "limited">><<replace "#roe">>''Limited Fire''<</replace>><</link>> | <<link "Free Fire">><<set $securityForceRulesOfEngagement = "free">><<replace "#roe">>''Free Fire''<</replace>><</link>>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accountability: <span id="accountability"><<if $securityForceAccountability == "strict">>''Strict Accountability''<<elseif $securityForceAccountability == "some">>''Some Accountability''<<else>>''No Accountability''<</if>></span>.&nbsp;&nbsp; <<link "Strict Accountability">><<set $securityForceAccountability = "strict">><<replace "#accountability">>''Strict Accountability''<</replace>><</link>> | <<link "Some Accountability">><<set $securityForceAccountability = "some">><<replace "#accountability">>''Some Accountability''<</replace>><</link>> | <<link "No Accountability">><<set $securityForceAccountability = "none">><<replace "#accountability">>''No Accountability''<</replace>><</link>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Current Status://
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equipment (Infantry):&nbsp;<<if $securityForceInfantryPower == 0>>High quality light armour and ballistic small arms.<<elseif $securityForceInfantryPower == 1>>Advanced light armour, basic exo-suits, and ballistic small arms.<<elseif $securityForceInfantryPower == 2>>Advanced light armour with enclosed tac-helmets, advanced exo-suits, and ballistic small arms.<<elseif $securityForceInfantryPower == 3>>
+	Advanced light armour with enclosed tac-helmets, basic enclosed combat suits, and electromagnetic small arms.<<elseif $securityForceInfantryPower == 4>>Advanced light armour with enclosed tac-helmets, advanced enclosed combat suits, and electromagnetic small arms.<<elseif $securityForceInfantryPower == 5>>Advanced light armour with enclosed tac-helmets, advanced enclosed combat suits with personal artillery, and electromagnetic small arms.<</if>>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equipment (Vehicular):&nbsp;<<if $securityForceVehiclePower == 0>>Re-purposed civilian vehicles and armed utility vehicles.<<elseif $securityForceVehiclePower == 1>>Armed and armoured utility vehicles and customized slave transports.<<elseif $securityForceVehiclePower == 2>>Basic light armour and customized slave transports.<<elseif $securityForceVehiclePower == 3>>Advanced light armour, basic support vehicles and artillery, and customized slave transports.<<elseif $securityForceVehiclePower == 4>>Advanced light armour, basic medium armour, advanced support vehicles and artillery, and specialized slave transports.<<elseif $securityForceVehiclePower == 5>>Advanced light armour, advanced medium armour, advanced support vehicles and artillery, and specialized slave transports.<</if>>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equipment (Aerial):&nbsp;<<if $securityForceAircraftPower == 0>>Basic light transport VTOLs with non-lethal weaponry.<<elseif $securityForceAircraftPower == 1>>Basic light transport VTOLs with upgraded weaponry.<<elseif $securityForceAircraftPower == 2>>Medium transport VTOLs with heavy weaponry.<<elseif $securityForceAircraftPower == 3>>Armoured medium transport VTOLs with heavy weaponry and secure cargo compartments.<<elseif $securityForceAircraftPower == 4>>Basic specialized attack VTOLs, and armoured medium transport VTOLs with heavy weaponry and secure cargo compartments.<<elseif $securityForceAircraftPower == 5>>Advanced specialized attack VTOLs, and armoured medium transport VTOLs with heavy weaponry and secure cargo compartments.<</if>>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equipment (Drones):&nbsp;<<if $securityForceDronePower == 0>>Basic security drones 'salvaged' from the arcology security contingent.<<elseif $securityForceDronePower == 1>>Basic armoured combat drones with ballistic weaponry.<<elseif $securityForceDronePower == 2>>Advanced armoured combat drones with ballistic weaponry and basic heavy drones with ballistic support weaponry.<<elseif $securityForceDronePower == 3>>Advanced armoured combat drones with ballistic weaponry and advanced heavy drones with ballistic support weaponry.<<elseif $securityForceDronePower == 4>>Advanced armoured combat drones with electromagnetic weaponry and advanced heavy drones with electromagnetic support weaponry.<<elseif $securityForceDronePower == 5>>Advanced armoured combat drones with electromagnetic weaponry, advanced heavy drones with electromagnetic support weaponry, and specialized drones for reconnaissance, capture, and swarm tactics.<</if>>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equipment (Stimulants):&nbsp;<<if $securityForceStimulantPower == 0>>Standard ephedrine-based stimulants.<<elseif $securityForceStimulantPower == 1>>Concentrated ephedrine-based stimulants.<<elseif $securityForceStimulantPower == 2>>Basic methamphetamine-based stimulants.<<elseif $securityForceStimulantPower == 3>>Concentrated methamphetamine-based stimulants and basic phenylcyclidine-based dissociatives. <<elseif $securityForceStimulantPower == 4>>Concentrated methamphetamine-based stimulants and phenylcyclidine-based dissociatives and basic tryptamine-based psychedelics.<<elseif $securityForceStimulantPower == 5>>Concentrated methamphetamine-based stimulants, phenylcyclidine-based dissociatives, tryptamine-based psychedelics.<</if>>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arcology (Upgrades):&nbsp;<<if $securityForceArcologyUpgrades == 0>>$securityForceName barracks in the arcology's lower levels.<<elseif $securityForceArcologyUpgrades == 1>>$securityForceName barracks in the arcology's lower levels, with an adjoining garage for vehicles.<<elseif $securityForceArcologyUpgrades == 2>>$securityForceName barracks in the arcology's lower levels, with an adjoining garage for vehicles and a launch bay for heavy drones.<<elseif $securityForceArcologyUpgrades == 3>>$securityForceName barracks in the arcology's lower levels, with an adjoining garage for vehicles, a launch bay for heavy drones, and advanced logistical facilities for heavy equipment.<<elseif $securityForceArcologyUpgrades == 4>>$securityForceName barracks in the arcology's lower levels, with an adjoining garage for vehicles, a launch bay for heavy drones, and advanced logistical facilities for heavy equipment. A ring of durable launch pads around the arcology's higher levels for aerial operations.<<elseif $securityForceArcologyUpgrades == 5>>$securityForceName barracks in the arcology's lower levels, with an adjoining garage for vehicles, a launch bay for heavy drones, and advanced logistical facilities for heavy equipment. A ring of durable launch pads around the arcology's higher levels for aerial operations, and heavy electromagnetic weapon batteries in fortified casemates for arcology defence and long-range fire support.<</if>>

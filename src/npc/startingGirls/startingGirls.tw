@@ -1,0 +1,1180 @@
+:: Starting Girls [nobr]
+
+<<if $showStartingGirlsExplanation == 1>>
+	You're no stranger to the Free Cities, which means you're no stranger to slavery. If you wish, you can bring slaves from your past life with you to your arcology. You have ¤$cash; you can spend it on slaves here, or bring it with you to start the game. Slaves created here will be much cheaper than if they were purchased on the market.
+	<<if ($PC.dick == 1) && ($PC.vagina == 1) && $seeDicks != 0>>
+		Since you have both a penis and a vagina yourself, you've obviously had access to a source of advanced surgery and organ farming. @@.springgreen;Slaves get a smaller cost increase here for having both penises and vaginas, and for having both testicles and ovaries.@@
+	<</if>>
+	<<if $slaves.length == 1>>
+		You have one slave already committed.
+	<<elseif $slaves.length > 1>>
+		You have $slaves.length slaves already committed.
+	<</if>>
+<<else>>
+	You have ¤$cash remaining and have
+	<<if $slaves.length == 1>>
+	one slave already committed.
+	<<elseif $slaves.length > 1>>
+	$slaves.length slaves already committed.
+	<</if>>
+<</if>>
+
+<<if $startingGirlCopied == 1>>
+	<<set _tempSlave = clone($activeSlave), $activeSlave = $slaveWithoutBonuses>>
+	<<set $activeSlave.ID = $IDNumber++>>
+	<<if $startingGirlRelation>>
+			<<switch $startingGirlRelation>>
+			<<case "mother">>
+				<<set $activeSlave.relation = "daughter", $activeSlave.age -= random(16,24)>>
+			<<case "daughter">>
+				<<set $activeSlave.relation = "mother", $activeSlave.age += random(16,24)>>
+				<<if $activeSlave.vagina == 0>><<set $activeSlave.vagina++>><</if>>
+			<<case "older sister">>
+				<<set $activeSlave.relation = "sister", $activeSlave.age += random(2,4)>>
+			<<case "younger sister">>
+				<<set $activeSlave.relation = "sister", $activeSlave.age -= random(2,4)>>
+			<<default>>
+				<<set $activeSlave.relation = "twin">>
+			<</switch>>
+			<<set $activeSlave.relationTarget = _tempSlave.ID>>
+		<<if $startingGirlRelation != "twin">><<set $activeSlave.birthWeek = random(0,51)>><</if>>
+		<<if $activeSlave.slaveSurname>><<set _familyName = $activeSlave.slaveSurname>><</if>>
+		<<if $activeSlave.birthSurname>><<set _familyBirthSurname = $activeSlave.birthSurname>><</if>>
+	<</if>>
+	<<NationalityToName $activeSlave>>
+	<<if _familyName>><<set $activeSlave.slaveSurname = _familyName>><</if>>
+	<<if _familyBirthSurname>><<set $activeSlave.birthSurname = _familyBirthSurname>><</if>>
+	<<set $activeSlave.slaveName = $activeSlave.birthName>>
+	<<if $activeSlave.attrKnown == 0>>
+		<<set $activeSlave.attrXX = random(0,100)>>
+		<<set $activeSlave.attrXY = random(0,100)>>
+		<<set $activeSlave.energy = random(1,90)>>
+	<</if>>
+	<<if $activeSlave.fetish != "mindbroken" && $activeSlave.fetishKnown == 0>>
+		<<set $activeSlave.fetishStrength = random(0,90)>>
+		<<set $activeSlave.fetish = either("none", "none", "none", "none", "none", "none", "none", "none", "none", "none", "submissive", "cumslut", "humiliation", "buttslut", "boobs", "pregnancy", "dom", "sadist", "masochist")>>
+	<</if>>
+	<<set $startingGirlCopied = 0, $startingGirlRelation = 0>>
+<<elseif $archetyped == 1>>
+	<<NationalityToName $activeSlave>>
+	<<set $activeSlave.slaveName = $activeSlave.birthName, $archetyped = 0>>
+<</if>>
+
+__You are customizing this slave:__
+<br>
+<<if $activeSlave == 0>>
+	<<StartingGirlsWorkaround>>
+<</if>>
+
+<<if $activeSlave.dick == 0>>
+<<else>>
+	<<if $activeSlave.prostate == 0>>
+		<<set $activeSlave.prostate = 1>>
+	<</if>>
+<</if>>
+<<if ($activeSlave.balls == 0)>>
+	<<set $activeSlave.scrotum = 0>>
+<</if>>
+<<if ($activeSlave.vagina == -1)>>
+	<<set $activeSlave.vaginaLube = 0>>
+<</if>>
+<<set $activeSlave.age = Math.clamp($activeSlave.age, 18, 44) || 18>>
+<<set $activeSlave.birthWeek = Math.clamp($activeSlave.birthWeek, 0, 51) || 0>>
+<<set $activeSlave.trust = Math.clamp($activeSlave.trust, -100, 100) || 0>>
+<<set $activeSlave.devotion = Math.clamp($activeSlave.devotion, -100, 100) || 0>>
+<<if ($activeSlave.anus > 2 && $activeSlave.analSkill <= 10) || ($activeSlave.anus == 0 && $activeSlave.analSkill > 30)>>
+	<<set $activeSlave.analSkill = 15>>
+<</if>>
+<<if $activeSlave.vagina < 0>>
+	<<set $activeSlave.vaginalSkill = 0>>
+<<elseif ($activeSlave.vagina > 2 && $activeSlave.vaginalSkill <= 10) || ($activeSlave.vagina == 0 && $activeSlave.vaginalSkill > 30)>>
+	<<set $activeSlave.vaginalSkill = 15>>
+<</if>>
+<<if ($activeSlave.intelligence + $activeSlave.intelligenceImplant > 2) && $activeSlave.entertainSkill <= 10>>
+	<<set $activeSlave.entertainSkill = 15>>
+<</if>>
+
+<<if $activeSlave.indenture >= 0>>
+	<<set $activeSlave.indenture = Math.clamp($activeSlave.indenture, 26, 208)>>
+<</if>>
+<<set $activeSlave.height = Math.clamp($activeSlave.height, 91, 274) || 140>>
+<<set $activeSlave.boobs = Math.clamp(Math.trunc($activeSlave.boobs/50)*50, 0, 50000) || 200>>
+<<set $activeSlave.canRecruit = 0>>
+
+<span id="slaveinfo">
+<<set $saleDescription = 1>>
+<<include "Long Slave Description">>
+</span>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;''<<link "Refresh">><<goto "Starting Girls">><</link>>''
+
+| <<link "Randomize career">>
+<<if ($activeSlave.age <= 22)>>
+	<<set $activeSlave.career = setup.youngCareers.random()>>
+<<elseif ($activeSlave.intelligenceImplant == 1)>>
+	<<set $activeSlave.career = setup.educatedCareers.random()>>
+<<else>>
+	<<set $activeSlave.career = setup.uneducatedCareers.random()>>
+<</if>>
+<<SaleDescription>>
+<<StartingGirlsCost>>
+<</link>>
+
+| <<link "Randomize name">>
+<<NationalityToName $activeSlave>>
+<<set $activeSlave.slaveName = $activeSlave.birthName>>
+<<SaleDescription>>
+<<StartingGirlsCost>>
+<</link>>
+
+| [[More customization options]]
+
+| <<link "Start over with a random slave">>
+<<set $fixedNationality = $nationalities.random()>>
+<<StartingGirlsWorkaround>>
+<<StartingGirlsRefresh>>
+<<SaleDescription>>
+<<StartingGirlsCost>>
+<</link>>
+
+<hr>''Devotion:''
+<span id="devotion">
+<<if $activeSlave.devotion < -95>>@@.darkviolet;Utterly hateful.@@
+<<elseif $activeSlave.devotion < -50>>@@.darkviolet;Hateful.@@
+<<elseif $activeSlave.devotion < -20>>@@.mediumorchid;Resistant.@@
+<<elseif $activeSlave.devotion <= 20>>@@.yellow;Ambivalent.@@
+<<elseif $activeSlave.devotion <= 50>>@@.hotpink;Accepting.@@
+<<elseif $activeSlave.devotion <= 95>>@@.deeppink;Devoted.@@
+<<else>>@@.magenta;Worshipful.@@
+<</if>>
+</span>
+<<link "Utterly hateful">><<set $activeSlave.devotion = -100>><<replace "#devotion">>@@.darkviolet;Utterly hateful.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Hateful">><<set $activeSlave.devotion = -70>><<replace "#devotion">>@@.darkviolet;Hateful.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Resistant">><<set $activeSlave.devotion = -35>><<replace "#devotion">>@@.mediumorchid;Resistant.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Ambivalent">><<set $activeSlave.devotion = 0>><<replace "#devotion">>@@.yellow;Ambivalent.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Accepting">><<set $activeSlave.devotion = 35>><<replace "#devotion">>@@.hotpink;Accepting.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Devoted">><<set $activeSlave.devotion = 70>><<replace "#devotion">>@@.deeppink;Devoted.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Worshipful">><<set $activeSlave.devotion = 100>><<replace "#devotion">>@@.magenta;Worshipful.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+<<textbox "$activeSlave.devotion" $activeSlave.devotion "Starting Girls">>
+<span id="devotionWarning"></span>
+
+<br>''Trust:''
+<span id="trust">
+<<if $activeSlave.trust < -95>>@@.goldenrod;Abjectly terrified.@@
+<<elseif $activeSlave.trust < -50>>@@.goldenrod;Terrified.@@
+<<elseif $activeSlave.trust < -20>>@@.gold;Frightened.@@
+<<elseif $activeSlave.trust <= 20>>@@.yellow;Fearful.@@
+<<elseif $activeSlave.trust <= 50>>@@.mediumaquamarine;Careful.@@
+<<elseif $activeSlave.trust <= 95>>@@.mediumseagreen;Trusting.@@
+<<else>>@@.seagreen;Absolute trust.@@
+<</if>>
+</span>
+<<link "Abjectly terrified">><<set $activeSlave.trust = -100>><<replace "#trust">>@@.goldenrod;Abjectly terrified.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Terrified">><<set $activeSlave.trust = -70>><<replace "#trust">>@@.goldenrod;Terrified.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Frightened">><<set $activeSlave.trust = -35>><<replace "#trust">>@@.gold;Frightened.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Fearful">><<set $activeSlave.trust = 0>><<replace "#trust">>@@.yellow;Fearful.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Careful">><<set $activeSlave.trust = 35>><<replace "#trust">>@@.mediumaquamarine;Careful.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Trusting">><<set $activeSlave.trust = 70>><<replace "#trust">>@@.mediumseagreen;Trusting.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Absolute trust">><<set $activeSlave.trust = 100>><<replace "#trust">>@@.seagreen;Absolute trust.@@<</replace>><<StartingGirlsCost>><</link>>
+<<textbox "$activeSlave.trust" $activeSlave.trust "Starting Girls">>
+
+<br>''Legal status:''
+<span id="legal">
+<<if $activeSlave.indenture > 0>>Indentured servant with <<textbox "$activeSlave.indenture" $activeSlave.indenture "Starting Girls">> weeks remaining.
+<<else>>Slave.
+<</if>>
+</span>
+<<link "Slave">><<set $activeSlave.indenture = -1, $activeSlave.indentureRestrictions = 0>><<replace "#legal">>Slave.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Indentured Servant">><<set $activeSlave.indenture = 52, $activeSlave.indentureRestrictions = 0>><<replace "#legal">>Indentured servant with <<textbox "$activeSlave.indenture" $activeSlave.indenture "Starting Girls">> weeks remaining.<</replace>><<StartingGirlsCost>><</link>>
+
+<<if $activeSlave.indenture > 0>>
+<span id="restrictions">
+<br>''Indenture restrictions:''
+<<if $activeSlave.indentureRestrictions == 2>>Restrictive.
+<<elseif $activeSlave.indentureRestrictions == 1>>Protective.
+<<else>>None.
+<</if>>
+</span>
+<<link "Restrictive">><<set $activeSlave.indentureRestrictions = 2>><<replace "#restrictions">>Restrictive.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Protective">><<set $activeSlave.indentureRestrictions = 1>><<replace "#restrictions">>Protective.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "None">><<set $activeSlave.indentureRestrictions = 0>><<replace "#restrictions">>None.<</replace>><<StartingGirlsCost>><</link>>
+<</if>>
+
+<br>''Voice:''
+<span id="voice">
+<<if $activeSlave.voice == 0>>Mute.
+<<elseif $activeSlave.voice == 1>>Deep.
+<<elseif $activeSlave.voice == 2>>Normal.
+<<elseif $activeSlave.voice == 3>>High.
+<</if>>
+</span>
+<<link "Mute">><<set $activeSlave.voice = 0>><<replace "#voice">>Mute.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Deep">><<set $activeSlave.voice = 1>><<replace "#voice">>Deep.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Normal">><<set $activeSlave.voice = 2>><<replace "#voice">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "High.">><<set $activeSlave.voice = 3>><<replace "#voice">>High.<</replace>><<StartingGirlsCost>><</link>>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span id="language">
+<<if $activeSlave.voice != 0>>
+	''$language:''
+	<<if $activeSlave.accent == 0>>Unaccented.
+	<<elseif $activeSlave.accent == 1>>Pretty $activeSlave.nationality accent.
+	<<elseif $activeSlave.accent == 2>>Thick $activeSlave.nationality accent.
+	<<else>>Not fluent.
+	<</if>>
+<</if>>
+</span>
+<<if $activeSlave.voice != 0>>
+	<<link "Unaccented">><<set $activeSlave.accent = 0>><<replace "#language">>Unaccented.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Accent">><<set $activeSlave.accent = 1>><<replace "#language">>Pretty $activeSlave.nationality accent.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Heavy accent">><<set $activeSlave.accent = 2>><<replace "#language">>Thick $activeSlave.nationality accent.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Poor">><<set $activeSlave.accent = 3>><<replace "#language">>Not fluent.<</replace>><<StartingGirlsCost>><</link>>
+<</if>>
+
+<br>''Age:''
+<span id="age">
+<<textbox "$activeSlave.age" $activeSlave.age "Starting Girls">>
+</span>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+''Birth week:''
+<span id="birthWeek">
+<<textbox "$activeSlave.birthWeek" $activeSlave.birthWeek "Starting Girls">>
+</span>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+''Genes:''
+@@.yellow;<span id="originalSex">$activeSlave.genes</span>.@@&nbsp;
+<<link "XX">><<set $activeSlave.genes = "XX">><<replace "#originalSex">>$activeSlave.genes<</replace>><</link>>
+ |
+<<link "XY">><<set $activeSlave.genes = "XY">><<replace "#originalSex">>$activeSlave.genes<</replace>><</link>>
+
+<br>''Health:''
+<span id="health">
+<<if $activeSlave.health == -40>>@@.red;Unhealthy.@@
+<<elseif $activeSlave.health == 0>>@@.yellow;Healthy.@@
+<<elseif $activeSlave.health == 40>>@@.green;Very healthy.@@
+<<else>>@@.green;Extremely healthy.@@
+<</if>>
+</span>
+<<link "Unhealthy">><<set $activeSlave.health = -40>><<replace "#health">>@@.red;Unhealthy.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Healthy">><<set $activeSlave.health = 0>><<replace "#health">>@@.yellow;Healthy.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Very healthy">><<set $activeSlave.health = 40>><<replace "#health">>@@.green;Very healthy.@@<</replace>><<StartingGirlsCost>><</link>> |
+ <<link "Extremely healthy">><<set $activeSlave.health = 80>><<replace "#health">>@@.green;Extremely healthy.@@<</replace>><<StartingGirlsCost>><</link>>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<<if $seeExtreme == 1>>
+''Limbs:''
+<span id="amp">
+<<if $activeSlave.amp == 1>>Amputee.
+<<else>>Normal.
+<</if>>
+</span>
+<<link "Normal">><<set $activeSlave.amp = 0>><<replace "#amp">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Amputee">><<set $activeSlave.amp = 1>><<replace "#amp">>Amputee.<</replace>><<StartingGirlsCost>><</link>>
+<</if>>
+
+<br>''Muscles:''
+<span id="muscles">
+<<if $activeSlave.muscles <= 5>>Normal.
+<<elseif $activeSlave.muscles <= 30>>Toned.
+<<else>>Ripped.
+<</if>>
+</span>
+<<link "Normal">><<set $activeSlave.muscles = 0>><<replace "#muscles">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Toned">><<set $activeSlave.muscles = 20>><<replace "#muscles">>Toned.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Ripped">><<set $activeSlave.muscles = 50>><<replace "#muscles">>Ripped.<</replace>><<StartingGirlsCost>><</link>>
+&nbsp;&nbsp;&nbsp;&nbsp;
+''Waist:''
+<span id="waist">
+<<if $activeSlave.waist > 95>>Masculine.
+<<elseif $activeSlave.waist > 40>>Ugly.
+<<elseif $activeSlave.waist > 10>>Unattractive.
+<<elseif $activeSlave.waist >= -10>>Average.
+<<elseif $activeSlave.waist >= -40>>Feminine.
+<<elseif $activeSlave.waist >= -95>>Hourglass.
+<<else>>Absurd.
+<</if>>
+</span>
+<<link "Absurd">><<set $activeSlave.waist = -100>><<replace "#waist">>Absurd.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Hourglass">><<set $activeSlave.waist = -55>><<replace "#waist">>Hourglass.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Feminine">><<set $activeSlave.waist = -15>><<replace "#waist">>Feminine.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Average">><<set $activeSlave.waist = 0>><<replace "#waist">>Average.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Unattractive">><<set $activeSlave.waist = 15>><<replace "#waist">>Unattractive.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Ugly">><<set $activeSlave.waist = 55>><<replace "#waist">>Ugly.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Masculine">><<set $activeSlave.waist = 100>><<replace "#waist">>Masculine.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Height:''
+<span id="height">
+<<if $activeSlave.height < 150>>Petite.
+<<elseif $activeSlave.height < 160>>Short.
+<<elseif $activeSlave.height < 170>>Average.
+<<elseif $activeSlave.height < 185>>Tall.
+<<else>>Very tall.
+<</if>>
+<<textbox "$activeSlave.height" $activeSlave.height "Starting Girls">> cm
+</span>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+''Weight:''
+<span id="weight">
+<<if $activeSlave.weight < -95>>@@.red;Emaciated.@@
+<<elseif $activeSlave.weight < -30>>@@.red;Skinny.@@
+<<elseif $activeSlave.weight < -10>>Thin.
+<<elseif $activeSlave.weight <= 10>>Average.
+<<elseif $activeSlave.weight <= 30>>Plush.
+<<elseif $activeSlave.weight <= 95>>@@.red;Chubby.@@
+<<else>>@@.red;Fat.@@
+<</if>>
+</span>
+<<link "Emaciated">><<set $activeSlave.weight = -100>><<replace "#weight">>@@.red;Emaciated.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Skinny">><<set $activeSlave.weight = -50>><<replace "#weight">>@@.red;Skinny.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Thin">><<set $activeSlave.weight = -20>><<replace "#weight">>Thin.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Average">><<set $activeSlave.weight = 0>><<replace "#weight">>Average.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Plush">><<set $activeSlave.weight = 20>><<replace "#weight">>Plush.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Chubby">><<set $activeSlave.weight = 50>><<replace "#weight">>@@.red;Chubby.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Fat">><<set $activeSlave.weight = 100>><<replace "#weight">>@@.red;Fat.@@<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Prestige:''
+<span id="prestige">
+<<if $activeSlave.prestige >= 3>>@@.green;World renowned.@@
+<<elseif $activeSlave.prestige >= 2>>@@.green;Regionally famous.@@
+<<elseif $activeSlave.prestige >= 1>>@@.green;Locally known.@@
+<<else>>None.
+<</if>>
+</span>
+<<link "None">><<set $activeSlave.prestige = 0>><<replace "#prestige">>None.<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Locally known">><<set $activeSlave.prestige = 1>><<replace "#prestige">>@@.green;Locally known.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Regionally famous">><<set $activeSlave.prestige = 2>><<replace "#prestige">>@@.green;Regionally famous.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "World renowned">><<set $activeSlave.prestige = 3>><<replace "#prestige">>@@.green;World renowned.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+<span id="prestigeWarning"></span>
+
+<br><br>
+<span id = "nationality">
+Her nationality is $activeSlave.nationality.
+<<link "Set custom nationality">>
+<<replace "#nationality">><<textbox "$activeSlave.nationality" $activeSlave.nationality>>
+<</replace>>
+<</link>>
+</span>
+<<if $seeRace == 1>>
+<br>''Ethnicity:'' <span id="ethnicity"><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">></span>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "White">><<set $activeSlave.race = "white">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Black">><<set $activeSlave.race = "black">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Latina">><<set $activeSlave.race = "latina">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Asian">><<set $activeSlave.race = "asian">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Middle Eastern">><<set $activeSlave.race = "middle eastern">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Amerindian">><<set $activeSlave.race = "amerindian">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Southern European">><<set $activeSlave.race = "southern european">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Semitic">><<set $activeSlave.race = "semitic">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Malay">><<set $activeSlave.race = "malay">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Indo-aryan">><<set $activeSlave.race = "indo-aryan">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Pacific Islander">><<set $activeSlave.race = "pacific islander">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Mixed Race">><<set $activeSlave.race = "mixed race">><<replace "#ethnicity">><<textbox "$activeSlave.race" $activeSlave.race "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>
+<</if>>
+
+<br>''Skin color:'' <span id="skin"><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">></span>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "White">><<set $activeSlave.skin = "white">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Fair">><<set $activeSlave.skin = "fair">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Tanned">><<set $activeSlave.skin = "tanned">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>  |
+<<link "Olive">><<set $activeSlave.skin = "olive">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>  |
+<<link "Light brown">><<set $activeSlave.skin = "light brown">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>  |
+<<link "Brown">><<set $activeSlave.skin = "brown">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>  |
+<<link "Black">><<set $activeSlave.skin = "black">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>> |
+<<link "Pale">><<set $activeSlave.skin = "pale">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>  |
+<<link "Dark">><<set $activeSlave.skin = "dark">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>  |
+<<link "Light">><<set $activeSlave.skin = "light">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>  |
+<<link "Extremely pale">><<set $activeSlave.skin = "extremely pale">><<replace "#skin">><<textbox "$activeSlave.skin" $activeSlave.skin "Starting Girls">><</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Facial appearance:'' <span id="faceShape">$activeSlave.faceShape</span>.
+<<link "Normal">><<set $activeSlave.faceShape = "normal">><<replace "#faceShape">>$activeSlave.faceShape<</replace>><<StartingGirlsCost>><</link>> |
+<<if $seeDicks != 0>><<link "Masculine">><<set $activeSlave.faceShape = "masculine">><<replace "#faceShape">>$activeSlave.faceShape<</replace>><<StartingGirlsCost>><</link>> |<</if>>
+<<link "Androgynous">><<set $activeSlave.faceShape = "androgynous">><<replace "#faceShape">>$activeSlave.faceShape<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Cute">><<set $activeSlave.faceShape = "cute">><<replace "#faceShape">>$activeSlave.faceShape<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Sensual">><<set $activeSlave.faceShape = "sensual">><<replace "#faceShape">>$activeSlave.faceShape<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Exotic">><<set $activeSlave.faceShape = "exotic">><<replace "#faceShape">>$activeSlave.faceShape<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Facial attractiveness:''
+<span id="face">
+<<if $activeSlave.face < -95>>Very ugly.
+<<elseif $activeSlave.face < -40>>Ugly.
+<<elseif $activeSlave.face < -10>>Unattractive.
+<<elseif $activeSlave.face <= 10>>Average.
+<<elseif $activeSlave.face <= 40>>Attractive.
+<<elseif $activeSlave.face <= 95>>Beautiful.
+<<else>>Very beautiful.
+<</if>>
+</span>
+<<link "Very ugly">><<set $activeSlave.face = -100>><<replace "#face">>Very ugly.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Ugly">><<set $activeSlave.face = -55>><<replace "#face">>Ugly.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Unattractive">><<set $activeSlave.face = -15>><<replace "#face">>Unattractive.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Average">><<set $activeSlave.face = 0>><<replace "#face">>Average.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Attractive">><<set $activeSlave.face = 15>><<replace "#face">>Attractive.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Beautiful">><<set $activeSlave.face = 55>><<replace "#face">>Beautiful.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Very beautiful">><<set $activeSlave.face = 100>><<replace "#face">>Very beautiful.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Lips:''
+<span id="lips">
+<<if $activeSlave.lips <= 10>>Thin.
+<<elseif $activeSlave.lips <= 20>>Normal.
+<<elseif $activeSlave.lips <= 40>>Pretty.
+<<elseif $activeSlave.lips <= 70>>Plush.
+<<elseif $activeSlave.lips <= 95>>Huge.
+<<else>>Facepussy.
+<</if>>
+</span>
+<<link "Thin">><<set $activeSlave.lips = 5>><<replace "#lips">>Thin.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Normal">><<set $activeSlave.lips = 15>><<replace "#lips">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Plush">><<set $activeSlave.lips = 25>><<replace "#lips">>Plush.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Big">><<set $activeSlave.lips = 55>><<replace "#lips">>Big.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Huge">><<set $activeSlave.lips = 85>><<replace "#lips">>Huge.<</replace>><<StartingGirlsCost>><</link>>
+<<if $seeExtreme == 1>>
+ |
+<<link "Facepussy">><<set $activeSlave.lips = 100>><<replace "#lips">>Facepussy.<</replace>><<StartingGirlsCost>><</link>>
+<</if>>
+&nbsp;&nbsp;&nbsp;&nbsp;''Teeth:''
+<span id="teeth">
+<<if $activeSlave.teeth == "crooked">>Crooked.
+<<elseif $activeSlave.teeth == "straightening braces">>Braces.
+<<else>>Straight.
+<</if>>
+</span>
+<<link "Straight">><<set $activeSlave.teeth = "normal">><<replace "#teeth">>Straight.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Crooked">><<set $activeSlave.teeth = "crooked">><<replace "#teeth">>Crooked.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Braces">><<set $activeSlave.teeth = "straightening braces">><<replace "#teeth">>Braces.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Vision:''
+<span id="vision">
+<<if $seeExtreme == 1>>
+	<<if $activeSlave.eyes == -2>>Blind.
+	<<elseif $activeSlave.eyes == -1>>Nearsighted.
+	<<else>>Normal.
+	<</if>>
+<<else>>
+<<if $activeSlave.eyes == -1>>Nearsighted.
+<<else>>Normal.
+	<</if>>
+<</if>>
+</span>
+<<link "Normal">><<set $activeSlave.eyes = 1>><<replace "#vision">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Nearsighted">><<set $activeSlave.eyes = -1>><<replace "#vision">>Nearsighted.<</replace>><<StartingGirlsCost>><</link>>
+<<if $seeExtreme == 1>>
+|
+<<link "Blind">><<set $activeSlave.eyes = -2>><<replace "#vision">>Blind.<</replace>><<StartingGirlsCost>><</link>>
+<</if>>
+
+<br><br>''Breasts:''
+<span id="boobs">
+<<if $activeSlave.boobs <= 200>>Flat.
+<<elseif $activeSlave.boobs <= 500>>Healthy.
+<<elseif $activeSlave.boobs <= 800>>Large.
+<<elseif $activeSlave.boobs <= 1200>>Very Large.
+<<elseif $activeSlave.boobs <= 2000>>Huge.
+<<elseif $activeSlave.boobs <= 4000>>Massive.
+<<elseif $activeSlave.boobs <= 6000>>Monstrous.
+<<else>>Science experiment.
+<</if>>
+<<textbox "$activeSlave.boobs" $activeSlave.boobs "Starting Girls">> CCs
+</span>
+&nbsp;&nbsp;&nbsp;&nbsp;''Lactation:''
+<span id="lactation">
+<<if $activeSlave.lactation == 2>>Artificial.
+<<elseif $activeSlave.lactation == 1>>Natural.
+<<else>>None.
+<</if>>
+</span>
+<<link "Artificial">><<set $activeSlave.lactation = 2>><<replace "#lactation">>Artificial.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Natural">><<set $activeSlave.lactation = 1>><<replace "#lactation">>Natural.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "None">><<set $activeSlave.lactation = 0>><<replace "#lactation">>None.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Nipples:'' <span id="nipples">$activeSlave.nipples</span>.
+<<link "Tiny">><<set $activeSlave.nipples = "tiny">><<replace "#nipples">>$activeSlave.nipples<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Cute">><<set $activeSlave.nipples = "cute">><<replace "#nipples">>$activeSlave.nipples<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Puffy">><<set $activeSlave.nipples = "puffy">><<replace "#nipples">>$activeSlave.nipples<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Inverted">><<set $activeSlave.nipples = "inverted">><<replace "#nipples">>$activeSlave.nipples<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Huge">><<set $activeSlave.nipples = "huge">><<replace "#nipples">>$activeSlave.nipples<</replace>><<StartingGirlsCost>><</link>>
+&nbsp;&nbsp;&nbsp;&nbsp;''Areolae:''
+<span id="areolae">
+<<if $activeSlave.areolae == 1>>
+	Large.
+<<elseif $activeSlave.areolae == 2>>
+	Wide.
+<<elseif $activeSlave.areolae == 3>>
+	Huge.
+<<else>>
+	Normal.
+<</if>>
+</span>
+<<link "Normal">><<set $activeSlave.areolae = 0>><<replace "#areolae">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Large">><<set $activeSlave.areolae = 1>><<replace "#areolae">>Large.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Wide">><<set $activeSlave.areolae = 2>><<replace "#areolae">>Wide.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Huge">><<set $activeSlave.areolae = 3>><<replace "#areolae">>Huge.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Shoulders:''
+<span id="shoulders">
+<<if $activeSlave.shoulders < -1>>Very narrow.
+<<elseif $activeSlave.shoulders < 0>>Narrow.
+<<elseif $activeSlave.shoulders > 1>>Very broad.
+<<elseif $activeSlave.shoulders > 0>>Broad.
+<<else>>Feminine.
+<</if>>
+</span>
+<<link "Very narrow">><<set $activeSlave.shoulders = -2>><<replace "#shoulders">>Very narrow.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Narrow">><<set $activeSlave.shoulders = -1>><<replace "#shoulders">>Narrow.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Normal">><<set $activeSlave.shoulders = 0>><<replace "#shoulders">>Feminine.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Broad">><<set $activeSlave.shoulders = 1>><<replace "#shoulders">>Broad.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Very broad">><<set $activeSlave.shoulders = 2>><<replace "#shoulders">>Very broad.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Hips:''
+<span id="hips">
+<<if $activeSlave.hips < -1>>Very narrow.
+<<elseif $activeSlave.hips < 0>>Narrow.
+<<elseif $activeSlave.hips > 1>>Very broad.
+<<elseif $activeSlave.hips > 0>>Broad.
+<<else>>Normal.
+<</if>>
+</span>
+<<link "Very narrow">><<set $activeSlave.hips = -2>><<replace "#hips">>Very narrow.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Narrow">><<set $activeSlave.hips = -1>><<replace "#hips">>Narrow.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Normal">><<set $activeSlave.hips = 0>><<replace "#hips">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Broad">><<set $activeSlave.hips = 1>><<replace "#hips">>Broad.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Very broad">><<set $activeSlave.hips = 2>><<replace "#hips">>Very broad.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Butt:''
+<span id="butt">
+<<if $activeSlave.butt == 0>>Flat.
+<<elseif $activeSlave.butt < 2>>Small.
+<<elseif $activeSlave.butt < 3>>Plump.
+<<elseif $activeSlave.butt < 4>>Big.
+<<elseif $activeSlave.butt < 5>>Huge.
+<<elseif $activeSlave.butt < 6>>Enormous.
+<<elseif $activeSlave.butt < 7>>Gigantic.
+<<else>>Massive.
+<</if>>
+</span>
+<<link "Flat">><<set $activeSlave.butt = 0>><<replace "#butt">>Flat.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Small">><<set $activeSlave.butt = 1>><<replace "#butt">>Small.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Plump">><<set $activeSlave.butt = 2>><<replace "#butt">>Plump.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Healthy">><<set $activeSlave.butt = 3>><<replace "#butt">>Big.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Huge">><<set $activeSlave.butt = 4>><<replace "#butt">>Huge.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Enormous">><<set $activeSlave.butt = 5>><<replace "#butt">>Enormous.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Gigantic">><<set $activeSlave.butt = 6>><<replace "#butt">>Gigantic.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Massive">><<set $activeSlave.butt = 7>><<replace "#butt">>Massive.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Anus:''
+<span id="anus">
+<<if $activeSlave.anus == 0>>@@.lime;Virgin.@@
+<<elseif $activeSlave.anus == 1>>Normal.
+<<elseif $activeSlave.anus == 2>>Veteran.
+<<else>>Gaping.
+<</if>>
+</span>
+<<link "Anal virgin">><<set $activeSlave.anus = 0>><<replace "#anus">>@@.lime;Virgin.@@<</replace>><<StartingGirlsAnalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Normal">><<set $activeSlave.anus = 1>><<replace "#anus">>Normal.<</replace>><<StartingGirlsAnalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Veteran">><<set $activeSlave.anus = 2>><<replace "#anus">>Veteran.<</replace>><<StartingGirlsAnalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Gaping">><<set $activeSlave.anus = 3>><<replace "#anus">>Gaping.<</replace>><<StartingGirlsAnalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+
+<br>''Vagina:''
+<span id="vagina">
+<<if $activeSlave.vagina == -1>>//No vagina.//
+<<elseif $activeSlave.vagina == 0>>@@.lime;Virgin.@@
+<<elseif $activeSlave.vagina == 1>>Normal.
+<<elseif $activeSlave.vagina == 2>>Veteran.
+<<else>>Gaping.
+<</if>>
+</span>
+<<link "No vagina">><<set $activeSlave.vagina = -1, $activeSlave.preg = -2, $activeSlave.ovaries = 0>><<replace "#vagina">>//No vagina.//<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Virgin">><<set $activeSlave.vagina = 0, $activeSlave.preg = -1, $activeSlave.ovaries = 1>><<replace "#vagina">>@@.lime;Virgin.@@<</replace>><<StartingGirlsVaginalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Normal">><<set $activeSlave.vagina = 1, $activeSlave.preg = -1, $activeSlave.ovaries = 1>><<replace "#vagina">>Normal.<</replace>><<StartingGirlsVaginalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Veteran">><<set $activeSlave.vagina = 2, $activeSlave.preg = -1, $activeSlave.ovaries = 1>><<replace "#vagina">>Veteran.<</replace>><<StartingGirlsVaginalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Gaping">><<set $activeSlave.vagina = 3, $activeSlave.preg = -1, $activeSlave.ovaries = 1>><<replace "#vagina">>Gaping.<</replace>><<StartingGirlsVaginalSkill>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+
+<span id="vaginablock">
+<<if $activeSlave.vagina > -1>>
+<br>
+
+<<if $activeSlave.dick == 0>>
+	''Clit:''
+	<span id="clit">
+	<<if $activeSlave.clit == 0>>Normal.
+	<<elseif $activeSlave.clit == 1>>Large.
+	<<else>>Huge.
+	<</if>>
+	</span>
+	<<link "Normal">><<set $activeSlave.clit = 0>><<replace "#clit">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Large">><<set $activeSlave.clit = 1>><<replace "#clit">>Large.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Huge">><<set $activeSlave.clit = 2>><<replace "#clit">>Huge.<</replace>><<StartingGirlsCost>><</link>>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+<</if>>
+''Labia:''
+<span id="labia">
+<<if $activeSlave.labia == 2>>Huge.
+<<elseif $activeSlave.labia == 1>>Large.
+<<else>>Normal.
+<</if>>
+</span>
+<<link "Normal">><<set $activeSlave.labia = 0>><<replace "#labia">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Large">><<set $activeSlave.labia = 1>><<replace "#labia">>Large.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Huge">><<set $activeSlave.labia = 2>><<replace "#labia">>Huge.<</replace>><<StartingGirlsCost>><</link>>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+''Vaginal wetness:''
+<span id="wetness">
+<<if $activeSlave.vaginaLube == 0>>Dry.
+<<elseif $activeSlave.vaginaLube == 1>>Normal.
+<<else>>Excessive.
+<</if>>
+</span>
+<<link "Dry">><<set $activeSlave.vaginaLube = 0>><<replace "#wetness">>Dry.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Normal">><<set $activeSlave.vaginaLube = 1>><<replace "#wetness">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Excessive">><<set $activeSlave.vaginaLube = 2>><<replace "#wetness">>Excessive.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Pregnancy:''
+<span id="preg">
+<<if $activeSlave.preg > 20>>Ready to drop.
+<<elseif $activeSlave.preg > 20>>Advanced.
+<<elseif $activeSlave.preg > 5>>Early.
+<<elseif $activeSlave.preg > -2>>None.
+<<else>>Barren.
+<</if>>
+</span>
+<<link "Ready to Drop">><<set $activeSlave.preg = 35,$activeSlave.pregType = 1>><<replace "#preg">>Ready to drop.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Advanced">><<set $activeSlave.preg = 25,$activeSlave.pregType = 1>><<replace "#preg">>Advanced.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Early">><<set $activeSlave.preg = 10,$activeSlave.pregType = 1>><<replace "#preg">>Early.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "None">><<set $activeSlave.preg = 0,$activeSlave.pregType = 0>><<replace "#preg">>None.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Barren">><<set $activeSlave.preg = -2,$activeSlave.pregType = 0>><<replace "#preg">>Barren.<</replace>><<StartingGirlsCost>><</link>>
+<</if>>
+</span>
+
+<span id="dickblock">
+<<if $seeDicks != 0>>
+	<br>''Penis:''
+	<span id="dick">
+	<<if $activeSlave.dick == 0>>None.
+	<<elseif $activeSlave.dick == 1>>Tiny.
+	<<elseif $activeSlave.dick == 2>>Small.
+	<<elseif $activeSlave.dick == 3>>Normal.
+	<<elseif $activeSlave.dick == 4>>Large.
+	<<elseif $activeSlave.dick == 5>>Massive.
+	<<else>>Inhuman.<</if>>
+	</span>
+	<<link "No penis">><<set $activeSlave.dick = 0,$activeSlave.balls = 0,$activeSlave.clit = 0>><<replace "#dick">>None.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Tiny">><<set $activeSlave.dick = 1,$activeSlave.clit = 0>><<replace "#dick">>Tiny.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Small">><<set $activeSlave.dick = 2,$activeSlave.clit = 0>><<replace "#dick">>Small.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Normal">><<set $activeSlave.dick = 3,$activeSlave.clit = 0>><<replace "#dick">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Large">><<set $activeSlave.dick = 4,$activeSlave.clit = 0>><<replace "#dick">>Large.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Massive">><<set $activeSlave.dick = 5,$activeSlave.clit = 0>><<replace "#dick">>Massive.<</replace>><<StartingGirlsCost>><</link>>
+	<<if $activeSlave.dick > 0>>
+		&nbsp;&nbsp;&nbsp;&nbsp;''Foreskin:''
+		<span id="foreskin">
+		<<if $activeSlave.foreskin == 0>>None.
+		<<elseif $activeSlave.foreskin == 1>>Tiny.
+		<<elseif $activeSlave.foreskin == 2>>Small.
+		<<elseif $activeSlave.foreskin == 3>>Normal.
+		<<elseif $activeSlave.foreskin == 4>>Large.
+		<<else>>Massive.<</if>>
+		</span>
+		<<if $seeCircumcision == 1>><<link "Circumcised">><<set $activeSlave.foreskin = 0>><<replace "#foreskin">>None.<</replace>><<StartingGirlsCost>><</link>> |<</if>>
+		<<link "Tiny">><<set $activeSlave.foreskin = 1>><<replace "#foreskin">>Tiny.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Small">><<set $activeSlave.foreskin = 2>><<replace "#foreskin">>Small.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Normal">><<set $activeSlave.foreskin = 3>><<replace "#foreskin">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Large">><<set $activeSlave.foreskin = 4>><<replace "#foreskin">>Large.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Massive">><<set $activeSlave.foreskin = 5>><<replace "#foreskin">>Massive.<</replace>><<StartingGirlsCost>><</link>>
+	<</if>>
+	<br>''Testicles:''
+	<span id="balls">
+	<<if $activeSlave.balls == 0>>None.
+	<<elseif $activeSlave.balls == 1>>Vestigial.
+	<<elseif $activeSlave.balls == 2>>Small.
+	<<elseif $activeSlave.balls == 3>>Normal.
+	<<elseif $activeSlave.balls == 4>>Large.
+	<<elseif $activeSlave.balls == 5>>Massive.
+	<<else>>Inhuman.<</if>>
+	</span>
+	<<link "No testicles">><<set $activeSlave.balls = 0>><<replace "#balls">>None.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Vestigial">><<set $activeSlave.balls = 1>><<replace "#balls">>Vestigial.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Small">><<set $activeSlave.balls = 2>><<replace "#balls">>Small.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Normal">><<set $activeSlave.balls = 3>><<replace "#balls">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Large">><<set $activeSlave.balls = 4>><<replace "#balls">>Large.<</replace>><<StartingGirlsCost>><</link>> |
+	<<link "Massive">><<set $activeSlave.balls = 5>><<replace "#balls">>Massive.<</replace>><<StartingGirlsCost>><</link>>
+	<<if $activeSlave.balls > 0>>
+		&nbsp;&nbsp;&nbsp;&nbsp;''Ballsack:''
+		<span id="scrotum">
+		<<if $activeSlave.scrotum == 0>>None.
+		<<elseif $activeSlave.scrotum == 1>>Tiny.
+		<<elseif $activeSlave.scrotum == 2>>Small.
+		<<elseif $activeSlave.scrotum == 3>>Normal.
+		<<elseif $activeSlave.scrotum == 4>>Large.
+		<<elseif $activeSlave.scrotum == 5>>Massive.
+		<<else>>Inhuman.<</if>>
+		</span>
+		<<link "None">><<set $activeSlave.scrotum = 0>><<replace "#scrotum">>None.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Tiny">><<set $activeSlave.scrotum = 1>><<replace "#scrotum">>Tiny.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Small">><<set $activeSlave.scrotum = 2>><<replace "#scrotum">>Small.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Normal">><<set $activeSlave.scrotum = 3>><<replace "#scrotum">>Normal.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Large">><<set $activeSlave.scrotum = 4>><<replace "#scrotum">>Large.<</replace>><<StartingGirlsCost>><</link>> |
+		<<link "Massive">><<set $activeSlave.scrotum = 5>><<replace "#scrotum">>Massive.<</replace>><<StartingGirlsCost>><</link>>
+	<</if>>
+<</if>>
+</span>
+
+<br><br>
+<span id="analSkillsBlock">
+</span>
+<<timed 50ms>>
+	<<StartingGirlsAnalSkill>>
+<</timed>>
+&nbsp;&nbsp;&nbsp;&nbsp;
+''Oral sex:''
+<span id="oralSkill">
+<<if $activeSlave.oralSkill <= 10>>Unskilled.
+<<elseif $activeSlave.oralSkill <= 30>>@@.cyan;Basic.@@
+<<elseif $activeSlave.oralSkill <= 60>>@@.cyan;Skilled.@@
+<<else>>@@.cyan;Expert.@@
+<</if>>
+</span>
+<<link "Unskilled">><<set $activeSlave.oralSkill = 0>><<replace "#oralSkill">>Unskilled.<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Basic">><<set $activeSlave.oralSkill = 15>><<replace "#oralSkill">>@@.cyan;Basic.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Skilled">><<set $activeSlave.oralSkill = 35>><<replace "#oralSkill">>@@.cyan;Skilled.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Expert">><<set $activeSlave.oralSkill = 65>><<replace "#oralSkill">>@@.cyan;Expert.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+
+<br>
+<span id="vaginalSkillsBlock">
+</span>
+<<timed 50ms>>
+	<<StartingGirlsVaginalSkill>>
+<</timed>>
+
+<br>''Prostitution:''
+<span id="whoreSkill">
+<<if $activeSlave.whoreSkill <= 10>>Unskilled.
+<<elseif $activeSlave.whoreSkill <= 30>>@@.cyan;Basic.@@
+<<elseif $activeSlave.whoreSkill <= 60>>@@.cyan;Skilled.@@
+<<else>>@@.cyan;Expert.@@
+<</if>>
+</span>
+<<link "Unskilled">><<set $activeSlave.whoreSkill = 0>><<replace "#whoreSkill">>Unskilled.<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Basic">><<set $activeSlave.whoreSkill = 15>><<replace "#whoreSkill">>@@.cyan;Basic.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Skilled">><<set $activeSlave.whoreSkill = 35>><<replace "#whoreSkill">>@@.cyan;Skilled.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Expert">><<set $activeSlave.whoreSkill = 65>><<replace "#whoreSkill">>@@.cyan;Expert.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+&nbsp;&nbsp;&nbsp;&nbsp;''Entertainment:''
+<span id="entertainSkill">
+<<if $activeSlave.entertainSkill <= 10>>Unskilled.
+<<elseif $activeSlave.entertainSkill <= 30>>@@.cyan;Basic.@@
+<<elseif $activeSlave.entertainSkill <= 60>>@@.cyan;Skilled.@@
+<<else>>@@.cyan;Expert.@@
+<</if>>
+</span>
+<<link "Unskilled">><<set $activeSlave.entertainSkill = 0>><<replace "#entertainSkill">>Unskilled.<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Basic">><<set $activeSlave.entertainSkill = 15>><<replace "#entertainSkill">>@@.cyan;Basic.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Skilled">><<set $activeSlave.entertainSkill = 35>><<replace "#entertainSkill">>@@.cyan;Skilled.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Expert">><<set $activeSlave.entertainSkill = 65>><<replace "#entertainSkill">>@@.cyan;Expert.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+
+<br>''Combat:''
+<span id="combatSkill">
+<<if $activeSlave.combatSkill == 0>>Unskilled.
+<<else>>@@.cyan;Skilled.@@
+<</if>>
+</span>
+<<link "Unskilled">><<set $activeSlave.combatSkill = 0>><<replace "#combatSkill">>Unskilled.<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>> |
+<<link "Skilled">><<set $activeSlave.combatSkill = 1>><<replace "#combatSkill">>@@.cyan;Skilled.@@<</replace>><<StartingGirlsCost>><<StartingGirlsWarnings>><</link>>
+<span id="skillsWarning"></span>
+
+<br>''Intelligence:''
+<span id="intelligence">
+<<if $activeSlave.intelligence == 3>>@@.deepskyblue;Brilliant.@@
+<<elseif $activeSlave.intelligence == 2>>@@.deepskyblue;Very smart.@@
+<<elseif $activeSlave.intelligence == 1>>@@.deepskyblue;Smart.@@
+<<elseif $activeSlave.intelligence == 0>>Average.
+<<elseif $activeSlave.intelligence == -1>>@@.orangered;Stupid.@@
+<<elseif $activeSlave.intelligence == -2>>@@.orangered;Very stupid.@@
+<<else>>@@.orangered;Moronic.@@
+<</if>>
+</span>
+<<link "Brilliant">><<set $activeSlave.intelligence = 3>><<replace "#intelligence">>@@.deepskyblue;Brilliant.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Very smart">><<set $activeSlave.intelligence = 2>><<replace "#intelligence">>@@.deepskyblue;Very smart.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Smart">><<set $activeSlave.intelligence = 1>><<replace "#intelligence">>@@.deepskyblue;Smart.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Average intelligence">><<set $activeSlave.intelligence = 0>><<replace "#intelligence">>Average.<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Stupid">><<set $activeSlave.intelligence = -1>><<replace "#intelligence">>@@.orangered;Stupid.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Very stupid">><<set $activeSlave.intelligence = -2>><<replace "#intelligence">>@@.orangered;Very stupid.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Moronic">><<set $activeSlave.intelligence = -3>><<replace "#intelligence">>@@.orangered;Moronic.@@<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Education:''
+<span id="intelligenceImplant">
+<<if $activeSlave.intelligenceImplant == 1>>@@.deepskyblue;Educated.@@
+<<else>>Uneducated.
+<</if>>
+</span>
+<<link "Educated">><<set $activeSlave.intelligenceImplant = 1>><<replace "#intelligenceImplant">>@@.deepskyblue;Educated.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Uneducated">><<set $activeSlave.intelligenceImplant = 0>><<replace "#intelligenceImplant">>Uneducated.<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Fetish:''
+<span id="fetishblock">
+<span id="fetish">
+<<if $activeSlave.fetishKnown == 1>>
+	<<if $activeSlave.fetish == "none">>
+		@@.pink;$activeSlave.fetish.@@
+	<<else>>
+		@@.lightcoral;$activeSlave.fetish.@@
+	<</if>>
+<<else>>
+	//Not known.//
+	<<link "Known">>
+		<<ToggleFetish 1>>
+	<</link>>
+<</if>>
+</span>
+<br>
+<<if $activeSlave.fetishKnown == 1>>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<<link "Unknown">>
+		<<ToggleFetish 0>>
+	<</link>> |
+	<<link "None">>
+		<<set $activeSlave.fetish = "none", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Sub">>
+		<<set $activeSlave.fetish = "submissive", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Dom">>
+		<<set $activeSlave.fetish = "dom", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Cumslut">>
+		<<set $activeSlave.fetish = "cumslut", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Humiliation">>
+		<<set $activeSlave.fetish = "humiliation", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Buttslut">>
+		<<set $activeSlave.fetish = "buttslut", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Breasts">>
+		<<set $activeSlave.fetish = "boobs", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Pregnancy">>
+		<<set $activeSlave.fetish = "pregnancy", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Sadism">>
+		<<set $activeSlave.fetish = "sadist", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>> |
+	<<link "Masochism">>
+		<<set $activeSlave.fetish = "masochist", $activeSlave.fetishKnown = 1>>
+		<<ToggleFetish 1>>
+	<</link>>
+
+<<if $activeSlave.fetish != "none">>
+<br>
+<span id="fetishStrength">
+	''Fetish strength:''
+	<<if $activeSlave.fetishStrength > 95>>
+		@@.lightcoral;High.@@
+	<<elseif $activeSlave.fetishStrength <= 60>>
+		@@.pink;Low.@@
+	<<else>>
+		@@.hotpink;Normal.@@
+	<</if>>
+	<<if $activeSlave.fetishStrength > 60>>
+		<<link "Decrease">>
+			<<ChangeFetishStrength 0>>
+		<</link>>
+	<</if>>
+	<<if ($activeSlave.fetishStrength > 60)>>|<</if>>
+	<<if $activeSlave.fetishStrength <= 95>>
+		<<link "Increase">>
+			<<ChangeFetishStrength 1>>
+		<</link>>
+	<</if>>
+</span>
+<</if>>
+
+<</if>>
+</span>
+
+<br>''Sexuality:''
+<span id="sexuality">
+<span id="attrXY">
+<<if $activeSlave.attrKnown == 1>>
+	<<if $activeSlave.attrXY <= 5>>
+		@@.red;Disgusted by men,@@
+	<<elseif $activeSlave.attrXY <= 15>>
+		@@.red;Turned off by men,@@
+	<<elseif $activeSlave.attrXY <= 35>>
+		@@.red;Not attracted to men,@@
+	<<elseif $activeSlave.attrXY <= 65>>
+		Indifferent to men,
+	<<elseif $activeSlave.attrXY <= 85>>
+		@@.green;Attracted to men,@@
+	<<elseif $activeSlave.attrXY <= 95>>
+		@@.green;Aroused by men,@@
+	<<else>>
+		@@.green;Passionate about men,@@
+	<</if>>
+<<else>>
+	//Not known.//
+<</if>>
+</span>
+<span id="attrXX">
+<<if $activeSlave.attrKnown == 1>>
+	<<if $activeSlave.attrXX <= 5>>
+		@@.red;disgusted by women.@@
+	<<elseif $activeSlave.attrXX <= 15>>
+		@@.red;turned off by women.@@
+	<<elseif $activeSlave.attrXX <= 35>>
+		@@.red;not attracted to women.@@
+	<<elseif $activeSlave.attrXX <= 65>>
+		indifferent to women.
+	<<elseif $activeSlave.attrXX <= 85>>
+		@@.green;attracted to women.@@
+	<<elseif $activeSlave.attrXX <= 95>>
+		@@.green;aroused by women.@@
+	<<else>>
+		@@.green;passionate about women.@@
+	<</if>>
+<</if>>
+</span>
+<<if $activeSlave.attrKnown == 1>>
+<<link "Unknown">>
+	<<ToggleSexuality 0>>
+<</link>>
+
+<br>XY attraction:
+<span id="decreaseXY">
+	<<link "Decrease">>
+	<<ChangeAttr 1 0>>
+	<</link>>
+</span>
+<span id="increaseXY">
+|
+	<<link "Increase">>
+	<<ChangeAttr 1 1>>
+	<</link>>
+</span>
+| XX attraction:
+<span id="decreaseXX">
+	<<link "Decrease">>
+	<<ChangeAttr 0 0>>
+	<</link>>
+</span>
+<span id="increaseXX">
+|
+	<<link "Increase">>
+	<<ChangeAttr 0 1>>
+	<</link>>
+</span>
+<br>''Sex drive:''
+<span id="energy">
+<<if $activeSlave.energy == 100>>@@.green;Nympho!@@
+<<elseif $activeSlave.energy > 80>>@@.green;Sex addict.@@
+<<elseif $activeSlave.energy > 60>>@@.green;Powerful.@@
+<<elseif $activeSlave.energy > 40>>@@.yellow;Average.@@
+<<elseif $activeSlave.energy > 20>>@@.red;Poor.@@
+<<else>>@@.red;Frigid.@@<</if>>
+</span>
+<<link "Nympho">><<set $activeSlave.energy = 100, $activeSlave.attrKnown = 1>><<replace "#energy">>@@.green;Nympho!@@<</replace>><<StartingGirlsCost>><</link>>
+| <<link "Sex addict">><<set $activeSlave.energy = 85, $activeSlave.attrKnown = 1>><<replace "#energy">>@@.green;Sex addict.@@<</replace>><<StartingGirlsCost>><</link>>
+| <<link "Powerful">><<set $activeSlave.energy = 65, $activeSlave.attrKnown = 1>><<replace "#energy">>@@.green;Powerful.@@<</replace>><<StartingGirlsCost>><</link>>
+| <<link "Average">><<set $activeSlave.energy = 45, $activeSlave.attrKnown = 1>><<replace "#energy">>@@.yellow;Average.@@<</replace>><<StartingGirlsCost>><</link>>
+| <<link "Poor">><<set $activeSlave.energy = 25, $activeSlave.attrKnown = 1>><<replace "#energy">>@@.red;Poor.@@<</replace>><<StartingGirlsCost>><</link>>
+| <<link "Frigid">><<set $activeSlave.energy = 5, $activeSlave.attrKnown = 1>><<replace "#energy">>@@.red;Frigid.@@<</replace>><<StartingGirlsCost>><</link>>
+<<else>>
+	<<link "Known">>
+		<<ToggleSexuality 1>>
+	<</link>>
+<</if>>
+</span>
+
+<br>''Behavioral Flaw:''
+<span id="behavioralFlaw">
+<<if $activeSlave.behavioralFlaw == "none">>
+	//$activeSlave.behavioralFlaw.//
+<<else>>
+	@@.red;$activeSlave.behavioralFlaw.@@
+<</if>>
+</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "None">><<set $activeSlave.behavioralFlaw = "none">><<replace "#behavioralFlaw">>//$activeSlave.behavioralFlaw.//<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Arrogant">><<set $activeSlave.behavioralFlaw = "arrogant">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Bitchy">><<set $activeSlave.behavioralFlaw = "bitchy">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Odd">><<set $activeSlave.behavioralFlaw = "odd">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Men">><<set $activeSlave.behavioralFlaw = "hates men">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Women">><<set $activeSlave.behavioralFlaw = "hates women">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Anorexic">><<set $activeSlave.behavioralFlaw = "anorexic">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Gluttonous">><<set $activeSlave.behavioralFlaw = "gluttonous">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Devout">><<set $activeSlave.behavioralFlaw = "devout">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Liberated">><<set $activeSlave.behavioralFlaw = "liberated">><<replace "#behavioralFlaw">>@@.red;$activeSlave.behavioralFlaw.@@<</replace>><<StartingGirlsCost>><</link>>
+
+<br>''Sexual Flaw:''
+<span id="sexualFlaw">
+<<if $activeSlave.sexualFlaw == "none">>
+	//$activeSlave.sexualFlaw.//
+<<else>>
+	@@.red;$activeSlave.sexualFlaw.@@
+<</if>>
+</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "None">><<set $activeSlave.sexualFlaw = "none">><<replace "#sexualFlaw">>//$activeSlave.sexualFlaw.//<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Oral">><<set $activeSlave.sexualFlaw = "hates oral">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Anal">><<set $activeSlave.sexualFlaw = "hates anal">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Penetration">><<set $activeSlave.sexualFlaw = "hates penetration">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Repressed">><<set $activeSlave.sexualFlaw = "repressed">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Shamefast">><<set $activeSlave.sexualFlaw = "shamefast">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Apathetic">><<set $activeSlave.sexualFlaw = "apathetic">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Crude">><<set $activeSlave.sexualFlaw = "crude">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Judgemental">><<set $activeSlave.sexualFlaw = "judgemental">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>> |
+<<link "Sexually idealistic">><<set $activeSlave.sexualFlaw = "idealistic">><<replace "#sexualFlaw">>@@.red;$activeSlave.sexualFlaw.@@<</replace>><<StartingGirlsCost>><</link>>
+
+<br>
+<span id="finalize">
+<<StartingSlaveCost $activeSlave>>
+<<if $cash >= $slaveCost>>
+	<<if $activeSlave.prestige>>
+		<<set $activeSlave.prestige = Math.clamp($activeSlave.prestige,0,3)>>
+	<<else>>
+		<<set $activeSlave.prestigeDesc = 0>>
+	<</if>>
+	<<set $activeSlave.age = Number($activeSlave.age) || 18>>
+	<<set $activeSlave.devotion = Number($activeSlave.devotion) || 0>>
+	<<set $activeSlave.trust = Number($activeSlave.trust) || 0>>
+	<<if $activeSlave.indenture >= 0>>
+		<<set $activeSlave.indenture = Math.clamp($activeSlave.indenture, 26, 208) || 26>>
+	<</if>>
+	<<set $activeSlave.height = Math.clamp($activeSlave.height, 91, 274) || 140>>
+	<<set $activeSlave.boobs = Math.clamp(Math.trunc($activeSlave.boobs/50)*50, 0, 50000) || 200>>
+	<<set $slaveWithoutBonuses = $activeSlave>>
+	<<if $PC.career != "engineer">>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<<link "Add this slave">>
+			<<set $returnTo = "Commit Starting Girl", $createRelatedSlave = 0, $applyCareerBonus = 1, $careerBonusApplied = 0>>
+			<<StartingSlaveCost $activeSlave>>
+			<<set $cash -= $slaveCost>>
+			<<goto "RG AS Dump">>
+		<</link>>
+		//This will apply your @@.springgreen;career bonus@@ to her:
+		<<if $PC.career == "capitalist">>
+			one free level of @@.cyan;prostitution skill.@@
+		<<elseif $PC.career == "mercenary">>
+			@@.mediumaquamarine;+10 trust.@@
+		<<elseif $PC.career == "slaver">>
+			@@.hotpink;+10 devotion.@@
+		<<elseif $PC.career == "medicine">>
+			free @@.lime;basic implants.@@
+		<<elseif $PC.career == "celebrity">>
+			one free level of @@.cyan;entertainment skill.@@
+		<<elseif $PC.career == "wealth">>
+			two free levels of @@.cyan;sex skills.@@
+		<<else>>
+			@@.hotpink;+10 devotion,@@ one free level of @@.cyan;prostitution skill@@ and @@.cyan;entertainment skill,@@ and two free levels of @@.cyan;sex skills.@@
+		<</if>>//
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<<link "Add slave without career bonus">>
+			<<set $returnTo = "Commit Starting Girl", $createRelatedSlave = 0, $applyCareerBonus = 0, $careerBonusApplied = 0>>
+			<<StartingSlaveCost $activeSlave>>
+			<<set $cash -= $slaveCost>>
+			<<goto "RG AS Dump">>
+		<</link>>
+	<<else>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<<link "Add slave">>
+			<<set $returnTo = "Commit Starting Girl", $createRelatedSlave = 0, $applyCareerBonus = 0, $careerBonusApplied = 0>>
+			<<StartingSlaveCost $activeSlave>>
+			<<set $cash -= $slaveCost>>
+			<<goto "RG AS Dump">>
+		<</link>>
+		<br>
+	<</if>>
+<<else>>
+	<br>//You lack the necessary funds to add this slave.//
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+[[Discard this slave and continue|Acquisition]]
+</span>
+
+<br><br>__Archetypes:__&nbsp;&nbsp;&nbsp;&nbsp;//Convenient combinations of slave attributes//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Irish Rose">>
+	<<set $archetyped = 1, $activeSlave.nationality = "Irish", $fixedNationality = "Irish">>
+	<<StartingGirlsWorkaround>>
+	<<StartingGirlsRefresh>>
+	<<set $activeSlave.race = "white", $activeSlave.eyeColor = "green", $activeSlave.skin = "fair", $activeSlave.hColor = "red", $activeSlave.pubicHColor = "red", $activeSlave.markings = "heavily freckled">>
+	<<SaleDescription>>
+	<<StartingGirlsCost>>
+<</link>>
+//A beautiful flower from the Emerald Isle//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Cali Girl">>
+	<<set $archetyped = 1, $activeSlave.nationality = "American", $fixedNationality = "American">>
+	<<StartingGirlsWorkaround>>
+	<<StartingGirlsRefresh>>
+	<<set $activeSlave.eyeColor = "blue", $activeSlave.skin = "tanned", $activeSlave.hColor = "blonde", $activeSlave.pubicHColor = "blonde", $activeSlave.markings = "none", $activeSlave.height = 190, $activeSlave.face = 95, $activeSlave.muscles = 20, $activeSlave.weight = -20>>
+	<<SaleDescription>>
+	<<StartingGirlsCost>>
+<</link>>
+//Tall, taut, and tan//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Novice">>
+	<<StartingGirlsWorkaround>>
+	<<StartingGirlsRefresh>>
+	<<set $activeSlave.analSkill = 0, $activeSlave.oralSkill = 0, $activeSlave.vaginalSkill = 0, $activeSlave.whoreSkill = 0, $activeSlave.entertainSkill = 0, $activeSlave.combatSkill = 0, $activeSlave.age = 18, $activeSlave.fetishKnown = 0, $activeSlave.attrKnown = 0>>
+	<<SaleDescription>>
+	<<StartingGirlsCost>>
+<</link>>
+//Train your own and save//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Head Girl Prospect">>
+	<<StartingGirlsWorkaround>>
+	<<set $activeSlave.career = setup.HGCareers.random(), $activeSlave.age = Math.clamp(36, 44, $activeSlave.age), $activeSlave.intelligence = 2, $activeSlave.intelligenceImplant = 0>>
+	<<SaleDescription>>
+	<<StartingGirlsCost>>
+<</link>>
+//Inexpensive potential to become a great right hand woman//
+<<if $seeExtreme != 0>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Wellspring">>
+	<<StartingGirlsWorkaround>>
+	<<StartingGirlsRefresh>>
+	<<set $activeSlave.analSkill = 0, $activeSlave.oralSkill = 0, $activeSlave.vaginalSkill = 0, $activeSlave.whoreSkill = 0, $activeSlave.entertainSkill = 0, $activeSlave.combatSkill = 0, $activeSlave.age = 18, $activeSlave.fetishKnown = 0, $activeSlave.attrKnown = 0, $activeSlave.health = 10, $activeSlave.intelligence = -3,  $activeSlave.intelligenceImplant = 0, $activeSlave.vagina = 3, $activeSlave.anus = 3, $activeSlave.ovaries = 1, $activeSlave.dick = 5, $activeSlave.balls = 5, $activeSlave.prostate = 1, $activeSlave.lactation = 2, $activeSlave.nipples = "huge", $activeSlave.boobs = 10000>>
+	<<SaleDescription>>
+	<<StartingGirlsCost>>
+<</link>>
+//Capable of producing all kinds of useful fluids//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<link "Onahole">>
+	<<StartingGirlsWorkaround>>
+	<<StartingGirlsRefresh>>
+	<<set $activeSlave.analSkill = 0, $activeSlave.oralSkill = 0, $activeSlave.vaginalSkill = 0, $activeSlave.whoreSkill = 0, $activeSlave.entertainSkill = 0, $activeSlave.combatSkill = 0, $activeSlave.fetish = "mindbroken", $activeSlave.amp = 1, $activeSlave.voice = 0, $activeSlave.eyes = 0>>
+	<<SaleDescription>>
+	<<StartingGirlsCost>>
+<</link>>
+//A living cocksleeve//
+<</if>>
+
+<br><br>__Start over by selecting a nationality:__
+
+<<for _sg = 0; _sg < setup.baseNationalities.length; _sg++>>
+	<<set _nation = setup.baseNationalities[_sg]>>
+
+	<<print "
+	<<link _nation>>
+		<<set $fixedNationality = setup.baseNationalities[" + _sg + "]>>
+		<<StartingGirlsWorkaround>>
+		<<StartingGirlsRefresh>>
+		<<SaleDescription>>
+	<</link>>
+	">>
+	<<if _sg < setup.baseNationalities.length-1>>
+	|
+	<</if>>
+<</for>>

@@ -1,0 +1,449 @@
+:: Neighbor Description [nobr]
+
+<br><br>&nbsp;&nbsp;&nbsp;&nbsp;
+''$arcologies[$i].name'' is located to the $arcologies[$i].direction of your arcology. It is governed by
+<<switch $arcologies[$i].government>>
+<<case "elected officials">>
+	elected officials, periodically paralyzing its development.
+<<case "a committee">>
+	a committee, hindering its development.
+<<case "an oligarchy">>
+	a small group of leading citizens, making its development very unpredictable.
+<<case "your trustees">>
+	a small group of leading citizens who are serving as your trustees.
+<<case "an individual">>
+	an individual, making its development vibrant but unpredictable.
+<<case "your agent">>
+	your agent, who is directing the arcology in your stead.
+<<case "a corporation">>
+	a corporation, making its development steady and unspectacular.
+<<default>>
+	direct democracy, making its development dangerously unstable.
+<</switch>>
+<<if $arcologies[$i].direction == 0>>
+  <<set $economicUncertainty = 5>>
+<<else>>
+  <<set $economicUncertainty = 10>>
+<</if>>
+<<if $arcologies[$i].government != "your trustees">>
+<<if $arcologies[$i].government != "your agent">>
+Its leadership has control of approximately <<print Math.trunc(($arcologies[$i].ownership*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>% of the arcology<<if $arcologies[$i].minority > $arcologies[$i].ownership-10>>, a dangerously narrow margin over competition with a <<print Math.trunc(($arcologies[$i].minority*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>% share<</if>>.
+<</if>>
+<</if>>
+<<if $arcologies[$i].PCminority > 0>>You own $arcologies[$i].PCminority% of this arcology<</if>><<if ($arcologies[$i].government == "your trustees") || ($arcologies[$i].government == "your agent")>><<if $arcologies[$i].minority > $arcologies[$i].PCminority-10>>, a dangerously narrow margin over competition with a <<print Math.trunc(($arcologies[$i].minority*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>% share<</if>>.<</if>>
+<<set $economicUncertainty -= 2*$assistantPower>>
+The arcology has an estimated GSP of @@.yellowgreen;¤<<print Math.trunc((0.1*$arcologies[$i].prosperity*random(100-$economicUncertainty,100+$economicUncertainty))/100)>>m,@@
+<<if Math.abs($arcologies[$i].prosperity - $averageProsperity) < 5>>
+	average among
+<<elseif $arcologies[$i].prosperity > $averageProsperity>>
+	ahead of
+<<else>>
+	behind
+<</if>>
+its neighbors.
+
+<<set $desc = 0>>
+<<set $seed = []>>
+<<if $arcologies[$i].FSSubjugationist != "unset">>
+	<<if $arcologies[$i].FSSubjugationist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSSubjugationist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "racial Subjugationism, and is ">>
+	<<if $arcologies[$i].FSSubjugationist > 95>>
+	<<set $desc = $desc + "the home of an advanced project to create a subservient race of ">>
+	<<set $desc = $desc + $arcologies[$i].FSSubjugationistRace>>
+	<<set $desc = $desc + " slaves.">>
+	<<elseif $arcologies[$i].FSSubjugationist > 40>>
+	<<set $desc = $desc + "working to refine ">>
+	<<set $desc = $desc + $arcologies[$i].FSSubjugationistRace>>
+	<<set $desc = $desc + " slavery.">>
+	<<else>>
+	<<set $desc = $desc + "an excellent dumping ground for low quality ">>
+	<<set $desc = $desc + $arcologies[$i].FSSubjugationistRace>>
+	<<set $desc = $desc + " slaves.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSSupremacist != "unset">>
+	<<if $arcologies[$i].FSSubjugationist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSSubjugationist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "racial Supremacy, and is ">>
+	<<if $arcologies[$i].FSSubjugationist > 95>>
+	<<set $desc = $desc + "a global magnet for ">>
+	<<set $desc = $desc + $arcologies[$i].FSSupremacistRace>>
+	<<set $desc = $desc + " nationalists.">>
+	<<elseif $arcologies[$i].FSSubjugationist > 40>>
+	<<set $desc = $desc + "becoming increasingly free of ">>
+	<<set $desc = $desc + $arcologies[$i].FSSupremacistRace>>
+	<<set $desc = $desc + " slaves.">>
+	<<else>>
+	<<set $desc = $desc + "the site of a furious debate over existing ">>
+	<<set $desc = $desc + $arcologies[$i].FSSupremacistRace>>
+	<<set $desc = $desc + " slaves.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSGenderRadicalist != "unset">>
+	<<if $arcologies[$i].FSGenderRadicalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSGenderRadicalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Gender Radicalism, and is ">>
+	<<if $arcologies[$i].FSGenderRadicalist > 95>>
+	<<set $desc = $desc + "notorious for the openness with which its citizens fuck its slavegirls in the ass until they cum.">>
+	<<elseif $arcologies[$i].FSGenderRadicalist > 40>>
+	<<set $desc = $desc + "known to be a good place to find slavegirls who cum when buttfucked.">>
+	<<else>>
+	<<set $desc = $desc + "actively importing a wider variety of slave girls.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSGenderFundamentalist != "unset">>
+	<<if $arcologies[$i].FSGenderFundamentalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSGenderFundamentalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Gender Fundamentalism, and is ">>
+	<<if $arcologies[$i].FSGenderFundamentalist > 95>>
+	<<set $desc = $desc + "famous for its slave schools, crowded with a future generation of world class slaves.">>
+	<<elseif $arcologies[$i].FSGenderFundamentalist > 40>>
+	<<set $desc = $desc + "remarkable for its crowds of hugely pregnant slave women.">>
+	<<else>>
+	<<set $desc = $desc + "importing increasing numbers of fertile slaves.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSPaternalist != "unset">>
+	<<if $arcologies[$i].FSPaternalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSPaternalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Paternalism, and is ">>
+	<<if $arcologies[$i].FSPaternalist > 95>>
+	<<set $desc = $desc + "the home of an educated, enlightened caste of slaves more productive than some arcologies' citizens.">>
+	<<elseif $arcologies[$i].FSPaternalist > 40>>
+	<<set $desc = $desc + "becoming known for its unusually cheerful atmosphere.">>
+	<<else>>
+	<<set $desc = $desc + "starting to demand abused slaves whose lives can be turned around.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSDegradationist != "unset">>
+	<<if $arcologies[$i].FSDegradationist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSDegradationist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Degradationism, and is ">>
+	<<if $arcologies[$i].FSDegradationist > 95>>
+	<<set $desc = $desc + "renowned and feared by slaves worldwide, as a place of blood and steel from which few ever leave.">>
+	<<elseif $arcologies[$i].FSDegradationist > 40>>
+	<<set $desc = $desc + "becoming dreaded by slaves, since the few it exports are full of unbelievably awful stories.">>
+	<<else>>
+	<<set $desc = $desc + "importing a rapidly increasing number of slaves, for some reason.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSBodyPurist != "unset">>
+	<<if $arcologies[$i].FSBodyPurist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSBodyPurist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Body Purism, and is ">>
+	<<if $arcologies[$i].FSBodyPurist > 95>>
+	<<set $desc = $desc + "a world leader in the drug industry due to its pharmaceutical research breakthroughs.">>
+	<<elseif $arcologies[$i].FSBodyPurist > 40>>
+	<<set $desc = $desc + "pouring an ever increasing amount of money into drug research.">>
+	<<else>>
+	<<set $desc = $desc + "setting up research programs to develop better slave drugs.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSTransformationFetishist != "unset">>
+	<<if $arcologies[$i].FSTransformationFetishist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSTransformationFetishist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Transformation Fetishism, and is ">>
+	<<if $arcologies[$i].FSTransformationFetishist > 95>>
+	<<set $desc = $desc + "renowned as the source of some of the world's most unbelievable surgical transformations.">>
+	<<elseif $arcologies[$i].FSTransformationFetishist > 40>>
+	<<set $desc = $desc + "rapidly moving from mere breast expansion to more esoteric surgical fetishism.">>
+	<<else>>
+	<<set $desc = $desc + "receiving daily shipments of silicone and surgical necessities.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSYouthPreferentialist != "unset">>
+	<<if $arcologies[$i].FSYouthPreferentialist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSYouthPreferentialist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Youth Preferentialism, and is ">>
+	<<if $arcologies[$i].FSYouthPreferentialist > 95>>
+	<<set $desc = $desc + "famous for the intense celebratory attention slaves receive there once reaching their majorities.">>
+	<<elseif $arcologies[$i].FSYouthPreferentialist > 40>>
+	<<set $desc = $desc + "moving virginity and the taking of virginity ever higher in the public estimation.">>
+	<<else>>
+	<<set $desc = $desc + "starting to get a reputation as an excellent place to get a good price for a virgin.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSMaturityPreferentialist != "unset">>
+	<<if $arcologies[$i].FSMaturityPreferentialist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSMaturityPreferentialist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Maturity Preferentialism, and is ">>
+	<<if $arcologies[$i].FSMaturityPreferentialist > 95>>
+	<<set $desc = $desc + "world famous among mature slaves, who see it as a paradise in which MILFs are the most valuable girls around.">>
+	<<elseif $arcologies[$i].FSMaturityPreferentialist > 40>>
+	<<set $desc = $desc + "striking for the variety of well-preserved beauties that can be seen there.">>
+	<<else>>
+	<<set $desc = $desc + "displaying an increasing demand for enslaved housewives and professional women.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSSlimnessEnthusiast != "unset">>
+	<<if $arcologies[$i].FSSlimnessEnthusiast > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSSlimnessEnthusiast > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Slimness Enthusiasm, and is ">>
+	<<if $arcologies[$i].FSSlimnessEnthusiast > 95>>
+	<<set $desc = $desc + "very well known for the wonderful variety of nubile bodies that can be seen there.">>
+	<<elseif $arcologies[$i].FSSlimnessEnthusiast > 40>>
+	<<set $desc = $desc + "becoming known as an arcology that slims slaves down rather than turning them into piles of tits and ass.">>
+	<<else>>
+	<<set $desc = $desc + "starting to display unusual fashions regarding breasts and butts.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSAssetExpansionist != "unset">>
+	<<if $arcologies[$i].FSAssetExpansionist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSAssetExpansionist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Asset Expansionism, and is ">>
+	<<if $arcologies[$i].FSAssetExpansionist > 95>>
+	<<set $desc = $desc + "widely considered an interior design masterpiece for its adaptations to slaves with fifty kilos of tits.">>
+	<<elseif $arcologies[$i].FSAssetExpansionist > 40>>
+	<<set $desc = $desc + "a popular tourist destination just for the view, which features some truly spectacular bare boobs.">>
+	<<else>>
+	<<set $desc = $desc + "demanding fatter slaves, since its citizens are learning they absorb growth hormones better.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSPastoralist != "unset">>
+	<<if $arcologies[$i].FSPastoralist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSPastoralist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Pastoralist, and is ">>
+	<<if $arcologies[$i].FSPastoralist > 95>>
+	<<set $desc = $desc + "a world-renowned producer of cowgirl dairy products of all kinds.">>
+	<<elseif $arcologies[$i].FSPastoralist > 40>>
+	<<set $desc = $desc + "devoting more and more of its slaves to work as cowgirls, or to the service and upkeep of cowgirls.">>
+	<<else>>
+	<<set $desc = $desc + "displaying an increasing public appetite for dairy, and yet imports almost no true cow's milk.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSPhysicalIdealist != "unset">>
+	<<if $arcologies[$i].FSPhysicalIdealist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSPhysicalIdealist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Physical Idealism, and is ">>
+	<<if $arcologies[$i].FSPhysicalIdealist > 95>>
+	<<set $desc = $desc + "a constant standout at international athletic competitions, where both its citizens and slaves do very well.">>
+	<<elseif $arcologies[$i].FSPhysicalIdealist > 40>>
+	<<set $desc = $desc + "quite a sight, since its citizens and slaves all lift. Constantly.">>
+	<<else>>
+	<<set $desc = $desc + "the site of a musclegirl fetish community.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSChattelReligionist != "unset">>
+	<<if $arcologies[$i].FSChattelReligionist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSChattelReligionist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Chattel Religionism, and is ">>
+	<<if $arcologies[$i].FSChattelReligionist > 95>>
+	<<set $desc = $desc + "a significant force in the global development of Chattel Religionist dogma.">>
+	<<elseif $arcologies[$i].FSChattelReligionist > 40>>
+	<<set $desc = $desc + "a popular destination for devout old world citizens engaging in sex tourism.">>
+	<<else>>
+	<<set $desc = $desc + "in the throes of public dissention over its religious laws.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSRomanRevivalist != "unset">>
+	<<if $arcologies[$i].FSRomanRevivalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSRomanRevivalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Roman Revivalism, and is ">>
+	<<if $arcologies[$i].FSRomanRevivalist > 95>>
+	<<set $desc = $desc + "hugely famous for its broadcasts of gladiatorial combat, popular even in the old world.">>
+	<<elseif $arcologies[$i].FSRomanRevivalist > 40>>
+	<<set $desc = $desc + "almost obnoxiously aspirational, with citizens competing to serve the state best.">>
+	<<else>>
+	<<set $desc = $desc + "working its way through sword and sandals fashion towards proper historicity.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSAztecRevivalist != "unset">>
+	<<if $arcologies[$i].FSAztecRevivalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSAztecRevivalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Aztec Revivalism, and is ">>
+	<<if $arcologies[$i].FSAztecRevivalist > 95>>
+	<<set $desc = $desc + "world famous for its incredible architecture and highly qualified leading caste and military.">>
+	<<elseif $arcologies[$i].FSAztecRevivalist > 40>>
+	<<set $desc = $desc + "busily constructing great pyramids and statues with commensurate costs.">>
+	<<else>>
+	<<set $desc = $desc + "struggling to embrace the amount of blood sacrifice and prayer involved.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSEgyptianRevivalist != "unset">>
+	<<if $arcologies[$i].FSEgyptianRevivalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Egyptian Revivalism, and is ">>
+	<<if $arcologies[$i].FSEgyptianRevivalist > 95>>
+	<<set $desc = $desc + "a world famous tourist destination for the traditional festival in its plaza, which never stops.">>
+	<<elseif $arcologies[$i].FSEgyptianRevivalist > 40>>
+	<<set $desc = $desc + "very much under renovation, as vast blocks of stone are imported around the clock.">>
+	<<else>>
+	<<set $desc = $desc + "struggling with the fashion implications of so much white linen everywhere.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSEdoRevivalist != "unset">>
+	<<if $arcologies[$i].FSEdoRevivalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSEdoRevivalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Edo Revivalism, and is ">>
+	<<if $arcologies[$i].FSEdoRevivalist > 95>>
+	<<set $desc = $desc + "visibly trailing cherry blossoms, blown off its balconies by the wind.">>
+	<<elseif $arcologies[$i].FSEdoRevivalist > 40>>
+	<<set $desc = $desc + "becoming a notable cultural center, even in the old world.">>
+	<<else>>
+	<<set $desc = $desc + "the object of considerable debate among socially awkward teenagers worldwide.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSArabianRevivalist != "unset">>
+	<<if $arcologies[$i].FSArabianRevivalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSArabianRevivalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Arabian Revivalism, and is ">>
+	<<if $arcologies[$i].FSArabianRevivalist > 95>>
+	<<set $desc = $desc + "a famous center of Arabian romanticism, since it has the wisdom not to be historically perfect.">>
+	<<elseif $arcologies[$i].FSArabianRevivalist > 40>>
+	<<set $desc = $desc + "working through which parts of Arabian romanticism to adopt and which to discard.">>
+	<<else>>
+	<<set $desc = $desc + "eagerly revelling in the most romantic parts of superficial Arabian romanticism.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+<<if $arcologies[$i].FSChineseRevivalist != "unset">>
+	<<if $arcologies[$i].FSChineseRevivalist > 80>>
+	<<set $desc = "committed to ">>
+	<<elseif $arcologies[$i].FSChineseRevivalist > 20>>
+	<<set $desc = "pursuing ">>
+	<<else>>
+	<<set $desc = "just establishing ">>
+	<</if>>
+	<<set $desc = $desc + "Chinese Revivalism, and is ">>
+	<<if $arcologies[$i].FSChineseRevivalist > 95>>
+	<<set $desc = $desc + "now confidently mature about its possession of the Mandate of Heaven.">>
+	<<elseif $arcologies[$i].FSChineseRevivalist > 40>>
+	<<set $desc = $desc + "often aggressive about its status as the middle kingdom to the point that it betrays uncertainty.">>
+	<<else>>
+	<<set $desc = $desc + "moving towards a stage of refinement that will allow it to present itself properly.">>
+	<</if>>
+	<<set $seed.push($desc)>>
+<</if>>
+
+<<if $seed.length > 0>>
+<<if $seed.length > 2>>
+	Its culture is complex. First, it is $seed[0]
+	<<for $j = 1; $j < $seed.length; $j++>>
+	<<if $j < $seed.length-1>>It is<<else>>Finally, the arcology is<</if>> $seed[$j]
+	<</for>>
+<<elseif $seed.length == 2>>
+	Its culture is developing along two lines. First, it is $seed[0] Second, it is $seed[1]
+<<else>>
+	Its culture is diverging from the old world: it is $seed[0]
+<</if>>
+<</if>>

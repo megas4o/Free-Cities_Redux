@@ -1,0 +1,2684 @@
+:: Future Society [nobr]
+
+
+<<set $nextButton = "Back", $nextLink = "Main", $showEncyclopedia = 1, $encyclopedia = "Future Societies">>
+
+<<if ndef $arcologies[0].FSSubjugationist>>
+	<<set $arcologies[0].FSSubjugationist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSSupremacist>>
+	<<set $arcologies[0].FSSupremacist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSGenderRadicalist>>
+	<<set $arcologies[0].FSGenderRadicalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSGenderFundamentalist>>
+	<<set $arcologies[0].FSGenderFundamentalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSPaternalist>>
+	<<set $arcologies[0].FSPaternalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSDegradationist>>
+	<<set $arcologies[0].FSDegradationist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSBodyPurist>>
+	<<set $arcologies[0].FSBodyPurist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSTransformationFetishist>>
+	<<set $arcologies[0].FSTransformationFetishist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSYouthPreferentialist>>
+	<<set $arcologies[0].FSYouthPreferentialist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSMaturityPreferentialist>>
+	<<set $arcologies[0].FSMaturityPreferentialist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSSlimnessEnthusiast>>
+	<<set $arcologies[0].FSSlimnessEnthusiast = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSAssetExpansionist>>
+	<<set $arcologies[0].FSAssetExpansionist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSPastoralist>>
+	<<set $arcologies[0].FSPastoralist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSPhysicalIdealist>>
+	<<set $arcologies[0].FSPhysicalIdealist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSChattelReligionist>>
+	<<set $arcologies[0].FSChattelReligionist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSNull>>
+	<<set $arcologies[0].FSNull = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSRomanRevivalist>>
+	<<set $arcologies[0].FSRomanRevivalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSAztecRevivalist>>
+	<<set $arcologies[0].FSAztecRevivalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSEgyptianRevivalist>>
+	<<set $arcologies[0].FSEgyptianRevivalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSEdoRevivalist>>
+	<<set $arcologies[0].FSEdoRevivalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSArabianRevivalist>>
+	<<set $arcologies[0].FSArabianRevivalist = "unset">>
+<</if>>
+<<if ndef $arcologies[0].FSChineseRevivalist>>
+	<<set $arcologies[0].FSChineseRevivalist = "unset">>
+<</if>>
+
+/* FIRST FS STORING FOR RIVALRY */
+
+<<if $rivalryFS == 0>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<set $rivalryFS = "Racial Subjugationism">>
+	<<set $rivalryFSRace = $arcologies[0].FSSubjugationistRace>>
+<</if>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<set $rivalryFS = "Racial Supremacism">>
+	<<set $rivalryFSRace = $arcologies[0].FSSupremacistRace>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<set $rivalryFS = "Gender Radicalism">>
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<set $rivalryFS = "Gender Fundamentalism">>
+<</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<set $rivalryFS = "Paternalism">>
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	<<set $rivalryFS = "Degradationism">>
+<</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<set $rivalryFS = "Body Purism">>
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	<<set $rivalryFS = "Transformation Fetishism">>
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<set $rivalryFS = "Youth Preferentialism">>
+<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<set $rivalryFS = "Maturity Preferentialism">>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<set $rivalryFS = "Slimness Enthusiasm">>
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	<<set $rivalryFS = "Asset Expansionism">>
+<</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<set $rivalryFS = "Pastoralism">>
+<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<set $rivalryFS = "Physical Idealism">>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<set $rivalryFS = "Chattel Religionism">>
+<<elseif $arcologies[0].FSNull != "unset">>
+	<<set $rivalryFS = "Multiculturalism">>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<set $rivalryFS = "Roman Revivalism">>
+<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	<<set $rivalryFS = "Aztec Revivalism">>
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<set $rivalryFS = "Egyptian Revivalism">>
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<<set $rivalryFS = "Edo Revivalism">>
+<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	<<set $rivalryFS = "Arabian Revivalism">>
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<<set $rivalryFS = "Chinese Revivalism">>
+<</if>>
+<</if>>
+
+<<if $cheatMode == 1>>
+<center>
+//[[Cheat Edit Future Society|MOD_Edit FS Cheat][$cheater = 1]]//
+</center>
+<br><br>
+<</if>>
+
+<<if $FSCredits > 0>>
+	@@.yellow;$arcologies[0].name's society is ready to begin accepting a new societal direction.@@
+<<elseif $FSGotRepCreditThree == 1>>
+	Your society is so radically changed that it is starting to take on a life of its own. The major decisions about its direction have been made.
+<<else>>
+	You must develop your reputation further for $arcologies[0].name's society to be ready for a new societal direction.
+<</if>>
+
+<<if $arcologies[0].FSSupremacist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in $arcologies[0].FSSupremacistRace superiority.
+<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with $arcologies[0].FSSupremacistRace superiority.
+<<elseif $arcologies[0].FSSupremacist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to $arcologies[0].FSSupremacistRace superiority.
+<<elseif $arcologies[0].FSSupremacist != "unset">>
+	$arcologies[0].name is unconvinced of $arcologies[0].FSSupremacistRace superiority.
+<</if>>
+
+<<if $arcologies[0].FSSubjugationist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the inferiority of $arcologies[0].FSSubjugationistRace people.
+<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the inferiority of $arcologies[0].FSSubjugationistRace people.
+<<elseif $arcologies[0].FSSubjugationist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the inferiority of $arcologies[0].FSSubjugationistRace people.
+<<elseif $arcologies[0].FSSubjugationist != "unset">>
+	$arcologies[0].name is unconvinced of the inferiority of $arcologies[0].FSSubjugationistRace people.
+<</if>>
+
+<<if $arcologies[0].FSGenderRadicalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the need to redefine gender around power.
+<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the need to redefine gender around power.
+<<elseif $arcologies[0].FSGenderRadicalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the need to redefine gender around power.
+<<elseif $arcologies[0].FSGenderRadicalist != "unset">>
+	$arcologies[0].name is unconvinced of the need to redefine gender around power.
+<</if>>
+
+<<if $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the need to preserve traditional gender roles.
+<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the need to preserve traditional gender roles.
+<<elseif $arcologies[0].FSGenderFundamentalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the need to preserve traditional gender roles.
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	$arcologies[0].name is unconvinced of the need to preserve traditional gender roles.
+<</if>>
+
+<<if $arcologies[0].FSPaternalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the vision of a well-bred race of slaves.
+<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the vision of a well-bred race of slaves.
+<<elseif $arcologies[0].FSPaternalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the vision of a well-bred race of slaves.
+<<elseif $arcologies[0].FSPaternalist != "unset">>
+	$arcologies[0].name is unconvinced of the vision of a well-bred race of slaves.
+<</if>>
+
+<<if $arcologies[0].FSDegradationist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that slaves are not human and should be thoroughly degraded.
+<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that slaves are not human and should be thoroughly degraded.
+<<elseif $arcologies[0].FSDegradationist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the proposition that slaves are not human and should be thoroughly degraded.
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	$arcologies[0].name is unconvinced that slaves are not human and should be thoroughly degraded.
+<</if>>
+
+<<if $arcologies[0].FSBodyPurist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in the unattractive nature of implants.
+<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the unattractive nature of implants.
+<<elseif $arcologies[0].FSBodyPurist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the unattractive nature of implants.
+<<elseif $arcologies[0].FSBodyPurist != "unset">>
+	$arcologies[0].name is unconvinced of the unattractive nature of implants.
+<</if>>
+
+<<if $arcologies[0].FSTransformationFetishist >= $FSLockinLevel>>
+	$arcologies[0].name passionately fetishizes implants.
+<<elseif $arcologies[0].FSTransformationFetishist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name strongly fetishizes implants.
+<<elseif $arcologies[0].FSTransformationFetishist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name fetishizes implants.
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	$arcologies[0].name is beginning to fetishize implants.
+<</if>>
+
+<<if $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel>>
+	$arcologies[0].name is passionately enthusiastic for older ladies.
+<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name is very enthusiastic for older ladies.
+<<elseif $arcologies[0].FSMaturityPreferentialist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is enthusiastic for older ladies.
+<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	$arcologies[0].name is beginning to be enthusiastic for older ladies.
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel>>
+	$arcologies[0].name is passionately enthusiastic for young women.
+<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name is very enthusiastic for young women.
+<<elseif $arcologies[0].FSYouthPreferentialist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is enthusiastic for young women.
+<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+	$arcologies[0].name is beginning to be enthusiastic for young women.
+<</if>>
+
+<<if $arcologies[0].FSSlimnessEnthusiast >= $FSLockinLevel>>
+	$arcologies[0].name is passionately enthusiastic about slim slaves with girlish figures.
+<<elseif $arcologies[0].FSSlimnessEnthusiast >= $FSLockinLevel*0.6>>
+	$arcologies[0].name is very enthusiastic about slim slaves with girlish figures.
+<<elseif $arcologies[0].FSSlimnessEnthusiast >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is enthusiastic about slim slaves with girlish figures.
+<<elseif $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	$arcologies[0].name is beginning to be enthusiastic about slim slaves with girlish figures.
+<</if>>
+
+<<if $arcologies[0].FSAssetExpansionist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that all tits and asses should be bigger.
+<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that all tits and asses should be bigger.
+<<elseif $arcologies[0].FSAssetExpansionist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the idea that all tits and asses should be bigger.
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	$arcologies[0].name is unconvinced that all tits and asses should be bigger.
+<</if>>
+
+<<if $arcologies[0].FSPastoralist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that slaves should be milked.
+<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that slaves should be milked.
+<<elseif $arcologies[0].FSPastoralist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the idea that slaves should be milked.
+<<elseif $arcologies[0].FSPastoralist != "unset">>
+	$arcologies[0].name is unconvinced that slaves should be milked.
+<</if>>
+
+<<if $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that all slaves should be tall and strong.
+<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with the idea that all slaves should be tall and strong.
+<<elseif $arcologies[0].FSPhysicalIdealist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to the idea that all slaves should be tall and strong.
+<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+	$arcologies[0].name is unconvinced that all slaves should be tall and strong.
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly in a version of religion that emphasizes slaveholding traditions.
+<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with a version of religion that emphasizes slaveholding traditions.
+<<elseif $arcologies[0].FSChattelReligionist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to a version of religion that emphasizes slaveholding traditions.
+<<elseif $arcologies[0].FSChattelReligionist != "unset">>
+	$arcologies[0].name is unconvinced of a version of religion that emphasizes slaveholding traditions.
+<</if>>
+
+<<if $arcologies[0].FSNull >= $FSLockinLevel>>
+	$arcologies[0].name is committed to affording its citizens absolute cultural freedom.
+<<elseif $arcologies[0].FSNull >= $FSLockinLevel*0.75>>
+	$arcologies[0].name is committed to affording its citizens great cultural freedom.
+<<elseif $arcologies[0].FSNull >= $FSLockinLevel*0.5>>
+	$arcologies[0].name is committed to affording its citizens considerable cultural freedom.
+<<elseif $arcologies[0].FSNull != "unset">>
+	$arcologies[0].name is committed to affording its citizens basic cultural freedom.
+<</if>>
+
+<<if $arcologies[0].FSRomanRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the new Rome.
+<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build the new Rome.
+<<elseif $arcologies[0].FSRomanRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build the new Rome.
+<<elseif $arcologies[0].FSRomanRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build the new Rome.
+<</if>>
+
+<<if $arcologies[0].FSAztecRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the new Aztec Empire.
+<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build the new Aztec Empire.
+<<elseif $arcologies[0].FSAztecRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build the new Aztec Empire.
+<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build the new Aztec Empire.
+<</if>>
+
+<<if $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the land of the Pharaohs, reborn.
+<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build a new land of the Pharaohs.
+<<elseif $arcologies[0].FSEgyptianRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build a new land of the Pharaohs.
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build a new land of the Pharaohs.
+<</if>>
+
+<<if $arcologies[0].FSEdoRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is the land of the Shogun, reborn.
+<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build a new Edo Japan.
+<<elseif $arcologies[0].FSEdoRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build a new Edo Japan.
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build a new Edo Japan.
+<</if>>
+
+<<if $arcologies[0].FSArabianRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that it is ancient Baghdad reborn.
+<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your project to build a new Sultanate.
+<<elseif $arcologies[0].FSArabianRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your project to build a new Sultanate.
+<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your project to build a new Sultanate.
+<</if>>
+
+<<if $arcologies[0].FSChineseRevivalist >= $FSLockinLevel>>
+	$arcologies[0].name believes implicitly that possesses the Mandate of Heaven.
+<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.6>>
+	$arcologies[0].name agrees strongly with your pursuit of the Mandate of Heaven.
+<<elseif $arcologies[0].FSChineseRevivalist >= $FSLockinLevel*0.3>>
+	$arcologies[0].name is sympathetic to your pursuit of the Mandate of Heaven.
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	$arcologies[0].name is unconvinced of the wisdom of your pursuit of the Mandate of Heaven.
+<</if>>
+
+You have unlocked
+<<if ($FSGotRepCreditFour == 1)>>
+	__all five__
+<<elseif ($FSGotRepCreditThree == 1)>>
+	__four of five__
+<<elseif ($FSGotRepCreditTwo == 1)>>
+	__three of five__
+<<elseif ($FSGotRepCreditOne == 1)>>
+	__two of five__
+<<else>>
+	__one of five__
+<</if>>
+possible societal customizations.
+
+<<if $FSSpending > 10000>><<set _warn = 1>><</if>>
+<<set $FSSpending = Number($FSSpending) || 0>>
+<<set $FSSpending = Math.clamp(Math.ceil($FSSpending/1000)*1000, 0, 10000)>>
+<br>You are spending ¤<<textbox "_newFSSpending" $FSSpending>> each week to support your societal goals. [[Save changes|Future Society][$FSSpending = Number(_newFSSpending) || 0]]
+<<if _warn>><br>//Spending more than ¤10000 weekly would be counterproductive//<</if>>
+
+<br>
+
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<br>''You are pursuing'' $arcologies[0].FSSupremacistRace superiority. //<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSSupremacist = "unset", $arcologies[0].FSSupremacistDecoration = 20, $arcologies[0].FSSupremacistLawME = 0, $arcologies[0].FSSupremacistSMR = 0, $FSCredits += 1>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<if $arcologies[0].FSSupremacistDecoration == 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSSupremacist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSSupremacistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<elseif $arcologies[0].FSSupremacistDecoration == 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSSupremacist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSSupremacistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<elseif $arcologies[0].FSSupremacistDecoration == 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSSupremacist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSSupremacistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<elseif $arcologies[0].FSSupremacistDecoration == 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSSupremacist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSSupremacistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<elseif $arcologies[0].FSSupremacistDecoration == 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</if>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "monstergirl")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>[[Racial supremacism|Future Society][$arcologies[0].FSSupremacist = 4, $FSCredits -= 1]]: a belief in <<if $arcologies[0].FSSupremacistRace == 0>>the superiority of a chosen race<<else>>$arcologies[0].FSSupremacistRace superiority<</if>>.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;Select race:
+<<if $arcologies[0].FSSupremacistRace != "white">>[[White|Future Society][$arcologies[0].FSSupremacistRace = "white"]]<<else>>White<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "asian">>[[Asian|Future Society][$arcologies[0].FSSupremacistRace = "asian"]]<<else>>Asian<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "latina">>[[Latino|Future Society][$arcologies[0].FSSupremacistRace = "latina"]]<<else>>Latino<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "middle eastern">>[[Middle Eastern|Future Society][$arcologies[0].FSSupremacistRace = "middle eastern"]]<<else>>Middle Eastern<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "black">>[[Black|Future Society][$arcologies[0].FSSupremacistRace = "black"]]<<else>>Black<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "indo-aryan">>[[Indo-Aryan|Future Society][$arcologies[0].FSSupremacistRace = "indo-aryan"]]<<else>>Indo-Aryan<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "amerindian">>[[Amerindian|Future Society][$arcologies[0].FSSupremacistRace = "amerindian"]]<<else>>Amerindian<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "pacific islander">>[[Pacific Islander|Future Society][$arcologies[0].FSSupremacistRace = "pacific islander"]]<<else>>Pacific Islander<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "malay">>[[Malay|Future Society][$arcologies[0].FSSupremacistRace = "malay"]]<<else>>Malay<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "southern european">>[[Southern European|Future Society][$arcologies[0].FSSupremacistRace = "southern european"]]<<else>>Southern European<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "semitic">>[[Semitic|Future Society][$arcologies[0].FSSupremacistRace = "semitic"]]<<else>>Semitic<</if>> |
+<<if $arcologies[0].FSSupremacistRace != "mixed race">>[[Mixed Race|Future Society][$arcologies[0].FSSupremacistRace = "mixed race"]]<<else>>Mixed Race<</if>>
+	<<else>>
+	/*//''Racial supremacism'': a belief in the superiority of a chosen race.//*/
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<br>''You are pursuing'' $arcologies[0].FSSubjugationistRace inferiority. //<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSSubjugationist = "unset", $arcologies[0].FSSubjugationistDecoration = 20, $arcologies[0].FSSubjugationistLawME = 0, $arcologies[0].FSSubjugationistSMR = 0, $FSCredits += 1>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<if $arcologies[0].FSSubjugationistDecoration == 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSSubjugationist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSSubjugationistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<elseif $arcologies[0].FSSubjugationistDecoration == 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSSubjugationist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSSubjugationistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<elseif $arcologies[0].FSSubjugationistDecoration == 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSSubjugationist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSSubjugationistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<elseif $arcologies[0].FSSubjugationistDecoration == 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSSubjugationist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSSubjugationistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<elseif $arcologies[0].FSSubjugationistDecoration == 100>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<else>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</if>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "amazon")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Racial subjugationism|Future Society][$arcologies[0].FSSubjugationist = 4, $FSCredits -= 1]]: a belief in <<if $arcologies[0].FSSubjugationistRace == 0>>the inferiority of a chosen race<<else>>$arcologies[0].FSSubjugationistRace inferiority<</if>>.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;Select race:
+<<if $arcologies[0].FSSubjugationistRace != "white">>[[White|Future Society][$arcologies[0].FSSubjugationistRace = "white"]]<<else>>White<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "asian">>[[Asian|Future Society][$arcologies[0].FSSubjugationistRace = "asian"]]<<else>>Asian<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "latina">>[[Latino|Future Society][$arcologies[0].FSSubjugationistRace = "latina"]]<<else>>Latino<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "middle eastern">>[[Middle Eastern|Future Society][$arcologies[0].FSSubjugationistRace = "middle eastern"]]<<else>>Middle Eastern<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "black">>[[Black|Future Society][$arcologies[0].FSSubjugationistRace = "black"]]<<else>>Black<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "indo-aryan">>[[Indo-Aryan|Future Society][$arcologies[0].FSSubjugationistRace = "indo-aryan"]]<<else>>Indo-Aryan<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "amerindian">>[[Amerindian|Future Society][$arcologies[0].FSSubjugationistRace = "amerindian"]]<<else>>Amerindian<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "pacific islander">>[[Pacific Islander|Future Society][$arcologies[0].FSSubjugationistRace = "pacific islander"]]<<else>>Pacific Islander<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "malay">>[[Malay|Future Society][$arcologies[0].FSSubjugationistRace = "malay"]]<<else>>Malay<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "southern european">>[[Southern European|Future Society][$arcologies[0].FSSubjugationistRace = "southern european"]]<<else>>Southern European<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "semitic">>[[Semitic|Future Society][$arcologies[0].FSSubjugationistRace = "semitic"]]<<else>>Semitic<</if>> |
+<<if $arcologies[0].FSSubjugationistRace != "mixed race">>[[Mixed Race|Future Society][$arcologies[0].FSSubjugationistRace = "mixed race"]]<<else>>Mixed Race<</if>>
+	<<else>>
+	/*//''Racial subjugationism'': a belief in the inferiority of a subject race.//*/
+	<</if>>
+<</if>>
+
+<br><br>
+
+''Sometimes a strong leader must chose one road and sacrifice another.  The following choices are paired, and only one from each pair can be chosen at a time:''
+
+<<if $seeDicks != 0>>
+<<if $arcologies[0].FSGenderFundamentalist == "unset">>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<br>''You are pursuing'' a radical redefinition of gender that identifies powerful people as male, and everyone else as female.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSGenderRadicalist = "unset", $arcologies[0].FSGenderRadicalistDecoration = 20, $arcologies[0].FSGenderRadicalistLawDicks = 0, $arcologies[0].FSGenderRadicalistLawFuta = 0, $arcologies[0].FSGenderRadicalistLawBeauty = 0, $arcologies[0].FSGenderRadicalistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "gender radicalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSGenderRadicalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSGenderRadicalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSGenderRadicalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSGenderRadicalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSGenderRadicalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSGenderRadicalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSGenderRadicalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSGenderRadicalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSGenderRadicalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "shemale") || ($assistantAppearance == "monstergirl")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Gender radicalism|Future Society][$arcologies[0].FSGenderRadicalist = 4, $FSCredits -= 1]]: a radical redefinition of gender that identifies powerful people as male, and everyone else as female.
+	<<else>>
+	/*//''Gender radicalism'': a radical redefinition of gender that identifies powerful people as male, and everyone else as female.//*/
+	<</if>>
+<</if>>
+<</if>>
+<<else>>
+	//The alternative to "Gender traditionalism" is not available with your settings.//
+<</if>>
+
+<<if $arcologies[0].FSGenderRadicalist == "unset">>
+<<if $arcologies[0].FSGenderFundamentalist != "unset">>
+	<br>''You are pursuing'' gender traditionalism, including a societal preference for feminine slaves and support for slave pregnancy.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSGenderFundamentalist = "unset", $arcologies[0].FSGenderFundamentalistDecoration = 20, $arcologies[0].FSGenderFundamentalistSMR = 0, $arcologies[0].FSGenderFundamentalistLawBimbo = 0, $FSCredits += 1>><<if $assistantFSAppearance == "gender fundamentalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSGenderFundamentalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSGenderFundamentalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSGenderFundamentalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSGenderFundamentalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSGenderFundamentalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSGenderFundamentalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSGenderFundamentalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSGenderFundamentalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSGenderFundamentalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "goddess")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Gender traditionalism|Future Society][$arcologies[0].FSGenderFundamentalist = 4, $FSCredits -= 1]]: a societal preference for feminine slaves and support for slave pregnancy.
+	<<else>>
+	/*//''Gender traditionalism'': a societal preference for feminine slaves and support for slave pregnancy.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<br>
+
+<<if $arcologies[0].FSDegradationist == "unset">>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<br>''You are pursuing'' a vision of slave improvement, including slaves' health, mental well-being, and education.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSPaternalist = "unset", $arcologies[0].FSPaternalistDecoration = 20, $arcologies[0].FSPaternalistLaw = 0, $arcologies[0].FSPaternalistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "paternalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSPaternalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSPaternalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSPaternalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSPaternalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSPaternalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSPaternalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSPaternalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSPaternalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSPaternalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "goddess")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Paternalism|Future Society][$arcologies[0].FSPaternalist = 4, $FSCredits -= 1]]: a vision of slave improvement, including slaves' health, mental well-being, and education.
+	<<else>>
+	/*//''Paternalism'': a vision of slave improvement, including slaves' health, mental well-being, and education.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPaternalist == "unset">>
+<<if $arcologies[0].FSDegradationist != "unset">>
+	<br>''You are pursuing'' slave degradation, a belief that slaves are not human and should not be treated decently.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSDegradationist = "unset", $arcologies[0].FSDegradationistDecoration = 20, $arcologies[0].FSDegradationistLaw = 0, $arcologies[0].FSDegradationistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "degradationist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSDegradationistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSDegradationist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSDegradationistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSDegradationist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSDegradationistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSDegradationist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSDegradationistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSDegradationist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSDegradationistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "monstergirl") || ($assistantAppearance == "businesswoman")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Degradationism|Future Society][$arcologies[0].FSDegradationist = 4, $FSCredits -= 1]]: a belief that slaves are not human and should not be treated decently.
+	<<else>>
+	/*//''Degradation'': a belief that slaves are not human and should not be treated decently.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<br>
+
+<<if $arcologies[0].FSTransformationFetishist == "unset">>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<br>''You are pursuing'' societal disapproval of implant surgery.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSBodyPurist = "unset", $arcologies[0].FSBodyPuristDecoration = 20, $arcologies[0].FSBodyPuristLaw = 0, $arcologies[0].FSBodyPuristSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "body purist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSBodyPuristDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSBodyPurist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSBodyPuristDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSBodyPurist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSBodyPuristDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSBodyPurist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSBodyPuristDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSBodyPurist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSBodyPuristDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "goddess")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Body Purism|Future Society][$arcologies[0].FSBodyPurist = 4, $FSCredits -= 1]]: societal disapproval of implant surgery.
+	<<else>>
+	/*//''Body Purism'': societal disapproval of implant surgery.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSBodyPurist == "unset">>
+<<if $arcologies[0].FSTransformationFetishist != "unset">>
+	<br>''You are pursuing'' societal fetishization of implant surgery.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSTransformationFetishist = "unset", $arcologies[0].FSTransformationFetishistDecoration = 20, $arcologies[0].FSTransformationFetishistLaw = 0, $arcologies[0].FSTransformationFetishistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "transformation fetishist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSTransformationFetishistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSTransformationFetishist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSTransformationFetishistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSTransformationFetishist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSTransformationFetishistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSTransformationFetishist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSTransformationFetishistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSTransformationFetishist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSTransformationFetishistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "shemale")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if ($FSCredits > 0)>>
+	<br>''''[[Transformation Fetishism|Future Society][$arcologies[0].FSTransformationFetishist = 4, $FSCredits -= 1]]: societal fetishization of implant surgery.
+	<<else>>
+	/*//''Transformation Fetishism'': societal fetishization of implant surgery.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<br>
+
+<<if $arcologies[0].FSMaturityPreferentialist == "unset">>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<br>''You are pursuing'' an accentuated societal preference for younger slaves.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSYouthPreferentialist = "unset", $arcologies[0].FSYouthPreferentialistDecoration = 20, $arcologies[0].FSYouthPreferentialistLaw = 0, $arcologies[0].FSYouthPreferentialistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "youth preferentialist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSYouthPreferentialistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSYouthPreferentialist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSYouthPreferentialistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSYouthPreferentialist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSYouthPreferentialistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSYouthPreferentialist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSYouthPreferentialistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSYouthPreferentialist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSYouthPreferentialistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "shemale")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Youth Preferentialism|Future Society][$arcologies[0].FSYouthPreferentialist = 4, $FSCredits -= 1]]: increased interest in girls just past their majority.
+	<<else>>
+	/*//''Youth Preferentialism'': increased interest in girls just past their majority.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSYouthPreferentialist == "unset">>
+<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<br>''You are pursuing'' a societal preference for older women.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSMaturityPreferentialist = "unset", $arcologies[0].FSMaturityPreferentialistDecoration = 20, $arcologies[0].FSMaturityPreferentialistLaw = 0, $arcologies[0].FSMaturityPreferentialistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "maturity preferentialist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSMaturityPreferentialistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSMaturityPreferentialist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSMaturityPreferentialistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSMaturityPreferentialist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSMaturityPreferentialistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSMaturityPreferentialist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSMaturityPreferentialistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSMaturityPreferentialist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSMaturityPreferentialistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "goddess")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Maturity Preferentialism|Future Society][$arcologies[0].FSMaturityPreferentialist = 4, $FSCredits -= 1]]: increased interest in mature slaves.
+	<<else>>
+	/*//''Maturity Preferentialism'': increased interest in mature slaves.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<br>
+
+<<if $arcologies[0].FSAssetExpansionist == "unset">>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<br>''You are supporting'' enthusiasm for slaves with girlish figures.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSSlimnessEnthusiast = "unset", $arcologies[0].FSSlimnessEnthusiastDecoration = 20, $arcologies[0].FSSlimnessEnthusiastSMR = 0, $arcologies[0].FSSlimnessEnthusiastSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "slimness enthusiast">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSSlimnessEnthusiastDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSSlimnessEnthusiast >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSSlimnessEnthusiastDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSSlimnessEnthusiast >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSSlimnessEnthusiastDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSSlimnessEnthusiast >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSSlimnessEnthusiastDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSSlimnessEnthusiast >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSSlimnessEnthusiastDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "shemale")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Slimness Enthusiasm|Future Society][$arcologies[0].FSSlimnessEnthusiast = 4, $FSCredits -= 1]]: a fashion for slaves with girlish figures.
+	<<else>>
+	/*//''Slimness Enthusiasm'': a fashion for slaves with girlish figures.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSlimnessEnthusiast == "unset">>
+<<if $arcologies[0].FSAssetExpansionist != "unset">>
+	<br>''You are pursuing'' societal hunger for huge assets.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSAssetExpansionist = "unset", $arcologies[0].FSAssetExpansionistDecoration = 20, $arcologies[0].FSAssetExpansionistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "asset expansionist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSAssetExpansionistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSAssetExpansionist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSAssetExpansionistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSAssetExpansionist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSAssetExpansionistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSAssetExpansionist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSAssetExpansionistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSAssetExpansionist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSAssetExpansionistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "shemale")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Asset Expansionism|Future Society][$arcologies[0].FSAssetExpansionist = 4, $FSCredits -= 1]]: societal hunger for huge assets of whatever origin.
+	<<else>>
+	/*//''Asset Expansionism'': societal hunger for huge assets of whatever origin.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<br>
+
+<<if $arcologies[0].FSPhysicalIdealist == "unset">>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<br>''You are pursuing'' societal normalization of slave milking.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSPastoralist = "unset", $arcologies[0].FSPastoralistDecoration = 20, $arcologies[0].FSPastoralistLaw = 0, $arcologies[0].FSPastoralistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "pastoralist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSPastoralistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSPastoralist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSPastoralistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSPastoralist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSPastoralistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSPastoralist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSPastoralistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSPastoralist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSPastoralistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "goddess") || ($assistantAppearance == "shemale")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Slave Pastoralism|Future Society][$arcologies[0].FSPastoralist = 4, $FSCredits -= 1]]: societal acceptance of slave products like milk.
+	<<else>>
+	/*//''Slave Pastoralism'': societal acceptance of slave products like milk.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPastoralist == "unset">>
+<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+	<br>''You are pursuing'' societal reverence for the idealized human form, including height, health and muscle.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSPhysicalIdealist = "unset", $arcologies[0].FSPhysicalIdealistDecoration = 20, $arcologies[0].FSPhysicalIdealistSMR = 0, $arcologies[0].FSPastoralistLaw = 0, $FSCredits += 1>><<if $assistantFSAppearance == "physical idealist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSPhysicalIdealistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSPhysicalIdealist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSPhysicalIdealistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSPhysicalIdealist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSPhysicalIdealistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSPhysicalIdealist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSPhysicalIdealistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSPhysicalIdealist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSPhysicalIdealistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "shemale")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Physical Idealism|Future Society][$arcologies[0].FSPhysicalIdealist = 4, $FSCredits -= 1]]: societal reverence for the idealized human form, including height, health and muscle.
+	<<else>>
+	/*//''Physical Idealism'': societal reverence for the idealized human form, including height, health and muscle.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<br>
+
+<<if $arcologies[0].FSNull == "unset">>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<br>''You are pursuing'' a new strain of religion that emphasizes the slaveholding portions of religious history.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSChattelReligionist = "unset", $arcologies[0].FSChattelReligionistDecoration = 20, $arcologies[0].FSChattelReligionistLaw = 0, $arcologies[0].FSChattelReligionistCreed = 0, $arcologies[0].FSChattelReligionistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "chattel religionist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSChattelReligionistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSChattelReligionist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSChattelReligionistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSChattelReligionist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSChattelReligionistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSChattelReligionist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSChattelReligionistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSChattelReligionist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSChattelReligionistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "goddess") || ($assistantAppearance == "monstergirl")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Chattel Religionism|Future Society][$arcologies[0].FSChattelReligionist = 4, $FSCredits -= 1]]: a new strain of religion that emphasizes the slaveholding portions of religious history.
+	<<else>>
+	/*//''Chattel Religionism'': a new strain of religion that emphasizes the slaveholding portions of religious history.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $arcologies[0].FSChattelReligionist == "unset">>
+<<if $arcologies[0].FSNull != "unset">>
+	<br>''You are permitting <<if $arcologies[0].FSNull <= 25>>basic<<elseif $arcologies[0].FSNull <= 50>>considerable<<elseif $arcologies[0].FSNull <= 75>>advanced<<else>>absolute<</if>>'' cultural freedom in your arcology.
+	<<if $arcologies[0].FSNull <= 25>>
+		//[[Abandon|Future Society][$arcologies[0].FSNull = "unset", $arcologies[0].FSNullDecoration = 20, $arcologies[0].FSNullLaw = 0, $FSCredits += 1]]//
+	<<else>>
+		//[[Withdraw|Future Society][$arcologies[0].FSNull -= 25, $FSCredits += 1]]//
+	<</if>>
+	<<if $FSCredits > 0>>
+	<<if $arcologies[0].FSNull < $FSLockinLevel>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Advance|Future Society][$arcologies[0].FSNull += 25, $FSCredits -= 1]]: further commitment to allow your arcology's citizens cultural freedom.
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+		<br>[[Multiculturalism|Future Society][$arcologies[0].FSNull = 25, $FSCredits -= 1]]: a commitment to allow your arcology's citizens cultural freedom.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;//This option is an alternative to societal advancement, and will not advance naturally.//
+	<</if>>
+<</if>>
+<</if>>
+
+<br><br>
+
+''You can also encourage your arcology to revive one of the classical slaving cultures:''
+
+<<if ($arcologies[0].FSAztecRevivalist == "unset") && ($arcologies[0].FSEgyptianRevivalist == "unset") && ($arcologies[0].FSEdoRevivalist == "unset") && ($arcologies[0].FSArabianRevivalist == "unset") && ($arcologies[0].FSChineseRevivalist == "unset")>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<br>''You are pursuing'' a vision of a new Rome.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSRomanRevivalist = "unset", $arcologies[0].FSRomanRevivalistDecoration = 20, $arcologies[0].FSRomanRevivalistLaw = 0, $arcologies[0].FSRomanRevivalistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "roman revivalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSRomanRevivalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSRomanRevivalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSRomanRevivalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSRomanRevivalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSRomanRevivalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSRomanRevivalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSRomanRevivalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSRomanRevivalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSRomanRevivalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "amazon")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Roman Revivalism|Future Society][$arcologies[0].FSRomanRevivalist = 4, $FSCredits -= 1]]: a vision of a new Rome.
+	<<else>>
+	/*//''Roman Revivalism'': a vision of a new Rome.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSRomanRevivalist == "unset") && ($arcologies[0].FSEgyptianRevivalist == "unset") && ($arcologies[0].FSEdoRevivalist == "unset") && ($arcologies[0].FSArabianRevivalist == "unset") && ($arcologies[0].FSChineseRevivalist == "unset")>>
+<<if $arcologies[0].FSAztecRevivalist != "unset">>
+	<br>''You are pursuing'' a vision of a new Aztec Empire.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSAztecRevivalist = "unset", $arcologies[0].FSAztecRevivalistDecoration = 20, $arcologies[0].FSAztecRevivalistLaw = 0, $FSCredits += 1>><<if $assistantFSAppearance == "aztec revivalist">><<set $assistantFSAppearance = "default">><</if>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSAztecRevivalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSAztecRevivalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSAztecRevivalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSAztecRevivalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSAztecRevivalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSAztecRevivalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSAztecRevivalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSAztecRevivalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSAztecRevivalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "goddess") || ($assistantAppearance == "amazon")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Aztec Revivalism|Future Society][$arcologies[0].FSAztecRevivalist = 4, $FSCredits -= 1]]: a vision of a new Aztec Empire.
+	<<else>>
+	/*//''Aztec Revivalism'': a vision of a new Aztec Empire.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSRomanRevivalist == "unset") && ($arcologies[0].FSAztecRevivalist == "unset") && ($arcologies[0].FSEdoRevivalist == "unset") && ($arcologies[0].FSArabianRevivalist == "unset") && ($arcologies[0].FSChineseRevivalist == "unset")>>
+<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<br>''You are pursuing'' a vision of Pharaoh's Egypt.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSEgyptianRevivalist = "unset", $arcologies[0].FSEgyptianRevivalistDecoration = 20, $arcologies[0].FSEgyptianRevivalistLaw = 0, $arcologies[0].FSEgyptianRevivalistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "egyptian revivalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSEgyptianRevivalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSEgyptianRevivalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSEgyptianRevivalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSEgyptianRevivalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSEgyptianRevivalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSEgyptianRevivalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSEgyptianRevivalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSEgyptianRevivalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSEgyptianRevivalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "goddess") || ($assistantAppearance == "monstergirl")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Egyptian Revivalism|Future Society][$arcologies[0].FSEgyptianRevivalist = 4, $FSCredits -= 1]]: a vision of a Pharaoh's Egypt.
+	<<else>>
+	/*//''Egyptian Revivalism'': a vision of Pharaoh's Egypt.//*/
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSRomanRevivalist == "unset") && ($arcologies[0].FSAztecRevivalist == "unset") && ($arcologies[0].FSEgyptianRevivalist == "unset") && ($arcologies[0].FSArabianRevivalist == "unset") && ($arcologies[0].FSChineseRevivalist == "unset")>>
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+	<br>''You are pursuing'' a vision of Edo Japan.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSEdoRevivalist = "unset", $arcologies[0].FSEdoRevivalistDecoration = 20, $arcologies[0].FSEdoRevivalistLaw = 0, $arcologies[0].FSEdoRevivalistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "edo revivalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSEdoRevivalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSEdoRevivalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSEdoRevivalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSEdoRevivalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSEdoRevivalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSEdoRevivalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSEdoRevivalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSEdoRevivalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSEdoRevivalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "amazon") || ($assistantAppearance == "monstergirl")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Edo Revivalism|Future Society][$arcologies[0].FSEdoRevivalist = 4, $FSCredits -= 1]]: a vision of Edo Japan.
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSRomanRevivalist == "unset") && ($arcologies[0].FSAztecRevivalist == "unset") && ($arcologies[0].FSEgyptianRevivalist == "unset") && ($arcologies[0].FSEdoRevivalist == "unset") && ($arcologies[0].FSChineseRevivalist == "unset")>>
+<<if $arcologies[0].FSArabianRevivalist != "unset">>
+	<br>''You are pursuing'' a vision of the Sultanate of old.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSArabianRevivalist = "unset", $arcologies[0].FSArabianRevivalistDecoration = 20, $arcologies[0].FSArabianRevivalistLaw = 0, $arcologies[0].FSArabianRevivalistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "arabian revivalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSArabianRevivalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSArabianRevivalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSArabianRevivalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSArabianRevivalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSArabianRevivalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSArabianRevivalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSArabianRevivalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSArabianRevivalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSArabianRevivalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "businesswoman") || ($assistantAppearance == "schoolgirl")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Arabian Revivalism|Future Society][$arcologies[0].FSArabianRevivalist = 4, $FSCredits -= 1]]: a vision of the Sultanate of old.
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSRomanRevivalist == "unset") && ($arcologies[0].FSAztecRevivalist == "unset") && ($arcologies[0].FSEgyptianRevivalist == "unset") && ($arcologies[0].FSEdoRevivalist == "unset") && ($arcologies[0].FSArabianRevivalist == "unset")>>
+<<if $arcologies[0].FSChineseRevivalist != "unset">>
+	<br>''You are pursuing'' a vision of ancient China.
+	//<<link [[Abandon|Future Society]]>><<set $arcologies[0].FSChineseRevivalist = "unset", $arcologies[0].FSChineseRevivalistDecoration = 20, $arcologies[0].FSChineseRevivalistLaw = 0, $arcologies[0].FSChineseRevivalistSMR = 0, $FSCredits += 1>><<if $assistantFSAppearance == "chinese revivalist">><<set $assistantFSAppearance = "default">><</if>><<ClearFacilityDecorations>><</link>>//<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<switch $arcologies[0].FSChineseRevivalistDecoration>>
+	<<case 20>>
+	//$arcologies[0].name is not customized to support this goal.//
+	<<if $arcologies[0].FSChineseRevivalist >= 10>>
+		[[Modify your arcology's internal media to support this goal|Future Society][$arcologies[0].FSChineseRevivalistDecoration = 40, $cash -= 2500]] //Costs ¤2500//
+	<<else>>
+		//You must advance this goal before customization to support it becomes available.//
+	<</if>>
+	<<case 40>>
+	//$arcologies[0].name's media is supporting this goal.//
+	<<if $arcologies[0].FSChineseRevivalist >= 30>>
+		[[Redecorate your arcology's public spaces to support this goal|Future Society][$arcologies[0].FSChineseRevivalistDecoration = 60, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 60>>
+	//$arcologies[0].name's media is supporting this goal, and $arcologies[0].name's public spaces are decorated to support it too.//
+	<<if $arcologies[0].FSChineseRevivalist >= 50>>
+		[[Station slaves in your arcology's public spaces to promote this goal|Future Society][$arcologies[0].FSChineseRevivalistDecoration = 80, $cash -= 10000]] //Costs ¤10000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 80>>
+	$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it too.
+	<<if $arcologies[0].FSChineseRevivalist >= 70>>
+		[[Customize the exterior of the arcology to support this goal|Future Society][$arcologies[0].FSChineseRevivalistDecoration = 100, $cash -= 20000]] //Costs ¤20000//
+	<<else>>
+		//You must advance this goal before further customization to support it becomes available.//
+	<</if>>
+	<<case 100>>
+	//$arcologies[0].name's media is supporting this goal; $arcologies[0].name's public spaces are decorated to support it, and have slaves stationed in them to support it. The exterior of the arcology has been remodeled to support it too; the arcology is fully customized for this goal.//
+	<</switch>>
+	<<if $PAPublic == 1>>
+	<<if ($assistantAppearance == "schoolgirl") || ($assistantAppearance == "monstergirl")>>
+	//With her $assistantAppearance appearance, $assistantName is a good public mascot for this model.//
+	<</if>>
+	<</if>>
+<<else>>
+	<<if $FSCredits > 0>>
+	<br>''''[[Chinese Revivalism|Future Society][$arcologies[0].FSChineseRevivalist = 4, $FSCredits -= 1]]: a vision of ancient China.
+	<</if>>
+<</if>>
+<</if>>
+
+<br><br>
+
+''Apply your vision more concretely.  As your plan for society advances and your arcology grows, you can even transform new areas to match.''
+
+<span id="mass">
+
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<br>
+	<<link "Rename your obedient slaves according to Paternalist custom">>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if ($slaves[$i].devotion > 20) || (($slaves[$i].devotion >= -20) && ($slaves[$i].trust < -20))>>
+		<<set $toSearch = $slaves[$i].slaveName>>
+		<<if ($toSearch.indexOf("Miss") == -1)>>
+		<<if ($toSearch.indexOf("Ms.") == -1)>>
+		<<if ($toSearch.indexOf("Mrs.") == -1)>>
+		<<if ($slaves[$i].relationship > 4)>>
+		/*
+			<<for $j = 0; $j < $slaves.length; $j++>>
+			<<if ($slaves[$i].relationshipTarget == $slaves[$j].ID)>>
+				<<set $slaves[$i].slaveName = ("Mrs. " + $slaves[$i].slaveName + " " + $slaves[$j].slaveName)>>
+			<</if>>
+			<</for>>
+		*/
+				<<set $slaves[$i].slaveName = ("Mrs. " + $slaves[$i].slaveName)>>
+		<<elseif ($slaves[$i].age > 24)>>
+			<<set $slaves[$i].slaveName = ("Ms. " + $slaves[$i].slaveName)>>
+		<<else>>
+			<<set $slaves[$i].slaveName = ("Miss " + $slaves[$i].slaveName)>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+	<</for>>
+	<<replace "#mass">>
+		<br>Obedient slaves renamed.<br>
+	<</replace>>
+	<</link>>
+	<br>
+<</if>>
+<<if $arcologies[0].FSDegradationist != "unset">>
+	<br>
+	<<link "Rename all your slaves according to Degradationist custom">>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<DegradingName $slaves[$i]>>
+	<</for>>
+	<<replace "#mass">>
+		<br>Slaves renamed.<br>
+	<</replace>>
+	<</link>>
+	<br>
+<</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<br>
+	<<link "Give all your lactating slaves cow names">>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<if $slaves[_i].lactation > 0>>
+			<<set $slaves[_i].slaveName = setup.cowSlaveNames.random()>>
+		<</if>>
+	<</for>>
+	<<replace "#mass">>
+		<br>Slaves renamed.<br>
+	<</replace>>
+	<</link>>
+	<br>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<br>
+	<<link "Rename all your slaves according to Roman custom">>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<set $slaves[_i].slaveName = setup.romanSlaveNames.random(), $slaves[_i].slaveSurname = setup.romanSlaveSurnames.random()>>
+	<</for>>
+	<<replace "#mass">>
+		<br>Slaves renamed.<br>
+	<</replace>>
+	<</link>>
+	<br>
+<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	<br>
+	<<link "Rename all your slaves according to ancient Aztec custom">>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<set $slaves[_i].slaveName = setup.aztecSlaveNames.random(), $slaves[_i].slaveSurname = 0>>
+	<</for>>
+	<<replace "#mass">>
+		<br>Slaves renamed.<br>
+	<</replace>>
+	<</link>>
+	<br>
+<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<br>
+	<<link "Rename all your slaves according to ancient Egyptian custom">>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<set $slaves[_i].slaveName = setup.ancientEgyptianSlaveNames.random(), $slaves[_i].slaveSurname = 0>>
+	<</for>>
+	<<replace "#mass">>
+		<br>Slaves renamed.<br>
+	<</replace>>
+	<</link>>
+	<br>
+<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<br>
+	<<link "Rename all your slaves according to feudal Japanese custom">>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<set $slaves[_i].slaveName = setup.edoSlaveNames.random(), $slaves[_i].slaveSurname = setup.edoSlaveSurnames.random()>>
+	<</for>>
+	<<replace "#mass">>
+		<br>Slaves renamed.<br>
+	<</replace>>
+	<</link>>
+	<br>
+<</if>>
+
+/* No names yet for Arabian or Chinese. */
+
+</span>
+
+
+/* FACILITY REDECORATION */
+<<if $brothel > 0>>
+<<if $brothelDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($brothelDecoration == "Supremacist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($brothelDecoration == "Subjugationist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($brothelDecoration == "Gender Radicalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($brothelDecoration == "Gender Fundamentalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($brothelDecoration == "Paternalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($brothelDecoration == "Body Purist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($brothelDecoration == "Transformation Fetishist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($brothelDecoration == "Youth Preferentialist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($brothelDecoration == "Maturity Preferentialist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($brothelDecoration == "Slimness Enthusiast")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($brothelDecoration == "Asset Expansionist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($brothelDecoration == "Pastoralist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($brothelDecoration == "Physical Idealist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($brothelDecoration == "Chattel Religionist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($brothelDecoration == "Degradationist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($brothelDecoration == "Roman Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($brothelDecoration == "Aztec Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($brothelDecoration == "Egyptian Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($brothelDecoration == "Edo Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($brothelDecoration == "Arabian Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($brothelDecoration == "Chinese Revivalist")>>
+	<<set $brothelDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$brothelNameCaps is decorated in //$brothelDecoration// style.  //<<brothelDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($brothelDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$brothelDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($brothelDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$brothelDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($brothelDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$brothelDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($brothelDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$brothelDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($brothelDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$brothelDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($brothelDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$brothelDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($brothelDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$brothelDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($brothelDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$brothelDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($brothelDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$brothelDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($brothelDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$brothelDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($brothelDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$brothelDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($brothelDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$brothelDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($brothelDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$brothelDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($brothelDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$brothelDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($brothelDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$brothelDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($brothelDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$brothelDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($brothelDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$brothelDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($brothelDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$brothelDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($brothelDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$brothelDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($brothelDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$brothelDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($brothelDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$brothelDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $club > 0>>
+<<if $clubDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($clubDecoration == "Supremacist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($clubDecoration == "Subjugationist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($clubDecoration == "Gender Radicalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($clubDecoration == "Gender Fundamentalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($clubDecoration == "Paternalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($clubDecoration == "Body Purist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($clubDecoration == "Transformation Fetishist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($clubDecoration == "Youth Preferentialist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($clubDecoration == "Maturity Preferentialist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($clubDecoration == "Slimness Enthusiast")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($clubDecoration == "Asset Expansionist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($clubDecoration == "Pastoralist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($clubDecoration == "Physical Idealist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($clubDecoration == "Chattel Religionist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($clubDecoration == "Degradationist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($clubDecoration == "Roman Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($clubDecoration == "Aztec Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($clubDecoration == "Egyptian Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($clubDecoration == "Edo Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($clubDecoration == "Arabian Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($clubDecoration == "Chinese Revivalist")>>
+	<<set $clubDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$clubNameCaps is decorated in //$clubDecoration// style.  //<<clubDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($clubDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$clubDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($clubDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$clubDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($clubDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$clubDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($clubDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$clubDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($clubDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$clubDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($clubDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$clubDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($clubDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$clubDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($clubDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$clubDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($clubDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$clubDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($clubDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$clubDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($clubDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$clubDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($clubDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$clubDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($clubDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$clubDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($clubDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$clubDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($clubDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$clubDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($clubDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$clubDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($clubDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$clubDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($clubDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$clubDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($clubDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$clubDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($clubDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$clubDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($clubDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$clubDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $dairy > 0>>
+<<if $dairyDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($dairyDecoration == "Supremacist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($dairyDecoration == "Subjugationist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($dairyDecoration == "Gender Radicalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($dairyDecoration == "Gender Fundamentalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($dairyDecoration == "Paternalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($dairyDecoration == "Body Purist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($dairyDecoration == "Transformation Fetishist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($dairyDecoration == "Youth Preferentialist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($dairyDecoration == "Maturity Preferentialist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($dairyDecoration == "Slimness Enthusiast")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($dairyDecoration == "Asset Expansionist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($dairyDecoration == "Pastoralist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($dairyDecoration == "Physical Idealist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($dairyDecoration == "Chattel Religionist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($dairyDecoration == "Degradationist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($dairyDecoration == "Roman Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($dairyDecoration == "Aztec Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($dairyDecoration == "Egyptian Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($dairyDecoration == "Edo Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($dairyDecoration == "Arabian Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($dairyDecoration == "Chinese Revivalist")>>
+	<<set $dairyDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$dairyNameCaps is decorated in //$dairyDecoration// style.  //<<dairyDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($dairyDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$dairyDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($dairyDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$dairyDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($dairyDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$dairyDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($dairyDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$dairyDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($dairyDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$dairyDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($dairyDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$dairyDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($dairyDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$dairyDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($dairyDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$dairyDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($dairyDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$dairyDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($dairyDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$dairyDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($dairyDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$dairyDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($dairyDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$dairyDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($dairyDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$dairyDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($dairyDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$dairyDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($dairyDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$dairyDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($dairyDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$dairyDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($dairyDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$dairyDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($dairyDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$dairyDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($dairyDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$dairyDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($dairyDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$dairyDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($dairyDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$dairyDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $spa > 0>>
+<<if $spaDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($spaDecoration == "Supremacist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($spaDecoration == "Subjugationist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($spaDecoration == "Gender Radicalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($spaDecoration == "Gender Fundamentalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($spaDecoration == "Paternalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($spaDecoration == "Body Purist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($spaDecoration == "Transformation Fetishist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($spaDecoration == "Youth Preferentialist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($spaDecoration == "Maturity Preferentialist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($spaDecoration == "Slimness Enthusiast")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($spaDecoration == "Asset Expansionist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($spaDecoration == "Pastoralist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($spaDecoration == "Physical Idealist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($spaDecoration == "Chattel Religionist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($spaDecoration == "Degradationist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($spaDecoration == "Roman Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($spaDecoration == "Aztec Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($spaDecoration == "Egyptian Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($spaDecoration == "Edo Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($spaDecoration == "Arabian Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($spaDecoration == "Chinese Revivalist")>>
+	<<set $spaDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$spaNameCaps is decorated in //$spaDecoration// style. //<<spaDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($spaDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$spaDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($spaDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$spaDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($spaDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$spaDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($spaDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$spaDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($spaDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$spaDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($spaDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$spaDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($spaDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$spaDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($spaDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$spaDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($spaDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$spaDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($spaDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$spaDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($spaDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$spaDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($spaDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$spaDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($spaDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$spaDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($spaDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$spaDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($spaDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$spaDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($spaDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$spaDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($spaDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$spaDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($spaDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$spaDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($spaDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$spaDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($spaDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$spaDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($spaDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$spaDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $clinic > 0>>
+<<if $clinicDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($clinicDecoration == "Supremacist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($clinicDecoration == "Subjugationist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($clinicDecoration == "Gender Radicalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($clinicDecoration == "Gender Fundamentalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($clinicDecoration == "Paternalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($clinicDecoration == "Body Purist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($clinicDecoration == "Transformation Fetishist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($clinicDecoration == "Youth Preferentialist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($clinicDecoration == "Maturity Preferentialist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($clinicDecoration == "Slimness Enthusiast")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($clinicDecoration == "Asset Expansionist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($clinicDecoration == "Pastoralist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($clinicDecoration == "Physical Idealist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($clinicDecoration == "Chattel Religionist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($clinicDecoration == "Degradationist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($clinicDecoration == "Roman Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($clinicDecoration == "Aztec Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($clinicDecoration == "Egyptian Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($clinicDecoration == "Edo Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($clinicDecoration == "Arabian Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($clinicDecoration == "Chinese Revivalist")>>
+	<<set $clinicDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$clinicNameCaps is decorated in //$clinicDecoration// style. //<<clinicDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($clinicDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$clinicDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($clinicDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$clinicDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($clinicDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$clinicDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($clinicDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$clinicDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($clinicDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$clinicDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($clinicDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$clinicDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($clinicDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$clinicDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($clinicDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$clinicDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($clinicDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$clinicDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($clinicDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$clinicDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($clinicDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$clinicDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($clinicDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$clinicDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($clinicDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$clinicDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($clinicDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$clinicDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($clinicDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$clinicDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($clinicDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$clinicDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($clinicDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$clinicDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($clinicDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$clinicDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($clinicDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$clinicDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($clinicDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$clinicDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($clinicDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$clinicDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $schoolroom > 0>>
+<<if $schoolroomDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($schoolroomDecoration == "Supremacist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($schoolroomDecoration == "Subjugationist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($schoolroomDecoration == "Gender Radicalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($schoolroomDecoration == "Gender Fundamentalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($schoolroomDecoration == "Paternalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($schoolroomDecoration == "Body Purist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($schoolroomDecoration == "Transformation Fetishist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($schoolroomDecoration == "Youth Preferentialist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($schoolroomDecoration == "Maturity Preferentialist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($schoolroomDecoration == "Slimness Enthusiast")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($schoolroomDecoration == "Asset Expansionist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($schoolroomDecoration == "Pastoralist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($schoolroomDecoration == "Physical Idealist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($schoolroomDecoration == "Chattel Religionist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($schoolroomDecoration == "Degradationist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($schoolroomDecoration == "Roman Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($schoolroomDecoration == "Aztec Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($schoolroomDecoration == "Egyptian Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($schoolroomDecoration == "Edo Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($schoolroomDecoration == "Arabian Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($schoolroomDecoration == "Chinese Revivalist")>>
+	<<set $schoolroomDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$schoolroomNameCaps is decorated in //$schoolroomDecoration// style.  //<<schoolroomDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($schoolroomDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$schoolroomDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($schoolroomDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$schoolroomDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($schoolroomDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$schoolroomDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($schoolroomDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$schoolroomDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($schoolroomDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$schoolroomDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($schoolroomDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$schoolroomDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($schoolroomDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$schoolroomDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($schoolroomDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$schoolroomDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($schoolroomDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$schoolroomDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($schoolroomDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$schoolroomDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($schoolroomDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$schoolroomDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($schoolroomDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$schoolroomDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($schoolroomDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$schoolroomDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($schoolroomDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$schoolroomDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($schoolroomDecoration != "Degradationist")>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$schoolroomDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($schoolroomDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$schoolroomDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($schoolroomDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$schoolroomDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($schoolroomDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$schoolroomDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($schoolroomDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$schoolroomDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($schoolroomDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$schoolroomDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($schoolroomDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$schoolroomDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $cellblock > 0>>
+<<if $cellblockDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($cellblockDecoration == "Supremacist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($cellblockDecoration == "Subjugationist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($cellblockDecoration == "Gender Radicalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($cellblockDecoration == "Gender Fundamentalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($cellblockDecoration == "Paternalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($cellblockDecoration == "Body Purist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($cellblockDecoration == "Transformation Fetishist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($cellblockDecoration == "Youth Preferentialist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($cellblockDecoration == "Maturity Preferentialist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($cellblockDecoration == "Slimness Enthusiast")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($cellblockDecoration == "Asset Expansionist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($cellblockDecoration == "Pastoralist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($cellblockDecoration == "Physical Idealist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($cellblockDecoration == "Chattel Religionist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($cellblockDecoration == "Degradationist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($cellblockDecoration == "Roman Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($cellblockDecoration == "Aztec Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($cellblockDecoration == "Egyptian Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($cellblockDecoration == "Edo Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($cellblockDecoration == "Arabian Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($cellblockDecoration == "Chinese Revivalist")>>
+	<<set $cellblockDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$cellblockNameCaps is decorated in //$cellblockDecoration// style. //<<cellblockDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($cellblockDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$cellblockDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($cellblockDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$cellblockDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($cellblockDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$cellblockDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($cellblockDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$cellblockDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($cellblockDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$cellblockDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($cellblockDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$cellblockDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($cellblockDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$cellblockDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($cellblockDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$cellblockDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($cellblockDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$cellblockDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($cellblockDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$cellblockDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($cellblockDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$cellblockDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($cellblockDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$cellblockDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($cellblockDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$cellblockDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($cellblockDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$cellblockDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($cellblockDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$cellblockDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($cellblockDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$cellblockDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($cellblockDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$cellblockDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($cellblockDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$cellblockDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($cellblockDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$cellblockDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($cellblockDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$cellblockDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($cellblockDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$cellblockDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $servantsQuarters > 0>>
+<<if $servantsQuartersDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($servantsQuartersDecoration == "Supremacist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($servantsQuartersDecoration == "Subjugationist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($servantsQuartersDecoration == "Gender Radicalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($servantsQuartersDecoration == "Gender Fundamentalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($servantsQuartersDecoration == "Paternalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($servantsQuartersDecoration == "Body Purist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($servantsQuartersDecoration == "Transformation Fetishist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($servantsQuartersDecoration == "Youth Preferentialist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($servantsQuartersDecoration == "Maturity Preferentialist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($servantsQuartersDecoration == "Slimness Enthusiast")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($servantsQuartersDecoration == "Asset Expansionist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($servantsQuartersDecoration == "Pastoralist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($servantsQuartersDecoration == "Physical Idealist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($servantsQuartersDecoration == "Chattel Religionist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($servantsQuartersDecoration == "Degradationist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($servantsQuartersDecoration == "Roman Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($servantsQuartersDecoration == "Aztec Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($servantsQuartersDecoration == "Egyptian Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($servantsQuartersDecoration == "Edo Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($servantsQuartersDecoration == "Arabian Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($servantsQuartersDecoration == "Chinese Revivalist")>>
+	<<set $servantsQuartersDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$servantsQuartersNameCaps is decorated in //$servantsQuartersDecoration// style.  //<<servantsQuartersDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($servantsQuartersDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$servantsQuartersDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($servantsQuartersDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$servantsQuartersDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($servantsQuartersDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$servantsQuartersDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($servantsQuartersDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$servantsQuartersDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($servantsQuartersDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$servantsQuartersDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($servantsQuartersDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$servantsQuartersDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($servantsQuartersDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$servantsQuartersDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($servantsQuartersDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$servantsQuartersDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($servantsQuartersDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$servantsQuartersDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($servantsQuartersDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$servantsQuartersDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($servantsQuartersDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$servantsQuartersDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($servantsQuartersDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$servantsQuartersDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($servantsQuartersDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$servantsQuartersDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($servantsQuartersDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$servantsQuartersDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($servantsQuartersDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$servantsQuartersDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($servantsQuartersDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$servantsQuartersDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($servantsQuartersDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$servantsQuartersDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($servantsQuartersDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$servantsQuartersDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($servantsQuartersDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$servantsQuartersDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($servantsQuartersDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$servantsQuartersDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($servantsQuartersDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$servantsQuartersDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $arcade > 0>>
+<<if $arcadeDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($arcadeDecoration == "Supremacist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($arcadeDecoration == "Subjugationist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($arcadeDecoration == "Gender Radicalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($arcadeDecoration == "Gender Fundamentalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($arcadeDecoration == "Paternalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($arcadeDecoration == "Body Purist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($arcadeDecoration == "Transformation Fetishist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($arcadeDecoration == "Youth Preferentialist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($arcadeDecoration == "Maturity Preferentialist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($arcadeDecoration == "Slimness Enthusiast")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($arcadeDecoration == "Asset Expansionist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($arcadeDecoration == "Pastoralist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($arcadeDecoration == "Physical Idealist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($arcadeDecoration == "Chattel Religionist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($arcadeDecoration == "Degradationist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($arcadeDecoration == "Roman Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($arcadeDecoration == "Aztec Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($arcadeDecoration == "Egyptian Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($arcadeDecoration == "Edo Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($arcadeDecoration == "Arabian Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($arcadeDecoration == "Chinese Revivalist")>>
+	<<set $arcadeDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$arcadeNameCaps is decorated in //$arcadeDecoration// style.  //<<arcadeDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($arcadeDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$arcadeDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($arcadeDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$arcadeDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($arcadeDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$arcadeDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($arcadeDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$arcadeDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($arcadeDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$arcadeDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($arcadeDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$arcadeDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($arcadeDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$arcadeDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($arcadeDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$arcadeDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($arcadeDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$arcadeDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($arcadeDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$arcadeDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($arcadeDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$arcadeDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($arcadeDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$arcadeDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($arcadeDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$arcadeDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($arcadeDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$arcadeDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($arcadeDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$arcadeDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($arcadeDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$arcadeDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($arcadeDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$arcadeDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($arcadeDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$arcadeDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($arcadeDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$arcadeDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($arcadeDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$arcadeDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($arcadeDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$arcadeDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>
+
+<<if $masterSuite > 0>>
+<<if $masterSuiteDecoration != "standard">>
+<<if ($arcologies[0].FSSupremacist == "unset") && ($masterSuiteDecoration == "Supremacist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSSubjugationist == "unset") && ($masterSuiteDecoration == "Subjugationist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderRadicalist == "unset") && ($masterSuiteDecoration == "Gender Radicalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSGenderFundamentalist == "unset") && ($masterSuiteDecoration == "Gender Fundamentalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSPaternalist == "unset") && ($masterSuiteDecoration == "Paternalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSBodyPurist == "unset") && ($masterSuiteDecoration == "Body Purist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSTransformationFetishist == "unset") && ($masterSuiteDecoration == "Transformation Fetishist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSYouthPreferentialist == "unset") && ($masterSuiteDecoration == "Youth Preferentialist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSMaturityPreferentialist == "unset") && ($masterSuiteDecoration == "Maturity Preferentialist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSSlimnessEnthusiast == "unset") && ($masterSuiteDecoration == "Slimness Enthusiast")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSAssetExpansionist == "unset") && ($masterSuiteDecoration == "Asset Expansionist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSPastoralist == "unset") && ($masterSuiteDecoration == "Pastoralist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSPhysicalIdealist == "unset") && ($masterSuiteDecoration == "Physical Idealist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSChattelReligionist == "unset") && ($masterSuiteDecoration == "Chattel Religionist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSDegradationist == "unset") && ($masterSuiteDecoration == "Degradationist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSRomanRevivalist == "unset") && ($masterSuiteDecoration == "Roman Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSAztecRevivalist == "unset") && ($masterSuiteDecoration == "Aztec Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSEgyptianRevivalist == "unset") && ($masterSuiteDecoration == "Egyptian Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSEdoRevivalist == "unset") && ($masterSuiteDecoration == "Edo Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSArabianRevivalist == "unset") && ($masterSuiteDecoration == "Arabian Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<<elseif ($arcologies[0].FSChineseRevivalist == "unset") && ($masterSuiteDecoration == "Chinese Revivalist")>>
+	<<set $masterSuiteDecoration = "standard">>
+<</if>>
+<</if>>
+<br>$masterSuiteNameCaps is decorated in //$masterSuiteDecoration// style.  //<<masterSuiteDescriptionFS>>//
+<<if ($arcologies[0].FSSupremacist >= 20) && ($masterSuiteDecoration != "Supremacist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Supremacist redecoration|Future Society][$masterSuiteDecoration = "Supremacist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSubjugationist >= 20) && ($masterSuiteDecoration != "Subjugationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Subjugationist redecoration|Future Society][$masterSuiteDecoration = "Subjugationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderRadicalist >= 20) && ($masterSuiteDecoration != "Gender Radicalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Radicalist redecoration|Future Society][$masterSuiteDecoration = "Gender Radicalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSGenderFundamentalist >= 20) && ($masterSuiteDecoration != "Gender Fundamentalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Gender Fundamentalist redecoration|Future Society][$masterSuiteDecoration = "Gender Fundamentalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPaternalist >= 20) && ($masterSuiteDecoration != "Paternalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Paternalist redecoration|Future Society][$masterSuiteDecoration = "Paternalist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSBodyPurist >= 20) && ($masterSuiteDecoration != "Body Purist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Body Purist redecoration|Future Society][$masterSuiteDecoration = "Body Purist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSTransformationFetishist >= 20) && ($masterSuiteDecoration != "Transformation Fetishist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Transformation Fetishist redecoration|Future Society][$masterSuiteDecoration = "Transformation Fetishist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSYouthPreferentialist >= 20) && ($masterSuiteDecoration != "Youth Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Youth Preferentialist redecoration|Future Society][$masterSuiteDecoration = "Youth Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSMaturityPreferentialist >= 20) && ($masterSuiteDecoration != "Maturity Preferentialist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Maturity Preferentialist redecoration|Future Society][$masterSuiteDecoration = "Maturity Preferentialist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSSlimnessEnthusiast >= 20) && ($masterSuiteDecoration != "Slimness Enthusiast")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Slimness Enthusiast redecoration|Future Society][$masterSuiteDecoration = "Slimness Enthusiast", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSAssetExpansionist >= 20) && ($masterSuiteDecoration != "Asset Expansionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Asset Expansionist redecoration|Future Society][$masterSuiteDecoration = "Asset Expansionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPastoralist >= 20) && ($masterSuiteDecoration != "Pastoralist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Pastoralist redecoration|Future Society][$masterSuiteDecoration = "Pastoralist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSPhysicalIdealist >= 20) && ($masterSuiteDecoration != "Physical Idealist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Physical Idealist redecoration|Future Society][$masterSuiteDecoration = "Physical Idealist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSChattelReligionist >= 20) && ($masterSuiteDecoration != "Chattel Religionist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chattel Religionist redecoration|Future Society][$masterSuiteDecoration = "Chattel Religionist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSDegradationist >= 20) && ($masterSuiteDecoration != "Degradationist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Degradationist redecoration|Future Society][$masterSuiteDecoration = "Degradationist", $cash -= 5000]]
+<</if>>
+<<if ($arcologies[0].FSRomanRevivalist >= 20) && ($masterSuiteDecoration != "Roman Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Roman Revivalist redecoration|Future Society][$masterSuiteDecoration = "Roman Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSAztecRevivalist >= 20) && ($masterSuiteDecoration != "Aztec Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Aztec Revivalist redecoration|Future Society][$masterSuiteDecoration = "Aztec Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEgyptianRevivalist >= 20) && ($masterSuiteDecoration != "Egyptian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Egyptian Revivalist redecoration|Future Society][$masterSuiteDecoration = "Egyptian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSEdoRevivalist >= 20) && ($masterSuiteDecoration != "Edo Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Edo Revivalist redecoration|Future Society][$masterSuiteDecoration = "Edo Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSArabianRevivalist >= 20) && ($masterSuiteDecoration != "Arabian Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Arabian Revivalist redecoration|Future Society][$masterSuiteDecoration = "Arabian Revivalist", $cash -= 5000]]
+<<elseif ($arcologies[0].FSChineseRevivalist >= 20) && ($masterSuiteDecoration != "Chinese Revivalist")>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Chinese Revivalist redecoration|Future Society][$masterSuiteDecoration = "Chinese Revivalist", $cash -= 5000]]
+<</if>>
+<</if>>

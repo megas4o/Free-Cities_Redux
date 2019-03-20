@@ -1,0 +1,60 @@
+:: RE busy brothel [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+
+$brothelNameCaps is well staffed, and does a busy trade in flesh 24 hours a day. With so many sex slaves in the Free Cities, brothels occupy a functional, nearly mechanical part of the sexual landscape. Free citizens and sometimes even favored slaves visit the brothel, select from the available merchandise, relieve their sexual needs, and leave. Affection, companionship, and emotional needs are available elsewhere.
+
+Of course, $brothelName is the best establishment of its kind in the arcology. Citizens who patronize it can expect themselves to be very well looked after by skilled slaves. The quality of the merchandise, the efficiency with which it is delivered, and the cleanliness and reputation of the premises @@.green;reflect well on you,@@<<set $rep += 100>> so much so that you could leverage this bustling sexual commerce in many ways.
+
+<br><br>
+<span id="result">
+<<link "Surprise the hardworking whores with a day of rest">>
+	<<replace "#result">>
+	The problem with assembly-line sex is that it has a tendency to destroy any sense of intimacy or fun. So, you make some simple preparations and close the brothel for a day, hiring some freelancers to cover. All your slave whores are allowed to sleep late, and then spend the day with you playing games and enjoying light amusements. The girls are surprised by your generosity, but they have fun. Many of the games are sexually themed. One day of giggling and squealing can't completely reverse the transactionalization of sex for them, but they @@.hotpink;appreciate the effort.@@
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].assignment == "work in the brothel">>
+		<<set $slaves[$i].devotion += 4>>
+		<</if>>
+	<</for>>
+	<<set $cash -= 1000>>
+	<</replace>>
+<</link>> //This will cost ¤1000//
+<br><<link "Hire an expert hooker to give lessons">>
+	<<replace "#result">>
+	The citizen streetwalker has had her day. A few of the cleverest have avoided being driven into poverty, either by becoming madams or by finding a way to build a new career serving the slave brothel industry. One of these is touring the city, offering her long sexual experience in seminars for slave prostitutes. Her services are not cheap, but it rapidly becomes clear that they are worth it. She is a grey-haired but still elegant woman with deep crow's feet and a smoker's voice. She is not only a sexual master, but a hardbitten and comprehensively experienced businesswoman. All of your brothel slaves with any room for improvement in their whoring skills @@.green;learn from her lessons,@@ while those who have nothing to learn @@.hotpink;gain confidence@@ from her praise.
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].assignment == "work in the brothel">>
+		<<if $slaves[$i].whoreSkill < 100>>
+		<<set $slaves[$i].whoreSkill += 10>>
+		<<else>>
+		<<set $slaves[$i].devotion += 4>>
+		<</if>>
+		<</if>>
+	<</for>>
+	<<set $cash -= 2000>>
+	<</replace>>
+<</link>> //This will cost ¤2000//
+<br><<link "Eliminate prices for one morning to promote the brothel">>
+	<<replace "#result">>
+	The news that sex will be free at the brothel travels like wildfire. Security measures are necessary to control the throng that spends the entire day entering and leaving the brothel, though as the day goes on the crowds thin. By midmorning, all the holes on offer are so fucked out that only those who fetishize that sort of thing stick around. The brothel is a real seminal sewer by noon, and it smells like it. Nevertheless, free sex is a short route to @@.green;public approval,@@ though you do miss a morning's fees. The poor slave whores are @@.red;fairly battered@@ by so much wear and tear in so little time.
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].assignment == "work in the brothel">>
+		<<set $slaves[$i].health -= 10>>
+		<</if>>
+		<<if ($slaves[$i].vagina > -1) && ($slaves[$i].vaginalAccessory != "chastity belt")>>
+		<<set $slaves[$i].vaginalCount += 5>>
+		<<set $vaginalTotal += 5>>
+		<<set $slaves[$i].analCount += 5>>
+		<<set $analTotal += 5>>
+		<<else>>
+		<<set $slaves[$i].analCount += 10>>
+		<<set $analTotal += 10>>
+		<</if>>
+		<<set $slaves[$i].oralCount += 10>>
+		<<set $oralTotal += 10>>
+	<</for>>
+	<<set $cash -= 2000>>
+	<</replace>>
+<</link>> //This will cost ¤2000//
+</span>

@@ -1,0 +1,621 @@
+
+:: RES Failure
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Scheduled Event">>
+<<set $returnTo = "Scheduled Event">>
+
+<<if ($TSS.schoolPresent == 1) && ($TSS.schoolProsperity <= -10)>>
+	<<set $RESFailure = "TSS">>
+<<elseif ($GRI.schoolPresent == 1) && ($GRI.schoolProsperity <= -10)>>
+	<<set $RESFailure = "GRI">>
+<<elseif ($SCP.schoolPresent == 1) && ($SCP.schoolProsperity <= -10)>>
+	<<set $RESFailure = "SCP">>
+<<elseif ($LDE.schoolPresent == 1) && ($LDE.schoolProsperity <= -10)>>
+	<<set $RESFailure = "LDE">>
+<<elseif ($TGA.schoolPresent == 1) && ($TGA.schoolProsperity <= -10)>>
+	<<set $RESFailure = "TGA">>
+<<elseif ($TFS.schoolPresent == 1) && ($TFS.schoolProsperity <= -10)>>
+	<<set $RESFailure = "TFS">>
+<</if>>
+
+<<set $rep -= 200>>
+<<set $AProsperityCap -= 2>>
+<<set $slavesToAdd = 5>>
+<<if $RESFailure == "TSS">>
+	<<set $TSS.schoolPresent = 0>>
+	<<set $TSS.subsidy = 0>>
+	<<set $TSS.schoolProsperity = 0>>
+	<<set $TSS.schoolAnnexed = 1>>
+	<<for $i = 0; $i < $slavesToAdd; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.career = "a slave">>
+		<<set $activeSlave.butt = either(1, 2, 2, 3)>>
+		<<set $activeSlave.boobs = either(200, 300, 300, 400)>>
+		<<if $TSS.schoolUpgrade == 1>>
+			<<set $activeSlave.origin = "She was given to you by a failed branch campus of The Slavegirl School after she was retrained as a slave girl.">>
+			<<set $activeSlave.butt += 1>>
+			<<set $activeSlave.boobs += 200>>
+			<<set $activeSlave.anus = 1>>
+			<<set $activeSlave.vagina = 1>>
+			<<set $activeSlave.age = random(36,42)>>
+		<<else>>
+			<<set $activeSlave.origin = "She was given to you by a failed branch campus of The Slavegirl School right after her majority.">>
+			<<set $activeSlave.anus = 0>>
+			<<set $activeSlave.vagina = 0>>
+			<<set $activeSlave.age = 18>>
+		<</if>>
+		<<set $activeSlave.intelligenceImplant = 1>>
+		<<set $activeSlave.teeth = "normal">>
+		<<set $activeSlave.intelligence = either (-1, 0, 1, 2)>>
+		<<set $activeSlave.devotion = random(25,45)>>
+		<<set $activeSlave.trust = random(25,45)>>
+		<<set $activeSlave.health = random(50,60)>>
+		<<set $activeSlave.preg = 0>>
+		<<set $activeSlave.weight = 0>>
+		<<set $activeSlave.chem = 20>>
+		<<if $TSS.schoolUpgrade == 0>>
+			<<set $activeSlave.vaginalSkill = 0>>
+			<<set $activeSlave.oralSkill = 0>>
+			<<set $activeSlave.analSkill = 0>>
+			<<set $activeSlave.whoreSkill = 0>>
+			<<set $activeSlave.entertainSkill = 15>>
+		<<else>>
+			<<set $activeSlave.vaginalSkill = 15>>
+			<<set $activeSlave.oralSkill = 15>>
+			<<set $activeSlave.analSkill = 15>>
+			<<set $activeSlave.whoreSkill = 15>>
+			<<set $activeSlave.entertainSkill = 15>>
+		<</if>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.pubicHStyle = "waxed">>
+		<<set $activeSlave.sexualFlaw = either("none")>>
+		<<set $activeSlave.behavioralFlaw = either("none")>>
+		<<set $activeSlave.hStyle = "tails">>
+		<<set $activeSlave.customTat = "She has the simple logo of the corporation that operates The Slavegirl School tattooed on her left cheek.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</for>>
+<<elseif $RESFailure == "GRI">>
+	<<set $GRI.schoolPresent = 0>>
+	<<set $GRI.subsidy = 0>>
+	<<set $GRI.schoolProsperity = 0>>
+	<<set $GRI.schoolAnnexed = 1>>
+	<<for $i = 0; $i < $slavesToAdd; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She was given to you by a failed subsidiary lab of the Growth Research Institute right after her use as a test subject ended.">>
+		<<set $activeSlave.career = "a slave">>
+		<<set $activeSlave.intelligenceImplant = 0>>
+		<<set $activeSlave.devotion = random(-15,-5)>>
+		<<set $activeSlave.trust = random(-25,-45)>>
+		<<set $activeSlave.chem = 100>>
+		<<if $GRI.schoolUpgrade == 1>>
+			<<set $activeSlave.health = 200>>
+		<<else>>
+			<<set $activeSlave.health = random(-80,100)>>
+		<</if>>
+		<<set $activeSlave.height = random(150,190)>>
+		<<set $activeSlave.butt = random(4,10)>>
+		<<if $GRI.schoolUpgrade == 2>>
+			<<set $activeSlave.boobs = 200*random(15,30)>>
+			<<set $activeSlave.lactation = 2>>
+		<<else>>
+			<<set $activeSlave.boobs = 200*random(4,20)>>
+		<</if>>
+		<<set $activeSlave.nipples = either("inverted", "huge")>>
+		<<set $activeSlave.areolae = either(0, 1, 2, 3)>>
+		<<set $activeSlave.clit = either(0, 1, 2, 3)>>
+		<<set $activeSlave.lips = random(5,85)>>
+		<<set $activeSlave.anus = 0>>
+		<<set $activeSlave.vagina = 0>>
+		<<set $activeSlave.preg = 0>>
+		<<set $activeSlave.weight = 0>>
+		<<set $activeSlave.vaginalSkill = 0>>
+		<<set $activeSlave.oralSkill = 0>>
+		<<set $activeSlave.analSkill = 0>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 0>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.pubicHStyle = "waxed">>
+		<<set $activeSlave.age = 19>>
+		<<set $activeSlave.behavioralFlaw = either("odd")>>
+		<<set $activeSlave.hStyle = "shaved">>
+		<<set $activeSlave.hLength = 0>>
+		<<set $activeSlave.customTat = "She has a barcode that identified her when she was a test subject at the Growth Research Institute tattooed on her left cheek.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</for>>
+<<elseif $RESFailure == "SCP">>
+	<<set $SCP.schoolPresent = 0>>
+	<<set $SCP.subsidy = 0>>
+	<<set $SCP.schoolProsperity = 0>>
+	<<set $SCP.schoolAnnexed = 1>>
+	<<for $i = 0; $i < $slavesToAdd; $i++>>
+		<<include "Generate XX Slave">>
+		<<set $activeSlave.origin = "She was given to you by a failed branch campus of St. Claver Preparatory after she served as a plastic surgeon's passing final exam.">>
+		<<set $activeSlave.chem = 20>>
+		<<set $activeSlave.career = "a slave">>
+		<<if $SCP.schoolUpgrade == 1>>
+			<<set $activeSlave.intelligenceImplant = 0>>
+			<<set $activeSlave.intelligence = -2>>
+			<<set $activeSlave.devotion = 20>>
+			<<set $activeSlave.trust = 20>>
+		<<else>>
+			<<set $activeSlave.intelligenceImplant = 1>>
+			<<set $activeSlave.teeth = "normal">>
+			<<set $activeSlave.intelligence = either(-1, 0, 1, 2)>>
+			<<set $activeSlave.devotion = random(25,45)>>
+			<<set $activeSlave.trust = random(25,45)>>
+		<</if>>
+		<<set $activeSlave.health = 100>>
+		<<set $activeSlave.heightImplant = 1>>
+		<<set $activeSlave.height += 10>>
+		<<set $activeSlave.buttImplant = (4-$activeSlave.butt)>>
+		<<set $activeSlave.butt += $activeSlave.buttImplant>>
+		<<set $activeSlave.boobsImplant = (2000-$activeSlave.boobs)>>
+		<<set $activeSlave.boobs += $activeSlave.boobsImplant>>
+		<<set $activeSlave.nipples = "tiny">>
+		<<set $activeSlave.areolae = 0>>
+		<<set $activeSlave.clit = 0>>
+		<<set $activeSlave.lipsImplant = (75-$activeSlave.lips)>>
+		<<set $activeSlave.lips += $activeSlave.lipsImplant>>
+		<<set $activeSlave.faceImplant = 35>>
+		<<set $activeSlave.face = random(35,80)>>
+		<<set $activeSlave.anus to 0>>
+		<<set $activeSlave.vagina to 0>>
+		<<set $activeSlave.preg to 0>>
+		<<set $activeSlave.weight = -20>>
+		<<if $SCP.schoolUpgrade == 2>>
+			<<set $activeSlave.vaginalSkill = 15>>
+			<<set $activeSlave.oralSkill = 15>>
+			<<set $activeSlave.analSkill = 15>>
+			<<set $activeSlave.whoreSkill = 15>>
+			<<set $activeSlave.entertainSkill = 15>>
+		<<else>>
+			<<set $activeSlave.vaginalSkill = 0>>
+			<<set $activeSlave.oralSkill = 0>>
+			<<set $activeSlave.analSkill = 0>>
+			<<set $activeSlave.whoreSkill = 0>>
+			<<set $activeSlave.entertainSkill = 0>>
+		<</if>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.pubicHStyle = "waxed">>
+		<<set $activeSlave.age = 19>>
+		<<set $activeSlave.sexualFlaw = either("none")>>
+		<<set $activeSlave.behavioralFlaw = either("none")>>
+		<<set $activeSlave.hStyle = "tails">>
+		<<set $activeSlave.hColor = "blonde">>
+		<<set $activeSlave.pubicHColor = "blonde">>
+		<<if $activeSlave.race != "white">><<set $activeSlave.race = "surgically altered to look white">><</if>>
+		<<set $activeSlave.skin = "tanned">>
+		<<set $activeSlave.customTat = "She has the coat of arms of St. Claver Preparatory tattooed on her left cheek.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</for>>
+<<elseif $RESFailure == "LDE">>
+	<<set $LDE.schoolPresent = 0>>
+	<<set $LDE.subsidy = 0>>
+	<<set $LDE.schoolProsperity = 0>>
+	<<set $LDE.schoolAnnexed = 1>>
+	<<for $i = 0; $i < $slavesToAdd; $i++>>
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.origin = "She was given to you by a failed branch campus of the innovative École des Enculées right after her graduation.">>
+		<<set $activeSlave.career = "a slave">>
+		<<set $activeSlave.intelligenceImplant = 0>>
+		<<set $activeSlave.chem = 100>>
+		<<if $LDE.schoolUpgrade == 1>>
+			<<set $activeSlave.devotion = 20>>
+			<<set $activeSlave.trust = 20>>
+		<<else>>
+			<<set $activeSlave.devotion = random(60,70)>>
+			<<set $activeSlave.trust = random(55,60)>>
+		<</if>>
+		<<set $activeSlave.health = random(60,80)>>
+		<<set $activeSlave.muscles = 0>>
+		<<set $activeSlave.butt to either(4,5)>>
+		<<set $activeSlave.face = random(20,60)>>
+		<<set $activeSlave.boobs to either(500,650,800)>>
+		<<set $activeSlave.waist = -15>>
+		<<set $activeSlave.lips to 35>>
+		<<if $LDE.schoolUpgrade == 2>>
+			<<set $activeSlave.balls = either(3,4)>>
+			<<set $activeSlave.dick = either(3,4)>>
+			<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+			<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum = $activeSlave.balls>><</if>>
+		<<else>>
+			<<set $activeSlave.dick = either(1,1,1,2)>>
+			<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+			<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum = $activeSlave.balls>><</if>>
+			<<set $activeSlave.balls = either(1,1,1,2)>>
+		<</if>>
+		<<set $activeSlave.anus = 2>>
+		<<set $activeSlave.vagina = -1>>
+		<<set $activeSlave.preg = 0>>
+		<<set $activeSlave.weight = random(0,20)>>
+		<<set $activeSlave.vaginalSkill = 0>>
+		<<set $activeSlave.oralSkill = 15>>
+		<<set $activeSlave.analSkill = 100>>
+		<<set $activeSlave.whoreSkill = 15>>
+		<<set $activeSlave.entertainSkill = 15>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.pubicHStyle = "waxed">>
+		<<set $activeSlave.age = 19>>
+		<<set $activeSlave.sexualFlaw = "none">>
+		<<set $activeSlave.behavioralFlaw = either("none", "odd")>>
+		<<set $activeSlave.fetishStrength = either(1, 2)>>
+		<<set $activeSlave.fetish = "buttslut">>
+		<<set $activeSlave.fetishKnown = 1>><<set $activeSlave.attrKnown = 1>>
+		<<set $activeSlave.hStyle = "tails">>
+		<<set $activeSlave.hLength = 100>>
+		<<set $activeSlave.customTat = "She has the buttock-shaped symbol of the École des Enculées that created her tattooed on her left cheek.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</for>>
+<<elseif $RESFailure == "TGA">>
+	<<set $TGA.schoolPresent = 0>>
+	<<set $TGA.subsidy = 0>>
+	<<set $TGA.schoolProsperity = 0>>
+	<<set $TGA.schoolAnnexed = 1>>
+	<<for $i = 0; $i < $slavesToAdd; $i++>>
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.origin = "She was given to you by a failed branch campus of the intense Gymnasium-Academy right after her majority.">>
+		<<set $activeSlave.career = "a slave">>
+		<<set $activeSlave.intelligenceImplant = 1>>
+		<<set $activeSlave.teeth = "normal">>
+		<<set $activeSlave.intelligence = either (-1, 0, 1, 2)>>
+		<<set $activeSlave.chem = 20>>
+		<<if $TGA.schoolUpgrade == 1>>
+			<<set $activeSlave.devotion = 20>>
+			<<set $activeSlave.trust = 20>>
+		<<else>>
+			<<set $activeSlave.devotion = random(25,45)>>
+			<<set $activeSlave.trust = random(25,45)>>
+		<</if>>
+		<<set $activeSlave.health = 100>>
+		<<set $activeSlave.muscles = either(20, 50, 50)>>
+		<<set $activeSlave.butt = either(2, 2, 3)>>
+		<<set $activeSlave.boobs = either(100, 200)>>
+		<<set $activeSlave.dick = random(3,5)>>
+		<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+		<<if $activeSlave.balls > 0>><<set $activeSlave.scrotum = $activeSlave.balls>><</if>>
+		<<set $activeSlave.balls = random(3,5)>>
+		<<set $activeSlave.anus = 0>>
+		<<set $activeSlave.vagina = -1>>
+		<<set $activeSlave.preg = 0>>
+		<<set $activeSlave.weight = 0>>
+		<<set $activeSlave.vaginalSkill = 0>>
+		<<set $activeSlave.oralSkill = 0>>
+		<<set $activeSlave.analSkill = 0>>
+		<<set $activeSlave.whoreSkill = 0>>
+		<<set $activeSlave.entertainSkill = 0>>
+		<<if $TGA.schoolUpgrade == 2>>
+			<<set $activeSlave.combatSkill = 1>>
+		<<else>>
+			<<set $activeSlave.combatSkill = 0>>
+		<</if>>
+		<<set $activeSlave.pubicHStyle = "waxed">>
+		<<set $activeSlave.age = 18>>
+		<<set $activeSlave.sexualFlaw = either("none", "apathetic")>>
+		<<set $activeSlave.behavioralFlaw = either("none", "arrogant", "odd")>>
+		<<set $activeSlave.hStyle = "short">>
+		<<set $activeSlave.hLength = 2>>
+		<<set $activeSlave.customTat = "She has the baroque crest of the Gymnasium-Academy that trained her branded into her left cheek.">>
+		<<set $activeSlave.slaveCost = 0>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</for>>
+<<else>>
+	<<set $TFS.schoolPresent = 0>>
+	<<set $TFS.subsidy = 0>>
+	<<set $TFS.schoolProsperity = 0>>
+	<<set $TFS.schoolAnnexed = 1>>
+	<<for $i = 0; $i < $slavesToAdd-1; $i++>>
+		<<set $seed = random(1,4)>>
+		<<include "Generate XY Slave">>
+		<<set $activeSlave.origin = "She was a Futanari Sister until you engineered her early enslavement.">>
+		<<set $activeSlave.career = "a Futanari Sister">>
+		<<set $activeSlave.faceShape = either("sensual", "exotic")>>
+		<<if $seed == 1>>
+			<<set $activeSlave.intelligence to -1>>
+			<<set $activeSlave.chem to 150>>
+			<<set $activeSlave.butt to either(5,6)>>
+			<<set $activeSlave.hips to 1>>
+			<<set $activeSlave.face to either(35,35,35,75,100)>>
+			<<set $activeSlave.boobs = 100*random(12,20)>>
+			<<set $activeSlave.dick = random(2,3)>>
+			<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+			<<if $TFS.schoolUpgrade == 1>>
+				<<set $activeSlave.balls = 1>>
+				<<set $activeSlave.scrotum = 0>>
+			<<elseif $TFS.schoolUpgrade == 2>>
+				<<set $activeSlave.balls = random(8,9), $activeSlave.scrotum = $activeSlave.balls>>
+			<<else>>
+				<<set $activeSlave.balls = random(2,3)>>
+				<<set $activeSlave.scrotum = $activeSlave.balls>>
+			<</if>>
+			<<set $activeSlave.lips to 0>>
+			<<set $activeSlave.weight to 0>>
+			<<set $activeSlave.age to random(25,29)>>
+			<<set $activeSlave.vagina to 2>>
+			<<set $activeSlave.anus to 2>>
+			<<set $activeSlave.fetish to "submissive">>
+		<<elseif $seed is 2>>
+			<<set $activeSlave.intelligence to 0>>
+			<<set $activeSlave.chem to 200>>
+			<<set $activeSlave.butt to either(6,7)>>
+			<<set $activeSlave.hips to 2>>
+			<<set $activeSlave.face to either(35,35,75,75,100)>>
+			<<set $activeSlave.boobs = 100*random(20,32)>>
+			<<set $activeSlave.dick = random(3,4)>>
+			<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+			<<if $TFS.schoolUpgrade == 1>>
+				<<set $activeSlave.balls = 1>>
+				<<set $activeSlave.scrotum = 0>>
+			<<elseif $TFS.schoolUpgrade == 2>>
+				<<set $activeSlave.balls = random(9,10), $activeSlave.scrotum = $activeSlave.balls>>
+			<<else>>
+				<<set $activeSlave.balls = random(3,4)>>
+				<<set $activeSlave.scrotum = $activeSlave.balls>>
+			<</if>>
+			<<set $activeSlave.lips to random(15,25)>>
+			<<set $activeSlave.weight to 20>>
+			<<set $activeSlave.age to random(30,34)>>
+			<<set $activeSlave.vagina to 2>>
+			<<set $activeSlave.anus to 2>>
+			<<set $activeSlave.fetish to either("buttslut", "cumslut")>>
+		<<elseif $seed is 3>>
+			<<set $activeSlave.intelligence to 1>>
+			<<set $activeSlave.chem to 250>>
+			<<set $activeSlave.butt to either(7,8)>>
+			<<set $activeSlave.hips to 2>>
+			<<set $activeSlave.face to either(35,75,75,100,100)>>
+			<<set $activeSlave.boobs = 100*random(32,42)>>
+			<<set $activeSlave.dick = random(4,5)>>
+			<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+			<<if $TFS.schoolUpgrade == 1>>
+				<<set $activeSlave.balls = 1>>
+				<<set $activeSlave.scrotum = 0>>
+			<<elseif $TFS.schoolUpgrade == 2>>
+				<<set $activeSlave.balls = random(6,7), $activeSlave.scrotum = $activeSlave.balls>>
+			<<else>>
+				<<set $activeSlave.balls = random(4,5)>>
+				<<set $activeSlave.scrotum = $activeSlave.balls>>
+			<</if>>
+			<<set $activeSlave.lips = random(25,55)>>
+			<<set $activeSlave.weight = 20>>
+			<<set $activeSlave.age = random(35,39)>>
+			<<set $activeSlave.vagina = 3>>
+			<<set $activeSlave.anus = 3>>
+			<<set $activeSlave.fetish = either("buttslut", "cumslut")>>
+		<<else>>
+			<<set $activeSlave.intelligence to 2>>
+			<<set $activeSlave.chem to 300>>
+			<<set $activeSlave.butt to either(8,9)>>
+			<<set $activeSlave.hips to 2>>
+			<<set $activeSlave.face to either(35,75,100,100,100)>>
+			<<set $activeSlave.boobs = 100*random(44,60)>>
+			<<set $activeSlave.dick = random(5,6)>>
+			<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+			<<if $TFS.schoolUpgrade == 1>>
+				<<set $activeSlave.balls = 1>>
+				<<set $activeSlave.scrotum = 0>>
+			<<elseif $TFS.schoolUpgrade == 2>>
+				<<set $activeSlave.balls = random(7,8), $activeSlave.scrotum = $activeSlave.balls>>
+			<<else>>
+				<<set $activeSlave.balls = random(5,6)>>
+				<<set $activeSlave.scrotum = $activeSlave.balls>>
+			<</if>>
+			<<set $activeSlave.lips = random(25,55)>>
+			<<set $activeSlave.weight = 50>>
+			<<set $activeSlave.age = random(40,42)>>
+			<<set $activeSlave.vagina = 3>>
+			<<set $activeSlave.anus = 3>>
+			<<set $activeSlave.fetish = "dom">>
+		<</if>>
+		<<if $TFS.farmUpgrade != 0>>
+			<<set $activeSlave.ovaries = 1>>
+			<<if $TFS.farmUpgrade == 2>>
+				<<set $activeSlave.preg = random(1,35)>>
+			<</if>>
+		<</if>>
+		<<set $activeSlave.intelligenceImplant = 1>>
+		<<set $activeSlave.teeth = "normal">>
+		<<if $TFS.schoolUpgrade == 2>>
+			<<set $activeSlave.energy = 100>>
+		<<else>>
+			<<set $activeSlave.energy = $activeSlave.age+random(20,30)>>
+		<</if>>
+		<<set $activeSlave.devotion = random(30,35)>>
+		<<set $activeSlave.trust = random(-15,-5)>>
+		<<set $activeSlave.health = random(60,80)>>
+		<<set $activeSlave.muscles = 20>>
+		<<set $activeSlave.waist = -15>>
+		<<set $activeSlave.shoulders to 1>>
+		<<set $activeSlave.preg to -2>>
+		<<set $activeSlave.vaginalSkill = 100>>
+		<<set $activeSlave.oralSkill = 100>>
+		<<set $activeSlave.analSkill = 100>>
+		<<set $activeSlave.whoreSkill = 15>>
+		<<set $activeSlave.entertainSkill = 100>>
+		<<set $activeSlave.combatSkill = 0>>
+		<<set $activeSlave.pubicHStyle = "waxed">>
+		<<if $TFS.schoolUpgrade == 1>>
+			<<set $activeSlave.sexualQuirk = "caring">>
+		<</if>>
+		<<set $activeSlave.sexualFlaw = either("none", "hates women")>>
+		<<set $activeSlave.behavioralFlaw = either("none", "arrogant")>>
+		<<set $activeSlave.fetishStrength = 100>>
+		<<set $activeSlave.fetishKnown = 0>>
+		<<set $activeSlave.attrKnown = 0>>
+		<<set $activeSlave.hStyle = "neat">>
+		<<set $activeSlave.hLength = 150>>
+		<<set $activeSlave.customTat = "She has a simple pink heart tattooed on her right temple.">>
+		<<set $REFutaSisterCheckinIDs.push($activeSlave.ID)>>
+		<<set $activeSlave.slaveCost = 0>>
+		<<AddSlave $activeSlave>> /* skip New Slave Intro */
+	<</for>>
+	<<include "Generate XY Slave">>
+	<<set $activeSlave.origin to "She was the leader of your arcology's Futanari Sisters until you engineered her community's failure and enslavement.">>
+	<<set $activeSlave.career to "a Futanari Sister">>
+	<<set $activeSlave.intelligence to 2>>
+	<<set $activeSlave.chem to 300>>
+	<<set $activeSlave.butt to either(8,9)>>
+	<<set $activeSlave.hips to 2>>
+	<<set $activeSlave.face = 100>>
+	<<set $activeSlave.boobs = 100*random(44,60)>>
+	<<set $activeSlave.dick = random(5,6)>>
+	<<if $activeSlave.foreskin > 0>><<set $activeSlave.foreskin = $activeSlave.dick>><</if>>
+	<<if $TFS.schoolUpgrade == 1>>
+		<<set $activeSlave.balls = 1>>
+		<<set $activeSlave.scrotum = 0>>
+	<<elseif $TFS.schoolUpgrade == 2>>
+		<<set $activeSlave.balls = 10>>
+		<<set $activeSlave.scrotum = $activeSlave.balls>>
+	<<else>>
+		<<set $activeSlave.balls = random(5,6)>>
+		<<set $activeSlave.scrotum = $activeSlave.balls>>
+	<</if>>
+	<<set $activeSlave.lips = random(25,55)>>
+	<<set $activeSlave.weight = 50>>
+	<<set $activeSlave.age = random(40,42)>>
+	<<set $activeSlave.vagina = 3>>
+	<<set $activeSlave.anus = 3>>
+	<<set $activeSlave.fetish = "dom">>
+	<<if $TFS.farmUpgrade != 0>>
+		<<set $activeSlave.ovaries = 1>>
+		<<if $TFS.farmUpgrade == 2>>
+			<<set $activeSlave.preg = random(1,35)>>
+		<</if>>
+	<</if>>
+	<<set $activeSlave.intelligenceImplant = 1>>
+	<<set $activeSlave.teeth = "normal">>
+	<<if $TFS.schoolUpgrade == 2>>
+		<<set $activeSlave.energy = 100>>
+	<<else>>
+		<<set $activeSlave.energy = $activeSlave.age+random(20,30)>>
+	<</if>>
+		<<set $activeSlave.devotion = random(25,30)>>
+		<<set $activeSlave.trust = random(10,15)>>
+	<<set $activeSlave.health = random(60,80)>>
+	<<set $activeSlave.muscles = 20>>
+	<<set $activeSlave.waist = -15>>
+	<<set $activeSlave.shoulders to 1>>
+	<<set $activeSlave.preg to -2>>
+	<<set $activeSlave.vaginalSkill = 100>>
+	<<set $activeSlave.oralSkill = 100>>
+	<<set $activeSlave.analSkill = 100>>
+	<<set $activeSlave.whoreSkill = 15>>
+	<<set $activeSlave.entertainSkill = 100>>
+	<<set $activeSlave.combatSkill = 0>>
+	<<set $activeSlave.pubicHStyle = "waxed">>
+	<<if $TFS.schoolUpgrade == 1>>
+		<<set $activeSlave.sexualQuirk = "caring">>
+	<</if>>
+	<<set $activeSlave.sexualFlaw = either("none", "hates women")>>
+	<<set $activeSlave.behavioralFlaw = either("none", "arrogant")>>
+	<<set $activeSlave.fetishStrength = 100>>
+	<<set $activeSlave.fetishKnown = 0>>
+	<<set $activeSlave.attrKnown = 0>>
+	<<set $activeSlave.hStyle = "neat">>
+	<<set $activeSlave.hLength = 150>>
+	<<set $activeSlave.customTat = "She has a simple pink heart tattooed on her right temple.">>
+	<<set $activeSlave.slaveCost = 0>>
+	<<AddSlave $activeSlave>> /* skip New Slave Intro */
+<</if>>
+
+<<if $RESFailure == "TSS">>
+	You receive a personal call from a senior representative of The Slavegirl School, as you've been expecting since their second missed rent payment. "I apologize," he says with some embarrassment, "but it seems our expansion into your arcology was a mistake. It's strange - the business climate seemed excellent, and other corporations are doing well." He sighs. "Nevertheless, nothing ever seemed to go as planned. We'll be shutting our branch campus down immediately. In fact, it should be shut down within the hour. I regret to add," he says nervously, "that we're experiencing continued difficulty finding the liquidity to pay what we owe you. The branch campus we're closing has five recent graduates. We'd like to transfer them to you in lieu of payment." He hurriedly ends the call.
+<<elseif $RESFailure == "GRI">>
+	You receive a personal call from a senior representative of the Growth Research Institute, as you've been expecting since their second missed rent payment. "I apologize," he says with some embarrassment, "but it seems our expansion into your arcology was a mistake. It's strange - the business climate seemed excellent, and other corporations are doing well." He sighs. "Nevertheless, nothing ever seemed to go as planned. We'll be shutting our subsidiary lab down immediately. In fact, it should be shut down within the hour. I regret to add," he says nervously, "that we're experiencing continued difficulty finding the liquidity to pay what we owe you. The lab we're closing has five solid test subjects. We'd like to transfer them to you in lieu of payment." He hurriedly ends the call.
+<<elseif $RESFailure == "SCP">>
+	You receive a personal call from a senior representative of St. Claver Prep, as you've been expecting since their second missed rent payment. "I apologize," he says with some embarrassment, "but it seems our expansion into your arcology was a mistake. It's strange - the business climate seemed excellent, and other corporations are doing well." He sighs. "Nevertheless, nothing ever seemed to go as planned. We'll be shutting our branch campus down immediately. In fact, it should be shut down within the hour. I regret to add," he says nervously, "that we're experiencing continued difficulty finding the liquidity to pay what we owe you. The branch campus we're closing has five recent graduates. We'd like to transfer them to you in lieu of payment." He hurriedly ends the call.
+<<elseif $RESFailure == "LDE">>
+	You receive a personal call from a senior representative of the Ecole des Enculees, as you've been expecting since their second missed rent payment. "I apologize," he says with some embarrassment, "but it seems our expansion into your arcology was a mistake. It's strange - the business climate seemed excellent, and other corporations are doing well." He sighs. "Nevertheless, nothing ever seemed to go as planned. We'll be shutting our branch campus down immediately. In fact, it should be shut down within the hour. I regret to add," he says nervously, "that we're experiencing continued difficulty finding the liquidity to pay what we owe you. The branch campus we're closing has five recent graduates. We'd like to transfer them to you in lieu of payment." He hurriedly ends the call.
+<<elseif $RESFailure == "TGA">>
+	You receive a personal call from a senior representative of the Gymnasium-Academy, as you've been expecting since their second missed rent payment. "I apologize," he says with some embarrassment, "but it seems our expansion into your arcology was a mistake. It's strange - the business climate seemed excellent, and other corporations are doing well." He sighs. "Nevertheless, nothing ever seemed to go as planned. We'll be shutting our branch campus down immediately. In fact, it should be shut down within the hour. I regret to add," he says nervously, "that we're experiencing continued difficulty finding the liquidity to pay what we owe you. The branch campus we're closing has five recent graduates. We'd like to transfer them to you in lieu of payment." He hurriedly ends the call.
+<<else>>
+	The senior Sister of the community of Futanari Sisters in your arcology appears at your penthouse, as you've been expecting since their second missed rent payment. This is quite the occasion, since they never leave their little nest. She's delightfully nude, and it occurs to you that the Sisters probably do not own clothing at all. She has obviously been crying; puffy eyes and a sniffling nose mar her gorgeous face. She must have caused quite the sensation as she made her way here, in tears, gigantic tits and huge cock bouncing around. To your surprise, she flings herself at your feet, her dick making a painful-sounding slap against the floor and her breasts squashing out to either side of her.
+	<br><br>
+	"Please," she cries to your feet. "Please take us as slaves. We're indebted, and we'll all be enslaved. You're our friend, you'll treat us better than anyone." Then she whispers, "Please, <<if $PC.surname>><<if $PC.title>>Mr.<<else>>Ms.<</if>> <<print $PC.surname>>,<<else>><<print $PC.name>>,<</if>> don't make me beg." You tell the prostrate futa you accept. Her mood does not improve: she scrabbles around to face away from you, plush body jiggling submissively, and raises her buttocks to spread her pussy and anus for you. "Thank you," she weeps. "Now please rape me, <<Master>>. I deserve it. My mismanagement stole my Sisters' years of idyll from them. Please, rape me."
+<</if>>
+<br><br>
+The failure of a prominent organization within your arcology has @@.red;affected your reputation@@ and @@.red;your arcology's prosperity@@ slightly, but you've come out a long way ahead. You've acquired excellent slaves for a pitiful fraction of their fair price.
+
+<</nobr>>
+
+<<nobr>>
+<span id="result">
+<<if $RESFailure == "TFS">>
+<<link "Rape her">>
+	<<replace "#result">>
+	<<nobr>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if ($slaves[$i].origin == "She was the leader of your arcology's Futanari Sisters until you engineered her community's failure and enslavement.")>>
+		<<set $activeSlave.devotion += 10>>
+		<<set $activeSlave.analCount += 1>>
+		<<set $activeSlave.vaginalCount += 1>>
+		<<set $analTotal += 1>>
+		<<set $vaginalTotal += 1>>
+	<</if>>
+	<<set $activeSlave.slaveCost = 0>>
+	<</for>>
+	You <<if $PC.dick == 1>>whip out your dick<<else>>pull on a strap-on, the one you use for disobedient slaves,<</if>> and kneel down behind the sobbing futa matron. When she feels it touching her pussylips, she whispers "Thank you, <<Master>>," through her tears. She's very, very sexually experienced, so it's harder to make her feel it than it would be for a girl with tighter holes. But you're an expert. You calibrate your pounding to pull just barely too far out, so that she feels you ramming mercilessly into her with each stroke, and so that the slightest mistake from her sends <<if $PC.dick == 1>>your cock<<else>>the phallus<</if>> right up the other hole. Despite her anguish and the brutal fuck, or perhaps because of them, she slowly manages to get hard, and orgasms painfully when you do. She @@.hotpink;can't seem to stop thanking you,@@ but is quiet when you tell her to be.
+	<</nobr>><</replace>>
+<</link>>
+<br>
+<</if>>
+<<link "Sell your prizes immediately">>
+	<<replace "#result">>
+	<<nobr>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	<<set $activeSlave = $slaves[$i]>>
+	<<if $RESFailure == "TSS">>
+		<<if ($slaves[$i].origin == "She was given to you by a failed branch campus of The Slavegirl School right after her majority.") || ($slaves[$i].origin == "She was given to you by a failed branch campus of The Slavegirl School after she was retrained as a slave girl.")>>
+		<<slaveCost $slaves[$i]>>
+		<<set $cash += $slaveCost>>
+		<<include "Remove activeSlave">>
+		<<set $i -= 1>>
+		<</if>>
+	<<elseif $RESFailure == "GRI">>
+		<<if $slaves[$i].origin == "She was given to you by a failed subsidiary lab of the Growth Research Institute right after her use as a test subject ended.">>
+		<<slaveCost $slaves[$i]>>
+		<<set $cash += $slaveCost>>
+		<<include "Remove activeSlave">>
+		<<set $i -= 1>>
+		<</if>>
+	<<elseif $RESFailure == "SCP">>
+		<<if $slaves[$i].origin == "She was given to you by a failed branch campus of St. Claver Preparatory after she served as a plastic surgeon's passing final exam.">>
+		<<slaveCost $slaves[$i]>>
+		<<set $cash += $slaveCost>>
+		<<include "Remove activeSlave">>
+		<<set $i -= 1>>
+		<</if>>
+	<<elseif $RESFailure == "LDE">>
+		<<if $slaves[$i].origin == "She was given to you by a failed branch campus of the innovative École des Enculées right after her graduation.">>
+		<<slaveCost $slaves[$i]>>
+		<<set $cash += $slaveCost>>
+		<<include "Remove activeSlave">>
+		<<set $i -= 1>>
+		<</if>>
+	<<elseif $RESFailure == "TGA">>
+		<<if $slaves[$i].origin == "She was given to you by a failed branch campus of the intense Gymnasium-Academy right after her majority.">>
+		<<slaveCost $slaves[$i]>>
+		<<set $cash += $slaveCost>>
+		<<include "Remove activeSlave">>
+		<<set $i -= 1>>
+		<</if>>
+	<<else>>
+		<<if ($slaves[$i].origin == "She was the leader of your arcology's Futanari Sisters until you engineered her community's failure and enslavement.") || ($slaves[$i].origin == "She was a Futanari Sister until you engineered her early enslavement.")>>
+		<<slaveCost $slaves[$i]>>
+		<<set $cash += $slaveCost>>
+		<<include "Remove activeSlave">>
+		<<set $i -= 1>>
+		<</if>>
+	<</if>>
+	<</for>>
+	Prizes sold.
+	<</nobr>><</replace>>
+<</link>>
+</span>
+<</nobr>>

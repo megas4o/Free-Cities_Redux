@@ -1,0 +1,36 @@
+:: RE busy servants quarters [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+
+Your penthouse is very well staffed with servants. The trend in modern buildings is to design around automatic cleaning systems. Dusting, mopping, and polishing are no longer really necessary when machines that do them more cheaply and thoroughly than any human are readily available. Keeping slaves to clean is an ostentation, and visitors to your quarters are often @@.green;surprised and gratified@@ to see a sex slave working away in the old way.<<set $rep += 100>>
+
+<br><br>The busy servants' quarters are a reservoir of slaves that can be used for almost any whim that occurs to you.
+
+<span id="result">
+<br><br><<link "Share the servants' quarters with your more favored slaves">>
+	<<replace "#result">>
+	<br><br>
+	The poor slaves in the servants' quarters are lower than almost any others, and they know it. Unfortunately for them, they're about to spend a long weekend knowing it unusually well. Sleeping time is usually nearly inviolate; you are the only person in the penthouse who is permitted to wake a sleeping slave for any but emergency reasons. Not now. You haunt the servants' quarters, using and abusing at will, and encourage your better slaves to follow your example. They quickly take the opportunity to be better than someone for once, and compete with each other in sexual harassment of the servants. They @@.hotpink;appreciate@@ having @@.mediumorchid;targets@@ for their frustrations.
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].assignment != "work in servants' quarters">>
+		<<set $slaves[$i].devotion += 4>>
+			<<set $slaves[$i].oralCount += 3>>
+			<<set $oralTotal += 3>>
+		<</if>>
+		<<if $slaves[$i].assignment == "work in servants' quarters">>
+		<<set $slaves[$i].devotion -= 5>>
+		<<if ($slaves[$i].vagina > -1) && ($slaves[$i].vaginalAccessory != "chastity belt")>>
+			<<set $slaves[$i].vaginalCount += 1>>
+			<<set $vaginalTotal += 1>>
+		<<else>>
+			<<set $slaves[$i].analCount += 1>>
+			<<set $analTotal += 1>>
+		<</if>>
+			<<set $slaves[$i].oralCount += 5>>
+			<<set $oralTotal += 5>>
+		<</if>>
+	<</for>>
+	<</replace>>
+<</link>>
+</span>

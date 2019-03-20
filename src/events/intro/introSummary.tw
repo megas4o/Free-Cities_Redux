@@ -1,0 +1,374 @@
+:: Intro Summary [nobr]
+
+<<set $neighboringArcologies to Math.clamp($neighboringArcologies, 0, 8)>>
+
+You may review your settings before clicking "Continue" to begin.
+
+<br><br>
+
+__''World Settings''__
+
+<<if ($economy != 1) || ($seeDicks != 50) || ($continent != "North America") || ($internationalTrade != 1) || ($internationalVariety != 1) || ($seeRace != 1) || ($seeNationality != 1) || ($seeExtreme != 0) || ($seeCircumcision != 1) || ($seeAge != 1) || ($plot != 1)>>
+	//[[restore defaults|Intro Summary][$seeDicks = 50,$economy = 1,$continent = "North America",$internationalTrade = 1,$internationalVariety = 1,$seeRace = 1,$seeNationality = 1,$seeExtreme = 0,$seeCircumcision = 1,$seeAge = 1,$plot = 1]]//
+<</if>>
+
+<br>
+
+<<if $economy == 1>>
+	The world economy is in ''doubtful'' shape.
+	[[Easier|Intro Summary][$economy = 0.5]] | [[Harder|Intro Summary][$economy = 1.5]]
+<<elseif $economy < 1>>
+	The world economy is still in ''good'' shape.
+	[[Harder|Intro Summary][$economy = 1]]
+<<else>>
+	The world economy is in ''terrible'' shape.
+	[[Easier|Intro Summary][$economy = 1]]
+<</if>>
+
+<<set $drugsCost = Math.trunc(100*$economy)>>
+<<set $rulesCost = Math.trunc(100*$economy)>>
+<<set $modCost = Math.trunc(50*$economy)>>
+<<set $surgeryCost = Math.trunc(300*$economy)>>
+
+<br>
+
+<<if $internationalTrade == 0>>
+	The slave trade is ''continental,'' so a narrower variety of slaves will be available.
+	[[Allow intercontinental trade|Intro Summary][$internationalTrade = 1]]
+<<else>>
+	The slave trade is ''international,'' so a wider variety of slaves will be available.
+	[[Restrict the trade to continental|Intro Summary][$internationalTrade = 0]]
+<</if>>
+
+<<if $internationalTrade == 1>>
+<br>
+<<if $internationalVariety == 0>>
+	International slave variety is ''semi-realistic,'' so more populous nations will be more common.
+	[[Normalized national variety|Intro Summary][$internationalVariety = 1]]
+<<else>>
+	International slave variety is ''normalized,'' so small nations will appear nearly as much as large ones.
+	[[Semi-realistic national variety|Intro Summary][$internationalVariety = 0]]
+<</if>>
+<</if>>
+
+<br>
+
+<<if $seeAge == 1>>
+	Slaves will ''age naturally.''
+	[[Disable aging|Intro Summary][$seeAge = 0]]
+<<else>>
+	Slaves will ''not age,'' and not experience birthdays.
+	[[Enable aging|Intro Summary][$seeAge = 1]]
+<</if>>
+//This option cannot be changed during the game//
+
+<br>
+
+<<if $seeRace == 1>>
+	Ethnicity will ''occasionally'' be mentioned.
+	[[Disable most mentions of race|Intro Summary][$seeRace = 0]]
+<<else>>
+	Ethnicity will ''almost never'' be mentioned.
+	[[Enable mentions of race|Intro Summary][$seeRace = 1]]
+<</if>>
+
+<br>
+
+<<if $seeNationality == 1>>
+	Nationality will ''occasionally'' be mentioned.
+	[[Disable most mentions of nationality|Intro Summary][$seeNationality = 0]]
+<<else>>
+	Nationality will ''almost never'' be mentioned.
+	[[Enable mentions of nationality|Intro Summary][$seeNationality = 1]]
+<</if>>
+
+<br>
+
+<<if $seeExtreme == 1>>
+	Extreme content like amputation is ''enabled''.
+	[[Disable|Intro Summary][$seeExtreme = 0]]
+<<else>>
+	Extreme content like amputation is ''disabled''.
+	[[Enable|Intro Summary][$seeExtreme = 1]]
+<</if>>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<<if $seeDicks != 0>>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<<if $seeCircumcision == 1>>
+	Circumcision is ''enabled''.
+	[[Disable|Intro Summary][$seeCircumcision = 0]]
+<<else>>
+	Circumcision is ''disabled''.
+	[[Enable|Intro Summary][$seeCircumcision = 1]]
+<</if>>
+<</if>>
+
+<br>
+
+Interactions between slaves' weight and asset size are
+<<if ($weightAffectsAssets != 0)>>
+	''enabled''. [[Disable|Intro Summary][$weightAffectsAssets = 0]]
+<<else>>
+	''disabled''. [[Enable|Intro Summary][$weightAffectsAssets = 1]]
+<</if>>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<<if ($curativeSideEffects != 0)>>
+Curative side effects are ''enabled''. [[Disable|Intro Summary][$curativeSideEffects = 0]]
+<<else>>
+Curative side effects are ''disabled''. [[Enable|Intro Summary][$curativeSideEffects = 1]]
+<</if>>
+
+<br>
+
+<<switch $seeDicks>>
+<<case 100>>
+	''All''
+<<case 90>>
+	''Almost all''
+<<case 75>>
+	''Most''
+<<case 50>>
+	''Half''
+<<case 25>>
+	''Some''
+<<case 10>>
+	''A few''
+<<default>>
+	''None''
+<</switch>>
+of the slave girls will have dicks.
+<<if $seeDicks != 0>>[[None|Intro Summary][$seeDicks = 0]]<<else>>None<</if>> (0%)
+| <<if $seeDicks != 10>>[[A few|Intro Summary][$seeDicks = 10]]<<else>>A few<</if>> (10%)
+| <<if $seeDicks != 25>>[[Some|Intro Summary][$seeDicks = 25]]<<else>>Some<</if>> (25%)
+| <<if $seeDicks != 50>>[[Half|Intro Summary][$seeDicks = 50]]<<else>>Half<</if>> (50%)
+| <<if $seeDicks != 75>>[[Most|Intro Summary][$seeDicks = 75]]<<else>>Most<</if>> (75%)
+| <<if $seeDicks != 90>>[[Almost all|Intro Summary][$seeDicks = 90]]<<else>>Almost all<</if>> (90%)
+| <<if $seeDicks != 100>>[[All|Intro Summary][$seeDicks = 100]]<<else>>All<</if>> (100%)
+
+<br>
+
+<<if $plot == 1>>
+	Game mode: ''two-handed''. Includes non-erotic events concerning the changing world.
+	[[Disable non-erotic events|Intro Summary][$plot = 0]]
+<<else>>
+	Game mode: ''one-handed''. No non-erotic events concerning the changing world.
+	[[Enable non-erotic events|Intro Summary][$plot = 1]]
+<</if>>
+
+<br><br>
+
+__The Free City__
+<br>
+The Free City features ''$neighboringArcologies'' arcologies in addition to your own.
+<<textbox "$neighboringArcologies" $neighboringArcologies "Intro Summary">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Setting this to 0 will disable most content involving the rest of the Free City.//
+
+<<if $targetArcology.type == "New">>
+<br>
+The Free City is located on ''$terrain'' terrain.
+[[Urban|Intro Summary][$terrain = "urban"]] |
+[[Rural|Intro Summary][$terrain = "rural"]] |
+[[Marine|Intro Summary][$terrain = "marine"]] |
+[[Oceanic|Intro Summary][$terrain = "oceanic"]]
+<<if $terrain != "oceanic">>
+<br>
+The Free City is located in ''$continent''.
+[[North America|Intro Summary][$continent = "North America", $language = "English"]] | [[South America|Intro Summary][$continent = "South America", $language = "Spanish"]] | [[Europe|Intro Summary][$continent = "Europe", $language = "English"]] | [[the Middle East|Intro Summary][$continent = "the Middle East", $language = "Arabic"]] | [[Africa|Intro Summary][$continent = "Africa", $language = "Arabic"]] | [[Asia|Intro Summary][$continent = "Asia", $language = "Chinese"]] | [[Australia|Intro Summary][$continent = "Australia", $language = "English"]]
+<</if>>
+<</if>>
+
+<<if ($targetArcology.type != "RomanRevivalist") && ($targetArcology.type != "AztecRevivalist") && ($targetArcology.type != "EgyptianRevivalist") && ($targetArcology.type != "EdoRevivalist") && ($targetArcology.type != "ArabianRevivalist") && ($targetArcology.type != "ChineseRevivalist")>>
+<br>
+The lingua franca of your arcology is ''$language''.
+<<if $language != "English">>
+	[[English|Intro Summary][$language = "English"]] |
+<<else>>
+	English |
+<</if>>
+<<if $language != "Spanish">>
+	[[Spanish|Intro Summary][$language = "Spanish"]] |
+<<else>>
+	Spanish |
+<</if>>
+<<if $language != "Arabic">>
+	[[Arabic|Intro Summary][$language = "Arabic"]] |
+<<else>>
+	Arabic |
+<</if>>
+<<if $language != "Chinese">>
+	[[Chinese|Intro Summary][$language = "Chinese"]] |
+<<else>>
+	Chinese |
+<</if>>
+Custom: <<textbox "$language" $language "Intro Summary">>
+<</if>>
+
+<br><br>
+
+__Player Character__
+<br>
+<<if $PC.title > 0>>
+	Conversational title: ''Master''.
+	[[Switch to Mistress|Intro Summary][$PC.title = 0]]
+<<else>>
+	Conversational title: ''Mistress''.
+	[[Switch to Master|Intro Summary][$PC.title = 1]]
+<</if>>
+| Custom: <<textbox "$PC.customTitle" $PC.customTitle "Intro Summary">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<if def $PC.title.customTitle>>
+	<<set $PC.customTitleLisp = $PC.customTitle, $PC.customTitleLisp = $PC.customTitleLisp.replace("ss", "th"), $PC.customTitleLisp = $PC.customTitleLisp.replace("S", "Th"), $PC.customTitleLisp = $PC.customTitleLisp.replace("s", "th")>>
+<</if>>
+//If using a custom title, select Master or Mistress to set the gender of your title.//
+
+<br>
+
+Career: ''$PC.career''.
+<<if $PC.career != "arcology owner">>
+	[[Wealth|Intro Summary][$PC.career = "wealth"]] |
+	[[Business|Intro Summary][$PC.career = "capitalist"]] |
+	[[PMC work|Intro Summary][$PC.career = "mercenary"]] |
+	[[Slaving|Intro Summary][$PC.career = "slaver"]] |
+	[[Engineering|Intro Summary][$PC.career = "engineer"]] |
+	[[Medicine|Intro Summary][$PC.career = "medicine"]] |
+	[[Celebrity|Intro Summary][$PC.career = "celebrity"]]
+<</if>>
+
+<br>
+
+Method of acquiring your arcology: ''$PC.rumor''.
+[[Wealth|Intro Summary][$PC.rumor = "wealth"]] |
+[[Hard work|Intro Summary][$PC.rumor = "diligence"]] |
+[[Force|Intro Summary][$PC.rumor = "force"]] |
+[[Social engineering|Intro Summary][$PC.rumor = "social engineering"]] |
+[[Luck|Intro Summary][$PC.rumor = "luck"]]
+
+<br>
+
+Genitalia:
+<<if $PC.dick == 1>>
+	<<if $PC.vagina == 1>>
+		''penis and vagina''. Sex scene variations; more difficult reputation maintenance; some unique opportunities, especially with breasts.
+		[[No penis|Intro Summary][$PC.dick = 0]] | [[No vagina|Intro Summary][$PC.vagina = 0]]
+	<<else>>
+		''penis''. Standard sex scenes; easiest reputation maintenance.
+		[[Switch to vagina|Intro Summary][$PC.dick = 0, $PC.vagina = 1]] | [[Add a vagina|Intro Summary][$PC.vagina = 1]]
+	<</if>>
+<<else>>
+	''vagina''. Sex scene variations; most difficult reputation maintenance.
+	[[Switch to penis|Intro Summary][$PC.dick = 1, $PC.vagina = 0]] | [[Add a penis|Intro Summary][$PC.dick = 1]]
+<</if>>
+
+<br>
+
+<<if $PC.boobs > 0>>
+	Chest: ''breasts''. Sex scene variations; more difficult reputation maintenance.
+	[[Remove breasts|Intro Summary][$PC.boobs = 0]]
+<<else>>
+	Chest: ''masculine''. Standard sex scenes; easier reputation maintenance.
+	[[Add breasts|Intro Summary][$PC.boobs = 1]]
+<</if>>
+
+<br>
+
+Age:
+<<if $PC.age == 3>>
+	''well into middle age''.
+	[[Younger|Intro Summary][$PC.age = 2]]
+<<elseif $PC.age == 2>>
+	''entering middle age''.
+	[[Younger|Intro Summary][$PC.age = 1]] | [[Older|Intro Summary][$PC.age = 3]]
+<<else>>
+	''surprisingly young''.
+	[[Older|Intro Summary][$PC.age = 2]]
+<</if>>
+
+<br>
+Name your character: (given name) <<textbox "$PC.name" $PC.name "Intro Summary">> (surname)
+<<if $PC.surname>>
+	<<textbox "$PC.surname" $PC.surname "Intro Summary">>
+	<<link "Go by a single name">><<set $PC.slaveSurname = 0>><<goto "Intro Summary">><</link>>
+<<else>>
+	<<textbox "$PC.surname" "" "Intro Summary">>
+<</if>>
+<br>
+Preferred refreshment: <<textbox "$PC.refreshment" $PC.refreshment "Intro Summary">> [[Cigars|Intro Summary][$PC.refreshment = "cigar",$PC.refreshmentType = 0]] | [[Whiskey|Intro Summary][$PC.refreshment = "whiskey",$PC.refreshmentType = 1]]
+<br>
+Preferred method of consumption: ''<<if $PC.refreshmentType == 0>>Smoked<<elseif $PC.refreshmentType == 1>>Drank<<elseif $PC.refreshmentType == 2>>Eaten<<elseif $PC.refreshmentType == 3>>Snorted<<else>>Injected<</if>>''.
+[[Smoked|Intro Summary][$PC.refreshmentType = 0]] | [[Drank|Intro Summary][$PC.refreshmentType = 1]] | [[Eaten|Intro Summary][$PC.refreshmentType = 2]] | [[Snorted|Intro Summary][$PC.refreshmentType = 3]] | [[Injected|Intro Summary][$PC.refreshmentType = 4]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<if $PC.refreshmentType == 0>>//"Smoke" must fit into the following sentence: "I smoked a $PC.refreshment" to fit events properly//<</if>>
+
+<br><br>
+
+Image display
+<<if $seeImages == 1>>
+	''enabled.'' [[Disable|Intro Summary][$seeImages = 0]]
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<<if $imageChoice == 1>>
+		''Vector art by NoX'' is selected. [[Switch to rendered imagepack|Intro Summary][$imageChoice = 0]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		Highlights on shiny clothing
+		<<if $seeVectorArtHighlights == 1>>
+			@@.cyan;ENABLED@@. [[Disable|Options][$seeVectorArtHighlights = 0]]
+		<<else>>
+			@@.red;DISABLED@@. [[Enable|Options][$seeVectorArtHighlights = 1]]
+		<</if>>
+	<<else>>
+		''Rendered imagepack by Shokushu'' is selected. [[Switch to vector art|Intro Summary][$imageChoice = 1]]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		Slave summary fetish images
+		<<if $seeMainFetishes == 1>>
+			''enabled.'' [[Disable|Intro Summary][$seeMainFetishes = 0]]
+		<<else>>
+			''disabled.'' [[Enable|Intro Summary][$seeMainFetishes = 1]]
+		<</if>>
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Slave images in lists are
+	<<if $seeSummaryImages == 1>>
+		''enabled.'' [[Disable|Intro Summary][$seeSummaryImages = 0]]
+	<<else>>
+		''disabled.'' [[Enable|Intro Summary][$seeSummaryImages = 1]]
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Slave images in the weekly report are
+	<<if $seeReportImages == 1>>
+		''enabled.'' [[Disable|Intro Summary][$seeReportImages = 0]]
+	<<else>>
+		''disabled.'' [[Enable|Intro Summary][$seeReportImages = 1]]
+	<</if>>
+<<else>>
+	''disabled.'' [[Enable|Intro Summary][$seeImages = 1]] //Requires image resources.//
+<</if>>
+
+<br><br>
+<<link "Continue">>
+	<<if $PC.career == "capitalist">>
+		<<set $PC.trading = 100>>
+	<<elseif $PC.career == "mercenary">>
+		<<set $PC.warfare = 100>>
+	<<elseif $PC.career == "slaver">>
+		<<set $PC.slaving = 100>>
+	<<elseif $PC.career == "engineer">>
+		<<set $PC.engineering = 100>>
+	<<elseif $PC.career == "medicine">>
+		<<set $PC.medicine = 100>>
+	<<elseif $PC.career == "arcology owner">>
+		<<set $PC.trading = 100>>
+		<<set $PC.warfare = 100>>
+		<<set $PC.slaving = 100>>
+		<<set $PC.engineering = 100>>
+		<<set $PC.medicine = 100>>
+	<</if>>
+	<<set $girls = 2>>
+	<<goto "init Nationalities">>
+<</link>>
+
+<br><br>
+[[Cheat Start|init Nationalities][$cash += 1000000,$girls = 3,$rep += 10000,$dojo += 1,$cheatMode = 1,$seeDesk = 0, $seeFCNN = 0, $sortSlavesBy = "devotion",$sortSlavesOrder = "descending",$sortSlavesMain = 0,$rulesAssistantMain = 1,$abbreviateDevotion = 1,$abbreviateRules = 1,$abbreviateClothes = 2,$abbreviateHealth = 1,$abbreviateDiet = 1,$abbreviateDrugs = 1,$abbreviateRace = 1,$abbreviateNationality = 1,$abbreviateGenitalia = 1,$abbreviatePhysicals = 1,$abbreviateSkills = 1,$abbreviateMental = 2,$PC.trading = 100,$PC.warfare = 100,$PC.slaving = 100,$PC.engineering = 100,$PC.medicine = 100]] | //Intended for debugging: may have unexpected effects//

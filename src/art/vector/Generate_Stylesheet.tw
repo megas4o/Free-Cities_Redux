@@ -1,0 +1,38 @@
+:: Art_Vector_Generate_Stylesheet_ [nobr]
+
+/* _art_display_class is the style class for this display */
+<<if _art_display_id > 0 >>
+	<<set _art_display_id += 1>>
+<<else>>
+	<<set _art_display_id = 1>>
+<</if>>
+<<set _art_display_class = "ad"+_art_display_id >>
+
+<<print "<style>."+_art_display_class+" {
+    position: absolute;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+."+_art_display_class+" .white   { fill:#FFFFFF; }
+."+_art_display_class+" .skin    { fill:"+_skinColour+"; }
+."+_art_display_class+" .head    { "+_headSkinStyle+"; }
+."+_art_display_class+" .torso   { "+_torsoSkinStyle+"; }
+."+_art_display_class+" .boob    { "+_boobSkinStyle+"; }
+."+_art_display_class+" .penis   { "+_penisSkinStyle+"; }
+."+_art_display_class+" .scrotum { "+_scrotumSkinStyle+"; }
+."+_art_display_class+" .areola  { "+_areolaStyle+"; }
+."+_art_display_class+" .labia   { "+_labiaStyle+"; }
+."+_art_display_class+" .hair    { fill:"+_hairColour+"; }
+."+_art_display_class+" .shoe    { fill:"+_shoeColour+"; }
+."+_art_display_class+" .shoe_shadow    { fill:"+_shoeShadowColour+"; }
+."+_art_display_class+" .smart_piercing { fill:#4DB748; }
+."+_art_display_class+" .steel_piercing { fill:#787878; }
+."+_art_display_class+" .steel_chastity { fill:#BABABA; }
+."+_art_display_class+" .outfit_base  { fill:"+_outfitBaseColour+"; }
+."+_art_display_class+" .gag     { fill:#BF2126; }
+."+_art_display_class+" .shadow  { fill:#010101; }
+."+_art_display_class+" .glasses { fill:#010101; }
+</style>" >>

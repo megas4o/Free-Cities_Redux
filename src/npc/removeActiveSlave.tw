@@ -1,0 +1,65 @@
+:: Remove activeSlave [nobr silently]
+
+<<set _ID = $activeSlave.ID, _SL = $slaves.length, _x = $slaves.findIndex(function(s) { return s.ID == _ID; })>>
+
+<<if _x >= 0 && _x < _SL>>
+	<<for _y = 0; _y < _SL; _y++>>
+		<<if _ID == $slaves[_y].pregSource>>
+			<<set $slaves[_y].pregSource = 0>>
+		<</if>>
+		<<if $activeSlave.daughters > 0>>
+			<<if $slaves[_y].mother == _ID>>
+				<<set $slaves[_y].mother = $missingParentID>>
+			<</if>>
+			<<if $slaves[_y].father == _ID>>
+				<<set $slaves[_y].father = $missingParentID>>
+			<</if>>
+			<<set _missingID = 1>>
+		<</if>>
+		<<if $activeSlave.mother > 0 || $activeSlave.father > 0>>
+			<<if $activeSlave.mother == $slaves[_y].ID || $activeSlave.father == $slaves[_y].ID>>
+				<<set $slaves[_y].daughters-->>
+			<</if>>
+		<</if>>
+		<<if $activeSlave.sisters > 0>>
+			<<if areSisters($activeSlave, $slaves[_y]) > 0>>
+				<<set $slaves[_y].sisters-->>
+			<</if>>
+		<</if>>
+		<<if $slaves[_y].ID == $activeSlave.relationTarget>>
+			<<set $slaves[_y].relation = 0, $slaves[_y].relationTarget = 0>>
+		<</if>>
+		<<if $slaves[_y].ID == $activeSlave.relationshipTarget>>
+			<<set $slaves[_y].relationship = 0, $slaves[_y].relationshipTarget = 0>>
+		<</if>>
+		<<if $slaves[_y].ID == $activeSlave.rivalryTarget>>
+			<<set $slaves[_y].rivalry = 0, $slaves[_y].rivalryTarget = 0>>
+		<</if>>
+	<</for>>
+
+	/* remove from Pit fighters list, if needed */
+	<<set $fighterIDs.delete(_ID)>>
+
+	/* remove from Coursing Association, if needed */
+	<<if $Lurcher != 0 && $Lurcher.ID == _ID>>
+		<<set $Lurcher = 0>>
+	<</if>>
+
+	<<if _ID == $personalAttention>>
+			<<set $personalAttention = "business">>
+		<</if>>
+
+	/% Remove from facility array or leadership role, if needed %/
+	<<removeJob $activeSlave $activeSlave.assignment>>
+
+	<<set _y = $slavesOriginal.findIndex(function(s) { return s.ID == _ID; })>>
+	<<if _y != -1>>
+		<<set $slavesOriginal.deleteAt(_y)>>
+	<</if>>
+
+	<<set _dump = $slaves.deleteAt(_x), _SL--, $activeSlave = 0>>
+	
+	<<if _missingID == 1>>
+		<<set $missingParentID-->>
+	<</if>>
+<</if>>

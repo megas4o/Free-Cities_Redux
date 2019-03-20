@@ -1,0 +1,147 @@
+:: Add custom descriptors [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Slave Interact">>
+<<set $oldName = $activeSlave.slaveName, $oldSurname = $activeSlave.slaveSurname>>
+
+You may enter custom descriptors for your slave's hair color, hair style, tattoos, or anything else here. After typing, press enter to commit your change. These custom descriptors will appear in descriptions of your slave, but will have no gameplay effect. Changing them is free.
+<br><br>
+
+<<if $activeSlave.devotion >= -50>>
+	<<if $activeSlave.customTitle != "">>You have instructed her to always refer to you as $activeSlave.customTitle, which, should she lisp, comes out as $activeSlave.customTitleLisp<<else>>You expect her to refer to you as all your other slaves do<</if>>.
+	<br>
+	<span id="result">
+	<<if $activeSlave.customTitle == "">>
+		<<link "Set a custom title for her to address you as">>
+			<<replace "#result">>
+				Custom title: <<textbox "$activeSlave.customTitle" $activeSlave.customTitle>>
+				<<link "Apply">>
+					<<replace "#result">>
+						She'll try her best to call you $activeSlave.customTitle.
+						<<set $activeSlave.customTitleLisp = $activeSlave.customTitle, $activeSlave.customTitleLisp = $activeSlave.customTitleLisp.replace("ss", "th"), $activeSlave.customTitleLisp = $activeSlave.customTitleLisp.replace("S", "Th"), $activeSlave.customTitleLisp = $activeSlave.customTitleLisp.replace("s", "th")>>
+					<</replace>>
+				<</link>>
+			<</replace>>
+		<</link>>
+	<<else>>
+		She's trying her best to call you <<textbox "$activeSlave.customTitle" $activeSlave.customTitle>>
+		<br>
+		<<link "Apply">>
+			<<replace "#result">>
+				She'll try her best to call you $activeSlave.customTitle.
+				<<set $activeSlave.customTitleLisp = $activeSlave.customTitle, $activeSlave.customTitleLisp = $activeSlave.customTitleLisp.replace("ss", "th"), $activeSlave.customTitleLisp = $activeSlave.customTitleLisp.replace("S", "Th"), $activeSlave.customTitleLisp = $activeSlave.customTitleLisp.replace("s", "th")>>
+			<</replace>>
+		<</link>> |
+		<<link "Stop using a custom title">>
+			<<replace "#result">>
+				She will no longer refer to you with a special title.
+				<<set $activeSlave.customTitle = "">>
+				<<set $activeSlave.customTitleLisp = "">>
+			<</replace>>
+		<</link>>
+	<</if>>
+	</span>
+<<else>>
+	//You must break her will further before she will refer to you by a new title.<<if SlaveStatsChecker.checkForLisp($activeSlave)>><<if def $activeSlave.customTitleLisp && $activeSlave.customTitleLisp != "">> For now, she intends to keep calling you "<<print $activeSlave.customTitleLisp>>".<</if>><<else>><<if def $activeSlave.customTitle && $activeSlave.customTitle != "">> For now, she intends to keep calling you "<<print $activeSlave.customTitle>>".<</if>><</if>>//
+<</if>>
+
+<br><br>
+
+<<if ((($activeSlave.devotion >= -50) || ($activeSlave.trust < -20)) && ($activeSlave.birthName != $activeSlave.slaveName)) || (($activeSlave.devotion > 20) || ($activeSlave.trust < -20))>>
+	Change her given name<<if $activeSlave.birthName != $activeSlave.slaveName>> (her birth name was $activeSlave.birthName)<</if>>: <<textbox "$activeSlave.slaveName" $activeSlave.slaveName "Rename">>
+	<<link "Restore her birth name">><<set $activeSlave.slaveName = $activeSlave.birthName>><<goto "Rename">><</link>>
+	<<if $arcologies[0].FSPastoralist != "unset">>
+	<<if $activeSlave.lactation > 0>>
+		| <<link "Give her a random cow given name">><<set $activeSlave.slaveName = setup.cowSlaveNames.random()>><<goto "Rename">><</link>>
+	<</if>>
+	<</if>>
+	<<if $arcologies[0].FSChattelReligionist != "unset">>
+		| <<link "Give her a random devotional given name">><<set $activeSlave.slaveName = setup.chattelReligionistSlaveNames.random()>><<goto "Rename">><</link>>
+	<</if>>
+	<br><br>
+	Change her surname<<if $activeSlave.birthSurname != $activeSlave.slaveSurname>> (her birth surname was $activeSlave.birthSurname)<</if>>:
+	<<if $activeSlave.slaveSurname>>
+		<<textbox "$activeSlave.slaveSurname" $activeSlave.slaveSurname "Rename">>
+	<<else>>
+		<<textbox "$activeSlave.slaveSurname" "" "Rename">>
+	<</if>>
+	<<link "Restore her birth surname">><<set $activeSlave.slaveSurname = $activeSlave.birthSurname>><<goto "Rename">><</link>>
+	<<if $activeSlave.slaveSurname>>
+		| <<link "Take her surname away">><<set $activeSlave.slaveSurname = 0>><<goto "Rename">><</link>>
+	<</if>>
+	<<if $activeSlave.relationship >= 5>>
+		<<for _i = 0; _i < $slaves.length; _i++>>
+		<<if $activeSlave.relationshipTarget == $slaves[_i].ID>>
+			<<if $slaves[_i].slaveSurname>>
+			<<if $activeSlave.slaveSurname != $slaves[_i].slaveSurname>>
+				| <<link "Give her her wife's surname">><<set $activeSlave.slaveSurname = $slaves[_i].slaveSurname>><<goto "Rename">><</link>>
+				<<break>>
+			<</if>>
+			<</if>>
+		<</if>>
+		<</for>>
+	<</if>>
+	<<if $activeSlave.relationship == -3>>
+		<<if $PC.surname>>
+		<<if $activeSlave.slaveSurname != $PC.surname>>
+			| <<link "Give her your surname">><<set $activeSlave.slaveSurname = $PC.surname>><<goto "Rename">><</link>>
+		<</if>>
+		<</if>>
+	<</if>>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+		| <<link "Give her a random full Roman name">><<set $activeSlave.slaveName = setup.romanSlaveNames.random(), $activeSlave.slaveSurname = setup.romanSlaveSurnames.random()>><<goto "Rename">><</link>>
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+		| <<link "Give her a random full Aztec name">><<set $activeSlave.slaveName = setup.aztecSlaveNames.random(), $activeSlave.slaveSurname = 0>><<goto "Rename">><</link>>
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+		| <<link "Give her a random full ancient Egyptian name">><<set $activeSlave.slaveName = setup.ancientEgyptianSlaveNames.random(), $activeSlave.slaveSurname = 0>><<goto "Rename">><</link>>
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+		| <<link "Give her a random full feudal Japanese name">><<set $activeSlave.slaveName = setup.edoSlaveNames.random(), $activeSlave.slaveSurname = setup.edoSlaveSurnames.random()>><<goto "Rename">><</link>>
+	<</if>>
+	<<if $arcologies[0].FSDegradationist > -1>>
+		| <<link "Give her a degrading full name">><<DegradingName $activeSlave>><<goto "Rename">><</link>>
+	<</if>>
+<<else>>
+	//You must break her will further before you can successfully force a new name on her.//
+<</if>>
+
+<br><br>
+<<switch $activeSlave.hStyle>>
+<<case "tails" "dreadlocks" "cornrows">>
+Her hair is in $activeSlave.hStyle.
+<<case "ponytail">>
+Her hair is in a $activeSlave.hStyle.
+<<default>>
+Her hair is $activeSlave.hStyle.
+<</switch>>
+Custom hair description: <<textbox "$activeSlave.hStyle" $activeSlave.hStyle "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use a short, uncapitalized and unpunctuated description; for example: 'back in a ponytail'//
+
+<br><br>
+Her hair is $activeSlave.hColor in color.
+Custom hair color: <<textbox "$activeSlave.hColor" $activeSlave.hColor "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use a short, uncapitalized and unpunctuated description; for example: 'black with purple highlights'//
+
+<br><br>
+Change her custom tattoo: <<textbox "$activeSlave.customTat" $activeSlave.customTat "Add custom descriptors">> <br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use complete sentences; for example: 'She has blue stars tattooed along her cheekbones.'//
+
+<br><br>
+Change her origin story: <<textbox "$activeSlave.origin" $activeSlave.origin "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use complete, capitalized and punctuated sentences; for example: 'She followed you home from the pet store.'//
+
+<br><br>
+Change her custom description: <<textbox "$activeSlave.customDesc" $activeSlave.customDesc "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use complete, capitalized and punctuated sentences; for example: 'She has a beauty mark above her left nipple.'//
+
+<br><br>
+Change her custom label: <<textbox "$activeSlave.customLabel" $activeSlave.customLabel "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use a short phrase; for example: 'Breeder.'//
+
+<br><br>
+<<if ndef $activeSlave.customImage>><<set $activeSlave.customImage = 0>><</if>>
+Assign her a custom image:
+<<if $activeSlave.customImage != 0>>
+	<<textbox "$activeSlave.customImage" $activeSlave.customImage "Add custom descriptors">>
+<<else>>
+	<<textbox "$activeSlave.customImage" "" "Add custom descriptors">>
+<</if>>
+<<link "Reset">><<set $activeSlave.customImage = 0>><<goto "Add custom descriptors">><</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//File must be in .png format. Place file in the \resources folder. Enter the filename without the .png extension. For example, for a file with the path \bin\resources\headgirl.png, enter headgirl.//

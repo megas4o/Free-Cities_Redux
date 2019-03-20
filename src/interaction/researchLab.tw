@@ -1,0 +1,237 @@
+:: Research Lab [nobr]
+
+<<switch $temp>>
+
+<<case 0>>
+
+	<<set $nextButton = "Back", $nextLink = "Manage Arcology">>
+
+	//You switch one of the screens in your office to the feed from research facility.//<br><br>
+
+	<br>[[Decommission facility|Manage Arcology][$researchLab.built = "false",$researchLab.hired = 0,$helots += $researchLab.menials,$researchLab.menials = 0,$researchLab.research = "none",$researchLab.manufacture = "none",$researchLab.productionTime = 0]] //Warning! This will cancel all projects, remove all staff and shut down this facility.//
+
+	<br><br>[[Purchase cybernetics|Research Lab][$temp = 1]]
+<br><br>
+	__Personnel__<br><br>&nbsp;
+
+<br>
+	<<if $researchLab.aiModule == 1>>
+		[[Buy and install research module|Research Lab][$cash -= 35000, $researchLab.aiModule = 2]] //This module enables your assistant to assist staff and direct menials assigned to your research facility, increasing efficiency. It costs ¤35000//<br>
+	<</if>>
+	<<if ($researchLab.hired + $researchLab.menials) == 0>>
+		//Facility is currently unstaffed.//
+	<<else>>
+		//You have
+		<<if $researchLab.hired == 1>>
+			one scientist
+		<<elseif $researchLab.hired > 1>>
+			$researchLab.hired scientists
+		<</if>>
+		<<if $researchLab.menials != 0>> and<</if>>
+		<<if $researchLab.menials == 0>>
+		<<elseif $researchLab.menials == 1>>
+			one menial slave
+		<<elseif $researchLab.menials > 1>>
+			$researchLab.menials menials
+		<</if>>
+		working in your lab.
+			<<if $researchLab.aiModule != 0>>Occasionally you hear voice of your assistant as it helps direct and organize work.<</if>>//
+	<</if>>
+	<br>
+
+	&nbsp;Currently, this facility can employ $researchLab.maxSpace people.
+	<<if $researchLab.maxSpace == 5>>
+		[[Expand facility|Research Lab][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $researchLab.maxSpace = 10]]
+		//Costs ¤<<print Math.trunc(5000*$upgradeMultiplierArcology)>>//
+	<<elseif $researchLab.maxSpace == 10>>
+		[[Expand facility|Research Lab][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $researchLab.maxSpace = 20]]
+		//Costs ¤<<print Math.trunc(10000*$upgradeMultiplierArcology)>>//
+	<<elseif $researchLab.maxSpace == 20>>
+		[[Expand facility|Research Lab][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $researchLab.maxSpace = 30]]
+		//Costs ¤<<print Math.trunc(15000*$upgradeMultiplierArcology)>>//
+	<<elseif $researchLab.maxSpace == 30>>
+		[[Expand facility|Research Lab][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $researchLab.maxSpace = 40]]
+		//Costs ¤<<print Math.trunc(20000*$upgradeMultiplierArcology)>>//
+	<<elseif $researchLab.maxSpace == 40>>
+		[[Expand facility|Research Lab][$cash -= Math.trunc(5000*$upgradeMultiplierArcology), $researchLab.maxSpace = 50]]
+		//Costs ¤<<print Math.trunc(25000*$upgradeMultiplierArcology)>>//
+	<<elseif $researchLab.maxSpace == 50>>
+		//Facility is fully expanded.//
+	<</if>>
+	<br><br>&nbsp;
+
+
+
+	<<if ($researchLab.hired + $researchLab.menials) < $researchLab.maxSpace>>
+		Hire [[x1|Research Lab][$researchLab.hired += 1,$cash -= 5000]]
+		<<if ($researchLab.maxSpace - ($researchLab.hired + $researchLab.menials)) >= 5>>
+			| [[x5|Research Lab][$researchLab.hired += 5,$cash -= 25000]]
+		<</if>>
+		<<if ($researchLab.maxSpace - ($researchLab.hired + $researchLab.menials)) >= 10>>
+			| [[x10|Research Lab][$researchLab.hired += 10,$cash -= 50000]]
+		<</if>>
+		scientists.<br>
+		 &nbsp;&nbsp;&nbsp;//Each scientist will require an initial fee of ¤5000 and incur ¤300 weekly.//
+		 <br>
+		 <<if $helots > 0>>
+			Assign [[x1|Research Lab][$researchLab.menials += 1,$helots -= 1]]
+			<<if ($researchLab.maxSpace - ($researchLab.hired + $researchLab.menials)) >= 5 && $helots >= 5>>
+				| [[x5|Research Lab][$researchLab.menials += 5,$helots -= 5]]
+			<</if>>
+			<<if ($researchLab.maxSpace - ($researchLab.hired + $researchLab.menials)) >= 10 && $helots >= 10>>
+				| [[x10|Research Lab][$researchLab.menials += 10,$helots -= 10]]
+			<</if>>
+			  menial slaves to lab.<br>
+		<<else>>You do not own any <<if $researchLab.menials != 0>>unassigned <</if>>menial slaves.<br>
+		<</if>>
+		&nbsp;&nbsp;&nbsp;//Using menial slaves is much cheaper than hiring scientists, but they are less effective. ¤100 per slave each week.//<br>
+	<<else>>
+		&nbsp;&nbsp;&nbsp;//Facility is fully staffed.//
+	<</if>>
+	<br>
+	<<if $researchLab.hired > 0>>&nbsp;
+		Fire [[x1|Research Lab][$researchLab.hired -= 1]]
+		<<if $researchLab.hired >= 5>>
+			| [[x5|Research Lab][$researchLab.hired -= 5]]
+		<</if>>
+		<<if $researchLab.hired >= 10>>
+			| [[x10|Research Lab][$researchLab.hired -= 10]]
+		<</if>>
+		| [[All|Research Lab][$researchLab.hired = 0]]
+		scientists.
+	<</if>>
+	<<if $researchLab.menials > 0>><br>&nbsp;
+		Dismiss [[x1|Research Lab][$researchLab.menials -= 1,$helots += 1]]
+		<<if $researchLab.menials >= 5>>
+			| [[x5|Research Lab][$researchLab.menials -= 5,$helots += 5]]
+		<</if>>
+		<<if $researchLab.menials >= 10>>
+			| [[x10|Research Lab][$researchLab.menials -= 10,$helots += 10]]
+		<</if>>
+		| [[All|Research Lab][$helots += $researchLab.menials,$researchLab.menials = 0]]
+		menial slaves.
+	<</if>>
+
+	<br><br>
+	__Research__
+	<br><br>&nbsp;
+	<<if $researchLab.research != "none">>
+		//Your lab staff is currently researching @@.yellow;$researchLab.research@@.//<br>
+		[[Cancel Research|Research Lab][$researchLab.productionTime = 0,$researchLab.research = "none"]]
+	<<elseif $researchLab.manufacture != "none">>
+		//Your lab staff is currently busy with other projects.//
+	<<else>>
+		//No research active.//<br>
+		<<if $researchLab.basicPLimbInterface == 0 && $stockpile.basicPLimbInterface > 0>><br>
+			[[Reverse engineer basic prosthetics interface|Research Lab][$researchLab.productionTime = 80,$researchLab.research = "Basic prosthetics interface"]]
+		<</if>>
+		<<if $researchLab.basicPLimbInterface != 0 && $researchLab.advPLimbInterface == 0 && $stockpile.advPLimbInterface > 0>><br>
+			[[Reverse engineer advanced prosthetics interface|Research Lab][$researchLab.productionTime = 120,$researchLab.research = "Advanced prosthetics interface"]]
+		<</if>>
+		<<if $researchLab.basicPLimb == 0 && $stockpile.basicPLimb > 0>><br>
+			[[Reverse engineer basic prosthetic limbs|Research Lab][$researchLab.productionTime = 80,$researchLab.research = "Basic prosthetic limbs"]]
+		<</if>>
+		<<if $researchLab.advSexPLimb == 0 && $stockpile.advSexPLimb > 0>><br>
+			[[Reverse engineer advanced sex limbs|Research Lab][$stockpile.advSexPLimb -= 1,$researchLab.productionTime = 100,$researchLab.research = "Advanced sex limbs"]]
+		<</if>>
+		<<if $researchLab.advGracePLimb == 0 && $stockpile.advGracePLimb > 0>><br>
+			[[Reverse engineer advanced beauty limbs|Research Lab][$stockpile.advGracePLimb -= 1,$researchLab.productionTime = 100,$researchLab.research = "Advanced beauty limbs"]]
+		<</if>>
+		<<if $researchLab.advCombatPLimb == 0 && $stockpile.advCombatPLimb > 0>><br>
+			[[Reverse engineer advanced combat limbs|Research Lab][$stockpile.advCombatPLimb -= 1,$researchLab.productionTime = 100,$researchLab.research = "Advanced combat limbs"]]
+		<</if>>
+		<<if $researchLab.cyberneticPLimb == 0 && $researchLab.advPLimbInterface == 1 && ($researchLab.advSexPLimb + $researchLab.advGracePLimb + $researchLab.advCombatPLimb) >= 1>><br>
+			[[Develop cybernetic limbs|Research Lab][$researchLab.productionTime = 300,$researchLab.research = "Cybernetic limbs"]]
+		<</if>>
+		<<if $researchLab.ocularImplant == 0 && $stockpile.ocularImplant > 0>><br>
+			[[Reverse engineer ocular implants|Research Lab][$stockpile.ocularImplant -= 1,$researchLab.productionTime = 100,$researchLab.research = "Ocular implants"]]
+		<</if>>
+		<<if $researchLab.erectileImplant == 0 && $stockpile.erectileImplant > 0>><br>
+			[[Reverse engineer erectile implant|Research Lab][$stockpile.erectileImplant -= 1,$researchLab.productionTime = 100,$researchLab.research = "Erectile implant"]]
+		<</if>>
+	<</if>>
+
+	<br><br>
+	__Manufacture__
+	<br><br>&nbsp;
+	<<if $researchLab.research != "none">>
+		//Your lab staff is currently busy with research.//
+	<<elseif $researchLab.manufacture != "none">>
+		//Your lab staff is currently building @@.yellow;$researchLab.manufacture@@.//
+		[[Cancel Project|Research Lab][$researchLab.productionTime = 0,$researchLab.manufacture = "none"]]
+	<<else>>
+		//No projects currently active.//<br>
+		<<if $researchLab.basicPLimbInterface == 1>><br>
+			[[Build basic prosthetics interface|Research Lab][$researchLab.productionTime = 50,$researchLab.manufacture = "Basic prosthetics interface"]] // Currently have: $stockpile.basicPLimbInterface//
+		<</if>>
+		<<if $researchLab.advPLimbInterface == 1>><br>
+			[[Build advanced prosthetics interface|Research Lab][$researchLab.productionTime = 80,$researchLab.manufacture = "Advanced prosthetics interface"]] // Currently have: $stockpile.advPLimbInterface//
+		<</if>>
+		<<if $researchLab.basicPLimb == 1>><br>
+			[[Build basic prosthetic limbs|Research Lab][$researchLab.productionTime = 20,$researchLab.manufacture = "Basic prosthetic limbs"]] // Currently have: $stockpile.basicPLimb//
+		<</if>>
+		<<if $researchLab.advSexPLimb == 1>><br>
+			[[Build advanced sex limbs|Research Lab][$researchLab.productionTime = 100,$researchLab.manufacture = "Advanced sex limbs"]] // Currently have: $stockpile.advSexPLimb//
+		<</if>>
+		<<if $researchLab.advGracePLimb == 1>><br>
+			[[Build advanced beauty limbs|Research Lab][$researchLab.productionTime = 100,$researchLab.manufacture = "Advanced beauty limbs"]] // Currently have: $stockpile.advGracePLimb//
+		<</if>>
+		<<if $researchLab.advCombatPLimb == 1>><br>
+			[[Build advanced combat limbs|Research Lab][$researchLab.productionTime = 100,$researchLab.manufacture = "Advanced combat limbs"]] // Currently have: $stockpile.advCombatPLimb//
+		<</if>>
+		<<if $researchLab.cyberneticPLimb == 1>><br>
+			[[Build cybernetic limbs|Research Lab][$researchLab.productionTime = 150,$researchLab.manufacture = "Cybernetic limbs"]] // Currently have: $stockpile.cyberneticPLimb//
+		<</if>>
+		<<if $researchLab.ocularImplant == 1>><br>
+			[[Build ocular implants|Research Lab][$researchLab.productionTime = 80,$researchLab.manufacture = "Ocular implants"]] // Currently have: $stockpile.ocularImplant//
+		<</if>>
+		<<if $researchLab.erectileImplant == 1>><br>
+			[[Build Erectile implant|Research Lab][$researchLab.productionTime = 50,$researchLab.manufacture = "Erectile implant"]] // Costs ¤25000. Currently have: $stockpile.erectileImplant//
+		<</if>>
+	<</if>>
+
+
+<<case 1>>
+	<<set $temp = 0>>
+	<<set $nextLink = "Research Lab">>
+	//You contact representative of one of the larger cybernetics companies and inquired about their products.<br>&nbsp;This is what they have to offer://<br><br>
+
+	__Hardware__<br>
+	[[Basic prosthetics interface|Research Lab][$temp = 1, $cash -= 25000, $stockpile.basicPLimbInterface += 1]] //Costs ¤25000. Currently have: $stockpile.basicPLimbInterface//<br>
+	[[Advanced prosthetics interface|Research Lab][$temp = 1, $cash -= 60000, $stockpile.advPLimbInterface += 1]] //Costs ¤60000. Currently have: $stockpile.advPLimbInterface//<br>
+	[[Basic prosthetic limbs|Research Lab][$temp = 1, $cash -= 15000, $stockpile.basicPLimb += 1]] //Costs ¤15000. Currently have: $stockpile.basicPLimb//<br>
+	[[Advanced sex limbs|Research Lab][$temp = 1, $cash -= 30000, $stockpile.advSexPLimb += 1]] //Costs ¤30000. Currently have: $stockpile.advSexPLimb//<br>
+	[[Advanced beauty limbs|Research Lab][$temp = 1, $cash -= 30000, $stockpile.advGracePLimb += 1]] //Costs ¤30000. Currently have: $stockpile.advGracePLimb//<br>
+	[[Advanced combat limbs|Research Lab][$temp = 1, $cash -= 30000, $stockpile.advCombatPLimb += 1]] //Costs ¤30000. Currently have: $stockpile.advCombatPLimb//<br>
+	[[Ocular implants|Research Lab][$temp = 1, $cash -= 35000, $stockpile.ocularImplant += 1]] //Costs ¤35000. Currently have: $stockpile.ocularImplant//<br>
+	/*[[Erectile implant|Research Lab][$temp = 1, $cash -= 25000, $stockpile.erectileImplant += 1]] //Costs ¤25000. Currently have: $stockpile.erectileImplant//*/
+
+	<br><br>__Schematics__<br>
+	<<if $researchLab.basicPLimbInterface != 1 && $researchLab.research != "Basic prosthetics interface">>
+		[[Basic prosthetics interface|Research Lab][$temp = 1, $cash -= 85000, $researchLab.basicPLimbInterface = 1]] //Costs ¤85000.//<br>
+	<</if>>
+	<<if $researchLab.advPLimbInterface != 1 && $researchLab.research != "Advanced prosthetics interface">>
+	[[Advanced prosthetics interface|Research Lab][$temp = 1, $cash -= 260000, $researchLab.advPLimbInterface = 1]] //Costs ¤260000.//<br>
+	<</if>>
+	<<if $researchLab.basicPLimb != 1 && $researchLab.research != "Basic prosthetic limbs">>
+	[[Basic prosthetic limbs|Research Lab][$temp = 1, $cash -= 60000, $researchLab.basicPLimb = 1]] //Costs ¤60000.//<br>
+	<</if>>
+	<<if $researchLab.advSexPLimb != 1 && $researchLab.research != "Advanced sex limbs">>
+	[[Advanced sex limbs|Research Lab][$temp = 1, $cash -= 120000, $researchLab.advSexPLimb = 1]] //Costs ¤120000.//<br>
+	<</if>>
+	<<if $researchLab.advGracePLimb != 1 && $researchLab.research != "Advanced beauty limbs">>
+	[[Advanced beauty limbs|Research Lab][$temp = 1, $cash -= 120000, $researchLab.advGracePLimb = 1]] //Costs ¤120000.//<br>
+	<</if>>
+	<<if $researchLab.advCombatPLimb != 1 && $researchLab.research != "Advanced combat limbs">>
+	[[Advanced combat limbs|Research Lab][$temp = 1, $cash -= 120000, $researchLab.advCombatPLimb = 1]] //Costs ¤120000.//<br>
+	<</if>>
+	<<if $researchLab.ocularImplant != 1 && $researchLab.research != "Ocular implants">>
+	[[Ocular implants|Research Lab][$temp = 1, $cash -= 160000, $researchLab.ocularImplant = 1]] //Costs ¤160000.//<br>
+	<</if>>
+	/*<<if $researchLab.erectileImplant != 1 && $researchLab.research != "Erectile implant">>
+	[[Erectile implant|Research Lab][$temp = 1, $cash -= 95000, $researchLab.erectileImplant = 1]] //Costs ¤95000.//
+	<</if>>*/
+
+
+<</switch>>
+

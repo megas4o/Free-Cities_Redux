@@ -1,0 +1,49 @@
+:: RE full bed [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check">>
+
+<<set _bedSlaveIndex = []>>
+<<for _i = 0; _i < $slaves.length; _i++>>
+	<<if $slaves[_i].devotion > 50 && $slaves[_i].anus > 0 && ($slaves[_i].assignment == "please you" || $slaves[_i].assignment == "serve in the master suite" || $slaves[_i].assignment == "be your Concubine") && $slaves[_i].amp != 1>>
+		<<set _bedSlaveIndex.push(_i)>>
+	<</if>>
+<</for>>
+<<if _bedSlaveIndex.length < 2>>
+	<<goto "RIE Eligibility Check">>
+<<else>>
+<<set _bedSlaveOne = _bedSlaveIndex.pluck()>>
+<<set _bedSlaveTwo = _bedSlaveIndex.pluck()>>
+
+You have the luxury of being attended to by a coterie of devoted sex slaves. Tonight, $slaves[_bedSlaveTwo].slaveName and $slaves[_bedSlaveOne].slaveName are with you when it's time for bed, so they strip naked and climb under the sheets with you, one on either side. Each snuggles in under one of your arms so she can rest her head on your shoulder, a hand on your chest, her breasts against your flank, <<if $slaves[_bedSlaveTwo].preg > 10 && $slaves[_bedSlaveOne].preg > 10>>her swollen belly against yours, <</if>>and the warmth between her legs against your hip.
+
+<br><br>
+
+Today was an unusually relaxing day, and you aren't particularly tired.
+
+<br><br>
+
+<span id="result">
+<<link "Take a slave in each hand">>
+	<<replace "#result">>
+		With your arms each around a slave, you begin to run your hands across their bodies. They snuggle closer to you, their nipples growing hard and their hips grinding against you. As your grasp runs lower and lower, cupping and massaging their buttocks, they begin to kiss the chest against which their adoring faces are pressed, and reach down <<if $PC.dick == 0>>to your pussy<<else>><<if $PC.vagina == 1>>towards your cock and cunt<<else>>for your member<</if>><</if>>. The more manually skilled begins to give you a gentle stroke, while the other softly massages your <<if ($PC.dick == 0)>>mons<<else>>testicles<</if>>. They stiffen in unison when you hook two fingers up each asshole, but immediately relax and begin to work you harder. They orgasm one after the other, their butts clenching against your intruding fingers, and then eagerly clean you with their mouths when you climax yourself. They have become @@.hotpink;still more devoted to you.@@
+		<<set $slaves[_bedSlaveOne].devotion += 4>>
+		<<set $slaves[_bedSlaveTwo].devotion += 4>>
+		<<set $slaves[_bedSlaveOne].analCount += 1>>
+		<<set $slaves[_bedSlaveTwo].analCount += 1>>
+		<<set $analTotal += 2>>
+	<</replace>>
+<</link>>
+<br><<link "Pull up the sheets and wrestle">>
+	<<replace "#result">>
+		Without warning, you jerk the sheets all the way up and pin them at the head of the bed. They giggle as you seize first the one and then the other, groping and tickling. $slaves[_bedSlaveTwo].slaveName and $slaves[_bedSlaveOne].slaveName catch the spirit of fun, and rove around in the soft darkness under the sheets. You're <<if $PC.dick == 1>>rock hard<<if $PC.vagina == 1>> and <</if>><</if>><<if $PC.vagina == 1>>soaking wet<</if>> in no time, wrestling with two naked slaves, and begin to fuck the first one you can grab and hold. <<if ($slaves[_bedSlaveOne].amp != 1) && ($slaves[_bedSlaveTwo].amp != 1)>>When you <<if ($PC.dick == 0)>>finish with her<<else>>come inside her<</if>>, you release her and she slides out of bed to wash; by the time she gets back under the sheets, clean and fresh, you're on the point of filling the other.<<else>>When you <<if ($PC.dick == 0)>>finish with her<<else>>come inside her<</if>>, you carry her limbless, helpless body out of bed to wash her, and then return to the bed to fuck the other.<</if>> You switch off with the two of them, fucking them in turn, until everyone falls asleep in an exhausted pile. They have become @@.mediumaquamarine;still more trusting of you.@@
+		<<set $slaves[_bedSlaveOne].trust += 4>>
+		<<set $slaves[_bedSlaveTwo].trust += 4>>
+		<<set $slaves[_bedSlaveOne].analCount += 3>>
+		<<set $slaves[_bedSlaveTwo].analCount += 3>>
+		<<set $analTotal += 6>>
+	<</replace>>
+<</link>>
+</span>
+
+<</if>> /* closes validity check */
+

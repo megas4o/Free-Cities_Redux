@@ -1,0 +1,21 @@
+:: Next Slave In Line
+
+<<silently>>
+
+<<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $activeSlave.ID == $slaves[$i].ID>>
+	<<set $slaves[$i] = $activeSlave>>
+	<<set $activeSlave = {}>>
+	<<break>>
+	<</if>>
+<</for>>
+
+<<if $place == $slavesInLine.length-1>>
+	<<set $activeSlave = $slavesInLine[0]>>
+<<else>>
+	<<set $activeSlave = $slavesInLine[$place+1]>>
+<</if>>
+
+<<goto "Slave Interact">>
+
+<</silently>>

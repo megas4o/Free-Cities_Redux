@@ -1,0 +1,47 @@
+:: RE devoted mother daughter [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "RIE Eligibility Check">>
+
+<<set $i = $slaves.findIndex(function(s) { return s.ID == $devMother.ID; })>>
+<<set $j = $slaves.findIndex(function(s) { return s.ID == $devDaughter.ID; })>>
+
+$devMother.slaveName and her daughter $devDaughter.slaveName are both good slaves, devoted and obedient. They'd probably do anything you order them to do. By happenstance they come before you for inspection one after the other. They certainly see each other stark naked frequently enough. As you finish $devMother.slaveName's inspection, her daughter waits patiently for her turn. It occurs to you that they probably would do //anything// you order them to do, and that they're so acclimated to sexual slavery that they might well enjoy it.
+
+<br><br>
+
+<span id="result">
+<br><<link "Spend the night sharing your bed with them, and each of them with the other">>
+	<<replace "#result">>
+	Neither of them bats an eye when you announce you're turning in early and that they'll be joining you. Since they're already naked, they get into your big soft bed before you and lie facing each other, with enough room in between them for you to take a central position. They clearly assume you'll start with one of them on each side of you, so they're quite surprised when you slide in behind $devMother.slaveName instead. $devDaughter.slaveName snuggles up to her mother happily enough, however. You extend the foreplay to hours, eventually bringing both of them to such a state of naked arousal that they begin grinding against each other as much as they do you. They get the idea, and things turn into a sort of unspoken mutual one-upsmanship between them. What starts with $devDaughter.slaveName clearly feeling very daring as she sucks her mother's nipple ends with $devMother.slaveName lying on her back getting fucked by you while she orally pleasures $devDaughter.slaveName. You're face to face with $devDaughter.slaveName and she groans happily into your mouth as $devMother.slaveName moans into her fuckhole.
+	@@.mediumaquamarine;They have both become more trusting of you.@@
+
+	<<set $slaves[$i].trust += 4, $slaves[$j].trust += 4, $slaves[$i].oralCount += 1, $slaves[$j].oralCount += 1, $oralTotal += 2>>
+
+	<<if canDoAnal($slaves[$i])>>
+		<<set $slaves[$i].analCount += 1>>
+		<<set $analTotal += 1>>
+	<<elseif canDoVaginal($slaves[$i])>>
+		<<set $slaves[$i].vaginalCount += 1>>
+		<<set $vaginalTotal += 1>>
+	<</if>>
+
+	<<if canDoAnal($slaves[$j])>>
+		<<set $slaves[$j].analCount += 1>>
+		<<set $analTotal += 1>>
+	<<elseif canDoVaginal($slaves[$j])>>
+		<<set $slaves[$j].vaginalCount += 1>>
+		<<set $vaginalTotal += 1>>
+	<</if>>
+
+	<</replace>>
+<</link>>
+<br><<link "Get them started and then keep them at it in your office">>
+	<<replace "#result">>
+	You give them orders of devastating simplicity: they are to repair to the couch in your office and are to take turns getting each other off until such time as you tell them otherwise. They're momentarily stunned, but $devMother.slaveName takes the lead and draws her daughter over to the couch by the hand. They're both accomplished sex slaves and obey orders well, so they are quite successful in the little game, if a bit mechanical. For the rest of the day, interviewees come and go and are treated to the sight of the two of them having subdued sex on the couch. Showing off one's slaves for business interlocutors is a common Free Cities practice, but more than one perceptive person figures out what the resemblance between the two slaves and the age gap between them really means. Of course, all those who figure it out are impressed by your sheer decadence.
+	@@.green;Your reputation has increased considerably.@@
+	<<set $rep += 1000>>
+	<<set $slaves[$i].oralCount += 5, $slaves[$j].oralCount += 5, $oralTotal += 10>>
+	<</replace>>
+<</link>>
+</span>
+

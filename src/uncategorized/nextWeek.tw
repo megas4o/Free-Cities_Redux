@@ -1,0 +1,212 @@
+:: Next Week [silently]
+
+<<if $rivalOwner != 0>>
+	<<set _SL = $arcologies.length>>
+	<<for _i = 0; _i < _SL; _i++>>
+	<<if $arcologies[_i].rival == 1>>
+		<<set $rivalOwner = $arcologies[_i].prosperity>>
+	<</if>>
+	<</for>>
+<</if>>
+
+<<set $averageTrust = 0, $averageDevotion = 0, _slavesContributing = 0, _OldHG = -1, _NewHG = -1, _SL = $slaves.length>>
+<<for _i = 0; _i < _SL; _i++>>
+	<<if $seeAge == 1>>
+		<<if $slaves[_i].birthWeek < 51>>
+			<<set $slaves[_i].birthWeek += 1>>
+		<<else>>
+			<<set $slaves[_i].birthWeek = 0, $slaves[_i].age += 1>>
+		<</if>>
+	<</if>>
+	<<if $slaves[_i].indenture > 0>>
+		<<set $slaves[_i].indenture -= 1>>
+	<</if>>
+	<<set $slaves[_i].trust = Number($slaves[_i].trust.toFixed(1)), $slaves[_i].devotion = Number($slaves[_i].devotion.toFixed(1))>>
+	<<set $slaves[_i].oldDevotion = $slaves[_i].devotion, $slaves[_i].oldTrust = $slaves[_i].trust, $slaves[_i].tired = 0, $slaves[_i].minorInjury = 0>>
+	<<if $slaves[_i].sentence > 1>>
+		<<set $slaves[_i].sentence -= 1>>
+	<<elseif $slaves[_i].sentence == 1>>
+		<<removeJob $slaves[_i] $slaves[_i].assignment>>
+	<</if>>
+	<<if $slaves[_i].weekAcquired == 0>>
+		<<set $slaves[_i].weekAcquired = $week>>
+	<</if>>
+	<<if $slaves[_i].relation == 0>>
+		<<set $slaves[_i].relationTarget = 0>>
+	<</if>>
+	<<if $slaves[_i].relationship == 0>>
+		<<set $slaves[_i].relationshipTarget = 0>>
+	<</if>>
+	<<if $slaves[_i].rivalry == 0>>
+		<<set $slaves[_i].rivalryTarget = 0>>
+	<</if>>
+	/% Fix some possible floating point rounding errors, and bring precision to one decimal place. %/
+	<<SlaveStatClamp $slaves[_i]>>
+	<<set $slaves[_i].energy = Math.clamp($slaves[_i].energy.toFixed(1), 0, 100)>>
+	<<if $slaves[_i].fetishStrength > 95>>
+		<<set $slaves[_i].fetishStrength = 100>>
+	<<else>>
+		<<set $slaves[_i].fetishStrength = Math.clamp($slaves[_i].fetishStrength.toFixed(1), 0, 100)>>
+	<</if>>
+	<<set $slaves[_i].weight = Math.clamp($slaves[_i].weight.toFixed(1), -100, 100)>>
+	<<set $slaves[_i].health = Number($slaves[_i].health.toFixed(1))>>
+	<<set $slaves[_i].butt = Number($slaves[_i].butt.toFixed(1))>>
+	<<set $slaves[_i].muscles = Math.clamp($slaves[_i].muscles.toFixed(1), -100, 100)>>
+	<<set $slaves[_i].lips = Math.clamp($slaves[_i].lips.toFixed(1), 0, 100)>>
+	<<set $slaves[_i].oralSkill = Math.clamp($slaves[_i].oralSkill.toFixed(1), 0, 100)>>
+	<<set $slaves[_i].vaginalSkill = Math.clamp($slaves[_i].vaginalSkill.toFixed(1), 0, 100)>>
+	<<set $slaves[_i].analSkill = Math.clamp($slaves[_i].analSkill.toFixed(1), 0, 100)>>
+	<<set $slaves[_i].whoreSkill = Math.clamp($slaves[_i].whoreSkill.toFixed(1), 0, 100)>>
+	<<set $slaves[_i].entertainSkill = Math.clamp($slaves[_i].entertainSkill.toFixed(1), 0, 100)>>
+	<<set $slaves[_i].lactationAdaptation = Math.clamp($slaves[_i].lactationAdaptation.toFixed(1), 0, 100)>>
+	<<set $slaves[_i].intelligenceImplant = Number($slaves[_i].intelligenceImplant.toFixed(1))>>
+	<<if ($HGSuiteEquality == 1) && ($HeadGirl != 0) && ($slaves[_i].devotion > 50)>>
+		<<if ($slaves[_i].assignment == "live with your Head Girl")>>
+			<<set _NewHG = _i>>
+		<<elseif ($slaves[_i].ID == $HeadGirl.ID)>>
+			<<set _OldHG = _i>>
+		<</if>>
+	<</if>>
+	/* AVERAGE VALUES UPDATE */
+	<<if $slaves[_i].assignmentVisible == 1>>
+		<<set $averageTrust += $slaves[_i].trust, $averageDevotion += $slaves[_i].devotion, _slavesContributing++>>
+	<<elseif ($slaves[_i].assignment != "be confined in the cellblock") && ($slaves[_i].assignment != "be confined in the arcade") && (($slaves[_i].assignment != "work in the dairy") || ($dairyRestraintsSetting < 2))>>
+		<<set $averageTrust += $slaves[_i].trust*0.5, $averageDevotion += $slaves[_i].devotion*0.5, _slavesContributing += 0.5>>
+	<</if>>
+	/* Persistent Summary flag */
+	<<set $slaves[_i].currentSummary = 0>>
+<</for>>
+<<set $averageTrust = $averageTrust/_slavesContributing>>
+<<set $averageDevotion = $averageDevotion/_slavesContributing>>
+<<set $enduringTrust = ($averageTrust+($enduringTrust*3))/4>>
+<<set $enduringDevotion = ($averageDevotion+($enduringDevotion*3))/4>>
+
+<<if (_OldHG != -1) && (_NewHG != -1)>>
+	<<removeJob $slaves[_NewHG] "live with your Head Girl">>
+	<<assignJob $slaves[_OldHG] "live with your Head Girl">>
+	<<set $HeadGirl = $slaves[_NewHG], $slaves[_NewHG].assignment = "be your Head Girl", $slaves[_NewHG].diet = "healthy">>
+<</if>>
+
+<<if $week == $oldWeek>>
+	<<set $week += 1, $day += 7>>
+	<<switch $month>>
+	<<case "January">>
+	<<if $day > 31>>
+		<<set $day -= 31, $month = "February">>
+	<</if>>
+	<<case "February">>
+	<<if $day > 28>>
+		<<set $day -= 28, $month = "March">>
+	<</if>>
+	<<case "March">>
+	<<if $day > 31>>
+		<<set $day -= 31, $month = "April">>
+	<</if>>
+	<<case "April">>
+	<<if $day > 30>>
+		<<set $day -= 30, $month = "May">>
+	<</if>>
+	<<case "May">>
+	<<if $day > 31>>
+		<<set $day -= 31, $month = "June">>
+	<</if>>
+	<<case "June">>
+	<<if $day > 30>>
+		<<set $day -= 30, $month = "July">>
+	<</if>>
+	<<case "July">>
+	<<if $day > 31>>
+		<<set $day -= 31, $month = "August">>
+	<</if>>
+	<<case "August">>
+	<<if $day > 31>>
+		<<set $day -= 31, $month = "September">>
+	<</if>>
+	<<case "September">>
+	<<if $day > 30>>
+		<<set $day -= 30, $month = "October">>
+	<</if>>
+	<<case "October">>
+	<<if $day > 31>>
+		<<set $day -= 31, $month = "November">>
+	<</if>>
+	<<case "November">>
+	<<if $day > 30>>
+		<<set $day -= 30, $month = "December">>
+	<</if>>
+	<<default>>
+	<<if $day > 31>>
+		<<set $day -= 31, $month = "January", $year += 1>>
+	<</if>>
+	<</switch>>
+<</if>>
+
+<<set _seed = random(1,10)>>
+<<if $week < 25>>
+	<<if _seed > 4>>
+		<<set $weatherToday = $niceWeather.random()>>
+	<<else>>
+		<<set $weatherToday = $lightWeather.random()>>
+	<</if>>
+<<elseif $week < 50>>
+	<<if _seed > 4>>
+		<<set $weatherToday = $niceWeather.random()>>
+	<<elseif _seed > 2>>
+		<<set $weatherToday = $lightWeather.random()>>
+	<<else>>
+		<<set $weatherToday = $heavyWeather.random()>>
+	<</if>>
+<<elseif $week < 75>>
+	<<if _seed > 6>>
+		<<set $weatherToday = $niceWeather.random()>>
+	<<elseif _seed > 3>>
+		<<set $weatherToday = $lightWeather.random()>>
+	<<else>>
+		<<set $weatherToday = $heavyWeather.random()>>
+	<</if>>
+<<else>>
+	<<if _seed > 8>>
+		<<set $weatherToday = $niceWeather.random()>>
+	<<elseif _seed > 6>>
+		<<set $weatherToday = $lightWeather.random()>>
+	<<elseif _seed > 2>>
+		<<set $weatherToday = $heavyWeather.random()>>
+	<<else>>
+		<<set $weatherToday = $extremeWeather.random()>>
+	<</if>>
+<</if>>
+
+<<if $boomerangWeeks>><<set $boomerangWeeks++>><</if>>
+
+<<set $coursed = 0, $eventDescription = 0, $manuallyRetired = 0, $pitFought = 0, $preOwnedViewed = 0, $prestigeAuctioned = 0, $repGain = 0, $shelterSlave = 0, $shelterSlaveBought = 0, $slaveMarketLimit = 10 + ($rep / 1000), $slavesSeen = 0>>
+
+/% These are variables that either should be made into _temp vars or should be Zeroed out once done with them instead of here. This can also interfere with debugging or hide NaN's as zeroing things out would clear a NaN. Also could stop from NaN's getting worse? %/
+/% Integer and float variables. No real need to zero them out but doesn't hurt to have them in a known state, though this might mask variables NaN'ing out. Takes up the least amount of Memory besides a "" string. %/
+<<set $averageProsperity = 0, $beauty = 0, $beautyMultiplier = 0, $boobsID = -1, $boobsInterestTargetID = -1, $brideSlave = -1, $buttslutID = -1, $buttslutInterestTargetID = -1, $cumslutID = -1, $FResult = 0, $groomSlave = -1, $humiliationID = -1, $humiliationInterestTargetID = -1, $i = 0, $individualCosts = 0, $influenceBonus = 0, $j = 0, $masochistID = -1, $masochistInterestTargetID = -1, $opinion = 0, $r = 0, $subID = -1, $submissiveInterestTargetID = -1, $weddingSlaveID = -1>>
+
+/% Other arrays %/
+<<set $events = [], $RESSevent = [], $RESSTRevent = [], $RETSevent = [], $RECIevent = [], $RecETSevent = [], $REFIevent = [], $REFSevent = [], $PESSevent = [], $PETSevent = [], $FSAcquisitionEvents = [], $FSNonconformistEvents = [], $qualifiedNicknames = [], $REAnalCowgirlSubIDs = [], $REButtholeCheckinIDs = [], $recruit = [], $RETasteTestSubIDs = [], $devotedSlaves = [], $rebelSlaves = [], $REBoobCollisionSubIDs = [], $REIfYouEnjoyItSubIDs = [], $RESadisticDescriptionSubIDs = [], $REShowerForceSubIDs = [], $RESimpleAssaultIDs = [], $RECockmilkInterceptionIDs = [], $REInterslaveBeggingIDs = []>>
+
+/% Slave Objects using 0 instead of null. Second most memory eaten up. %/
+<<set $activeSlave = 0, $displaySlave = 0, $domSlave = 0, $eventSlave = 0, $RERelationshipSlave = 0, $slaveWithoutBonuses = 0, $subSlave = 0, $milfSlave = 0>>
+
+/% Slave Objects that never get zeroed so null them here. Second most memory eaten up. %/
+<<set $assayedSlave = null, $beforeGingering = null, $mother = null, $daughter = null, $devMother = null, $devDaughter = null, $alphaTwin = null, $betaTwin = null, $youngerSister = null, $olderSister = null, $recruiterMother = null, $sibling = null, $recruiterSlave = null>>
+
+/% Slave Object Arrays. These can take up the most memory. %/
+<<set $eligibleSlaves = [], $slavesInLine = []>>
+
+/% Strings Memory varies. %/
+<<set $analSkinDesc = "", $applyDesc = "", $bellyAccessory = "", $buyer = "", $desc = "", $goto = "", $malefactor = "", $nickname = "", $notApplyDesc = "", $oldName = "", $oldSurname = "", $situationDesc = "", $skinDesc = "", $k = "">>
+/% Done with zeroing out, what should be for the most part Temps %/
+
+/*HACKY EVENT WORKAROUNDS*/
+<<if $eventID != -1>>
+	<<set $slaves[$eventID].devotion -= 50, $eventID = -1>>
+<</if>>
+
+<<if $autosave != 0>>
+	<<script>>Save.autosave.save("Week Start Autosave")<</script>>
+<</if>>
+
+<<goto "Main">>

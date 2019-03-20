@@ -1,0 +1,78 @@
+:: Cellblock [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Cellblock", $showEncyclopedia = 1, $encyclopedia = "Cellblock", $cellblockSlaves = $CellBiIDs.length>>
+
+<<if $cellblockName != "the Cellblock">>
+	<<set $cellblockNameCaps = $cellblockName.replace("the ", "The ")>>
+<</if>>
+
+<<cellblockDescriptionFS>>
+
+<<if $cellblockSlaves > 2>>
+	$cellblockNameCaps is full of slaves, though it's difficult to tell at first. The row of cell doors is closed as always, and the soundproofed little rooms let no noise escape. Through each little window, though, a scene of loneliness and misery may be witnessed.
+<<elseif $cellblockSlaves > 0>>
+	$cellblockNameCaps holds a few slaves, though it's difficult to tell at first. The row of cell doors is closed as always, and the soundproofed little rooms let no noise escape. Through several of the little windows, though, a scene of loneliness and misery may be witnessed.
+<<elseif $Wardeness != 0>>
+	$Wardeness.slaveName is alone in the cellblock, and seems rather lonely without anyone to oppress.
+<<else>>
+	None of your slaves are confined in the cellblock. [[Decommission the cellblock|Main][$cellblock = 0, $cellblockDecoration = "standard", $cellblockUpgrade = 0]]
+<</if>>
+
+<<set _Tmult0 = Math.trunc($cellblock*1000*$upgradeMultiplierArcology)>>
+<br>$cellblockNameCaps has room for $cellblock slaves to be kept in close confinement.
+[[Expand the cellblock|Cellblock][$cash -= _Tmult0, $cellblock += 5]] //Costs ¤_Tmult0//
+
+<br>
+<<if $cellblockUpgrade == 1>>
+	Its compliance systems have been upgraded to allow slaves no mental respite, painstakingly correcting the tiniest misbehaviors to soften flaws into quirks at the cost of considerable anguish to inmates denied any rest from correction.
+<<else>>
+	<<set _Tmult1 = Math.trunc(20000*$upgradeMultiplierArcology)>>
+	Its compliance systems are standard. [[Upgrade them to soften slave flaws|Cellblock][$cash -= _Tmult1, $cellblockUpgrade = 1]] //Costs ¤_Tmult1//
+<</if>>
+
+<br><br>
+<<if $Wardeness != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+<<else>>
+	You do not have a slave serving as a Wardeness. [[Appoint one|Wardeness Select]]
+<</if>>
+
+<br><br>
+<<if ($cellblock <= $cellblockSlaves)>>
+	''$cellblockNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $cellblockSlaves)>>
+	<<link "''Send a resistant slave to be broken in the cellblock''">>
+		<<set $leaveCellblock = 0>>
+		<<replace #cellblockComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $cellblockSlaves > 0>>
+	| <<link "''Let a slave out of the cellblock''">>
+		<<set $leaveCellblock = 1>>
+		<<replace #cellblockComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//The cellblock is empty for the moment.<br>//
+<</if>>
+
+<span id="cellblockComingGoing">
+<<if $leaveCellblock == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<<unset $Flag>>
+
+<br><br>Rename $cellblockName: <<textbox "$cellblockName" $cellblockName "Cellblock">> //Use a noun or similar short phrase//

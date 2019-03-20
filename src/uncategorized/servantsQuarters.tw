@@ -1,0 +1,90 @@
+:: Servants' Quarters [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Servants' Quarters", $showEncyclopedia = 1, $encyclopedia = "Servants' Quarters", $servantsQuartersSlaves = $ServQiIDs.length>>
+
+<<if $servantsQuartersName != "the Servants' Quarters">>
+	<<set $servantsQuartersNameCaps = $servantsQuartersName.replace("the ", "The ")>>
+<</if>>
+
+<<servantsQuartersDescriptionFS>>
+
+<<if $servantsQuartersSlaves > 2>>
+	$servantsQuartersNameCaps are busy with hurrying slaves. One shift of girls is eating, cleaning the quarters, and bathing. The second is sleeping, and the third is out in the penthouse cleaning and serving.
+<<elseif $servantsQuartersSlaves > 0>>
+	A few slaves are working out of servants' quarters. They must split their scant time between looking after their own needs and the superior needs of everyone else.
+<<elseif $Stewardess != 0>>
+	$Stewardess.slaveName is alone, and seems rather bereft without anyone to order around.
+<<else>>
+	None of your slaves are working out of the servants' quarters. [[Decommission the quarters|Main][$servantsQuarters = 0, $servantsQuartersUpgradeMonitoring = 0, $servantsQuartersDecoration = "standard"]]
+<</if>>
+
+<<set _Tmult0 = Math.trunc($servantsQuarters*1000*$upgradeMultiplierArcology)>>
+<br>$servantsQuartersNameCaps has room to keep $servantsQuarters slaves while they serve.
+[[Expand the Servants' Quarters|Servants' Quarters][$cash -= _Tmult0, $servantsQuarters += 5]] //Costs ¤_Tmult0//
+
+<br>
+<<if $servantsQuartersUpgradeMonitoring == 1>>
+	The quarters have been upgraded with enhanced monitoring systems to make the servants work harder, improving their obedience and efficiency.
+<<else>>
+	<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+	The quarters are standard. [[Upgrade the monitoring systems to force harder work|Servants' Quarters][$cash -= _Tmult1, $servantsQuartersUpgradeMonitoring = 1]] //Costs ¤_Tmult1 and will increase upkeep costs//
+<</if>>
+
+<<if $servantMilkers == 1>>
+	<br>Since servants spend most of their time in the penthouse, any who are lactating will use the ubiquitous milkers.
+<</if>>
+
+<br><br>
+<<if $Stewardess != 0>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+	<<if canAchieveErection($Stewardess)>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<<if $stewardessImpregnates == 1>>
+			Keeping the maids pregnant is part of her job. [[Order her to stop impregnating|Servants' Quarters][$stewardessImpregnates = 0]]
+		<<else>>
+			She could be directed to keep the maids pregnant herself. [[Order her to impregnate|Servants' Quarters][$stewardessImpregnates = 1]]
+		<</if>>
+	<</if>>
+<<else>>
+	You do not have a slave serving as a Stewardess. [[Appoint one|Stewardess Select]]
+<</if>>
+
+<br><br>
+<<if ($servantsQuarters <= $servantsQuartersSlaves)>>
+	''$servantsQuartersNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $servantsQuartersSlaves)>>
+	<<link "''Send a slave to work out of $servantsQuartersName''">>
+		<<set $leaveServantsQuarters = 0>>
+		<<replace #servantsQuartersComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $servantsQuartersSlaves > 0>>
+	| <<link "''Bring a slave out of $servantsQuartersName''">>
+		<<set $leaveServantsQuarters = 1>>
+		<<replace #servantsQuartersComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//$servantsQuartersNameCaps is empty for the moment.<br>//
+<</if>>
+
+<span id="servantsQuartersComingGoing">
+<<if $leaveServantsQuarters == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<<unset $Flag>>
+
+<br><br>Rename $servantsQuartersName: <<textbox "$servantsQuartersName" $servantsQuartersName "Servants' Quarters">> //Use a noun or similar short phrase//

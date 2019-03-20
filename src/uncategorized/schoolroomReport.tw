@@ -1,0 +1,216 @@
+:: Schoolroom Report [nobr]
+
+<<SlaveSort $SchlRiIDs>>
+<<set _DL = $SchlRiIDs.length, $schoolroomSlaves = _DL, _idleBonus = 0, _FLsFetish = 0>>
+
+<<if $schoolroomDecoration != "standard">>
+	<<set _devBonus = 1>>
+<<else>>
+	<<set _devBonus = 0>>
+<</if>>
+
+<<if $Schoolteacher != 0>>
+	<<set _FLs = $slaves.findIndex(function(s) { return s.ID == $Schoolteacher.ID; })>>
+
+	<<if ($slaves[_FLs].health < -80)>>
+		<<set $slaves[_FLs].health += 20>>
+	<<elseif ($slaves[_FLs].health < -40)>>
+		<<set $slaves[_FLs].health += 15>>
+	<<elseif ($slaves[_FLs].health < 0)>>
+		<<set $slaves[_FLs].health += 10>>
+	<<elseif ($slaves[_FLs].health < 90)>>
+		<<set $slaves[_FLs].health += 7>>
+	<</if>>
+	<<if ($slaves[_FLs].devotion <= 60)>>
+		<<set $slaves[_FLs].devotion++>>
+	<</if>>
+	<<if ($slaves[_FLs].trust < -30)>>
+		<<set $slaves[_FLs].trust++>>
+	<</if>>
+	<<set $slaves[_FLs].devotion += _devBonus>>
+	<<if $slaves[_FLs].fetishStrength <= 95>>
+		<<if $slaves[_FLs].fetish != "dom">>
+			<<fetishChangeChance $slaves[_FLs]>>
+			<<if $fetishChangeChance > random(0,100)>>
+				<<set _FLsFetish = 1, $slaves[_FLs].fetishKnown = 1, $slaves[_FLs].fetish = "dom">>
+			<</if>>
+		<<elseif $slaves[_FLs].fetishKnown == 0>>
+			<<set _FLsFetish = 1, $slaves[_FLs].fetishKnown = 1>>
+		<<else>>
+			<<set _FLsFetish = 2, $slaves[_FLs].fetishStrength += 4>>
+		<</if>>
+	<</if>>
+	<<set $Schoolteacher = $slaves[_FLs]>>
+	&nbsp;&nbsp;&nbsp;&nbsp;$Schoolteacher.slaveName is serving as your Schoolteacher.<<if $Schoolteacher.relationship == -3>> As your wife, she tries her best to teach her pupils how to please you.<</if>>
+	<<if (_FLsFetish == 1)>>
+		She's allowed and even expected to use her students for her own sexual gratification, and in their own way her students are complicit, offering sexual favors for an easier time in the classroom. Before long, she's running a hungry eye over the tits and asses of new trainees; she is now @@.lightcoral;more dominant.@@
+	<<elseif (_FLsFetish == 2)>>
+		Every new student in class is a new target for her personal educational attention. @@.lightsalmon;She becomes more dominant.@@
+	<</if>>
+	<<if setup.schoolteacherCareers.includes($Schoolteacher.career)>>
+		She has experience with students and learning from her life before she was a slave, making her more effective.
+	<</if>>
+	<<if ($Schoolteacher.age > 35)>>
+		Her age earns her the respect of her students.
+		<<set _idleBonus++>>
+	<</if>>
+	<<if ($Schoolteacher.intelligence > 0)>>
+		She's intelligent enough to be a good teacher.
+		<<set _idleBonus++>>
+	<</if>>
+	<<if ($Schoolteacher.intelligenceImplant == 1)>>
+		Since she's educated herself, she understands her students.
+		<<set _idleBonus++>>
+	<</if>>
+	<<if ($Schoolteacher.face > 40)>>
+		Her students want to be just like their beautiful teacher.
+		<<set _idleBonus++>>
+	<</if>>
+	<<for _dI = 0; _dI < _DL; _dI++>>
+		<<set $i = $slaveIndices[$SchlRiIDs[_dI]]>>
+		<<if $Schoolteacher.rivalryTarget == $slaves[$i].ID>>
+			Ever since her <<if $Schoolteacher.rivalry == 1>>growing rival<<elseif $Schoolteacher.rivalry == 2>>rival<<elseif $Schoolteacher.rivalry == 3>>bitter rival<</if>>, was enrolled, she began stalking the classroom carrying a large paddle, much to $slaves[$i].slaveName's terror.
+			<<set $slaves[$i].devotion -= 4, $slaves[$i].trust -= 4>>
+			<<if random(1,100) > 35>>
+				<<set $Schoolteacher.rivalry++, $slaves[_FLs].rivalry++, $slaves[$i].rivalry++>>
+			<</if>>
+		<<elseif $Schoolteacher.relationshipTarget == $slaves[$i].ID>>
+			She dedicates most of her attention to her <<if $Schoolteacher.relationship == 1>>friend<<elseif $Schoolteacher.relationship == 2>>best friend<<elseif $Schoolteacher.relationship == 3>>friend with benefits<<elseif $Schoolteacher.relationship == 4>>lover<<elseif $Schoolteacher.relationship == 5>>slave wife<</if>>, $slaves[$i].slaveName, making sure she understands that day's lesson.
+			<<set $slaves[$i].devotion += 2, $slaves[$i].trust += 2>>
+		<<elseif $Schoolteacher.relationTarget == $slaves[$i].ID>>
+			She makes sure to spend extra time teaching her $slaves[$i].relation, $slaves[$i].slaveName.
+			<<set $slaves[$i].trust++>>
+		<</if>>
+	<</for>>
+	<<if (_DL < 5)>>
+		<<set _seed = random(1,10)+((5-_DL)*(random(150,170)+(_idleBonus*10)))>>
+		<<slavePaid $Schoolteacher _seed>>
+		<<set $lastWeeksFinances.incomeSchool = _seed>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;Since she doesn't have enough students to occupy all her time, $schoolroomName takes in citizens' slaves on a contract basis and she teaches them too, earning @@.yellowgreen;¤_seed.@@
+	<</if>>
+	<<if (_DL > 0)>><br><br><</if>>
+<</if>>
+
+<<if (_DL > 0)>>
+	&nbsp;&nbsp;&nbsp;&nbsp;<<if (_DL == 1)>>''There is one slave studying in $schoolroomName.''<<else>>''There are _DL slaves studying in $schoolroomName.''<</if>>
+<</if>>
+
+<<if ($Schoolteacher != 0)>>
+	<<set $i = _FLs>> /* apply following SA passages to facility leader */
+	<<if $showEWD != 0>>
+		<br><br>
+		/* 000-250-006 */
+		<<if $seeImages == 1 && $imageChoice == 0>>
+		<div class="imageRef tinyImg">
+			<<SlaveArt $slaves[_FLs] 0 0>>
+		</div>
+		<</if>>
+		/* 000-250-006 */
+		''__@@.pink;$slaves[_FLs].slaveName@@__'' is serving as your Schoolteacher.
+		<br>&nbsp;&nbsp;&nbsp;
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<br><<include "SA devotion">>
+	<<else>>
+		<<silently>>
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<<include "SA devotion">>
+		<</silently>>
+	<</if>>
+	<<set $Schoolteacher = $slaves[_FLs]>>
+<</if>>
+
+<<set _restedSlaves = 0>>
+<<for _dI = 0; _dI < _DL; _dI++>>
+	<<set $i = $slaveIndices[$SchlRiIDs[_dI]]>>
+	<<set $slaves[$i].devotion += _devBonus>>
+	<<if ($slaves[$i].health < -80)>>
+		<<set $slaves[$i].health += 20>>
+	<<elseif ($slaves[$i].health < -40)>>
+		<<set $slaves[$i].health += 10>>
+	<<elseif ($slaves[$i].health < 0)>>
+		<<set $slaves[$i].health += 7>>
+	<<elseif ($slaves[$i].health < 90)>>
+		<<set $slaves[$i].health += 3>>
+	<</if>>
+	/% Education done? Has to be here before we run the SA's or there will be double entries for slave %/
+	<<if ($slaves[$i].intelligenceImplant == 1)>>
+	<<if ($slaves[$i].voice == 0) || ($slaves[$i].accent <= 1) || (($schoolroomUpgradeLanguage == 0) && ($slaves[$i].accent <= 2))>>
+	<<if ($slaves[$i].oralSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].oralSkill > 10))>>
+	<<if ($slaves[$i].whoreSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].whoreSkill > 10))>>
+	<<if ($slaves[$i].entertainSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].entertainSkill > 10))>>
+	<<if ($slaves[$i].analSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].analSkill > 10)) || ($slaves[$i].anus < 1)>>
+	<<if ($slaves[$i].vaginalSkill > 30) || (($schoolroomUpgradeSkills == 0) && ($slaves[$i].vaginalSkill > 10)) || ($slaves[$i].vagina < 1)>>
+		<br><br>''__@@.pink;$slaves[$i].slaveName@@__'' can learn little from further classes, so @@.yellow;her assignment has defaulted to rest.@@
+		<<removeJob $slaves[$i] "learn in the schoolroom">>
+		<<set _restedSlaves++, _dI--, _DL-->>
+		<<continue>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<<if $showEWD != 0>>
+		<br><br>
+		/* 000-250-006 */
+		<<if $seeImages == 1 && $imageChoice == 0>>
+		<div class="imageRef tinyImg">
+			<<SlaveArt $slaves[$i] 0 0>>
+		</div>
+		<</if>>
+		/* 000-250-006 */
+		''__@@.pink;$slaves[$i].slaveName@@__''
+		<<if $slaves[$i].choosesOwnAssignment == 2>>
+			<<include "SA chooses own job">>
+		<<else>>
+			is studying in $schoolroomName.
+		<</if>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;She <<include "SA take classes">>
+		<br>&nbsp;&nbsp;&nbsp;
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<br><<include "SA devotion">>
+	<<else>>
+		<<silently>>
+		<<include "SA chooses own job">>
+		<<include "SA take classes">>
+		<<include "SA chooses own clothes">>
+		<<include "SA diet">>
+		<<include "SA long term effects">>
+		<<include "SA drugs">>
+		<<include "SA relationships">>
+		<<include "SA rivalries">>
+		<<include "SA devotion">>
+		<</silently>>
+	<</if>>
+<</for>>
+<<if (_restedSlaves > 0)>>
+	<br><br>&nbsp;&nbsp;&nbsp;
+	<<if (_restedSlaves == 1)>>
+		One slave has
+	<<else>>
+		_restedSlaves slaves have
+	<</if>>
+	@@.green;learned@@ all they can, and will be released from the schoolroom before the end of the week.
+<</if>>
+<<if $schoolroomDecoration != "standard">>
+	$schoolroomNameCaps's $schoolroomDecoration atmosphere @@.hotpink;has a minor impact on the students.@@
+<</if>>
+<<if _DL > 0 || $Schoolteacher != 0>>
+	<br><br>
+<</if>>

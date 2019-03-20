@@ -1,0 +1,532 @@
+:: SA get milked [nobr]
+
+<<if ndef $slaves[$i].lactationAdaptation>>
+	<<set $slaves[$i].lactationAdaptation = 0>>
+<</if>>
+
+<<set $milk = 0>>
+<<set $cum = 0>>
+
+gets milked this week.
+<<if $dairy > 0>>
+<<if $dairyRestraintsSetting < 2>>
+	<<if (($universalRulesFacilityWork == 1) && ($slaves[$i].assignment == "get milked") && ($dairySpots > 0)) || ($slaves[$i].assignment == "work in the dairy")>>
+	<<if ($slaves[$i].assignment == "get milked")>>
+		Since there's extra space in $dairyName, she spends most of her milkings there.
+		<<set $dairySpots -= 1>>
+	<</if>>
+	<<if ($Milkmaid != 0)>>
+		While there, she gets the benefit of $Milkmaid.slaveName's <<if ($Milkmaid.age < 21)>>youthful energy<<else>>care<</if>><<if ($Milkmaid.oralSkill >= 100)>> and talented tongue<</if>>.
+		<<if ($slaves[$i].devotion < $milkmaidDevotionThreshold)>>
+			<<set $slaves[$i].devotion += $milkmaidDevotionBonus>>
+		<</if>>
+		<<if ($slaves[$i].trust < $milkmaidTrustThreshold)>>
+			<<set $slaves[$i].trust += $milkmaidTrustBonus>>
+		<</if>>
+		<<if ($slaves[$i].health < 100)>>
+			<<set $slaves[$i].health += $milkmaidHealthBonus>>
+		<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $slaves[$i].lactation > 0>>
+
+	<<set $milk = milkAmount($slaves[$i])>>
+
+	She produces from her <<print either("tits", "breasts", "mammaries", "udders", "boobs")>>, which have a combined volume of <<print $slaves[$i].boobs*2>> CCs;
+	<<if ($slaves[$i].lactation == 1)>>
+		she is lactating naturally and produces a healthy stream of milk.
+	<<elseif ($slaves[$i].lactation == 2)>>
+		she is on lactation drugs and produces a river of milk.
+		<<if $slaves[$i].lactationAdaptation < 100>>
+			Her udders are forced to adapt to this unnatural productivity.
+			<<set $slaves[$i].lactationAdaptation += 1>>
+		<</if>>
+		<<if ($slaves[$i].curatives == 0) && ($slaves[$i].assignment != "be confined in the arcade")>>
+			The stress of extreme milk production @@.red;damages her health.@@
+			<<set $slaves[$i].health -= 3>>
+		<</if>>
+		<<if ($slaves[$i].assignment == "be confined in the arcade")>>
+			The automated arcade systems pump her full of drugs to prevent the extreme milk production from damaging her health.
+		<</if>>
+	<</if>>
+
+	<<if ($slaves[$i].devotion > 50)>>
+		She's such a happy cow that her mental state has a positive impact on her production.
+	<<elseif ($slaves[$i].devotion < -50)>>
+		She's such an unhappy cow that her mental state has a negative impact on her production.
+	<</if>>
+
+	<<if ($slaves[$i].boobsImplant > 200)>>
+		However, her breast implants impede milk production.
+	<</if>>
+
+	<<set $hormones = $slaves[$i].hormones>>
+	<<if ($slaves[$i].balls != 0) && ($hormones > -2)>>
+		<<set $hormones -= 1>>
+	<</if>>
+	<<if ($slaves[$i].ovaries != 0) && ($hormones < 2)>>
+		<<set $hormones += 1>>
+	<</if>>
+	<<if ($hormones > 1)>>
+		Her internal chemistry is perfectly suited to milk production.
+	<<elseif ($hormones > 0)>>
+		Her hormonal balance favors milk production.
+	<<elseif ($hormones < 0)>>
+		Her hormonal balance impedes milk production.
+	<<elseif ($hormones < -1)>>
+		Her internal chemistry is poorly suited to milk production.
+	<</if>>
+
+	<<if $slaves[$i].lactationAdaptation < 100>>
+	<<if ($slaves[$i].assignment == "get milked") || ($slaves[$i].assignment == "work in the dairy")>>
+		Living as a cow helps her body and mind adapt to producing milk.
+		<<set $slaves[$i].lactationAdaptation += 1>>
+	<</if>>
+	<</if>>
+
+	<<if ($slaves[$i].preg > 5)>>
+		Her pregnancy helps her body produce more milk naturally<<if $slaves[$i].lactationAdaptation < 100>>, and also helps it adapt to milk production<<set $slaves[$i].lactationAdaptation += 1>><</if>>.
+	<</if>>
+
+	<<if ($slaves[$i].health > 50)>>
+		Her shining health helps her really produce.
+	<<elseif ($slaves[$i].health < -50)>>
+		Her poor health impedes milk production.
+	<</if>>
+
+	<<if ($slaves[$i].weight > 10)>>
+		Her extra weight supports her productivity.
+	<<elseif ($slaves[$i].weight < -10)>>
+		Her thinness hinders her productivity.
+	<</if>>
+
+	<<if $slaves[$i].lactationAdaptation > 10>>
+	<<if $slaves[$i].lactationAdaptation > 50>>
+		Her body has adapted heavily to milk production, making her extremely productive.
+	<<else>>
+		Her body has gotten used to producing milk, making her very productive.
+	<</if>>
+	<</if>>
+
+	<<if $dairySlimMaintainUpgrade == 1>>
+	<<if $dairySlimMaintain == 1>>
+		<<if ($slaves[$i].boobs <= 700)>>
+			<<if ($arcologies[0].FSSlimnessEnthusiast > 80)>>
+				Your arcology's milkers are optimized to extract maximum output from small breasted slaves, which substantially increases her otherwise modest productivity.
+				<<set $milk *= 1.5>>
+			<<elseif ($arcologies[0].FSSlimnessEnthusiast > 20)>>
+				Your arcology's milkers have been carefully modified to more readily accommodate slaves with tiny breasts, which slightly mitigates her less than ideal physiology for milk production.
+				<<set $milk *= 1.1>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<</if>>
+
+	<<if ($slaves[$i].assignment == "work in the dairy")>>
+		<<if ($dairyFeedersUpgrade == 1)>>
+		<<if ($dairyFeedersSetting > 0)>>
+			<<set $milk += $milk*(0.1*($dairyFeedersUpgrade+$dairyRestraintsSetting+((50-$slaves[$i].age)/20)))>>
+			<<if ($slaves[$i].chem > 360)>>
+				<<set $milk *= 0.6>>
+			<<elseif ($slaves[$i].chem > 100)>>
+				<<set $milk *= ((600-$slaves[$i].chem)/600)>>
+			<</if>>
+		<</if>>
+		<</if>>
+	<<elseif ($slaves[$i].assignment == "be confined in the arcade")>>
+		<<set $milk *= 0.5>>
+	<</if>>
+
+	<<set $milk *= $servantMilkersMultiplier>>
+
+	<<set $milk = Math.trunc($milk)>>
+	<<if $milk < 1>>
+		<<set $milk = 1>>
+	<</if>>
+	<<set $slaves[$i].milk += $milk>>
+	<<set $milkTotal += $milk>>
+
+	As a result, she produces $milk liters of milk over the week.
+
+	<<if ($arcologies[0].FSPastoralistLaw == 1)>>
+		<<set $milkSale = $milk*(9+Math.trunc($arcologies[0].FSPastoralist/30))>>
+		Since breast milk is $arcologies[0].name's only legal dairy product, she can scarcely be milked fast enough, and she makes @@.yellowgreen;¤$milkSale.@@
+	<<elseif ($arcologies[0].FSPastoralist != "unset")>>
+		<<set $milkSale = $milk*(7+Math.trunc($arcologies[0].FSPastoralist/30))>>
+		Since milk is fast becoming a major part of the $arcologies[0].name's dietary culture, her milk is in demand, and she makes @@.yellowgreen;¤$milkSale.@@
+	<<else>>
+		<<set $milkSale = $milk*8>>
+		Her milk is sold for @@.yellowgreen;¤$milkSale.@@
+	<</if>>
+	<<slavePaid $slaves[$i] $milkSale>>
+
+	<<if $slaves[$i].fetishKnown>>
+	<<if ($slaves[$i].fetish == "boobs") || ($slaves[$i].energy > 95)>>
+		Getting constantly milked is as good as sex, as far as she's concerned. @@.hotpink;She is happy@@ to have her breasts receive so much attention.
+		<<set $slaves[$i].devotion += 1>>
+		<<if $slaves[$i].need>><<set $slaves[$i].need = 0>><</if>>
+	<</if>>
+	<</if>>
+
+	<<if ($slaves[$i].lactation > 1)>>
+		<<if ($slaves[$i].nipples != "huge")>>
+		<<if ($slaves[$i].nipples == "inverted")>>
+			<<if ($slaves[$i].fetish == "masochist") && ($slaves[$i].fetishKnown == 1)>>
+			Having the milkers constantly haul her inverted nipples out is @@.hotpink;extremely uncomfortable; she loves it.@@
+			<<set $slaves[$i].devotion += 3>>
+			<<else>>
+			Having the milkers constantly haul her inverted nipples out is @@.mediumorchid;extremely uncomfortable.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<</if>>
+			<<if (random(1,100) > 50)>>
+			The constant suction @@.lime;permanently protrudes them,@@ and
+			<<if (random(1,2) == 1)>>
+				it turns out they're absolutely massive.
+				<<set $slaves[$i].nipples = "huge">>
+			<<else>>
+				it turns out they're nice and puffy.
+				<<set $slaves[$i].nipples = "puffy">>
+			<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].nipples == "partially inverted")>>
+			<<if ($slaves[$i].fetish == "masochist") && ($slaves[$i].fetishKnown == 1)>>
+			Having the milkers constantly haul her inverted nipples out is @@.hotpink;quite uncomfortable; she loves it.@@
+			<<set $slaves[$i].devotion += 1>>
+			<<else>>
+			Having the milkers constantly haul her inverted nipples out is @@.mediumorchid;quite uncomfortable.@@
+			<<set $slaves[$i].devotion -= 1>>
+			<</if>>
+			<<if (random(1,100) > 30)>>
+			The constant suction @@.lime;permanently protrudes them,@@ and
+			<<if (random(1,2) == 1)>>
+				it turns out they're pretty cute.
+				<<set $slaves[$i].nipples = "cute">>
+			<<else>>
+				it turns out they're nice and puffy.
+				<<set $slaves[$i].nipples = "puffy">>
+			<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].nipples == "puffy") && (random(1,100) > 90)>>
+			Producing this river of milk @@.lime;enlarges her nipples:@@ they're now enormous.
+			<<set $slaves[$i].nipples = "huge">>
+		<<elseif ($slaves[$i].nipples == "cute") && (random(1,100) > 80)>>
+			Producing this river of milk @@.lime;makes her nipples nice and puffy.@@
+			<<set $slaves[$i].nipples = "puffy">>
+		<<elseif ($slaves[$i].nipples == "tiny")>>
+			Producing this river of milk @@.lime;makes her nipples grow to a nice size.@@
+			<<set $slaves[$i].nipples = "cute">>
+		<<elseif ($slaves[$i].areolae < 3) && (random(1,100) > 30+($slaves[$i].areolae*20))>>
+			Producing this river of milk @@.lime;broadens her areolae.@@
+			<<set $slaves[$i].areolae += 1>>
+		<</if>>
+		<</if>>
+	<<else>>
+		<<if ($slaves[$i].nipples != "huge")>>
+		<<if ($slaves[$i].nipples == "inverted")>>
+			<<if ($slaves[$i].fetish == "masochist") && ($slaves[$i].fetishKnown == 1)>>
+			Having the milkers constantly haul her inverted nipples out is @@.hotpink;extremely uncomfortable; she loves it.@@
+			<<set $slaves[$i].devotion += 3>>
+			<<else>>
+			Having the milkers constantly haul her inverted nipples out is @@.mediumorchid;extremely uncomfortable.@@
+			<<set $slaves[$i].devotion -= 3>>
+			<</if>>
+			<<if (random(1,100) > 50)>>
+			The constant suction @@.lime;permanently protrudes them,@@ and
+			<<if (random(1,2) == 1)>>
+				it turns out they're absolutely massive.
+				<<set $slaves[$i].nipples = "huge">>
+			<<else>>
+				it turns out they're nice and puffy.
+				<<set $slaves[$i].nipples = "puffy">>
+			<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].nipples == "partially inverted")>>
+			<<if ($slaves[$i].fetish == "masochist") && ($slaves[$i].fetishKnown == 1)>>
+			Having the milkers constantly haul her inverted nipples out is @@.hotpink;quite uncomfortable; she loves it.@@
+			<<set $slaves[$i].devotion += 1>>
+			<<else>>
+			Having the milkers constantly haul her inverted nipples out is @@.mediumorchid;quite uncomfortable.@@
+			<<set $slaves[$i].devotion -= 1>>
+			<</if>>
+			<<if (random(1,100) > 30)>>
+			The constant suction @@.lime;permanently protrudes them,@@ and
+			<<if (random(1,2) == 1)>>
+				it turns out they're pretty cute.
+				<<set $slaves[$i].nipples = "cute">>
+			<<else>>
+				it turns out they're nice and puffy.
+				<<set $slaves[$i].nipples = "puffy">>
+			<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].nipples == "tiny") && (random(1,100) > 50)>>
+			Producing milk @@.lime;makes her nipples grow to a nice size.@@
+			<<set $slaves[$i].nipples = "cute">>
+		<</if>>
+		<</if>>
+	<</if>>
+
+<</if>> /* CLOSES BREAST MILKING */
+
+<<if ($slaves[$i].balls > 0)>>
+
+	<<set $cumSlaves += 1>>
+	<<set $cum = cumAmount($slaves[$i])>>
+
+	<<if $slaves[$i].lactation > 0>>
+		Her
+	<<else>>
+		$slaves[$i].slaveName's
+	<</if>>
+
+	<<if $slaves[$i].dick > 0>>
+		<<if ($slaves[$i].dick > 6)>>
+			inhuman
+		<<elseif ($slaves[$i].dick > 5)>>
+			massive
+		<<elseif ($slaves[$i].dick > 4)>>
+			big
+		<<elseif ($slaves[$i].dick > 3)>>
+			sizeable
+		<<elseif ($slaves[$i].dick > 2)>>
+			moderate
+		<<elseif ($slaves[$i].dick > 1)>>
+			little
+		<<else>>
+			tiny
+		<</if>>
+		prick is
+		<<if $slaves[$i].lactation > 0>>
+			also
+		<</if>>
+		machine-milked
+	<<else>>
+		butt is machine-fucked
+	<</if>>
+	to extract the cum from her
+	<<if !$slaves[$i].scrotum>>
+		invisible
+	<<else>>
+		<<switch $slaves[$i].balls>>
+		<<case 10>>inhuman
+		<<case 9>>titanic
+		<<case 8>>gigantic
+		<<case 7>>monstrous
+		<<case 6>>huge
+		<<case 5>>pendulous
+		<<case 4>>swinging
+		<<case 3>>big
+		<<case 2>>average
+		<<case 1>>pathetic
+		<<default>>invisible
+		<</switch>>
+	<</if>>
+	<<if $slaves[$i].drugs == "testicle enhancement">>
+		balls, relieving them of the excessive cum production caused by the testicle enhancement drugs.
+	<<else>>
+		balls.
+	<</if>>
+
+	<<set $hormones = $slaves[$i].hormones>>
+	<<if $hormones < -1>>
+		Her internal chemistry is perfectly suited to cum production.
+	<<elseif $hormones < 0>>
+		Her hormonal balance favors cum production.
+	<<elseif $hormones > 0>>
+		Her hormonal balance impedes cum production.
+	<<elseif $hormones > 1>>
+		Her internal chemistry is poorly suited to cum production.
+	<</if>>
+
+	<<if $slaves[$i].scrotum == 0>>
+		She does produce cum despite her apparent ballslessness, but less than she would if they weren't hidden inside her.
+	<</if>>
+
+	<<if $slaves[$i].prostate>>
+		<<if $slaves[$i].prostate > 1>>
+			Her hyperactive prostate increases the volume of her ejaculations and promotes good semen production.
+		<</if>>
+	<<else>>
+		Her lack of a prostate reduces the health and volume of her ejaculations.
+	<</if>>
+
+	<<if ($slaves[$i].devotion > 50)>>
+		She's so happy that her mental state has a positive impact on her semen production.
+	<<elseif ($slaves[$i].devotion < -50)>>
+		She's so unhappy that her mental state has a negative impact on her semen production.
+	<</if>>
+
+	<<if ($slaves[$i].health > 50)>>
+		Her shining health helps her really produce.
+	<<elseif ($slaves[$i].health < -50)>>
+		Her poor health impedes semen production.
+	<</if>>
+
+	<<if ($slaves[$i].assignment == "work in the dairy")>>
+		<<if ($dairyStimulatorsUpgrade == 1)>>
+			<<if ($dairyStimulatorsSetting > 0)>>
+				<<set $cum += $cum*(0.2*($dairyStimulatorsSetting+$dairyRestraintsSetting+Math.trunc((50-$slaves[$i].age)/20)))>>
+			<</if>>
+			<<if ($slaves[$i].chem > 360)>>
+				<<set $cum = Math.trunc($cum*0.6)>>
+			<<elseif ($slaves[$i].chem > 100)>>
+				<<set $cum = Math.trunc($cum*((600-$slaves[$i].chem)/600))>>
+			<</if>>
+		<<elseif ($Milkmaid != 0)>>
+			<<if ($Milkmaid.dick > 4) && canAchieveErection($Milkmaid)>>
+				$Milkmaid.slaveName sometimes stands in for the machines, which is a polite way of saying she sometimes fucks $slaves[$i].slaveName's ass to help her cum.
+				<<set $cum += $cum*0.2>>
+			<</if>>
+		<</if>>
+	<<elseif ($slaves[$i].assignment == "be confined in the arcade")>>
+		<<set $cum = $cum*0.5>>
+	<</if>>
+
+	<<set $cum = Math.trunc($cum)>>
+	<<if $cum < 1>>
+		<<set $cum = 1>>
+	<</if>>
+	<<set $slaves[$i].cum += $cum>>
+	<<set $cumTotal += $cum>>
+
+	<<if ($arcologies[0].FSPastoralist == "unset")>>
+		<<set $seed = ($cum*random(25,35))>>
+		She produces <<print $cum>> deciliters of cum over the week; the fresh ejaculate is sold for @@.yellowgreen;¤<<print $seed>>.@@
+	<<elseif $arcologies[0].FSPastoralistLaw == 1>>
+		<<set $seed = ($cum*(random(40,50)))>>
+		She produces <<print $cum>> deciliters of cum over the week; the fresh ejaculate, which is in extremely high demand as one of $arcologies[0].name's few legal sources of animal protein, is sold for @@.yellowgreen;¤<<print $seed>>.@@
+	<<else>>
+		<<set $seed = ($cum*(random(25,35)+Math.trunc($arcologies[0].FSPastoralist/10)))>>
+		She produces <<print $cum>> deciliters of cum over the week; the fresh ejaculate, which is in high demand given the new cultural preference for slave products, is sold for @@.yellowgreen;¤<<print $seed>>.@@
+	<</if>>
+	<<slavePaid $slaves[$i] $seed>>
+
+	<<if ($slaves[$i].energy > 95)>>
+		Getting her dick constantly milked is almost as good as getting constant blowjobs as far as she's concerned. @@.hotpink;She is happy@@ to have her member receive so much attention.
+		<<set $slaves[$i].devotion += 1>>
+	<</if>>
+
+	<<if $slaves[$i].need>>
+		Her cock and balls are milked so thoroughly that she's involuntarily sexually sated, regardless of her feelings and tastes.
+		<<set $slaves[$i].need = 0>>
+	<</if>>
+
+	<<if ($slaves[$i].hormones > 0)>>
+		Since she cannot maintain an erection, she requires @@.gold;painful@@ and @@.mediumorchid;degrading@@ anal electrostimulation to produce.
+		<<set $slaves[$i].devotion -= 2>>
+		<<set $slaves[$i].trust -= 2>>
+		<<if ($slaves[$i].anus == 0)>>
+			The electrostimulator @@.lime;breaks in her virgin asshole.@@
+			<<set $slaves[$i].anus = 1>>
+		<</if>>
+	<<elseif ($slaves[$i].devotion <= 20)>>
+		Since she's unaroused by her situation, she requires @@.gold;painful@@ and @@.mediumorchid;degrading@@ anal electrostimulation to produce.
+		<<set $slaves[$i].devotion -= 2>>
+		<<set $slaves[$i].trust -= 2>>
+		<<if ($slaves[$i].anus == 0)>>
+			The electrostimulator @@.lime;breaks in her virgin asshole.@@
+			<<set $slaves[$i].anus = 1>>
+		<</if>>
+	<</if>>
+
+	<<if ($slaves[$i].balls < 3)>>
+		<<if ($slaves[$i].balls < 2)>>
+			<<if (random(1,100) > 70)>>
+				Constant semen production and continual emptying and refilling @@.lime;increases the size of her tiny testicles.@@
+				<<set $slaves[$i].balls += 1>>
+			<</if>>
+		<<elseif (random(1,100) > 90)>>
+			Constant semen production and continual emptying and refilling @@.lime;increases the size of her small testicles.@@
+			<<set $slaves[$i].balls += 1>>
+		<</if>>
+	<</if>>
+
+<</if>> /* CLOSES COCK MILKING */
+
+<<if $slaves[$i].genes == "XX" && $slaves[$i].prostate > 0 && $slaves[$i].balls == 0 >>
+	Her female prostate fluid is considered an exotic delicacy.
+	<<set $fluid = $slaves[$i].prostate * $slaves[$i].energy/5 + 1 >>
+	<<if $slaves[$i].energy > 10 >>
+		<<if $slaves[$i].health > 50 >>
+			<<if $slaves[$i].energy > 90 >>
+				As a nympho, she has no trouble orgasming almost constantly.
+			<</if>>
+			<<set $fluid = $fluid*$slaves[$i].health/50 >>
+			Her shining health keeps her juices flowing.
+		<<elseif $slaves[$i].health < -50 >>
+			<<set $fluid = $fluid * (1 + $slaves[$i].health/50) >>
+			She is so unwell, she produces less than normal.
+		<</if>>
+	<<else>>
+		/* $slaves[$i].energy <= 10 */
+		Unfortunately, she is frigid and rarely reaches orgasm in spite of the intense automatic stimulation.
+	<</if>>
+	<<set $fluid = Math.clamp(Math.trunc($fluid),1,1000) >>
+	<<print $fluid >> deciliters of uncommon ejaculate is gathered during her milkings.
+	<<set $fluidSale = $fluid*random(40,50) >>
+	<<if $arcologies[0].FSPastoralist != "unset" && $arcologies[0].FSPastoralist > 30 >>
+		<<set $fluidSale = Math.trunc($fluidSale*(1 + ($arcologies[0].FSPastoralist-30)/140)) >> /* fully accepted parsoralism gives +50% on the price*/
+		Because of your arcology's cultural preferences, it comes with extra value.
+	<</if>>
+	It is sold for @@.yellowgreen;¤<<print $fluidSale>>.@@
+	<<slavePaid $slaves[$i] $fluidSale>>
+<</if>> /* CLOSES FEMALE PROSTATE FLUID GATHERING */
+
+<<if ($slaves[$i].behavioralQuirk == "fitness")>>
+	$slaves[$i].slaveName @@.hotpink;privately enjoys@@ the focus on her health and fitness that comes with being a cow.
+	<<set $slaves[$i].devotion += 1>>
+<</if>>
+
+/* FACILITY DECORATION IMPACTS */
+
+<<if $slaves[$i].assignment == "work in the dairy">>
+<<if $dairyDecoration != "standard">>
+<<set $seed = 0.0001*$FSSingleSlaveRep*($milk+5*$cum)>>
+<<switch $dairyDecoration>>
+<<case "Roman Revivalist">>
+	<<set $arcologies[0].FSRomanRevivalist += $seed>>
+<<case "Aztec Revivalist">>
+	<<set $arcologies[0].FSAztecRevivalist += $seed>>
+<<case "Egyptian Revivalist">>
+	<<set $arcologies[0].FSEgyptianRevivalist += $seed>>
+<<case "Edo Revivalist">>
+	<<set $arcologies[0].FSEdoRevivalist += $seed>>
+<<case "Arabian Revivalist">>
+	<<set $arcologies[0].FSArabianRevivalist += $seed>>
+<<case "Chinese Revivalist">>
+	<<set $arcologies[0].FSChineseRevivalist += $seed>>
+<<case "Chattel Religionist">>
+	<<set $arcologies[0].FSChattelReligionist += $seed>>
+<<case "Degradationist">>
+	<<set $arcologies[0].FSDegradationist += $seed>>
+<<case "Asset Expansionist">>
+	<<set $arcologies[0].FSAssetExpansionist += $seed>>
+<<case "Transformation Fetishist">>
+	<<set $arcologies[0].FSTransformationFetishist += $seed>>
+<<case "Gender Radicalist">>
+	<<set $arcologies[0].FSGenderRadicalist += $seed>>
+<<case "Gender Fundamentalist">>
+	<<set $arcologies[0].FSGenderFundamentalist += $seed>>
+<<case "Physical Idealist">>
+	<<set $arcologies[0].FSPhysicalIdealist += $seed>>
+<<case "Supremacist">>
+	<<set $arcologies[0].FSSupremacist += $seed>>
+<<case "Subjugationist">>
+	<<set $arcologies[0].FSSubjugationist += $seed>>
+<<case "Paternalist">>
+	<<set $arcologies[0].FSPaternalist += $seed>>
+<<case "Pastoralist">>
+	<<set $arcologies[0].FSPastoralist += $seed>>
+<<case "Maturity Preferentialist">>
+	<<set $arcologies[0].FSMaturityPreferentialist += $seed>>
+<<case "Youth Preferentialist">>
+	<<set $arcologies[0].FSYouthPreferentialist += $seed>>
+<<case "Body Purist">>
+	<<set $arcologies[0].FSBodyPurist += $seed>>
+<<case "Slimness Enthusiast">>
+	<<set $arcologies[0].FSSlimnessEnthusiast += $seed>>
+<</switch>>
+<</if>>
+<</if>>

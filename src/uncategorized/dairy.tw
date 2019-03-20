@@ -1,0 +1,372 @@
+:: Dairy [nobr]
+
+<<set $nextButton = "Back to Main", $nextLink = "Main", $returnTo = "Dairy", $showEncyclopedia = 1, $encyclopedia = "Dairy">>
+
+<<SlaveSort $DairyiIDs>>
+<<set _DL = $DairyiIDs.length, $dairySlaves = _DL>>
+
+<<if $dairyName != "the Dairy">>
+	<<set $dairyNameCaps = $dairyName.replace("the ", "The ")>>
+<</if>>
+
+<<if ($dairyRestraintsSetting != 2) || ($dairyRestraintsUpgrade != 1)>>
+	<<if $dairyStimulatorsSetting == 2>>
+		<<set $dairyStimulatorsSetting = 1>>
+	<</if>>
+	<<if $dairyPregSetting == 2>>
+		<<set $dairyPregSetting = 1>>
+	<</if>>
+	<<if $dairyFeedersSetting == 2>>
+		<<set $dairyFeedersSetting = 1>>
+	<</if>>
+<</if>>
+
+<<if ($Milkmaid != 0) && ($dairyRestraintsSetting == 2)>>
+	$Milkmaid.slaveName has been removed from her position as Milkmaid, since an industrialized dairy automates her duties.
+	<<removeJob $Milkmaid "be the Milkmaid">>
+	<br><br>
+<</if>>
+
+<<if ($dairySlaves > 1)>>
+	<<if $dairyFeedersSettingChanged == 1>>
+		In unison, the milking machines press their feeding phalli into the slaves' mouths and down their throats. Once situated, they begin to facefuck the slaves, who gag and struggle as they figure out how to breathe while this is going on. Once each slave is no longer panicking and is inhaling and exhaling regularly, there is a hydraulic sound and the transparent reservoir of feeding fluid near her head begins to drain. The slaves swallow desperately, their bellies beginning to swell with nutrition and drugs.<br><br>
+	<<elseif $dairyFeedersSettingChanged == -1>>
+		In unison, the milking machines withdraw their feeders from the slaves' throats. The slaves gag and cough, strings of feeding fluid and saliva running between their lips and the heads of the feeding phalli. These remain close to their faces so that the slaves can suck them off once they get hungry, which they will, very soon. The slaves' mouths and tongues are very tired, and most of them rest with their mouths open and their tongues hanging out.<br><br>
+	<</if>>
+	<<if $dairyPregSettingChanged == 1>>
+		<<for _Di = 0; _Di < _DL; _Di++>>
+			<<set _i = $slaveIndices[$DairyiIDs[_Di]]>>
+			<<if ($slaves[_i].vagina > -1) && ($slaves[_i].vagina < 3)>>
+				$slaves[_i].slaveName's milking machine ejects her, since it cannot fit the mandated dildo into her tight cunt.
+				<<removeJob $slaves[_i] "work in the dairy">>
+				<<set _DL--, _Di-->>
+			<</if>>
+		<</for>>
+		In unison, the milking machines withdraw their dildos from the pregnant slaves' vaginas. The auxiliary drug injectors hiss as the slaves are filled with drugs that promote natural lubrication. The slaves begin to shift awkwardly as they feel their pussies begin to drool slick female fluids. Once a machine judges that its slave's cunt is sufficiently wet, it readies a gigantic dildo. The slaves cannot see their own groins, but as soon as the heads of the dildos touch their pussylips, they begin to
+		<<if $dairyFeedersSetting < 2>>
+			struggle instinctively against their restraints, and the more energetic ones begin to weep.
+		<<else>>
+			struggle instinctively against their restraints.
+		<</if>>
+		As the massive phalli begin to ejaculate fertility drugs and semen, they drive all resistance out of the poor girls.<br><br>
+	<<elseif $dairyPregSettingChanged == -1>>
+		In unison, the milking machines withdraw their monstrous dildos from the pregnant slaves' stretched cunts. Their pussies' overcharged production of natural lubricant produces a gush of pent-up female fluids from each loose vagina as the phalli slide clear.
+		<<if $dairyFeedersSetting < 2>>
+			The slaves moan with relief at the sudden reduction in fullness. Being penetrated like that while pregnant must be quite uncomfortable.
+		<<else>>
+			The slaves are silent, since their mouths and throats are being fucked by the feeders, but most of them relax a little in their restraints.
+		<</if>>
+		The machines do replace the withdrawn dildos with more reasonably sized phalli and resume thrusting, but the slaves are relieved anyway.<br><br>
+	<</if>>
+	<<if $dairyStimulatorsSettingChanged == 1>>
+		<<for _Di = 0; _Di < _DL; _Di++>>
+			<<set _i = $slaveIndices[$DairyiIDs[_Di]]>>
+			<<if ($slaves[_i].anus < 3)>>
+				$slaves[_i].slaveName's milking machine ejects her, since it cannot fit its massive anal dildo up her tight asshole.
+				<<removeJob $slaves[_i] "work in the dairy">>
+				<<set _DL--, _Di-->>
+			<</if>>
+		<</for>>
+		In unison, the milking machines shove their dildos deep into slaves' anuses, ejaculating large quantities of lubricant deep inside their rectums. The slaves start in surprise at the sudden rush of warm slick fluid, and then relax as the phalli withdraw themselves from their butts. Their relief is short-lived, however, as their assholes are only empty for a moment. The reasonably sized dildos are replaced with dildos the size of horse cocks. As soon as the slaves feel the heads of these monstrous phalli press inexorably against their sphincters,
+		<<if $dairyFeedersSetting < 2>>
+			they begin to scream and struggle instinctively. As the constant assrape that will define their existences for the foreseeable future begins in earnest, their whining
+		<<else>>
+			they begin to struggle wildly. As the constant assrape that will define their existences for the foreseeable future begins in earnest, their wriggling
+		<</if>>
+		gradually diminishes as each slave is exhausted and slumps within her restraints. The machines take no notice, and continue the relentless sodomy.<br><br>
+	<<elseif $dairyStimulatorsSettingChanged == -1>>
+		In unison, the milking machines withdraw their gargantuan dildos from the slaves' loosened anuses.
+		<<if $dairyFeedersSetting < 2>>
+			Several of the more energetic slaves begin to cry quietly with relief
+		<<else>>
+			The slaves are silent, since their mouths and throats are being fucked by the feeders, but most of them slump against their machines with relief
+		<</if>>
+		as their sphincters gradually recover from wide open to merely gaping. The machines switch out the withdrawn dildos for phalli that are just large, but the slaves barely react at all as they are penetrated. After what their sphincters have been through, a merely big dick is nothing to them.<br><br>
+	<</if>>
+	<<if $dairyRestraintsSettingChanged == 1>>
+		<<if $dairyRestraintsSetting == 1>>
+			<<for _Di = 0; _Di < _DL; _Di++>>
+				<<set _i = $slaveIndices[$DairyiIDs[_Di]]>>
+				<<if ($slaves[_i].indentureRestrictions >= 2)>>
+					$slaves[_i].slaveName's milking machine declines to restrain her, since she is encoded as an indentured servant protected from restraint for milking.
+					<<removeJob $slaves[_i] "work in the dairy">>
+					<<set _DL--, _Di-->>
+				<</if>>
+			<</for>>
+			The next cow to stumble over to a milking machine to be drained is gently but firmly embraced by its restraints, allowing it to suck her dry and violate her without any regard for her feelings. Most of the cows accept this new wrinkle in their lives, since the restraints let them go afterward, and the milking machines bring temporary relief. Some, however, begin to regard the machines with concern.
+		<<else>>
+			The next cow to stumble over to a milking machine to be drained finds to her surprise that she is not restrained while it sucks her dry. She wiggles around experimentally, verifying that she is indeed free to pull herself away from its ministrations if she wishes. There's little actual impact on the cows' behavior, since they still need the relief the machines offer.
+		<</if>>
+		<br><br>
+	<<elseif $dairyRestraintsSettingChanged == -1>>
+		<<if $dairyRestraintsSetting == 1>>
+			<<for _Di = 0; _Di < _DL; _Di++>>
+				<<set _i = $slaveIndices[$DairyiIDs[_Di]]>>
+				<<if ($slaves[_i].indentureRestrictions >= 1)>>
+					$slaves[_i].slaveName's milking machine declines to restrain her, since she is encoded as an indentured servant protected from being restrained for milking.
+					<<removeJob $slaves[_i] "work in the dairy">>
+					<<set _DL--, _Di-->>
+				<</if>>
+			<</for>>
+			The next time a cow tries to get up after being milked, she finds to her sudden terror that the machine will not let her go. It continues to add fluids to her body, and remove them from her nipples, ignoring her mounting panic as she realizes that it's to be her new partner and lover, on a level far more intimate than any possible human relationship. The other cows approach their machines with trepidation, but the mounting pressure in their udders forces them to embrace their immurement despite their terror.
+		<<else>>
+			The next time a cow finishes an intensive milking period, her restraints loosen. She does not move for a long time, as though she is unable to believe that she is, at least in an immediate and local sense, free. Finally, she prises herself out of her milking machine's embrace, thick strings of fluid leading from it to her orifices as she pulls each one off of its corresponding port.
+		<</if>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<set $dairySlaves = $DairyiIDs.length, $dairyStimulatorsSettingChanged = 0, $dairyFeedersSettingChanged = 0, $dairyPregSettingChanged = 0, $dairyRestraintsSettingChanged = 0>>
+
+<<dairyDescriptionFS>>
+
+<<if $dairySlaves > 2>>
+	$dairyNameCaps is working steadily.
+	<<if ($dairyRestraintsUpgrade == 1) && ($dairyRestraintsSetting > 1)>>
+	Each cow is strapped in to her own milking machine. The machines are set up in rows, alternating forward and backward so that the cows are interleaved as closely as possible without touching.
+	<<if ($dairyFeedersUpgrade == 1) && ($dairyFeedersSetting > 0)>>
+		<<if $dairyFeedersSetting == 2>>
+		A phallic feeding tube completely fills each cow's mouth and throat, making it eerily quiet in there. Occasionally one of the cows convulses when a particularly long rush of food and drugs flows down her gullet.
+		<<else>>
+		When feeding is required, a phallus extends into cows' mouths.
+		<</if>>
+	<</if>>
+	<<if ($dairyStimulatorsUpgrade == 1) && ($dairyStimulatorsSetting > 0)>>
+		<<if $dairyStimulatorsSetting == 2>>
+		Every cow is being sodomized by a massive phallus. Most are pumping away gently, the strokes taking a long time to push the half-meter of shaft into each slave's rectum and pull it out again. When a slave's balls are ready to give cum, however, the pace quickens, and the agonized slave wriggles in involuntary desperation to escape until she finally stiffens, squirts, and slumps in exhaustion.
+		<<else>>
+		Each cow's anus is periodically fucked by a machine phallus that ejaculates hydration directly up her butt. When a slave's balls are ready to give cum, she is mercilessly sodomized until prostate stimulation forces an orgasm.
+		<</if>>
+	<</if>>
+	<<if ($dairyPregUpgrade == 1) && ($dairyPregSetting > 0)>>
+		<<if $dairyPregSetting == 2>>
+		Fertile cows' vagina's are constantly penetrated by huge dildos that ejaculate fertility drugs. The drugs produce excessive female lubrication, so the constant dildo rape fills $dairyName with occasional gushing noises.
+		<<else>>
+		The fertile cows are visibly pregnant.
+		<</if>>
+	<</if>>
+	<<else>>
+	The row of milking machines is available for cows to use.
+	<<if ($dairyRestraintsSetting > 0)>>
+		When they do, the machines gently restrain them until they are completely done.
+	<</if>>
+	<<if ($dairyFeedersUpgrade == 1) && ($dairyFeedersSetting > 0)>>
+		The machines mount convenient phallic feeders for slaves to suck for tasty food while they're milked.
+	<</if>>
+	<<if ($dairyPregUpgrade == 1) && ($dairyPregSetting > 0)>>
+		The fertile cows are visibly pregnant.
+	<</if>>
+	<<if ($dairyStimulatorsUpgrade == 1) && ($dairyStimulatorsSetting > 0)>>
+		The machines gently sodomize cows who need the extra nutrition and treatment the dildos can ejaculate into them<<if $seeDicks > 0>>, and fuck them more vigorously when they need help ejaculating.<</if>>
+	<</if>>
+	<</if>>
+<<elseif $bioreactorsXY+$bioreactorsXX+$bioreactorsHerm+$bioreactorsBarren > 0>>
+	$dairyNameCaps is quiet and calm. The only sounds are faint sucking and gushing noises.
+<<elseif $dairySlaves > 0>>
+	$dairyNameCaps is sparsely populated.
+<<elseif $Milkmaid != 0>>
+	$Milkmaid.slaveName is alone in $dairyName, and has nothing to do but clean and maintain the equipment.
+<<else>>
+	$dairyNameCaps is empty and desolate.
+	<<link "Decommission the dairy">>
+		<<set $dairy = 0, $dairyFeedersUpgrade = 0, $dairyPregUpgrade = 0, $dairyStimulatorsUpgrade = 0, $dairyDecoration = "standard", $dairyFeedersSetting = 0, $dairyPregSetting = 0, $dairyStimulatorsSetting = 0>>
+		<<for _i = 0; _i < $sectors.length; _i++>>
+		<<if $sectors[_i].type == "Dairy">>
+			<<set $sectors[_i].type = "Manufacturing">><<break>>
+		<</if>>
+		<</for>>
+		<<goto "Main">>
+	<</link>>
+<</if>>
+
+<<set _Tmult0 = Math.trunc($dairy*1000*$upgradeMultiplierArcology)>>
+<br>$dairyNameCaps can support $dairy milkers. [[Expand the dairy|Dairy][$cash -= _Tmult0, $dairy += 5]] //Costs ¤_Tmult0 and will increase upkeep costs//
+
+<<set _Tmult1 = Math.trunc(10000*$upgradeMultiplierArcology)>>
+<br>
+<<if $dairyFeedersUpgrade == 1>>
+	The milking machines can hold feeders in slaves' mouths and inject drugs into their bodies, ensuring ideal nutrition and production.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;The feeders are
+	<<if $dairyFeedersSetting == 2>>
+		''industrial.'' [[Moderate|Dairy][$dairyFeedersSetting = 1, $dairyFeedersSettingChanged = -1]]
+	<<elseif $dairyFeedersSetting == 1>>
+		''active.'' [[Inactive|Dairy][$dairyFeedersSetting = 0]]<<if ($seeExtreme != 0) && ($dairyRestraintsSetting == 2)>> | [[Industrial|Dairy][$dairyFeedersSetting = 2, $dairyFeedersSettingChanged = 1]]<</if>>
+	<<else>>
+		''inactive.'' [[Active|Dairy][$dairyFeedersSetting = 1]]
+	<</if>>
+<<else>>
+	$dairyNameCaps is equipped to feed and clean slaves normally. [[Upgrade the milking machines with intubators|Dairy][$cash -= _Tmult1, $dairyFeedersUpgrade = 1]] //Costs ¤_Tmult1 and will increase upkeep costs//
+<</if>>
+
+<br>
+<<if $dairyPregUpgrade == 1>>
+	$dairyNameCaps can support cow pregnancies.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;Fertile cows' wombs are
+	<<if $dairyPregSetting == 2>>
+		''industrially employed.'' [[Moderate|Dairy][$dairyPregSetting = 1, $dairyPregSettingChanged = -1]]
+	<<elseif $dairyPregSetting == 1>>
+		''for hire.'' [[Not for hire|Dairy][$dairyPregSetting = 0]]<<if ($seeExtreme != 0) && ($dairyRestraintsSetting == 2)>> | [[Industrial|Dairy][$dairyPregSetting = 2, $dairyPregSettingChanged = 1]]<</if>>
+	<<else>>
+		''not for hire.'' [[For hire|Dairy][$dairyPregSetting = 1]]
+	<</if>>
+<<else>>
+	$dairyNameCaps is not prepared to support cow pregnancies, and therefore cannot be used to contract out fertile slaves' wombs.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;[[Upgrade the dairy to support pregnancies|Dairy][$cash -= 2500, $dairyPregUpgrade = 1]] //Costs ¤2500 and will increase upkeep costs//
+<</if>>
+
+<br>
+<<if $dairyStimulatorsUpgrade == 1>>
+	The milking machines mount reciprocating dildos that can sodomize the slaves, delivering extra nutrition and pharmaceuticals. <<if $seeDicks > 0>>The prostate stimulation also serves to increase semen production, where appropriate.<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;The sodomizers are
+	<<if $dairyStimulatorsSetting == 2>>
+		''industrial,'' employing dildos the size of horse phalli. [[Moderate|Dairy][$dairyStimulatorsSetting = 1, $dairyStimulatorsSettingChanged = -1]]
+	<<elseif $dairyStimulatorsSetting == 1>>
+		''active.'' [[Deactivate|Dairy][$dairyStimulatorsSetting = 0]]<<if ($seeExtreme != 0) && ($dairyRestraintsSetting == 2)>> | [[Industrial|Dairy][$dairyStimulatorsSetting = 2, $dairyStimulatorsSettingChanged = 1]]<</if>>
+	<<else>>
+		''inactive.'' [[Activate|Dairy][$dairyStimulatorsSetting = 1]]
+	<</if>>
+<<else>>
+	$dairyNameCaps does not automatically sodomize. [[Upgrade the cockmilking machines with sodomizers|Dairy][$cash -= _Tmult1, $dairyStimulatorsUpgrade = 1]] //Costs ¤_Tmult1 and will increase upkeep costs//
+<</if>>
+
+<<set _Tmult2 = Math.trunc(5000*$upgradeMultiplierArcology)>>
+<<if ($dairyPregUpgrade == 2) || ($dairyStimulatorsSetting == 2)>>
+<br>
+<<if $dairyPrepUpgrade == 1>>
+	$dairyNameCaps features a preparatory raper designed to gape slaves for integration.
+<<else>>
+	$dairyNameCaps's industrial machines can only accept slaves with loose holes. [[Install a preparatory raper|Dairy][$cash -= _Tmult2, $dairyPrepUpgrade = 1]] //Costs ¤_Tmult2//
+<</if>>
+<</if>>
+
+<br>
+<<if $dairyRestraintsUpgrade == 1>>
+	$dairyNameCaps is equipped to restrain cows.
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;The cows are restrained
+	<<if $dairyRestraintsSetting == 2>>
+		''permanently,'' allowing use of industrial techniques even devoted cows would flinch at. [[Only during milking|Dairy][$dairyRestraintsSetting = 1, $dairyFeedersSettingChanged = -1]]
+	<<elseif $dairyRestraintsSetting == 1>>
+		''when being milked,'' giving the machines full play. [[Free range|Dairy][$dairyRestraintsSetting = 0, $dairyFeedersSettingChanged = -1]] | [[Permanent machine milking|Dairy][$dairyRestraintsSetting = 2, $dairyFeedersSettingChanged = 1]]
+	<<else>>
+		''only when necessary,'' allowing obedient cows freedom to range around. [[Restrain the cows|Dairy][$dairyRestraintsSetting = 1, $dairyFeedersSettingChanged = 1]]
+	<</if>>
+<<else>>
+	$dairyNameCaps is not equipped to restrain recalcitrant cows. [[Equip the dairy with milking racks|Dairy][$cash -= _Tmult2, $dairyRestraintsUpgrade = 1]] //Costs ¤_Tmult2//
+<</if>>
+
+<<if ($bioreactorsAnnounced != 0) && ($dairyRestraintsSetting == 2) && ($dairyStimulatorsSetting == 2) && ($dairyFeedersSetting == 2)>>
+	<br>$dairyNameCaps will
+	<<if $createBioreactors == 1>>
+		''convert perfected cows into equipment,'' removing them from slave status, permanently. [[Cancel conversion|Dairy][$createBioreactors = 0]]
+	<<else>>
+		''leave perfected cows as slaves.'' [[Convert them into equipment|Dairy][$createBioreactors = 1]]
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSSlimnessEnthusiast > 80>>
+	<br>
+	<<if $dairySlimMaintainUpgrade == 1>>
+		Thanks to advances precipitated by the arcology's commitment to the fashion of slimmer slaves, $dairyName has been updated with optimized milkers for small breasts, and a customized drug regimen to extract maximum output while maintaining small breast sizes.
+		<<if $dairySlimMaintain == 1>>
+			$dairyNameCaps is currently set to limit the breast growth of slimmer slaves while maximizing their milk output. [[Return to Normal Operation|Dairy][$dairySlimMaintain = 0]] //NOTE: This may allow the automatic administration of lactation inducing drugs//
+		<<else>>
+			$dairyNameCaps is currently set to normal operation, and will allow the breasts of slimmer slaves to expand due to milking. [[Set milkers to preserve small breast sizes|Dairy][$dairySlimMaintain = 1]] //NOTE: This will NOT remove existing lactation implants//
+		<</if>>
+	<<else>>
+		Dairy cows' breasts will expand normally as a result of the milking process. [[Optimize the milking process to preserve small breast sizes|Dairy][$cash -= _Tmult2, $dairySlimMaintainUpgrade = 1, $dairySlimMaintain = 1]] //Costs ¤_Tmult2//
+	<</if>>
+<<elseif $arcologies[0].FSSlimnessEnthusiast > 20>>
+	<br>
+	<<if $dairySlimMaintainUpgrade == 1>>
+		Thanks to advances precipitated by the arcology's commitment to the fashion of slimmer slaves, $dairyName has been re-engineered so that its milking process can now prevent the unwanted breast expansion of fashionably slim slaves.
+		<<if $dairySlimMaintain == 1>>
+			$dairyNameCaps is currently set to limit the breast growth of slimmer slaves. [[Return to Normal Operation|Dairy][$dairySlimMaintain = 0]] //NOTE: This may allow the automatic administration of lactation inducing drugs//
+		<<else>>
+			$dairyNameCaps is currently set to normal operation, and will allow the breasts of slimmer slaves to expand due to milking. [[Set milkers to preserve small breast sizes|Dairy][$dairySlimMaintain = 1]] //NOTE: This will NOT remove existing lactation implants//
+		<</if>>
+	<<else>>
+		Dairy cows' breasts will expand normally as a result of the milking process. [[Optimize the milking process to preserve small breast sizes|Dairy][$cash -= _Tmult2, $dairySlimMaintainUpgrade = 1, $dairySlimMaintain = 1]] //Costs ¤_Tmult2//
+	<</if>>
+<</if>>
+
+<<if $arcologies[0].FSPaternalist == "unset">>
+	<br>
+	<<if $dairyUpgradeMenials == 1>>
+		<<if $menialBioreactors > 0>>
+			Menial Bioreactors are restrained here and there, in every unused space. Hoses run from their nipples<<if $seeDicks != 0>> and penises<</if>> into the machinery, and from the machinery into their mouths<<if $seeDicks != 100>>, anuses, and the pussies beneath their pregnant bellies<<else>> and anuses<</if>>.
+		<<else>>
+			In addition to the standard milking machines, $dairyName includes numerous hose hookups for menial Bioreactors. When there's space, any menial milkers you own can be placed in any empty space and connected.
+		<</if>>
+	<<else>>
+		There is no provision for milking menial Bioreactors. [[Add hose hookups|Dairy][$cash -= _Tmult1, $dairyUpgradeMenials = 1]] //Costs ¤_Tmult1//
+	<</if>>
+<</if>>
+
+<<if ($dairyPregSetting > 1) || ($dairyFeedersSetting > 1) || ($dairyStimulatorsSetting > 1)>>
+	<br><br>@@.yellow;WARNING:@@ current milking machine settings may have irreversible effects on cows.
+<</if>>
+
+<br><br>
+<<if ($Milkmaid != 0)>>
+	<<set $Flag = 2>>
+	<<include "Slave Summary">>
+	<<if canAchieveErection($Milkmaid)>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<<if $milkmaidImpregnates == 1>>
+			Keeping the cows pregnant is part of her job. [[Order her to stop impregnating|Dairy][$milkmaidImpregnates = 0]]
+		<<else>>
+			She could be directed to keep the cows pregnant herself. [[Order her to impregnate|Dairy][$milkmaidImpregnates = 1]]
+		<</if>>
+	<</if>>
+<<elseif $dairyRestraintsSetting > 1>>
+	//Current milking machine settings make a Milkmaid superfluous by replacing her duties with automation//
+<<else>>
+	You do not have a slave serving as a Milkmaid. [[Appoint one|Milkmaid Select]]
+<</if>>
+
+
+<br><br>
+<<if ($dairy <= $dairySlaves+_seed)>>
+	''$dairyNameCaps is full and cannot hold any more slaves''
+<<elseif ($slaves.length > $dairySlaves)>>
+	<<link "''Send a slave to $dairyName''">>
+		<<set $leaveDairy = 0>>
+		<<replace #dairyComingGoing>>
+			<<set $Flag = 0>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<</if>>
+
+<<if $dairySlaves > 0>>
+	| <<link "''Bring a slave out of $dairyName''">>
+		<<set $leaveDairy = 1>>
+		<<replace #dairyComingGoing>>
+			<<set $Flag = 1>>
+			<<include "Slave Summary">>
+		<</replace>>
+	<</link>>
+<<else>>
+	<br><br>//$dairyNameCaps is empty for the moment.<br>//
+<</if>>
+
+<<set _seed = $bioreactorsXY+$bioreactorsXX+$bioreactorsHerm+$bioreactorsBarren>>
+<<if _seed > 1>>
+	//In addition, _seed milking machines have biological components installed in them.//
+<<elseif _seed == 1>>
+	//In addition, one milking machine has biological components installed in it.//
+<</if>>
+
+<span id="dairyComingGoing">
+<<if $leaveDairy == 0>>
+	<<set $Flag = 0>>
+	<<include "Slave Summary">>
+<<else>>
+	<<set $Flag = 1>>
+	<<include "Slave Summary">>
+<</if>>
+</span>
+
+<<unset $Flag>>
+
+<br><br>Rename $dairyName: <<textbox "$dairyName" $dairyName "Dairy">> //Use a noun or similar short phrase//

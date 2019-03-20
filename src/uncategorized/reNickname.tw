@@ -1,0 +1,1005 @@
+:: RE nickname [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump">>
+<<if $seed == 1>>
+	<<set $returnTo = "RIE Eligibility Check">>
+<<else>>
+	<<set $returnTo = "Next Week">>
+<</if>>
+
+<<set $activeSlave = $eventSlave>>
+
+/* NICKNAME QUALIFICATION CHECKS */
+
+<<set $qualifiedNicknames = []>>
+
+<<if ($activeSlave.nationality != 0)>>
+	<<set $qualifiedNicknames.push("nationality")>>
+<</if>>
+
+<<if ($seeRace == 1)>>
+<<if ($activeSlave.race == "white")>>
+	<<set $qualifiedNicknames.push("white")>>
+<<elseif ($activeSlave.race == "asian")>>
+	<<set $qualifiedNicknames.push("asian")>>
+<<elseif ($activeSlave.race == "latina")>>
+	<<set $qualifiedNicknames.push("latina")>>
+<<elseif ($activeSlave.race == "black")>>
+	<<set $qualifiedNicknames.push("black")>>
+<<elseif ($activeSlave.race == "pacific islander")>>
+	<<set $qualifiedNicknames.push("pacific islander")>>
+<<elseif ($activeSlave.race == "southern european")>>
+	<<set $qualifiedNicknames.push("southern european")>>
+<<elseif ($activeSlave.race == "amerindian")>>
+	<<set $qualifiedNicknames.push("amerindian")>>
+<<elseif ($activeSlave.race == "semitic")>>
+	<<set $qualifiedNicknames.push("semitic")>>
+<<elseif ($activeSlave.race == "middle eastern")>>
+	<<set $qualifiedNicknames.push("middle eastern")>>
+<<elseif ($activeSlave.race == "indo-aryan")>>
+	<<set $qualifiedNicknames.push("indo-aryan")>>
+<<elseif ($activeSlave.race == "mixed race")>>
+	<<set $qualifiedNicknames.push("mixed race")>>
+<</if>>
+<</if>>
+
+<<if ($activeSlave.boobs < 500) && ($activeSlave.butt < 3) && ($activeSlave.weight <= 10)>>
+	<<set $qualifiedNicknames.push("girlish")>>
+<</if>>
+<<if ($activeSlave.anus > 2) || ($activeSlave.vagina > 2)>>
+	<<set $qualifiedNicknames.push("loose")>>
+<</if>>
+<<if ($activeSlave.boobs < 500) && ($activeSlave.butt < 3) && ($activeSlave.dick > 0)>>
+	<<set $qualifiedNicknames.push("trap")>>
+<</if>>
+<<if ($activeSlave.boobs > 500) && ($activeSlave.butt > 3) && ($activeSlave.dick > 0)>>
+	<<set $qualifiedNicknames.push("trans")>>
+<</if>>
+<<if ($activeSlave.weight > 30)>>
+	<<set $qualifiedNicknames.push("chubby")>>
+<</if>>
+<<if ($activeSlave.muscles > 30)>>
+	<<set $qualifiedNicknames.push("muscles")>>
+<</if>>
+<<if ($activeSlave.energy > 95)>>
+	<<set $qualifiedNicknames.push("buttslut")>>
+	<<set $qualifiedNicknames.push("cumslut")>>
+	<<set $qualifiedNicknames.push("humiliation")>>
+	<<set $qualifiedNicknames.push("submissive")>>
+<</if>>
+<<if ($activeSlave.fetish == "buttslut") && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60)>>
+	<<set $qualifiedNicknames.push("buttslut")>>
+<</if>>
+<<if ($activeSlave.fetish == "cumslut") && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60)>>
+	<<set $qualifiedNicknames.push("cumslut")>>
+<</if>>
+<<if ($activeSlave.fetish == "humiliation") && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60)>>
+	<<set $qualifiedNicknames.push("humiliation")>>
+<</if>>
+<<if ($activeSlave.fetish == "submissive") && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60)>>
+	<<set $qualifiedNicknames.push("submissive")>>
+<</if>>
+<<if ($activeSlave.oralCount+$activeSlave.vaginalCount+$activeSlave.analCount > 500)>>
+	<<set $qualifiedNicknames.push("veteran")>>
+<</if>>
+<<if (($activeSlave.boobs*$activeSlave.lactation) > 1000)>>
+	<<set $qualifiedNicknames.push("cow")>>
+<</if>>
+<<if ($activeSlave.oralSkill <= 30) && ($activeSlave.analSkill <= 30)>>
+	<<set $qualifiedNicknames.push("novice")>>
+<</if>>
+<<if ($activeSlave.ID == $HeadGirl.ID)>>
+	<<set $qualifiedNicknames.push("head girl")>>
+<</if>>
+<<if ($activeSlave.ID == $Bodyguard.ID)>>
+	<<set $qualifiedNicknames.push("bodyguard")>>
+<</if>>
+<<if ($activeSlave.ID == $Concubine.ID)>>
+	<<set $qualifiedNicknames.push("Concubine")>>
+<</if>>
+<<if ($activeSlave.ID == $Attendant.ID)>>
+	<<set $qualifiedNicknames.push("Attendant")>>
+<</if>>
+<<if ($activeSlave.ID == $Madam.ID)>>
+	<<set $qualifiedNicknames.push("Madam")>>
+<</if>>
+<<if ($activeSlave.ID == $DJ.ID)>>
+	<<set $qualifiedNicknames.push("DJ")>>
+<</if>>
+<<if ($activeSlave.ID == $Recruiter.ID)>>
+	<<set $qualifiedNicknames.push("Recruiter")>>
+<</if>>
+<<if ($activeSlave.ID == $Wardeness.ID)>>
+	<<set $qualifiedNicknames.push("Wardeness")>>
+<</if>>
+<<if ($activeSlave.ID == $Milkmaid.ID)>>
+	<<set $qualifiedNicknames.push("Milkmaid")>>
+<</if>>
+<<if ($activeSlave.ID == $Milkmaid.ID) && $activeSlave.dick > 5 && canPenetrate($activeSlave) && $cumSlaves > 3>>
+	<<set $qualifiedNicknames.push("Collectrix")>>
+<</if>>
+<<if ($activeSlave.ID == $Stewardess.ID)>>
+	<<set $qualifiedNicknames.push("Stewardess")>>
+<</if>>
+<<if ($activeSlave.ID == $Schoolteacher.ID)>>
+	<<set $qualifiedNicknames.push("Schoolteacher")>>
+<</if>>
+<<if ($activeSlave.assignment == "be a subordinate slave")>>
+	<<set $qualifiedNicknames.push("server")>>
+<</if>>
+<<if ($activeSlave.nipples == "huge") || ($activeSlave.nipples == "puffy")>>
+	<<set $qualifiedNicknames.push("nipples")>>
+<</if>>
+<<if ($activeSlave.areolae > 2)>>
+	<<set $qualifiedNicknames.push("areolae")>>
+<</if>>
+<<if ($activeSlave.lips > 40)>>
+	<<set $qualifiedNicknames.push("lips")>>
+<</if>>
+<<if ($activeSlave.labia > 1) && ($activeSlave.vagina > -1)>>
+	<<set $qualifiedNicknames.push("labia")>>
+<</if>>
+<<if ($activeSlave.age > 35)>>
+	<<set $qualifiedNicknames.push("old")>>
+<</if>>
+<<if ($activeSlave.amp == 1)>>
+	<<set $qualifiedNicknames.push("amp")>>
+<</if>>
+<<if ($activeSlave.eyes == -2)>>
+	<<set $qualifiedNicknames.push("blind")>>
+<</if>>
+<<if ($activeSlave.boobsImplant > 1000) || ($activeSlave.buttImplant > 3)>>
+	<<set $qualifiedNicknames.push("implants")>>
+<</if>>
+<<if ($activeSlave.preg > 5)>>
+	<<set $qualifiedNicknames.push("preg")>>
+<</if>>
+<<if ($activeSlave.dick > 4)>>
+	<<set $qualifiedNicknames.push("hung")>>
+<</if>>
+<<if ($activeSlave.dick > 0) && ($activeSlave.balls == 0)>>
+	<<set $qualifiedNicknames.push("gelding")>>
+<</if>>
+<<if ($activeSlave.dick == 1)>>
+	<<set $qualifiedNicknames.push("micropenis")>>
+<</if>>
+<<if ($activeSlave.boobs >= 800)>>
+	<<set $qualifiedNicknames.push("boobs")>>
+<</if>>
+<<if ($activeSlave.butt > 5)>>
+	<<set $qualifiedNicknames.push("butt")>>
+<</if>>
+<<if ($activeSlave.vagina == 0)>>
+	<<set $qualifiedNicknames.push("virgin")>>
+<</if>>
+<<if ($activeSlave.height >= 185)>>
+	<<set $qualifiedNicknames.push("tall")>>
+<</if>>
+<<if ($activeSlave.height < 150)>>
+	<<set $qualifiedNicknames.push("short")>>
+<</if>>
+<<if ($activeSlave.vagina == 1) && ($activeSlave.vaginalSkill <= 10)>>
+	<<set $qualifiedNicknames.push("vaginalWhiner")>>
+<</if>>
+<<if ($activeSlave.anus == 1) && ($activeSlave.analSkill <= 10)>>
+	<<set $qualifiedNicknames.push("analWhiner")>>
+<</if>>
+
+<<if ($qualifiedNicknames.length == 0)>>
+	<<goto "RIE Eligibility Check">>
+<<else>>
+
+<<set $nickname = $qualifiedNicknames.random()>>
+
+<<if ($nickname is "nationality")>>
+	<<if ($activeSlave.nationality is "Afghan")>>
+		<<set $nickname to either("'Bactrian'", "'Chai Girl'", "'Kabul'", "'Pashtun'", "'Poppy'", "'Taliban'")>>
+	<<elseif ($activeSlave.nationality is "Albanian")>>
+		<<set $nickname to either("'Hoxha'", "'Tirana'")>>
+	<<elseif ($activeSlave.nationality is "Algerian")>>
+		<<set $nickname to either("'Casbah'", "'Corsair'", "'Djamila'", "'Hassiba'", "'Pied-Noir'", "'Zhora'", "Harki")>>
+	<<elseif ($activeSlave.nationality is "American")>>
+		<<set $nickname to either("'Burger'", "'Chicago'", "'Hollywood'", "'Lady Liberty'", "'Lone Star'", "'New York'", "'Washington'", "'Yankee'")>>
+	<<elseif ($activeSlave.nationality is "Andorran")>>
+		<<set $nickname to either("'Ski Trip'", "'Skossyreff'")>>
+	<<elseif ($activeSlave.nationality is "Angolan")>>
+		<<set $nickname to either("'Cabinda'", "'Luanda'")>>
+	<<elseif ($activeSlave.nationality is "Antiguan")>>
+		<<set $nickname to either("'Barbuda'", "'Redonda'")>>
+	<<elseif ($activeSlave.nationality is "Argentinian")>>
+		<<set $nickname to either("'Blanca'", "'Buenos Aires'", "'Evita'", "'Gaucha'", "'Macri'", "'Malvinas'")>>
+	<<elseif ($activeSlave.nationality is "Armenian")>>
+		<<set $nickname to either("'Hachik'", "'Khorovats'", "'Rabiz'")>>
+	<<elseif ($activeSlave.nationality is "Aruban")>>
+		<<set $nickname to either("'Caquetio'", "'Oranjestad'")>>
+	<<elseif ($activeSlave.nationality is "Australian")>>
+		<<set $nickname to either("'Abo'", "'Aussie'", "'Bogan'", "'Convict'", "'Crikey'", "'Down Under'", "'Mad'", "'Sheila'")>>
+	<<elseif ($activeSlave.nationality is "Austrian")>>
+		<<set $nickname to either("'Fut'", "'Maria'", "'Wiener'")>>
+	<<elseif ($activeSlave.nationality is "Azerbaijani")>>
+		<<set $nickname to either("'Baku'", "'Black January'")>>
+	<<elseif ($activeSlave.nationality is "Bahamian")>>
+		<<set $nickname to either("'Columbus'", "'Nassau'")>>
+	<<elseif ($activeSlave.nationality is "Bahraini")>>
+		<<set $nickname to either("'Manama'", "'Two Seas'")>>
+	<<elseif ($activeSlave.nationality is "Bangladeshi")>>
+		<<set $nickname to either("'Bengali'", "'Bhibhi'", "'Dhaka'", "'Sweatshop'", "'Tiger'")>>
+	<<elseif ($activeSlave.nationality is "Barbadian")>>
+		<<set $nickname to either("'Bajan'", "'Bridgetown'", "'Sugar Cane'")>>
+	<<elseif ($activeSlave.nationality is "Belarusian")>>
+		<<set $nickname to either("'Bulbash'", "'Minsk'", "'Šliucha'", "'Stalker'", "'White Russian'")>>
+	<<elseif ($activeSlave.nationality is "Belgian")>>
+		<<set $nickname to either("'Antwerp'", "'Brussels'", "'Sprout'", "'Straatmeid'", "'Truttemie'", "'Waffles'")>>
+	<<elseif ($activeSlave.nationality is "Belizean")>>
+		<<set $nickname to either("'Belmopan'", "'Great Blue Hole'")>>
+	<<elseif ($activeSlave.nationality is "Beninese")>>
+		<<set $nickname to either("'Cotonou'", "'Dahomey'", "'Porto-Novo'")>>
+	<<elseif ($activeSlave.nationality is "Bermudian")>>
+		<<set $nickname to either("'Bermuda Triangle'", "'Hamilton'")>>
+	<<elseif ($activeSlave.nationality is "Bhutanese")>>
+		<<set $nickname to either("'Druk'", "'Thimphu'")>>
+	<<elseif ($activeSlave.nationality is "Bissau-Guinean")>>
+		<<set $nickname to either("'Bissau'", "'Bolama'", "'Kriol'")>>
+	<<elseif ($activeSlave.nationality is "Bolivian")>>
+		<<set $nickname to either("'La Paz'", "'Sucre'", "'Titicaca'")>>
+	<<elseif ($activeSlave.nationality is "Bosnian")>>
+		<<set $nickname to either("'Herzegovina'", "'Sarajevo'")>>
+	<<elseif ($activeSlave.nationality is "Brazilian")>>
+		<<set $nickname to either("'7-1'", "'Bunda'", "'Dago'", "'Favelada'", "'Hue'", "'Ipanema'", "'Monkey'", "'São Paulo'", "'Zika'")>>
+	<<elseif ($activeSlave.nationality is "British")>>
+		<<set $nickname to either("'Brit'", "'Britbong'", "'Chav'", "'Fish'n'Chips'", "'Limey'", "'London'", "'Pikey'", "'Pommie'", "'Rosbif'", "'Scrubber'", "'Slag'", "'Slapper'")>>
+	<<elseif ($activeSlave.nationality is "Bruneian")>>
+		<<set $nickname to either("'Abode of Peace'", "'Bandar Seri Begawan'")>>
+	<<elseif ($activeSlave.nationality is "Bulgarian")>>
+		<<set $nickname to either("'Sofia'", "'Zhivkov'")>>
+	<<elseif ($activeSlave.nationality is "Burkinabé")>>
+		<<set $nickname to either("'Ouagadougou'", "'Upper Volta'")>>
+	<<elseif ($activeSlave.nationality is "Burmese")>>
+		<<set $nickname to either("'Burma Shave'", "'Burmese Python'", "'Golden Triangle'", "'Rangoon'")>>
+	<<elseif ($activeSlave.nationality is "Burundian")>>
+		<<set $nickname to either("'Bujumbura'", "'Heha'")>>
+	<<elseif ($activeSlave.nationality is "Cambodian")>>
+		<<set $nickname to either("'Angkor Wat'", "'Holiday in Cambodia'", "'Phnom Penh'")>>
+	<<elseif ($activeSlave.nationality is "Cameroonian")>>
+		<<set $nickname to either("'Douala'", "'Yaoundé'")>>
+	<<elseif ($activeSlave.nationality is "Canadian")>>
+		<<set $nickname to either("'Canuck'", "'Loonie'", "'Maple Syrup'", "'Mountie'", "'Poutine'", "'Quebec'", "'Toronto'", "'Vancouver'", "'Yukon'")>>
+	<<elseif ($activeSlave.nationality is "Cape Verdean")>>
+		<<set $nickname to either("'Cabo Verde'", "'Praia'")>>
+	<<elseif ($activeSlave.nationality is "Catalan")>>
+		<<set $nickname to either("'Barcelona'", "'Castell'", "'Senyera'")>>
+	<<elseif ($activeSlave.nationality is "Central African")>>
+		<<set $nickname to either("'Bangui'", "'Bokassa'")>>
+	<<elseif ($activeSlave.nationality is "Chadian")>>
+		<<set $nickname to either("'Chad'", "'Habré'", "'N'Djamena'", "'Tombalbaye'")>>
+	<<elseif ($activeSlave.nationality is "Chilean")>>
+		<<set $nickname to either("'Chela'", "'Pinochet'", "'Santiago'", "'Toya'")>>
+	<<elseif ($activeSlave.nationality is "Chinese")>>
+		<<set $nickname to either("'Beijing'", "'Dim Sum'", "'Dragon'", "'Empress'", "'Guangzhou'", "'Kung Fu'", "'Lead Toys'", "'Lotus'", "'Made in China'", "'Manchu'", "'Nanking'", "'Renmenbi'", "'Shanghai'")>>
+	<<elseif ($activeSlave.nationality is "Colombian")>>
+		<<set $nickname to either("'Bogotá'", "'Cafetera'", "'Coca'", "'Crystal'", "'FARC'", "'Pablita Escobar'")>>
+	<<elseif ($activeSlave.nationality is "Comorian")>>
+		<<set $nickname to either("'Karthala'", "'Mayotte'", "'Moroni'")>>
+	<<elseif ($activeSlave.nationality is "Congolese")>>
+		<<set $nickname to either("'Brazzaville'", "'Ngouabi'", "'Nguesso'")>>
+	<<elseif ($activeSlave.nationality is "a Cook Islander")>>
+		<<set $nickname to either("'Avarua'", "'Rarotonga'")>>
+	<<elseif ($activeSlave.nationality is "Costa Rican")>>
+		<<set $nickname to either("'Oxcart'", "'San José'")>>
+	<<elseif ($activeSlave.nationality is "Croatian")>>
+		<<set $nickname to either("'Tito'", "'Zagreb'")>>
+	<<elseif ($activeSlave.nationality is "Cuban")>>
+		<<set $nickname to either("'Blockade'", "'Castro'", "'Commie'", "'Havana'", "'Scarface'")>>
+	<<elseif ($activeSlave.nationality is "Cypriot")>>
+		<<set $nickname to either("'Enosis'", "'Nicosia'")>>
+	<<elseif ($activeSlave.nationality is "Czech")>>
+		<<set $nickname to either("'Bohemian'", "'Czechnya'", "'Kunda'", "'Prague'")>>
+	<<elseif ($activeSlave.nationality is "Danish")>>
+		<<set $nickname to either("'Copenhagen'", "'Ludertæve'", "'Tøs'", "'Viking'")>>
+	<<elseif ($activeSlave.nationality is "Djiboutian")>>
+		<<set $nickname to either("'Ifat'", "'Tadjoura'")>>
+	<<elseif ($activeSlave.nationality is "Dominican")>>
+		<<set $nickname to either("'Caribbean'", "'Domingo'", "'Palo'", "'Santo Domingo'", "'Taíno'", "'Trinitaria'")>>
+	<<elseif ($activeSlave.nationality is "Dominiquais")>>
+		<<set $nickname to either("'Red Dog'", "'Roseau'")>>
+	<<elseif ($activeSlave.nationality is "Dutch")>>
+		<<set $nickname to either("'Amsterdam'", "'Cheesehead'", "'Slaaf'", "'Slet'")>>
+	<<elseif ($activeSlave.nationality is "East Timorese")>>
+		<<set $nickname to either("'Dili'", "'Timor Leste'")>>
+	<<elseif ($activeSlave.nationality is "Ecuadorian")>>
+		<<set $nickname to either("'Galápagos'", "'Quito'")>>
+	<<elseif ($activeSlave.nationality is "Egyptian")>>
+		<<set $nickname to either("'Cairo'", "'Cleopatra'", "'Misirlou'", "'Sinai'", "'Sphinx'", "'Suez'")>>
+	<<elseif ($activeSlave.nationality is "Emirati")>>
+		<<set $nickname to either("'Abu Dhabi'", "'Bedouin'", "'Dubai'")>>
+	<<elseif ($activeSlave.nationality is "Equatoguinean")>>
+		<<set $nickname to either("'Bata'", "'Malabo'", "'Nguema'", "'Oyala'")>>
+	<<elseif ($activeSlave.nationality is "Eritrean")>>
+		<<set $nickname to either("'Asmara'", "'Punt'")>>
+	<<elseif ($activeSlave.nationality is "Estonian")>>
+		<<set $nickname to either("'Baltic'", "'Eesti'", "'Tallinn'")>>
+	<<elseif ($activeSlave.nationality is "Ethiopian")>>
+		<<set $nickname to either("'Oromo'", "'Rastafarian'")>>
+	<<elseif ($activeSlave.nationality is "Fijian")>>
+		<<set $nickname to either("'Itaukei'", "'Suva'")>>
+	<<elseif ($activeSlave.nationality is "Filipina")>>
+		<<set $nickname to either("'Flip'", "'Manila'", "'Pinoy'")>>
+	<<elseif ($activeSlave.nationality is "Finnish")>>
+		<<set $nickname to either("'Helinski'", "'Mämmi'", "'Perkele'", "'Saunagirl'", "'Winter War'")>>
+	<<elseif ($activeSlave.nationality is "French")>>
+		<<set $nickname to either("'Belle'", "'Fille de Joie'", "'Mademoiselle'", "'Marseille'", "'Paris'", "'Surrender Monkey'")>>
+	<<elseif ($activeSlave.nationality is "French Guianan")>>
+		<<set $nickname to either("'Cayenne'", "'Île du Diable'")>>
+	<<elseif ($activeSlave.nationality is "French Polynesian")>>
+		<<set $nickname to either("'Fangataufa'", "'Moruroa'", "'Papeete'", "'Tahiti'")>>
+	<<elseif ($activeSlave.nationality is "Gabonese")>>
+		<<set $nickname to either("'Bongo'", "'Libreville'")>>
+	<<elseif ($activeSlave.nationality is "Gambian")>>
+		<<set $nickname to either("'Banjul'", "'Serekunda'")>>
+	<<elseif ($activeSlave.nationality is "Georgian")>>
+		<<set $nickname to either("'Kutaisi'", "'Tbilisi'")>>
+	<<elseif ($activeSlave.nationality is "German")>>
+		<<set $nickname to either("'Berlin'", "'Bratwurst'", "'Fraulein'", "'Kraut'", "'Oktoberfest'", "'Piefke'", "'Valkyrie'")>>
+	<<elseif ($activeSlave.nationality is "Ghanan")>>
+		<<set $nickname to either("'Akan'", "'Gold Coast'", "'Warrior Queen'")>>
+	<<elseif ($activeSlave.nationality is "Greek")>>
+		<<set $nickname to either("'Athens'", "'Debts'", "'Ionian'", "'Spartan'")>>
+	<<elseif ($activeSlave.nationality is "Greenlandic")>>
+		<<set $nickname to either("'Eskimo'", "'Nuuk'")>>
+	<<elseif ($activeSlave.nationality is "Grenadian")>>
+		<<set $nickname to either("'Grenada Dove'", "'Urgent Fury'", "'Woolie'")>>
+	<<elseif ($activeSlave.nationality is "Guatemalan")>>
+		<<set $nickname to either("'Chapín'", "'Guatemalan'", "'Mayan'")>>
+	<<elseif ($activeSlave.nationality is "Guinean")>>
+		<<set $nickname to either("'Bauxite'", "'Conakry'", "'Toure'")>>
+	<<elseif ($activeSlave.nationality is "Guyanese")>>
+		<<set $nickname to either("'Georgetown'", "'Hoatzin'")>>
+	<<elseif ($activeSlave.nationality is "Haitian")>>
+		<<set $nickname to either("'Maîtresse'", "'Mama Doc'", "'Maman'", "'Port-au-Prince'", "'Voodoo'")>>
+	<<elseif ($activeSlave.nationality is "Honduran")>>
+		<<set $nickname to either("'Anchuria'", "'Catracho'", "'Tegucigalpa'")>>
+	<<elseif ($activeSlave.nationality is "Hungarian")>>
+		<<set $nickname to either("'Budapest'", "'Magyar'", "'Szuka'")>>
+	<<elseif ($activeSlave.nationality is "I-Kiribati")>>
+		<<set $nickname to either("'Gilbert'", "'Tarawa'")>>
+	<<elseif ($activeSlave.nationality is "Icelandic")>>
+		<<set $nickname to either("'Penis Museum'", "'Reykjavík'", "'Sagas'")>>
+	<<elseif ($activeSlave.nationality is "Indian")>>
+		<<set $nickname to either("'Bhibhi'", "'Bhopal'", "'Delhi'", "'Hindi'", "'Mahatma'", "'Mumbai'", "'Punjabi'", "'Savita'")>>
+	<<elseif ($activeSlave.nationality is "Indonesian")>>
+		<<set $nickname to either("'Jakarta'", "'Malay'", "'Sunda'")>>
+	<<elseif ($activeSlave.nationality is "Iraqi")>>
+		<<set $nickname to either("'Assyrian'", "'Baghdad'", "'Fallujah'", "'Fertile Crescent'", "'Hussein'", "'Mesopotamian'", "'Oilfields'", "'Whore of Babylon'")>>
+	<<elseif ($activeSlave.nationality is "Iranian")>>
+		<<set $nickname to either("'Ayatollah'", "'Iranian'", "'Persian'", "'Tehran'")>>
+	<<elseif ($activeSlave.nationality is "Irish")>>
+		<<set $nickname to either("'Carbomb'", "'Dublin'", "'Emerald'", "'Lassie'", "'Paddy'", "'Potato Famine'", "'Sinn Féin'")>>
+	<<elseif ($activeSlave.nationality is "Israeli")>>
+		<<set $nickname to either("'God's Chosen'", "'Hebrew'", "'Levantine'", "'Tel Aviv'")>>
+	<<elseif ($activeSlave.nationality is "Italian")>>
+		<<set $nickname to either("'Bologna'", "'Greaseball'", "'Latin'", "'Napoli'", "'Renaissance'", "'Rome'", "'Salami'", "'Sicilian'", "'Spaghetti'", "'Terrone'", "'Wop'")>>
+	<<elseif ($activeSlave.nationality is "Ivorian")>>
+		<<set $nickname to either("'Abidjan'", "'Ivory'", "'Yamoussoukro'")>>
+	<<elseif ($activeSlave.nationality is "Jamaican")>>
+		<<set $nickname to either("'Kingston'", "'Kush'", "'Rasta'", "'Reggae'", "'West Indies'", "'Yardie'")>>
+	<<elseif ($activeSlave.nationality is "Japanese")>>
+		<<set $nickname to either("'Anime'", "'Banzai'", "'Bishoujo'", "'Fukushima'", "'Geisha Girl'", "'Hello Kitty'", "'Hiroshima'", "'Hokkaido'", "'Ichiban'", "'Kamikaze'", "'Kawasaki'", "'Kyoto'", "'Kyushu'", "'Nagano'", "'Nagasaki'", "'Nipponese'", "'Osaka'", "'Sushi'", "'Tempura'", "'Tokyo'", "'Wasabi'", "'Yakuza'", "'Yamaha'", "'Yamato Nadeshiko'")>>
+	<<elseif ($activeSlave.nationality is "Jordanian")>>
+		<<set $nickname to either("'Edomite'", "'Hashemite'", "'Mansaf'", "'Moab'", "'Petra'")>>
+	<<elseif ($activeSlave.nationality is "Kazakh")>>
+		<<set $nickname to either("'Blue Hat'", "'Borat'", "'Khan'")>>
+	<<elseif ($activeSlave.nationality is "Kenyan")>>
+		<<set $nickname to either("'Mau Mau'", "'Nairobi'", "'Safari'", "'Swahili'")>>
+	<<elseif ($activeSlave.nationality is "Kittitian")>>
+		<<set $nickname to either("'Basseterre'", "'Nevis'")>>
+	<<elseif ($activeSlave.nationality is "Korean")>>
+		<<set $nickname to either("'Dokdo'", "'Gangnam'", "'K-Pop'", "'Kimchi'", "'Nida'", "'Pyongyang'", "'Samsung'", "'Seoul'")>>
+	<<elseif ($activeSlave.nationality is "Kosovan")>>
+		<<set $nickname to either("'Kosovar'", "'Pristina'")>>
+	<<elseif ($activeSlave.nationality is "Kurdish")>>
+		<<set $nickname to either("'Ararat'", "'Kurd'", "'Mahabad'")>>
+	<<elseif ($activeSlave.nationality is "Kuwaiti")>>
+		<<set $nickname to either("'Burgan'", "'Gulf War'")>>
+	<<elseif ($activeSlave.nationality is "Kyrgyz")>>
+		<<set $nickname to either("'Bishkek'", "'Manas'")>>
+	<<elseif ($activeSlave.nationality is "Laotian")>>
+		<<set $nickname to either("'Muang Lao'", "'Vientiane'")>>
+	<<elseif ($activeSlave.nationality is "Latvian")>>
+		<<set $nickname to either("'Livonia'", "'Riga'")>>
+	<<elseif ($activeSlave.nationality is "Lebanese")>>
+		<<set $nickname to either("'Beirut'", "'Cedar'", "'Druze'", "'Lebo'", "'Maronite'", "'Phoenician'")>>
+	<<elseif ($activeSlave.nationality is "Liberian")>>
+		<<set $nickname to either("'Monrovia'", "'Taylor'")>>
+	<<elseif ($activeSlave.nationality is "Libyan")>>
+		<<set $nickname to either("'Cyrene'", "'Gaddafi'", "'Silphium'", "'Tripoli'", "'Zenga Zenga'")>>
+	<<elseif ($activeSlave.nationality is "a Liechtensteiner")>>
+		<<set $nickname to either("'Schaan'", "'Vaduz'")>>
+	<<elseif ($activeSlave.nationality is "Lithuanian")>>
+		<<set $nickname to either("'Memel'", "'Pagan'", "'Vilnus'")>>
+	<<elseif ($activeSlave.nationality is "Luxembourgian")>>
+		<<set $nickname to either("'Bureaucrat'", "'Passerelle'")>>
+	<<elseif ($activeSlave.nationality is "Macedonian")>>
+		<<set $nickname to either("'Sarissa'", "'Skopje'")>>
+	<<elseif ($activeSlave.nationality is "Malagasy")>>
+		<<set $nickname to either("'Antananarivo'", "'Lemur'")>>
+	<<elseif ($activeSlave.nationality is "Malawian")>>
+		<<set $nickname to either("'Lilongwe'", "'Warm Heart of Africa'")>>
+	<<elseif ($activeSlave.nationality is "Malaysian")>>
+		<<set $nickname to either("'Kuala Lumpur'", "'Malay Girl'", "'Pirate'")>>
+	<<elseif ($activeSlave.nationality is "Maldivian")>>
+		<<set $nickname to either("'Dhoni'", "'Malé'")>>
+	<<elseif ($activeSlave.nationality is "Malian")>>
+		<<set $nickname to either("'Mandinka'", "'Mansa Musa'", "'Sahel'", "'Timbuktu'", "'Trans-Sahara'")>>
+	<<elseif ($activeSlave.nationality is "Maltese")>>
+		<<set $nickname to either("'Maltese Falcon'", "'Valletta'")>>
+	<<elseif ($activeSlave.nationality is "Marshallese")>>
+		<<set $nickname to either("'Bikini Atoll'", "'Majuro'")>>
+	<<elseif ($activeSlave.nationality is "Mauritanian")>>
+		<<set $nickname to either("'Coppolani'", "'Nouakchott'")>>
+	<<elseif ($activeSlave.nationality is "Mauritian")>>
+		<<set $nickname to either("'Dodo'", "'Port Louis'")>>
+	<<elseif ($activeSlave.nationality is "Mexican")>>
+		<<set $nickname to either("'Azteca'", "'Beaner'", "'Burrito'", "'Cartel'", "'Chiquita'", "'Fence Hopper'", "'Headless'", "'Juarez'", "'Malinche'", "'Mamacita'", "'Senorita'", "'Sinaloa'", "'Taco'", "'Tijuana'", "'Wetback'")>>
+	<<elseif ($activeSlave.nationality is "Micronesian")>>
+		<<set $nickname to either("'Palikir'", "'Weno'")>>
+	<<elseif ($activeSlave.nationality is "Moldovan")>>
+		<<set $nickname to either("'Bessarabia'", "'Chișinău'")>>
+	<<elseif ($activeSlave.nationality is "Monégasque")>>
+		<<set $nickname to either("'Grace Kelly'", "'Monte Carlo'")>>
+	<<elseif ($activeSlave.nationality is "Mongolian")>>
+		<<set $nickname to either("'Genghis Khan'", "'Ulaanbaatar'")>>
+	<<elseif ($activeSlave.nationality is "Montenegrin")>>
+		<<set $nickname to either("'Black Mountain'", "'Podgorica'")>>
+	<<elseif ($activeSlave.nationality is "Moroccan")>>
+		<<set $nickname to either("'Casablanca'", "'Rabat'")>>
+	<<elseif ($activeSlave.nationality is "Mosotho")>>
+		<<set $nickname to either("'Maseru'", "'Moshoeshoe'")>>
+	<<elseif ($activeSlave.nationality is "Motswana")>>
+		<<set $nickname to either("'Gaborone'", "'Kalahari'")>>
+	<<elseif ($activeSlave.nationality is "Mozambican")>>
+		<<set $nickname to either("'Lourenço Marques'", "'Maputo'")>>
+	<<elseif ($activeSlave.nationality is "Namibian")>>
+		<<set $nickname to either("'Namib'", "'Windhoek'")>>
+	<<elseif ($activeSlave.nationality is "Nauruan")>>
+		<<set $nickname to either("'Phosphate'", "'Pleasant Island'")>>
+	<<elseif ($activeSlave.nationality is "Nepalese")>>
+		<<set $nickname to either("'Katmandu'", "'Nepali'", "'Sherpa'")>>
+	<<elseif ($activeSlave.nationality is "a New Zealander")>>
+		<<set $nickname to either("'All-Black'", "'Auckland'", "'Kiwi'", "'Wellington'")>>
+	<<elseif ($activeSlave.nationality is "Ni-Vanuatu")>>
+		<<set $nickname to either("'New Hebride'", "'Port Vila'")>>
+	<<elseif ($activeSlave.nationality is "Nicaraguan")>>
+		<<set $nickname to either("'Granada'", "'Managua'", "'Nica'")>>
+	<<elseif ($activeSlave.nationality is "Nigerian")>>
+		<<set $nickname to either("'Abuja'", "'Kwara'", "'Lagos'", "'Scammer'")>>
+	<<elseif ($activeSlave.nationality is "Nigerien")>>
+		<<set $nickname to either("'Kountché'", "'Niamey'")>>
+	<<elseif ($activeSlave.nationality is "Niuean")>>
+		<<set $nickname to either("'Alofi'", "'Rock of Polynesia'")>>
+	<<elseif ($activeSlave.nationality is "Norwegian")>>
+		<<set $nickname to either("'Black Metal'", "'Kuksuger'", "'Ludder'", "'Norse'", "'Norsk'", "'Oil Hog'", "'Ola'", "'Oslo'")>>
+	<<elseif ($activeSlave.nationality is "Omani")>>
+		<<set $nickname to either("'Dhofar'", "'Empty Quarter'", "'Ibadi'", "'Khanjar'", "'Muscat'")>>
+	<<elseif ($activeSlave.nationality is "Pakistani")>>
+		<<set $nickname to either("'Indus'", "'Karachi'", "'Lahore'", "'Paki'")>>
+	<<elseif ($activeSlave.nationality is "Palauan")>>
+		<<set $nickname to either("'Koror'", "'Ngerulmud'")>>
+	<<elseif ($activeSlave.nationality is "Palestinian")>>
+		<<set $nickname to either("'Gaza'", "'Hamas'", "'West Bank'")>>
+	<<elseif ($activeSlave.nationality is "Panamanian")>>
+		<<set $nickname to either("'Noriega'", "'Panama Canal'")>>
+	<<elseif ($activeSlave.nationality is "Papua New Guinean")>>
+		<<set $nickname to either("'Papua'", "'Port Moresby'")>>
+	<<elseif ($activeSlave.nationality is "Paraguayan")>>
+		<<set $nickname to either("'Asunción'", "'Stroessner'")>>
+	<<elseif ($activeSlave.nationality is "Peruvian")>>
+		<<set $nickname to either("'Incan'", "'Lima'", "'Lorcha'", "'Perucha'", "'Trujillo'", "'Zampoña'")>>
+	<<elseif ($activeSlave.nationality is "Polish")>>
+		<<set $nickname to either("'Hussar'", "'Krakow'", "'Kurwa'", "'Polski'", "'Pshek'", "'Warsaw'")>>
+	<<elseif ($activeSlave.nationality is "Portuguese")>>
+		<<set $nickname to either("'Bunda'", "'Portagee'")>>
+	<<elseif ($activeSlave.nationality is "Puerto Rican")>>
+		<<set $nickname to either("'51st State'", "'Boricua'", "'Nuyorican'", "'San Juan'", "'West Side Story'")>>
+	<<elseif ($activeSlave.nationality is "Qatari")>>
+		<<set $nickname to either("'Al Jazeera'", "'Doha'")>>
+	<<elseif ($activeSlave.nationality is "Romanian")>>
+		<<set $nickname to either("'Bucharest'", "'Ceausescu'", "'Dracula'", "'Gypsy'", "'Impaler'", "'Orphan'", "'Roma'")>>
+	<<elseif ($activeSlave.nationality is "Russian")>>
+		<<set $nickname to either("'Commie'", "'Cyka'", "'Mail Order'", "'Moscow'", "'Moskal'", "'Red Banner'", "'Russkie'", "'Siberian Kitten'", "'Slav'", "'Soviet'", "'Suka'", "'Tovarishina'", "'Tsaritsa'", "'Vodka'")>>
+	<<elseif ($activeSlave.nationality is "Rwandan")>>
+		<<set $nickname to either("'Hotel Rwanda'", "'Kigali'")>>
+	<<elseif ($activeSlave.nationality is "Sahrawi")>>
+		<<set $nickname to either("'El-Aaiún'", "'Tifariti'", "'Western Saharan'")>>
+	<<elseif ($activeSlave.nationality is "Saint Lucian")>>
+		<<set $nickname to either("'Castries'", "'Helen of the West Indies'")>>
+	<<elseif ($activeSlave.nationality is "Salvadoran")>>
+		<<set $nickname to either("'Duarte'", "'San Salvador'")>>
+	<<elseif ($activeSlave.nationality is "Sammarinese")>>
+		<<set $nickname to either("'Saint Marinus'", "'Three Towers'")>>
+	<<elseif ($activeSlave.nationality is "Samoan")>>
+		<<set $nickname to either("'Apia'", "'Navigator'")>>
+	<<elseif ($activeSlave.nationality is "São Toméan")>>
+		<<set $nickname to either("'Príncipe'", "'Roças"')>>
+	<<elseif ($activeSlave.nationality is "Saudi")>>
+		<<set $nickname to either("'Burqa'", "'Mecca'", "'Riyadh'", "'Sandy'")>>
+	<<elseif ($activeSlave.nationality is "Scottish")>>
+		<<set $nickname to either("'Braveheart'", "'Edinburgh'", "'Glasgow'", "'Hadrian'", "'Lass'", "'Ned'", "'Nessie'", "'Unicorn'")>>
+	<<elseif ($activeSlave.nationality is "Senegalese")>>
+		<<set $nickname to either("'Dakar'", "'Our Boat'", "'Wolof'")>>
+	<<elseif ($activeSlave.nationality is "Serbian")>>
+		<<set $nickname to either("'Belgrade'", "'Picka'", "'Remove Kebab'")>>
+	<<elseif ($activeSlave.nationality is "Seychellois")>>
+		<<set $nickname to either("'Seabird'", "'Victoria'")>>
+	<<elseif ($activeSlave.nationality is "Sierra Leonean")>>
+		<<set $nickname to either("'Blood Diamond'", "'Freetown'")>>
+	<<elseif ($activeSlave.nationality is "Singaporean")>>
+		<<set $nickname to either("'Bedok'", "'Merlion'")>>
+	<<elseif ($activeSlave.nationality is "Slovak")>>
+		<<set $nickname to either("'Bratislava'", "'Bzdocha'", "'Shlapka'")>>
+	<<elseif ($activeSlave.nationality is "Slovene")>>
+		<<set $nickname to either("'Ljubljana'", "'Prince's Stone'")>>
+	<<elseif ($activeSlave.nationality is "a Solomon Islander")>>
+		<<set $nickname to either("'Guadalcanal'", "'Honiara'")>>
+	<<elseif ($activeSlave.nationality is "Somali")>>
+		<<set $nickname to either("'Black Hawk Down'", "'Mogadishu'", "'The Captain Now'")>>
+	<<elseif ($activeSlave.nationality is "South African")>>
+		<<set $nickname to either("'Afrikaner'", "'Apartheid'", "'Cape Town'", "'Johannesburg'", "'Saffer'", "'Shaka'", "'Springbok'")>>
+	<<elseif ($activeSlave.nationality is "South Sudanese")>>
+		<<set $nickname to either("'Juba'", "'Nilotic'")>>
+	<<elseif ($activeSlave.nationality is "Spanish")>>
+		<<set $nickname to either("'Barcelona'", "'Jamon'", "'Madrid'", "'Monja'", "'Senora'", "'Siesta'", "'Toreadora'")>>
+	<<elseif ($activeSlave.nationality is "Sri Lankan")>>
+		<<set $nickname to either("'Ceylon'", "'Colombo'")>>
+	<<elseif ($activeSlave.nationality is "Sudanese")>>
+		<<set $nickname to either("'Gordon's Revenge'", "'Khartoum'", "'Nubian'", "'Omdurman'")>>
+	<<elseif ($activeSlave.nationality is "Surinamese")>>
+		<<set $nickname to either("'Bouterse'", "'Paramaribo'")>>
+	<<elseif ($activeSlave.nationality is "Swazi")>>
+		<<set $nickname to either("'Eswatini'", "'Mbabane'")>>
+	<<elseif ($activeSlave.nationality is "Swedish")>>
+		<<set $nickname to either("'Ikea'", "'Norse'", "'Stockholm'", "'Sweden Yes'")>>
+	<<elseif ($activeSlave.nationality is "Swiss")>>
+		<<set $nickname to either("'Alpine'", "'Geneva'", "'Numbered Account'", "'Schlampe'", "'Zurich'")>>
+	<<elseif ($activeSlave.nationality is "Syrian")>>
+		<<set $nickname to either("'Aleppo'", "'Damascus'")>>
+	<<elseif ($activeSlave.nationality is "Taiwanese")>>
+		<<set $nickname to either("'Formosa'", "'Taipei'")>>
+	<<elseif ($activeSlave.nationality is "Tajik")>>
+		<<set $nickname to either("'Dushanbe'", "'Sarazm'")>>
+	<<elseif ($activeSlave.nationality is "Tanzanian")>>
+		<<set $nickname to either("'Dar es Salaam'", "'Dodoma'", "'Wilderness'", "'Zanzibar'")>>
+	<<elseif ($activeSlave.nationality is "Thai")>>
+		<<set $nickname to either("'Bangcock'", "'Bangkok'", "'Ladyboy'", "'Pattaya'", "'T-Girl'")>>
+	<<elseif ($activeSlave.nationality is "Tibetan")>>
+		<<set $nickname to either("'Dalai Lama'", "'Himalayan'", "'Lhasa'")>>
+	<<elseif ($activeSlave.nationality is "Togolese")>>
+		<<set $nickname to either("'Lomé'", "'Togoland'")>>
+	<<elseif ($activeSlave.nationality is "Tongan")>>
+		<<set $nickname to either("'Friendly'", "'Nuku'alofa'")>>
+	<<elseif ($activeSlave.nationality is "Trinidadian")>>
+		<<set $nickname to either("'Chaguanas'", "'Tobago'", "'Trini'")>>
+	<<elseif ($activeSlave.nationality is "Tunisian")>>
+		<<set $nickname to either("'Barbary'", "'Carthaginian'", "'Ifriqiya'", "'Punic'")>>
+	<<elseif ($activeSlave.nationality is "Turkish")>>
+		<<set $nickname to either("'Ankara'", "'Harem'", "'Istanbul'", "'Kebab'", "'Ottoman'", "'Turkette'", "'Turkish'", "'Turksmell'")>>
+	<<elseif ($activeSlave.nationality is "Turkmen")>>
+		<<set $nickname to either("'Ashgabat'", "'Karakum'")>>
+	<<elseif ($activeSlave.nationality is "Tuvaluan")>>
+		<<set $nickname to either("'Ellice'", "'Funafuti'")>>
+	<<elseif ($activeSlave.nationality is "Ugandan")>>
+		<<set $nickname to either("'Bushbaby'", "'Cannibal'", "'Kampala'")>>
+	<<elseif ($activeSlave.nationality is "Ukrainian")>>
+		<<set $nickname to either("'Chernobyl'", "'Chiki Briki'", "'Cossack'", "'Crimea'", "'Donbass'", "'Euromaidan'", "'Holhina'", "'Holhushka'", "'Kiev'", "'Mail Order'", "'Radioactive'", "'Salo'", "'Stalker'", "'Suki'", "'Svoboda'")>>
+	<<elseif ($activeSlave.nationality is "Uruguayan")>>
+		<<set $nickname to either("'Garra Charrúa'", "'Montevideo'")>>
+	<<elseif ($activeSlave.nationality is "Uzbek")>>
+		<<set $nickname to either("'Samarkand'", "'Silk Road'", "'Steppe Princess'", "'Steppe Queen'", "'Tashkent'")>>
+	<<elseif ($activeSlave.nationality is "Vatican")>>
+		<<set $nickname to either("'Holy See'", "'Pope Joan'")>>
+	<<elseif ($activeSlave.nationality is "Venezuelan")>>
+		<<set $nickname to either("'Caracas'", "'Chavista'", "'Chola'", "'Revolutionary'", "'Socialist'")>>
+	<<elseif ($activeSlave.nationality is "Vietnamese")>>
+		<<set $nickname to either("'Charlie'", "'VC'", "'Saigon'", "'Hanoi'", "'Me Love You Long Time'", "'Me So Horny'", "'Victor Charlie'", "'Viet'")>>
+	<<elseif ($activeSlave.nationality is "Vincentian")>>
+		<<set $nickname to either("'Kingstown'", "'Vincy'")>>
+	<<elseif ($activeSlave.nationality is "Yemeni")>>
+		<<set $nickname to either("'Khat'", "'Red Sea Pirate'", "'Queen of the Desert'")>>
+	<<elseif ($activeSlave.nationality is "Zairian")>>
+		<<set $nickname to either("'Bongo'", "'Diamond'", "'Ebola'", "'Kinshasa'")>>
+	<<elseif ($activeSlave.nationality is "Zambian")>>
+		<<set $nickname to either("'Livingstone'", "'Lusaka'", "'Victoria Falls'")>>
+	<<elseif ($activeSlave.nationality is "Zimbabwean")>>
+		<<set $nickname to either("'Bobojan'", "'Grimmy'", "'Harare'", "'Kaffir'", "'Mugabe'", "'Mujiba'", "'Nyombie'", "'Rhodie'", "'Zimbo'")>>
+	<<else>>
+		<<set $nickname = either("'Stateless'", "'Refugee'")>>
+	<</if>>
+	<<set $situationDesc = "is $activeSlave.nationality. The slave trade is truly international, and no nation is unrepresented among the masses of sex slaves passed from hand to hand like the chattel they are. Most of the old nations are struggling, and even those still in great shape often find their citizens emigrating to the Free Cities. Some of these emigres do well, and others become human livestock.">>
+	<<set $applyDesc = "is a little proud of her national nickname, as a reminder of who she was and a mark that she still has an identity.">>
+	<<set $notApplyDesc = "realizes that her new identity is truly stateless. In the Free Cities, it does not matter where a slave is from, so long as that slave has value. All slaves belong to the singular nation of the owned, the subordinated, the fucked.">>
+
+<<elseif ($nickname == "white")>>
+	<<set $nickname = either("'Dixie'", "'Down Home'", "'Duchess'", "'Euro Trash'", "'Europa'", "'Grits'", "'Hillbilly'", "'Hollywood'", "'Honky'", "'Ice Queen'", "'Memphis'", "'Pasty'", "'Princess'", "'Snowflake'", "'Top Dollar'", "'Valley Girl'", "'Vanilla'", "'Vegas'", "'White Bread'", "'Yankee'")>>
+	<<set $situationDesc = "is white, which is not uncommon given the collapse of many erstwhile first world nations into depression and the proximity of many Free Cities to majority white areas. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "asian")>>
+	<<set $nickname = either("'3DPD'", "'Almond'", "'Chinese'", "'Chink'", "'E-Sports'", "'Manila'", "'Me Love You Long Time'", "'Me So Horny'", "'Oriental'", "'Pinoy'", "'Squint'", "'Thaigirl'", "'Tokyo'", "'Waifu'", "'Yellow Fever'")>>
+	<<set $situationDesc = "is asian, which is not uncommon given the huge population of Asia and the poverty of many countries there. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "latina")>>
+	<<set $nickname = either("'Adorada'", "'Cafe'", "'Chiquita'", "'Chola'", "'Cuzinho'", "'Facil'", "'Mestiza'", "'Mexicali'", "'One Peso'", "'Rio Grande'", "'Senora'", "'Senorita'", "'Shakira'", "'Spicy'", "'Yeyo'")>>
+	<<set $situationDesc = "is latina, which is not uncommon given the poor state of many Central and South American countries and the long diaspora of poor natives of those areas. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "black")>>
+	<<set $nickname = either("'B-Girl'", "'Bottom Bitch'", "'Cocoa'", "'Cotton'", "'Gangsta'", "'His Girl Friday'", "'House Slave'", "'Jungle Fever'", "'Miss'", "'Missie'", "'Mulatto'", "'Quadroon'", "'Sheboon'")>>
+	<<set $situationDesc = "is black, which is not uncommon given the urban collapse afflicting the first world and the wars raging in Africa.  Slaves casually reference race as much as free citizens. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "indo-aryan")>>
+	<<set $nickname = either("'Babu'", "'Bhabhi'", "'Bindi'", "'Bollywood'", "'Desi'", "'Durga'", "'Kali Maa'", "'Kama Sutra'", "'Kaur'", "'Mughal'", "'Sati'", "'Sepoy'", "'Shanti'", "'Sim Sim Salabim'", "'Snake Charmer'", "'Subcontinental'", "'Swami'", "'Tigress'", "'Untouchable'", "'Yoga'", "'Zoroastrian'")>>
+	<<set $situationDesc = "is indo-aryan, which is not uncommon given the poverty in many majority indo-aryan countries, and the near-submersion of some others due to rising sea levels. Slaves casually reference race as much as free citizens. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "middle eastern")>>
+	<<set $nickname = either("'Bibi'", "'Chai Girl'", "'Desert Sun'", "'Dune'", "'Harem Girl'", "'Jasmine'", "'Sandy'", "'Scheherazade'", "'Third Wife'")>>
+	<<set $situationDesc = "is middle eastern, which is not uncommon given the interminable wars and disruptions in that part of the world. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "mixed race")>>
+	<<set $nickname = either("'Colonial'", "'Colored'", "'Creole'", "'Diversity'", "'Hafu'", "'Half and Half'", "'Half-breed'", "'Half-caste'", "'Interracial'", "'Melting Pot'", "'Melungeon'", "'Miscegenation'", "'Mongrel'", "'Mulatto'", "'Mutt'", "'Octaroon'", "'Pardo'", "'Quadroon'", "'Quadroon'", "'Zambo'")>>
+	<<set $situationDesc = "is mixed race, an ethnic makeup that has always been a target for abuse. Slaves of all races can find something about her to dislike. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "semitic")>>
+	<<set $nickname = either("'Baal Worshipper'", "'Biblical'", "'Canaanite'", "'Dead Sea'", "'Good Samaritan'", "'Holy land'", "'Inanna'", "'Ishtar'", "'Lilith'", "'Lost Ark'", "'Nephilim'", "'Philistine'", "'Qedesha'", "'Red Sea'", "'Salome'", "'Sodom and Gomorrah'", "'Whore of Babylon'")>>
+	<<set $situationDesc = "is semitic, which is not uncommon given the many conflicts in countries with semitic minorities. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "malay")>>
+	<<set $nickname = either("'Bumi'", "'Indon'", "'Island Hopper'", "'Krakatoa'", "'Naga'", "'Nutmeg'", "'Rani'", "'Samudra Kidul'", "'Sandalwood'", "'Spice Islands'", "'Trade Winds'")>>
+	<<set $situationDesc = "is malay, which is not uncommon given the ongoing poverty in many majority malay countries, and the serious weather patterns savaging that part of the world. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "amerindian")>>
+	<<set $nickname = either("'Deerskin'", "'Eskimo Sister'", "'Firewater'", "'Indio'", "'Injun'", "'Ke-mo Sah-bee'", "'La Malinche'", "'Métis Mother'", "'Moccasins'", "'Pocahontas'", "'Redskin'", "'Reservation'", "'Scalper'", "'Smoke Signal'", "'Squaw'", "'Tiger Lily'", "'Tipi Warmer'", "'Totem Pole'", "'Warpath'", "'Wigwam'")>>
+	<<set $situationDesc = "is amerindian, which is not uncommon given the poverty that still plagues those long-suffering peoples. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "pacific islander")>>
+	<<set $nickname = either("'Aloha'", "'Breadfruit'", "'Conch Blower'", "'Grass Skirt'", "'Hori'", "'Hula Girl'", "'Longpig'", "'Outrigger'", "'Paradise'", "'Pineapple'", "'Polynesian'", "'Seashell'", "'South Pacific'", "'Tiki Torch'")>>
+	<<set $situationDesc = "is a pacific islander, which is not uncommon given wholesale destruction of many countries in that area by the worsening climate. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "southern european")>>
+	<<set $nickname = either("'Aphrodite'", "'Doña'", "'Fine Wine'", "'Garlic Breath'", "'Greaseball'", "'Grecian'", "'Infamis'", "'Lupa'", "'Mediterranean'", "'Meretrix'", "'Odalisque'", "'Olive Oil'", "'Riviera'", "'Roman Nose'", "'Venus'", "'Wog'", "Bella'")>>
+	<<set $situationDesc = "is southern european, which is not uncommon given the endemic corruption and political collapse in that part of the world. Slaves casually reference race as much or more than free citizens. They absorb the racial peccadilloes of their owners, and many of them bring prejudices from the old world into their slave lives.">>
+	<<set $applyDesc = "now has a constant reminder that as a sex slave she is judged on her appearance first.">>
+	<<set $notApplyDesc = "may feel some gratitude due to your preference that she not be defined by her ethnicity, but this is counterbalanced by the increased independence your kindness inspires.">>
+
+<<elseif ($nickname == "vaginalWhiner")>>
+	<<set $nickname = either("'Whiny'", "'Squealer'", "'Struggles'", "'Pussy Bitch'", "'Pussypain'", "'Shallow'", "'Rapebait'", "'Tightcunt'")>>
+	<<set $situationDesc = "has a tight pussy and not much skill using it. She still gets fucked, which results in frequent painful situations for her. Her moaning as she takes a big dick earns her the scorn of her fellow slaves.">>
+	<<set $applyDesc = "is embarrassed by her new nickname, and resolves to try harder to address her lack of skill. She hopes she'll get better at sex soon, for her own sake.">>
+	<<set $notApplyDesc = "is a little grateful you've decided to protect her from the other slaves' mockery of her sore little pussy. She still wants to get better at sex, for her own sake.">>
+
+<<elseif ($nickname == "analWhiner")>>
+	<<set $nickname = either("'Whiny'", "'Squealer'", "'Struggles'", "'Anal Bitch'", "'Asspain'", "'Painal'", "'Buttrape'", "'Tightass'")>>
+	<<set $situationDesc = "has a tight asshole and not much skill taking an anal fuck. She still gets buttraped, which causes her a great deal of anal pain. Her sobbing as she takes a big dick up her tight little asspussy earns her the scorn of her fellow slaves.">>
+	<<set $applyDesc = "is embarrassed by her new nickname, and resolves to try harder to address her lack of skill. She hopes she'll get better at buttsex soon, for her own sake.">>
+	<<set $notApplyDesc = "is a little grateful you've decided to protect her from the other slaves' mockery of her sore little asshole. She still wants to get better at buttsex, for her own sake.">>
+
+<<elseif ($nickname == "girlish")>>
+	<<set $nickname = either("'Missie'", "'Slender'", "'Tomboy'", "'Ano'", "'Supermodel'", "'Runway'", "'Toothpick'", "'Zero'", "'Slip'")>>
+	<<set $situationDesc = "has a trim form: her assets are quite modest. The slave society of the Free Cities tends to follow average male desires, which is to say that many slaves find themselves augmented to very large proportions. It's natural that slaves required to carry such burdens should resent her.">>
+	<<set $applyDesc = "is prouder of her lithe form that she was before, and is a little relieved at the added evidence that you don't plan to give her major implants any time soon.">>
+	<<set $notApplyDesc = "realizes that her form isn't necessarily due to some master plan and that you may see fit to change it; she begins to regard the remote surgery with apprehension.">>
+
+<<elseif ($nickname == "loose")>>
+	<<set $nickname = either("'Loose'", "'Welcoming'", "'Noisy'", "'Open'", "'Sloppy'", "'Gaping'", "'Size Queen'", "'Relaxed'", "'Accommodating'")>>
+	<<set $situationDesc = "has taken a lot of dick. Enough dick that her overused holes really show the mileage. She can take the largest cock without a sigh.">>
+	<<set $applyDesc = "is proud of her mileage, now that you've countenanced adding it to your name. Every cock she's taken, she's taken at your command.">>
+	<<set $notApplyDesc = "realizes that she isn't special just because she's been fucked so much, and understands that she'll have to do her best to fuck like a fresh teenager no matter how loose she gets.">>
+
+<<elseif ($nickname == "trap")>>
+	<<set $nickname = either("'Girldick'", "'Otokonoko'", "'Switch'", "'Spurt'", "'Ganymede'", "'Chai'", "'Thai'", "'Trap'", "'Trappy'", "'Sissy'")>>
+	<<set $situationDesc = "is a Free Cities sex slave, which makes her female. It makes her female despite several obvious physical issues, such as the fact that she's got an androgynous figure, or the fact that she has a penis. Neither of these makes any real difference when a cock gets shoved down her throat or stuffed up her butt, but they're hard not to notice.">>
+	<<set $applyDesc = "accepts that she's a little piece of shemale property.">>
+	<<set $notApplyDesc = "will do her best to serve as a nice little sex slave without explicit reference to how she's put together, or she'll be punished.">>
+
+<<elseif ($nickname == "micropenis")>>
+	<<set $nickname = either("'Bitchdick'", "'Boyclit'", "'Gherkin'", "'Inchworm'", "'Little Dick'", "'Tiny'")>>
+	<<set $situationDesc = "is a Free Cities sex slave, which makes her female. It's not immediately obvious from many angles that she wasn't born that way, since her penis is almost comically small. For her, penetrative sex would be very limited, even if she weren't a Free Cities slave and therefore a perpetual receptacle for dick.">>
+	<<set $applyDesc = "accepts the implicit mockery.">>
+	<<set $notApplyDesc = "is a little relieved to be protected from the mockery, even though her tiny endowment mocks her as it flops around whenever she's used.">>
+
+<<elseif ($nickname == "implants")>>
+	<<set $nickname = either("'Silicone'", "'Plastique'", "'Bimbo'", "'Barbie'", "'Blowup Doll'")>>
+	<<set $situationDesc = "is absolutely full of implants. They're so large it's quite obvious she's fake, and there's no pretension about it. She's a bimbo slut, and the other slaves never tire of letting her know it.">>
+	<<set $applyDesc = "accepts the implicit mockery, knowing that her bimbo body is what appeals to <<if def $PC.customTitle>>her $PC.customTitle<<elseif $PC.title != 0>>her master<<else>>her mistress<</if>>.">>
+	<<set $notApplyDesc = "is relieved to be protected from the other slaves' mockery over her implants, though she's also a little sad she can't take them as a kind of trademark.">>
+
+<<elseif ($nickname == "chubby")>>
+	<<set $nickname = either("'Plush'", "'Hambeast'", "'Jabba'", "'Landwhale'", "'Jiggles'", "'Tubby'", "'Whale'", "'Rotund'", "'Rubenesque'", "'Ample'", "'Jumbo'")>>
+	<<set $situationDesc = "is carrying a little extra weight. The cruelty of life as a slave increases your property's willingness to do cruelty where they can get away with it - what is passed to them, they pass to others - so she finds herself mocked for her size.">>
+	<<set $applyDesc = "knows that being fat makes her less valuable on the market, but she begins to accept that she's going to have to put up with being chubby for now.">>
+	<<set $notApplyDesc = "believes that this means she's going to have to lose weight soon, causing her some trepidation.">>
+
+<<elseif ($nickname == "muscles")>>
+	<<set $nickname = either("'Tank'", "'Gunshow'", "'Giant'", "'Gargantua'", "'Snu-Snu'", "'Prepare Yourself'", "'Gymrat'")>>
+	<<set $situationDesc = "is a big girl. Her huge muscles aren't to everyone's taste, but they're quite eye-catching, and give her some interesting sexual possibilities that wouldn't work with, for example, a sex slave not capable of supporting her own body weight on one hand for long periods. She has become the object of mixed admiration and envy from your other stock.">>
+	<<set $applyDesc = "is happy with her nickname; any embarrassment she may have felt about looking like statuary becomes a jet of pride. She's confident that this is the way you want her.">>
+	<<set $notApplyDesc = "she is a sex slave first, last, and always, no matter what her one-rep max is.">>
+
+<<elseif ($nickname == "buttslut")>>
+	<<set $nickname = either("'Anal Addict'", "'Greek'", "'Backdoor'", "'Sphincter'", "'Butthole'", "'Swedish'", "'Sodomy'", "'Cornhole'", "'Asspussy'", "'Bum-love'", "'Second Pussy'")>>
+	<<set $situationDesc = "loves it up the butt, and her tastes in sex are hard to miss. She's a sex slave and takes it however it's given, but honest enjoyment is hard to fake and it's pretty obvious how much fun she has when she's bent over and buttfucked. Her typical come-on is to bend over, reach around to spread her buttocks, and wink her anus by alternately clenching and relaxing her sphincter.">>
+	<<set $applyDesc = "knows that whatever the rest of her slave life holds, it will involve her slave rectum holding a lot of dick.">>
+	<<set $notApplyDesc = "understands that she'll have to take what buttsex she can get.">>
+
+<<elseif ($nickname == "cumslut")>>
+	<<set $nickname = either("'Vampire'", "'Sucker'", "'Deep Throat'", "'Throatclit'", "'No Gag Reflex'", "'Facepussy'", "'Semen Demon'", "'Cumfiend'", "'Succubus'", "'Vacuum'", "'Hoover'", "'Fellatio'", "'Pearl Necklace'", "'Swallows'", "'Gobbler'", "'Pole Smoker'", "'Meat Smoker'", "'Lip Service'", "'Guzzler'")>>
+	<<set $situationDesc = "loves her some cum. Most slaves have to put effort into showing enthusiasm when on their knees and presented with the second or third cock in a row. She, on the other hand, maintains such a fetish for the stuff that she'll often suck it out of other slaves' holes, if allowed.">>
+	<<set $applyDesc = "knows that as long as she's your slave, she'll get what she needs.">>
+	<<set $notApplyDesc = "understands that cum is a luxury and she'll have to savor what comes her way naturally.">>
+
+<<elseif ($nickname == "submissive")>>
+	<<set $nickname = either("'Doormat'", "'Bootlicker'", "'Sub'", "'Meek'", "'Submissive'", "'Bottom'", "'Clinger'", "'Secondary'", "'Humble'")>>
+	<<set $situationDesc = "loves sexual submission. Whatever she's doing, she likes to be on the bottom. She'd rather be face-fucked than suck, and would rather take a dick than ride one. Some slaves look down on her willingness to put herself even farther below others, while some envy her ability to enjoy things that they have to work to tolerate.">>
+	<<set $applyDesc = "pretends to accept her new nickname obediently, but is secretly pleased by recognition of her submissive nature.">>
+	<<set $notApplyDesc = "understands that being a submissive sex slave doesn't make her special. All sex slaves must submit.">>
+
+<<elseif ($nickname == "humiliation")>>
+	<<set $nickname = either("'Public Display'", "'Showoff'", "'Pornstar'", "'Nudist'", "'Attention Whore'", "'Showgirl'", "'Exhibitionist'", "'Flasher'", "'Flaunter'", "'Showboat'", "'Display Model'")>>
+	<<set $situationDesc = "loves to show off. Where other slaves would blush, get embarrassed, and wish they could cover themselves, she blushes, gets aroused, and enjoys the stares. Most other slaves are jealous of her predilections. Not many slaves naturally enjoy being fucked in public, and she can get off on it.">>
+	<<set $applyDesc = "accepts her new nickname without even pretending not to enjoy it. She's proud to fuck in plain view, and she wants everyone to know it. And fuck her in plain view.">>
+	<<set $notApplyDesc = "understands that she's a sex slave first, and must fuck in private like she were fucking in public.">>
+
+<<elseif ($nickname == "veteran")>>
+	<<set $nickname = either("'Village Bicycle'", "'Public Favorite'", "'Whore Queen'", "'Dirty'", "'Worn'", "'Tired-Out'", "'Easy'", "'Cumdump'")>>
+	<<set $situationDesc = "has been with you for a while, and she's gotten fucked a lot. Hundreds and hundreds of times over many weeks. Though she does her best, at times it can be obvious that there's very little that surprises her any more. She's forgotten more sexual experience than many of your other slaves remember.">>
+	<<set $applyDesc = "knows that you've noticed all her hard work. Getting fucked day in and day out is harder than digging ditches, and she's a veteran ditchdigger.">>
+	<<set $notApplyDesc = "understands that even though she's been fucked so much, she's still just meat; she isn't special.">>
+
+<<elseif ($nickname == "cow")>>
+	<<set $nickname = either("'Dairy Queen'", "'Holstein'", "'Bessie'", "'Milk Cans'", "'Cow'", "'Cowbell'", "'Milky Udders'", "'Creamy'", "'Milkmaid'", "'Milk Fountain'", "'Milk Factory'")>>
+	<<set $situationDesc = "is a good stock animal. Her body efficiently turns the cheap slave nutrition produced by your arcology into a never-ending river of rich milk.">>
+	<<set $applyDesc = "knows that her future involves many hours having her nipples gently tugged by a milking machine.">>
+	<<set $notApplyDesc = "understands that she must continue to be a good milking slave, but that such duties do not necessarily define her.">>
+
+<<elseif ($nickname == "novice")>>
+	<<set $nickname = either("'Fumbles'", "'Calamity'", "'Slippery'", "'Sorry'", "'Fresh'", "'Innocent'", "'Novice'")>>
+	<<set $situationDesc = "does her best; she really tries. But she simply hasn't mastered the skills that more experienced sex slaves take for granted. Though this can be annoying and at times even painful, it is a source of occasional slapstick comedy.">>
+	<<set $applyDesc = "has a constant reminder that no matter how skilled a courtesan she becomes, some of her greatest hits will be told as amusing anecdotes for the rest of her service.">>
+	<<set $notApplyDesc = "understands that what matters is not what she did yesterday, or how much they liked it, but what she does today, and how much they like it.">>
+
+<<elseif ($nickname == "head girl")>>
+	<<set $nickname = either("'Mistress'", "'On Your Knees'", "'Bottom Bitch'", "'Top'", "'Favorite'", "'Perfect'", "'Mrs.'")>>
+	<<set $situationDesc = "occupies a place in the hierarchy of your penthouse that is certainly one which encourages nicknaming. Your other slaves view her with mixed envy, adoration, emulation, and apprehension. She is someone to curry favor with, to offer sexual favors, and at times someone to avoid. To the devoted slave her closeness to you is enviable; to the rebellious slave her alliance with you is traitorous.">>
+	<<set $applyDesc = "was already proud of and happy with her exalted position, but now she is all the more so. She had always nursed the secret fear that this was temporary, but her place at your right hand is now part of her name.">>
+	<<set $notApplyDesc = "begins to fear a little that she may one day be supplanted, since you did not think it right to make her place a part of her name.">>
+
+<<elseif ($nickname == "Concubine")>>
+	<<set $nickname = either("'Missus'", "'Mrs.'", "'Beauty'", "'Queen'", "'Princess'", "'Contessa'")>>
+	<<set $situationDesc = "occupies a place in the hierarchy of your penthouse that is certainly one which encourages nicknaming. Your other slaves view her with mixed envy and admiration. She has much of the luxury of the Head Girl and none of the responsibility, and all she has to do for this exalted place is keep your sexual satisfaction as her prime goal.">>
+	<<set $applyDesc = "was already proud of and happy with her exalted position, but now she is all the more so. She had always nursed the secret fear that this was temporary, but her place in your bed is now part of her name.">>
+	<<set $notApplyDesc = "begins to fear a little that she may one day be supplanted, since you did not think it right to make her place a part of her name.">>
+
+<<elseif ($nickname == "Attendant")>>
+	<<set $nickname = either("'Healing Hands'", "'Bath Girl'", "'Spa Mother'", "'Steam Queen'", "'Warm Water'", "'Misty'")>>
+	<<set $situationDesc = "is loved by almost every slave in your penthouse. Getting a chance to go and spend some time in her spa is a wonderful treat, for which slaves are willing to work very hard. She's very willing to help them find sexual release, but mostly just provides minor care and an understanding ear for their troubles.">>
+	<<set $applyDesc = "enjoys helping your girls, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes helping your girls and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "Madam")>>
+	<<set $nickname = either("'Mother'", "'Pimp Queen'", "'Pimparella'", "'Whore Queen'", "'Brothel Queen'", "'Pimp Hand'")>>
+	<<set $situationDesc = "is in an unusually responsible and pragmatic position, for a slave. She runs her whores' lives with almost total control, overseeing the sale of their bodies day in, day out. Some resent her, some love her, but all depend on her.">>
+	<<set $applyDesc = "enjoys running a whorehouse, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes running a whorehouse and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "DJ")>>
+	<<set $nickname = either("'Celebutante'", "'Club Queen'", "'Club Princess'", "'Arcology Idol'", "'LP'", "'Superbass'", "'Bassgirl'", "'Subwoofers'")>>
+	<<set $situationDesc = "has a leadership role that requires decisiveness and discretion, but has to maintain a role of flirtatiousness and fun, at the same time. Other slaves marvel at how she must give another slut orders one moment, and girlishly giggle at a prominent citizen the next.">>
+	<<set $applyDesc = "enjoys being one of the most idolized girls in the arcology, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes being one of the most idolized girls in the arcology and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "Recruiter")>>
+	<<set $nickname = either("'Trapper'", "'Cam Queen'", "'Slaver'", "'Slavecatcher'", "'Camgirl'", "'Honeytrap'")>>
+	<<set $situationDesc = "is fundamentally a liar, in her role as recruiter. She must constantly lie by omission if not by commission, telling everyone interested in slavery all about everything good about being your slave, while leaving out the fundamental reality of sexual servitude.">>
+	<<set $applyDesc = "enjoys seeing girls go from faces on a screen to fellow fuckslaves, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes making girls go from faces on a screen to fellow fuckslaves and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "Wardeness")>>
+	<<set $nickname = either("'Rapist'", "'Nightstick'", "'Jailoress'", "'Interrogatrix'", "'Inquisitrix'", "'Stoolie'")>>
+	<<set $situationDesc = "has perhaps the most hated role among your slaves. Her charges hate her, of course. But almost every slave who was once one of her charges hates her too, for they have not forgotten how her whim was once the law to them.">>
+	<<set $applyDesc = "enjoys having a row of cells full of slaves to abuse, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes having a row of cells full of slaves to abuse and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "Milkmaid")>>
+	<<set $nickname = either("'Dairy Queen'", "'Strong Hands'", "'Cowhand'", "'Cowpoke'", "'Milktugger'", "'Cream Queen'")>>
+	<<set $situationDesc = "has a physically demanding and emotionally rewarding role. It's hard work, hauling milk and shifting cows all day, but her girls love her. It's hard not to love someone when you depend on them so totally.">>
+	<<set $applyDesc = "enjoys being a milkmaid, despite the tough work, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes being a milkmaid, despite the tough work, and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "Collectrix")>>
+	<<set $nickname = either("'Cum Queen'", "'Buttfucker'", "'Prostate Poker'", "'Extractrix'", "'Sodomizer'", "'Orgasmotron'")>>
+	<<set $situationDesc = "is required to fuck more exhaustingly than any other slave in the arcology. It's one thing to take dick all day; it's quite another to be expected to constantly massage prostates to orgasm. Naturally, the other slaves notice.">>
+	<<set $applyDesc = "really enjoys being expected to bone butts constantly, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes being expected to bone butts constantly and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "Schoolteacher")>>
+	<<set $nickname = either("'Schoolmarm'", "'Principal'", "'Schoolmistress'", "'Ruler'", "'The Profesora'")>>
+	<<set $situationDesc = "might consider her role boring, if she weren't allowed to use sexual abuse as a correction for poor attentiveness. As it is, her sexual aggressiveness draws much open comment and some private infatuation from the students.">>
+	<<set $applyDesc = "likes teaching, especially because she's allowed to use the students, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes teaching, especially because she's allowed to use the students, and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "Stewardess")>>
+	<<set $nickname = either("'Martinent'", "'Perfectionist'", "'Inspectrix'", "'Top Mop'", "'Concierge'", "'Housemistress'")>>
+	<<set $situationDesc = "might consider her role boring, if she weren't allowed to use sexual abuse as a correction for poor work. As it is, her sexual aggressiveness draws much open comment and some private infatuation from the servants.">>
+	<<set $applyDesc = "likes being in charge of household tasks, especially because she's allowed to use the servants, and is happy to learn that the role is part of her name now.">>
+	<<set $notApplyDesc = "is a bit sad that her role isn't part of her name, since she likes being in charge of household tasks, especially because she's allowed to use the servants, and now wonders whether she'll be allowed to keep doing so.">>
+
+<<elseif ($nickname == "bodyguard")>>
+	<<set $nickname = either("'Aegis'", "'Paladin'", "'Athena'", "'Diana'", "'Widow'", "'Terminatrix'", "'Bloody'", "'Gunsmoke'")>>
+	<<set $situationDesc = "divides your other slaves. She is a physically intimidating sight, wearing normal slave attire and obviously sexually available, but also carrying a sword across her back and an automatic weapon at her hip. Some revere her unique position of responsibility, while others mock how far she steps outside the bounds of sexual slavery.">>
+	<<set $applyDesc = "knew a while ago that she was likely to spend some time shadowing your every move. But now, she understands that not only is your life in her hands, it is going to remain so. She is almost awed by the responsibility.">>
+	<<set $notApplyDesc = "realizes to her apprehension that she may someday be a simple sex slave again, respected for her holes rather than her swordswomanship.">>
+
+<<elseif ($nickname == "server")>>
+	<<set $nickname = either("'Bottom'", "'Bedwarmer'", "'Sub'", "'Girltoy'", "'Slave Slut'", "'Please No'", "'Lovergirl'", "'House Slave'")>>
+	<<set $situationDesc = "holds a place in the hierarchy of your penthouse that almost demands a nickname. She is the lowest of the low, below even your other slaves. She is a pitiable creature, living with a large number of sexually charged people, slave and free, all of whom have the right to demand any sexual service they wish of her.">>
+	<<set $applyDesc = "has become almost proud of her strange, exhausting situation. Hers is not the struggle of slaves to know their place, for she knows hers. It is on the bottom.">>
+	<<set $notApplyDesc = "begins to hope a little that maybe she can rise beyond her current station.">>
+
+<<elseif ($nickname == "nipples")>>
+	<<set $nickname = either("'Eye Hazard'", "'THO'", "'Nips'", "'Puffy'", "'Pointy'", "'Titclits'")>>
+	<<set $situationDesc = "has a pair of nipples that are hard to ignore. Whenever she's sexually aroused, they jut proudly from her chest. As a result, it's totally impossible for her to conceal arousal. When she's ready for it, her big nipples let the whole world know she's easy.">>
+	<<set $applyDesc = "is proud of the nickname, almost amusingly so. She flaunts her nipples in a way she didn't before.">>
+	<<set $notApplyDesc = "accepts that her nipples are just another part of her, and that if she pokes those who fuck her in the missionary position a little, that's all right.">>
+
+<<elseif ($nickname == "areolae")>>
+	<<set $nickname = either("'Headlights'", "'Broad Based'", "'Highbeams'", "'Cans'", "'Areolae'", "'Dark Circles'")>>
+	<<set $situationDesc = "has areolae broader than many slaves' entire breasts. Some slaves find them unattractive, making them an easy target for mockery; others like them, and playfully torment her by giving her a nickname based on them.">>
+	<<set $applyDesc = "is proud of the nickname, almost amusingly so. She flaunts her lovely broad areolae happily, the nipples in their centers hard.">>
+	<<set $notApplyDesc = "accepts that her broad areolae are just another part of her, just like her big tits.">>
+
+<<elseif ($nickname == "lips")>>
+	<<set $nickname = either("'DSLs'", "'Pillows'", "'Kissy'", "'Facepussy'", "'Beestung'")>>
+	<<set $situationDesc = "has lovely lips. They're so big she can hardly talk straight, and they even hinder her ability to communicate any facial expression other than a desire to be facefucked. This is appropriate, as she spends a lot of time getting facefucked.">>
+	<<set $applyDesc = "accepts that her big lips define her. Even more than before, she presents her mouth for oral sex whenever she flirts, and she views her throat as her primary sexual organ.">>
+	<<set $notApplyDesc = "accepts that her mouth is only one of her holes, and that as a sex slave she'll be taking cock in all of them, even if her lips are huge.">>
+
+<<elseif ($nickname == "labia")>>
+	<<set $nickname = either("'Flaps'", "'Petals'", "'Blooming'", "'Folds'", "'Flower'")>>
+	<<set $situationDesc = "has pretty pussylips, larger than most girls'. When she's aroused they announce her state to the whole world, becoming engorged with lust. Other slaves can't help but notice, and mock her uniqueness down there.">>
+	<<set $applyDesc = "really starts to see the appearance of her pussy as a trademark. She's prouder of it than she was before, and she enjoys sex a bit more too, really appreciating it when she gets to feel another slave gently nibble her lovely folds.">>
+	<<set $notApplyDesc = "accepts that the most important part of her vagina is the warm, wet interior, not the generously endowed exterior.">>
+
+<<elseif ($nickname == "old")>>
+	<<set $nickname = either("'Auntie'", "'Cougar'", "'Mommy'", "'Mother'", "'Big Sis'", "'Cradle Robber'", "'MILF'", "'Mature'", "'Obasan'", "'Jukusei'", "'Senior'", "'Seasoned'")>>
+	<<set $situationDesc = "is older than the average Free Cities slave. It has its downsides; she's worth less at sale and her earning potential as a whore is lower. But, on the other hand, good experience is irreplaceable, and in your experience all slaves feel remarkably similar inside, regardless of age. Nevertheless, some younger slaves resent her.">>
+	<<set $applyDesc = "understands that far from being a mockery, your sanction has turned an intended insult into a reference to the advantages of her years.">>
+	<<set $notApplyDesc = "understands that she must do her best to fuck like the teenager she isn't.">>
+
+<<elseif ($nickname == "trans")>>
+	<<set $nickname = either("'Surprise'", "'Queen'", "'Shemale'", "'Missie'", "'Girly'", "'Legs Crossed'", "'Trap'")>>
+	<<set $situationDesc = "might have looked like a sissy or a trap at some point, but she no longer does. She has the curves and the face to be mistaken for a natural woman if she wears clothes that conceal her cock, which is an ability with all sorts of interesting uses. Mockery always fixes on what's unusual, of course, and some of your other slaves even envy her equipment.">>
+	<<set $applyDesc = "believes that you approve of her as she is now, and that she can treat her dick as an asset.">>
+	<<set $notApplyDesc = "understands that she must do her best to fuck like the natural girl she isn't.">>
+
+<<elseif ($nickname == "amp")>>
+	<<set $nickname = either("'Pocket Pussy'", "'Stumps'", "'Nubs'", "'Fucknugget'", "'Cocksock'", "'Fleshlight'", "'Onahole'", "'Dickholster'")>>
+	<<set $situationDesc = "is a fun little fucktoy, a limbless torso with nice wet holes than can be used regardless of her feelings. Giving a poor quadruple amputee a nickname might seem like stooping to wanton cruelty, but other slaves are willing to call her anything to take their minds off their own status.">>
+	<<set $applyDesc = "takes a tiny bit of solace from her nickname, hoping that by accepting it, you were expressing an enjoyment of her attenuated body.">>
+	<<set $notApplyDesc = "understands that she would be a sex toy even if she still had arms and legs.">>
+
+<<elseif ($nickname == "blind")>>
+	<<set $nickname = either("'Blind'", "'Stares'", "'No-Sight'", "'Deadeye'", "'Sightless'", "'Crash'")>>
+	<<set $situationDesc = "is blind. Her dull eyes reveal her condition. She has to feel her way between jobs and is at the mercy of everyone.">>
+	<<set $applyDesc = "accepts that her disability defines her. She keeps her eyes wide open, no longer fearing what others say about them.">>
+	<<set $notApplyDesc = "understands that she is expected to obey, work, and fuck just like any of your other slaves, regardless of her eyesight.">>
+
+<<elseif ($nickname == "preg")>>
+	<<set $nickname = either("'Broodmother'", "'Breeder'", "'Breeding Stock'", "'Mare'", "'Fertile'", "'Mother'", "'Mommy'")>>
+	<<set $situationDesc = "is a breeding slave. Her belly seems to grow daily, unavoidable evidence that she's pregnant. Most men prefer slaves without pregnant stomachs, but those that enjoy them adore her. She occupies a strange place in slave culture, desired and abhorred, hopeful and fearful.">>
+	<<set $applyDesc = "takes a bit of solace from her new hope at her nickname that she will be allowed to complete her pregnancy, and a bit of fear from her suspicion that producing babies is her whole future.">>
+	<<set $notApplyDesc = "understands that she is expected to obey, work, and fuck just like any of your other slaves, regardless of her pregnancy.">>
+
+<<elseif ($nickname == "hung")>>
+	<<set $nickname = either("'Tentpole'", "'Hung'", "'Tripod'", "'Third Arm'", "'Long Dong'", "'Bitchbreaker'", "'Swingin' Dick'", "'Long'", "'Shaft'")>>
+	<<set $situationDesc = "is a Free Cities sex slave, which makes her a girl. The pretension is hard to maintain at times, however, as her massive member swings around, gets in the way, sticks out of clothing, and blows huge loads. Half the fun of using her butt is making her absurd dick slap around. It's an obvious target for a nickname, especially since more than one slave has personal experience with how she feels inside them.">>
+	<<set $applyDesc = "enjoys being nicknamed for her dick. She's special, her dick is special, and now that she's been nicknamed for it, she's confident she and her dick will be allowed to go on being special.">>
+	<<set $notApplyDesc = "realizes that she's just a slave girl behind, no matter what's dangling in front, and does her best to take it like one.">>
+
+<<elseif ($nickname == "gelding")>>
+	<<set $nickname = either("'Neutered'", "'Nipped'", "'Clipped'", "'Empty'", "'Limp'", "'Gelded'", "'Soft'")>>
+	<<set $situationDesc = "is a Free Cities sex slave, which makes her a girl. This is an easier thing for her to accept since her testicles were removed. The lack of testosterone makes her docile and more accepting of her proper role as a receptacle for hard dick. Naturally, other slaves have taken notice.">>
+	<<set $applyDesc = "naturally viewed her own castration as a subject of revulsion and horror. Now, though, she begins to see herself as filling a right and proper role as a gelded slave.">>
+	<<set $notApplyDesc = "realizes that the process of turning her from what she was into what she is did not make her special.">>
+
+<<elseif ($nickname == "short")>>
+	<<set $nickname = either("'Shortstack'", "'Pocket Pussy'", "'Funsize'", "'Miniature'")>>
+	<<set $situationDesc = "is fairly low to the ground. This makes her a bit different, sexually; she's better for several oral sex positions, but most standing positions turn into a game of how long her partner can hold her at the appropriate height.">>
+	<<set $applyDesc = "is a little proud that her diminutive stature, once nothing but a source of embarrassment, is apparently significant to you.">>
+	<<set $notApplyDesc = "realizes that she'll just have to reach higher to make up for her height, since you don't consider it special.">>
+
+<<elseif ($nickname == "tall")>>
+	<<set $nickname = either("'Skyscraper'", "'Basketballer'", "'Everest'", "'Giant'")>>
+	<<set $situationDesc = "is impressively tall for a girl. This makes her sexually convenient, since her holes are at convenient cock height. She spends many of her sexual encounters bent slightly at the waist to allow herself to be taken from behind.">>
+	<<set $applyDesc = "is quite proud of her impressive height, even more so than before. She resolves to tower over other slaves sexually as well as literally.">>
+	<<set $notApplyDesc = "realizes that being tall doesn't make her special, and understands that it's her holes that make her, not how high they are.">>
+
+<<elseif ($nickname == "boobs")>>
+	<<set $nickname = either("'Bouncing'", "'Stacked'", "'Hooters'", "'Airbags'", "'Tatas'", "'Melons'", "'Funbags'", "'Jugs'", "'Bristols'", "'Oppai'", "'Bazookas'", "'Norks'", "'Knockers'")>>
+	<<set $situationDesc = "has large breasts. Pointing this out is about as observant as describing the sky as blue. When she enters a room, they precede her. When she takes it doggy style, they prop her up. Other slaves are envious of the attention she gets, and happy they don't have to carry such burdens.">>
+	<<set $applyDesc = "was of course proud of her huge breasts before this new nickname. Now, though, she accepts them as a sort of trademark.">>
+	<<set $notApplyDesc = "accepts that having titanic tits does not make her special, since what's important is her holes, not her boobs.">>
+
+<<elseif ($nickname == "butt")>>
+	<<set $nickname = either("'Bootylicious'", "'Wide Load'", "'Moneymaker'", "'Buns'", "'Badonkadonk'", "'Brazilian'", "'Milkshake'", "'Tushy'", "'Heiny'", "'Rump'", "'Backside'")>>
+	<<set $situationDesc = "has a large ass. Pointing this out is about as observant as describing the sky as blue. (Though impressive for other reasons, for her sexual partners, since they sometimes have difficulty drawing breath for such remarks.) When she enters a room, it follows her. When she takes it doggy style, it pads penetration to an almost inconvenient degree. Other slaves are envious of the attention she gets, and happy they don't have to carry such burdens.">>
+	<<set $applyDesc = "was of course proud of her huge ass before this new nickname. Now, though, she accepts it as a sort of trademark.">>
+	<<set $notApplyDesc = "accepts that having a massive ass does not make her special, since what's important is her holes, not her buttocks.">>
+
+<<elseif ($nickname == "virgin")>>
+	<<set $nickname = either("'Pure'", "'Innocent'", "'Flower'", "'Chaste'", "'Unbroken'", "'Doomed'", "'Chastity'", "'Pristine'", "'Unspoilt'", "'Vestal'")>>
+	<<set $situationDesc = "has never had vanilla sex. This is not unusual in the Free Cities, since many slaveowners value and preserve virginity. Virgins form a separate class of sorts among slaves. Some of them even dislike their status, as having a virgin pussy can often result in a tired tongue or a sore butt.">>
+	<<set $applyDesc = "understands that it's her fate to remain unspoiled a while longer, and redoubles her efforts to do better with her other parts.">>
+	<<set $notApplyDesc = "dreads and anticipates the day when she'll lose her pearl of great price and gain another way to please a man.">>
+
+<</if>>
+
+<<EventNameLink $activeSlave>> $situationDesc You begin to overhear your other slaves refer to her as @@.pink;$nickname $activeSlave.slaveName.@@
+
+<br><br>
+
+<span id="result">
+<<set $toSearch = $activeSlave.slaveName.toLowerCase()>>
+<<if ($toSearch.indexOf("'") == -1)>>
+<<link "Encourage use of the nickname">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<replace "#result">>
+	Whatever $activeSlave.slaveName's feelings about being called $nickname were, she knows they're moot the first time she hears you refer to her that way. @@.hotpink;She has become more submissive to you.@@ $activeSlave.slaveName $applyDesc
+	<<set $activeSlave.devotion += 4>>
+	<<set $activeSlave.slaveName = ($nickname + " " + $activeSlave.slaveName)>>
+	<</replace>>
+<</link>>
+<br>
+<</if>>
+<<link "Disapprove, but encourage the other slaves to come up with a better nickname">>
+	<<goto "RE nickname">>
+<</link>>
+<br><<link "Put a stop to it">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<replace "#result">>
+	As soon as you make your will on the matter known, $activeSlave.slaveName is referred to as $activeSlave.slaveName again. $activeSlave.slaveName $notApplyDesc
+	<</replace>>
+<</link>>
+<br><<link "No nicknames, now or ever">>
+	<<replace "#name">>
+	$activeSlave.slaveName
+	<</replace>>
+	<<replace "#result">>
+	You make it known that the power to name slaves is yours and yours alone.
+	<<set $nicknamesAllowed = 0>>
+	<</replace>>
+<</link>>
+</span>
+
+<</if>> /* closes $qualifiedNicknames.length > 0 */

@@ -1,0 +1,33 @@
+:: SA rest [nobr]
+
+takes the week off.
+<<if $slaves[$i].fuckdoll > 0>>It has nothing to do but <<if $slaves[$i].amp == 0>>lie<<else>>stand<</if>> in place.<</if>>
+
+<<if $slaves[$i].health > 90>>
+	$possessiveCap health is so outstanding that rest does not improve it.
+<<elseif $slaves[$i].health > -100>>
+	$possessiveCap @@.green;health recovers@@ with rest.
+	<<set $slaves[$i].health += 10>>
+<</if>>
+
+<<if $slaves[$i].fuckdoll == 0>>
+<<if $slaves[$i].fetish != "mindbroken">>
+<<if $slaves[$i].devotion > 20>>
+	<<if $slaves[$i].trust <= 20>>
+	Being allowed to rest @@.mediumaquamarine;reduces $possessive fear@@ of you.
+	<<set $slaves[$i].trust += 4>>
+	<<elseif $slaves[$i].trust <= 50>>
+	Being allowed to rest @@.mediumaquamarine;builds $possessive trust@@ in you.
+	<<set $slaves[$i].trust += 2>>
+	<<else>>
+	Being allowed to rest @@.mediumaquamarine;confirms $possessive trust@@ in you.
+	<<set $slaves[$i].trust += 2>>
+	<</if>>
+<<else>>
+	<<if $slaves[$i].trust < -20>>
+	Being allowed to rest @@.mediumaquamarine;reduces $possessive fear@@ of you.
+	<<set $slaves[$i].trust += 4>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>

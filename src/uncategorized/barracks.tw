@@ -1,0 +1,127 @@
+:: Barracks [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Main">>
+
+The mercenaries you retain to protect $arcologies[0].name are housed in this sector of the arcology, which is fitted out as a modern barracks. It's much less expensive to house them here than to let them live at free quarters in the living areas of the arcology. They live somewhat apart from the society they protect, down here, but
+<<if $personalArms > 0 && $invasionVictory > 0>>
+	you're always welcome here. You're their employer, but what's more important to them is that you also fought alongside them in victorious battle.
+<<else>>
+	they don't resent an unannounced visit from their employer.
+<</if>>
+As you enter the main bay of the barracks, lined with modern arms and armor and a few muscular, scarred men and women looking after their gear or suiting up to stand post, you're greeted respectfully, with<<if $personalArms > 0 && $invasionVictory > 0>> jaunty salutes and<</if>> formal <<if $PC.title == 1>>"Sir"s.<<else>>"Ma'am"s<</if>><<if $personalArms > 0 && $invasionVictory > 0>>, but also with smiles and nods<</if>>.
+<<if $mercenaries >= 3>>
+	Though few of the mercenaries are visible,
+	<<if $mercenaries >= 5>>
+		the bay is huge. There's enough equipment for a full company here.
+	<<else>>
+		there's enough equipment for a full platoon here.
+	<</if>>
+<</if>>
+
+<<if $mercenariesTitle != "mercenaries">>
+	They've taken to their role as $mercenariesTitle.
+	<<switch $mercenariesTitle>>
+	<<case "Knights">>
+		Every set of gear has some kind of chivalric device on it, and the heavier sets of powered armor are accented with a lot of burnished steel.
+	<<case "Evocati">>
+		The heavier sets of powered armor have Roman standards mounted on their backs, and officers' helmets are distinguished by horsehair crests.
+	<<case "Shorn Ones">>
+		The bigger sets of power armor are adorned with multiple ornaments and painted with symbols of the gods and victory.
+	<<case "Medjay">>
+		The gear is accented with bronze and animal skins. Some of the heavier armored helmets even have faceplates styled after Pharaonic death masks.
+	<<case "Samurai">>
+		The gear is functional, but it has a distinctive Sengoku style to it. A ceramic wakizashi is an almost universal tertiary weapon.
+	<<case "Janissaries">>
+		They consider themselves a caste apart, and keep to themselves, priding themselves on relentless training and perpetual readiness.
+	<<case "Knights Templar">>
+		All the armor includes a modernized version of a white surcoat emblazoned with the symbol of the new faith.
+	<<case "Immortals">>
+		The lighting in the bay has been lowered, and the gear is styled to be menacing. There's a sense of leashed danger here.
+	<<case "Asgardians">>
+		Their armor has been modified to allow the wearers' muscular arms to remain visible, and the heavier armor seems to be equipped with capes.
+	<<case "Knights of the Blood">>
+		Their gear is adorned with the badges and ensigns of racialist societies, and posters from the same sources are visible on the walls.
+	<<case "Rangers">>
+		Their gear has a heavy Western influence; everyone carries heavy revolvers everywhere, and the armor sports rope lariats for lassoing 'cattle.'
+	<</switch>>
+<</if>>
+There are doors to magazines, armories, and training areas to all sides, and muffled gunfire can be heard from the latter.
+
+<br><br>
+You head up a deck, to the staff area, and up one more, to look into the living area. It's comfortable and very well-kept, since they have a large number of slaves here to look after them. Relaxing mercenaries are scattered around the common areas, and most are enjoying a slave or two.
+<<if $FSAnnounced>>
+	They're obviously adopting the customs of $arcologies[0].name.
+	<<set _vignette = 0>>
+	<<if $arcologies[0].FSSubjugationist != "unset">>
+		A mercenary is fingering a $arcologies[0].FSSubjugationistRace girl's <<if $seeDicks != 100>>pussy<<else>>anus<</if>>. She's wincing a little; she must be new here.
+		<<set _vignette++>>
+	<</if>>
+	<<if $arcologies[0].FSSupremacist != "unset">>
+		<<if _vignette>>Another<<else>>A<</if>> mercenary, a woman, is being seen to by a multicultural bunch of subhumans of different races. She has one eating her out while two more are rubbing her feet.
+		<<set _vignette++>>
+	<</if>>
+	<<if $arcologies[0].FSGenderRadicalist != "unset">>
+		<<if _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary, who's rather obviously earned enough money to pay for the surgeries and drugs to turn herself into an imposing futanari, is pounding a dickgirl slave.
+		<<set _vignette++>>
+	<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+		<<if _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is being ridden by an enormously pregnant slave. He's massaging her taut belly as she uses her hands to support her sore boobs.
+		<<set _vignette++>>
+	<</if>>
+	<<if $arcologies[0].FSPaternalist != "unset">>
+		<<if _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is making out with a pretty slave. An old romantic movie is playing on a wallscreen in front of them, forgotten.
+		<<set _vignette++>>
+	<<elseif $arcologies[0].FSDegradationist != "unset">>
+		<<if _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is using a slave as a footrest as he relaxes. She has a huge dildo up her ass, and whenever she moves, he uses a foot to shove it farther inside her.
+		<<set _vignette++>>
+	<</if>>
+	<<if $arcologies[0].FSBodyPurist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is idly playing with a slave's natural breasts as he watches a wallscreen. He's being gentle and she doesn't seem to mind.
+		<<set _vignette++>>
+	<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is fucking a bimbo slave doggy style. Her fake tits are so huge that the motion is making them slap together under her.
+		<<set _vignette++>>
+	<</if>>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is getting a blowjob from a young slave. He's playing with her <<if $seeDicks != 100>>fresh pussy<<else>>tight little anus<</if>> as she sucks his dick.
+		<<set _vignette++>>
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is getting a massage from a mature slave. She's wearing a towel, but he sneaks a hand back and steals it, freeing her heavy breasts.
+		<<set _vignette++>>
+	<</if>>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is getting a lapdance from a lithe slave. She's moving her cute butt lower and lower, getting ready to impale herself on his raging erection.
+		<<set _vignette++>>
+	<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is almost hidden by a slave he's got in his lap. He has his head buried between her monstrous breasts, and it's not clear how he's breathing.
+	<</if>>
+	<<if $arcologies[0].FSPastoralist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is drinking a slave's milk, straight from the nipple, while idly massaging her other breast, bringing out a thin stream of milk.
+	<<elseif $arcologies[0].FSPhysicalIdealist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is doing pushups with a well-endowed slave sitting on his back to add weight. She's counting his reps for him.
+	<</if>>
+	<<if $arcologies[0].FSChattelReligionist != "unset">>
+		<<if _vignette >= 4>>Finally, a<<elseif _vignette >= 3>>Yet another<<elseif _vignette >= 2>>A third<<elseif _vignette>>Another<<else>>A<</if>> mercenary is mounting a praying slave from behind. It doesn't distract her; her quiet devotions become more fervent as he fucks her.
+	<</if>>
+	<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<elseif $arcologies[0].FSAztecRevivalist != "unset">>
+	<<elseif $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<elseif $arcologies[0].FSEdoRevivalist != "unset">>
+	<<elseif $arcologies[0].FSArabianRevivalist != "unset">>
+	<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<</if>>
+<</if>>
+
+<<if $mercenariesHelpCorp > 0>>
+	<br><br>
+	As you leave, a squad moves thunderously into the bay, fresh from a slave raid on behalf of your corporation. Most of their captures have been dropped off with the corporate receivers, but they've been given a pretty girl who isn't a good training prospect for the corporate brand, a common reward. The squad looks after their weapons and armor first, an inviolable rule, and as they do, they leave their naked slave standing in the middle of the bay, ignored. She isn't even bound, but she's standing nude and alone amongst modern mercenaries, and she knows there's nothing she can do. So, she does her best to cover herself with her hands, and she cries.
+<</if>>
+
+<br><br>
+
+<<link "Decommission the barracks and return this sector to manufacturing">>
+	<<set $barracks = 0>>
+	<<for _i = 0; _i < $sectors.length; _i++>>
+		<<if $sectors[_i].type == "Barracks">><<set $sectors[_i].type = "Manufacturing">><<break>><</if>>
+	<</for>>
+	<<goto "Main">>
+<</link>>

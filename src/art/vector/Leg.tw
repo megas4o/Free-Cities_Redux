@@ -1,0 +1,29 @@
+:: Art_Vector_Leg_ [nobr]
+
+/* Leg wideness switch courtesy of Nov-X */
+
+/* BEWARE: _legSize is also used in Art_Vector_Feet_ */
+/* BEWARE: _buttSize set by Art_Vector_Butt_ */
+
+<<if _artSlave.amp != 1>>
+  <<set _legSize = "Normal">>
+  <<if _artSlave.hips < 0>>
+    <<if _artSlave.weight > 95>>
+      <<set _legSize = "Normal">>
+    <<else>>
+      <<set _legSize = "Narrow">>
+    <</if>>
+  <<elseif _artSlave.hips == 0>>
+    <<if _artSlave.weight > 95>>
+      <<set _legSize = "Wide">>
+    <<else>>
+      <<set _legSize = "Normal">>
+    <</if>>
+  <<elseif _artSlave.hips > 0>>
+    <<set _legSize = "Wide">>
+  <</if>>
+  <<set _art = "Art_Vector_Leg_"+_legSize >>
+<<else>>
+  <<set _art = "Art_Vector_Stump" >>
+<</if>>
+<<include _art >>

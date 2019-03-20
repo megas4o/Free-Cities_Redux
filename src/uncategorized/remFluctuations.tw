@@ -1,0 +1,87 @@
+:: REM fluctuations [nobr]
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "RIE Eligibility Check">>
+
+<<if ($REM == 1)>>
+	<<set $REM = either("revel", "antislavery terrorism", "tainted drugs", "new free city", "speculation", "medical breakthrough")>>
+<<else>>
+	<<set $REM = either("bankruptcy", "refugee boat", "arcology change", "war", "empty prisons", "unemployment")>>
+<</if>>
+
+<<if $assistant > 0>>
+<<if $marketAssistantAnnounced>>
+	The market assistant's avatar appears on a wall screen as you're going about your business.
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>The regular monstergirl stands behind and prods the human girl forward.
+	<<case "shemale">>You recognize her function by her glasses and because her bimbo cock softens, halfway, while she addresses you on economic matters.
+	<<case "amazon">>She illustrates a small group of gossiping tribeswomen that fades away as she leaves them and approaches you.
+	<<case "businesswoman">>The junior businesswoman adopts a shy posture when addressing you directly, as if unsuccessfully concealing a workplace crush.
+	<<case "goddess">>The demigoddess portrait arrives in a glittery cloud of dust, wearing winged shoes.
+	<<case "schoolgirl">>Both schoolgirls are sitting knee to knee; the nerdy one hands the other a folded note. "Pass it on," she stage whispers. <<if $assistantName == "your personal assistant">>Your regular assistant<<else>>$assistantName<</if>> rolls her eyes.
+	<<case "normal">>Her symbol lights up in regular green pulses while she waits for your attention.
+	<</switch>>
+	"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I have a news item that may be of business interest," she
+	<<switch $assistantAppearance>>
+	<<case "monstergirl" "normal">>informs you.
+	<<case "shemale">>says seriously.
+	<<case "amazon">>says warmly.
+	<<case "businesswoman">>says diffidently.
+	<<case "goddess">>announces.
+	<<case "schoolgirl">>reads aloud.
+	<</switch>>
+<<else>>
+	<<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> appears on a wall screen as you're going about your business.
+	<<if $assistantAppearance == "monstergirl">>She's looking unusually businesslike, with her tentacle hair restrained in a bun.
+	<<elseif $assistantAppearance == "shemale">>She's looking unusually businesslike, with her perpetually erect dick going untended, for once.
+	<<elseif $assistantAppearance == "amazon">>She's looking unusually businesslike, and is doing sums on a primitive little abacus.
+	<<elseif $assistantAppearance == "businesswoman">>She has a clipboard pressed against her generous bosom, and peers at you over the tops of her spectacles.
+	<<elseif $assistantAppearance == "goddess">>She's looking unusually businesslike, with her hands clasped behind her back and pivoting one foot.
+	<<elseif $assistantAppearance == "schoolgirl">>She's looking unusually businesslike, and has a scribbled note in her hand.
+	<<else>>Her symbol spins for attention.
+	<</if>>
+	"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I have a news item that may be of business interest," she
+	<<if $assistantAppearance == "monstergirl">>purrs.<<elseif $assistantAppearance == "shemale">>says flirtatiously.<<elseif $assistantAppearance == "amazon">>says gruffly.<<elseif $assistantAppearance == "businesswoman">>says severely.<<elseif $assistantAppearance == "goddess">>whispers coyly.<<elseif $assistantAppearance == "schoolgirl">>giggles.<<else>>says.<</if>>
+<</if>>
+<<else>>
+Your <<if $marketAssistantAnnounced>>market<<else>>personal<</if>> assistant's symbol appears on a wall screen as you're going about your business. It spins for your attention. "<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I have a news item that may be of business interest," it says.
+<</if>>
+<br><br>
+
+<<if $REM == "revel">>
+	Something is happening in one of the Free Cities' richest arcologies. It's not clear what, exactly, it is, since its owner is making skillful use of the arcology's advanced surveillance and media systems to keep its internal affairs quite secret. The truth will get out eventually, and it's probably not going to do much for old world opinions of the Free Cities. After all, cheap slaves go into that arcology at a prodigious rate, and they don't seem to ever come out again. The unexpected demand for slaves, any slaves, has produced a temporary tightening of the entire slave market. Projections suggest price increases of up to twenty percent. There will be no immediate impact on you or your slaves, but the coming weeks will be a great time to sell stock, and a bad time to buy. @@.yellow;The market price of slaves has increased.@@
+	<<set $slaveCostFactor += 0.1>>
+<<elseif $REM == "tainted drugs">>
+	The Free Cities are anarcho-capitalist paradises - or 'paradises,' depending on one's station and assets. You can't complain personally, as one of the Free Cities' richest citizens, master of your own arcology and owner of sexual slaves. Unfortunately quite a few slaves in the markets are in a position to complain today, as are their owners. Many slave markets use long-lasting stimulants to pep their wares up for auction; dull-eyed slaves earn low bids. Corner-cutting at one of the major suppliers of these stimulants led to a number of slaves being prepared for auction being damaged today. Relatively few were permanently lost, but slaves are going to be a little scarce for a while, which will drive up the going rate. Projections suggest increases of up to twenty percent. There will be no immediate impact on you or your slaves, but the coming weeks will be a great time to sell stock, and a bad time to buy. @@.yellow;The market price of slaves has increased.@@
+	<<set $slaveCostFactor += 0.1>>
+<<elseif $REM == "antislavery terrorism">>
+	Antislavery activism in the old world has grown to match the spread of slavery in the Free Cities. Unfortunately for the activists, they are confronted with a fundamental problem: the independence of the Free Cities. There is very little they can do without resorting to violence, and so, predictably, they often do. A major slave induction center in one of the more open Free Cities has just suffered a suicide bombing. The actual damage was slight, but a wave of increased import security is sweeping the Free Cities in reaction to the incident. Slave prices will be driven up by the cost of checking imported merchandise for explosive devices until the market adjusts. Projections suggest price increases of up to twenty percent. There will be no immediate impact on you or your slaves, but the coming weeks will be a great time to sell stock, and a bad time to buy. @@.yellow;The market price of slaves has increased.@@
+	<<set $slaveCostFactor += 0.1>>
+<<elseif $REM == "new free city">>
+	New Free Cities arise unpredictably. They require either carving out a slice of the old world, emancipating it from whichever inattentive or corrupt country previously owned the land, or reclaiming new land from barren or uninhabitable areas, efforts which are often kept secret. The unpredictable happened today; the world has a new Free City. As usual, immigration rights are being offered cheaply to deserving persons. Many of the remaining rich and talented of the old world are staking claims in the new city, and they'll be buying slaves when they get to their new home. It's a sellers' market out there; projections show the price of slaves rising as much as thirty percent in the short term. There will be no immediate impact on you or your slaves, but the coming weeks will be a great time to sell stock, and a bad time to buy. @@.yellow;The market price of slaves has increased.@@
+	<<set $slaveCostFactor += 0.15>>
+<<elseif $REM == "speculation">>
+	The Free Cities are almost totally unregulated. Prices and interest rates can spike and plummet with speeds not seen since the South Seas Bubble, and for the most silly or corrupt of reasons. Today, it's the latter. A massive attempt to rig the slave market was uncovered this morning. Ultimately, the culprits were caught and much of the damage reversed, but confidence in the marketplace has been shaken. Many great slave vendors are holding onto their stock until they're sure the water's calm again. It's a sellers' market out there; projections show the price of slaves rising as much as thirty percent in the short term. There will be no immediate impact on you or your slaves, but the coming weeks will be a great time to sell stock, and a bad time to buy. @@.yellow;The market price of slaves has increased.@@
+	<<set $slaveCostFactor += 0.15>>
+<<elseif $REM == "medical breakthrough">>
+	There has been a breakthrough in gene therapy. More accurately, there was a breakthrough in gene therapy several years ago - you already knew all about it, and some of the more advanced slave medical upgrades available to you use the technology. However, it's finally gotten out of the prototype stage, and is becoming available to the Free Cities middle class, citizens with one or two slaves. The average citizen is more able today than he was yesterday to turn his chattel housekeeper into the girl he's always dreamed of. Aspirational stuff like this always causes a major price shock. It's a sellers' market out there; projections show the price of slaves rising as much as thirty percent in the short term. There will be no immediate impact on you or your slaves, but the coming weeks will be a great time to sell stock, and a bad time to buy. @@.yellow;The market price of slaves has increased.@@
+	<<set $slaveCostFactor += 0.15>>
+<<elseif $REM == "bankruptcy">>
+	The economy of the Free Cities is a rough-and-tumble place. The absence of old world regulations and institutions, and the often gold-rush atmosphere of the new cities, lead to fortunes being made and lost overnight. Last night, one of the Free Cities' greatest fortunes was lost. A great slave trading house unexpectedly went bankrupt, and its huge stable of slaves are being sold at fire-sale prices. The unforeseen sell off is driving down the market price of slaves all across the Free Cities. Projections show a short-term price drop of up to twenty percent. There will be no immediate impact on you or your slaves, but the coming weeks will be a fine time to buy new stock, and a terrible time to sell. @@.yellow;The market price of slaves has dropped.@@
+	<<set $slaveCostFactor -= 0.1>>
+<<elseif $REM == "refugee boat">>
+	Periodic refugee crises sweep the old world, and sometimes the human flotsam shaken loose from its moorings in the old world is brought up on the shores of the Free Cities. This week, that was no metaphor. A floating Free City has been inundated by refugees in boats. Naturally, the boats have been discarded and the refugees enslaved. It is unclear whether they somehow did not know that this was their inevitable fate, or their lot in the old world was so desperate that they were willing to accept it. Projections show a short-term slave price drop of up to twenty percent as the market digests the influx. There will be no immediate impact on you or your slaves, but the coming weeks will be a fine time to buy new stock, and a terrible time to sell. @@.yellow;The market price of slaves has dropped.@@
+	<<set $slaveCostFactor -= 0.1>>
+<<elseif $REM == "arcology change">>
+	All across the Free Cities, arcology owners are experimenting with new society models and new ways of enforcing them. A nearby arcology has just undergone a major internal struggle as its owner forced through a radical program of changes and harsh measures to enforce them. All but a handful of its inhabitants have been enslaved and placed under the control of a chosen few. With harems of hundreds and little experience or infrastructure to manage them, the new overlords are selling off stock to raise funds to make the transition. Projections show a short-term price drop of up to twenty percent as they flood the market with mediocre slaves. There will be no immediate impact on you or your slaves, but the coming weeks will be a fine time to buy new stock, and a terrible time to sell. @@.yellow;The market price of slaves has dropped.@@
+	<<set $slaveCostFactor -= 0.1>>
+<<elseif $REM == "war">>
+	The old world outside the Free Cities took another step towards its final decline today. A relatively prosperous third world city fell to a regional warlord, and it seems the remaining great powers lack either the money or the will to do anything about it. The victors seem to be following the standard procedure for modern conquerors. Anything valuable, they steal. Among the population, they recruit the willing, shoot the unwilling, and enslave everyone else. The slave markets are going to be glutted with new stock soon. Projections show a short-term price drop of up to thirty percent. There will be no immediate impact on you or your slaves, but the coming weeks will be a fine time to buy new stock, and a terrible time to sell. @@.yellow;The market price of slaves has dropped.@@
+	<<set $slaveCostFactor -= 0.15>>
+<<elseif $REM == "empty prisons">>
+	A small, impoverished old world country defaulted on its currency today. Its beleaguered government is taking every available step to raise funds. Among other things, it has sold every inmate in its prisons who would fetch a price worth the trouble of sale into Free Cities slavery. Though most of the influx is going to be of abominably low quality, the sudden addition of so much new meat is going to have a big impact on the slave economy. Projections show a short-term price drop of up to thirty percent. There will be no immediate impact on you or your slaves, but the coming weeks will be a fine time to buy new stock, and a terrible time to sell. @@.yellow;The market price of slaves has dropped.@@
+	<<set $slaveCostFactor -= 0.15>>
+<<elseif $REM == "unemployment">>
+	A leading old world nation has just suffered a major economic downturn. Old world nations suffer economic downturns all the time, of course, but to those with interests in the slave market, news like this can be very important. Slave market shocks from catastrophes get all the headlines, but a change that affects millions will often be more impactful. As unemployment in the old world rises, the number of people faced with the choice between starvation and voluntary enslavement rises. Social safety nets just aren't what they used to be. Projections show a short-term slave price drop of up to thirty percent due to the sharp increase in desperate people immigrating to the Free Cities for enslavement. There will be no immediate impact on you or your slaves, but the coming weeks will be a fine time to buy new stock, and a terrible time to sell. @@.yellow;The market price of slaves has dropped.@@
+	<<set $slaveCostFactor -= 0.15>>
+<</if>>

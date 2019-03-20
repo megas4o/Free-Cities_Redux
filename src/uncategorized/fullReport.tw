@@ -1,0 +1,107 @@
+:: Full Report [nobr]
+
+/* 000-250-006 */
+<<if $seeImages && $seeReportImages>>
+    <div class="imageRef medImg">
+    <<SlaveArt $slaves[$i] 2 0>>
+    </div>
+<</if>>
+/* 000-250-006 */
+
+<<SlavePronouns $slaves[$i]>>
+
+<<set _fullReportTCash = $cash>>
+
+<<switch $slaves[$i].assignment>>
+<<case "rest">>
+	<<include "SA rest">>
+<<case "whore">>
+	<<include "SA whore">>
+	<<set $lastWeeksFinances.incomeWhore += ($cash - _fullReportTCash)>>
+<<case "serve the public">>
+	<<include "SA serve the public">>
+<<case "work a glory hole">>
+	<<include "SA work a glory hole">>
+	<<set $lastWeeksFinances.incomeGloryhole += ($cash - _fullReportTCash)>>
+<<case "get milked">>
+	<<set $servantMilkersMultiplier = 1>>
+	<<include "SA get milked">>
+	<<set $lastWeeksFinances.incomeMilked += ($cash - _fullReportTCash)>>
+<<case "take classes">>
+	<<include "SA take classes">>
+<<case "please you">>
+	<<include "SA please you">>
+<<case "be a subordinate slave">>
+	<<include "SA serve your other slaves">>
+<<case "be a servant">>
+	<<include "SA servant">>
+<<case "stay confined">>
+	<<include "SA stay confined">>
+<<case "guard you">>
+	<<include "SA guard you">>
+<<case "be your Head Girl">>
+	<<include "SA be your Head Girl">>
+<<case "recruit girls">>
+	<<include "SA recruit girls">>
+<<default>>
+	<<removeJob $slaves[$i] $slaves[$i].assignment>>
+	<<include "SA rest">>
+<</switch>>
+
+<<set _fullReportTCash = $cash>>
+<<if $servantMilkers == 1 && $slaves[$i].lactation > 0 && $slaves[$i].assignment != "get milked">>
+	$possessiveCap assignment
+	<<if setup.servantMilkersJobs.includes($slaves[$i].assignment)>>
+		is not strenuous, so $pronoun <<if $slaves[$i].devotion > 20>><<if $slaves[$i].fetish == "boobs">>eagerly <</if>>uses<<elseif $slaves[$i].devotion >= -20>>is required to use<<else>>is forced to use<</if>> the penthouse milkers frequently,
+		<<set $servantMilkersMultiplier = 0.5>>
+	<<else>>
+		keeps $possessive busy, but $pronoun <<if $slaves[$i].devotion > 20>><<if $slaves[$i].fetish == "boobs">>eagerly <</if>>uses<<elseif $slaves[$i].devotion >= -20>>is required to use<<else>>is forced to use<</if>> the penthouse milkers whenever $pronoun can,
+		<<set $servantMilkersMultiplier = 0.25>>
+	<</if>>
+	<<silently>><<include "SA get milked">><</silently>>
+	<<set $servantMilkersMultiplier = 1>>
+	and $pronoun gives $milk liters of milk over the week, which is sold for @@.yellowgreen;¤$milkSale.@@
+<</if>>
+<<set $lastWeeksFinances.incomeExtraMilk += ($cash - _fullReportTCash)>>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<<if $slaves[$i].minorInjury != 0>>
+	$possessiveCap $slaves[$i].minorInjury will heal by the end of the week.
+<</if>>
+
+<<if $showEWD == 0>>
+	<<silently>>
+	<<include "SA rules">>
+	<<include "SA chooses own clothes">>
+	<<include "SA diet">>
+	<<include "SA long term effects">>
+	<<include "SA drugs">>
+	<<include "SA relationships">>
+	<<include "SA rivalries">>
+	<</silently>>
+<<else>>
+	<<include "SA rules">>
+	<<include "SA chooses own clothes">>
+	<<include "SA diet">>
+	<<include "SA long term effects">>
+	<<include "SA drugs">>
+	<<include "SA relationships">>
+	<<include "SA rivalries">>
+	<br>
+<</if>>
+
+<<if ($personalAttention == $slaves[$i].ID) && ($slaves[$i].tired == 0)>>
+	<<set $activeSlave = $slaves[$i]>>
+	<<include "PT Workaround">>
+	<br>
+<</if>>
+
+<<for _hgtsidx = 0; _hgtsidx < $HGTrainSlavesIDs.length; _hgtsidx++>>
+	<<if $slaves[$i].ID == $HGTrainSlavesIDs[_hgtsidx].ID>>
+		<<set $activeSlave = $slaves[$i], $HGtraining = $HGTrainSlavesIDs[_hgtsidx].training>>
+		<<include "HG Application">>
+		<br>
+	<</if>>
+<</for>>
+
+<<include "SA devotion">>

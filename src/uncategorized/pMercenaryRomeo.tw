@@ -1,0 +1,75 @@
+:: P mercenary romeo
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Random Nonindividual Event">>
+
+<<if $activeSlave == 0>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<if $slaves[$i].fetish != "mindbroken">>
+		<<if $slaves[$i].fuckdoll == 0>>
+			<<if ($slaves[$i].assignment == "serve the public")>>
+				<<set $activeSlave = $slaves[$i]>>
+				<<break>>
+			<</if>>
+			<<if ($slaves[$i].assignment == "serve in the club")>>
+				<<set $activeSlave = $slaves[$i]>>
+				<<break>>
+			<</if>>
+			<<if ($slaves[$i].assignment == "whore")>>
+				<<set $activeSlave = $slaves[$i]>>
+				<<break>>
+			<</if>>
+			<<if ($slaves[$i].assignment == "work in the brothel")>>
+				<<set $activeSlave = $slaves[$i]>>
+				<<break>>
+			<</if>>
+		<</if>>
+		<</if>>
+	<</for>>
+	<<if $activeSlave == 0>>
+		<<set $activeSlave = $slaves.random()>>
+	<</if>>
+<</if>>
+
+<<slaveCost $activeSlave>>
+<<set $slaveCost = (random(60,70)*Math.trunc($slaveCost/100))>>
+<<set $slaveCost = 100*Math.trunc($slaveCost/100)>>
+
+<</nobr>>\
+\
+One of your mercenaries requests an interview. He's a worn, grey-haired tank of a man, made bulkier still by heavy ceramic plate armor and lots of ammunition and gear. The murderous submachine gun favored for city fighting looks like a toy in his hands. But as he sits at your invitation and accepts a <<if $PC.refreshmentType == 0>>$PC.refreshment<<elseif $PC.refreshmentType == 1>>glass of $PC.refreshment<<elseif $PC.refreshmentType == 2>>a plate of $PC.refreshment<<elseif $PC.refreshmentType == 3>>line of $PC.refreshment<<else>>syringe  of $PC.refreshment<</if>> proffered by an attentive slave girl, he seems almost bashful.
+
+"<<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, I'll say this straight. I'd like to buy one of your slaves. I've been seeing <<EventNameLink $activeSlave>> a lot, and she makes the years sit a little lighter on me. I've scraped together what I can, and I can pay ¤$slaveCost." It's a decent price, probably a little less than you could get at auction. It's a huge sum for a mercenary; it's probably his entire savings. You ask what he would do with her. "Well," he says, actually blushing, "I'd free her. And marry her, if she'd have me."
+\
+<span id="result">
+<<link "Decline, and tell her not to see him">>
+	<<replace "#result">>
+	$activeSlave.slaveName obeys your orders not to see the old mercenary. Though neither he or $activeSlave.slaveName says a word about it, his squadmates are not so closemouthed. Soon the tragic story of The Mercenary and the Slave Girl is being told in bars and brothels across the Free City, with you naturally playing @@.red;the role of the villain.@@
+	<<set $rep -= 1000>>
+	<</replace>>
+<</link>>
+<<link "Politely decline">>
+	<<replace "#result">>
+	"Ah well," he says, "didn't think you would, but I had to ask. If you'd be so kind as to keep her assigned so's I can see her, I would be grateful. That was a fine victory, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>; come down to the bar and join the boys and I. We'll buy you a drink. Devil knows, thanks to you we can afford to."
+	<</replace>>
+<</link>>
+<<link "Accept">>
+	<<replace "#result">>
+	The mercenary leaves to collect his purchase. On the video feeds, you see that $activeSlave.slaveName can hardly believe what's happened. <<if $activeSlave.amp != 1>>She hugs him, sobbing into his shoulder. As they walk hand in hand down towards his quarters,<<else>>As he picks up her limbless form to give her a hug,<</if>> she gives the nearest camera a little nod and silently mouths the words 'thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>master<<else>>mistress<</if>>.' Soon the romantic story of The Mercenary and the Slave Girl is being told in bars and brothels across the Free City, with you naturally playing @@.green;a supporting role.@@
+	<<set $rep += 500>>
+	<<set $cash += $slaveCost>>
+	<<include "Remove activeSlave">>
+	<</replace>>
+<</link>>
+<<link "Give her to him as a gift">>
+	<<replace "#result">>
+	The mercenary cannot believe his ears. After you repeat yourself twice, he leaves to collect your gift, thanking you clumsily. On the video feeds, you see that $activeSlave.slaveName can hardly believe what's happened. <<if $activeSlave.amp != 1>>She hugs him, sobbing into his shoulder. As they walk hand in hand down towards his quarters,<<else>>As he picks up her limbless form to give her a hug,<</if>> she gives the nearest camera a little nod and silently mouths the words 'thank you, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>master<<else>>mistress<</if>>.' You smile to yourself; when they get there they'll find flowers and a paid reservation at the arcology's best restaurant. Soon the story is being told in bars and brothels across the Free City, with you naturally playing @@.green;a starring role.@@ Some days later, you hear a dramatization is being filmed, with an aging action star playing the mercenary, a rising starlet playing $activeSlave.slaveName, and a noted character actor playing you.
+	<<set $rep += 3000>>
+	<<set _poster = "a poster for the movie that was made about the love between one of your mercenaries and " + $activeSlave.slaveName>>
+	<<set $trinkets.push(_poster)>>
+	<<include "Remove activeSlave">>
+	<</replace>>
+<</link>>
+</span>

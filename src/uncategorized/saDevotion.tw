@@ -1,0 +1,678 @@
+:: SA devotion [nobr]
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<<if $slaves[$i].fetish == "mindbroken">>
+	@@.red;Her mind is fundamentally broken, so her experiences have no lasting effect on her emotional state.@@
+<<else>>
+<<if $slaves[$i].fuckdoll == 0>>
+
+<<set $energyPlus = 0>>
+
+<<if $slaves[$i].origin == "You were acquainted with her before you were an arcology owner; your rival tried to use her to manipulate you, but you rescued her.">>
+	<<if ($rivalryDuration <= 10 || $rivalryFS == "Racial Supremacism" || $rivalryFS == "Paternalism")>>
+		You @@.mediumaquamarine;saved $slaves[$i].slaveName from a living nightmare@@ under your rival's rule. She @@.hotpink;tries her best to adapt to her savior's wishes@@.
+		<<set $slaves[$i].devotion += 2.0>>
+		<<set $slaves[$i].trust += 2.0>>
+	<<elseif $hostageGiveIn == 1>>
+		Since you are @@.mediumaquamarine;indulging@@ $slaves[$i].slaveName's desires, she @@.hotpink;likes you more@@.
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+	<<elseif $rivalryDuration > 20 and $slaves[$i].devotion < 5>>
+		<<if $personalAttention == $slaves[$i].ID>>
+			You took everything from $slaves[$i].slaveName and @@.mediumorchid;she hates you for it@@. Since you won't give her what she wants, she @@.gold;refuses to trust you@@. Since you are putting such a personal touch into her care, she can't find it in her to rebel as strongly.
+			<<set $slaves[$i].devotion -= 1.0>>
+			<<set $slaves[$i].trust -= 1.0>>
+		<<else>>
+			You took everything from $slaves[$i].slaveName and @@.mediumorchid;she hates you for it@@. Since you won't give her what she wants, she @@.gold;refuses to trust you at all@@.
+			<<set $slaves[$i].devotion -= 8.0>>
+			<<set $slaves[$i].trust -= 8.0>>
+		<</if>>
+	<<elseif $rivalryDuration > 10 and $slaves[$i].devotion < 5>>
+		<<if $personalAttention == $slaves[$i].ID>>
+			She is @@.gold;horrified by you@@. Your rival taught her a great deal about slave life in your arcology and indulged her deepest fantasies. $slaves[$i].slaveName considers being your pet @@.mediumorchid;a fate worse than death@@. Since you are putting such a personal touch into her care, maybe you aren't the monster she thought you were. She can't find it in her to hate and fear you as much.
+			<<set $slaves[$i].devotion -= 3>>
+			<<set $slaves[$i].trust -= 3>>
+		<<else>>
+			She is @@.gold;horrified by you@@. Your rival taught her a great deal about slave life in your arcology and indulged her deepest fantasies. $slaves[$i].slaveName considers being your pet @@.mediumorchid;a fate worse than death@@.
+			<<set $slaves[$i].devotion -= 15.0>>
+			<<set $slaves[$i].trust -= 15.0>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].devotion <= 95>>
+
+<<if $slaves[$i].devotion <= 20>>
+<<if $slaves[$i].devotion >= -50>>
+<<if $slaves[$i].trust > 20>>
+	$slaves[$i].slaveName does not like you and believes that you will not punish her severely, and her @@.mediumorchid;regard for you is severely reduced@@ by this lack of respect.
+	<<set $slaves[$i].trust -= 4>>
+<<elseif $slaves[$i].trust >= -20>>
+	$slaves[$i].slaveName neither likes nor fears you, and her @@.mediumorchid;regard for you is reduced@@ by this lack of respect.
+	<<set $slaves[$i].trust -= 2>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if $slaves[$i].intelligence != 0>>
+<<if $slaves[$i].intelligence >= 3>>
+	<<if $personalAttention == $slaves[$i].ID>>
+	$slaves[$i].slaveName's @@.deepskyblue;brilliant mind@@ strongly resists slavery, but since you are giving her personal attention you are able to compensate for her genius.
+	<<else>>
+	<<if $slaves[$i].trust < -20>>
+		$slaves[$i].slaveName's @@.deepskyblue;brilliant mind@@ strongly resists slavery, but she fears you deeply enough that she consciously forces herself to obey out of self-preservation.
+	<<else>>
+		$slaves[$i].slaveName's @@.deepskyblue;brilliant mind@@ strongly @@.mediumorchid;resists@@ slavery and encourages her to @@.gold;fear you.@@
+		<<set $slaves[$i].devotion -= 2>>
+		<<set $slaves[$i].trust -= 2>>
+	<</if>>
+	<</if>>
+<<elseif $slaves[$i].intelligence >= 2>>
+	<<if $personalAttention == $slaves[$i].ID>>
+	$slaves[$i].slaveName's @@.deepskyblue;highly acute mind@@ naturally resists slavery, but since you are giving her personal attention you are able to compensate for her intelligence.
+	<<else>>
+	<<if $slaves[$i].trust < -20>>
+		$slaves[$i].slaveName's @@.deepskyblue;highly acute mind@@ naturally resists slavery, but she fears you deeply enough that she consciously forces herself to obey out of self-preservation.
+	<<else>>
+		$slaves[$i].slaveName's @@.deepskyblue;highly acute mind@@ naturally @@.mediumorchid;resists@@ slavery and encourages her to @@.gold;fear you.@@
+		<<set $slaves[$i].devotion -= 2>>
+		<<set $slaves[$i].trust -= 2>>
+	<</if>>
+	<</if>>
+<<elseif $slaves[$i].intelligence >= 1>>
+	<<if $personalAttention == $slaves[$i].ID>>
+	$slaves[$i].slaveName's @@.deepskyblue;intelligent mind@@ naturally resists slavery, but since you are giving her personal attention you are able to compensate for her cleverness.
+	<<else>>
+	<<if $slaves[$i].trust < -20>>
+		$slaves[$i].slaveName's @@.deepskyblue;intelligent mind@@ naturally resists slavery, but she fears you deeply enough that she consciously forces herself to obey out of self-preservation.
+	<<else>>
+		$slaves[$i].slaveName's @@.deepskyblue;intelligent mind@@ naturally @@.mediumorchid;resists@@ slavery.
+		<<set $slaves[$i].devotion -= 2>>
+	<</if>>
+	<</if>>
+<<elseif $slaves[$i].intelligence <= -3>>
+	$slaves[$i].slaveName's @@.orangered;moronic mind@@ naturally @@.hotpink;accepts@@ slavery, and she's imbecile enough to instinctively @@.mediumaquamarine;trust you@@ to know what's best for her.
+	<<set $slaves[$i].devotion += 2>>
+	<<set $slaves[$i].trust += 2>>
+<<elseif $slaves[$i].intelligence <= -2>>
+	$slaves[$i].slaveName's @@.orangered;idiotic mind@@ naturally @@.hotpink;accepts@@ slavery, and she's stupid enough to instinctively @@.mediumaquamarine;trust you@@ to know what's best.
+	<<set $slaves[$i].devotion += 1>>
+	<<set $slaves[$i].trust += 1>>
+<<elseif $slaves[$i].intelligence <= -1>>
+	$slaves[$i].slaveName's @@.orangered;unintelligent mind@@ naturally @@.hotpink;accepts@@ slavery.
+	<<set $slaves[$i].devotion += 1>>
+<</if>>
+<</if>>
+
+<</if>>
+
+<<if ($arcologies[0].FSPaternalistLaw == 1)>>
+	The totally paternalistic society of your arcology encourages her to @@.mediumaquamarine;trust you.@@
+	<<set $slaves[$i].trust += 1>>
+<<elseif ($arcologies[0].FSPaternalist >= random(1,120))>>
+	The paternalistic culture of your arcology encourages her to @@.mediumaquamarine;trust you.@@
+	<<set $slaves[$i].trust += 1>>
+<</if>>
+<<if ($arcologies[0].FSChattelReligionistLaw == 1)>>
+	Your status as the prophet of your theocratic arcology encourages her to @@.mediumaquamarine;trust you.@@
+	<<set $slaves[$i].trust += 1>>
+<<elseif ($arcologies[0].FSChattelReligionist >= random(1,120))>>
+	Your arcology's omnipresent religion encourages her to @@.mediumaquamarine;trust you.@@
+	<<set $slaves[$i].trust += 1>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionistCreed == 1>>
+<<if $nicaeaFocus == "slaves">>
+	The creed of $nicaeaName @@.hotpink;focuses on slaves@@ and is repeated constantly all around her.
+	<<set $slaves[$i].devotion += $nicaeaPower>>
+<</if>>
+<</if>>
+
+/* INDENTURE MENTAL EFFECTS */
+
+<<if ($slaves[$i].indenture > -1)>>
+	<<if $slaves[$i].indenture <= 52>>
+	She knows that it's less than a year until her indenture ends.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she has mixed feelings about the prospect.
+	<<elseif $slaves[$i].devotion >= -20>>
+		The prospect of freedom @@.hotpink;encourages her to submit to your orders@@ and @@.mediumaquamarine;encourages her to be optimistic.@@
+		<<set $slaves[$i].devotion += 2>>
+		<<set $slaves[$i].trust += 2>>
+	<<else>>
+		The prospect of freedom encourages her to @@.mediumaquamarine;tolerate anything.@@
+		<<set $slaves[$i].trust += 2>>
+	<</if>>
+	<<else>>
+	The fact that she is an indentured servant, not a permanent slave, is never truly far from her mind.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she has mixed feelings about eventual freedom.
+	<<elseif $slaves[$i].devotion >= -20>>
+		The prospect of eventual freedom @@.hotpink;cheers her up@@ and @@.mediumaquamarine;makes her optimistic.@@
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+	<<else>>
+		The prospect of eventual freedom works to make the indignities of slavery @@.mediumaquamarine;weigh lightly@@ on her.
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	<</if>>
+	<<if $slaves[$i].devotion <= 20>>
+	<<if $slaves[$i].indentureRestrictions >= 2>>
+		She's also @@.mediumaquamarine;able to rely on the protection@@ of her indenture.
+		<<set $slaves[$i].trust += 1>>
+	<<elseif $slaves[$i].indentureRestrictions > 1>>
+		She's also @@.mediumaquamarine;able to trust the restrictions@@ that her indenture places on her treatment.
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	<</if>>
+
+<<elseif $seeAge == 1>> /* RETIREMENT */
+
+<<if $slaves[$i].age >= $retirementAge-5>>
+<<if ($CitizenRetirement == 1)>>
+	<<if $slaves[$i].age >= $retirementAge-1>>
+	She knows that it's less than a year until her retirement from sexual slavery into citizenship.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she has mixed feelings about the prospect, but she prefers to think of it as your way of looking after her. It's her favorite subject, and her strong feelings about it
+		<<if $arcologies[0].FSPaternalist != "unset">>
+			advances paternalistic ideals and @@.green;improves your reputation.@@
+			<<FSChange "Paternalist" 2>>
+		<<else>>
+			@@.green;improves your reputation.@@
+			<<set $repGain += $FSSingleSlaveRep*2>>
+		<</if>>
+	<<elseif $slaves[$i].devotion >= -20>>
+		The prospect of manumission @@.hotpink;encourages her to submit to slavery@@ and @@.mediumaquamarine;encourages her to be optimistic.@@
+		<<set $slaves[$i].devotion += 2>>
+		<<set $slaves[$i].trust += 2>>
+	<<else>>
+		The prospect of manumission encourages her to @@.mediumaquamarine;tolerate anything.@@
+		<<set $slaves[$i].trust += 2>>
+	<</if>>
+	<<else>>
+	Her retirement from sexual slavery into citizenship is on the horizon.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she has mixed feelings about the prospect, but she prefers to think of it as your way of looking after her. This
+		<<if $arcologies[0].FSPaternalist != "unset">>
+			advances paternalistic ideals and @@.green;improves your reputation.@@
+			<<FSChange "Paternalist" 2>>
+		<<else>>
+			@@.green;improves your reputation.@@
+			<<set $repGain += $FSSingleSlaveRep>>
+		<</if>>
+	<<elseif $slaves[$i].devotion >= -20>>
+		The prospect of manumission @@.hotpink;cheers her up@@ and @@.mediumaquamarine;makes her optimistic.@@
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+	<<else>>
+		The prospect of manumission works to make the indignities of slavery @@.mediumaquamarine;weigh lightly@@ on her.
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	<</if>>
+<<elseif ($BioreactorRetirement == 1)>>
+	<<if $slaves[$i].age >= $retirementAge-1>>
+	She knows that it's less than a year until her permanent inclusion in the arcology's milk production systems.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she desperately tries not to think about it, though she occasionally bursts into tears without provocation.
+	<<elseif $slaves[$i].devotion > 20>>
+		To put it mildly, @@.gold;she is terrified.@@
+		<<set $slaves[$i].trust -= 3>>
+	<<else>>
+		She is filled with @@.gold;terror@@ and @@.mediumorchid;horror.@@
+		<<set $slaves[$i].devotion -= 3>>
+		<<set $slaves[$i].trust -= 3>>
+	<</if>>
+	<<else>>
+	She knows that her permanent inclusion in the arcology's milk production systems is not far off.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she tries not to think about it, though she occasionally seems preoccupied.
+	<<elseif $slaves[$i].devotion > 20>>
+		The prospect @@.gold;scares her.@@
+		<<set $slaves[$i].trust -= 2>>
+	<<else>>
+		The prospect @@.gold;scares@@ and @@.mediumorchid;disgusts her.@@
+		<<set $slaves[$i].devotion -= 2>>
+		<<set $slaves[$i].trust -= 2>>
+	<</if>>
+	<</if>>
+<<elseif ($ArcadeRetirement == 1)>>
+	<<if $slaves[$i].age >= $retirementAge-1>>
+	She knows that it's less than a year until she is to be permanently encased in a bodysuit with holes for nothing but dick.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she desperately tries not to think about it, though she occasionally bursts into tears without provocation.
+	<<elseif $slaves[$i].devotion > 20>>
+		To put it mildly, @@.gold;she is terrified.@@
+		<<set $slaves[$i].trust -= 3>>
+	<<else>>
+		She is filled with @@.gold;terror@@ and @@.mediumorchid;horror.@@
+		<<set $slaves[$i].devotion -= 3>>
+		<<set $slaves[$i].trust -= 3>>
+	<</if>>
+	<<else>>
+	She knows that her ultimate fate as a Fuckdoll is not far off.
+	<<if $slaves[$i].devotion > 95>>
+		Since she loves you, she tries not to think about it, though she occasionally seems preoccupied.
+	<<elseif $slaves[$i].devotion > 20>>
+		The prospect @@.gold;scares her.@@
+		<<set $slaves[$i].trust -= 2>>
+	<<else>>
+		The prospect @@.gold;scares@@ and @@.mediumorchid;disgusts her.@@
+		<<set $slaves[$i].devotion -= 2>>
+		<<set $slaves[$i].trust -= 2>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($CitizenRetirement == 1)>>
+<<if ($slaves[$i].devotion <= 95) || ($slaves[$i].trust <= 95)>>
+<<if $SexMilestoneRetirement == 1>>
+	<<if $slaves[$i].oralCount + $slaves[$i].analCount + $slaves[$i].vaginalCount + $slaves[$i].penetrativeCount + $slaves[$i].mammaryCount >= $retirementSex*0.8>>
+	<<if $slaves[$i].devotion >= -20>>
+		She's @@.hotpink;more obedient@@ and @@.mediumaquamarine;more tolerant,@@
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+	<<else>>
+		She does her best to @@.mediumaquamarine;stay strong,@@
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	since she knows that her freedom is only a few thousand dicks away.
+	<</if>>
+<</if>>
+<<if $MilkMilestoneRetirement == 1>>
+	<<if $slaves[$i].milk >= $retirementMilk*0.8>>
+	<<if $slaves[$i].devotion >= -20>>
+		She's @@.hotpink;more obedient@@ and @@.mediumaquamarine;more tolerant,@@
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+	<<else>>
+		She does her best to @@.mediumaquamarine;stay strong,@@
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	since she knows she will be free if her udders can gush just a bit more cream.
+	<</if>>
+<</if>>
+<<if $BirthsMilestoneRetirement == 1>>
+	<<if $slaves[$i].births >= $retirementBirths*0.6>>
+	<<if $slaves[$i].devotion >= -20>>
+		She's @@.hotpink;more obedient@@ and @@.mediumaquamarine;more tolerant,@@
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+	<<else>>
+		She does her best to @@.mediumaquamarine;stay strong,@@
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	since she knows she only has to successfully breed a little more to be free.
+	<</if>>
+<</if>>
+<<if $KillsMilestoneRetirement == 1>>
+	<<if $slaves[$i].pitkills >= $retirementKills*0.6>>
+	<<if $slaves[$i].devotion >= -20>>
+		She's @@.hotpink;more obedient@@ and @@.mediumaquamarine;more tolerant,@@
+		<<set $slaves[$i].devotion += 1>>
+		<<set $slaves[$i].trust += 1>>
+	<<else>>
+		She does her best to @@.mediumaquamarine;stay strong,@@
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+	since she knows just a bit more murder in the pit will win her freedom.
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<</if>> /* CLOSES RETIREMENT */
+
+<<if $slaves[$i].assignmentVisible == 1>>
+<<if $personalAttention == "sex">>
+<<if $freeSexualEnergy > 0>>
+	<<if $freeSexualEnergy == 3>>
+		She gets a lot of sexual attention from you, since you don't have nearly enough dedicated fucktoys to sate your libido, and this @@.hotpink;<<if $slaves[$i].devotion > 50>>intensifies her love for you<<else>>forces her to get used to sex slavery<</if>>.@@
+	<<elseif $freeSexualEnergy == 2>>
+		She receives some sexual attention from you, since you don't have enough dedicated fucktoys to sate your libido, and this @@.hotpink;<<if $slaves[$i].devotion > 50>>builds her closeness to you<<else>>gets her used to being your sex slave<</if>>.@@
+	<<else>>
+		She receives occasional sexual attention from you, since you barely have enough dedicated fucktoys to sate your libido, @@.hotpink;<<if $slaves[$i].devotion > 50>>making her feel closer to you<<else>>keeping her aware she's your sex slave<</if>>.@@
+	<</if>>
+	<<set $slaves[$i].devotion += $freeSexualEnergy>>
+	<<set $slaves[$i].oralCount += $freeSexualEnergy>>
+	<<set $oralTotal += $freeSexualEnergy>>
+	<<if canDoVaginal($slaves[$i])>>
+		<<set $slaves[$i].vaginalCount += $freeSexualEnergy>>
+		<<set $vaginalTotal += $freeSexualEnergy>>
+	<</if>>
+	<<if canDoAnal($slaves[$i])>>
+		<<set $slaves[$i].analCount += $freeSexualEnergy>>
+		<<set $analTotal += $freeSexualEnergy>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+/* COLLECTIVE SPIRIT IMPACTS */
+
+<<if ($slaves.length > 3)>>
+<<set _collectiveTrustEffect = 0>>
+<<set _collectiveDevotionEffect = 0>>
+<<if $enduringDevotion > 50>>
+	<<if $slaves[$i].devotion >= -20>>
+	<<if $slaves[$i].devotion <= 20>>
+		<<set _collectiveDevotionEffect = 1, $slaves[$i].devotion += 1>>
+		<<if $slaves[$i].assignmentVisible == 1>><<set $slaves[$i].devotion += 1>><</if>>
+	<</if>>
+	<</if>>
+<<elseif $enduringDevotion <= 0>>
+	<<if $slaves[$i].devotion <= 20>>
+		<<set _collectiveDevotionEffect = -1, $slaves[$i].devotion -= 1>>
+		<<if $slaves[$i].assignmentVisible == 1>><<set $slaves[$i].devotion -= 1>><</if>>
+	<</if>>
+<</if>>
+<<if $enduringTrust > 50>>
+	<<if $slaves[$i].trust >= -20>>
+	<<if $slaves[$i].trust <= 20>>
+		<<set _collectiveTrustEffect = 1, $slaves[$i].trust += 1>>
+		<<if $slaves[$i].assignmentVisible == 1>><<set $slaves[$i].trust += 1>><</if>>
+	<</if>>
+	<</if>>
+<<elseif $enduringTrust <= 0>>
+	<<if $slaves[$i].trust <= 20>>
+		<<set _collectiveTrustEffect = -1, $slaves[$i].trust -= 1>>
+		<<if $slaves[$i].assignmentVisible == 1>><<set $slaves[$i].trust -= 1>><</if>>
+	<</if>>
+<</if>>
+<<if _collectiveDevotionEffect == 1>>
+	<<if _collectiveTrustEffect == 1>>
+		Since she's ambivalent and fearful, the @@.hotpink;collective devotion@@ @@.mediumaquamarine;and trust@@ of your slaves affect her slightly.
+	<<elseif _collectiveTrustEffect == 0>>
+		Since she's ambivalent about you, the @@.hotpink;collective devotion@@ your slaves feel for you affects her slightly.
+	<<else>>
+		Since she's ambivalent about you, the @@.hotpink;collective devotion@@ your slaves feel for you affects her slightly, but their @@.gold;general fear@@ affects her too.
+	<</if>>
+<<elseif _collectiveDevotionEffect == 0>>
+	<<if _collectiveTrustEffect == 1>>
+		Since she's fearful of you, the @@.mediumaquamarine;collective trust@@ your slaves place in you affects her slightly.
+	<<elseif _collectiveTrustEffect == -1>>
+		Since she doesn't trust you, the @@.gold;collective fear@@ your slaves feel for you affects her slightly.
+	<</if>>
+<<else>>
+	<<if _collectiveTrustEffect == 1>>
+		The @@.mediumorchid;collective anger@@ your slaves feel reinforces her own feelings, but their @@.mediumaquamarine;collective trust@@ also affects her slightly.
+	<<elseif _collectiveTrustEffect == 0>>
+		The @@.mediumorchid;collective anger@@ your slaves feel reinforces her own feelings.
+	<<else>>
+		The @@.mediumorchid;collective anger@@ @@.gold;and fear@@ your slaves feel reinforce her own feelings.
+	<</if>>
+<</if>>
+<</if>>
+
+<<if $slaves[$i].assignmentVisible == 1>>
+<<if ($arcade != 0) || (($dairy != 0) && ($dairyRestraintsSetting >= 2))>>
+	<<if $slaves[$i].devotion <= 95>>
+		She knows about <<if $arcade != 0>>$arcadeName<<if ($dairy != 0) && ($dairyRestraintsSetting >= 2)>> and $dairyName<</if>><<else>>$dairyName<</if>>, and @@.gold;fears@@ that you might send her there.
+		<<set $slaves[$i].trust -= 1>>
+	<<else>>
+		She knows some of your other slaves meet terrible, industrial fates, but she loves you so much that she tries not to think about it.
+	<</if>>
+<</if>>
+<</if>>
+
+/* STAT CROSSOVERS */
+
+<<if $slaves[$i].trust >= -20>>
+<<if $slaves[$i].devotion > 95>>
+	<<if $slaves[$i].trust <= 20>>
+		$slaves[$i].slaveName loves you, so she finds herself @@.mediumaquamarine;fearing you a little less.@@
+		<<set $slaves[$i].trust += 1>>
+	<<elseif $slaves[$i].trust <= 50>>
+		$slaves[$i].slaveName loves you, so she finds herself @@.mediumaquamarine;trusting you a little more.@@
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+<<elseif $slaves[$i].devotion > 60>>
+	<<if $slaves[$i].trust <= 20>>
+		$slaves[$i].slaveName is devoted to you, so she finds herself @@.mediumaquamarine;fearing you a little less.@@
+		<<set $slaves[$i].trust += 1>>
+	<</if>>
+<<elseif $slaves[$i].devotion < -50>>
+	<<if $slaves[$i].trust > 20>>
+	<<if $slaves[$i].trust <= 95>>
+		$slaves[$i].slaveName hates you, so she finds herself @@.gold;trusting you a little less.@@
+		<<set $slaves[$i].trust -= 2>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $slaves[$i].trust > 95>>
+	<<if $slaves[$i].devotion <= 20>>
+		$slaves[$i].slaveName trusts you implicitly, so she finds herself @@.hotpink;hating you a little less.@@
+		<<set $slaves[$i].devotion += 1>>
+	<<elseif $slaves[$i].devotion <= 50>>
+		$slaves[$i].slaveName trusts you implicitly, so she finds herself @@.hotpink;liking you a little more.@@
+		<<set $slaves[$i].devotion += 1>>
+	<</if>>
+<<elseif $slaves[$i].trust > 50>>
+	<<if $slaves[$i].devotion <= 20>>
+		$slaves[$i].slaveName trusts you, so she finds herself @@.hotpink;hating you a little less.@@
+		<<set $slaves[$i].devotion += 1>>
+	<</if>>
+<<elseif $slaves[$i].trust < -50>>
+	<<if $slaves[$i].devotion >= -20>>
+	<<if $slaves[$i].devotion <= 50>>
+		$slaves[$i].slaveName is so terrified of you that she tries desperately to avoid punishment, @@.hotpink;which is sometimes indistinguishable from devotion.@@
+		<<set $slaves[$i].devotion += 2>>
+	<</if>>
+	<</if>>
+<<elseif $slaves[$i].trust < -20>>
+	<<if $slaves[$i].devotion > 20>>
+	<<if $slaves[$i].devotion <= 50>>
+		$slaves[$i].slaveName is scared of you, but not truly terrified, so she feels safe in @@.mediumorchid;hating the worst parts of being your sex slave.@@
+		<<set $slaves[$i].devotion -= 2>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].sexualQuirk == "unflinching")>>
+	<<if ($slaves[$i].devotion <= 95)>>
+	<<if ($slaves[$i].devotion < $slaves[$i].oldDevotion)>>
+	Her unflinching nature leads her to forget some of the unpleasant things she's experienced this week, @@.hotpink;reducing their impact on her feelings about you.@@
+	<<set $slaves[$i].devotion += ($slaves[$i].oldDevotion - $slaves[$i].devotion)/2>>
+	<</if>>
+	<</if>>
+<</if>>
+
+/* CAPS ON DEVOTION GAIN */
+
+<<if $slaves[$i].devotion >= -20>>
+	<<if $slaves[$i].devotion >= ($slaves[$i].oldDevotion+5)>>
+		<<if $arcologies[0].FSChattelReligionist >= random(1,100)>>
+		The natural resilience of her mind is overcome by the omnipresent combination of faith and servitude in $arcologies[0].name, and she does not resist her progress down the path towards total subservience.
+		<<elseif $personalAttention == $slaves[$i].ID>>
+		She gained so much regard for you this week that her natural reaction is to rebound a little, but since you're giving her personal attention, your charismatic presence prevents this.
+		<<elseif $slaves[$i].devotion < 95>>
+		So many things served to drive her into subservience this week that her mind @@.mediumorchid;rebounds a little.@@
+		<<set $slaves[$i].devotion = ($slaves[$i].oldDevotion+5)>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $slaves[$i].devotion >= ($slaves[$i].oldDevotion+5)>>
+	<<if $slaves[$i].behavioralFlaw == "arrogant">>
+		Though she made progress this week, @@.mediumorchid;it is limited by her arrogance.@@
+		<<set $slaves[$i].devotion = ($slaves[$i].oldDevotion+5)>>
+	<<elseif ($slaves[$i].behavioralFlaw == "bitchy") && canTalk($slaves[$i])>>
+		Though she made progress this week, @@.mediumorchid;it is limited by the independence she regains by making snide comments.@@
+		<<set $slaves[$i].devotion = ($slaves[$i].oldDevotion+5)>>
+	<<elseif $slaves[$i].behavioralFlaw == "devout">>
+		Though she made progress this week, @@.mediumorchid;it is limited by the independence she regains through reliance on her faith.@@
+		<<set $slaves[$i].devotion = ($slaves[$i].oldDevotion+5)>>
+	<<elseif $slaves[$i].behavioralFlaw == "liberated">>
+		Though she made progress this week, @@.mediumorchid;it is limited by the independence she retains due to her moral convictions that this is wrong.@@
+		<<set $slaves[$i].devotion = ($slaves[$i].oldDevotion+5)>>
+	<</if>>
+	<</if>>
+<</if>>
+
+/* CAPS ON TRUST GAIN */
+
+<<if $slaves[$i].trust > -20>>
+	<<if $slaves[$i].trust >= ($slaves[$i].oldTrust+5)>>
+		<<if $arcologies[0].FSChattelReligionist >= random(1,100)>>
+		Any natural doubts she harbors are overcome by her belief in Chattel Religionism, and she does not resist her progress down the path towards total trust in you.
+		<<elseif $personalAttention == $slaves[$i].ID>>
+		She gained so much trust in you this week that her natural reaction is to doubt herself, but since you're giving her personal attention, she decides to trust her understanding of your will.
+		<<elseif $slaves[$i].trust < 95>>
+		She gained so much trust in you this week that she @@.gold;draws back a little@@ out of self-doubt.
+		<<set $slaves[$i].trust = ($slaves[$i].oldTrust+5)>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $slaves[$i].trust >= ($slaves[$i].oldTrust+5)>>
+	<<if ($slaves[$i].behavioralFlaw == "odd") && ($slaves[$i].collar != "shock punishment")>>
+		Though she made progress this week, @@.gold;it is limited by her preoccupation with her own oddities.@@
+		<<set $slaves[$i].trust = ($slaves[$i].oldTrust+5)>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].devotion > 100) && ($slaves[$i].trust > 100) && ($slaves[$i].energy > 95)>>
+	<<if ($rep < 20000)>>Her perfect devotion and trust @@.green;improve your reputation.@@<</if>>
+	<<set $repGain += 10*($slaves[$i].trust-100)>>
+	<<set $slaves[$i].devotion = 100>>
+	<<set $repGain += 10*($slaves[$i].trust-100)>>
+	<<set $slaves[$i].trust = 100>>
+<<else>>
+	<<if ($slaves[$i].devotion > 100)>>
+		<<if ($slaves[$i].trust < 100) && ($slaves[$i].trust >= -20)>>
+			<<set $slaves[$i].trust += Math.trunc(($slaves[$i].devotion-100)*5)/10>>
+		<<elseif $slaves[$i].energy <= 50>>
+			<<set $energyPlus += Math.trunc($slaves[$i].devotion-100)>>
+		<<else>>
+			<<if ($rep < 20000)>>Her extreme devotion @@.green;improved your reputation.@@<</if>>
+			<<set $repGain += 10*($slaves[$i].devotion-100)>>
+		<</if>>
+		<<set $slaves[$i].devotion = 100>>
+	<<elseif $slaves[$i].devotion > 95>>
+		<<set $slaves[$i].devotion = 100>>
+	<<elseif ($slaves[$i].devotion < -95)>>
+		<<set $slaves[$i].devotion = -100>>
+	<</if>>
+	<<if ($slaves[$i].trust > 100)>>
+		<<if $slaves[$i].devotion <= 100>>
+			<<set $slaves[$i].devotion += Math.trunc($slaves[$i].trust)>>
+		<<elseif $slaves[$i].energy <= 50>>
+			<<set $energyPlus += Math.trunc($slaves[$i].trust-100)>>
+		<<else>>
+			<<if ($rep < 20000)>>Her extreme trust @@.green;improved your reputation.@@<</if>>
+			<<set $repGain += 25*($slaves[$i].trust-100)>>
+		<</if>>
+		<<set $slaves[$i].trust = 100>>
+	<<elseif $slaves[$i].trust > 95>>
+		<<set $slaves[$i].trust = 100>>
+	<<elseif ($slaves[$i].trust < -95)>>
+		<<set $slaves[$i].trust = -100>>
+	<</if>>
+<</if>>
+<<if ($energyPlus > 0)>>
+	Her confidence in her hypersexual life @@.green;improved her low sex drive.@@
+	<<set $slaves[$i].energy += $energyPlus>>
+<</if>>
+
+<<if ($slaves[$i].devotion > 95)>>
+	$slaves[$i].slaveName's @@.magenta;worshipfulness is beyond improvement,@@ and her
+<<elseif ($slaves[$i].devotion > 50) && ($slaves[$i].devotion > $slaves[$i].oldDevotion)>>
+	$slaves[$i].slaveName's @@.hotpink;devotion increased@@ and her
+<<elseif ($slaves[$i].devotion > 50) && ($slaves[$i].devotion == $slaves[$i].oldDevotion)>>
+	$slaves[$i].slaveName's @@.yellow;devotion did not change@@ and her
+<<elseif ($slaves[$i].devotion > 50)>>
+	$slaves[$i].slaveName's @@.mediumorchid;devotion dropped@@ and her
+<<elseif ($slaves[$i].devotion >= -20) && ($slaves[$i].devotion > $slaves[$i].oldDevotion)>>
+	$slaves[$i].slaveName's @@.hotpink;regard for you increased@@ and her
+<<elseif ($slaves[$i].devotion >= -20) && ($slaves[$i].devotion == $slaves[$i].oldDevotion)>>
+	$slaves[$i].slaveName's @@.yellow;regard for you did not change@@ and her
+<<elseif ($slaves[$i].devotion >= -20)>>
+	$slaves[$i].slaveName's @@.mediumorchid;regard for you dropped@@ and her
+<<elseif ($slaves[$i].devotion > $slaves[$i].oldDevotion)>>
+	$slaves[$i].slaveName's @@.hotpink;resistance dropped@@ and her
+<<elseif ($slaves[$i].devotion == $slaves[$i].oldDevotion)>>
+	$slaves[$i].slaveName's @@.yellow;resistance did not change@@ and her
+<<else>>
+	$slaves[$i].slaveName's @@.mediumorchid;resistance increased@@ and her
+<</if>>
+
+<<if ($slaves[$i].trust > 95)>>
+	@@.seagreen;trust in you is total.@@
+<<elseif ($slaves[$i].trust > 20) && ($slaves[$i].trust > $slaves[$i].oldTrust)>>
+	@@.mediumaquamarine;trust improved@@ this week.
+<<elseif ($slaves[$i].trust > 20) && ($slaves[$i].trust == $slaves[$i].oldTrust)>>
+	@@.yellow;trust did not change@@ this week.
+<<elseif ($slaves[$i].trust > 20)>>
+	@@.gold;trust dropped@@ this week.
+<<elseif ($slaves[$i].trust > $slaves[$i].oldTrust)>>
+	@@.mediumaquamarine;fear dropped@@ this week.
+<<elseif ($slaves[$i].trust == $slaves[$i].oldTrust)>>
+	@@.yellow;fear did not change@@ this week.
+<<else>>
+	@@.gold;fear increased@@ this week.
+<</if>>
+
+<<if ($slaves[$i].devotion > 50) && ($slaves[$i].oldDevotion <= 50)>>
+	@@.green;She has gone from accepting her position to being devoted to you!@@
+	<<set $slaves[$i].devotion += 1>>
+<<elseif ($slaves[$i].devotion > 20) && ($slaves[$i].oldDevotion <= 20)>>
+	@@.green;She has gone from being ambivalent toward you to accepting your ownership of her!@@
+	<<set $slaves[$i].devotion += 1>>
+<<elseif ($slaves[$i].devotion >= -20) && ($slaves[$i].oldDevotion < -20)>>
+	@@.green;She has gone from disliking you to being ambivalent about you!@@
+	<<set $slaves[$i].devotion += 1>>
+<<elseif ($slaves[$i].devotion >= -50) && ($slaves[$i].oldDevotion < -50)>>
+	@@.green;She has gone from hating you to merely disliking you!@@
+	<<set $slaves[$i].devotion += 1>>
+<</if>>
+
+<<if ($slaves[$i].trust > 50) && ($slaves[$i].oldtrust <= 50)>>
+	@@.green;She has gone from being careful around you to trusting you!@@
+	<<set $slaves[$i].trust += 1>>
+<<elseif ($slaves[$i].trust > 20) && ($slaves[$i].oldtrust <= 20)>>
+	@@.green;She has gone from fearing you to merely being careful around you!@@
+	<<set $slaves[$i].trust += 1>>
+<<elseif ($slaves[$i].trust >= -20) && ($slaves[$i].oldtrust < -20)>>
+	@@.green;She has gone from being afraid of you to being merely fearful!@@
+	<<set $slaves[$i].trust += 1>>
+<<elseif ($slaves[$i].trust >= -50) && ($slaves[$i].oldtrust < -50)>>
+	@@.green;She has gone from being terrified to being merely afraid of you!@@
+	<<set $slaves[$i].trust += 1>>
+<</if>>
+
+<<if ($slaves[$i].trust < -20) && ($slaves[$i].oldtrust >= -20)>>
+	<<if ($slaves[$i].devotion <= 20)>>
+	@@.green;She has gone from merely fearing you to actively being afraid of you!@@
+	<<set $slaves[$i].trust -= 2>>
+	<</if>>
+<</if>>
+
+/* done stealthily to make the slave's progression seem natural */
+<<if ($slaves[$i].rudeTitle == 1) && ($slaves[$i].devotion >= -50)>>
+	<<set $slaves[$i].customTitle = "", $slaves[$i].customTitleLisp = "", $slaves[$i].rudeTitle = 0>>
+<</if>>
+
+<<else>> /* IS FUCKDOLL */
+
+It is confined in a suit that limits its perception of the outside world to tonal commands from the suit itself and things that are inserted into its mouth<<if $activeSlave.vagina > -1>>, vagina,<</if>> and anus.
+<<if $slaves[$i].sexualFlaw == "self hating">>
+	Its self hatred @@.gold;cannot eliminate the growing fear@@ engendered by its remaining spark of self-preservation.
+	<<set $slaves[$i].trust -= 5>>
+<<elseif $slaves[$i].trust > 50>>
+	It still hopes you'll let it out of its suit so it can be your good slave again, but @@.gold;fear and doubt creep in@@ by the minute. And there are a lot of them.
+<<else>>
+	With little to do but <<if $activeSlave.fuckdoll <= 60>>wonder if it's about to be used<<else>>desperately hope it'll be used soon<</if>>, it dwells on the @@.gold;horrible fear@@ that this dark existence will be perpetual.
+<</if>>
+<<set $slaves[$i].trust -= 10>>
+<<if $slaves[$i].sexualFlaw == "self hating">>
+	It knows to its core that it deserves this, @@.mediumorchid;slowing but not stopping its descent into depression.@@
+	<<set $slaves[$i].devotion += 5>>
+<<elseif $slaves[$i].devotion > 50>>
+	It spirals through @@.mediumorchid;obsessive depression,@@ wondering what it did to deserve this fate.
+<<else>>
+	In the silence and darkness between the times it's used, it has little to do but @@.mediumorchid;hate you.@@
+<</if>>
+<<set $slaves[$i].devotion -= 10>>
+
+<</if>> /* CLOSES FUCKDOLL CHECK */
+<</if>> /* CLOSES MINDBROKEN CHECK */

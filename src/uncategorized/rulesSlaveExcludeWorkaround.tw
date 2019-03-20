@@ -1,0 +1,15 @@
+:: Rules Slave Exclude Workaround
+
+<<nobr>>
+<<set $nextButton = "Continue", $nextLink = "Rules Slave Exclude">>
+
+<<if !ruleSlaveExcluded($activeSlave, $currentRule)>>
+	<<set $currentRule.excludedSlaves.push($activeSlave.ID)>>
+	<<if ruleSlaveSelected($activeSlave, $currentRule)>>
+		<<set $currentRule.selectedSlaves.delete($activeSlave.ID)>>
+	<</if>>
+<</if>>
+
+<<goto "Rules Slave Exclude">>
+<</nobr>>
+

@@ -1,0 +1,12 @@
+:: Rules Slave Deselect Workaround
+
+<<nobr>>
+<<set $nextButton = "Continue", $nextLink = "Rules Slave Select">>
+
+<<if ruleSlaveSelected($activeSlave, $currentRule)>>
+	<<set $currentRule.selectedSlaves.delete($activeSlave.ID)>>
+<</if>>
+
+<<goto "Rules Slave Select">>
+<</nobr>>
+

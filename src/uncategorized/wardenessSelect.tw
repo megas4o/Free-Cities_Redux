@@ -1,0 +1,14 @@
+:: Wardeness Select [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Cellblock", $showEncyclopedia = 1, $encyclopedia = "Wardeness">>
+
+<<if ($Wardeness != 0)>>
+	''__@@.pink;$Wardeness.slaveName@@__'' is serving as your Wardeness.<br><br>She will help break your prisoners.
+<<else>>
+	You have not selected a Wardeness.
+<</if>>
+
+<br><br>''Appoint a Wardeness from your devoted slaves:''
+<<include "Slave Summary">>
+
+<br><br>[[None|Wardeness Workaround][$i = -1]]

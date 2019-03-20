@@ -1,0 +1,10 @@
+:: NGP Workaround [silently]
+
+<<if $slavesToImport == 1>>
+	<<assignJob $slaves[$i] "be imported">>
+<<else>>
+	<<removeJob $slaves[$i] $slaves[$i].assignment>>
+<</if>>
+
+<<goto "New Game Plus">>
+

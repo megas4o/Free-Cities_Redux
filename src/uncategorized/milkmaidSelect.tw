@@ -1,0 +1,14 @@
+:: Milkmaid Select [nobr]
+
+<<set $nextButton = "Back", $nextLink = "Dairy", $showEncyclopedia = 1, $encyclopedia = "Milkmaid">>
+
+<<if ($Milkmaid != 0)>>
+	''__@@.pink;$Milkmaid.slaveName@@__'' is serving as your Milkmaid.<br><br>She will look after your livestock, helping them give milk<<if $seeDicks > 0>> and semen<</if>>.
+<<else>>
+	You have not selected a Milkmaid.
+<</if>>
+
+<br><br>''Appoint a Milkmaid from your obedient slaves:''
+<<include "Slave Summary">>
+
+<br><br>[[None|Milkmaid Workaround][$i = -1]]

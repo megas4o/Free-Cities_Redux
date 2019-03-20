@@ -1,0 +1,35 @@
+:: P Mercs Help Corp [nobr]
+
+<<set $nextButton = "Decline", $nextLink = "Random Nonindividual Event", $mercenariesHelpCorp = -1>> /* hide button until user makes a selection */
+
+Your weekly meeting with your $mercenariesTitle commander finishes with unusual speed. With the arcology owner who set the Daughters on you enslaved, all other immediate threats defused or smashed,<<if $arcologies[0].FSRomanRevivalistLaw > 0>> your citizens serving in the urban cohorts with enthusiasm,<</if>> and the $mercenariesTitle in excellent fighting condition, there just weren't enough concerns from either of your perspectives to fill the time. You sit across your desk from each other, discussing the global situation over $PC.refreshment.
+
+<br><br>
+
+"You know, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>," the scarred man says thoughtfully. "Threat board's pretty sparse these days. I mean, not for those poor bastards." He <<if $PC.refreshmentType == 0>>waves his $PC.refreshment<<elseif $PC.refreshmentType == 1>>uses his glass to point<<elseif $PC.refreshmentType == 2>>points a piece of $PC.refreshment<<elseif $PC.refreshmentType == 3>>finishes arranging a line before pointing<<else>>using his syringe to point<</if>> at a screen showing a live news feed from a war on the other side of the world. A huge cloud in an unmistakable, malevolent shape, a broad rising head atop a dirty column of vapor, is towering above a large city.
+
+<br><br>
+
+"But in our immediate area, there's just not much that can threaten us. Most trouble on the horizon's going to come from economics and supply and the climate, but that stuff doesn't shoot back. I think we can afford a little dispersal of military effort. Why don't I second squads to your corporation, when we've got the availability? Your corporate guys are already pulling meat out of the conflict zones. No offense to them, they're pretty good, but they're not quite at the level of my boys and girls. And don't worry, I'd keep 'em clear of shit like that." He indicates the onscreen mushroom cloud again.
+
+<br><br>
+
+''This is a unique opportunity'' and will not reoccur.
+
+<br><br>
+
+<span id="result">
+<<link "Decline">>
+	<<replace "#result">>
+	Best to keep the $mercenariesTitle in reserve. You decline, and the commander chuckles. "Well <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, if you insist, I suppose we could find ways to keep busy around the arcology. I mean, we're a little starved for female company here, but we can make do."
+	<</replace>>
+<</link>>
+<br><<link "Make it so">>
+	<<set $nextButton = "Continue">><<UpdateNextButton>>
+	<<replace "#result">>
+	It's a fine idea, and you agree. The commander looks so enthused that you feel obliged to ask that he not risk himself unduly. He laughs. "There are no old, bold mercs, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>, and I am sure as hell old. I'll be sure to grow even older under contract with you. Now, unless there's anything else, I've just bought a nice girl to add to the commander's suite, and she makes me feel a bit younger."
+	<<set $mercenariesHelpCorp = 1>>
+	<</replace>>
+<</link>>
+</span>
+

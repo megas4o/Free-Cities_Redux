@@ -1,0 +1,22 @@
+:: RE no event [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Next Week">>
+
+<<set $activeSlave = $eventSlave>>
+
+<<set $activeSlave.devotion += 3>>
+<<set $activeSlave.trust += 3>>
+
+/* 000-250-006 */
+<<if $seeImages == 1>>
+<<if $imageChoice == 1>>
+    <div class="imageRef lrgVector"><<SlaveArt $activeSlave 2 0>></div>
+<<else>>
+    <div class="imageRef lrgRender"><<SlaveArt $activeSlave 2 0>></div>
+<</if>>
+<</if>>
+/* 000-250-006 */
+
+This is a placeholder event.
+<br><br>
+<<EventNameLink $activeSlave>> does not currently qualify for any events, so she has been given a generic @@.hotpink;devotion@@ and @@.mediumaquamarine;trust@@ boost. /*If you see this event repeatedly for her, please submit a report so the author can write her some events.*/

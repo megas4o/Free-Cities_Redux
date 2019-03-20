@@ -1,0 +1,185 @@
+:: Takeover Target [nobr]
+
+<<set $ui = "start", $showBodyMods = 1>>
+
+Before you deploy the <<if $PC.rumor == "wealth">>financial reserves that<<elseif $PC.rumor == "diligence">>carefully constructed plan that<<elseif $PC.rumor == "force">>mercenaries and <<if $continent == "Europe">>//maskirovka//<<else>>cover plan<</if>> that<<elseif $PC.rumor == "social engineering">>clever social manipulation that<<else>>optimistic plan you hope<</if>> will allow you to take over an arcology, you need to select a target. There are a number of vulnerable arcologies that you could <<if $PC.rumor == "wealth">>attempt a hostile takeover of<<elseif $PC.rumor == "diligence">>work to take over<<elseif $PC.rumor == "force">>attack<<elseif $PC.rumor == "social engineering">>infiltrate<<else>>aspire to take over<</if>> with a reasonable chance of success. Free Cities are volatile places, even compared to the troubled state of the rest of the world. There are always arcologies whose owners are on the brink of failure, and you could target one of them.
+<<if $PC.career == "arcology owner">>(Since you've @@.springgreen;owned an arcology before,@@ you identify more potential target arcologies than a novice might.)<</if>>
+Alternatively, arcologies are being built every day, and their owners' control is often uncertain. @@.orange;Which arcology will you target?@@
+<br><br>
+
+[[A newly constructed arcology|Terrain Intro][$targetArcology.type = "New"]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//With many new arcologies being constructed, you will be able to select which area of the world and type of Free City you'd like your target arcology to be located in.//
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Recommended for new players.//
+<hr style="margin:0">
+<<set _arcologyTypes = ["Supremacist", "Subjugationist", "Paternalist", "AssetExpansionist", "SlimnessEnthusiast", "TransformationFetishist", "BodyPurist", "MaturityPreferentialist", "YouthPreferentialist", "Pastoralist", "PhysicalIdealist", "ChattelReligionist", "RomanRevivalist", "AztecRevivalist", "EgyptianRevivalist", "EdoRevivalist", "ArabianRevivalist", "ChineseRevivalist", "Multiculturalist"]>>
+<<if $seeDicks != 0>><<set _arcologyTypes.push("GenderRadicalist")>><</if>>
+<<if $seeDicks != 100>><<set _arcologyTypes.push("GenderFundamentalist")>><</if>>
+<<if $seeExtreme != 0>><<set _arcologyTypes.push("Degradationist")>><</if>>
+<<set _terrainTypes = ["urban", "urban", "rural", "rural", "rural", "marine", "marine", "oceanic"]>>
+<<set _continents = ["North America", "North America", "South America", "Europe", "Europe", "the Middle East", "Africa", "Asia", "Asia", "Australia"]>>
+<<set _races = ["white", "asian", "latina", "middle eastern", "indo-aryan", "pacific islander", "malay", "amerindian", "southern european", "semitic", "mixed race"]>>
+<<set _targetArcologies = []>>
+<<set _targets = 4>>
+<<if $PC.career == "arcology owner">><<set _targets += 2>><</if>>
+<<for $i = 0; $i < _targets; $i++>>
+	<<set $targetArcology = {}>>
+	<<set $targetArcology.type = _arcologyTypes.pluck()>>
+	<<switch $targetArcology.type>>
+	<<case "Supremacist">>
+		<<set $targetArcology.race = _races.random()>>
+		<<switch $targetArcology.race>>
+		<<case "white">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistWhite.random()>>
+		<<case "asian">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistAsian.random()>>
+		<<case "latina">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistLatina.random()>>
+		<<case "middle eastern">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistMiddleEastern.random()>>
+		<<case "black">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistBlack.random()>>
+		<<case "indo-aryan">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistIndoAryan.random()>>
+		<<case "pacific islander">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistPacificIslander.random()>>
+		<<case "malay">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistMalay.random()>>
+		<<case "amerindian">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistAmerindian.random()>>
+		<<case "southern european">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistSouthernEuropean.random()>>
+		<<case "semitic">>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistSemitic.random()>>
+		<<default>>
+			<<set $targetArcology.name = setup.ArcologyNamesSupremacistMixedRace.random()>>
+		<</switch>>
+	<<case "Subjugationist">>
+		<<set $targetArcology.race = _races.random()>>
+		<<switch $targetArcology.race>>
+		<<case "white">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistWhite.random()>>
+		<<case "asian">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistAsian.random()>>
+		<<case "latina">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistLatina.random()>>
+		<<case "middle eastern">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistMiddleEastern.random()>>
+		<<case "black">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistBlack.random()>>
+		<<case "indo-aryan">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistIndoAryan.random()>>
+		<<case "pacific islander">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistPacificIslander.random()>>
+		<<case "malay">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistMalay.random()>>
+		<<case "amerindian">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistAmerindian.random()>>
+		<<case "southern european">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistSouthernEuropean.random()>>
+		<<case "semitic">>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistSemitic.random()>>\
+		<<default>>
+			<<set $targetArcology.name = setup.ArcologyNamesSubjugationistMixedRace.random()>>
+		<</switch>>
+	<<case "GenderRadicalist">><<set $targetArcology.name = setup.ArcologyNamesGenderRadicalist.random()>>
+	<<case "GenderFundamentalist">><<set $targetArcology.name = setup.ArcologyNamesGenderFundamentalist.random()>>
+	<<case "Paternalist">><<set $targetArcology.name = setup.ArcologyNamesPaternalist.random()>>
+	<<case "Degradationist">><<set $targetArcology.name = setup.ArcologyNamesDegradationist.random()>>
+	<<case "AssetExpansionist">><<set $targetArcology.name = setup.ArcologyNamesAssetExpansionist.random()>>
+	<<case "SlimnessEnthusiast">><<set $targetArcology.name = setup.ArcologyNamesSlimnessEnthusiast.random()>>
+	<<case "TransformationFetishist">><<set $targetArcology.name = setup.ArcologyNamesTransformationFetishist.random()>>
+	<<case "BodyPurist">><<set $targetArcology.name = setup.ArcologyNamesBodyPurist.random()>>
+	<<case "MaturityPreferentialist">><<set $targetArcology.name = setup.ArcologyNamesMaturityPreferentialist.random()>>
+	<<case "YouthPreferentialist">><<set $targetArcology.name = setup.ArcologyNamesYouthPreferentialist.random()>>
+	<<case "Pastoralist">><<set $targetArcology.name = setup.ArcologyNamesPastoralist.random()>>
+	<<case "PhysicalIdealist">><<set $targetArcology.name = setup.ArcologyNamesPhysicalIdealist.random()>>
+	<<case "ChattelReligionist">><<set $targetArcology.name = setup.ArcologyNamesChattelReligionist.random()>>
+	<<case "RomanRevivalist">><<set $targetArcology.name = setup.ArcologyNamesRomanRevivalist.random()>>
+	<<case "AztecRevivalist">><<set $targetArcology.name = setup.ArcologyNamesAztecRevivalist.random()>>
+	<<case "EgyptianRevivalist">><<set $targetArcology.name = setup.ArcologyNamesEgyptianRevivalist.random()>>
+	<<case "EdoRevivalist">><<set $targetArcology.name = setup.ArcologyNamesEdoRevivalist.random()>>
+	<<case "ArabianRevivalist">><<set $targetArcology.name = setup.ArcologyNamesArabianRevivalist.random()>>
+	<<case "ChineseRevivalist">><<set $targetArcology.name = setup.ArcologyNamesChineseRevivalist.random()>>
+	<<default>><<set $targetArcology.name = "Arcology X-4">>
+	<</switch>>
+	<<set $targetArcology.FSProgress = either(10,30,50)>>
+	<<set $targetArcology.prosperity = either(40,50,60)>>
+	<<set $targetArcology.citizens = random(-1,1)>>
+	<<set $targetArcology.terrain = _terrainTypes.random()>>
+	<<set $targetArcology.continent = _continents.random()>>
+	<<set _targetArcologies.push($targetArcology)>>
+<</for>>
+<<for $i = 0; $i < _targetArcologies.length; $i++>>
+	<<print "[[_targetArcologies[$i].name|Terrain Intro][$targetArcology to _targetArcologies[" + $i + "]]]">> is an established arcology located in a Free City
+	<<if _targetArcologies[$i].terrain == "urban">>
+		carved out of an urban area of _targetArcologies[$i].continent.
+	<<elseif _targetArcologies[$i].terrain == "rural">>
+		built in a rural area of _targetArcologies[$i].continent.
+	<<elseif _targetArcologies[$i].terrain == "marine">>
+		constructed just offshore of _targetArcologies[$i].continent.
+	<<else>>
+		in the middle of the ocean.
+	<</if>>
+	<<if _targetArcologies[$i].prosperity >= 60>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It is unusually prosperous for a vulnerable arcology.
+	<<elseif _targetArcologies[$i].prosperity <= 40>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has little economic prosperity and is vulnerable.
+	<</if>>
+	<<if _targetArcologies[$i].citizens > 0>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an unusually high ratio of citizens to sex slaves, increasing demand for sexual services.
+	<<elseif _targetArcologies[$i].citizens < 0>>
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an unusually low ratio of citizens to sex slaves, reducing demand for sexual services.
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	Its society
+	<<if _targetArcologies[$i].FSProgress >= 50>>
+		has advanced towards
+	<<elseif _targetArcologies[$i].FSProgress >= 30>>
+		has devoted resources to
+	<<else>>
+		has just begun to adopt
+	<</if>>
+	<<switch _targetArcologies[$i].type>>
+	<<case "Supremacist">>@@.orange;Supremacy of the _targetArcologies[$i].race race.@@
+	<<case "Subjugationist">>@@.orange;Subjugation of the _targetArcologies[$i].race race.@@
+	<<case "GenderRadicalist">>@@.orange;Gender Radicalism,@@ a movement that supports feminization of slavegirls with dicks.
+	<<case "GenderFundamentalist">>@@.orange;Gender Fundamentalism,@@ a reaction to modern libertinism that seeks to reinforce gender roles.
+	<<case "Paternalist">>@@.orange;Paternalism,@@ an optimistic strain of slavery that protects and improves slaves.
+	<<case "Degradationist">>@@.orange;Degradationism,@@ an extreme branch of modern slavery that treats slaves as subhuman.
+	<<case "AssetExpansionist">>@@.orange;Asset Expansionism,@@ a societal preoccupation with expansion of body parts, especially breasts.
+	<<case "SlimnessEnthusiast">>@@.orange;Slimness Enthusiasm,@@ an aesthetic movement that fetishizes the lithe female form.
+	<<case "TransformationFetishist">>@@.orange;Transformation Fetishism,@@ a focus on implants and other kinds of surgical alteration.
+	<<case "BodyPurist">>@@.orange;Body Purism,@@ a reaction to extreme surgical fetishism that prefers bodies grown biologically.
+	<<case "MaturityPreferentialist">>@@.orange;Maturity Preferentialism,@@ an appetite for mature slaves based on MILF fetishism.
+	<<case "YouthPreferentialist">>@@.orange;Youth Preferentialism,@@ which focuses on youth and virginity in slaves.
+	<<case "Pastoralist">>@@.orange;Pastoralism,@@ an appetite for products of the human body, especially milk.
+	<<case "PhysicalIdealist">>@@.orange;Physical Idealism,@@ an aspirational movement which fetishizes muscle and physical fitness.
+	<<case "ChattelReligionist">>@@.orange;Chattel Religionism,@@ a religious revival in the context of modern slavery.
+	<<case "RomanRevivalist">>@@.orange;Roman Revivalism,@@ which seeks to recreate the glory that was ancient Rome.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an established lingua franca: Latin.
+	<<case "AztecRevivalist">>@@.orange;Aztec Revivalism,@@ which aspires to reach the heights of the Aztec Empire at it's peak.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an established lingua franca: Nahuatl.
+	<<case "EgyptianRevivalist">>@@.orange;Egyptian Revivalism,@@ a movement to rebuild the monuments and greatness of ancient Egypt.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an established lingua franca: Ancient Egyptian.
+	<<case "EdoRevivalist">>@@.orange;Edo Revivalism,@@ an insular movement with a focus on the cultural superiority of old Japan.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an established lingua franca: Japanese.
+	<<case "ArabianRevivalist">>@@.orange;Arabian Revivalism,@@ a melding of Arabian history and recent mythology of the Near East.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an established lingua franca: Arabic.
+	<<case "ChineseRevivalist">>@@.orange;Chinese Revivalism,@@ which modernizes the assumed superiority of the Middle Kingdom.
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;
+		It has an established lingua franca: Chinese.
+	<<default>>@@.orange;Multiculturalism,@@ a celebration of the total liberty that was the original purpose of the Free Cities.
+	<</switch>>
+	<hr style="margin:0">
+<</for>>

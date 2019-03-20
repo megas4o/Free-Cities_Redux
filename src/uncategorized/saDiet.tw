@@ -1,0 +1,625 @@
+:: SA diet [nobr]
+
+<<if $slaves[$i].fuckdoll == 0>>
+
+<<if $feeder == 1>>
+<<if $slaves[$i].diet != "healthy">>
+	The upgraded kitchen closely monitors her diet.
+<</if>>
+<</if>>
+
+<<switch $slaves[$i].diet>>
+<<case "restricted">> /* Weight Loss */
+	<<set _weightLoss = 5>>
+	<<set _assetLoss = 5>>
+	<<if ($slaves[$i].behavioralFlaw == "anorexic")>>
+		<<if ($slaves[$i].devotion >= -20)>>
+			As an anorexic, @@.hotpink;she derives perverse enjoyment from being underfed.@@
+			<<set $slaves[$i].devotion += 1>>
+		<<else>>
+			As an anorexic, she accepts being underfed.
+		<</if>>
+	<<elseif ($slaves[$i].behavioralFlaw == "gluttonous")>>
+		As a stress glutton, @@.gold;being underfed makes her terribly anxious.@@
+		<<set $slaves[$i].trust -= 5>>
+	<<elseif ($slaves[$i].behavioralQuirk == "fitness")>>
+		As a fitness fanatic, @@.hotpink;she enjoys slimming down.@@
+		<<set $slaves[$i].devotion += 1>>
+	<<elseif ($slaves[$i].devotion <= 20)>>
+		@@.mediumorchid;She resents being underfed.@@
+		<<set $slaves[$i].devotion -= 4>>
+	<</if>>
+	<<if ($slaves[$i].devotion <= 20)>>
+		<<if ($slaves[$i].dietCum > 0)>>
+			<<if ($slaves[$i].sexualFlaw != "cum addict")>>
+				<<if ($slaves[$i].fetish != "cumslut")>>
+					<<if ($slaves[$i].dietCum == 2)>>
+						<<if ($cockFeeder == 0)>>
+							<<if random(1,100) > 50>>
+								Her @@.mediumorchid;disgusting diet@@ is little more than human ejaculate infused with nutritional supplements, and she's unable to hold most of it down.
+								<<set _weightLoss = 8>>
+								<<set _assetLoss = 4>>
+								<<set $slaves[$i].devotion -= 4>>
+							<<else>>
+								Despite her food being filled with large amounts of thick, human ejaculate, she manages to choke down enough that she doesn't get sick from malnourishment.
+								<<set _weightLoss = 6>>
+								<<set _assetLoss = 4>>
+								<<set $slaves[$i].devotion -= 2>>
+							<</if>>
+						<<else>>
+							The phallic feeders inject her food directly into her stomach, helping her get her prescribed servings so that her weight loss is safe and consistent. However, the unmistakable taste of cum she burps up afterward @@.mediumorchid;nauseates@@ and @@.gold;unnerves@@ her.
+							<<set _weightLoss = 5>>
+							<<set _assetLoss = 5>>
+							<<set $slaves[$i].devotion -= 3>>
+							<<set $slaves[$i].trust -= 1>>
+						<</if>>
+					<<elseif ($slaves[$i].dietCum == 1)>>
+						<<if ($cockFeeder == 0)>>
+							<<if random(1,100) < 20>>
+								She is @@.mediumorchid;troubled@@ by the use of human ejaculate as a food additive, and she has a problem keeping all of her food down.
+								<<set _weightLoss = 7>>
+								<<set _assetLoss = 4>>
+								<<set $slaves[$i].devotion -= 2>>
+							<<else>>
+								Despite having human ejaculate added to her food, she manages to choke it down this week, @@.mediumorchid;but it's a struggle.@@
+								<<set _weightLoss = 5>>
+								<<set _assetLoss = 5>>
+								<<set $slaves[$i].devotion -= 2>>
+							<</if>>
+						<<else>>
+							The phallic feeders inject her food directly into her stomach, helping her get her prescribed servings so that her weight loss is safe and consistent. However, the thought of being force fed food with ejaculate in it @@.mediumorchid;disturbs her.@@
+							<<set _weightLoss = 5>>
+							<<set _assetLoss = 5>>
+							<<set $slaves[$i].devotion -= 3>>
+						<</if>>
+					<</if>>
+				<<elseif $slaves[$i].fetishKnown == 1>>
+					She <<if $slaves[$i].fetishStrength < 60 >> is used to eating cum<<else>>loves eating cum<</if>>, so she <<if $slaves[$i].behavioralFlaw == "gluttonous">>desperately <</if>>sucks down every drop of the <<if $slaves[$i].dietCum == 2>>nutritionally supplemented human ejaculate<<else>>cum supplemented food<</if>> she's given to eat, especially because her servings are small.
+					<<if $slaves[$i].fetishStrength < 95>>
+						<<if $slaves[$i].dietCum == 2>>
+							The high concentration of cum in her food @@.lightcoral;further@@ <<if $slaves[$i].fetishStrength < 60>>@@.lightcoral;habituates@@<<else>>@@.lightcoral;endears@@<</if>>@@.lightcoral; her to the taste.@@
+							<<set $slaves[$i].fetishStrength += 2>>
+						<<elseif $slaves[$i].dietCum == 1>>
+							Having cum added to her food makes her <<if $slaves[$i].fetishStrength < 60>>@@.lightcoral;even more used to the taste of it.@@<<else>>@@.lightcoral;love the taste of it even more.@@<</if>>
+							<<set $slaves[$i].fetishStrength += 1>>
+						<</if>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>> /* For Devotion Higher than 20 */
+		<<if $slaves[$i].sexualFlaw == "cum addict">>
+			<<if $slaves[$i].dietCum == 2>>
+				<<if $slaves[$i].behavioralFlaw != "anorexic">>Despite wanting more to eat, t<<else>>T<</if>>he cum addict is relieved to have such high-concentrations of cum in her diet.
+			<<elseif $slaves[$i].dietCum == 1>>
+				Although her food is supplemented with ejaculate, she is so addicted to cum that restricting the amount she can eat @@.mediumorchid;upsets her.@@
+				<<set $slaves[$i].devotion -= 1>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if _weightLoss == 8>>
+		Her weight loss this week is so dramatic as to be dangerous, and @@.red;her health suffers because of it.@@ @@.gold;Your disregard for her well-being scares her.@@
+		<<set $slaves[$i].health -= 4>>
+		<<set $slaves[$i].trust -= 2>>
+	<<elseif _weightLoss == 7>>
+		Distate for her food caused her to lose weight a bit too quickly, and by the end of the week she looks @@.gold;a little unsettled@@ and @@.red;slightly malnourished.@@
+		<<set $slaves[$i].health -= 1>>
+		<<set $slaves[$i].trust -= 1>>
+	<<elseif _weightLoss == 6>>
+		Due to her distaste for her diet, she loses a bit more weight than she was supposed to this week, making her @@.gold;a little anxious.@@
+		<<set $slaves[$i].trust -= 1>>
+	<<elseif _weightLoss == 5>>
+		She loses weight.
+	<</if>>
+	<<set $slaves[$i].weight -= _weightLoss+($feeder*2)>>
+	<<if $slaves[$i].boobs-$slaves[$i].boobsImplant >= 200>>
+		<<if random(1,_assetLoss) <= 1+$feeder>>
+			@@.orange;Her breasts get a little smaller.@@
+			<<set $slaves[$i].boobs -= 50>>
+		<</if>>
+	<</if>>
+	<<if $slaves[$i].butt > 1>>
+		<<if random(1,_assetLoss) <= 1+$feeder>>
+			@@.orange;Her butt gets a little smaller.@@
+			<<set $slaves[$i].butt -= 1>>
+		<</if>>
+	<</if>>
+	<<if ($slaves[$i].weight < -95)>>
+		She is now quite skinny, so her diet @@.yellow;has defaulted to maintenance of this weight.@@
+		<<set $slaves[$i].diet = "healthy">>
+	<</if>>
+<<case "fattening">> /* Weight Gain */
+	<<set _weightGain = 5>>
+	<<set _assetGain = 5>>
+	<<if ($slaves[$i].behavioralFlaw == "anorexic")>>
+		Suffering from anorexia, @@.mediumorchid;she is intensely resentful of being overfed.@@
+		<<set $slaves[$i].devotion -= 5>>
+	<<elseif ($slaves[$i].behavioralFlaw == "gluttonous")>>
+		As a glutton,
+		<<if ($slaves[$i].devotion >= -20)>>
+			@@.hotpink;she derives almost sexual pleasure from being overfed.@@
+			<<set $slaves[$i].devotion += 4>>
+		<<else>>
+			she accepts being overfed.
+		<</if>>
+	<<elseif ($slaves[$i].devotion <= 20)>>
+		@@.mediumorchid;She resents being overfed.@@
+		<<set $slaves[$i].devotion -= 4>>
+	<</if>>
+	<<if ($slaves[$i].devotion <= 20)>>
+		<<if ($slaves[$i].dietCum > 0)>>
+			<<if ($slaves[$i].sexualFlaw != "cum addict")>>
+				<<if ($slaves[$i].fetish != "cumslut")>>
+					<<if ($slaves[$i].dietCum == 2)>>
+						<<if ($cockFeeder == 0)>>
+							<<if random(1,100) > 50>>
+								@@.mediumorchid;She is disgusted@@ that she is forced to drink large amounts of human ejaculate for sustenance.  <<if $slaves[$i].sexualFlaw == "hates oral">>This is @@.mediumorchid;exacerbated@@ by her hatred of oral sex.<</if>>  She has trouble holding her food down.
+								<<set _weightGain = 0>>
+								<<set $slaves[$i].devotion -= 4>>
+								<<if $slaves[$i].sexualFlaw == "hates oral">>
+									<<set $slaves[$i].devotion -= 1>>
+								<</if>>
+							<<else>>
+								Despite her food being filled with large amounts of human ejaculate, she manages to keep some of it down, but @@.mediumorchid;she hates you for it.@@
+								<<set _weightGain = 2>>
+								<<set _assetGain = 10>>
+								<<set $slaves[$i].devotion -= 2>>
+							<</if>>
+						<<else>>
+							<<if random(1,100) < 30>>
+								The phallic feeders inject her food directly into her stomach, helping her get the extra calories she's been prescribed, but the @@.mediumorchid;ejaculate based food is so heavy in her tummy@@ that she loses a tiny bit of her intake to post-meal nausea.
+								<<set _weightGain = 4>>
+								<<set _assetGain = 6>>
+								<<set $slaves[$i].devotion -= 4>>
+							<<else>>
+								The phallic feeders inject her food directly into her stomach, ensuring that she gets all of her prescribed calories, and @@.mediumorchid;despite some intense nausea afterwards,@@ she's able to keep her heavy cum diet down.
+								<<set $slaves[$i].devotion -= 4>>
+							<</if>>
+						<</if>>
+					<<elseif ($slaves[$i].dietCum == 1)>>
+						<<if ($cockFeeder == 0)>>
+							<<if random(1,100) < 15>>
+								She hates being forced to eat food that is supplemented with cum as her primary source of nourishment<<if $slaves[$i].sexualFlaw == "hates oral">>, and her hatred of oral sex makes it even worse.<<else>>.<</if>>  @@.mediumorchid;She is so disgusted@@ that she has trouble keeping most of her food down.
+								<<set _weightGain = 0>>
+								<<set $slaves[$i].devotion -= 4>>
+							<<else>>
+								Despite her food tasting strongly of cum, she manages to choke down most of it this week, @@.mediumorchid;but she resents being a cum-fed whore.@@
+								<<set _weightGain = 3>>
+								<<set _assetGain = 8>>
+								<<set $slaves[$i].devotion -= 2>>
+							<</if>>
+						<<else>>
+							The phallic feeders inject her food directly into her stomach, helping her get her prescribed calories, even though @@.mediumorchid;she hates the idea of being force-fed cum.@@
+							<<set $slaves[$i].devotion -= 2>>
+						<</if>>
+					<</if>>
+				<<elseif $slaves[$i].fetishKnown == 1>>
+					<<if $slaves[$i].behavioralFlaw == "anorexic">>Despite her predilection to starve herself, s<<else>>S<</if>>he <<if $slaves[$i].fetishStrength > 60>>loves cum so much that she <</if>>can't help but suck down every drop of the nutrition infused human ejaculate she's given to eat.
+					<<if $slaves[$i].fetishStrength < 95>>
+						<<if $slaves[$i].dietCum == 2>>
+							The high concentration of cum in her food @@.lightcoral;further@@ <<if $slaves[$i].fetishStrength < 60>>@@.lightcoral;habituates@@<<else>>@@.lightcoral;endears@@<</if>>@@.lightcoral; her to the taste.@@
+							<<set $slaves[$i].fetishStrength += 1>>
+						<<elseif $slaves[$i].dietCum == 1>>
+							Having cum added to her food makes her <<if $slaves[$i].fetishStrength < 60>>@@.lightcoral;even more used to the taste of it.@@<<else>>@@.lightcoral;love the taste of it even more.@@<</if>>
+							<<set $slaves[$i].fetishStrength += 1>>
+						<</if>>
+					<</if>>
+				<</if>>
+			<<else>>
+				<<if $slaves[$i].dietCum == 2>>
+					She hates herself for it, but the cum addict is @@.lightpink;grateful@@ to have so much ejaculate in her diet, especially because she's given extra food this week.
+					<<set $slaves[$i].devotion += 1>>
+				<<elseif $slaves[$i].dietCum == 1>>
+					The cum addict @@.gold;anxiously@@ slurps up every drop of her cum-supplemented food this week.  She eats all the extra food she's given and is @@.mediumorchid;disturbed@@ by her insatiable hunger for more.
+					<<set $slaves[$i].devotion -= 1>>
+					<<set $slaves[$i].trust -= 1>>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if ($slaves[$i].dietMilk > 0)>>
+			<<if ($slaves[$i].sexualFlaw != "breast growth")>>
+				<<if ($slaves[$i].fetish != "pregnancy")>>
+					<<if ($slaves[$i].dietMilk == 2)>>
+						<<if ($cockFeeder == 0)>>
+							Despite her food being based on huge quantities breast milk, she manages to keep most of it down, but @@.mediumorchid;she hates you for it.@@
+							<<set _weightGain = 2>>
+							<<set _assetGain = 10>>
+							<<set $slaves[$i].devotion -= 2>>
+						<<else>>
+							The phallic feeders inject her food directly into her stomach, ensuring that she gets all of her prescribed calories, and @@.mediumorchid;despite some intense nausea afterwards,@@ she's able to keep her heavy milk diet down.
+							<<set $slaves[$i].devotion -= 4>>
+						<</if>>
+					<<elseif ($slaves[$i].dietMilk == 1)>>
+						<<if ($cockFeeder == 0)>>
+							Despite her food tasting strongly of human breast milk, she manages to choke down most of it this week, @@.mediumorchid;but she resents being a milk-fed whore.@@
+							<<set _weightGain = 3>>
+							<<set _assetGain = 8>>
+							<<set $slaves[$i].devotion -= 2>>
+						<<else>>
+							The phallic feeders inject her food directly into her stomach, helping her get her prescribed calories, even though @@.mediumorchid;she hates the idea of being force-fed human milk.@@
+							<<set $slaves[$i].devotion -= 2>>
+						<</if>>
+					<</if>>
+				<<elseif $slaves[$i].fetishKnown == 1>>
+					<<if $slaves[$i].behavioralFlaw == "anorexic">>Despite her predilection to starve herself, s<<else>>S<</if>>he <<if $slaves[$i].fetishStrength > 60>>loves breast milk so much that she <</if>>can't help but suck down every drop of the nutrition infused human milk she's given to eat.
+					<<if $slaves[$i].fetishStrength < 95>>
+						<<if $slaves[$i].dietMilk == 2>>
+							The high concentration of milk in her food @@.lightcoral;further@@ <<if $slaves[$i].fetishStrength < 60>>@@.lightcoral;habituates@@<<else>>@@.lightcoral;endears@@<</if>>@@.lightcoral; her to the corruption of normal pregnancy and motherhood.@@
+							<<set $slaves[$i].fetishStrength += 1>>
+						<<elseif $slaves[$i].dietMilk == 1>>
+							Having milk added to her food makes her <<if $slaves[$i].fetishStrength < 60>>@@.lightcoral;accept perversion of normal pregnancy.@@<<else>>@@.lightcoral;even hornier for anything related to pregnancy.@@<</if>>
+							<<set $slaves[$i].fetishStrength += 1>>
+						<</if>>
+					<</if>>
+				<</if>>
+			<<else>>
+				<<if $slaves[$i].dietMilk == 2>>
+					She hates herself for it, but the breast growth fanatic is @@.lightpink;grateful@@ to have so much mother's milk in her diet, especially because she's given extra food this week.
+					<<set $slaves[$i].devotion += 1>>
+				<<elseif $slaves[$i].dietMilk == 1>>
+					The breast growth fanatic @@.gold;anxiously@@ slurps up every drop of her milk-supplemented food this week.  She eats all the extra food she's given and is @@.mediumorchid;disturbed@@ by her insatiable hunger for more mother's milk.
+					<<set $slaves[$i].devotion -= 1>>
+					<<set $slaves[$i].trust -= 1>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>> /* For Devotion Higher than 20 See Below for more diet effects for this condition*/
+		<<if $slaves[$i].sexualFlaw == "cum addict">>
+			<<if $slaves[$i].dietCum == 2>>
+				Her diet is almost pure human ejaculate with nutritional additives<<if $slaves[$i].behavioralFlaw == "anorexic">>. Despite her desire to remain thin, her cum addiction is even more powerful.<<else>>--the perfect food for a cum addict.<</if>> She gets extra food this week.  She makes a sloppy mess at feeding time, getting cum all over herself, and she is unashamed of her pathological need to be your cum-fed slut.  @@.hotpink;She's a happy little cum-piggy.@@  The only drawback is that some of her food ends up on her, rather than in her.
+				<<set $slaves[$i].devotion += 3>>
+				<<set _weightGain = 4>>
+				<<set _assetGain = 6>>
+			<<elseif $slaves[$i].dietCum == 1>>
+				Her food is infused with ejaculate, <<if $slaves[$i].behavioralFlaw == "anorexic">>and her cum addiction trumps her desire to remain thin. S<<else>>and s<</if>>he is @@.hotpink;thrilled to get extra this week.@@  She gobbles down every last drop like the happy <<if $slaves[$i].weight < 0>>little <<else>>chubby <</if>>cum addict she is.
+				<<set $slaves[$i].devotion += 2>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if (_weightGain > 0)>>
+		<<if _weightGain == 5>>
+			She gains weight.
+		<<elseif _weightGain >= 3>>
+			She gains some weight.
+		<<elseif _weightGain >= 1>>
+			She gains a little weight, but her progress was severely limited by what she was forced to eat, @@.gold;making for an anxious week for her.@@
+			<<set $slaves[$i].trust -= 1>>
+		<</if>>
+		<<set $slaves[$i].weight += _weightGain+($feeder*2)>>
+		<<if random(1,_assetGain) <= 1+$feeder>>
+			@@.lime;Her breasts get a little bigger.@@
+			<<set $slaves[$i].boobs += 50>>
+		<</if>>
+		<<if random(1,_assetGain) <= 1+$feeder>>
+			@@.lime;Her butt gets a little bigger.@@
+			<<set $slaves[$i].butt += 1>>
+		<</if>>
+		<<if $slaves[$i].weight > 95>>
+			She is now quite fat, so her diet @@.yellow;has defaulted to maintenance of this weight.@@
+			<<set $slaves[$i].diet = "healthy">>
+		<</if>>
+	<<else>>
+		She doesn't gain any weight this week.
+	<</if>>
+<<case "muscle building">> /* Muscle Gain */
+	<<if $slaves[$i].muscles > 90>>
+		Her heavy workouts focus on lifting. She has plateaued at a state of @@.lime;goddess-like musculature.@@
+		<<set $slaves[$i].muscles = 100>>
+		<<set $slaves[$i].diet = "healthy">>
+	<<elseif ($slaves[$i].drugs == "steroids")>>
+		Her heavy workouts focus on lifting, and since she's on so much gear, she @@.lime;gains muscle rapidly.@@
+		<<set $slaves[$i].muscles += 8>>
+	<<elseif ($slaves[$i].balls > 0) && ($slaves[$i].hormones > 0)>>
+		Her heavy workouts focus on lifting, but with natural testosterone and artificial female hormones clashing in her system, she only @@.lime;slowly gains muscle.@@
+		<<set $slaves[$i].muscles += 3>>
+	<<elseif ($slaves[$i].balls > 0) && ($slaves[$i].hormones < 0)>>
+		Her heavy workouts focus on lifting, and with natural testosterone and artificial male hormones in her system, she @@.lime;gains muscle rapidly.@@
+		<<set $slaves[$i].muscles += 8>>
+	<<elseif ($slaves[$i].balls > 0)>>
+		Her heavy workouts focus on lifting, and with natural testosterone in her system, she @@.lime;gains muscle.@@
+		<<set $slaves[$i].muscles += 5>>
+	<<elseif ($slaves[$i].hormones < 0)>>
+		Her heavy workouts focus on lifting, and with artificial testosterone in her system, she @@.lime;gains muscle.@@
+		<<set $slaves[$i].muscles += 5>>
+	<<elseif ($slaves[$i].hormones > 0)>>
+		Her heavy workouts focus on lifting, but with lots of female hormones in her system, she barely @@.lime;gains muscle.@@
+		<<set $slaves[$i].muscles += 2>>
+	<<else>>
+		Her heavy workouts focus on lifting, and she @@.lime;slowly gains muscle.@@
+		<<set $slaves[$i].muscles += 3>>
+	<</if>>
+	<<if ($slaves[$i].behavioralQuirk == "fitness")>>
+		She attacks lifting with real enthusiasm, further increasing her mass.
+		<<set $slaves[$i].muscles += 2>>
+	<</if>>
+	<<if random(1,100) > 90>>
+	<<if ($slaves[$i].boobs-$slaves[$i].boobsImplant >= 200)>>
+		@@.orange;Her breasts get a little smaller.@@
+		<<set $slaves[$i].boobs -= 50>>
+	<<elseif ($slaves[$i].butt > 1)>>
+		@@.orange;Her butt gets a little smaller.@@
+		<<set $slaves[$i].butt -= 1>>
+	<</if>>
+	<</if>>
+	<<if random(1,100) > 80>>
+		Her workout successes have @@.green;improved her health.@@
+		<<set $slaves[$i].health += 10>>
+	<</if>>
+	<<if $slaves[$i].weight > 10>>
+		Her workouts have also @@.orange;burned off some excess fat.@@
+		<<set $slaves[$i].weight -= 2>>
+	<</if>>
+<<case "slimming">> /* Muscle Loss */
+	<<if $slaves[$i].muscles <= 10>>
+		Her long workouts focus on cardio. She has finally @@.lime;lost all visible musculature.@@
+		<<set $slaves[$i].muscles = 0>>
+		<<set $slaves[$i].diet = "healthy">>
+	<<elseif ($slaves[$i].drugs == "steroids")>>
+		Her long workouts focus on cardio, but since she's still shooting gear, she @@.lime;loses mass slowly.@@
+		<<set $slaves[$i].muscles -= 3>>
+	<<elseif ($slaves[$i].balls > 0) && ($slaves[$i].hormones < 0)>>
+		Her long workouts focus on cardio, but since she's got so much natural and artificial testosterone, she @@.lime;loses mass slowly.@@
+		<<set $slaves[$i].muscles -= 3>>
+	<<elseif ($slaves[$i].balls > 0) && ($slaves[$i].hormones > 0)>>
+		Her long workouts focus on cardio, and with the natural testosterone in her system counteracted by hormone treatment, she @@.lime;loses musculature.@@
+		<<set $slaves[$i].muscles -= 5>>
+	<<elseif ($slaves[$i].balls > 0)>>
+		Her long workouts focus on cardio, but with some natural testosterone in her system, she @@.lime;loses muscle slowly.@@
+		<<set $slaves[$i].muscles -= 3>>
+	<<elseif ($slaves[$i].hormones > 0)>>
+		Her long workouts focus on cardio, and with female hormone treatment, she @@.lime;loses musculature rapidly.@@
+		<<set $slaves[$i].muscles -= 8>>
+	<<elseif ($slaves[$i].hormones < 0)>>
+		Her long workouts focus on cardio, but under male hormone treatment, she @@.lime;loses muscle slowly.@@
+		<<set $slaves[$i].muscles -= 3>>
+	<<else>>
+		Her long workouts focus on cardio, and she @@.lime;loses musculature.@@
+		<<set $slaves[$i].muscles -= 5>>
+	<</if>>
+	<<if ($slaves[$i].behavioralQuirk == "fitness")>>
+		She approaches endurance work with real enthusiasm, quickly slimming her down.
+		<<set $slaves[$i].muscles -= 2>>
+	<</if>>
+	<<if random(1,100) > 90>>
+	<<if ($slaves[$i].boobs-$slaves[$i].boobsImplant >= 200)>>
+		@@.orange;Her breasts get a little smaller.@@
+		<<set $slaves[$i].boobs -= 50>>
+	<<elseif ($slaves[$i].butt > 1)>>
+		@@.orange;Her butt gets a little smaller.@@
+		<<set $slaves[$i].butt -= 1>>
+	<</if>>
+	<</if>>
+	<<if random(1,100) > 80>>
+		Her workout successes have @@.green;improved her health.@@
+		<<set $slaves[$i].health += 10>>
+	<</if>>
+	<<if $slaves[$i].weight > 10>>
+		Her workouts have also @@.orange;burned off some excess fat.@@
+		<<set $slaves[$i].weight -= 2>>
+	<</if>>
+<</switch>>
+
+<<if ($slaves[$i].dietCum > 0)>>
+	<<if ($slaves[$i].devotion > 20)>> /* Diet effects for Devotion over 20 -- For ALL cum diets */
+		<<if ($slaves[$i].fetishKnown == 1)>>
+			<<if ($slaves[$i].fetishStrength > 95) && ($slaves[$i].fetish == "cumslut")>>
+				She @@.hotpink;regularly orgasms@@ while sucking down her cum-infused breakfast.
+				<<set $slaves[$i].devotion += 1>>
+			<<elseif ($slaves[$i].energy > 95) || ($slaves[$i].fetish == "cumslut")>>
+				She @@.hotpink;enjoys@@ the perversity of having large amounts of ejaculate in her diet.
+				<<set $slaves[$i].devotion += 1>>
+			<</if>>
+		<</if>>
+		<<if ($slaves[$i].fetishStrength <= 95)>>
+			<<if ($slaves[$i].fetish != "cumslut")>>
+				<<if $fetishChangeChance > random(0,100)>>
+					After sucking down cum for sustenance, she has started to think of the stuff as a @@.lightcoral;normal part@@ of life.
+					<<set $slaves[$i].fetish = "cumslut">>
+					<<set $slaves[$i].fetishKnown = 1>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>> /* For devotion under 20.  This is for all cum diets EXCEPT restricted and fattening diets.  See above for those effects */
+		<<if ($slaves[$i].sexualFlaw != "cum addict")>>
+			<<if ($slaves[$i].fetish != "cumslut")>>
+				<<if $slaves[$i].diet != "fattening">>
+					<<if $slaves[$i].diet != "restricted">>
+						<<if $slaves[$i].energy < 60>>
+							<<if $slaves[$i].dietCum == 2>>
+								Her diet is basically pure ejaculate supplemented by nutritional vitamins.  Being forced to rely on human sex-fluid for sustenance @@.mediumorchid;nauseates her.@@
+								<<set $slaves[$i].devotion -= 3>>
+							<<elseif $slaves[$i].dietCum == 1>>
+								She is @@.mediumorchid;nauseated@@ by the large amounts of ejaculate in her diet.
+								<<set $slaves[$i].devotion -= 2>>
+							<</if>>
+							<<if $slaves[$i].weight >= -95>>
+								<<if $cockFeeder != 1>>
+									<<if $slaves[$i].dietCum == 2>>
+										She has trouble keeping her disgusting food down; she loses weight.
+										<<set $slaves[$i].weight -= 5>>
+									<<elseif $slaves[$i].dietCum == 1>>
+										<<if random(1,3) == 3>>
+											She has trouble keeping her disgusting food down; she loses weight.
+											<<if ($slaves[$i].boobs-$slaves[$i].boobsImplant >= 200)>>
+												@@.orange;Her breasts get a little smaller.@@
+												<<set $slaves[$i].boobs -= 50>>
+											<<elseif ($slaves[$i].butt > 1)>>
+												@@.orange;Her butt gets a little smaller.@@
+												<<set $slaves[$i].butt -= 1>>
+											<</if>>
+										<</if>>
+									<</if>>
+								<<else>>
+									Despite her revulsion, the deep-throating phallic feeders ensure that she swallows all her food.
+								<</if>>
+							<</if>>
+						<<else>>
+							<<if $slaves[$i].dietCum == 2>>
+								<<if $slaves[$i].energy > 80>>
+									She has become so sex-driven that she @@.lime;appreciates the perversity@@ of her extreme cum diet, despite @@.mediumorchid;it sometimes being a bit too much for her.@@
+									<<set $slaves[$i].devotion -= 1>>
+									<<set $slaves[$i].energy += 1>>
+								<<else>>
+									Her high sex drive helps her pretend her heavy cum-based diet is the <<if $slaves[$i].fetish == "masochist">>ejaculate of an abusive lover<<elseif $slaves[$i].fetish == "boobs">>fresh milk from a pretty dairy cow<<elseif $slaves[$i].fetish == "submissive">>ejaculate of a dominant partner<<elseif $slaves[$i].fetish == "pregnancy">>ejaculate of her future baby's father<<elseif $slaves[$i].fetish == "sadist">>ejaculate of a pain-slut she recently milked<<elseif $slaves[$i].fetish == "buttslut">>ejaculate of a cock that just came from her butt<<elseif $slaves[$i].fetish == "dom">>ejaculate of a weak-minded submissive<<elseif $slaves[$i].fetish == "humiliation">>ejaculate of a publicly used slut<<else>>ejaculate of a gentle lover<</if>>--helping her keep her @@.mediumorchid;unpleasant@@ food down.
+									<<set $slaves[$i].devotion -= 1>>
+								<</if>>
+							<<elseif $slaves[$i].dietCum == 1>>
+								<<if $slaves[$i].energy > 80>>
+									She has become so sex-driven that she appreciates the perversity of her cum diet, making her @@.lime;feel hot@@ just eating it.
+									<<set $slaves[$i].energy += 2>>
+								<<else>>
+									Her high sex drive helps her pretend her cum-supplemented diet is the <<if $slaves[$i].fetish == "masochist">>ejaculate of an abusive lover<<elseif $slaves[$i].fetish == "boobs">>fresh milk from a pretty dairy cow<<elseif $slaves[$i].fetish == "submissive">>ejaculate of a dominant partner<<elseif $slaves[$i].fetish == "pregnancy">>ejaculate of her future baby's father<<elseif $slaves[$i].fetish == "sadist">>ejaculate of a pain-slut she recently milked<<elseif $slaves[$i].fetish == "buttslut">>ejaculate of a cock that just came from her butt<<elseif $slaves[$i].fetish == "dom">>ejaculate of a weak-minded submissive<<elseif $slaves[$i].fetish == "humiliation">>ejaculate of a publicly used slut<<else>>ejaculate of a gentle lover<</if>>--helping her swallow her food without complaint.
+								<</if>>
+							<</if>>
+						<</if>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $cockFeeder == 1>> /* Cockfeeder effects independent of diet type.  There are other special cockfeeder effects for fattening and slimming cum diets above */
+	<<if $slaves[$i].fetish != "mindbroken">>
+		<<if ($slaves[$i].sexualFlaw == "hates oral")>>
+			<<if ndef _weightGain>>
+				<<if random(1,100) > 80>>
+					Getting her sustenance only after working the phallic food dispensers in the kitchen forces her to @@.green;accept oral sex@@ as a fact of life.
+					<<set $slaves[$i].sexualFlaw = "none">>
+				<<else>>
+					Being forced to get her sustenance only by working the phallic food dispensers in the kitchen @@.mediumorchid;infuriates her,@@ since she hates oral.
+					<<set $slaves[$i].devotion -= 4>>
+				<</if>>
+			<</if>>
+		<<elseif ($slaves[$i].fetish == "cumslut")>>
+			<<if ($slaves[$i].fetishKnown == 0)>>
+				Being forced to get her sustenance only by working the phallic food dispensers in the kitchen has revealed something: @@.lightcoral;she's got an oral fetish!@@
+				<<set $slaves[$i].fetishKnown = 1>>
+			<<elseif ($slaves[$i].fetishStrength <= 95) && ($slaves[$i].devotion > 4)>>
+				Being forced to get her sustenance only by working the phallic food dispensers in the kitchen has @@.lightcoral;deepened her oral fixation.@@
+				<<set $slaves[$i].fetishStrength += 5>>
+			<</if>>
+		<<elseif ($slaves[$i].fetish != "cumslut")>>
+			<<if ndef _weightGain>>
+				<<if ($slaves[$i].devotion < -20)>>
+					Being forced to get her sustenance only by working the phallic food dispensers in the kitchen @@.mediumorchid;disgusts her.@@
+					<<set $slaves[$i].devotion -= 2>>
+				<<elseif $fetishChangeChance > random(0,100)>>
+					Getting her sustenance only after working the phallic food dispensers in the kitchen makes sucking cock to completion such an integral part of her life that she starts to @@.lightcoral;fetishize ejaculate.@@
+					<<set $slaves[$i].fetish = "cumslut">>
+					<<set $slaves[$i].fetishKnown = 1>>
+					<<set $slaves[$i].fetishStrength = 10>>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if ($slaves[$i].sexualQuirk == "gagfuck queen")>>
+			She @@.hotpink;secretly enjoys@@ gagging on her breakfast every morning.
+			<<set $slaves[$i].devotion += 1>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $revealFoodEffects == 1>>
+	She knows that every meal of the liquid slave food she <<if $cockFeeder == 1>>sucks down<<else>>eats<</if>> makes it less and less likely that she'll ever survive without it,
+	<<if $slaves[$i].devotion > 50>>
+		but she actually @@.mediumaquamarine;takes a kind of comfort@@ in knowing that she'll always be a slave.
+		<<set $slaves[$i].trust++>>
+	<<elseif $slaves[$i].devotion > 20>>
+		but since she's been broken to slavery, she does her best not to think about it.
+	<<elseif $slaves[$i].devotion > -20>>
+		and though she does her best not to think about it, it sometimes makes her @@.gold;cry herself to sleep.@@
+		<<set $slaves[$i].trust-->>
+	<<else>>
+		knowledge that fills her with @@.gold;fear@@ and @@.mediumorchid;horror@@ every time she thinks about it.
+		<<set $slaves[$i].trust--,$slaves[$i].devotion-->>
+	<</if>>
+<</if>>
+
+<<else>> /* FUCKDOLL DIETS */
+
+<<switch $slaves[$i].diet>>
+<<case "restricted">> /* Weight Loss */
+	The ports in Fuckdoll suits allow total dietary control, and it's barely aware it's being @@.orange;slimmed down.@@
+	<<set $slaves[$i].weight -= 9>>
+	<<if random(1,2) <= 1>>
+		<<if random(1,2) <= 1>>
+			@@.orange;Its breasts get a little smaller.@@
+			<<set $slaves[$i].boobs -= 50>>
+		<</if>>
+	<</if>>
+	<<if $slaves[$i].butt > 1>>
+		<<if random(1,5) <= 1>>
+			@@.orange;Its butt gets a little smaller.@@
+			<<set $slaves[$i].butt -= 1>>
+		<</if>>
+	<</if>>
+	<<if ($slaves[$i].weight < -95)>>
+		It is now quite skinny, so its diet @@.yellow;has defaulted to maintenance of this weight.@@
+		<<set $slaves[$i].diet = "healthy">>
+	<</if>>
+<<case "fattening">> /* Weight Gain */
+	The ports in Fuckdoll suits allow total dietary control, and it's barely aware it's being @@.lime;fattened up.@@
+	<<set $slaves[$i].weight += 9>>
+	<<if random(1,2) <= 1>>
+		@@.lime;Its breasts get a little bigger.@@
+		<<set $slaves[$i].boobs += 50>>
+	<</if>>
+	<<if random(1,5) <= 1>>
+		@@.lime;Its butt gets a little bigger.@@
+		<<set $slaves[$i].butt += 1>>
+	<</if>>
+	<<if $slaves[$i].weight > 95>>
+		It is now quite fat, so its diet @@.yellow;has defaulted to maintenance of this weight.@@
+		<<set $slaves[$i].diet = "healthy">>
+	<</if>>
+<<case "muscle building">> /* Muscle Gain */
+	Fuckdolls suits can force their inhabitants to lift weights until they drop.
+	<<if $slaves[$i].muscles > 90>>
+		It has plateaued at a state of @@.lime;perfect musculature.@@
+		<<set $slaves[$i].muscles = 100>>
+		<<set $slaves[$i].diet = "healthy">>
+	<<else>>
+		It @@.lime;slowly gains muscle.@@
+		<<set $slaves[$i].muscles += 9>>
+	<</if>>
+	<<if random(1,100) > 90>>
+	<<if ($slaves[$i].boobs-$slaves[$i].boobsImplant >= 200)>>
+		@@.orange;Its breasts get a little smaller.@@
+		<<set $slaves[$i].boobs -= 50>>
+	<<elseif ($slaves[$i].butt > 1)>>
+		@@.orange;Its butt gets a little smaller.@@
+		<<set $slaves[$i].butt -= 1>>
+	<</if>>
+	<</if>>
+	<<if $slaves[$i].weight > 10>>
+		Its workouts have also @@.orange;burned off some excess fat.@@
+		<<set $slaves[$i].weight -= 2>>
+	<</if>>
+	The stress of forced exercise is trivial compared to everything else it experiences, and it's unaffected mentally.
+<<case "slimming">> /* Muscle Loss */
+	Fuckdoll suits can force their inhabitants to work out until they drop.
+	<<if $slaves[$i].muscles <= 10>>
+		It has finally @@.lime;lost all visible musculature.@@
+		<<set $slaves[$i].muscles = 0>>
+		<<set $slaves[$i].diet = "healthy">>
+	<<else>>
+		It @@.lime;loses musculature.@@
+		<<set $slaves[$i].muscles -= 9>>
+	<</if>>
+	<<if random(1,100) > 90>>
+	<<if ($slaves[$i].boobs-$slaves[$i].boobsImplant >= 200)>>
+		@@.orange;Its breasts get a little smaller.@@
+		<<set $slaves[$i].boobs -= 50>>
+	<<elseif ($slaves[$i].butt > 1)>>
+		@@.orange;Its butt gets a little smaller.@@
+		<<set $slaves[$i].butt -= 1>>
+	<</if>>
+	<</if>>
+	<<if $slaves[$i].weight > 10>>
+		Its workouts have also @@.orange;burned off some excess fat.@@
+		<<set $slaves[$i].weight -= 2>>
+	<</if>>
+	The stress of forced exercise is trivial compared to everything else it experiences, and it's unaffected mentally.
+<</switch>>
+
+<</if>> /* CLOSES FUCKDOLL CHECK */

@@ -1,0 +1,1530 @@
+:: SA whore [nobr]
+
+<<FResult $slaves[$i]>>
+<<if ($slaves[$i].releaseRules == "restrictive") && ($slaves[$i].standardReward !== "orgasm")>>
+	<<set $FResult += 2>>
+<</if>>
+<<if $ACitizens > $ASlaves*2>>
+	<<set $FResult = Math.trunc($FResult*1.1)>>
+<<elseif $ACitizens > $ASlaves>>
+	<<set $FResult = Math.trunc($FResult*1)>>
+<<elseif $ACitizens > $ASlaves*0.5>>
+	<<set $FResult = Math.trunc($FResult*0.95)>>
+<<elseif $ACitizens > $ASlaves*0.25>>
+	<<set $FResult = Math.trunc($FResult*0.9)>>
+<<else>>
+	<<set $FResult = Math.trunc($FResult*0.85)>>
+<</if>>
+<<Beauty $slaves[$i]>>
+<<if $ACitizens > $ASlaves*2>>
+	<<set $beauty = Math.trunc($beauty*1.1)>>
+<<elseif $ACitizens > $ASlaves>>
+	<<set $beauty = Math.trunc($beauty*1)>>
+<<elseif $ACitizens > $ASlaves*0.5>>
+	<<set $beauty = Math.trunc($beauty*0.95)>>
+<<elseif $ACitizens > $ASlaves*0.25>>
+	<<set $beauty = Math.trunc($beauty*0.9)>>
+<<else>>
+	<<set $beauty = Math.trunc($beauty*0.85)>>
+<</if>>
+<<if $slaves[$i].sexualFlaw == "neglectful">>
+	<<set $beauty = Math.trunc($beauty*1.1)>>
+<</if>>
+<<if $slaves[$i].assignment == "be the Madam">>
+	<<if $brothelSlaves+$slavesGettingHelp > 0>>
+	<<set $beauty = Math.trunc($beauty*((5-$brothelSlaves-$slavesGettingHelp)/5))>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].devotion > 95) || ($slaves[$i].energy > 95)>>
+	enthusiastically sells
+<<elseif ($slaves[$i].devotion > 50)>>
+	willingly sells
+<<elseif ($slaves[$i].devotion > 20)>>
+	obediently sells
+<<elseif ($slaves[$i].trust < -20)>>
+	reluctantly sells
+<<else>>
+	is forced to sell
+<</if>>
+her body.
+
+<<set $beautyMultiplier = 1>>
+<<if $brothel > 0>>
+	<<if (($universalRulesFacilityWork == 1) && ($slaves[$i].assignment == "whore") && ($brothelSpots > 0)) || ($slaves[$i].assignment == "work in the brothel")>>
+	<<if ($slaves[$i].assignment == "whore")>>
+		Since there's extra space in $brothelName, she sells herself there.
+		<<set $brothelSpots -= 1>>
+	<</if>>
+	<<if $brothelAdsSpending != 0>>
+		<<if $brothelAdsStacked == 1>>
+		<<if ($slaves[$i].butt > 4)>>
+		<<if ($slaves[$i].boobs > 800)>>
+			<<set $beautyMultiplier += 0.05>>
+			Her stacked body fits $brothelName's ad campaign, getting her more business.
+		<</if>>
+		<</if>>
+		<<elseif $brothelAdsStacked == -1>>
+		<<if ($slaves[$i].boobs < 500)>>
+		<<if ($slaves[$i].butt < 3)>>
+		<<if ($slaves[$i].weight <= 10)>>
+		<<if ($slaves[$i].muscles <= 30)>>
+			<<set $beautyMultiplier += 0.05>>
+			Her slim body fits $brothelName's ad campaign, getting her more business.
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<<if $brothelAdsModded == 1>>
+		<<if $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+			<<set $beautyMultiplier += 0.05>>
+			Body art like hers is a major draw.
+		<</if>>
+		<<elseif $brothelAdsModded == -1>>
+		<<if $slaves[$i].corsetPiercing == 0 && $piercingScore < 3 && $tatScore < 2>>
+			<<set $beautyMultiplier += 0.05>>
+			Very clean bodies like hers are a major draw.
+		<</if>>
+		<</if>>
+		<<if $brothelAdsImplanted == 1>>
+		<<if ($slaves[$i].boobsImplant > 0)>>
+		<<if ($slaves[$i].buttImplant > 0)>>
+		<<if ($slaves[$i].waist < -10)>>
+		<<if ($slaves[$i].lipsImplant > 0)>>
+			<<set $beautyMultiplier += 0.05>>
+			Many citizens come to the brothel looking to rent a plastic slut like her.
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<<elseif $brothelAdsImplanted == -1>>
+		<<if ($slaves[$i].boobsImplant == 0)>>
+		<<if ($slaves[$i].buttImplant == 0)>>
+		<<if ($slaves[$i].waist >= -95)>>
+		<<if ($slaves[$i].lipsImplant == 0)>>
+		<<if $slaves[$i].faceImplant <= 30>>
+			<<set $beautyMultiplier += 0.05>>
+			Many citizens come to the brothel looking to play with a natural girl like her.
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<</if>>
+		<<if $brothelAdsOld == 1>>
+		<<if ($slaves[$i].age >= 30)>>
+			<<set $beautyMultiplier += 0.05>>
+			She's perfect for $brothelName, whose brand is mature slaves.
+		<</if>>
+		<<elseif $brothelAdsOld == -1>>
+		<<if ($slaves[$i].age < 30)>>
+			<<set $beautyMultiplier += 0.05>>
+			She's perfect for $brothelName, whose brand is young slaves.
+		<</if>>
+		<</if>>
+		<<if $brothelAdsXX == 1>>
+		<<if ($slaves[$i].dick == 0)>>
+			<<set $beautyMultiplier += 0.05>>
+			Almost everyone who comes to $brothelName is looking to fuck a girl like her.
+		<</if>>
+		<<elseif $brothelAdsXX == -1>>
+		<<if ($slaves[$i].dick > 0)>>
+			<<set $beautyMultiplier += 0.05>>
+			Almost everyone who comes to $brothelName is looking to pound a girl who cums when buttfucked.
+		<</if>>
+		<</if>>
+	<</if>>
+	<<if $Madam != 0>>
+		<<if $madamCashBonus > 0>>
+		<<set $beautyMultiplier += $madamCashBonus>>
+		<<if ($slaves[$i].assignment == "whore")>>
+			Working
+		<<else>>
+			Living and working
+		<</if>>
+		out of the brothel, she comes under $Madam.slaveName's
+		<<if $madamCashBonus < 0.1>>
+			completely inept
+		<<elseif $madamCashBonus < 0.2>>
+			unskilled
+		<<elseif $madamCashBonus < 0.3>>
+			skillful
+		<<else>>
+			masterful
+		<</if>>
+		leadership.
+		<<if ($Madam.dick > 2) && canAchieveErection($Madam)>>
+			<<if ($slaves[$i].devotion <= 20)>>
+			The Madam rapes her when she fails to meet standards.
+			<<else>>
+			The Madam uses her dick to reward her when she does well and needs some loving.
+			<</if>>
+		<</if>>
+		<<if !["none", "neglectful", "cum addict", "anal addict", "attention whore", "breast growth", "abusive", "malicious", "self hating", "breeder"].includes($slaves[$i].sexualFlaw) && (random(1,100) > 90)>>
+			$Madam.slaveName manages to @@.green;break@@ $slaves[$i].slaveName of her sexual flaws.
+			<<set $slaves[$i].sexualFlaw = "none">>
+		<<elseif ($slaves[$i].behavioralFlaw != "none") && (random(1,100) > 90)>>
+			$Madam.slaveName manages to @@.green;break@@ $slaves[$i].slaveName of her flaws.
+			<<set $slaves[$i].behavioralFlaw = "none">>
+		<</if>>
+		<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<<set $beauty = Math.trunc($beauty*$beautyMultiplier)>>
+
+Her appearance attracted $beauty customers (<<print Math.trunc($beauty/7)>> a day)<<if $beauty > 160>>, so many that each of her holes was often filled by more than one cock<<elseif $beauty > 140>>, so many that she spent much of her time getting gangbanged<<elseif $beauty > 120>>, so many that customers often spitroasted the slut<<elseif $beauty > 100>>, so many that she frequently had sex with multiple customers at once<<elseif $beauty > 70>>, so many that she occasionally had sex with multiple customers at once<</if>>. They paid ¤$FResult on average.
+
+<<if $seeAge == 1>>
+<<if $slaves[$i].age == 18>>
+	<<if $slaves[$i].birthWeek == 0>>
+	She just turned 18 this week, giving her an immense boost to both popularity and price.
+	<<elseif $slaves[$i].birthWeek < 4>>
+	This is still the first month in which it's legal to pay to fuck her, giving her a boost to both popularity and price.
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].behavioralQuirk == "sinful")>>
+	$slaves[$i].slaveName @@.hotpink;secretly enjoys@@ how utterly sinful and depraved it is for her to sell her body.
+	<<set $slaves[$i].devotion += 1>>
+<<elseif ($slaves[$i].behavioralQuirk == "cutting")>>
+	$slaves[$i].slaveName @@.hotpink;openly enjoys@@ the direct, frank language of prostitution, and delights customers with cutting remarks even as they fuck her.
+	<<set $slaves[$i].devotion += 1>>
+<</if>>
+<<if ($slaves[$i].sexualQuirk is "caring")>>
+	$slaves[$i].slaveName sees her role as helping people with their sexual needs, and she @@.mediumaquamarine;trusts that her place@@ in society is an important one.
+	<<set $slaves[$i].trust += 1>>
+<</if>>
+
+<<set $injury = 0>>
+<<if $slaves[$i].assignment == "work in the brothel">>
+<<elseif $slaves[$i].curatives > 0>>
+	The drugs she's on protect her from the wear of whoring.
+<<elseif ($slaves[$i].health < -50)>>
+	The stress of whoring while ill is @@.red;very hard on her.@@
+	<<set $slaves[$i].health -= 10>>
+	<<set $injury = 1>>
+<<elseif ($slaves[$i].health < -20) && (random(1,100) > 50)>>
+	The stress of whoring while ill is @@.red;hard on her.@@
+	<<set $slaves[$i].health -= 7>>
+	<<set $injury = 1>>
+<<elseif ($slaves[$i].vagina < 0)>>
+	<<SlaveTitle $slaves[$i]>>
+	<<if (($slaves[$i].analSkill + $slaves[$i].oralSkill) >= 200)>>
+	She's such an expert whore that she copes with the stress of being a $desc prostitute.
+	<<elseif random(1,100) > 40+(10*($slaves[$i].analSkill + $slaves[$i].oralSkill))>>
+	The stress of being a $desc prostitute is @@.red;hard on her.@@
+	<<set $slaves[$i].health -= 7>>
+	<<set $injury = 1>>
+	<</if>>
+<<elseif ($slaves[$i].vaginalAccessory == "chastity belt")>>
+	<<if (($slaves[$i].analSkill + $slaves[$i].oralSkill) >= 200)>>
+	She's such an expert whore that she copes with the stress of being limited to buttsex and oral.
+	<<elseif random(1,100) > 40+(10*($slaves[$i].analSkill + $slaves[$i].oralSkill))>>
+	The stress of being limited to buttsex and oral is @@.red;hard on her.@@
+	<<set $slaves[$i].health -= 7>>
+	<<set $injury = 1>>
+	<</if>>
+<<elseif ($slaves[$i].analSkill + $slaves[$i].oralSkill + $slaves[$i].vaginalSkill) < 300>>
+	<<if random(1,100) > 10+(($slaves[$i].analSkill + $slaves[$i].oralSkill + $slaves[$i].vaginalSkill)/10)>>
+	<<set $injury = 1>>
+	<</if>>
+<</if>>
+<<if ($injury == 1)>>
+	<<set $slaves[$i].health -= 3>>
+	<<if canDoAnal($slaves[$i])>>
+	<<set $seed = random(1,100)>>
+	<<else>>
+	<<set $seed = random(1,80)>>
+	<</if>>
+	<<if ($seed > 80)>>
+	<<set $slaves[$i].minorInjury = "sore ass">>
+	Rough anal with a careless customer left her with a @@.red;$slaves[$i].minorInjury.@@
+	<<include "minor injury response">>
+	<<elseif ($seed > 60)>>
+	<<set $slaves[$i].minorInjury = "black eye">>
+	A violent customer left her with a @@.red;$slaves[$i].minorInjury.@@
+	<<include "minor injury response">>
+	<<elseif ($seed > 40)>>
+	<<set $slaves[$i].minorInjury = "split lip">>
+	An abusive customer left her with a @@.red;$slaves[$i].minorInjury.@@
+	<<include "minor injury response">>
+	<<elseif ($seed > 20)>>
+	<<set $slaves[$i].minorInjury = "bad bruise">>
+	A rough customer left her with a @@.red;$slaves[$i].minorInjury.@@
+	<<include "minor injury response">>
+	<<else>>
+	<<set $slaves[$i].minorInjury = "sore muscle">>
+	The hard labor of constant sex left her with a @@.red;$slaves[$i].minorInjury.@@
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].vagina != -1)>>
+<<if canDoVaginal($slaves[$i])>>
+<<if ($slaves[$i].vagina == 0)>>
+	<<if ($slaves[$i].aphrodisiacs > 1)>>
+	Her virginity goes to the highest bidder, earning ¤<<print ($beauty*10)>>. She's so full of aphrodisiacs that she @@.hotpink;enjoys the experience.@@ @@.lime;Her pussy is now broken in.@@
+	<<set $slaves[$i].devotion += 4>>
+	<<set $slaves[$i].vagina = 1>>
+	<<set $FResult += 10>>
+	<<elseif ($slaves[$i].devotion > 20)>>
+	Her virginity goes to the highest bidder, earning ¤<<print ($beauty*10)>>. Losing her virginity in this way @@.hotpink;confirms her submission to you.@@ @@.lime;Her pussy is now broken in.@@
+	<<set $slaves[$i].devotion += 4>>
+	<<set $slaves[$i].vagina = 1>>
+	<<set $FResult += 10>>
+	<<else>>
+	Her virginity goes to the highest bidder, earning ¤<<print ($beauty*10)>>. She tries to resist, and losing her virginity to a rape makes her @@.mediumorchid;hate@@ and @@.gold;fear@@ you a great deal. @@.lime;Her pussy is now broken in.@@
+	<<set $slaves[$i].devotion -= 10>>
+	<<set $slaves[$i].trust -= 10>>
+	<<set $slaves[$i].vagina = 1>>
+	<<set $FResult += 10>>
+	<</if>>
+<<elseif ($slaves[$i].vagina < 3)>>
+	<<if (random(1,100) > ((170-$beauty)+($slaves[$i].vagina*10)+($slaves[$i].vaginalSkill/3)))>>
+	@@.lime;Her pussy gets loosened by the intense use.@@
+	<<set $slaves[$i].vagina += 1>>
+	<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<if canDoAnal($slaves[$i])>>
+<<if ($slaves[$i].anus == 0)>>
+	<<if ($slaves[$i].aphrodisiacs > 1)>>
+	Her tight little anus goes to the highest bidder, earning ¤<<print ($beauty*5)>>. She's so full of aphrodisiacs that she @@.hotpink;enjoys the experience.@@ Her fresh asshole is fucked all week, and by the end of it @@.lime;she won't sit down.@@
+	<<set $slaves[$i].devotion += 4>>
+	<<set $slaves[$i].anus = 2>>
+	<<set $FResult += 5>>
+	<<elseif ($slaves[$i].devotion > 20)>>
+	Her tight little anus goes to the highest bidder, earning ¤<<print ($beauty*5)>>. The pain and humiliation @@.hotpink;confirm her submission to you.@@ Her fresh asshole is fucked all week, and by the end of it @@.lime;she won't sit down.@@
+	<<set $slaves[$i].devotion += 4>>
+	<<set $slaves[$i].anus = 2>>
+	<<set $FResult += 5>>
+	<<else>>
+	Her tight little anus goes to the highest bidder, earning ¤<<print ($beauty*5)>>. The pain and humiliation increases her @@.mediumorchid;hatred@@ and @@.gold;fear@@ for you. Her fresh asshole is fucked all week, and by the end of it @@.lime;she won't sit down.@@
+	<<set $slaves[$i].devotion -= 5>>
+	<<set $slaves[$i].trust -= 5>>
+	<<set $slaves[$i].anus = 2>>
+	<<set $FResult += 5>>
+	<</if>>
+<<elseif ($slaves[$i].anus < 3)>>
+	<<if ($slaves[$i].vagina < 0)>>
+	<<if ((random(1,100) > ((150-$beauty)+($slaves[$i].anus*10)+($slaves[$i].analSkill/6))))>>
+		@@.lime;Her asshole sees constant use in place of a pussy and loosens.@@
+		<<set $slaves[$i].anus += 1>>
+	<</if>>
+	<<elseif ($slaves[$i].vaginalAccessory == "chastity belt")>>
+	<<if ((random(1,100) > ((150-$beauty)+($slaves[$i].anus*10)+($slaves[$i].analSkill/6))))>>
+		@@.lime;Her asshole sees constant use in place of her protected pussy and loosens.@@
+		<<set $slaves[$i].anus += 1>>
+	<</if>>
+	<<else>>
+	<<if ((random(1,100) > ((160-$beauty)+($slaves[$i].anus*10)+($slaves[$i].analSkill/6))))>>
+		@@.lime;Her asshole loosens with constant use.@@
+		<<set $slaves[$i].anus += 1>>
+	<</if>>
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].devotion > 20)>>
+<<elseif !canWalk($slaves[$i])>>
+	Since she can't walk, she spends all of her time in her own room in the brothel. Customers come in, fuck her, and leave.
+<<if ($slaves[$i].whoreSkill <= 10)>>
+<<elseif ($slaves[$i].whoreSkill <= 30)>>
+	As a skilled prostitute, she gets a little more money out of customers.
+<<elseif ($slaves[$i].whoreSkill <= 60)>>
+	As an expert prostitute, she gets more money out of customers.
+<<elseif ($slaves[$i].whoreSkill >= 100)>>
+	As a masterful prostitute, she makes more money.
+<</if>>
+<</if>>
+
+<<if $slaves[$i].aphrodisiacs > 1>>
+	The aphrodisiac cocktail has her so desperately horny that regardless of her personal feelings, she @@.hotpink;gets off with customers all week.@@ In her drug-addled state she doesn't remember enough to learn sexual skills.
+	<<set $slaves[$i].devotion += 4>>
+<<elseif ($slaves[$i].devotion <= 20) && ($slaves[$i].energy <= 95)>>
+	<<if $slaves[$i].trust >= -20>>
+		She tries to refuse being sold as a whore, so she is restrained for sale. She loses a bit of herself to a week of rape, but remembers enough to know @@.mediumorchid;you're responsible,@@ and @@.gold;can force her if necessary.@@
+		<<set $slaves[$i].devotion -= 5>>
+		<<set $slaves[$i].trust -= 5>>
+	<<else>>
+		She doesn't show much enthusiasm, but the habit of slave prostitution @@.hotpink;wears away at her will.@@
+		<<set $slaves[$i].devotion += 4>>
+	<</if>>
+<<else>>
+	<<if ($slaves[$i].oralSkill + $slaves[$i].analSkill >= 200) && (($slaves[$i].vaginalSkill >= 100) || (canDoVaginal($slaves[$i]) == false))>>
+		She's a @@.aquamarine;sexual master@@
+		<<if canDoVaginal($slaves[$i])>>
+			whose
+		<<else>>
+			and despite <<if $slaves[$i].vagina < 0>>her lack of a<<else>>the inaccessibility of her<</if>> front hole, her
+		<</if>>
+		body commands @@.yellowgreen;a high price.@@ When she's not
+		<<if canDoVaginal($slaves[$i]) && (random(1,4) == 1)>>
+			pleasing the rich with her <<if $slaves[$i].prestige > 0>>prestigious<<else>>popular<</if>> pussy,
+		<<elseif ($beauty > 70) && (random(1,3) == 1)>>
+			getting gangbanged,
+		<<elseif (random(1,2) == 1)>>
+			performing one of her <<if $slaves[$i].prestige > 0>>famous<<else>>top-tier<</if>> blowjobs,
+		<<else>>
+			selling access to her <<if $slaves[$i].prestige > 0>>legendary<<else>>notorious<</if>> anus,
+		<</if>>
+		she works social gatherings and high society.
+	<<else>>
+		She shows diligence, and her sexual skills improve, according to what the customers demand<<if canDoVaginal($slaves[$i]) == false>> and what's possible for her<</if>>.
+		<<set $skillIncrease = 5+$slaves[$i].intelligence+$oralUseWeight>>
+		<<OralSkillIncrease $slaves[$i]>>
+		<<if canDoAnal($slaves[$i])>>
+			<<set $skillIncrease = 5+$slaves[$i].intelligence+$analUseWeight>>
+			<<AnalSkillIncrease $slaves[$i]>>
+		<</if>>
+		<<if canDoVaginal($slaves[$i])>>
+			<<set $skillIncrease = 5+$slaves[$i].intelligence+$vaginalUseWeight>>
+			<<VaginalSkillIncrease $slaves[$i]>>
+		<</if>>
+	<</if>>
+	<<if ($slaves[$i].amp != 1)>>
+	<<if ($slaves[$i].whoreSkill < 100)>>
+		She gains experience as a prostitute.
+		<<set $skillIncrease = 10+$slaves[$i].intelligence>>
+		<<WhoreSkillIncrease $slaves[$i]>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].minorInjury != 0>>
+	She attracts fewer people due to her minor injury.
+	<<set $beauty -= 1>>
+<</if>>
+
+<<if $showEWM == 1>>
+
+<<if ($slaves[$i].releaseRules == "restrictive") && ($slaves[$i].standardReward !== "orgasm")>>
+	She's a better whore because prostitution is her main sexual outlet.
+<</if>>
+
+<<if $slaves[$i].relation != 0>>
+	<<for $j = 0; $j < $slaves.length; $j++>>
+		<<if $slaves[$j].ID == $slaves[$i].relationTarget>>
+			<<if $slaves[$j].assignment == $slaves[$i].assignment>>
+				Since her $slaves[$j].relation $slaves[$j].slaveName is selling herself too, she earns extra ¤ by working with her.
+				<<if $arcologies[0].FSEgyptianRevivalist > 20>>
+					Customers are very enthusiastic about being able to participate in incestuous sex like the ancient Egyptians.
+				<</if>>
+			<</if>>
+			<<break>>
+		<</if>>
+	<</for>>
+<</if>>
+<<if $slaves[$i].relationship > 0>>
+	<<for $j = 0; $j < $slaves.length; $j++>>
+		<<if $slaves[$j].ID == $slaves[$i].relationshipTarget>>
+			<<if $slaves[$j].assignment == $slaves[$i].assignment>>
+				Her
+				<<if $slaves[$j].relationship <= 1>>
+					friend
+				<<elseif $slaves[$j].relationship <= 2>>
+					best friend
+				<<elseif $slaves[$j].relationship <= 3>>
+					friend with benefits
+				<<elseif $slaves[$j].relationship <= 4>>
+					lover
+				<<elseif $slaves[$j].relationship > 4>>
+					slave wife
+				<</if>>
+				$slaves[$j].slaveName is also whoring, so she earns a bit more.
+			<</if>>
+			<<break>>
+		<</if>>
+	<</for>>
+<<elseif $slaves[$i].relationship == -1>>
+	She relies on customers' desire to fuck her for emotional support, making her an excellent, if occasionally disturbing, whore.
+<</if>>
+<<if $slaves[$i].rivalry != 0>>
+	<<for $j = 0; $j < $slaves.length; $j++>>
+		<<if $slaves[$j].ID == $slaves[$i].rivalryTarget>>
+			<<if $slaves[$j].assignment == $slaves[$i].assignment>>
+				She earns a little less ¤ due to bickering with $slaves[$j].slaveName.
+			<</if>>
+			<<break>>
+		<</if>>
+	<</for>>
+<</if>>
+
+<<if canTalk($slaves[$i])>>
+	<<if $slaves[$i].voice > 2>>
+		<<if $slaves[$i].voiceImplant > 0>>
+			Her high-pitched bimbo voice makes it easier for her to entice potential customers.
+		<<else>>
+			Her high, girly voice makes it easier for her to entice potential customers.
+		<</if>>
+	<<elseif $slaves[$i].voice == 1>>
+		Most potential customers find her deep voice unattractive, making it harder for her to entice them.
+	<</if>>
+<</if>>
+
+<<if ($arcologies[0].FSTransformationFetishist > 20) || ($arcologies[0].FSDegradationist > 20)>>
+	<<if $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+		Many customers fetishize body mods and consider hers fascinating.
+	<<elseif $modScore > 7>>
+		Many customers fetishize body mods and consider hers interesting.
+	<</if>>
+<<elseif ($arcologies[0].FSBodyPurist > 20) || ($arcologies[0].FSPaternalist > 20)>>
+	<<if $modScore <= 7>>
+		Most customers disapprove of excessive body ornamentation and are pleased that she's unspoiled in that regard.
+	<<else>>
+		Most customers disapprove of body mods and consider hers unappealing.
+	<</if>>
+<<else>>
+	<<if $modScore > 15 || ($piercingScore > 8 && $tatScore > 5)>>
+		She has so much body art that most customers don't think she needs any more.
+	<<elseif !($slaves[$i].corsetPiercing == 0 && $piercingScore < 3 && $tatScore < 2)>>
+		Her body art helps attract customers.
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].aphrodisiacs > 1>>
+	On such a heavy aphrodisiac dose, she can't wait for each customer to fuck her.
+<<elseif $slaves[$i].aphrodisiacs > 0>>
+	On aphrodisiacs, she climaxes with every customer.
+<<elseif $slaves[$i].devotion > 95>>
+	She's so devoted that she does her best and pleases every customer.
+<<elseif $slaves[$i].devotion > 50>>
+	She's so devoted that she works hard to please customers.
+<<elseif $slaves[$i].trust < -20>>
+	She's afraid of you, so she works hard to please customers.
+<<else>>
+	She neither loves nor fears you enough to work hard, and makes a poor whore.
+<</if>>
+
+<<if ($slaves[$i].butt > 4) && ($slaves[$i].boobs > 800)>>
+	<<if $arcologies[0].FSAssetExpansionist != "unset">>
+		She makes a river of ¤ with her huge, fashionable assets.
+		<<if canTalk($slaves[$i])>>
+			<<if $slaves[$i].voice > 2>>
+				Her high voice contributes to her bimbo image, so she does even better.
+			<</if>>
+		<</if>>
+	<<elseif $arcologies[0].FSSlimnessEnthusiast >= 20>>
+		She makes no extra ¤ with her large assets since many citizens consider them disgusting.
+	<<else>>
+		She receives extra ¤ for having huge assets.
+	<</if>>
+	<<if $slaves[$i].dick > 0>>
+		<<if $arcologies[0].FSGenderRadicalist != "unset">>
+			Society's appetite for stacked whores with dicks makes her especially profitable.
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].age >= 30)>>
+	<<if $arcologies[0].FSMaturityPreferentialist != "unset">>
+		Her mature body is very fashionable.
+	<<elseif $arcologies[0].FSYouthPreferentialist != "unset">>
+		Her old body is badly out of fashion.
+	<</if>>
+<<else>>
+	<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+		Her youthful body is very fashionable.
+	<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+		Her young body is out of fashion.
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].boobs < 500) && ($slaves[$i].butt < 3) && ($slaves[$i].weight <= 10) && ($slaves[$i].muscles <= 30)>>
+	<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+		She makes extra ¤ due to her fashionably sleek little body.
+		<<if canTalk($slaves[$i])>>
+			<<if $slaves[$i].voice > 2>>
+				Her high voice contributes to her girlish image, so she does even better.
+			<</if>>
+		<</if>>
+	<<else>>
+		She receives extra ¤ for having a sleek, girlish figure.
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].boobsImplant == 0) && ($slaves[$i].buttImplant == 0) && ($slaves[$i].waist >= -95) && ($slaves[$i].lipsImplant == 0) && ($slaves[$i].faceImplant < 2)>>
+	<<if $arcologies[0].FSBodyPurist != "unset">>
+		With her all-natural, implant free appearance, she's very profitable.
+	<<elseif $arcologies[0].FSTransformationFetishist >= 20>>
+		Customers are disappointed by her all-natural, implant free appearance.
+	<<else>>
+		Some discerning customers appreciate her all-natural, implant free appearance.
+	<</if>>
+<<else>>
+	<<if $arcologies[0].FSTransformationFetishist != "unset">>
+		The public is willing to pay more for her augmented body.
+	<</if>>
+<</if>>
+
+<<if ($slaves[$i].clitPiercing > 2) && ($slaves[$i].devotion >= -20)>>
+	Almost everyone loves her enthusiasm for sex encouraged by her smart piercing.
+<<elseif ($slaves[$i].clitPiercing > 2)>>
+	Almost everyone appreciates her reduced reluctance towards sex encouraged by her smart piercing.
+<</if>>
+
+<<if $slaves[$i].teeth == "removable">>
+	The extra attention she receives from her ability to give toothless sucks is balanced out by the customers who are disgusted by it.
+<<elseif $slaves[$i].teeth == "pointy">>
+	The extra attention she receives from her terrifying mouth of sharp teeth is balanced out by the customers who are scared off by them.
+<</if>>
+
+<<if $slaves[$i].dick != 0>>
+	<<if $arcologies[0].FSGenderRadicalist == "unset">>
+		She sees fewer customers because many prefer whores without cocks.
+	<<elseif $arcologies[0].FSGenderRadicalist < 50>>
+		Her cock entices some customers and disappoints others; it has little effect on her popularity.
+	<<else>>
+		The overwhelming majority of potential customers consider her cock an attraction.
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].muscles > 95>>
+	<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+		In the new culture of $arcologies[0].name her muscles make her a very profitable whore.
+	<<else>>
+		Her muscles scare off some customers, but some pay well to enjoy a muscular whore.
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].amp == 1>>
+	Many prefer to fuck a whore with limbs, but some greatly enjoy buying the use of a helpless amputee.
+<</if>>
+
+<<if $slaves[$i].lactation > 0>>
+	She appeals to customers who like lactation play, or just want a whore they can drink milk from.
+<</if>>
+
+<<if $slaves[$i].preg > 10>>
+	<<if $arcologies[0].FSGenderFundamentalist == "unset">>
+		Many customers avoid visibly pregnant whores.
+	<<else>>
+		The new respect for traditional gender roles has given many citizens a taste for pregnant whores.
+	<</if>>
+<</if>>
+
+<<if ($seeRace == 1)>>
+	<<if ($slaves[$i].race == "surgically altered to look white") || ($slaves[$i].race == "white")>>
+		Many customers prefer white girls like $slaves[$i].slaveName.
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<if $slaves[$i].race != $arcologies[0].FSSupremacistRace>>
+		Some citizens fetishize whores of the servile races.
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<if $slaves[$i].race == $arcologies[0].FSSubjugationistRace>>
+		Many prefer to use and abuse whores of the proper slave race.
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+	<<if ($slaves[$i].nationality == "Japanese") || ($slaves[$i].nationality == "Edo Revivalist")>>
+		As a proper Japanese girl, she is considered extremely desirable.
+	<</if>>
+<<elseif $arcologies[0].FSChineseRevivalist != "unset">>
+	<<if ($slaves[$i].nationality == "Chinese") || ($slaves[$i].nationality == "Chinese Revivalist")>>
+		As a proper Chinese girl, she is considered extremely desirable.
+	<</if>>
+<</if>>
+
+<<if $slaves[$i].intelligence > 0>>
+	Her intelligence gives her an advantage at the business of selling her body.
+<<elseif $slaves[$i].intelligence < 0>>
+	Her stupidity gives her a handicap at the business of selling her body.
+<</if>>
+
+<<if $slaves[$i].prestige > 0>>
+	She attracts more attention because it's prestigious to fuck her.
+<</if>>
+
+<<if ($slaves[$i].fetishKnown == 1)>>
+<<if ($slaves[$i].fetishStrength > 60)>>
+<<switch $slaves[$i].fetish>>
+<<case "submissive">>
+	She gets more ¤ for her eagerness to submit.
+<<case "cumslut">>
+	She gets more ¤ for her enjoyment of cum.
+<<case "humiliation">>
+	She gets more ¤ for her eagerness to be humiliated by citizens.
+<<case "buttslut">>
+	<<if canDoAnal($slaves[$i])>>
+		She gets more ¤ for her obvious enjoyment of buttsex.
+	<</if>>
+<<case "dom">>
+	She gets some more ¤ for her enthusiasm dominating other slaves in group sex.
+<<case "masochist">>
+	She gets more ¤ for her obvious enjoyment of pain.
+<<case "sadist">>
+	She gets some more ¤ for her willingness to abuse other slaves.
+<<case "pregnancy">>
+	<<if canDoVaginal($slaves[$i])>>
+		As an impregnation fetishist she's very enthusiastic about vaginal sex.
+	<</if>>
+<<case "mindbroken">>
+	She gets less ¤ because she just lies there, mind broken.
+<</switch>>
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].attrKnown == 1)>>
+<<if ($slaves[$i].energy > 95)>>
+	As a nymphomaniac she gets sexual release from every transaction and is wildly successful.
+	<<set $slaves[$i].need -= $beauty>>
+<<elseif ($slaves[$i].energy > 80)>>
+	With her powerful sex drive she rarely has to fake an orgasm.
+<<elseif ($slaves[$i].energy > 60)>>
+	With her good sex drive she often orgasms with customers.
+<<elseif ($slaves[$i].energy > 40)>>
+	With her average sex drive she occasionally orgasms with customers.
+<<elseif ($slaves[$i].energy > 20)>>
+	With her poor sex drive she almost never orgasms with customers.
+<<else>>
+	Since she's frigid, she rarely experiences authentic arousal at work.
+<</if>>
+<<if ($slaves[$i].attrXY <= 15)>>
+	<<if ($slaves[$i].attrXX <= 15)>>
+		Her general disgust with sex makes her a very poor whore.
+	<<elseif ($slaves[$i].attrXX <= 85)>>
+		Her sexual disgust with men makes her a poor whore.
+	<<elseif ($slaves[$i].attrXX <= 95)>>
+		Her sexual disgust with men hinders her, though she is more enthusiastic with female customers.
+	<<else>>
+		Her sexual disgust with men hinders her, though she makes up for it with female customers.
+	<</if>>
+<<elseif ($slaves[$i].attrXY <= 85)>>
+	<<if ($slaves[$i].attrXX <= 15)>>
+		Her sexual disgust with men makes her a poor whore.
+	<<elseif ($slaves[$i].attrXX <= 85)>>
+		Her indifference to men and women makes her a poor whore.
+	<<elseif ($slaves[$i].attrXX <= 95)>>
+		Her sexual indifference to men hinders her, though she is more enthusiastic with female customers.
+	<<else>>
+		Her sexual indifference to men hinders her, though she makes up for it with female customers.
+	<</if>>
+<<elseif ($slaves[$i].attrXY <= 95)>>
+	<<if ($slaves[$i].attrXX <= 15)>>
+		Her sexual disgust with women hinders her, though she makes up for it with male customers.
+	<<elseif ($slaves[$i].attrXX <= 85)>>
+		Her sexual indifference to women hinders her, though she makes up for it with male customers.
+	<<elseif ($slaves[$i].attrXX <= 95)>>
+		She has the advantage of sexual sincerity with both men and women.
+	<<else>>
+		She's a good whore with male customers, and truly enthusiastic with women.
+	<</if>>
+<<else>>
+	<<if ($slaves[$i].attrXX <= 15)>>
+		Her sexual disgust with women hinders her, though she is enthusiastic with male customers.
+	<<elseif ($slaves[$i].attrXX <= 85)>>
+		Her sexual indifference to women hinders her, though she is enthusiastic with male customers.
+	<<elseif ($slaves[$i].attrXX <= 95)>>
+		She's a good whore with female customers, and truly enthusiastic with men.
+	<<else>>
+		She's openly lustful towards all customers, men and women.
+	<</if>>
+<</if>>
+<</if>>
+
+<<if ($slaves[$i].behavioralQuirk == "confident")>>
+	She's better at her job because she's such a confident whore.
+<<elseif ($slaves[$i].behavioralQuirk == "cutting")>>
+	She gets a lot of attention for her ability to joke at a customer's expense.
+<<elseif ($slaves[$i].behavioralQuirk == "funny")>>
+	She brings unintentional comic relief to the hard work  of prostitution.
+<<elseif ($slaves[$i].behavioralQuirk == "adores women")>>
+	She's a favorite among female customers, whom she greets with real enthusiasm.
+<<elseif ($slaves[$i].behavioralQuirk == "adores men")>>
+	She's a favorite among male customers, whom she greets with frank and open lust.
+<<elseif ($slaves[$i].behavioralQuirk == "fitness")>>
+	She's eager to please customers because she finds validation in their willingness to pay for sex with her.
+<<elseif ($slaves[$i].behavioralQuirk == "insecure")>>
+	She thinks of herself as really beautiful, despite the occasional harshness of sex work.
+<<elseif ($slaves[$i].behavioralQuirk == "sinful")>>
+	She identifies with prostitutes from the holy books, and scandalizes customers with her explicit scriptural references.
+<<elseif ($slaves[$i].behavioralQuirk == "advocate")>>
+	She reassures uncomfortable customers that prostitution isn't bad for her at all.
+<</if>>
+<<if ($slaves[$i].sexualQuirk == "gagfuck queen")>>
+	She's a favorite among customers who like to throatfuck a retching whore.
+<<elseif ($slaves[$i].sexualQuirk == "painal queen")>>
+	She's a favorite among customers who like to assrape a struggling whore.
+<<elseif ($slaves[$i].sexualQuirk == "strugglefuck queen")>>
+	She's a favorite among customers who like to wrestle with a struggling whore.
+<<elseif ($slaves[$i].sexualQuirk == "tease")>>
+	Despite being a whore, she somehow retains the ability to blush enticingly at nudity.
+<<elseif ($slaves[$i].sexualQuirk == "romantic")>>
+	Despite being a whore, she somehow retains the ability to make her customers feel special.
+<<elseif ($slaves[$i].sexualQuirk == "perverted")>>
+	She enjoys unexpected, perverted requests from customers.
+<<elseif ($slaves[$i].sexualQuirk == "unflinching")>>
+	She's impossible to disgust or surprise, pleasing customers with odd tastes.
+<<elseif ($slaves[$i].sexualQuirk == "size queen")>>
+	She's very eager to spend quality time with big cocks, making her a favorite among the well-endowed.
+<<elseif ($slaves[$i].sexualQuirk == "caring")>>
+	She's a relaxing whore to patronize, doing everything she can to make her customers comfortable.
+<</if>>
+
+<<switch $slaves[$i].behavioralFlaw>>
+<<case "arrogant">>
+	She receives less ¤ because she treats clients like they are beneath her dignity.
+<<case "bitchy">>
+	She receives less ¤ because she makes cutting remarks to clients.
+<<case "odd">>
+	She receives less ¤ because clients are annoyed by her odd behavior.
+<<case "hates men">>
+	She receives less ¤ because she can't conceal her distaste for the company of men.
+<<case "hates women">>
+	She receives less ¤ because she can't conceal her distaste for the company of women.
+<<case "devout">>
+	She receives less ¤ because people are annoyed by her habit of praying for forgiveness during sex.
+<<case "liberated">>
+	She receives less ¤ because people are annoyed by her obvious belief that being forced to serve them is wrong.
+<</switch>>
+<<switch $slaves[$i].sexualFlaw>>
+<<case "hates oral">>
+	She receives less ¤ because she tries to avoid sucking cock.
+<<case "hates anal">>
+	She receives less ¤ because she tries to avoid taking it up the ass.
+<<case "hates penetration">>
+	She receives less ¤ because she tries to avoid getting fucked.
+<<case "repressed">>
+	She receives less ¤ because customers who don't feel like forcing her sometimes have to cajole her past her repressed sexuality.
+<<case "idealistic">>
+	She receives less ¤ because customers who don't feel like forcing her sometimes have to convince her to have sex with them.
+<<case "apathetic">>
+	She receives less ¤ because she often just lies there taking dick.
+<<case "crude">>
+	She receives less ¤ because she isn't exactly the most elegant sexual partner.
+<<case "judgemental">>
+	She receives less ¤ because she openly disdains unattractive customers.
+<<case "shamefast">>
+	She receives less ¤ because she sometimes hesitates to take her clothes off and get to work.
+<<case "cum addict">>
+	Her abject begging for cum annoys customers who aren't looking for oral, but this is more than outweighed by how much it delights those who are.
+<<case "anal addict">>
+	Her abject begging for buttsex annoys customers who aren't interested in fucking her ass, but this is more than outweighed by how much it delights those who are.
+<<case "attention whore">>
+	She loses customers by her constant attention seeking.
+<<case "breast growth">>
+	Her excessive obsession with her own breasts, to the detriment of most sexual intercourse, loses customers.
+<<case "abusive">>
+	She loses customers whenever her sexual abusiveness becomes apparent.
+<<case "malicious">>
+	She loses customers whenever her sexual maliciousness becomes apparent.
+<<case "self hating">>
+	She loses customers during the crying jags brought on by her self hatred.
+<<case "neglectful">>
+	The occasional customer who likes a whore to climax authentically and can tell the difference is disappointed by her neglect of her own pleasure, but they're rare. Most are thrilled by her.
+<<case "breeder">>
+	Her obsession with pregnancy loses customers who aren't interested in that.
+<</switch>>
+
+<</if>> /* CLOSES EWM */
+
+<<if ($slaves[$i].sexualFlaw == "none")>>
+<<if $slaves[$i].devotion < 10>>
+<<if random(1,100) > 70>>
+<<if ($slaves[$i].vaginalSkill <= 30) && ($slaves[$i].vagina != -1) && ($slaves[$i].vaginalAccessory != "chastity belt")>>
+	After being fucked too hard too often, she now @@.red;dislikes being penetrated.@@
+	<<set $slaves[$i].sexualFlaw = "hates penetration">>
+<<elseif ($slaves[$i].analSkill <= 30)>>
+	After so much anal pain, she now @@.red;dislikes being buttfucked.@@
+	<<set $slaves[$i].sexualFlaw = "hates anal">>
+<<elseif ($slaves[$i].oralSkill <= 30)>>
+	After one too many facials, she now @@.red;dislikes sucking cock.@@
+	<<set $slaves[$i].sexualFlaw = "hates oral">>
+<</if>>
+<</if>>
+<</if>>
+<</if>>
+
+<<set _cash = Math.trunc(($beauty*$FResult)*(1+(0.002*$slaves[$i].whoreSkill)))>>
+In total, you were paid @@.yellowgreen;¤<<print _cash>>@@ for the use of $slaves[$i].slaveName's body this week.
+<<slavePaid $slaves[$i] _cash>>
+/*<<set $lastWeeksFinances.incomeWhore += _cash>>*/
+
+/* FACILITY DECORATION IMPACTS */
+
+<<if $slaves[$i].assignment == "work in the brothel">>
+<<if $brothelDecoration != "standard">>
+<<set $seed = 0.0005*$FSSingleSlaveRep*$beauty>>
+<<switch $brothelDecoration>>
+<<case "Roman Revivalist">>
+	<<set $arcologies[0].FSRomanRevivalist += $seed>>
+<<case "Aztec Revivalist">>
+	<<set $arcologies[0].FSAztecRevivalist += $seed>>
+<<case "Egyptian Revivalist">>
+	<<set $arcologies[0].FSEgyptianRevivalist += $seed>>
+<<case "Edo Revivalist">>
+	<<set $arcologies[0].FSEdoRevivalist += $seed>>
+<<case "Arabian Revivalist">>
+	<<set $arcologies[0].FSArabianRevivalist += $seed>>
+<<case "Chinese Revivalist">>
+	<<set $arcologies[0].FSChineseRevivalist += $seed>>
+<<case "Chattel Religionist">>
+	<<set $arcologies[0].FSChattelReligionist += $seed>>
+<<case "Degradationist">>
+	<<set $arcologies[0].FSDegradationist += $seed>>
+<<case "Asset Expansionist">>
+	<<set $arcologies[0].FSAssetExpansionist += $seed>>
+<<case "Transformation Fetishist">>
+	<<set $arcologies[0].FSTransformationFetishist += $seed>>
+<<case "Gender Radicalist">>
+	<<set $arcologies[0].FSGenderRadicalist += $seed>>
+<<case "Gender Fundamentalist">>
+	<<set $arcologies[0].FSGenderFundamentalist += $seed>>
+<<case "Physical Idealist">>
+	<<set $arcologies[0].FSPhysicalIdealist += $seed>>
+<<case "Supremacist">>
+	<<set $arcologies[0].FSSupremacist += $seed>>
+<<case "Subjugationist">>
+	<<set $arcologies[0].FSSubjugationist += $seed>>
+<<case "Paternalist">>
+	<<set $arcologies[0].FSPaternalist += $seed>>
+<<case "Pastoralist">>
+	<<set $arcologies[0].FSPastoralist += $seed>>
+<<case "Maturity Preferentialist">>
+	<<set $arcologies[0].FSMaturityPreferentialist += $seed>>
+<<case "Youth Preferentialist">>
+	<<set $arcologies[0].FSYouthPreferentialist += $seed>>
+<<case "Body Purist">>
+	<<set $arcologies[0].FSBodyPurist += $seed>>
+<<case "Slimness Enthusiast">>
+	<<set $arcologies[0].FSSlimnessEnthusiast += $seed>>
+<</switch>>
+<</if>>
+<</if>>
+
+/* SEX ACT COUNTS AND SEXUAL SATISFACTION */
+
+<<set _oralUse = $oralUseWeight+($slaves[$i].oralSkill/30)+$slaves[$i].lips>>
+<<set _analUse = 0>>
+<<if canDoAnal($slaves[$i])>><<set _analUse =  $analUseWeight+($slaves[$i].analSkill/30)-$slaves[$i].anus>><</if>>
+<<set _vaginalUse = 0>>
+<<if canDoVaginal($slaves[$i])>><<set _analUse =  $vaginalUseWeight+($slaves[$i].vaginalSkill/30)-$slaves[$i].vagina>><</if>>
+<<set _mammaryUse = $mammaryUseWeight>>
+<<if $slaves[$i].boobs > 10000>><<set $mammaryUseWeight += 5>><<elseif $slaves[$i].boobs > 2000>><<set $mammaryUseWeight += $slaves[$i].boobs/2000>><</if>>
+<<set _penetrativeUse = $penetrativeUseWeight>>
+<<if $slaves[$i].clit > 1>><<set $penetrativeUseWeight += ($slaves[$i].vaginalSkill/30)+$slaves[$i].clit>><</if>>
+<<if $slaves[$i].dick>>
+<<if canAchieveErection($slaves[$i])>>
+<<if ($slaves[$i].dickAccessory != "chastity belt")>>
+	<<set $penetrativeUseWeight += ($slaves[$i].dick+$slaves[$i].balls)/4>>
+<</if>>
+<</if>>
+<</if>>
+
+<<set _demand = _oralUse+_analUse+_vaginalUse+_mammaryUse+_penetrativeUse>>
+<<set _oralUse = Math.trunc((_oralUse/_demand)*$beauty)>>
+<<set _analUse = Math.trunc((_analUse/_demand)*$beauty)>>
+<<set _vaginalUse = Math.trunc((_vaginalUse/_demand)*$beauty)>>
+<<set _mammaryUse = Math.trunc((_mammaryUse/_demand)*$beauty)>>
+<<set _penetrativeUse = Math.trunc((_penetrativeUse/_demand)*$beauty)>>
+
+<<set $slaves[$i].oralCount += _oralUse, $slaves[$i].publicCount += _oralUse, $oralTotal += _oralUse>>
+<<set $slaves[$i].analCount += _analUse, $slaves[$i].publicCount += _analUse, $analTotal += _analUse>>
+<<set $slaves[$i].vaginalCount += _vaginalUse, $slaves[$i].publicCount += _vaginalUse, $vaginalTotal += _vaginalUse>>
+<<set $slaves[$i].mammaryCount += _mammaryUse, $slaves[$i].publicCount += _mammaryUse, $mammaryTotal += _mammaryUse>>
+<<set $slaves[$i].penetrativeCount += _penetrativeUse, $slaves[$i].publicCount += _penetrativeUse, $penetrativeTotal += _penetrativeUse>>
+
+<<if $slaves[$i].need>>
+<<if $slaves[$i].fetishKnown>>
+<<switch $slaves[$i].fetish>>
+<<case "submissive" "masochist">>
+	<<if _analUse+_vaginalUse > 0>>
+		She enjoys being fucked, and got sexual satisfaction from the <<print _analUse+_vaginalUse>> dicks stuck inside her this week.
+		<<set $slaves[$i].need -= _analUse+_vaginalUse>>
+	<</if>>
+<<case "dom" "sadist">>
+	<<if _penetrativeUse > 0>>
+		She enjoys being on top, and got special sexual satisfaction from the _penetrativeUse times she got to fuck someone this week.
+		<<set $slaves[$i].need -= 2*_penetrativeUse>>
+	<</if>>
+<<case "cumslut">>
+	<<if _oralUse > 0>>
+		She enjoys sucking, and got sexual satisfaction from the _oralUse blowjobs she gave this week.
+		<<set $slaves[$i].need -= _oralUse>>
+	<</if>>
+<<case "buttslut">>
+	<<if _analUse > 0>>
+		She enjoys getting buttfucked, and got sexual satisfaction from the _analUse times she was sodomized this week.
+		<<set $slaves[$i].need -= _analUse>>
+	<</if>>
+<<case "pregnancy">>
+	<<if _vaginalUse > 0>>
+		She enjoys having her pussy fucked, and got sexual satisfaction from the _vaginalUse times she got dick this week.
+		<<set $slaves[$i].need -= _vaginalUse>>
+	<</if>>
+<<case "humiliation">>
+	She enjoys the humiliation of being a public slut, and got a bit of sexual satisfaction from every sex act she performed this week.
+	<<set $slaves[$i].need -= $beauty>>
+<</switch>>
+<</if>>
+<</if>>
+
+/* VIGNETTES */
+
+<<if ($showVignettes == 1)>>
+<<set $vignettes = []>>
+
+<<set $seed = random(1,10)>>
+<<if ($seed == 1)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that she witnessed a domestic dispute over another whore,", type: "rep", effect: 0})>>
+<<elseif ($seed == 2)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that she saw a free whore finally sink into slavery,", type: "rep", effect: 0})>>
+<<elseif ($seed == 3)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that construction forced her to move from her usual spot,", type: "rep", effect: 0})>>
+<<elseif ($seed == 4)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that a customer used a new and improved sex toy on her,", type: "rep", effect: 0})>>
+<<elseif ($seed == 5)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was an appointment with an unusually perverted family,", type: "rep", effect: 0})>>
+<<elseif ($seed == 6)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that she saw a man sell his wife into slavery,", type: "rep", effect: 0})>>
+<<elseif ($seed == 7)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that she saw a woman sell her daughters into slavery,", type: "rep", effect: 0})>>
+<<elseif ($seed == 8)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that she watched a citizen descend into aphrodisiac addiction,", type: "rep", effect: 0})>>
+<<elseif ($seed == 9)>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that she watched a citizen develop the beginnings of sex addiction,", type: "rep", effect: 0})>>
+<<else>>
+	<<set $vignettes.push({text: "the most interesting thing that happened to her at work was that she witnessed a citizen administering a brutal public punishment to one of his slaves,", type: "rep", effect: 0})>>
+<</if>>
+<<set $seed = random(1,5)>>
+<<if ($seed == 1)>>
+	<<set $vignettes.push({text: "a citizen punished one of his slaves by tying her up in public near where $slaves[$i].slaveName was working. This cut into her business that day,", type: "cash", effect: -1})>>
+<<elseif ($seed == 2)>>
+	<<set $vignettes.push({text: "a citizen shared one of his slaves with the public near where $slaves[$i].slaveName was working. This cut into her business that day,", type: "cash", effect: -1})>>
+<<elseif ($seed == 3)>>
+	<<set $vignettes.push({text: "a private brothel offered a promotion near where $slaves[$i].slaveName was working. This cut into her business that day,", type: "cash", effect: -1})>>
+<<elseif ($seed == 4)>>
+	<<set $vignettes.push({text: "some free sluts threw an aphrodisiac street party near where $slaves[$i].slaveName was working. This cut into her business that day,", type: "cash", effect: -1})>>
+<<else>>
+	<<set $vignettes.push({text: "a contract breaker was punished with the pillory near where $slaves[$i].slaveName was working. This cut into her business that day,", type: "cash", effect: -1})>>
+<</if>>
+<<set $seed = random(1,5)>>
+<<if ($seed == 1)>>
+	<<set $vignettes.push({text: "one of her regular customers got a divorce and came to her for repeated consolation,", type: "cash", effect: 1})>>
+<<elseif ($seed == 2)>>
+	<<set $vignettes.push({text: "a brothel near where $slaves[$i].slaveName usually works had business trouble,", type: "cash", effect: 1})>>
+<<elseif ($seed == 3)>>
+	<<set $vignettes.push({text: "a competing whore that looks like her fell ill, driving a customer to look for an alternative,", type: "cash", effect: 1})>>
+<<elseif ($seed == 4)>>
+	<<set $vignettes.push({text: "a street whore that works near her was badly beaten by an abusive customer and had to take time off. The reduced competition got her more business,", type: "cash", effect: 1})>>
+<<else>>
+	<<set $vignettes.push({text: "an influx of tourists came into her part of the arcology, earning her more business for a day,", type: "cash", effect: 1})>>
+<</if>>
+
+<<if ($slaves[$i].fetishKnown == 1)>>
+<<if ($slaves[$i].fetish == "submissive")>>
+	<<set $vignettes.push({text: "she deeply impressed a customer with her sincere submission to him,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "she lost a customer who secretly wanted her to show a little initiative,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "cumslut")>>
+	<<set $vignettes.push({text: "she deeply impressed a customer with her hunger for his cum,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "she disgusted a customer who didn't know how much cum fetishes revolted him until she displayed hers,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "humiliation")>>
+	<<set $vignettes.push({text: "she earned repeat business from a customer who didn't know how much he liked public sex until she got him to try it,", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "she disgusted a customer who didn't know how much exhibitionism turned him off until he tried public sex with her,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "buttslut")>>
+	<<set $vignettes.push({text: "she earned repeat business from a customer who didn't know how much he liked fucking buttholes until she got him to try fucking hers,", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "she disgusted a customer who didn't know how much buttsex turned him off until she got him to try fucking her ass,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "boobs")>>
+	<<set $vignettes.push({text: "she deeply impressed a customer by orgasming to nothing but the feeling of her sucking her nipples,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "she disappointed a female customer who didn't know how uninterested she was in nipple play before trying it,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "sadist")>>
+	<<set $vignettes.push({text: "she deeply impressed a customer who brought his own slave to her for abuse with her sadism,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "a customer brought her his own slave to abuse, but the sight proved to be a turn off for him,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "masochist")>>
+	<<set $vignettes.push({text: "she helped a customer discover a new fetish by orgasming when he accidentally hurt her,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "she disturbed a customer who accidentally hurt her by orgasming,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "dom")>>
+	<<set $vignettes.push({text: "she made a female customer her bitch: fortunately, the customer wanted to be her bitch and came back for more", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "she accidentally overwhelmed a customer with her sexual dominance,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].fetish == "pregnancy")>>
+	<<set $vignettes.push({text: "she earned repeat business from a customer who didn't know how much he liked pregnancy play until she begged him to knock her up,", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "she disgusted a customer who didn't know how much pregnancy play turned him off until she begged him to knock her up,", type: "rep", effect: -1})>>
+<</if>>
+<</if>>
+<<if ($slaves[$i].behavioralFlaw == "arrogant")>>
+	<<set $vignettes.push({text: "she manages to give a citizen the impression she thinks herself better than him,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "bitchy")>>
+	<<set $vignettes.push({text: "she makes an emasculating remark to a customer right after he fucks her,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "odd")>>
+	<<set $vignettes.push({text: "she infuriates a potential customer with her nervous tics,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "hates men")>>
+	<<set $vignettes.push({text: "her disgust towards men surfaces at a bad time, losing her a male customer,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "hates women")>>
+	<<set $vignettes.push({text: "her disgust towards women surfaces at a bad time, losing her a female customer,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "gluttonous")>>
+	<<set $vignettes.push({text: "she accidentally lingers at a meal, missing a customer appointment,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "anorexic")>>
+	<<set $vignettes.push({text: "her bulimia surfaces at an extremely inopportune moment, turning a customer off,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "devout")>>
+	<<set $vignettes.push({text: "a customer catches her praying to herself as he inserts himself into her, turning him off,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].behavioralFlaw == "liberated")>>
+	<<set $vignettes.push({text: "she treats a rude potential customer impolitely, because she thinks that's fair,", type: "cash", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].sexualFlaw == "hates oral")>>
+	<<set $vignettes.push({text: "she vomits while trying to deepthroat a customer,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].sexualFlaw == "hates anal")>>
+	<<set $vignettes.push({text: "she cries while taking anal from a customer who isn't into painal,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].sexualFlaw == "hates penetration")>>
+	<<set $vignettes.push({text: "she cries while taking a pounding from a customer who likes his sex consensual,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].sexualFlaw == "shamefast")>>
+	<<set $vignettes.push({text: "she cries while a potential customer looks her over,", type: "cash", effect: -1})>>
+	<<set $vignettes.push({text: "she disrobed so slowly that a potential customer gave up on her,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].sexualFlaw == "idealistic")>>
+	<<set $vignettes.push({text: "she cries when explaining the price of her body to a potential customer,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].sexualFlaw == "repressed")>>
+	<<set $vignettes.push({text: "she misunderstands a potential customer's lewd requests, turning her off,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].sexualFlaw == "apathetic")>>
+	<<set $vignettes.push({text: "she fails to notice when a customer achieves orgasm,", type: "rep", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].behavioralQuirk == "confident")>>
+	<<set $vignettes.push({text: "she confidently presses forward with a wavering potential customer, and makes the sale,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "cutting")>>
+	<<set $vignettes.push({text: "she makes such a gloriously cutting remark to a male customer that a female bystander comes to her for repeat business,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "funny")>>
+	<<set $vignettes.push({text: "she makes a group of citizens laugh so hard, one of them comes to her for repeat business,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "fitness")>>
+	<<set $vignettes.push({text: "she continues a marathon gangbang past the point where most would have passed out,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "adores women")>>
+	<<set $vignettes.push({text: "she strikes up a personal friendship with a regular female customer,", type: "rep", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "adores men")>>
+	<<set $vignettes.push({text: "she strikes up a personal friendship with a regular male customer,", type: "rep", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "insecure")>>
+	<<set $vignettes.push({text: "she successfully convinces a regular customer that she's reliant on him emotionally,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "sinful")>>
+	<<set $vignettes.push({text: "she helps a customer get past her religious hangups through sex with her friendly neighborhood whore,", type: "rep", effect: 1})>>
+<<elseif ($slaves[$i].behavioralQuirk == "advocate")>>
+	<<set $vignettes.push({text: "she successfully convinces a wavering potential customer that there's nothing wrong with banging a whore,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].sexualQuirk == "gagfuck queen")>>
+	<<set $vignettes.push({text: "she earns repeat business from a citizen who's obsessed with gagfucks,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].sexualQuirk == "painal queen")>>
+	<<set $vignettes.push({text: "she earns repeat business from a citizen who's obsessed with painal,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].sexualQuirk == "strugglefuck queen")>>
+	<<set $vignettes.push({text: "she earns repeat business from a citizen who's obsessed with strugglefucking,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].sexualQuirk == "tease")>>
+	<<set $vignettes.push({text: "she convinces a citizen who's never had sex with a prostitute to patronize her with some truly inspired flirting,", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "a few partiers were so impressed with her provocative teasing that they repeated her wit to friends,", type: "rep", effect: 1})>>
+<<elseif ($slaves[$i].sexualQuirk == "romantic")>>
+	<<set $vignettes.push({text: "a citizen becomes infatuated with her, since he's convinced she's infatuated with him,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].sexualQuirk == "perverted")>>
+	<<set $vignettes.push({text: "she earns some momentary notoriety by engaging in a previously unheard-of sex act,", type: "rep", effect: 1})>>
+<<elseif ($slaves[$i].sexualQuirk == "caring")>>
+	<<set $vignettes.push({text: "she serves as an impromptu sounding board for a customer having marital trouble,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "a customer was so enamored with her kind and caring manner than he proposed to her and offered to take her away, and when she refused, he left a sizable tip,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].pitKills > 0)>>
+	<<set $vignettes.push({text: "she earns repeat business from a customer obsessed with the fact that she's a killer,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].oralCount > 500)>>
+	<<set $vignettes.push({text: "a customer into degradation becomes obsessed with driving her oral mileage as high as possible,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].analCount > 500) && ($slaves[$i].anus > 0)>>
+	<<set $vignettes.push({text: "a customer into degradation becomes obsessed with driving her anal mileage as high as possible,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].vaginalCount > 500) && ($slaves[$i].vagina > 0)>>
+	<<set $vignettes.push({text: "a customer into degradation becomes obsessed with driving her pussy mileage as high as possible,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].devotion > 95)>>
+	<<set $vignettes.push({text: "she really pushed herself to please a customer with tastes that disgusted her,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].devotion < -50)>>
+	<<set $vignettes.push({text: "her fury at being sold for sex turned a customer off before he could fuck her,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].devotion <= 20)>>
+	<<set $vignettes.push({text: "she treasured a love token given to her by a customer she fooled into thinking her affection was real,", type: "devotion", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].trust > 95)>>
+	<<set $vignettes.push({text: "she really pushed herself to accept a customer with tastes that frightened her,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].trust < -50)>>
+	<<set $vignettes.push({text: "her tearful terror at being forced to sell herself for sex turned a customer off before he could fuck her,", type: "cash", effect: -1})>>
+<</if>>
+<<if $slaves[$i].livingRules == "luxurious">>
+	<<set $vignettes.push({text: "she got a truly perfect night's sleep, which put her in the right frame of mind for the whole day,", type: "rep", effect: 1})>>
+<<elseif $slaves[$i].livingRules == "spare">>
+	<<set $vignettes.push({text: "she got a poor night's sleep in the noisy dormitory, which took the shine off her efforts for the whole day", type: "rep", effect: -1})>>
+<</if>>
+<<if $slaves[$i].releaseRules == "permissive">>
+	<<set $vignettes.push({text: "a customer asked if she masturbates, and then spent an hour jerking off as she described how,", type: "cash", effect: 1})>>
+<<elseif $slaves[$i].releaseRules == "restrictive">>
+	<<set $vignettes.push({text: "a customer asked if she masturbates, and seemed disappointed when she answered honestly,", type: "cash", effect: 0})>>
+<<else>>
+	<<set $vignettes.push({text: "a closeted female customer asked about her sex life with other slaves, and was enthralled by her answer,", type: "rep", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].health > 80)>>
+	<<set $vignettes.push({text: "a potential customer in the medical field was fascinated by her health, and spent almost as much time examining her as he did having sex with her,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].weight > 95)>>
+	<<set $vignettes.push({text: "a potential customer told her that he's looking forward to patronizing her once she loses a lot of weight.", type: "cash", effect: 0})>>
+<<elseif ($slaves[$i].weight > 30)>>
+	<<set $vignettes.push({text: "a potential customer told her that he's looking forward to patronizing her once she loses some weight.", type: "cash", effect: 0})>>
+<<elseif ($slaves[$i].weight <= -30)>>
+	<<set $vignettes.push({text: "a potential customer told her that he's looking forward to patronizing her once she gains some weight.", type: "cash", effect: 0})>>
+<<elseif ($slaves[$i].weight < -95)>>
+	<<set $vignettes.push({text: "a potential customer told her that he's looking forward to patronizing her once she gains a lot of weight.", type: "cash", effect: 0})>>
+<</if>>
+<<if ($slaves[$i].drugs == "testicle enhancement")>>
+	<<set $vignettes.push({text: "she took it in public, with her copious ejaculation getting her another customer right away,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].aphrodisiacs > 1)>>
+	<<set $vignettes.push({text: "her piteous begging for sex due to her extreme aphrodisiac dosage turned a potential customer off,", type: "cash", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].addict > 50)>>
+	<<set $vignettes.push({text: "she zoned out badly due to a low point between aphrodisiac doses, disappointing a customer,", type: "rep", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].preg > 20)>>
+	<<set $vignettes.push({text: "she earned repeat business from a customer who likes to do nothing more than cuddle with her swollen belly,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].hormones > 0)>>
+	<<if ($slaves[$i].dick > 0)>>
+		<<set $vignettes.push({text: "she disappointed a customer who was sure she could get $slaves[$i].slaveName's cock erect,", type: "rep", effect: -1})>>
+		<<set $vignettes.push({text: "she earned repeat business from a customer who seems unthreatened by her soft dick,", type: "cash", effect: 1})>>
+	<</if>>
+<<elseif ($slaves[$i].hormones < 0)>>
+	<<if ($slaves[$i].dick == 0)>>
+		<<set $vignettes.push({text: "she earned repeat business from a female customer who adores the masculinity produced by $slaves[$i].slaveName's hormone regime,", type: "cash", effect: 1})>>
+	<</if>>
+<</if>>
+<<if ($slaves[$i].hormones <= 0)>>
+	<<if ($slaves[$i].dick > 0)>>
+	<<if ($slaves[$i].balls > 0)>>
+		<<set $vignettes.push({text: "she earned repeat business from a customer who likes to see his wife get fucked by a dickgirl whore,", type: "cash", effect: 1})>>
+		<<if ($slaves[$i].dick > 3)>>
+			<<set $vignettes.push({text: "she earned repeat business from a female customer who likes big stiff cocks, and cannot lie,", type: "cash", effect: 1})>>
+			<<set $vignettes.push({text: "she irritated a male customer who brought his girlfriend with him by accidentally showing him up,", type: "rep", effect: -1})>>
+		<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if ($slaves[$i].balls > 3)>>
+	<<set $vignettes.push({text: "she loses a customer who wants her to look like a natural girl, since her balls are too big to be hidden,", type: "cash", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].vagina == 1)>>
+	<<set $vignettes.push({text: "she got extra business from a customer who really likes her, and wants to fuck her pussy as much as possible while it's still tight,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].vagina > 2)>>
+	<<set $vignettes.push({text: "she disappointed a customer whose cock is just too small for her big cunt,", type: "rep", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].anus == 1)>>
+	<<set $vignettes.push({text: "she got extra business from a customer who really likes her butthole, and wants to fuck it as much as possible while it's still tight,", type: "cash", effect: 1})>>
+<<elseif ($slaves[$i].anus > 2)>>
+	<<set $vignettes.push({text: "she disappointed a customer whose cock is just too small for her loose butthole,", type: "rep", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].face > 40)>>
+	<<set $vignettes.push({text: "she lost a potential customer who was so intimidated by her great beauty that he decided to find a homelier whore,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].face < -10)>>
+	<<set $vignettes.push({text: "she earned repeat business from a customer who lacks self-confidence, and is more comfortable with homely whores,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].age > 40)>>
+	<<set $vignettes.push({text: "she earned repeat business from a customer with serious mommy issues,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].lips > 70)>>
+	<<set $vignettes.push({text: "she earned repeat business from a customer who likes to play with her lips nonsexually (don't ask),", type: "cash", effect: 1})>>
+<</if>>
+<<if (canTalk($slaves[$i]) == false)>>
+	<<set $vignettes.push({text: "she impressed a customer who didn't know how relaxing a girl who can't talk could be,", type: "rep", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].muscles > 95)>>
+	<<set $vignettes.push({text: "she impressed a customer who was so eager to share workout plans with her that he almost forgot to have sex with her,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "she gained repeat business from a female customer who likes a girl who can bench-press her before and after they fuck,", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "she disappointed a customer by accidentally revealing that she's considerably stronger than him,", type: "rep", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].lactation > 0)>>
+	<<set $vignettes.push({text: "she was well compensated for providing fresh milk for the coffee served at a customer's business meeting", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "she served as a conveniently lactating whore near a trendy arcology coffeehouse,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].amp == 1)>>
+	<<set $vignettes.push({text: "she disappointed a customer who thought he'd enjoy fucking an amputee, but found it revolting,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].amp == -1)>>
+	<<set $vignettes.push({text: "a strange customer was excited by the sight of her prosthetic limbs,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "a customer was disgusted at the thought of her basic prosthetic limbs,", type: "rep", effect: -1})>>
+	<<set $vignettes.push({text: "a customer was put off by her prosthetic limbs,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].amp == -2)>>
+	<<set $vignettes.push({text: "a customer was excited by her vibrating fingertips,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "a customer was indifferent to the thought of having sex with a slave with artificial limbs,", type: "cash", effect: 0})>>
+	<<set $vignettes.push({text: "a customer was put off by her crude artificial limbs,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].amp == -3)>>
+	<<set $vignettes.push({text: "a strange customer was excited by the sight of her artificial limbs,", type: "rep", effect: 1})>>
+	<<set $vignettes.push({text: "a customer was indifferent to the thought of having sex with a slave with artificial limbs,", type: "cash", effect: 0})>>
+	<<set $vignettes.push({text: "a customer was put off by the sight of her prosthetic limbs,", type: "rep", effect: -1})>>
+<<elseif ($slaves[$i].amp == -4)>>
+	<<set $vignettes.push({text: "a customer was excited by the thought of having sex with a slave with p-limbs, but was scared off by her combat p-limbs,", type: "cash", effect: -1})>>
+	<<set $vignettes.push({text: "a customer was indifferent to the thought of having sex with a slave with artificial limbs,", type: "cash", effect: 0})>>
+	<<set $vignettes.push({text: "a customer was greatly intimidated by her combat p-limbs,", type: "cash", effect: -1})>>
+<<elseif ($slaves[$i].amp == -5)>>
+	<<set $vignettes.push({text: "a customer was fascinated by her cybernetic limbs, and spent almost as much time examining them as he did having sex with her,", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "a customer was excited by the thought of having sex with a cybernetically enhanced slave,", type: "cash", effect: 1})>>
+	<<set $vignettes.push({text: "a customer was greatly intimidated by the sight of her cybernetic limbs and was frightened away,", type: "cash", effect: -1})>>
+<<else>>
+	<<if ($slaves[$i].heels == 1)>>
+	<<if ($slaves[$i].shoes != "heels") && ($slaves[$i].shoes != "extreme heels") && ($slaves[$i].shoes != "boots")>>
+		<<set $vignettes.push({text: "she enticed a new customer who had never really considered buttsex before he saw her crawling along with her asshole vulnerable,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+	<<if ($slaves[$i].boobs > 1500)>>
+	<<if ($slaves[$i].boobsImplant == 0)>>
+	<<set $vignettes.push({text: "a young customer hired her to jump rope so he could watch her massive natural breasts flop around,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if ($slaves[$i].vaginalAccessory == "chastity belt")>>
+	<<set $vignettes.push({text: "a wavering customer who was disappointed that her pussy is unavailable decided to try her ass instead,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].fetish == "mindbroken")>>
+	<<set $vignettes.push({text: "a customer really enjoyed being able to treat her however he liked without eliciting a reaction,", type: "cash", effect: 1})>>
+<</if>>
+<<if ($slaves[$i].intelligence <= -2)>>
+	<<set $vignettes.push({text: "a customer managed to trick her into fucking him without payment,", type: "cash", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].face > 10)>>
+<</if>>
+<<if ($slaves[$i].face > 10)>>
+	<<if ($slaves[$i].dick > 0)>>
+	<<if ($slaves[$i].fetish == "buttslut")>>
+		<<set $vignettes.push({text: "a customer was surprised by her penis, so she hid it and enjoyed the buttsex without touching it,", type: "rep", effect: 1})>>
+	<<elseif ($slaves[$i].analSkill >= 100)>>
+		<<set $vignettes.push({text: "a customer was surprised by her penis, so she hid it and skillfully pretended to be a real girl,", type: "rep", effect: 1})>>
+	<<elseif ($slaves[$i].fetish == "buttslut")>>
+		<<set $vignettes.push({text: "a customer was surprised by her penis, so she hid it, but could barely tolerate anal without touching it", type: "rep", effect: -1})>>
+	<</if>>
+	<</if>>
+	<<if ($slaves[$i].analSkill < 100)>>
+	<<if ($slaves[$i].anus > 2)>>
+		<<set $vignettes.push({text: "a pair of customers enticed by her beauty but disappointed by her loose butthole doubled up on her poor anus without mercy,", type: "health", effect: -1})>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if ($slaves[$i].fetishKnown == 1)>>
+<<if ($slaves[$i].fetishStrength > 95)>>
+	<<if ($slaves[$i].fetish == "buttslut") || ($slaves[$i].fetish == "dom")>>
+	<<set $vignettes.push({text: "she advertised herself by forcing a slave in the stocks to eat her ass, drumming up business,", type: "cash", effect: 1})>>
+	<<elseif ($slaves[$i].fetish == "masochist")>>
+	<<set $vignettes.push({text: "she cooperated with a citizen who wanted to whip her tits black and blue", type: "health", effect: -1})>>
+	<</if>>
+<</if>>
+<</if>>
+<<if ($slaves[$i].health < 20)>>
+	<<set $vignettes.push({text: "she attracted the attention of a slaveowner alarmed by her poor health, and thought he seemed kind,", type: "devotion", effect: -1})>>
+<</if>>
+<<if ($slaves[$i].vaginalSkill >= 100)>>
+	<<set $vignettes.push({text: "she was hired to apply her skills to a customer's virgin son,", type: "devotion", effect: 0})>>
+<</if>>
+<<if ($slaves[$i].analSkill < 100)>>
+<<if ($slaves[$i].anus < 2)>>
+	<<set $vignettes.push({text: "a guy with a huge cock paid for the right to fuck her in her tight ass all night,", type: "health", effect: -1})>>
+<</if>>
+<</if>>
+<<if ($slaves[$i].relationship <= -2)>>
+<<if ($slaves[$i].intelligence < 1)>>
+	<<set $vignettes.push({text: "she accidentally mentions how much she loves you during intercourse with a customer who doesn't like to share,", type: "rep", effect: -1})>>
+<</if>>
+<</if>>
+<<if ($slaves[$i].prestige > 0)>>
+	<<set $vignettes.push({text: "a college fraternity visiting the arcology for rush week hired her for a gangbang,", type: "cash", effect: 3})>>
+<</if>>
+
+<<if $arcologies[0].FSSupremacist != "unset">>
+	<<if ($slaves[$i].race == $arcologies[0].FSSupremacistRace)>>
+	<<set $vignettes.push({text: "she lost a customer who couldn't bear to see a beautiful $arcologies[0].FSSupremacistRace be a whore,", type: "cash", effect: -1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSubjugationist != "unset">>
+	<<if ($slaves[$i].race == $arcologies[0].FSSubjugationistRace)>>
+	<<set $vignettes.push({text: "she had a bad time in general, since most of her customers didn't care about a $arcologies[0].FSSubjugationistRace prostitute's health or well-being,", type: "health", effect: -1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSYouthPreferentialist != "unset">>
+	<<if ($slaves[$i].age > 35)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who wants to keep his MILF fetish in the closet,", type: "cash", effect: 1})>>
+	<</if>>
+<<elseif $arcologies[0].FSMaturityPreferentialist != "unset">>
+	<<if ($slaves[$i].age <= 20)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who wants to keep his fetish for young girls in the closet,", type: "cash", effect: 1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSGenderRadicalist != "unset">>
+	<<if ($slaves[$i].dick > 0)>>
+	<<if ($slaves[$i].dick < 3)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who is coming to terms with Gender Radicalism, and is unthreatened by her little penis,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+<<elseif $arcologies[0].FSGenderFundamentalist != "unset">>
+	<<if ($slaves[$i].age > 25)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who thinks she resembles his ex-wife, who would never let him fuck her butt,", type: "cash", effect: 1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPaternalist != "unset">>
+	<<if ($slaves[$i].intelligence > 1)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who likes to chat with intelligent prostitutes as they fuck her,", type: "cash", effect: 1})>>
+	<</if>>
+<<elseif $arcologies[0].FSDegradationist != "unset">>
+	<<if canTalk($slaves[$i])>>
+	<<if ($slaves[$i].voice > 2)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who prefers girls with high-pitched screams,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSBodyPurist != "unset">>
+	<<if ($slaves[$i].boobsImplant > 0)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who wants to keep his fetish for breast implants in the closet,", type: "cash", effect: 1})>>
+	<</if>>
+<<elseif $arcologies[0].FSTransformationFetishist != "unset">>
+	<<if ($slaves[$i].boobsImplant == 0)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who wants to keep his fetish for natural breasts in the closet,", type: "cash", effect: 1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSSlimnessEnthusiast != "unset">>
+	<<if canTalk($slaves[$i])>>
+	<<if ($slaves[$i].voice > 2)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who loves her high-pitched squeals of pleasure,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+	<<if ($slaves[$i].boobs > 800)>>
+	<<set $vignettes.push({text: "she was publicly mocked as an ugly fat cow with dangling udders,", type: "rep", effect: -1})>>
+	<</if>>
+<<elseif $arcologies[0].FSAssetExpansionist != "unset">>
+	<<if ($slaves[$i].boobs < 300)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who wants to keep his fetish for flat chested girls in the closet,", type: "cash", effect: 1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPastoralist != "unset">>
+	<<if ($slaves[$i].lactation == 0)>>
+	<<set $vignettes.push({text: "she lost a customer who could not understand why nothing was coming out of her nipples when he sucked on them,", type: "cash", effect: -1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSPhysicalIdealist != "unset">>
+	<<if ($slaves[$i].muscles <= 95)>>
+	<<set $vignettes.push({text: "she lost a customer who could barely believe that she wasn't capable of holding herself in a handstand,", type: "cash", effect: -1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist != "unset">>
+	<<if ($slaves[$i].behavioralFlaw == "devout")>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who desperately wants his cock to be the one that converts her,", type: "cash", effect: 1})>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSRomanRevivalist != "unset">>
+	<<if ($slaves[$i].race == "white")>>
+	<<if ($slaves[$i].height >= 185)>>
+	<<set $vignettes.push({text: "she attracted a customer who thought her appearance worthy of a lusty northern barbarian,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSAztecRevivalist != "unset">>
+	<<if ($slaves[$i].devotion > 75)>>
+	<<if ($slaves[$i].intelligence >= 2)>>
+	<<set $vignettes.push({text: "she indulged a citizen by following a fertility ritual completely,", type: "rep", effect: 1})>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSEgyptianRevivalist != "unset">>
+	<<set $vignettes.push({text: "she got extra business from a group of citizens competing to get off with whores of each of the arcology's ethnic groups in the least time,", type: "cash", effect: 1})>>
+<</if>>
+<<if $arcologies[0].FSEdoRevivalist != "unset">>
+	<<if ($slaves[$i].face > 40)>>
+	<<if ($slaves[$i].intelligence > 1)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who wished to do nothing more than converse with a beautiful and intelligent girl,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+<</if>>
+<<if $arcologies[0].FSArabianRevivalist != "unset">>
+	<<if ($slaves[$i].entertainSkill >= 100)>>
+	<<if canTalk($slaves[$i])>>
+	<<if ($slaves[$i].voice > 0)>>
+	<<if ($slaves[$i].accent < 2)>>
+	<<set $vignettes.push({text: "she got repeat business from a customer who prefers prostitutes who can tell lovely stories,", type: "cash", effect: 1})>>
+	<</if>>
+	<</if>>
+	<</if>>
+	<</if>>
+<</if>>
+
+<<set $vignettes.push({text: "one of the companies with an office in your arcology retained her for a team-building bukkake party for its employees,", type: "rep", effect: 1})>>
+<<set $vignettes.push({text: "a man dragged his crying wife along so she could watch him fuck a whore,", type: "rep", effect: 0})>>
+<<set $vignettes.push({text: "a woman dragged her angry husband along so he could watch her get eaten out by a whore,", type: "rep", effect: 0})>>
+<<set $vignettes.push({text: "she went to sleep after being sold for sex all day, and had a dream about you loving her,", type: "devotion", effect: 1})>>
+<<set $vignettes.push({text: "she went to sleep after being sold for sex all day, and had a dream about you letting a customer hurt her,", type: "devotion", effect: -1})>>
+<<set $vignettes.push({text: "she went to sleep after being sold for sex all day, and had a dream about you protecting her from a mean customer,", type: "trust", effect: 1})>>
+<<set $vignettes.push({text: "she went to sleep after being sold for sex all day, and had a dream about you selling her for good,", type: "trust", effect: -1})>>
+
+<<set $vignette = $vignettes.random()>>
+__This week__ $vignette.text
+<<if ($vignette.type == "cash")>>
+	<<set _cash = Math.trunc($FResult*$vignette.effect)>>
+	<<if ($vignette.effect > 0)>>
+		@@.yellowgreen;making you an extra ¤<<print _cash>>.@@
+	<<elseif ($vignette.effect < 0)>>
+		@@.red;losing you ¤<<print _cash>>.@@
+	<<else>>
+		an incident without lasting effect.
+	<</if>>
+	<<slavePaid $slaves[$i] _cash>>
+	/*<<set $lastWeeksFinances.incomeWhore += _cash>>*/
+<<elseif ($vignette.type == "devotion")>>
+	<<if ($vignette.effect > 0)>>
+		<<if $slaves[$i].devotion > 50>>
+		@@.hotpink;increasing her devotion to you.@@
+		<<elseif $slaves[$i].devotion >= -20>>
+		@@.hotpink;increasing her acceptance of you.@@
+		<<elseif $slaves[$i].devotion > -10>>
+		@@.hotpink;reducing her dislike of you.@@
+		<<else>>
+		@@.hotpink;reducing her hatred of you.@@
+		<</if>>
+	<<elseif ($vignette.effect < 0)>>
+		<<if $slaves[$i].devotion > 50>>
+		@@.mediumorchid;reducing her devotion to you.@@
+		<<elseif $slaves[$i].devotion >= -20>>
+		@@.mediumorchid;reducing her acceptance of you.@@
+		<<elseif $slaves[$i].devotion > -10>>
+		@@.mediumorchid;increasing her dislike of you.@@
+		<<else>>
+		@@.mediumorchid;increasing her hatred of you.@@
+		<</if>>
+	<<else>>
+		an incident without lasting effect.
+	<</if>>
+	<<set $slaves[$i].devotion += 1*$vignette.effect>>
+<<elseif ($vignette.type == "trust")>>
+	<<if ($vignette.effect > 0)>>
+		<<if $slaves[$i].trust > 20>>
+		@@.mediumaquamarine;increasing her trust in you.@@
+		<<elseif $slaves[$i].trust > -10>>
+		@@.mediumaquamarine;reducing her fear of you.@@
+		<<else>>
+		@@.mediumaquamarine;reducing her terror of you.@@
+		<</if>>
+	<<elseif ($vignette.effect < 0)>>
+		<<if $slaves[$i].trust > 20>>
+		@@.gold;reducing her trust in you.@@
+		<<elseif $slaves[$i].trust > -20>>
+		@@.gold;increasing her fear of you.@@
+		<<else>>
+		@@.gold;increasing her terror of you.@@
+		<</if>>
+	<<else>>
+		an incident without lasting effect.
+	<</if>>
+	<<set $slaves[$i].trust += 1*$vignette.effect>>
+<<elseif ($vignette.type == "health")>>
+	<<if ($vignette.effect > 0)>>
+		@@.green;improving her health.@@
+	<<elseif ($vignette.effect < 0)>>
+		@@.red;affecting her health.@@
+	<<else>>
+		an incident without lasting effect.
+	<</if>>
+	<<set $slaves[$i].health += 2*$vignette.effect>>
+<<else>>
+	<<if ($vignette.effect > 0)>>
+		@@.green;gaining you a bit of reputation.@@
+	<<elseif ($vignette.effect < 0)>>
+		@@.red;losing you a bit of reputation.@@
+	<<else>>
+		an incident without lasting effect.
+	<</if>>
+	<<set $rep += Math.trunc($FResult*$vignette.effect*0.1)>>
+<</if>>
+
+<</if>> /* CLOSES VIGNETTES */

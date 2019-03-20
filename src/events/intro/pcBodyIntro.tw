@@ -1,0 +1,86 @@
+:: PC Body Intro [nobr]
+
+Most slaveowners in the Free Cities are male. The preexisting power structures of the old world have mostly migrated to the new, and it can often be very hard to be a free woman in the Free Cities. Some manage to make their way, but in many arcologies, men are the owners, and women are the owned. You'll cut a striking figure as the owner and leader of your arcology, but @@.orange;what's under your business attire?@@
+
+<br>
+
+Under my suit jacket,
+<<if $PC.boobs > 0>>
+	''feminine breasts.''
+	[[Remove breasts|PC Body Intro][$PC.boobs = 0]]
+<<else>>
+	''masculine muscles.''
+	[[Add breasts|PC Body Intro][$PC.boobs = 1]]
+<</if>>
+
+<br>
+
+Behind the front of my tailored
+<<if $PC.dick == 1>>
+	<<if $PC.vagina == 1>>
+		slacks, ''both a penis and a vagina.''
+		[[Remove the penis|PC Body Intro][$PC.dick = 0]] | [[Remove the vagina|PC Body Intro][$PC.vagina = 0]]
+	<<else>>
+		slacks, a ''penis.''
+		[[Switch to vagina|PC Body Intro][$PC.dick = 0, $PC.vagina = 1]] | [[Add a vagina|PC Body Intro][$PC.vagina = 1]]
+	<</if>>
+<<else>>
+	skirt, a ''vagina.''
+	[[Switch to penis|PC Body Intro][$PC.dick = 1, $PC.vagina = 0]] | [[Add a penis|PC Body Intro][$PC.dick = 1]]
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//These options will affect sex scenes. Feminine options will increase difficulty.//
+
+<br><br>
+
+Your slaves will refer to you as
+<<if $PC.title > 0>>
+	''Master.''
+	[[Switch to Mistress|PC Body Intro][$PC.title = 0]]
+<<else>>
+	''Mistress.''
+	[[Switch to Master|PC Body Intro][$PC.title = 1]]
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//This option will affect scenes but will not change difficulty.//
+
+<br><br>
+
+@@.orange;How old are you?@@
+<br>
+I'm
+<<if $PC.age == 3>>
+	well into middle age. I've made a name for myself, and I've still got it.
+	[[Younger|PC Body Intro][$PC.age = 2]]
+<<elseif $PC.age == 2>>
+	entering middle age. I'm accomplished, and I retain some youthful vigor.
+	[[Younger|PC Body Intro][$PC.age = 1]] | [[Older|PC Body Intro][$PC.age = 3]]
+<<else>>
+	surprisingly young. I'll need to prove myself, but I've got energy to burn.
+	[[Older|PC Body Intro][$PC.age = 2]]
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Older player characters start with more reputation and maintain reputation somewhat more easily, but have slightly less sexual energy.//
+
+<br><br>
+
+Name your character: <<textbox "$PC.name" $PC.name "PC Body Intro">> (surname)
+<<if $PC.surname>>
+	<<textbox "$PC.surname" $PC.surname "PC Body Intro">>
+	<<link "Go by a single name">><<set $PC.slaveSurname = 0>><<goto "PC Body Intro">><</link>>
+<<else>>
+	<<textbox "$PC.surname" "" "PC Body Intro">>
+<</if>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//As with all text boxes in FC, press the enter key to commit your changes.//
+<br>
+Preferred refreshment: <<textbox "$PC.refreshment" $PC.refreshment "PC Body Intro">> [[Cigars|PC Body Intro][$PC.refreshment = "cigar",$PC.refreshmentType = 0]] | [[Whiskey|PC Body Intro][$PC.refreshment = "whiskey",$PC.refreshmentType = 1]]
+<br>
+Preferred method of consumption: ''<<if $PC.refreshmentType == 0>>Smoked<<elseif $PC.refreshmentType == 1>>Drank<<elseif $PC.refreshmentType == 2>>Eaten<<elseif $PC.refreshmentType == 3>>Snorted<<else>>Injected<</if>>''.
+[[Smoked|PC Body Intro][$PC.refreshmentType = 0]] | [[Drank|PC Body Intro][$PC.refreshmentType = 1]] | [[Eaten|PC Body Intro][$PC.refreshmentType = 2]] | [[Snorted|PC Body Intro][$PC.refreshmentType = 3]] | [[Injected|PC Body Intro][$PC.refreshmentType = 4]]
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+//Flavor only; no mechanical effect. If entering a custom refreshment, please assign proper usage. <<if $PC.refreshmentType == 0>>"Smoke" must fit into the following sentence: "I smoked a $PC.refreshment" to fit events properly<</if>>//
+
+<br><br>
+
+[[Confirm player character customization|PC Experience Intro]]

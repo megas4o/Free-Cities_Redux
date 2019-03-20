@@ -1,0 +1,198 @@
+:: FKiss [nobr]
+
+You tell $activeSlave.slaveName to
+<<switch $activeSlave.collar>> 
+<<case "dildo gag">>
+	<<if ($activeSlave.amp != 1)>>
+		remove her dildo gag and approach you.
+	<<else>>
+		have another slave remove her dildo gag and set her down on your desk.
+	<</if>>
+	<<set _tempGag = $activeSlave.collar, $activeSlave.collar = "none">>
+<<case "massive dildo gag">>
+	<<if ($activeSlave.amp != 1)>>
+		pull her enormous dildo gag out of the depths of her throat and approach you.
+	<<else>>
+		have another slave pull the enormous dildo gag out of the depths of her throat and set her down on your desk.
+	<</if>>
+	<<set _tempGag = $activeSlave.collar, $activeSlave.collar = "none">>
+<<case "ball gag" "bit gag">>
+	<<if ($activeSlave.amp != 1)>>
+		undo her gag and approach you.
+	<<else>>
+		have another slave undo her gag and set her down on your desk.
+	<</if>>
+	<<set _tempGag = $activeSlave.collar, $activeSlave.collar = "none">>
+<<default>>
+	<<if canWalk($activeSlave)>>
+		approach you.
+	<<else>>
+		have another slave help her to your desk.
+	<</if>>
+<</switch>>
+
+<<Enunciate $activeSlave>>
+
+<<if ($activeSlave.fetish == "mindbroken")>>
+	She complies mechanically. She remembers that when <<Master>>'s commands are not obeyed, there is punishment.
+<<elseif ($activeSlave.relationship == -2)>>
+	She hurriedly complies, happy to be near the object of her longing. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. She finds the intense look from the <<if $PC.title == 1>>man<<else>>woman<</if>> she loves overwhelming, and her eyes flick downward after a moment. 
+	<<else>>
+		upon her face. She finds the intense look from the <<if $PC.title == 1>>man<<else>>woman<</if>> she loves overwhelming, and after a moment glances away. 
+	<</if>>
+	She blushes furiously.
+<<elseif ($activeSlave.relationship == -3)>>
+	She complies in a wifely fashion, moving her body as she approaches to best catch your desire. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. She finds the intense look from the <<if $PC.title == 1>>man<<else>>woman<</if>> she's married to affirming, and looks down with a smile, running her eyes over your <<if $PC.boobs == 1>>bosom<<else>>chest<</if>>.
+	<<else>>
+		upon her face. She finds the intense look from the <<if $PC.title == 1>>man<<else>>woman<</if>> she's married to affirming, and looks down with a smile.
+	<</if>>
+<<elseif ($activeSlave.devotion > 75)>>
+	She hurriedly complies, happy to be near you. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. She finds the intense look from her beloved <<Master>> disconcerting, and her eyes flick downward after a moment.
+	<<else>>
+		upon her face. She finds the intense look from her beloved <<Master>> disconcerting, and after a moment glances away. 
+	<</if>>
+	She blushes furiously.
+<<elseif ($activeSlave.devotion > 50)>>
+	She hurriedly complies, happy to be near you. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. She finds the intense attention from her <<Master>> disconcerting, and she looks down after a moment, blushing.
+	<<else>>
+		upon her face. She finds the intense attention from her <<Master>> disconcerting, and she looks down after a moment, blushing.
+	<</if>>
+<<elseif ($activeSlave.devotion > 20)>>
+	She hurriedly complies, happy to be near you. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. She finds the intense attention from her <<Master>> worrying, and she looks down after a moment, blushing nervously.
+	<<else>>
+		upon her face. She finds the intense attention from her <<Master>> worrying, and she looks down after a moment, blushing nervously.
+	<</if>>
+<<elseif ($activeSlave.devotion >= -20) && ($activeSlave.trust > -20)>>
+	She visibly considers disobedience, but decides that complying with such an apparently harmless order is safe, for now. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. She finds the intense attention from her <<Master>> worrying, and she looks down after a moment, her lower lip trembling with nervousness.
+	<<else>>
+		upon her face. She finds the intense attention from her <<Master>> worrying, and turns away after a moment, her lower lip trembling with nervousness.
+	<</if>>
+<<elseif ($activeSlave.trust < -20)>>
+	The command terrifies her, but she's more frightened still of the consequences of disobedience, and she complies. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. After a mere instant of locked gazes, she looks down fearfully, and begins to shake with terror, tears leaking silently down her cheeks.
+	<<else>>
+		upon her face. After a mere instant of locked faces, she looks down fearfully, and begins to shake with terror, tears leaking silently down her cheeks.
+	<</if>>
+<<else>>
+	She pauses, obviously considering whether to resist, but eventually decides to save her strength to fight more onerous orders, and gives in. Once she's close, you take a moment to gaze deeply
+	<<if canSee($activeSlave)>>
+		into her $activeSlave.eyeColor eyes. She stares back, but after a few moments she loses the contest of wills and looks down.
+	<<else>>
+		upon her face. She faces you defiantly, but after a few moments she loses the contest of wills and looks down.
+	<</if>>
+<</if>>
+
+You extend a <<if $PC.title == 1>>manly<<else>>feminine<</if>> hand and graze your fingertips along the line of her cheekbone.
+<<if ($activeSlave.lipsTat != 0)>>
+	Your fingers trace her facial tattoos, slowly picking out the patterns against her $activeSlave.skin skin.
+<</if>>
+<<if ($activeSlave.lipsPiercing+$activeSlave.tonguePiercing > 2)>>
+	You touch each of her facial piercings, one by one, feeling the hard metal contrast with her pliant flesh.
+<</if>>
+Then, you gently raise her <<if $activeSlave.face > 95>>heartrendingly beautiful<<elseif $activeSlave.face > 10>>lovely<<elseif $activeSlave.face >= -10>>pretty<<elseif $activeSlave.face >= -40>>homely<<else>>ugly<</if>> chin and kiss her right on her <<if $activeSlave.lips > 95>>facepussy<<else>><<if $activeSlave.lips > 70>>pillowlike <<elseif $activeSlave.lips > 40>>generous <<elseif $activeSlave.lips > 20>>plush <</if>>lips<</if>>.
+
+<<if ($activeSlave.fetish == "mindbroken")>>
+	Her mouth opens to accept the kiss, and is compliant with your questing tongue. Her posture remains completely unchanged. Being kissed affects her as little as being penetrated, being struck, or being loved: not at all. When you pull away,
+	<<if canSee($activeSlave)>>
+		her $activeSlave.eyeColor eyes track you carefully, awaiting further use of her body.
+	<<else>>
+		she exposes herself to you, awaiting further use of her body.
+	<</if>>
+<<elseif ($activeSlave.relationship == -2)>>
+	Her mouth accepts yours with love, matching itself perfectly to your insistent lips and tongue.<<if ($activeSlave.teeth == "pointy")>> (Though you're quite careful around her sharp dentition.)<</if>> She melts into you, sighing ever so gently. When you finally break the kiss, her mouth freezes in the shape it was in when last your lips touched, and a momentary look of longing crosses her face.<<if ($activeSlave.amp != 1)>> A hand reaches dumbly up to her mouth to trace her lips where yours last touched.<</if>>
+	<<if ($activeSlave.accent >= 3)>>
+		She does her best to communicate love with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>, since she does not speak $language well enough to express herself.
+	<<elseif ($activeSlave.amp == 1) && (!canTalk($activeSlave))>>
+		She does her best to communicate love with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>.
+	<<elseif !canTalk($activeSlave)>>
+		She signs that she loves you.
+	<<else>>
+		"I love you, <<Master>>," she <<say>>s dreamily.
+	<</if>>
+<<elseif ($activeSlave.devotion > 50) && ($activeSlave.fetish == "dom") && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60)>>
+	She giggles into you and kisses you back with vigor, her head pressing insistently forward. The two of you make out rather aggressively<<if ($activeSlave.teeth == "pointy")>>, her sharp teeth drawing a bit of blood from your lips and tongue<</if>>. She takes her tendency towards sexual dominance right up to the edge of insubordination, her active tongue only retreating when yours presses against it. When you finally shove her away, she's breathing hard through her grin.
+	<<if ($activeSlave.accent >= 3)>>
+		She does her best to communicate excitement with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>, since she does not speak $language well enough to express herself.
+	<<elseif ($activeSlave.amp == 1) && (!canTalk($activeSlave))>>
+		She does her best to communicate excitement with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>.
+	<<elseif !canTalk($activeSlave)>>
+		She signs that she liked that.
+	<<else>>
+		"That wa<<s>> fun, <<Master>>," she <<say>>s cheerfully.
+	<</if>>
+<<elseif ($activeSlave.devotion > 50) && ($activeSlave.fetish == "cumslut") && ($activeSlave.fetishKnown == 1) && ($activeSlave.fetishStrength > 60)>>
+	She stiffens with arousal. Her sexuality is complex, focusing on cum, but with a heavy layer of oral fixation. As your tongue plunders her mouth, she reacts almost as though she's receiving oral, whimpering and moaning into you and pressing herself lewdly against your <<if $PC.boobs == 1>>prominent breasts<<else>>manly chest<</if>>.<<if ($activeSlave.teeth == "pointy")>> She's very careful to avoid spearing your tongue with her sharp teeth.<</if>> She achieves a weak orgasm before you tire of making out with her.
+	<<if ($activeSlave.accent >= 3)>>
+		She does her best to communicate undiminished lust with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>, since she does not speak $language well enough to express herself.
+	<<elseif ($activeSlave.amp == 1) && (!canTalk($activeSlave))>>
+		She does her best to communicate undiminished lust with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>.
+	<<elseif !canTalk($activeSlave)>>
+		She signs that she liked that.
+	<<else>>
+		"That wa<<s>> fun, <<Master>>," she <<say>>s lustfully.
+	<</if>>
+<<elseif ($activeSlave.devotion > 50)>>
+	Her mouth accepts yours with devotion, matching itself carefully to your insistent lips and tongue.<<if ($activeSlave.teeth == "pointy")>> She is exquisitely careful to keep her sharp teeth clear of you.<</if>> She presses herself against you, her warmth wonderful against your <<if $PC.boobs == 1>>soft breasts<<else>>manly chest<</if>>. When you finally break the kiss, she runs her tongue rapturously across her moistened lips<<if ($activeSlave.amp != 1)>> and then runs a finger across them as well<</if>>, an openly sexual look on her $activeSlave.skin face.
+	<<if ($activeSlave.accent >= 3)>>
+		She does her best to communicate devotion with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>, since she's not confident in her ability to express it in $language.
+	<<elseif ($activeSlave.amp == 1) && (!canTalk($activeSlave))>>
+		She does her best to communicate devotion with her <<if canSee($activeSlave)>>$activeSlave.eyeColor eyes<<else>>facial expressions<</if>>.
+	<<elseif !canTalk($activeSlave)>>
+		She signs that she loves you.
+	<<else>>
+		"I love you, <<Master>>," she <<say>>s forthrightly.
+	<</if>>
+<<elseif ($activeSlave.devotion > 20)>>
+	She accepts the kiss willingly. As you are so close to her, you sense considerable turmoil in the <<if ($activeSlave.age > 30)>>woman<<else>>girl<</if>>; she's doing her duty as a slave by complying with your wishes, and is probably struggling with the mixture of resistance, obedience and perhaps even devotion forced to the forefront of her mind by your lips and tongue. When you finally break the kiss, <<if canSee($activeSlave)>>her $activeSlave.eyeColor eyes gaze into yours searchingly<<else>>she gazes at you<</if>>, looking for answers that are not there.
+	<<if (($activeSlave.amp == 1) && (!canTalk($activeSlave)))>>
+		Her <<if canSee($activeSlave)>>eyes beg<<else>>expression begs<</if>> for an answer: is that it?
+	<<elseif !canTalk($activeSlave)>>
+		She signs hesitantly, asking if that's it.
+	<<else>>
+		She asks hesitantly, "I-i<<s>> that it, <<Master>>?"
+	<</if>>
+<<elseif ($activeSlave.devotion >= -20) && ($activeSlave.trust < -20)>>
+	She accepts the kiss fearfully. As you kiss her unresisting mouth, her eagerness to avoid punishment leads her to kiss you back, though nervousness makes her mechanical. You kiss her harder, enjoying her fear, and the physical intimacy slowly does its work. She becomes softer and more natural, her resistance easing. When you pull away from her for a moment, she <<if canSee($activeSlave)>>looks<<else>>gazes<</if>> at you for a long moment, her mouth still hanging open, before visibly catching herself with a reminder that she's a slave and you're her owner.
+	<<if (($activeSlave.amp == 1) && (!canTalk($activeSlave)))>>
+		Her <<if canSee($activeSlave)>>eyes beg<<else>>expression begs<</if>> for an answer: is that it?
+	<<elseif !canTalk($activeSlave)>>
+		She signs hesitantly, asking if that's it.
+	<<else>>
+		She asks hesitantly, "I-i<<s>> that it, <<Master>>?"
+	<</if>>
+<<elseif ($activeSlave.trust < -50)>>
+	She is nearly frozen with fear, and does not resist as you kiss her. In fact, she barely reacts at all. She opens her mouth mechanically in response to your insistent tongue, but it's like kissing a doll. She is so filled with terror that she remains stiff even as it becomes clear to her you're not going to hurt her. When you bore of making out with the poor <<if ($activeSlave.age > 30)>>woman<<else>>girl<</if>> and pull away, she stares at you in utter incomprehension.
+	<<if (($activeSlave.amp == 1) && (!canTalk($activeSlave)))>>
+		Her <<if canSee($activeSlave)>>eyes beg<<else>>expression begs<</if>> for an answer: is that it?
+	<<elseif !canTalk($activeSlave)>>
+		She signs spastically, begging fearfully to know if that's it.
+	<<else>>
+		She asks nervously before cringing, "I-i<<s>> that it, <<Master>>?"
+	<</if>>
+<<else>>
+	She reflexively turns her head away from you, but you catch her jaw and kiss her harder. Spluttering, she flees backwards, but you tip forward with her and pin her against your desk, plundering her mouth without mercy. She wriggles desperately, but her struggles slowly subside as she realizes that you're not taking this any farther. When you bore of it and pull away, she stares at you in utter incomprehension.
+	<<if (($activeSlave.amp == 1) && (!canTalk($activeSlave)))>>
+		Her <<if canSee($activeSlave)>>eyes demand<<else>>expression demands<</if>> an answer: is that it?
+	<<elseif !canTalk($activeSlave)>>
+		She signs irritably, asking whether that's it.
+	<<else>>
+		She splutters, "I<<s>> that it, <<Master>>!?"
+	<</if>>
+<</if>>
+
+<<if def _tempGag>>
+	<<set $activeSlave.collar = _tempGag>>
+<</if>>

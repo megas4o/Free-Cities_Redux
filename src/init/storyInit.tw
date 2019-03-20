@@ -1,0 +1,973 @@
+:: init [nobr]
+
+/*
+FREE CITIES
+a text-based slave management game
+Copyright (C) 2017  freecitiesdev
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+<<unset $releaseID>>
+<<set $ver = "0.10.7", $releaseID = COMMIT>>
+<<if ndef $releaseID>><<set $releaseID = 1021>><</if>>
+
+/* This needs to be broken down into individual files that can be added to StoryInit instead. */
+
+<<if def $slaves>>
+	<<set _SL = $slaves.length>>
+	<<for _i = 0; _i < _SL; _i++>>
+	<<if $slaves[_i].assignment == "be imported">>
+		<<set $slaves[_i].ID += 1200000>>
+		<<set $slaves[_i].assignment = "rest">>
+		<<set $slaves[_i].assignmentVisible = 1>>
+		<<set $slaves[_i].weekAcquired = 1>>
+		<<if $slaves[_i].mother > 0>>
+			<<set $slaves[_i].mother += 1200000>>
+		<<elseif $slaves[_i].mother <= -1>>
+			<<set $slaves[_i].mother -= 1200000>>
+		<</if>>
+		<<if $slaves[_i].father > 0>>
+			<<set $slaves[_i].father += 1200000>>
+		<<elseif $slaves[_i].father <= -1>>
+			<<set $slaves[_i].father -= 1200000>>
+		<</if>>
+		<<set $slaves[_i].daughters = 0>>
+		<<set $slaves[_i].sisters = 0>>
+		<<set $slaves[_i].canRecruit = 0>>
+		<<if $arcologies[0].FSRomanRevivalist > 90>>
+			<<set $slaves[_i].nationality = "Roman Revivalist">>
+		<<elseif $arcologies[0].FSAztecRevivalist > 90>>
+			<<set $slaves[_i].nationality = "Aztec Revivalist">>
+		<<elseif $arcologies[0].FSEgyptianRevivalist > 90>>
+			<<set $slaves[_i].nationality = "Ancient Egyptian Revivalist">>
+		<<elseif $arcologies[0].FSEdoRevivalist > 90>>
+			<<set $slaves[_i].nationality = "Edo Revivalist">>
+		<<elseif $arcologies[0].FSArabianRevivalist > 90>>
+			<<set $slaves[_i].nationality = "Arabian Revivalist">>
+		<<elseif $arcologies[0].FSChineseRevivalist > 90>>
+			<<set $slaves[_i].nationality = "Ancient Chinese Revivalist">>
+		<</if>>
+		<<if $slaves[_i].relationTarget != 0>>
+		<<set $slaves[_i].relationTarget += 1200000>>
+		<</if>>
+		<<if $slaves[_i].relationshipTarget != 0>>
+		<<set $slaves[_i].relationshipTarget += 1200000>>
+		<</if>>
+		<<set $slaves[_i].rivalry = 0, $slaves[_i].rivalryTarget = 0, $slaves[_i].subTarget = 0>>
+	<<else>>
+		<<set _dump = $slaves.deleteAt(_i), _i--, _SL-->>
+	<</if>>
+	<</for>>
+	<<for _k = 0; _k < _SL; _k++>>
+		<<for _i = 0; _i < _SL; _i++>>
+			<<if $slaves[_k].mother == $slaves[_i].ID || $slaves[_k].father == $slaves[_i].ID>>
+				<<set $slaves[_i].daughters += 1>>
+			<</if>>
+			<<if areSisters($slaves[_k], $slaves[_i]) > 0>>
+				<<set $slaves[_i].sisters += 1>>
+			<</if>>
+		<</for>>
+	<</for>>
+	<<for _i = 0; _i < _SL; _i++>>
+	<<if $slaves[_i].relation != 0>>
+		<<set _seed = 0, _rt = $slaves[_i].relationTarget, _ID = $slaves[_i].ID>>
+		<<for _j = 0; _j < _SL; _j++>>
+		<<if _rt == $slaves[_j].ID>>
+			<<if $slaves[_j].relationTarget == _ID>>
+			<<set _seed = 1>>
+			<<break>>
+			<</if>>
+		<</if>>
+		<</for>>
+		<<if _seed == 0>>
+		<<set $slaves[_i].relation = 0, $slaves[_i].relationTarget = 0>>
+		<</if>>
+	<</if>>
+	<<if $slaves[_i].relationship > 0>>
+		<<set _seed = 0, _rt = $slaves[_i].relationshipTarget, _ID = $slaves[_i].ID>>
+		<<for _j = 0; _j < _SL; _j++>>
+		<<if _rt == $slaves[_j].ID>>
+			<<if $slaves[_j].relationshipTarget == _ID>>
+			<<set _seed = 1>>
+			<<break>>
+			<</if>>
+		<</if>>
+		<</for>>
+		<<if _seed == 0>>
+		<<set $slaves[_i].relationship = 0, $slaves[_i].relationshipTarget = 0>>
+		<</if>>
+	<</if>>
+	<</for>>
+	<<for _i = 0; _i < _SL; _i++>>
+	<<if $slaves[_i].relation == 0>>
+		<<if random(1,100) <= 5>>
+		<<set $slaves[_i].recruiter = "twin">>
+		<<elseif ($slaves[_i].age > 32) && (random(1,100) <= 41)>>
+		<<set $slaves[_i].recruiter = "mother">>
+		<<elseif ($slaves[_i].age < 24) && (random(1,100) <= 40)>>
+		<<set $slaves[_i].recruiter = "daughter">>
+		<<elseif ($slaves[_i].age < 43) && (random(1,100) <= 20)>>
+		<<set $slaves[_i].recruiter = "older sister">>
+		<<elseif ($slaves[_i].age < 25) && ($slaves[_i].age > 18) && (random(1,100) <= 20)>>
+		<<set $slaves[_i].recruiter = "young sister">>
+		<</if>>
+	<<else>>
+		<<set $slaves[_i].recruiter = 0>>
+	<</if>>
+	<<set $slaves[_i].milk = 0>>
+	<<set $slaves[_i].cum = 0>>
+	<<set $slaves[_i].births = 0>>
+	<<set $slaves[_i].mammaryCount = 0>>
+	<<set $slaves[_i].penetrativeCount = 0>>
+	<<set $slaves[_i].oralCount = 0>>
+	<<set $slaves[_i].analCount = 0>>
+	<<set $slaves[_i].vaginalCount = 0>>
+	<</for>>
+	<<set $slavesOriginal = $slaves>>
+<<else>>
+	<<set $slaves = []>>
+	<<set $slavesOriginal = []>>
+<</if>>
+<<set $organs = []>>
+<<set $ArcadeiIDs = [], $BrothiIDs = [], $CellBiIDs = [], $CliniciIDs = [], $ClubiIDs = [], $DairyiIDs = [], $HGSuiteiIDs = [], $MastSiIDs = [], $SchlRiIDs = [], $ServQiIDs = [], $SpaiIDs = []>>
+
+<<if ndef $saveImported>>
+	<<set $saveImported = 0>>
+<</if>>
+
+<<if $saveImported == 0>>
+
+<<set $cheater = 0>>
+<<set $PC = {name: "Anonymous", surname: 0, title: 1, dick: 1, vagina: 0, voiceImplant: 0, accent: 0, shoulders: 0, shouldersImplant: 0, boobs: 0, career: "capitalist", rumor: "wealth", indenture: -1, indentureRestrictions: 0, birthWeek: random(0,51), age: 2, sexualEnergy: 4, refreshment: "cigar", refreshmentType: 0, trading: 0, warfare: 0, slaving: 0, engineering: 0, medicine: 0}>>
+<<set $cash = 10000>>
+<<set $normalizedEvents = 0>>
+<<set $autosave = 1>>
+<<set $useFSNames = 1>>
+<<set $seeDetails = 1>>
+<<set $seeDesk = 1>>
+<<set $newModelUI = 1>>
+<<set $seeArcology = 1>>
+<<set $seeFCNN = 1>>
+<<set $seeExtreme = 0>>
+<<set $seeCircumcision = 1>>
+<<set $seeAge = 1>>
+<<set $seeDicks = 25>>
+<<set $seeRace = 1>>
+<<set $seeNationality = 1>>
+<<set $seeImages = 0>>
+<<set $imageChoice = 0>>
+<<set $seeVectorArtHighlights = 1>>
+<<set $seeMainFetishes = 0>>
+<<set $seeSummaryImages = 1>>
+<<set $seeReportImages = 1>>
+<<set $lineSeparations = 1>>
+<<set $showSexualHistory = 1>>
+<<set $showBodyMods = 0>>
+<<set $showImplantEffects = 1>>
+<<set $showClothing = 1>>
+<<set $showAgeDetail = 1>>
+<<set $showBoobCCs = 1>>
+<<set $showHeightCMs = 1>>
+<<set $showDickCMs = 1>>
+<<set $showScores = 1>>
+<<set $showAssignToScenes = 1>>
+<<set $showEWD = 1>>
+<<set $showEWM = 1>>
+<<set $showVignettes = 1>>
+<<set $showAppraisal = 1>>
+<<set $positionMainLinks = -1>>
+<<set $showTipsFromEncy = 1>>
+<<set $displayAssignments = 1>>
+<<set $sortSlavesBy = "devotion">>
+<<set $sortSlavesOrder = "descending">>
+<<set $sortSlavesMain = 1>>
+<<set $HGSeverity = 0>>
+<<set $HGFormality = 1>>
+<<set $universalRulesConsent = 0>>
+<<set $universalRulesRest = 0>>
+<<set $universalRulesFacilityWork = 1>>
+<<set $universalRulesImpregnation = "none">>
+<<set $universalRulesBirthing = 0>>
+<<set $universalRulesCSec = 0>>
+<<set $universalRulesNewSlavesRA = 1>>
+<<set $universalRulesAssignsSelfFacility = 0>>
+<<set $slaveDead = 0>>
+<<set $rulesAssistantMain = 1>>
+<<set $rulesAssistantAuto = 0>>
+<<set $abbreviateDevotion = 2>>
+<<set $abbreviateRules = 2>>
+<<set $abbreviateClothes = 2>>
+<<set $abbreviateOrigins = 2>>
+<<set $abbreviateRulesets = 2>>
+<<set $abbreviateNationality = 2>>
+<<set $abbreviateHealth = 2>>
+<<set $abbreviateDiet = 2>>
+<<set $abbreviateDrugs = 2>>
+<<set $abbreviateRace = 2>>
+<<set $abbreviateGenitalia = 2>>
+<<set $abbreviatePhysicals = 2>>
+<<set $abbreviateSkills = 2>>
+<<set $abbreviateMental = 2>>
+<<set $abbreviateSidebar = 2>>
+<<set $summaryStats = 1>>
+<<set $nicknamesAllowed = 1>>
+<<set $modRequestsAllowed = 1>>
+<<set $expansionRequestsAllowed = 1>>
+<<set $plot = 1>>
+<<set $continent = "North America">>
+<<set $terrain = "rural">>
+<<set $language = "English">>
+<<set $headGirlTrainsSkills = 1>>
+<<set $headGirlTrainsHealth = 1>>
+<<set $headGirlTrainsObedience = 1>>
+<<set $headGirlTrainsFlaws = 1>>
+<<set $headGirlSoftensFlaws = 1>>
+<<set $headGirlTrainsParaphilias = 1>>
+
+<<include "Init Rules">>
+
+<<else>>
+	<<if def $arcologies[0].prosperity>>
+		<<set $cash += 250*$arcologies[0].prosperity*$arcologies[0].ownership>>
+	<</if>>
+	<<set $cash = Math.clamp(1000*Math.trunc($cash/100000), 5000, 1000000)>>
+	<<set $PC.career = "arcology owner">>
+<</if>>
+
+<<set $targetArcology = {type: "New"}>>
+
+<<set $REFeminizationCheckinIDs = []>>
+<<set $REMILFCheckinIDs = []>>
+<<set $REOrientationCheckinIDs = []>>
+<<set $REUglyCheckinIDs = []>>
+<<set $REButtholeCheckinIDs = []>>
+<<set $REFutaSisterCheckinIDs = []>>
+<<set $REReductionCheckinIDs = []>>
+<<set $activeSlave = 0>>
+
+<<set $boomerangSlave = 0, $boomerangWeeks = 0, $boomerangBuyer = 0>>
+
+<<set $bioreactorPerfectedID = []>>
+
+<<set $independenceDay = 0>>
+<<set $invasionVictory = 0>>
+<<set $daughtersVictory = 0>>
+<<set $startingGirlCopied = 0, $startingGirlRelation = 0>>
+<<set $archetyped = 0>>
+
+<<set $slavesVisible = 0>>
+<<set $dormitory = 20>>
+<<set $dormitoryPopulation = 0>>
+<<set $rooms = 5>>
+<<set $roomsPopulation = 0>>
+
+<<set $brothelSlaves = 0>>
+<<set $brothelDecoration = "standard">>
+<<set $brothelUpgradeDrugs = 0>>
+<<set $brothelAdsSpending = 0>>
+<<set $brothelAdsOld = 0>>
+<<set $brothelAdsModded = 0>>
+<<set $brothelAdsImplanted = 0>>
+<<set $brothelAdsStacked = 0>>
+<<set $brothelAdsXX = 0>>
+<<set $brothelName = "the Brothel">>
+<<set $brothelNameCaps = "The Brothel">>
+<<set $brothel = 0>>
+<<set $dairySlaves = 0>>
+<<set $dairyDecoration = "standard">>
+<<set $dairyPrepUpgrade = 0>>
+<<set $dairyStimulatorsUpgrade = 0>>
+<<set $dairyStimulatorsSetting = 0>>
+<<set $dairyStimulatorsSettingChanged = 0>>
+<<set $dairyFeedersUpgrade = 0>>
+<<set $dairyFeedersSetting = 0>>
+<<set $dairyFeedersSettingChanged = 0>>
+<<set $dairyPregUpgrade = 0>>
+<<set $dairyPregSetting = 0>>
+<<set $dairyPregSettingChanged = 0>>
+<<set $dairyRestraintsUpgrade = 0>>
+<<set $dairyRestraintsSetting = 0>>
+<<set $dairySlimMaintainUpgrade = 0>>
+<<set $dairySlimMaintain = 0>>
+<<set $dairyUpgradeMenials = 0>>
+<<set $createBioreactors = 0>>
+<<set $bioreactorsAnnounced = 0>>
+<<set $bioreactorsHerm = 0>>
+<<set $bioreactorsXX = 0>>
+<<set $bioreactorsXY = 0>>
+<<set $bioreactorsBarren = 0>>
+<<set $dairyName = "the Dairy">>
+<<set $dairyNameCaps = "The Dairy">>
+<<set $dairy = 0>>
+<<set $cumSlaves = 0>>
+<<set $clubSlaves = 0>>
+<<set $clubDecoration = "standard">>
+<<set $clubUpgradePDAs = 0>>
+<<set $clubAdsSpending = 0>>
+<<set $clubAdsOld = 0>>
+<<set $clubAdsModded = 0>>
+<<set $clubAdsImplanted = 0>>
+<<set $clubAdsStacked = 0>>
+<<set $clubAdsXX = 0>>
+<<set $clubName = "the Club">>
+<<set $clubNameCaps = "The Club">>
+<<set $club = 0>>
+<<set $servantsQuartersSlaves = 0>>
+<<set $servantsQuartersDecoration = "standard">>
+<<set $servantsQuartersUpgradeMonitoring = 0>>
+<<set $servantsQuarters = 0>>
+<<set $servantsQuartersName = "the Servants' Quarters">>
+<<set $servantsQuartersNameCaps = "The Servants' Quarters">>
+<<set $schoolroomSlaves = 0>>
+<<set $schoolroomDecoration = "standard">>
+<<set $schoolroomUpgradeSkills = 0>>
+<<set $schoolroomUpgradeLanguage = 0>>
+<<set $schoolroomUpgradeRemedial = 0>>
+<<set $schoolroom = 0>>
+<<set $schoolroomName = "the Schoolroom">>
+<<set $schoolroomNameCaps = "The Schoolroom">>
+<<set $spaSlaves = 0>>
+<<set $spaDecoration = "standard">>
+<<set $spa = 0>>
+<<set $spaUpgrade = 0>>
+<<set $spaName = "the Spa">>
+<<set $spaNameCaps = "The Spa">>
+<<set $clinicSlaves = 0>>
+<<set $clinicDecoration = "standard">>
+<<set $clinic = 0>>
+<<set $clinicUpgradeFilters = 0>>
+<<set $clinicUpgradeScanner = 0>>
+<<set $clinicName = "the Clinic">>
+<<set $clinicNameCaps = "The Clinic">>
+<<set $arcadeSlaves = 0>>
+<<set $arcadeDecoration = "standard">>
+<<set $arcadeUpgradeInjectors = 0>>
+<<set $arcadeUpgradeFuckdolls = 0>>
+<<set $arcadeUpgradeCollectors = 0>>
+<<set $arcadeUpgradeMenials = 0>>
+<<set $arcadeName = "the Arcade">>
+<<set $arcadeNameCaps = "The Arcade">>
+<<set $arcade = 0>>
+<<set $fuckdollsSold = 0>>
+<<set $cellblockSlaves = 0>>
+<<set $cellblockDecoration = "standard">>
+<<set $cellblockUpgrade = 0>>
+<<set $cellblock = 0>>
+<<set $cellblockName = "the Cellblock">>
+<<set $cellblockNameCaps = "The Cellblock">>
+<<set $masterSuiteSlaves = 0>>
+<<set $masterSuiteDecoration = "standard">>
+<<set $masterSuiteUpgradeLuxury = 0>>
+<<set $masterSuiteUpgradePregnancy = 0>>				/* Is the upgrade active? */
+<<set $masterSuitePregnancyFertilityDrugs = 0>>		/* Are slaves being put on fertility drugs? */
+<<set $masterSuitePregnancyFertilitySupplements = 0>>	/* Are those drugs being supplemented (health benefits and (even) more multiple pregnancies) */
+<<set $masterSuitePregnancySlaveLuxuries = 0>>			/* Are the slaves being given some nicer things to reduce stress during preg? (health/devotion/trust benefits) */
+<<set $universalHGImpregnateMasterSuiteToggle = 0>>	/* Will the HG impregnate fertile slaves in the MS? */
+<<set $masterSuite = 0>>
+<<set $masterSuiteName = "the Master Suite">>
+<<set $masterSuiteNameCaps = "The Master Suite">>
+<<set $HGSuite = 0>>
+<<set $HGSuiteSlaves = 0>>
+<<set $HGSuiteSurgery = 1>>
+<<set $HGSuiteDrugs = 1>>
+<<set $HGSuiteHormones = 1>>
+<<set $HGSuiteEquality = 0>>
+<<set $HGSuiteName = "the Head Girl Suite">>
+<<set $HGSuiteNameCaps = "The Head Girl Suite">>
+<<set $fighterOne = 0>>
+<<set $fighterTwo = 0>>
+<<set $fighterIDs = []>>
+<<set $pitBG = 0>>
+<<set $pitAudience = "none">>
+<<set $pitLethal = 0>>
+<<set $pitFought = 0>>
+<<set $pit = 0>>
+<<set $pitName = "the Pit">>
+<<set $pitNameCaps = "The Pit">>
+<<set $dojo = 0>>
+<<set $feeder = 0>>
+<<set $cockFeeder = 0>>
+<<set $suppository = 0>>
+<<set $studio = 0>>
+<<set $weatherCladding = 0>>
+<<set $weatherAwareness = 0>>
+<<set $boobAccessibility = 0>>
+<<set $servantMilkers = 0>>
+<<set $servantMilkersMultiplier = 1>>
+<<set $servantMilkersJobs = ["be a servant", "work as a servant", "take classes", "please you", "be a subordinate slave", "stay confined", "recruit girls", "rest"]>>
+<<set $foodCost = 25>>
+
+<<set $legendaryWhoreID = 0>>
+<<set $legendaryEntertainerID = 0>>
+<<set $legendaryCowID = 0>>
+<<set $legendaryBallsID = 0>>
+<<set $legendaryAbolitionistID = 0>>
+
+<<set $FSAnnounced = 0>>
+<<set $FSCredits = 0>>
+<<set $FSGotRepCreditOne = 0>>
+<<set $FSGotRepCreditTwo = 0>>
+<<set $FSGotRepCreditThree = 0>>
+<<set $FSGotRepCreditFour = 0>>
+<<set $FSSingleSlaveRep = 10>>
+<<set $FSSpending = 0>>
+<<set $FSLockinLevel = 100>>
+<<set $applyLaw = 0>>
+<<set $FSPromenade = {Subjugationist: 0, Supremacist: 0, GenderRadicalist: 0, GenderFundamentalist: 0, Paternalist: 0, Degradationist: 0, BodyPurist: 0, TransformationFetishist: 0, YouthPreferentialist: 0, MaturityPreferentialist: 0, SlimnessEnthusiast: 0, AssetExpansionist: 0, Pastoralist: 0, PhysicalIdealist: 0, ChattelReligionist: 0, AztecRevivalist: 0, RomanRevivalist: 0, EgyptianRevivalist: 0, EdoRevivalist: 0, ArabianRevivalist: 0, ChineseRevivalist: 0}>>
+
+<<set $corpAnnounced = 0>>
+<<set $corpIncorporated = 0>>
+<<set $corpMarket = 0>>
+<<set $corpPeopleEnslaved = 0>>
+<<set $sharePrice = 0>>
+<<set $personalShares = 0>>
+<<set $publicShares = 0>>
+<<set $corpCash = 0>>
+<<set $corpProfit = 0>>
+<<set $generalAssets = 0>>
+<<set $slaveAssets = 0>>
+<<set $entrapmentAssets = 0>>
+<<set $captureAssets = 0>>
+<<set $trainingAssets = 0>>
+<<set $surgicalAssets = 0>>
+<<set $drugAssets = 0>>
+<<set $generalAssetPrice = 10>>
+<<set $slaveAssetPrice = 10>>
+<<set $entrapmentAssetPrice = 10>>
+<<set $captureAssetPrice = 10>>
+<<set $trainingAssetPrice = 10>>
+<<set $surgicalAssetPrice = 10>>
+<<set $drugAssetPrice = 10>>
+<<set $generalUpgradeBreaking = "unselected">>
+<<set $generalUpgradeWeight = "unselected">>
+<<set $generalUpgradeMuscle = "unselected">>
+<<set $entrapmentUpgradeDevotionOne = "unselected">>
+<<set $entrapmentUpgradeDevotionTwo = "unselected">>
+<<set $entrapmentUpgradeIntelligence = "unselected">>
+<<set $captureUpgradeGender = "unselected">>
+<<set $captureUpgradeAge = "unselected">>
+<<set $captureUpgradeRace = "unselected">>
+<<set $trainingUpgradeAccent = "unselected">>
+<<set $trainingUpgradeEducation = "unselected">>
+<<set $trainingUpgradeSexEd = "unselected">>
+<<set $surgicalUpgradeCosmetics = "unselected">>
+<<set $surgicalUpgradeImplants = "unselected">>
+<<set $surgicalUpgradeGenitalia = "unselected">>
+<<set $drugUpgradeHormones = "unselected">>
+<<set $drugUpgradeInjectionOne = "unselected">>
+<<set $drugUpgradeInjectionTwo = "unselected">>
+
+<<set $shelterSlave = 0>>
+<<set $shelterSlaveBought = 0>>
+<<set $shelterAbuse = 0>>
+
+<<set $lastWeeksFinances = {
+incomeArcologyImprovement:0,
+incomeMercenaries:0,
+incomeStocksBought:0,
+incomeStocks:0,
+incomeMenialTrades:0,
+incomePersonalBusiness:0,
+incomeFuckDollBioFactory: 0,
+incomeWhore: 0,
+incomeRest: 0,
+incomeFucktoy: 0,
+incomeSubordinateSlave: 0,
+incomeHouseServant: 0,
+incomeConfined: 0,
+incomePublicServant: 0,
+incomeClasses: 0,
+incomeMilked: 0,
+incomeExtraMilk: 0,
+incomeGloryhole: 0,
+incomeSlaves: 0,
+incomeLab: 0,
+incomeBrothel: 0,
+incomeClub: 0,
+incomeArcade: 0,
+incomeDairy: 0,
+incomeServantsQuarters: 0,
+incomeMasterSuite: 0,
+incomeSchool: 0,
+incomeSpa: 0,
+incomeClinic: 0,
+incomeCellblock: 0,
+incomeRents: 0,
+incomeTotal: 0,
+expensesMercenaries:0,
+expensesArcologyImprovement:0,
+expensesStocksBought:0,
+expensesStocks:0,
+expensesMenialTrades:0,
+expensesFuckDollBioFactory:0,
+expensesWhore: 0,
+expensesRest: 0,
+expensesFucktoy: 0,
+expensesSubordinateSlave: 0,
+expensesHouseServant: 0,
+expensesConfined: 0,
+expensesPublicServant: 0,
+expensesClasses: 0,
+expensesMilked: 0,
+expensesGloryhole: 0,
+expensesSlaves: 0,
+expensesLab: 0,
+expensesBrothel: 0,
+expensesClub: 0,
+expensesArcade: 0,
+expensesDairy: 0,
+expensesServantsQuarters: 0,
+expensesMasterSuite: 0,
+expensesSchool: 0,
+expensesSpa: 0,
+expensesClinic: 0,
+expensesCellblock: 0,
+expensesCitizenOrphanage: 0,
+expensesPrivateOrphanage: 0,
+expensesTotal: 0,
+profitsMercenaries:0,
+profitsArcologyImprovement:0,
+profitsStocksBought:0,
+profitsStocks:0,
+profitsMenialTrades:0,
+profitsFuckDollBioFactory:0,
+profitsWhore: 0,
+profitsRest: 0,
+profitsFucktoy: 0,
+profitsSubordinateSlave: 0,
+profitsHouseServant: 0,
+profitsConfined: 0,
+profitsPublicServant: 0,
+profitsClasses: 0,
+profitsMilked: 0,
+profitsGloryhole: 0,
+profitsSlaves: 0,
+profitsLab: 0,
+profitsBrothel: 0,
+profitsClub: 0,
+profitsArcade: 0,
+profitsDairy: 0,
+profitsServantsQuarters: 0,
+profitsMasterSuite: 0,
+profitsSchool: 0,
+profitsSpa: 0,
+profitsClinic: 0,
+profitsCellblock: 0,
+profitsTotal: 0
+}>>
+
+
+/* master suite reporting and alternate descriptions */
+<<set $verboseDescriptions = 0>>
+/* Accordion 000-250-006 */
+<<set $useAccordion = 0>>
+
+/* alternate clothing access variables */
+<<set $clothesBoughtBunny = 0>>
+<<set $clothesBoughtConservative = 0>>
+<<set $clothesBoughtChains = 0>>
+<<set $clothesBoughtWestern = 0>>
+<<set $clothesBoughtOil = 0>>
+<<set $clothesBoughtHabit = 0>>
+<<set $clothesBoughtToga = 0>>
+<<set $clothesBoughtHuipil = 0>>
+<<set $clothesBoughtKimono = 0>>
+<<set $clothesBoughtHarem = 0>>
+<<set $clothesBoughtQipao = 0>>
+<<set $clothesBoughtEgypt = 0>>
+<<set $clothesBoughtBelly = 0>>
+<<set $toysBoughtDildos = 0>>
+<<set $toysBoughtGags = 0>>
+<<set $toysBoughtButtPlugs = 0>>
+<<set $toysBoughtButtPlugTails = 0>>
+/* assistant FS appearance variable */
+<<set $assistantFSAppearance = "default">>
+
+/*PM variables */
+<<set $children = 0>>
+<<set $children = []>>
+<<set $missingParentID = -10000>>
+<<set $startingSlaveRelative = 0>>
+<<set $schoolSuggestion = 0>>
+<<set $TSS = {schoolUpgrade: 0, schoolPresent: 0, schoolProsperity: 0, subsidize: 0, schoolAnnexed: 0, studentsBought: 0, schoolSale: 0}>>
+<<set $GRI = {schoolUpgrade: 0, schoolPresent: 0, schoolProsperity: 0, subsidize: 0, schoolAnnexed: 0, studentsBought: 0, schoolSale: 0}>>
+<<set $SCP = {schoolUpgrade: 0, schoolPresent: 0, schoolProsperity: 0, subsidize: 0, schoolAnnexed: 0, studentsBought: 0, schoolSale: 0}>>
+<<set $LDE = {schoolUpgrade: 0, schoolPresent: 0, schoolProsperity: 0, subsidize: 0, schoolAnnexed: 0, studentsBought: 0, schoolSale: 0}>>
+<<set $TGA = {schoolUpgrade: 0, schoolPresent: 0, schoolProsperity: 0, subsidize: 0, schoolAnnexed: 0, studentsBought: 0, schoolSale: 0}>>
+<<set $TFS = {farmUpgrade: 0, schoolUpgrade: 0, schoolPresent: 0, schoolProsperity: 0, subsidize: 0, schoolAnnexed: 0, studentsBought: 0, schoolSale: 0}>>
+<<set $futaAddiction = 0>>
+
+<<set $IDNumber = 1>>
+
+<<set $week = 1>>
+<<set $month = "January">>
+<<set $day = 19>>
+<<set $year = 2037>>
+
+<<set $weddingPlanned = 0>>
+<<set $weddingSlaveID = 0>>
+<<set $personalAttention = "business">>
+<<set $trainingRegimen = "break her will">>
+<<set $HeadGirl = 0>>
+<<set $HGTimeInGrade = 0>>
+<<set $HGEnergy = 0>>
+<<set $HGCum = 0>>
+<<set $Recruiter = 0>>
+<<set $recruiterTarget = "desperate whores">>
+<<set $recruiterProgress = 0>>
+<<set $recruiterIdleRule = "number">>
+<<set $recruiterIdleNumber = 20>>
+<<set $bodyguardTrains = 1>>
+<<set $Bodyguard = 0>>
+<<set $Madam = 0>>
+<<set $DJ = 0>>
+<<set $Milkmaid = 0>>
+<<set $milkmaidImpregnates = 0>>
+<<set $Collectrix = 0>>
+<<set $Stewardess = 0>>
+<<set $stewardessImpregnates = 0>>
+<<set $Schoolteacher = 0>>
+<<set $Attendant = 0>>
+<<set $Nurse = 0>>
+<<set $Wardeness = 0>>
+<<set $Concubine = 0>>
+<<set $assistant = 0>>
+<<set $assistantPower = 0>>
+<<set $economicUncertainty = 10>>
+<<set $assistantAppearance = "normal">>
+<<set $assistantOptions = 0>>
+<<set $assistantFSOptions = 0>>
+<<set $assistantName = "your personal assistant">>
+<<set $assistantNameAnnounced = 0>>
+<<set $marketAssistantAnnounced = 0>>
+<<set $marketAssistantRelationship = "cute">>
+<<set $marketAssistantLimit = 0>>
+<<set $marketAssistantAggressiveness = 0>>
+
+<<set $justiceEvents = ["slave deal", "slave training", "majority deal", "indenture deal", "virginity deal"]>> /* not in setupVars because we remove events from this array as they occur */
+
+<<set $fixedNationality = 0>>
+<<set $fixedRace = 0>>
+<<set $ui = "start">>
+
+<<set $brandTarget = "buttocks">>
+<<set $brandDesign = "your initials">>
+
+<<set $oralTotal = 0>>
+<<set $vaginalTotal = 0>>
+<<set $analTotal = 0>>
+<<set $mammaryTotal = 0>>
+<<set $penetrativeTotal = 0>>
+<<set $milkTotal = 0>>
+<<set $cumTotal = 0>>
+<<set $birthsTotal = 0>>
+<<set $pitKillsTotal = 0>>
+
+<<set $collaboration = 0>>
+<<set $traitor = 0>>
+<<set $hackerSupport = 0>>
+<<set $hostage = 0>>
+<<set $hostageAnnounced = 0>>
+<<set $hostageCost = 0>>
+<<set $hostageRescued = 0>>
+<<set $hostageGiveIn = 0>>
+<<set $rivalSet = 0>>
+<<set $rivalryFS = 0>>
+<<set $rivalryFSAdopted = 0>>
+<<set $rivalryFSRace = 0>>
+<<set $rivalOwner = 0>>
+<<set $rivalOwnerEnslaved = 0>>
+<<set $rivalryPower = 0>>
+<<set $rivalryDuration = 0>>
+<<set $nationHate = 0>>
+<<set $PShoot = 0>>
+<<set $PSnatch = 0>>
+<<set $PRaid = 0>>
+<<set $PAid = 0>>
+<<set $PPit = 0>>
+
+<<set $dispensary = 0>>
+<<set $organFarmUpgrade = 0>>
+<<set $organsCompleted = 0>>
+<<set $limbsCompleted = 0>>
+<<set $limbs = []>>
+<<set $injectionUpgrade = 0>>
+<<set $hormoneUpgradeMood = 0>>
+<<set $hormoneUpgradeShrinkage = 0>>
+<<set $hormoneUpgradePower = 0>>
+<<set $curativeUpgrade = 0>>
+<<set $aphrodisiacUpgrade = 0>>
+<<set $healthyDrugsUpgrade = 0>>
+<<set $prostheticsUpgrade = 0>>
+
+<<set $surgeryUpgrade = 0>>
+
+<<set $barracks = 0>>
+<<set $mercenaries = 0>>
+<<set $mercenariesHelpCorp = 0>>
+<<set $personalArms = 0>>
+
+<<set $saleDescription = 0>>
+<<set $gingering = 0>>
+<<set $beforeGingering = 0>>
+<<set $gingeringDetected = 0>>
+<<set $gingeringDetection = 0>>
+<<set $surgeryDescription = 0>>
+<<set $encyclopedia = "How to Play">>
+<<set $showEncyclopedia = 1>>
+
+<<set $trinkets = []>>
+<<set $SPcost = 1000>>
+<<set $preOwnedViewed = 0>>
+<<set $debtWarned = 0>>
+<<set $economy = 1>>
+<<set $neighboringArcologies = 3>>
+<<set $internationalTrade = 1>>
+<<set $internationalVariety = 0>>
+<<set $slaveCostFactor = 0.95>>
+<<set $menialDemandFactor = 0>>
+<<set $minimumSlaveCost = 2500>>
+<<set $facilityCost = 100>>
+<<set $enduringRep = 1000>>
+<<set $rep = 1000>>
+<<set $repGain = 0>>
+<<set $repLoss = 0>>
+<<set $cashLastWeek = 0>>
+
+<<set $arcologyUpgrade = {drones: 0, hydro: 0, apron: 0, grid: 0, spire: 0}>>
+
+<<set $AGrowth = 2>>
+<<set $ACitizens = 4000>>
+<<set $ASlaves = 1000>>
+
+<<set $sectors = [
+	{type: "Penthouse", ownership: 1},
+	{type: "Empty", ownership: 0},
+	{type: "Empty", ownership: 0},
+	{type: "Empty", ownership: 0},
+	{type: "Empty", ownership: 0},
+	{type: "Shops", ownership: 1},
+	{type: "Shops", ownership: 1},
+	{type: "Shops", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Apartments", ownership: 1},
+	{type: "Markets", ownership: 1},
+	{type: "Markets", ownership: 1},
+	{type: "Markets", ownership: 1},
+	{type: "Markets", ownership: 1},
+	{type: "Markets", ownership: 1},
+	{type: "Manufacturing", ownership: 1},
+	{type: "Manufacturing", ownership: 1},
+	{type: "Manufacturing", ownership: 1},
+	{type: "Manufacturing", ownership: 1},
+	{type: "Manufacturing", ownership: 1}
+]>>
+
+<<for _i = 0; _i < 12; _i++>>
+	<<set _j = random(5,28)>>
+	<<if $sectors[_j].ownership == 1>>
+		<<set $sectors[_j].ownership = 0>>
+	<<else>>
+		<<set _i-->>
+	<</if>>
+<</for>>
+
+<<set $helots = 0>>
+<<set $fuckdolls = 0>>
+<<set $menialBioreactors = 0>>
+<<set $prestigeAuctioned = 0>>
+<<set $slaveMarketLimit = 20>>
+<<set $slavesSeen = 0>>
+
+<<set $slaveOrphanageTotal = 0>>
+<<set $citizenOrphanageTotal = 0>>
+<<set $privateOrphanageTotal = 0>>
+
+<<set $alwaysSubsidizeRep = 0>>
+<<set $alwaysSubsidizeGrowth = 0>>
+<<set $ProImmigrationCash = 0>>
+<<set $ProImmigrationRep = 0>>
+<<set $AntiImmigrationCash = 0>>
+<<set $AntiImmigrationRep = 0>>
+<<set $ProEnslavementCash = 0>>
+<<set $ProEnslavementRep = 0>>
+<<set $AntiEnslavementCash = 0>>
+<<set $AntiEnslavementRep = 0>>
+<<set $BasicSMR = 1>>
+<<set $HealthInspectionSMR = 0>>
+<<set $EducationSMR = 0>>
+<<set $IntelligenceEugenicsSMR = 0>>
+<<set $HeightEugenicsSMR = 0>>
+<<set $FaceEugenicsSMR = 0>>
+<<set $HonestySMR = 0>>
+<<set $ProRefugees = 0>>
+<<set $ProRecruitment = 0>>
+<<set $OralEncouragement = 0>>
+<<set $VaginalEncouragement = 0>>
+<<set $AnalEncouragement = 0>>
+<<set $OralDiscouragement = 0>>
+<<set $VaginalDiscouragement = 0>>
+<<set $AnalDiscouragement = 0>>
+<<set $CashForRep = 0>>
+<<set $RepForCash = 0>>
+<<set $RegularParties = 0>>
+<<set $PAPublic = 0>>
+<<set $CoursingAssociation = 0>>
+	<<set $Lurcher = 0>>
+	<<set $coursed = 0>>
+<<set $RaidingMercenaries = 0>>
+	<<set $raided = 0>>
+<<set $MixedMarriage = 0>>
+<<set $CulturalOpenness = 0>>
+
+<<set $policyCost = 5000>>
+<<set $expiree = 0>>
+<<set $retiree = 0>>
+<<set $birthee = 0>>
+<<set $retirementAge = 45>>
+<<set $customRetirementAge = 45>>
+<<set $CustomRetirementAgePolicy = 0>>
+<<set $BioreactorRetirement = 0>>
+<<set $ArcadeRetirement = 0>>
+<<set $CitizenRetirement = 0>>
+<<set $SexMilestoneRetirement = 0>>
+<<set $MilkMilestoneRetirement = 0>>
+<<set $BirthsMilestoneRetirement = 0>>
+<<set $KillsMilestoneRetirement = 0>>
+<<set $retirementSex = 10000>>
+<<set $retirementMilk = 50000>>
+<<set $retirementBirths = 5>>
+<<set $retirementKills = 3>>
+<<set $nicaea = 0>>
+<<set $nicaeaAnnounceable = 0>>
+<<set $nicaeaAnnounced = 0>>
+<<set $nicaeaPreparation = 0>>
+<<set $nicaeaInvolvement = -1>>
+<<set $nicaeaPower = 0>>
+<<set $nicaeaHeld = 0>>
+<<set $peacekeepers = 0>>
+
+<<set $oralUseWeight = 5>>
+<<set $vaginalUseWeight = 5>>
+<<set $analUseWeight = 5>>
+
+<<set $niceWeather = [
+	{name: "Sunny", severity: 1},
+	{name: "Cloudy", severity: 1},
+	{name: "Partly Cloudy", severity: 1},
+	{name: "Overcast", severity: 1},
+	{name: "Light Wind", severity: 1},
+	{name: "Clear and Calm", severity: 1},
+	{name: "Light Rain", severity: 1},
+	{name: "Heavy Rain", severity: 1},
+	{name: "Smoke warning", severity: 1},
+]>>
+
+<<set $lightWeather = [
+	{name: "High Winds", severity: 2},
+	{name: "Acid Rain", severity: 2},
+	{name: "T-Storm Warning", severity: 2},
+	{name: "Flood Warning", severity: 2},
+	{name: "Tornado Warning", severity: 2},
+	{name: "Light Sandstorm", severity: 2},
+	{name: "High Heat", severity: 2},
+	{name: "Smoky", severity: 2},
+]>>
+
+<<set $heavyWeather = [
+	{name: "Extreme Winds", severity: 3},
+	{name: "Heavy Acid Rain", severity: 3},
+	{name: "Extreme T-storm", severity: 3},
+	{name: "Flooding", severity: 3},
+	{name: "Tornadoes", severity: 3},
+	{name: "Sandstorm", severity: 3},
+	{name: "Extreme Heat", severity: 3},
+	{name: "Dense Smoke", severity: 3},
+]>>
+
+<<set $extremeWeather = [
+	{name: "Solar Flare", severity: 4},
+	{name: "Ion Storm", severity: 4},
+	{name: "Cataclysmic Rains", severity: 4},
+	{name: "Cat 6 Hurricane", severity: 4},
+	{name: "Abrasive Sandstorm", severity: 4},
+	{name: "Radiological Warning", severity: 4},
+]>>
+
+<<set $weatherToday = $niceWeather.random()>>
+
+<<set $returnTo = "Main">>
+<<set $nextButton = "END WEEK">>
+<<set $nextLink = "EW Slaves">>
+
+<<set $customSlaveOrdered = 0>>
+
+<<set $cheatMode = 0>>
+<<set $weightAffectsAssets = 1>>
+<<set $curativeSideEffects = 1>>
+
+<<set $fcnn = []>>
+<<set $fcnn.push("...coming up at the top of the hour: Catgirl slaves, science fact or science fiction...")>>
+<<set $fcnn.push("...coming up at the top of the hour: Malnockestivi Smith, Free Cities' first MtFtMtFtH transgendered person...")>>
+<<set $fcnn.push("...new arcology construction up 23% worldwide this year, according to...")>>
+<<set $fcnn.push("...United States Congress spends 1,264th consecutive day gridlocked over post office...")>>
+<<set $fcnn.push("...coming up at the top of the hour: Arcology owners: oversexed oligarchs or attractive, oversexed oligarchs?...")>>
+<<set $fcnn.push("...coming up at the top of the hour: Anal sex: not just for sex any more...")>>
+<<set $fcnn.push("...coming up at the top of the hour: Oral sex: the new hello...")>>
+<<set $fcnn.push("...new book by prominent feminist suggests that women should not be used as sexual appliances...")>>
+<<set $fcnn.push("...just ahead, interview with Desha Moore, prominent advocate for compulsory female enslavement...")>>
+<<set $fcnn.push("...just ahead, Slave Market Trends: will the pierced anus be in again this year...")>>
+<<set $fcnn.push("...just ahead, Slave Market Trends: upstart slave trainers avoid implants...")>>
+<<set $fcnn.push("...implant technology firm BusTech notches successful initial public offering...")>>
+<<set $fcnn.push("...the upcoming shortage of authentic leather and what it means for the whip industry...")>>
+<<set $fcnn.push("...dairy conglomerate Creem Inc. denies allegations of adulterating breast milk with...")>>
+<<set $fcnn.push("...two-time award-winning actress Linda Loveless debuted new implants on the red carpet this...")>>
+<<set $fcnn.push("...dick size: are your slaves lying to you when they tell you you're too big...")>>
+<<set $fcnn.push("...just ahead, slave expert's opinion on best shemale slaves to use for double penetration...")>>
+<<set $fcnn.push("...Free Cities social conservatives criticize marriage, say your slaves should be enough...")>>
+<<set $fcnn.push("...councilman Taggart suggested in a public address that involuntary enslavement...")>>
+<<set $fcnn.push("...councilman Taggart denies allegations that he has remained faithful to his wife...")>>
+<<set $fcnn.push("...councilman Taggart presented evidence that regulation of the sex slave market would...")>>
+<<set $fcnn.push("...after a word from our sponsors. Creem Inc.: for all your dairy needs...")>>
+<<set $fcnn.push("...after a word from our sponsors. Horstmann Ltd, Free Cities' finest whipmakers...")>>
+<<set $fcnn.push("...after a word from our sponsors. Coming soon to theaters, Quintuple, the musical...")>>
+<<set $fcnn.push("...critical of low-end slave training corporation Wallerson & Sons for practices that they say...")>>
+<<set $fcnn.push("...training corporation Wallerson & Sons called a study on slave illness rates 'ludicrous,' but...")>>
+<<set $fcnn.push("...our tech correspondent: the possibilities of virally-administered gene therapy...")>>
+<<set $fcnn.push("...our tech correspondent: breakthrough in in-vitro drug treatments that promise to...")>>
+<<set $fcnn.push("...our tech correspondent: next year to see release of two competing aphrodisiacs...")>>
+<<set $fcnn.push("...our tech correspondent: the coming permanent aphrodisiac implants, and what they mean...")>>
+<<set $fcnn.push("...Sex Slaves in Space: what it takes to keep a mining crew happy for an 18-month contract...")>>
+<<set $fcnn.push("...the implant-drug balance: how much tissue growth is necessary to support larger...")>>
+<<set $fcnn.push("...the actress stated that the cut to full nudity in the script violated contractual...")>>
+<<set $fcnn.push("...doping scandal as Slave Games watchdog alleges champion used internal reservoir of lube...")>>
+<<set $fcnn.push("...next on Extreme Surgery: the mouthpussy experimenters and what they...")>>
+<<set $fcnn.push("...'A hole's a hole,' said CEO of upstart budget glory hole franchise...")>>
+<<set $fcnn.push("...underground slave pit fights step into the light this evening as...")>>
+<<set $fcnn.push("...underground slave pit fight champion, freed yesterday, sells herself back into...")>>
+<<set $fcnn.push("...with the lead designer of the MP17, the new machine pistol marketed specifically for bodyguards...")>>
+<<set $fcnn.push("...the new Aegis drone series: because your arcology's security is your most important possession...")>>
+<<set $fcnn.push("...the BAe Goshawk: because you deserve to travel at twice the speed of sound in the finest style...")>>
+<<set $fcnn.push("...this year's Goat.cx award for outstanding orifice innovation goes to...")>>
+<<set $fcnn.push("...public controversy over cannibalism. Decadence taken too far or an acceptable next step...")>>
+<<set $fcnn.push("...sixth day of street cleaners' strike. Spokesman for the strikers: 'It's getting too nasty...")>>
+
+/* HACKY EVENT WORKAROUNDS */
+<<set $eventID = -1>>
+
+<<goto "Alpha disclaimer">>

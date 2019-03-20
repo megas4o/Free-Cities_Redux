@@ -1,0 +1,61 @@
+:: RE slave marriage
+
+<<nobr>>
+
+<<set $nextButton = "Continue">>
+<<set $nextLink = "Next Week">>
+
+<<if $groomSlave == 0>>
+	  <<set $groomSlave = $eventSlave>>
+<</if>>
+
+<<if $brideSlave == 0>>
+  <<for $i = 0; $i < $slaves.length; $i++>>
+	<<if $groomSlave.relationshipTarget == $slaves[$i].ID>>
+	  <<set $brideSlave = $slaves[$i]>>
+	<</if>>
+  <</for>>
+<</if>>
+<<Enunciate $groomSlave>>
+<</nobr>>\
+\
+<<print "[[$groomSlave.slaveName|Long Slave Description][$nextLink = passage(), $eventDescription = 1,$activeSlave = $groomSlave]]">> and <<print "[[$brideSlave.slaveName|Long Slave Description][$nextLink = passage(), $eventDescription = 1,$activeSlave = $brideSlave]]">> come into your office <<if ($groomSlave.amp != 1) && ($brideSlave.amp != 1)>>holding hands<<else>>doing their best to stay close to one another despite their physical limitations<</if>>. $brideSlave.slaveName looks at $groomSlave.slaveName expectantly, but she's terribly nervous and makes several false starts before beginning. Finally $groomSlave.slaveName musters her courage and <<if !canTalk($groomSlave)>>asks you with simple gestures to grant the two of them a slave marriage.<<else>>asks with her voice cracking, "<<Master>>, would you plea<<s>>e grant u<<s>> a <<s>>lave marriage?"<</if>>
+
+<<nobr>>
+<span id="result">
+<<link "Of course">>
+	<<replace "#result">>
+	You inquire as to whether they understand the Free Cities slave marriage ceremony, and they nod, not trusting themselves to do anything more. You give them a few minutes to get dressed in special outfits you make available. When they come back, they're wearing lacy lingerie designed to resemble old world wedding dresses, but without concealing anything.
+	<br><br><<if ($groomSlave.vagina == 0)>>$groomSlave.slaveName is a virgin, so she's wearing white<<elseif ($groomSlave.preg > 0)>>$groomSlave.slaveName is pregnant, so she's wearing light pink<<elseif ($groomSlave.vagina < 0)>>$groomSlave.slaveName is a sissy slave, so she's wearing light blue<<else>>$groomSlave.slaveName is an experienced sex slave, so she's wearing light pink<</if>> against her $groomSlave.skin skin. <<if ($groomSlave.dickAccessory == "chastity")>>She has a little bow on her chastity cage.<<elseif ($groomSlave.dick > 0) && ($groomSlave.balls > 0) && ($groomSlave.hormones < 1)>>The sight of $brideSlave.slaveName has her stiffly erect, and she's wearing a little bow around her cockhead.<<elseif ($groomSlave.dick > 0)>>She's impotent, but she's wearing a little bow around her useless cockhead.<<elseif ($groomSlave.clit > 0)>>Her prominent clit is engorged, and she's wearing a tiny bow on it.<<else>>She's wearing a demure little bow just over her pussy.<</if>><<if ($groomSlave.anus > 1)>> Her lacy panties are designed to spread her buttocks a little and display her big butthole.<<elseif ($groomSlave.anus == 0)>> Her lacy panties cover her virgin anus, for once.<</if>> <<if ($groomSlave.boobs > 1000)>>The bra makes no attempt to cover or even support her huge breasts, simply letting them through holes in the lace to jut proudly out.<<elseif ($groomSlave.boobs > 500)>>The bra supports and presents her big breasts, leaving her stiffening nipples bare.<<else>>The bra supports and presents her breasts, giving her more cleavage than she usually displays.<</if>><<if $groomSlave.preg > 10>> Her growing pregnancy prominently bulges from the gap between her lingerie.<</if>>
+	<br><br><<if ($brideSlave.vagina == 0)>>$brideSlave.slaveName is a virgin, so she's wearing white<<elseif ($groomSlave.preg > 0)>>$brideSlave.slaveName is pregnant, so she's wearing light pink<<elseif ($brideSlave.vagina < 0)>>$brideSlave.slaveName is a sissy slave, so she's wearing light blue<<else>>$brideSlave.slaveName is an experienced sex slave, so she's wearing light pink<</if>> against her $brideSlave.skin skin. <<if ($brideSlave.dickAccessory == "chastity")>>She has a little bow on her chastity cage.<<elseif ($brideSlave.dick > 0) && ($brideSlave.balls > 0) && ($brideSlave.hormones < 1)>>The sight of $groomSlave.slaveName has her stiffly erect, and she's wearing a little bow around her cockhead.<<elseif ($brideSlave.dick > 0)>>She's impotent, but she's wearing a little bow around her useless cockhead.<<elseif ($brideSlave.clit > 0)>>Her prominent clit is engorged, and she's wearing a tiny bow on it.<<else>>She's wearing a demure little bow just over her pussy.<</if>><<if ($brideSlave.anus > 1)>> Her lacy panties are designed to spread her buttocks a little and display her big butthole.<<elseif ($brideSlave.anus == 0)>> Her lacy panties cover her virgin anus, for once.<</if>> <<if ($brideSlave.boobs > 1000)>>The bra makes no attempt to cover or even support her huge breasts, simply letting them through holes in the lace to jut proudly out.<<elseif ($brideSlave.boobs > 500)>>The bra supports and presents her big breasts, leaving her stiffening nipples bare.<<else>>The bra supports and presents her breasts, giving her more cleavage than she usually displays.<</if>><<if $brideSlave.preg > 10>> Her growing pregnancy prominently bulges from the gap between her lingerie.<</if>>
+	<br><br>The procedure is simple. The two of them prostrate themselves on the ground and beg your indulgence. You state that you grant it, and hand each of them a simple gold band to be worn on the little finger in advertisement of the inferiority of their union. In turn, each of them gives the other her ring, and they kiss. You pronounce them slave wives, and offer them the couch for their honeymoon; they @@.mediumaquamarine;thank you profusely@@ through their building tears. It's always touching to see <<if $groomSlave.preg > 20 and $brideSlave.preg > 20>>two pregnant slaves fingering each other<<else>>a 69<</if>> in which both participants are @@.hotpink;softly crying with happiness.@@ <<if $groomSlave.pregSource == $brideSlave.ID && $brideSlave.pregSource == $groomSlave.ID>>When $groomSlave.slaveName and $brideSlave.slaveName tire, they rest, shoulder to shoulder, with a hand upon each other's bulging belly. Gently, they caress their growing pregnancies, knowing that they carry the other's love child.<<elseif $brideSlave.pregSource == $groomSlave.ID>>When they tire, $groomSlave.slaveName rests her head upon $brideSlave.slaveName's lap and gently kisses her lover's belly, knowing the child of their love is growing within.<<elseif $groomSlave.pregSource == $brideSlave.ID>>When they tire, $brideSlave.slaveName rests her head upon $groomSlave.slaveName's lap and gently kisses her lover's belly, knowing the child of their love is growing within.<</if>>
+	<<set $groomSlave.devotion += 4>>
+	<<set $brideSlave.devotion += 4>>
+	<<set $groomSlave.trust += 4>>
+	<<set $brideSlave.trust += 4>>
+	<<set $groomSlave.oralCount += 1>>
+	<<set $brideSlave.oralCount += 1>>
+	<<set $groomSlave.relationship = 5>>
+	<<set $brideSlave.relationship = 5>>
+	<<set $oralTotal += 2>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	  <<if $brideSlave.ID == $slaves[$i].ID>>
+		<<set $slaves[$i] = $brideSlave>>
+		<<break>>
+	  <</if>>
+	<</for>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+	  <<if $groomSlave.ID == $slaves[$i].ID>>
+		<<set $slaves[$i] = $groomSlave>>
+		<<break>>
+	  <</if>>
+	<</for>>
+	<</replace>>
+<</link>>
+<br><<link "No">>
+	<<replace "#result">>
+	You decline gently, telling them that their relationship is acceptable to you as it is. They are disappointed, but not surprised, and accept your will without a murmur. They leave as they entered, holding hands.
+	<</replace>>
+<</link>>
+</span>
+<</nobr>>

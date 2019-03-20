@@ -1,0 +1,87 @@
+:: P underground railroad [nobr]
+
+<<set $nextButton = " ", $nextLink = "Random Nonindividual Event">> /* hide button until user makes a selection */
+
+<<set $activeSlave = $slaves.find(function(s) { return s.fuckdoll == 0 && s.amp != 1 && s.devotion < 75 && canTalk(s) && ["whore", "serve the public", "serve in the club", "work in the brothel"].includes(s.assignment); })>>
+<<if (ndef $activeSlave)>> /* search again without assignments limitation */
+	<<set $activeSlave = $slaves.find(function(s) { return s.fuckdoll == 0 && s.amp != 1 && s.devotion < 75 && canTalk(s); })>>
+	<<if (ndef $activeSlave)>> /* still no match */
+		<<set $activeSlave = $slaves.random()>>
+	<</if>>
+<</if>>
+
+One fine day, as normal as any day surrounded by your slaves can be, you're sitting at your desk when a message comes in. <<if $assistantName == "your personal assistant">>Your personal assistant<<else>>$assistantName<</if>> totally fails to announce it, which is unusual; when you ask her why not, she replies
+<<if $assistant > 0>>
+	flirtatiously, "What message, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>?"
+	<<switch $assistantAppearance>>
+	<<case "monstergirl">>
+		Her avatar's tentacle hair wiggles with incomprehension.
+	<<case "shemale">>
+		Her avatar looks frustrated, its hardon wilting.
+	<<case "amazon">>
+		Her avatar gives a little shriek of frustration.
+	<<case "businesswoman">>
+		Her avatar wears an unaccustomed look of frustration.
+	<<case "goddess">>
+		Her avatar looks concerned without her usual sultry overtone.
+	<<case "schoolgirl">>
+		Her avatar puts on such a hard look of concentration that its eyes cross.
+	<<default>>
+		Her symbol avatar spins with frustration.
+	<</switch>>
+<<else>>
+	"You have received no messages in the past thirty seconds, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Sir<<else>>Ma'am<</if>>."
+<</if>>
+This is disturbing, to say the least. After close investigation, it appears someone has managed to plant a simple text message in your mail system without $assistantName or any of your other security systems taking any notice. Worse, your mysterious correspondent seems willing to show off this ability in this petty display rather than simply sending a message anonymously.
+
+<br><br>
+
+"You will immediately free $activeSlave.slaveName," it reads. "This is the price of your continued survival. Agree and you buy yourself a few more moments at the top of your heap of shit. Refuse, and you shall fall that much sooner." The message is signed "The Daughters of Liberty."
+
+<br><br>
+
+You call $activeSlave.slaveName in and politely inquire as to whether she knows anything about the matter. She nearly flees in terror, but gathers her courage and <<if canTalk($activeSlave) == false>>gestures meekly<<elseif ($activeSlave.lips > 70)>>lisps meekly through her huge lips<<elseif ($activeSlave.lipsPiercing+$activeSlave.tonguePiercing > 2)>>lisps meekly through her piercings<<else>>mumbles meekly<</if>> that several nondescript citizens she sees occasionally at work have passed a few messages to her. Apparently, they simply asked whether she wished to be free. Asked whether she does in fact wish to be free, she <<if canTalk($activeSlave) == false>>shakily gestures an apology, and admits that she does.<<elseif ($activeSlave.lips > 70)>>lisps faintly, "Ahm thorry, <<Master>>. Yeth."<<elseif ($activeSlave.lipsPiercing+$activeSlave.tonguePiercing > 2)>>lisps faintly, "Ahm thorry, <<Master>>. Yeth."<<else>>mutters faintly, "I'm sorry, <<if def $PC.customTitle>>$PC.customTitle<<elseif $PC.title != 0>>Master<<else>>Mistress<</if>>. Yes."<</if>>
+
+<br><br>
+
+<span id="result">
+<<link "Free her">> /* do not set $nextLink to AS Dump for this option because we call Remove activeSlave */
+	<<set $nextButton = "Continue">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	You calmly inform her that she's free to go. She almost collapses with shock, but turns and hurries out of the arcology, tears streaming from her eyes. She wanders down through the arcology, attracting little notice. One moment the monitors have her struggling through a dense-packed crowd, and the next, they don't.
+	<<if $activeSlave.relationship > 0>>
+		<<for $i = 0; $i < $slaves.length; $i++>>
+			<<if $activeSlave.relationshipTarget == $slaves[$i].ID>>
+				<<set $activeSlave.relationshipTarget = 0, $activeSlave.relationship = 0, $slaves[$i].relationshipTarget = 0, $slaves[$i].relationship = 0>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<<set $traitor = $activeSlave>>
+	<<include "Remove activeSlave">>
+	<</replace>>
+<</link>>
+<br><<link "Tell her to ignore the Daughters in the future">>
+	<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Random Nonindividual Event">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	$activeSlave.slaveName almost @@.mediumorchid;faints with relief@@ when it becomes apparent you aren't going to punish her for speaking of freedom. All attempts to use your monitoring systems to find the citizens who contacted her fail; it seems their ability to corrupt your systems is considerable. @@.mediumorchid;Whispers of freedom@@ run like wildfire amongst your slaves.
+	<<set $activeSlave.devotion -= 15>>
+	<<for $i = 0; $i < $slaves.length; $i++>>
+		<<set $slaves[$i].devotion -= 10>>
+	<</for>>
+	<</replace>>
+<</link>>
+<br><<link "Publicly flog her for treasonous conversation">>
+	<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Random Nonindividual Event">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	You announce that a treasonous slave will be publicly flogged. Treason is understood in the Free Cities to be activity that tends to undermine slavery, and public interest is considerable when $activeSlave.slaveName is dragged out into a public atrium and secured to a post. You do your duty; the one that passes the sentence should swing the lash. The ordeal is long and bloody. The populace understand the necessity of the punishment, though they are @@.red;disturbed@@ that such a thing could happen in your penthouse of all places. The effect on $activeSlave.slaveName's health @@.red;is serious,@@ and she is @@.gold;terrified of failing you again.@@
+	<<set $activeSlave.health -= 30, $activeSlave.trust -= 15, $rep -= 500>>
+	<</replace>>
+<</link>>
+<br><<link "Chemically lobotomize her to extirpate any record of the incident">>
+	<<set $nextButton = "Continue", $nextLink = "AS Dump", $returnTo = "Random Nonindividual Event">><<UpdateNextButton>> /* unlock Continue button */
+	<<replace "#result">>
+	You inform $activeSlave.slaveName that she is to return to her duties, which she does, mystified. Later in the day she finds herself scheduled for surgery, and meekly goes. As she feels the cool touch of the injector, loaded with powerful chemical lobotomizing agents, she looks up at the camera above the auto-surgery with a hint of resigned apology in her eyes. When she is released from the surgery's care a few hours later, the hint is gone. @@.red;As is everything.@@
+	<<set $activeSlave.fetish = "mindbroken">>
+	<</replace>>
+<</link>>
+</span>

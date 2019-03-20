@@ -1,0 +1,430 @@
+:: Autosurgery Settings [nobr]
+
+
+<<set $nextButton = "Back">>
+<<set $nextLink = "Rules Assistant">>
+
+//The autosurgery can accept the following guidelines. If results outside these guidelines are desired, deactivating the autosurgery and planning surgical interventions manually is recommended.  Surgeries will not actually take place until the week has ended.//
+
+<br><br>
+Vision correction:
+<span id = "eyes">
+	<<if ($currentRule.surgery.eyes == "no default setting")>>
+		''no default setting.''
+	<<elseif ($currentRule.surgery.eyes == 1)>>
+		''fixed.''
+	<<else>>
+		''blurred.''
+	<</if>>
+
+	<br>
+
+	<<if ($currentRule.surgery.eyes !== "no default setting")>>
+		<<link "No default setting">>
+			<<set $currentRule.surgery.eyes = "no default setting">>
+			<<RASurgeryChangeEyes>>
+		<</link>> |
+	<<else>>
+		No default setting |
+	<</if>>
+	<<if ($currentRule.surgery.eyes !== 1)>>
+		<<link "Corrected">>
+			<<set $currentRule.surgery.eyes = 1>>
+			<<RASurgeryChangeEyes>>
+		<</link>> |
+	<<else>>
+		Corrected |
+	<</if>>
+	<<if ($currentRule.surgery.eyes !== -1)>>
+		<<link "Blurred">>
+			<<set $currentRule.surgery.eyes = -1>>
+			<<RASurgeryChangeEyes>>
+		<</link>>
+	<<else>>
+		Blurred
+	<</if>>
+</span>
+
+<br><br>
+
+Lactation drug implants:
+<span id = "lactation">
+<<if ($currentRule.surgery.lactation == "no default setting")>>
+	''no default setting.''
+<<elseif ($currentRule.surgery.lactation == 1)>>
+	''implanted.''
+<<else>>
+	''implants will be removed.''
+<</if>>
+
+<br>
+
+<<if ($currentRule.surgery.lactation !== "no default setting")>>
+	<<link "No default setting">>
+		<<set $currentRule.surgery.lactation = "no default setting">>
+		<<RASurgeryChangeLactation>>
+	<</link>> |
+<<else>>
+	No default setting |
+<</if>>
+<<if ($currentRule.surgery.lactation !== 0)>>
+	<<link "Removed">>
+		<<set $currentRule.surgery.lactation = 0>>
+		<<RASurgeryChangeLactation>>
+	<</link>> |
+<<else>>
+	Removed |
+<</if>>
+<<if ($currentRule.surgery.lactation !== 1)>>
+	<<link "Implanted">>
+		<<set $currentRule.surgery.lactation = 1>>
+		<<RASurgeryChangeLactation>>
+	<</link>>
+<<else>>
+	Implanted
+<</if>>
+</span>
+
+<<if $seeDicks>>
+<br><br>
+
+Prostate production enhancing drug implants:
+<span id = "prostate">
+<<if ($currentRule.surgery.prostate == "no default setting")>>
+	''no default setting.''
+<<elseif ($currentRule.surgery.prostate == 1)>>
+	''implanted.''
+<<else>>
+	''implants will be removed.''
+<</if>>
+
+<br>
+
+<<if ($currentRule.surgery.prostate !== "no default setting")>>
+	<<link "No default setting">>
+		<<set $currentRule.surgery.prostate = "no default setting">>
+		<<RASurgeryChangeProstate>>
+	<</link>> |
+<<else>>
+	No default setting |
+<</if>>
+<<if ($currentRule.surgery.prostate !== 0)>>
+	<<link "Removed">>
+		<<set $currentRule.surgery.prostate = 0>>
+		<<RASurgeryChangeProstate>>
+	<</link>> |
+<<else>>
+	Removed |
+<</if>>
+<<if ($currentRule.surgery.prostate !== 1)>>
+	<<link "Implanted">>
+		<<set $currentRule.surgery.prostate = 1>>
+		<<RASurgeryChangeProstate>>
+	<</link>>
+<<else>>
+	Implanted
+<</if>>
+</span>
+<</if>>
+
+<br><br>
+
+Cosmetic surgery:
+<span id = "cosmetic">
+<<if ($currentRule.surgery.cosmetic == 2)>>
+	''invasive.''
+<<elseif ($currentRule.surgery.cosmetic == 1)>>
+	''subtle.''
+<<else>>
+	''none.''
+<</if>>
+
+<br>
+
+<<if ($currentRule.surgery.cosmetic !== 0)>>
+	<<link "None">>
+		<<set $currentRule.surgery.cosmetic = 0>>
+		<<RASurgeryChangeCosmetic>>
+	<</link>> |
+<<else>>
+	None |
+<</if>>
+<<if ($currentRule.surgery.cosmetic !== 1)>>
+	<<link "Subtle">>
+		<<set $currentRule.surgery.cosmetic = 1>>
+		<<RASurgeryChangeCosmetic>>
+	<</link>> |
+<<else>>
+	Subtle |
+<</if>>
+<<if ($currentRule.surgery.cosmetic !== 2)>>
+	<<link "Invasive">>
+		<<set $currentRule.surgery.cosmetic = 2>>
+		<<RASurgeryChangeCosmetic>>
+	<</link>>
+<<else>>
+	Invasive
+<</if>>
+</span>
+
+<br><br>
+
+Lip implants:
+<span id = "lips">
+<<if ($currentRule.surgery.lips == "no default setting")>>
+	''no default setting.''
+<<elseif ($currentRule.surgery.lips == 95)>>
+	implanted until a ''facepussy.''
+<<elseif ($currentRule.surgery.lips == 70)>>
+	implanted until ''huge.''
+<<elseif ($currentRule.surgery.lips == 40)>>
+	implanted until ''big.''
+<<elseif ($currentRule.surgery.lips == 20)>>
+	implanted until ''plush.''
+<<else>>
+	''implants will be removed.''
+<</if>>
+
+<br>
+
+<<if ($currentRule.surgery.lips !== "no default setting")>>
+	<<link "No default setting">>
+	<<set $currentRule.surgery.lips = "no default setting">>
+	<<RASurgeryChangeLips>>
+	<</link>> |
+<<else>>
+	No default setting |
+<</if>>
+<<if ($currentRule.surgery.lips != 0)>>
+	<<link "Removed">>
+	<<set $currentRule.surgery.lips = 0>>
+	<<RASurgeryChangeLips>>
+	<</link>> |
+<<else>>
+	Removed |
+<</if>>
+<<if ($currentRule.surgery.lips != 20)>>
+	<<link "Plush">>
+	<<set $currentRule.surgery.lips = 20>>
+	<<RASurgeryChangeLips>>
+	<</link>> |
+<<else>>
+	Plush |
+<</if>>
+<<if ($currentRule.surgery.lips != 40)>>
+	<<link "Big">>
+	<<set $currentRule.surgery.lips = 40>>
+	<<RASurgeryChangeLips>>
+	<</link>> |
+<<else>>
+	Big |
+<</if>>
+<<if ($currentRule.surgery.lips != 70)>>
+	<<link "Huge">>
+	<<set $currentRule.surgery.lips = 70>>
+	<<RASurgeryChangeLips>>
+	<</link>>
+<<else>>
+	Huge
+<</if>>
+<<if ($seeExtreme != 0)>>
+<<if ($currentRule.surgery.lips != 95)>>
+	| <<link "Facepussy">>
+	<<set $currentRule.surgery.lips = 95>>
+	<<RASurgeryChangeLips>>
+	<</link>>
+<<else>>
+	| Facepussy
+<</if>>
+<</if>>
+</span>
+
+<br><br>
+
+Buttock implants:
+<span id = "butt">
+<<if ($currentRule.surgery.butt == "no default setting")>>
+	''no default setting.''
+<<elseif ($currentRule.surgery.butt == 9)>>
+	implanted until ''maximized.''
+<<elseif ($currentRule.surgery.butt == 6)>>
+	implanted until ''huge.''
+<<elseif ($currentRule.surgery.butt == 4)>>
+	implanted until ''stacked.''
+<<elseif ($currentRule.surgery.butt == 2)>>
+	implanted until ''slim.''
+<<else>>
+	''implants will be removed.''
+<</if>>
+
+<br>
+
+<<if ($currentRule.surgery.butt !== "no default setting")>>
+	<<link "No default setting">>
+	<<set $currentRule.surgery.butt = "no default setting">>
+	<<RASurgeryChangeButt>>
+	<</link>> |
+<<else>>
+	No default setting |
+<</if>>
+<<if ($currentRule.surgery.butt != 0)>>
+	<<link "Removed">>
+	<<set $currentRule.surgery.butt = 0>>
+	<<RASurgeryChangeButt>>
+	<</link>> |
+<<else>>
+	Removed |
+<</if>>
+<<if ($currentRule.surgery.butt != 2)>>
+	<<link "Slim">>
+	<<set $currentRule.surgery.butt = 2>>
+	<<RASurgeryChangeButt>>
+	<</link>> |
+<<else>>
+	Slim |
+<</if>>
+<<if ($currentRule.surgery.butt != 4)>>
+	<<link "Stacked">>
+	<<set $currentRule.surgery.butt = 4>>
+	<<RASurgeryChangeButt>>
+	<</link>> |
+<<else>>
+	Stacked |
+<</if>>
+<<if ($currentRule.surgery.butt != 6)>>
+	<<link "Huge">>
+	<<set $currentRule.surgery.butt = 6>>
+	<<RASurgeryChangeButt>>
+	<</link>> |
+<<else>>
+	Huge |
+<</if>>
+<<if ($currentRule.surgery.butt != 9)>>
+	<<link "Maximize">>
+	<<set $currentRule.surgery.butt = 9>>
+	<<RASurgeryChangeButt>>
+	<</link>>
+<<else>>
+	Maximize
+<</if>>
+</span>
+
+<br><br>
+
+Breast implants:
+<span id = "boobs">
+<<if ($currentRule.surgery.boobs == "no default setting")>>
+	''no default setting.''
+<<elseif ($currentRule.surgery.boobs == 48000)>>
+	implanted until ''maximized.''
+<<elseif ($currentRule.surgery.boobs == 9000)>>
+	implanted to maximally ''functional,'' where more would immobilize the slave.
+<<elseif ($currentRule.surgery.boobs == 2000)>>
+	implanted until ''huge.''
+<<elseif ($currentRule.surgery.boobs == 1000)>>
+	implanted until ''stacked.''
+<<elseif ($currentRule.surgery.boobs == 400)>>
+	implanted until ''slim.''
+<<else>>
+	''implants will be removed.''
+<</if>>
+
+<br>
+
+<<if ($currentRule.surgery.boobs != "no default setting")>>
+	<<link "No default setting">>
+	<<set $currentRule.surgery.boobs = "no default setting">>
+	<<RASurgeryChangeBoobs>>
+	<</link>> |
+<<else>>
+	No default setting |
+<</if>>
+<<if ($currentRule.surgery.boobs != 0)>>
+	<<link "Removed">>
+	<<set $currentRule.surgery.boobs = 0>>
+	<<RASurgeryChangeBoobs>>
+	<</link>> |
+<<else>>
+	Removed |
+<</if>>
+<<if ($currentRule.surgery.boobs != 400)>>
+	<<link "Slim">>
+	<<set $currentRule.surgery.boobs = 400>>
+	<<RASurgeryChangeBoobs>>
+	<</link>> |
+<<else>>
+	Slim |
+<</if>>
+<<if ($currentRule.surgery.boobs != 1000)>>
+	<<link "Stacked">>
+	<<set $currentRule.surgery.boobs = 1000>>
+	<<RASurgeryChangeBoobs>>
+	<</link>> |
+<<else>>
+	Stacked |
+<</if>>
+<<if ($currentRule.surgery.boobs != 2000)>>
+	<<link "Huge">>
+	<<set $currentRule.surgery.boobs = 2000>>
+	<<RASurgeryChangeBoobs>>
+	<</link>> |
+<<else>>
+	Huge |
+<</if>>
+<<if ($currentRule.surgery.boobs != 9000)>>
+	<<link "Functional">>
+	<<set $currentRule.surgery.boobs = 9000>>
+	<<RASurgeryChangeBoobs>>
+	<</link>> |
+<<else>>
+	Functional |
+<</if>>
+<<if ($currentRule.surgery.boobs != 48000)>>
+	<<link "Maximize">>
+	<<set $currentRule.surgery.boobs = 48000>>
+	<<RASurgeryChangeBoobs>>
+	<</link>>
+<<else>>
+	Maximize
+<</if>>
+</span>
+
+<br><br>
+
+Orifice tightening:
+<span id = "holes">
+<<if ($currentRule.surgery.holes == 2)>>
+	''virginity restoration'' will be applied where possible.
+<<elseif ($currentRule.surgery.holes == 1)>>
+	''hole tightening'' will be applied.
+<<else>>
+	''none.''
+<</if>>
+
+<br>
+
+<<if ($currentRule.surgery.holes != 0)>>
+	<<link "Off">>
+	<<set $currentRule.surgery.holes = 0>>
+	<<RASurgeryChangeHoles>>
+	<</link>> |
+<<else>>
+	Off |
+<</if>>
+<<if ($currentRule.surgery.holes != 1)>>
+	<<link "Tightening">>
+	<<set $currentRule.surgery.holes = 1>>
+	<<RASurgeryChangeHoles>>
+	<</link>> |
+<<else>>
+	Tightening |
+<</if>>
+<<if ($currentRule.surgery.holes != 2)>>
+	<<link "Virginity">>
+	<<set $currentRule.surgery.holes = 2>>
+	<<RASurgeryChangeHoles>>
+	<</link>>
+<<else>>
+	Virginity
+<</if>>
+</span>

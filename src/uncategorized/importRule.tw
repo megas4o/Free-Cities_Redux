@@ -1,0 +1,65 @@
+:: Import Rule [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Rules Assistant">>
+
+//Paste the code into the text box and click Apply//
+
+<br><br>
+<span id = "importmsg">
+	''Enter a rule to import.''
+</span>
+
+<br><br>
+<span id = "textbox">
+	<<set _tempRule = "">>
+	<<textbox "_tempRule" _tempRule>>
+</span>
+
+
+<<link "Apply">>
+	<<if (def _tempRule) && (_tempRule !== "")>>
+		<<set _tempRule = eval('({' + _tempRule + '})')>>
+		<<if (def _tempRule.condition) && (ndef _tempRule.condition.id) && (ndef _tempRule.condition.first) && (ndef _tempRule.condition.second)>>
+			<<set _tempRule.condition = parseCondition(_tempRule.condition)>>
+			<<if _tempRule.condition != null && _tempRule.condition.expr != null>>
+				<<set _tempRule.condition = optimizeExpr(_tempRule.condition.expr)>>
+			<<else>>
+				<<unset _tempRule.condition>>
+			<</if>>
+		<</if>>
+
+		<<if (def _tempRule.condition)>>
+			/* pick an ID higher than the highest ID of any existing rule */
+			<<for _tempRule.ID = 0, _r = 0; _r < $defaultRules.length; _r++>>
+				<<set _tempRule.ID = Math.max(_tempRule.ID, $defaultRules[_r].ID + 1)>>
+			<</for>>
+
+			<<set $defaultRules.push(_tempRule)>> /* add the new rule to the end of the list (lowest priority) */
+
+			<<set $currentRule = _tempRule>> /* view new rule when returning to RA; clear input box */
+
+			<<replace #importmsg>>
+				''Rule imported successfully!''
+			<</replace>>
+			<<replace #textbox>>
+				<<set _tempRule = "">>
+				<<textbox "_tempRule" _tempRule>>
+			<</replace>>
+		<<else>>
+			<<replace #importmsg>>
+				''Parsing failed. Rule not imported!''
+			<</replace>>
+		<</if>>
+	<<else>>
+		<<replace #importmsg>>
+			''Enter a rule to import.''
+		<</replace>>
+	<</if>>
+	<<unset _tempRule>>
+<</link>>
+
+<br><br>
+
+<<link "Back to Rules Assistant">>
+	<<goto "Rules Assistant">>
+<</link>>
